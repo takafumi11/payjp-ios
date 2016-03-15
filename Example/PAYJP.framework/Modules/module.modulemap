@@ -1,0 +1,10 @@
+framework module PAYJP {
+  umbrella header "PAYJP.h"
+
+  export *
+  module * { export * }
+}
+
+module PAYJP.Swift {
+    header "PAYJP-Swift.h"
+}
