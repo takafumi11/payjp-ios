@@ -14,8 +14,7 @@ let MERCHANT_IDENTIFIER = "YOUR_MERCHANT_IDENTIFIER"
 
 
 class ViewController: UIViewController, PKPaymentAuthorizationViewControllerDelegate {
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var publicKey: UITextField!
     @IBOutlet weak var endpoint1: UITextField!
     @IBOutlet weak var endpoint2: UITextField!
     @IBOutlet weak var amount: UITextField!
@@ -110,7 +109,7 @@ class ViewController: UIViewController, PKPaymentAuthorizationViewControllerDele
         let paymentString = NSString.init(data: payment.token.paymentData, encoding: NSUTF8StringEncoding)?.stringByAddingPercentEncodingWithAllowedCharacters(set)
 
         // create a PAY.JP Token using ApplePay Token
-        let apiClient = PAYJP.APIClient(username: self.username.text!, password: self.password.text!)
+        let apiClient = PAYJP.APIClient(publicKey: self.publicKey.text!)
         apiClient.createPAYJPToken(self.endpoint1.text!, applePayToken: paymentString!, completionHandler: {
             (dict: NSDictionary?, res: NSURLResponse?, err: NSError?) in
             if err == nil {

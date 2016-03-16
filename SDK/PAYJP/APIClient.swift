@@ -7,14 +7,11 @@ import Foundation
 
 
 public class APIClient {
-    // PAY.JP Username
-    var username: String
-    // PAY.JP Password
-    var password: String
+    // PAY.JP public key
+    var publicKey: String
 
-    public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+    public init(publicKey: String) {
+        self.publicKey = publicKey
     }
 
     /// get PAY.JP Token
@@ -103,7 +100,7 @@ public class APIClient {
 
     /// Convert username and password to Base64 Credential
     func basicAuthCredentialWithUsername() -> String {
-        let credentialData = "\(self.username):\(self.password)".dataUsingEncoding(NSUTF8StringEncoding)!
+        let credentialData = "\(self.publicKey):".dataUsingEncoding(NSUTF8StringEncoding)!
         let base64Credential = credentialData.base64EncodedStringWithOptions([])
         return "Basic \(base64Credential)"
     }
