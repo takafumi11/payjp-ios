@@ -16,5 +16,5 @@
 ```
 import PAYJP
 
-let apiClient = PAYJP.APIClient(username: "PAY.JP Username", password: "PAY.JP Password")
+let apiClient = PAYJP.APIClient(publicKey: "PAY.JP Public Key")
 ```
