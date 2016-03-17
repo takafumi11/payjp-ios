@@ -110,7 +110,7 @@ class ViewController: UIViewController, PKPaymentAuthorizationViewControllerDele
 
         // create a PAY.JP Token using ApplePay Token
         let apiClient = PAYJP.APIClient(publicKey: self.publicKey.text!)
-        apiClient.createPAYJPToken(self.endpoint1.text!, applePayToken: paymentString!, completionHandler: {
+        apiClient.createPAYJPToken(paymentString!, url: self.endpoint1.text!, completionHandler: {
             (dict: NSDictionary?, res: NSURLResponse?, err: NSError?) in
             if err == nil {
                 let token = dict!["id"] as! String

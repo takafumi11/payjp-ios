@@ -15,11 +15,11 @@ public class APIClient {
     }
 
     /// get PAY.JP Token
-    /// - parameter url: PAY.JP Endpoint URL
     /// - parameter applePayToken: ApplePay Token
+    /// - parameter url: PAY.JP Endpoint URL
     public func createPAYJPToken(
-        url: String,
         applePayToken: String,
+        url: String = "https://api.pay.jp/v1/tokens",
         completionHandler: (NSDictionary?, NSURLResponse?, NSError?) -> ())
     {
         let parameters = ["card": applePayToken]
