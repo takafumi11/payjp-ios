@@ -16,9 +16,8 @@ class PAYJPTests: XCTestCase {
     }
     
     func testInit() {
-        let apiClient = APIClient(username: "foo", password: "bar")
-        XCTAssertEqual(apiClient.username, "foo")
-        XCTAssertEqual(apiClient.password, "bar")
+        let apiClient = APIClient(publicKey: "foo")
+        XCTAssertEqual(apiClient.publicKey, "foo")
     }
 
     func testParametersToQueryItems() {
@@ -27,7 +26,7 @@ class PAYJPTests: XCTestCase {
             "bar": "2",
             "baz": "3",
         ]
-        let apiClient = APIClient(username: "foo", password: "bar")
+        let apiClient = APIClient(publicKey: "foo")
         let queryItems = apiClient.parametersToQueryItems(parameters)
         XCTAssertEqual(queryItems.count, 3)
         for item in queryItems {
@@ -45,8 +44,8 @@ class PAYJPTests: XCTestCase {
     }
 
     func testBasicAuthCredentialWithUsername() {
-        let apiClient = APIClient(username: "foo", password: "bar")
+        let apiClient = APIClient(publicKey: "foo")
         let credential = apiClient.basicAuthCredentialWithUsername()
-        XCTAssertEqual(credential, "Basic Zm9vOmJhcg==")
+        XCTAssertEqual(credential, "Basic Zm9vOg==")
     }
 }
