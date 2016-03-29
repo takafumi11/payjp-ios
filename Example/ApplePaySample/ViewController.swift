@@ -33,7 +33,7 @@ class ViewController: UIViewController, PKPaymentAuthorizationViewControllerDele
 
         let buyButton = PKPaymentButton.init(paymentButtonType: PKPaymentButtonType.Buy, paymentButtonStyle: PKPaymentButtonStyle.Black)
         buyButton.frame = CGRectMake(90.0, 560.0, 200.0, 60.0)
-        buyButton.addTarget(self, action: "pay", forControlEvents: UIControlEvents.TouchUpInside)
+        buyButton.addTarget(self, action: #selector(pay), forControlEvents: UIControlEvents.TouchUpInside)
 
         self.view.addSubview(versionLabel)
         self.view.addSubview(buyButton)
