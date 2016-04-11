@@ -113,8 +113,12 @@ class ViewController: UIViewController, PKPaymentAuthorizationViewControllerDele
         apiClient.createPAYJPToken(paymentString!, url: self.endpoint1.text!, completionHandler: {
             (dict: NSDictionary?, res: NSURLResponse?, err: NSError?) in
             if err == nil {
-                let token = dict!["id"] as! String
-                let parameters = ["token": token, "amount": self.amount.text!]
+                guard let token = dict!["id"] else {
+                    print("could not get PAY.JP token")
+                    completion(PKPaymentAuthorizationStatus.Failure)
+                    return
+                }
+                let parameters = ["token": String(token), "amount": self.amount.text!]
 
                 // backend will make a payment using PAY.JP token
                 apiClient.makeTestPayment(self.endpoint2.text!, parameters: parameters, completionHandler: { (dict, res, err) in
