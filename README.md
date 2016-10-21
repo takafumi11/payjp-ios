@@ -14,12 +14,15 @@ let apiClient = PAYJP.APIClient(publicKey: "PAY.JP Public Key")
 
 ## 動作環境
 
+- Swift 3
 - iOS 8.4+
 - Xcode 8.0+
+- Result: https://github.com/antitypical/Result/
+- Himotoki: https://github.com/ikesyo/Himotoki/
 
 ## インストール
 
-[Carthage](https://github.com/Carthage/Carthage) でインストールする場合、以下のように記述いてください
+[Carthage](https://github.com/Carthage/Carthage) でインストールする場合、以下のように記述してください
 ```
 github "payjp/payjp-ios"
 ```
