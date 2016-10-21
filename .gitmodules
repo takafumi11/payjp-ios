@@ -1,6 +1,6 @@
 [submodule "Vendors/Result"]
 	path = Vendors/Result
 	url = https://github.com/antitypical/Result
-[submodule "Vendors/Homotoki"]
-	path = Vendors/Homotoki
+[submodule "Vendors/Himotoki"]
+	path = Vendors/Himotoki
 	url = https://github.com/ikesyo/Himotoki

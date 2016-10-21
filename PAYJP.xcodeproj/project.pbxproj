@@ -20,18 +20,18 @@
 		C68378261D9CD1330023B528 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378251D9CD1330023B528 /* Token.swift */; };
 		C68378C81D9CF1BB0023B528 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378C41D9CF1BB0023B528 /* Result.swift */; };
 		C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378C51D9CF1BB0023B528 /* ResultProtocol.swift */; };
-		C68378D81D9CF1E50023B528 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378CB1D9CF1E50023B528 /* Casting.swift */; };
-		C68378D91D9CF1E50023B528 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378CC1D9CF1E50023B528 /* Decodable.swift */; };
-		C68378DA1D9CF1E50023B528 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378CD1D9CF1E50023B528 /* decode.swift */; };
-		C68378DB1D9CF1E50023B528 /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378CE1D9CF1E50023B528 /* DecodeError.swift */; };
-		C68378DC1D9CF1E50023B528 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378CF1D9CF1E50023B528 /* Extractor.swift */; };
-		C68378DD1D9CF1E50023B528 /* Himotoki.h in Headers */ = {isa = PBXBuildFile; fileRef = C68378D01D9CF1E50023B528 /* Himotoki.h */; };
-		C68378DF1D9CF1E50023B528 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D21D9CF1E50023B528 /* KeyPath.swift */; };
-		C68378E01D9CF1E50023B528 /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D31D9CF1E50023B528 /* NSNumber.swift */; };
-		C68378E11D9CF1E50023B528 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D41D9CF1E50023B528 /* Operators.swift */; };
-		C68378E21D9CF1E50023B528 /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D51D9CF1E50023B528 /* RawRepresentable.swift */; };
-		C68378E31D9CF1E50023B528 /* StandardLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D61D9CF1E50023B528 /* StandardLib.swift */; };
-		C68378E41D9CF1E50023B528 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378D71D9CF1E50023B528 /* Transformer.swift */; };
+		C6FE0FAF1DBA09F0009F8F99 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA21DBA09F0009F8F99 /* Casting.swift */; };
+		C6FE0FB01DBA09F0009F8F99 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */; };
+		C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA41DBA09F0009F8F99 /* decode.swift */; };
+		C6FE0FB21DBA09F0009F8F99 /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */; };
+		C6FE0FB31DBA09F0009F8F99 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */; };
+		C6FE0FB41DBA09F0009F8F99 /* Himotoki.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */; };
+		C6FE0FB61DBA09F0009F8F99 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */; };
+		C6FE0FB71DBA09F0009F8F99 /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */; };
+		C6FE0FB81DBA09F0009F8F99 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */; };
+		C6FE0FB91DBA09F0009F8F99 /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */; };
+		C6FE0FBA1DBA09F0009F8F99 /* StandardLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */; };
+		C6FE0FBB1DBA09F0009F8F99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,18 +61,18 @@
 		C68378251D9CD1330023B528 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		C68378C41D9CF1BB0023B528 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C68378C51D9CF1BB0023B528 /* ResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultProtocol.swift; sourceTree = "<group>"; };
-		C68378CB1D9CF1E50023B528 /* Casting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casting.swift; sourceTree = "<group>"; };
-		C68378CC1D9CF1E50023B528 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
-		C68378CD1D9CF1E50023B528 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
-		C68378CE1D9CF1E50023B528 /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
-		C68378CF1D9CF1E50023B528 /* Extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
-		C68378D01D9CF1E50023B528 /* Himotoki.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Himotoki.h; sourceTree = "<group>"; };
-		C68378D21D9CF1E50023B528 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
-		C68378D31D9CF1E50023B528 /* NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
-		C68378D41D9CF1E50023B528 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		C68378D51D9CF1E50023B528 /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
-		C68378D61D9CF1E50023B528 /* StandardLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardLib.swift; sourceTree = "<group>"; };
-		C68378D71D9CF1E50023B528 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		C6FE0FA21DBA09F0009F8F99 /* Casting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casting.swift; sourceTree = "<group>"; };
+		C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		C6FE0FA41DBA09F0009F8F99 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
+		C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
+		C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
+		C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Himotoki.h; sourceTree = "<group>"; };
+		C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
+		C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
+		C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardLib.swift; sourceTree = "<group>"; };
+		C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +142,7 @@
 		C683781B1D9BD9A30023B528 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				C68378CA1D9CF1E50023B528 /* Himotoki */,
+				C6FE0FA11DBA09F0009F8F99 /* Himotoki */,
 				C68378C11D9CF1BB0023B528 /* Result */,
 			);
 			name = Vendors;
@@ -158,24 +158,24 @@
 			path = Vendors/Result/Result;
 			sourceTree = "<group>";
 		};
-		C68378CA1D9CF1E50023B528 /* Himotoki */ = {
+		C6FE0FA11DBA09F0009F8F99 /* Himotoki */ = {
 			isa = PBXGroup;
 			children = (
-				C68378CB1D9CF1E50023B528 /* Casting.swift */,
-				C68378CC1D9CF1E50023B528 /* Decodable.swift */,
-				C68378CD1D9CF1E50023B528 /* decode.swift */,
-				C68378CE1D9CF1E50023B528 /* DecodeError.swift */,
-				C68378CF1D9CF1E50023B528 /* Extractor.swift */,
-				C68378D01D9CF1E50023B528 /* Himotoki.h */,
-				C68378D21D9CF1E50023B528 /* KeyPath.swift */,
-				C68378D31D9CF1E50023B528 /* NSNumber.swift */,
-				C68378D41D9CF1E50023B528 /* Operators.swift */,
-				C68378D51D9CF1E50023B528 /* RawRepresentable.swift */,
-				C68378D61D9CF1E50023B528 /* StandardLib.swift */,
-				C68378D71D9CF1E50023B528 /* Transformer.swift */,
+				C6FE0FA21DBA09F0009F8F99 /* Casting.swift */,
+				C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */,
+				C6FE0FA41DBA09F0009F8F99 /* decode.swift */,
+				C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */,
+				C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */,
+				C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */,
+				C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */,
+				C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */,
+				C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */,
+				C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */,
+				C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */,
+				C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */,
 			);
 			name = Himotoki;
-			path = Vendors/Homotoki/Sources;
+			path = Vendors/Himotoki/Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,7 +185,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C68378DD1D9CF1E50023B528 /* Himotoki.h in Headers */,
+				C6FE0FB41DBA09F0009F8F99 /* Himotoki.h in Headers */,
 				615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,24 +290,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C68378E31D9CF1E50023B528 /* StandardLib.swift in Sources */,
-				C68378DC1D9CF1E50023B528 /* Extractor.swift in Sources */,
-				C68378DA1D9CF1E50023B528 /* decode.swift in Sources */,
+				C6FE0FB31DBA09F0009F8F99 /* Extractor.swift in Sources */,
+				C6FE0FAF1DBA09F0009F8F99 /* Casting.swift in Sources */,
+				C6FE0FBB1DBA09F0009F8F99 /* Transformer.swift in Sources */,
+				C6FE0FB61DBA09F0009F8F99 /* KeyPath.swift in Sources */,
 				C65513731DA24DF5009D6DA5 /* Transformers.swift in Sources */,
 				C65513881DA36749009D6DA5 /* Object.swift in Sources */,
+				C6FE0FB91DBA09F0009F8F99 /* RawRepresentable.swift in Sources */,
+				C6FE0FB01DBA09F0009F8F99 /* Decodable.swift in Sources */,
 				C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */,
-				C68378DB1D9CF1E50023B528 /* DecodeError.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
+				C6FE0FB21DBA09F0009F8F99 /* DecodeError.swift in Sources */,
+				C6FE0FB81DBA09F0009F8F99 /* Operators.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
+				C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */,
 				C68378C81D9CF1BB0023B528 /* Result.swift in Sources */,
-				C68378E11D9CF1E50023B528 /* Operators.swift in Sources */,
-				C68378D81D9CF1E50023B528 /* Casting.swift in Sources */,
-				C68378DF1D9CF1E50023B528 /* KeyPath.swift in Sources */,
-				C68378E21D9CF1E50023B528 /* RawRepresentable.swift in Sources */,
-				C68378E01D9CF1E50023B528 /* NSNumber.swift in Sources */,
-				C68378D91D9CF1E50023B528 /* Decodable.swift in Sources */,
+				C6FE0FBA1DBA09F0009F8F99 /* StandardLib.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
-				C68378E41D9CF1E50023B528 /* Transformer.swift in Sources */,
+				C6FE0FB71DBA09F0009F8F99 /* NSNumber.swift in Sources */,
 				C68378261D9CD1330023B528 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,7 +447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -467,7 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.pay.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
