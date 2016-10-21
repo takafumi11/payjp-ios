@@ -1,4 +1,4 @@
-# PAY.JP iOS SDK
+# PAY.JP iOS SDK Beta
 
 ## 使い方
 
@@ -24,14 +24,16 @@ let apiClient = PAYJP.APIClient(publicKey: "PAY.JP Public Key")
 
 [Carthage](https://github.com/Carthage/Carthage) でインストールする場合、以下のように記述してください
 ```
-github "payjp/payjp-ios"
+git "git@github.com:payjp/payjp-ios.git" "master"
 ```
 
 [CocoaPods](http://cocoapods.org) でもインストールすることができます。
 
 ```ruby
-pod "PAYJP"
+pod 'PAYJP', git: 'git@github.com:payjp/payjp-ios.git'
 ```
+
+詳しくは [サンプルコード](https://github.com/payjp/apple-pay-example) のプロジェクトを参照ください。
 
 ## License
 
