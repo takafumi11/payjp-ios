@@ -1,12 +1,6 @@
 # PAY.JP iOS SDK
 
-[![CI Status](http://img.shields.io/travis/laiso/PayJP.svg?style=flat)](https://travis-ci.org/laiso/PayJP)
-[![Version](https://img.shields.io/cocoapods/v/PayJP.svg?style=flat)](http://cocoapods.org/pods/PayJP)
-[![License](https://img.shields.io/cocoapods/l/PayJP.svg?style=flat)](http://cocoapods.org/pods/PayJP)
-[![Platform](https://img.shields.io/cocoapods/p/PayJP.svg?style=flat)](http://cocoapods.org/pods/PayJP)
-
-
-## Usage
+## 使い方
 
 ```
 import PAYJP
@@ -14,21 +8,23 @@ import PAYJP
 let apiClient = PAYJP.APIClient(publicKey: "PAY.JP Public Key")
 ```
 
-## Example
+## サンプルコード
 
-  - open Example/ApplePaySample.xcodeproj
-- open ViewController.swift and set your Apple Merchant ID (require iOS Developer Program Account)
-- build and run
+- Apple Pay: https://github.com/payjp/apple-pay-example
 
-## Requirements
+## 動作環境
 
-- iOS 9.2
-- Xcode 7.0+ to build the source.
+- iOS 8.4+
+- Xcode 8.0+
 
-## Installation
+## インストール
 
-PAY.JP iOS SDK is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+[Carthage](https://github.com/Carthage/Carthage) でインストールする場合、以下のように記述いてください
+```
+github "payjp/payjp-ios"
+```
+
+[CocoaPods](http://cocoapods.org) でもインストールすることができます。
 
 ```ruby
 pod "PAYJP"
