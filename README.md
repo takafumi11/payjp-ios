@@ -1,5 +1,7 @@
 # PAY.JP iOS SDK Beta
 
+https://pay.jp/docs/apple-pay
+
 ## 使い方
 
 ```
