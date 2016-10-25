@@ -1,23 +1,8 @@
 # PAY.JP iOS SDK Beta
 
+## ドキュメント
+
 https://pay.jp/docs/apple-pay
-
-## 使い方
-
-```
-import PAYJP
-
-// Apple Pay - payment: PKPayment
-let apiClient = PAYJP.APIClient(publicKey: PAYJPPublicKey)
-apiClient.createToken(with: payment.token) { (result) in
-    switch result {
-    case .success(let token):
-        print("token: \(token.identifer)")
-    case .failure(let error):
-        print(error)
-    }
-}
-```
 
 ## サンプルコード
 
