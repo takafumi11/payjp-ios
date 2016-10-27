@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PAYJP'
-  s.version          = '0.1.2'
+  s.version          = '0.1.0'
   s.summary          = 'PAY.JP iOS SDK'
   s.description      = 'PAY.JP iOS SDK'
 
   s.homepage         = 'https://github.com/payjp/payjp-ios'
   s.license          = { :type => 'MIT' }
   s.author           = { 'PAY.JP (https://pay.jp)' => 'support@pay.jp' }
-  s.source           = { :git => 'https://github.com/payjp/payjp-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/payjp/payjp-ios.git', :tag => s.version.to_s, submodules: true }
 
   s.ios.deployment_target = '8.0'
   s.xcconfig = {
