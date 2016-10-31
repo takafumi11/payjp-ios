@@ -24,7 +24,7 @@ git "git@github.com:payjp/payjp-ios.git" "master"
 [CocoaPods](http://cocoapods.org) でもインストールすることができます。
 
 ```ruby
-pod 'PAYJP', git: 'git@github.com:payjp/payjp-ios.git'
+pod 'PAYJP', git: 'git@github.com:payjp/payjp-ios.git', submodules: true
 ```
 
 詳しくは [サンプルコード](https://github.com/payjp/apple-pay-example) のプロジェクトを参照ください。
