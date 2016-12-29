@@ -11,10 +11,12 @@
 
 import Foundation
 
-public final class  Card: Object {
+public final class Card: Object {
     public let identifer: String
+    public let name: String
+    public let number: String
     public let last4Number: String
-    public let brand: String
+    public let brand: CardBrand
     public let expirationMonth: UInt8
     public let expirationYear: UInt16
     public let fingerprint: String
@@ -24,6 +26,8 @@ public final class  Card: Object {
     
     init(_ e: Extractor) {
         identifer = try! e <| "id"
+        name = try! e <| "name"
+        number = try! e <| "number"
         last4Number = try! e <| "last4"
         brand = try! e <| "brand"
         expirationMonth = try! e <| "exp_month"
@@ -32,5 +36,18 @@ public final class  Card: Object {
         liveMode = try! e <| "livemode"
         createdAt = try! DateTransformer.apply(e <| "created")
         rawValue = e.rawValue
+    }
+}
+
+public enum CardBrand: String, Decodable {
+    case visa = "Visa"
+    case masterCard = "MasterCard"
+    case JCB = "JCB"
+    case amex = "American Express"
+    case dinersClub = "Diners Club"
+    case discover = "Discover"
+    
+    func display() -> String {
+        return String(describing: self).uppercased()
     }
 }
