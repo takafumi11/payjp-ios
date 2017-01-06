@@ -14,9 +14,8 @@ import Foundation
 public final class Card: Object {
     public let identifer: String
     public let name: String?
-    public let number: String?
     public let last4Number: String
-    public let brand: CardBrand
+    public let brand: String
     public let expirationMonth: UInt8
     public let expirationYear: UInt16
     public let fingerprint: String
@@ -27,7 +26,6 @@ public final class Card: Object {
     init(_ e: Extractor) {
         identifer = try! e <| "id"
         name = try! e <|? "name"
-        number = try! e <|? "number"
         last4Number = try! e <| "last4"
         brand = try! e <| "brand"
         expirationMonth = try! e <| "exp_month"
