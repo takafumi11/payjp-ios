@@ -33,3 +33,13 @@ extension Token: Decodable {
         return try castOrFail(Token(e))
     }
 }
+
+extension Token {
+    public override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? Token {
+            return self.identifer == object.identifer
+        }
+        
+        return false
+    }
+}

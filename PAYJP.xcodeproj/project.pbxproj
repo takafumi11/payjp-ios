@@ -20,6 +20,10 @@
 		C68378261D9CD1330023B528 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378251D9CD1330023B528 /* Token.swift */; };
 		C68378C81D9CF1BB0023B528 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378C41D9CF1BB0023B528 /* Result.swift */; };
 		C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378C51D9CF1BB0023B528 /* ResultProtocol.swift */; };
+		C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */; };
+		C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F91E1E2369001D7F75 /* TestFixture.swift */; };
+		C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; };
+		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6FE0FAF1DBA09F0009F8F99 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA21DBA09F0009F8F99 /* Casting.swift */; };
 		C6FE0FB01DBA09F0009F8F99 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */; };
 		C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA41DBA09F0009F8F99 /* decode.swift */; };
@@ -44,6 +48,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C6E00B101E1F58C200C101B0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		615AFF5B1C8C74A1003FB86F /* PAYJP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PAYJP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AFF5E1C8C74A1003FB86F /* PAYJP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
@@ -61,6 +78,9 @@
 		C68378251D9CD1330023B528 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		C68378C41D9CF1BB0023B528 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C68378C51D9CF1BB0023B528 /* ResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultProtocol.swift; sourceTree = "<group>"; };
+		C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFromTokenTests.swift; sourceTree = "<group>"; };
+		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
+		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		C6FE0FA21DBA09F0009F8F99 /* Casting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casting.swift; sourceTree = "<group>"; };
 		C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		C6FE0FA41DBA09F0009F8F99 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
@@ -88,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */,
+				C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +122,7 @@
 				C683781B1D9BD9A30023B528 /* Vendors */,
 				615AFF691C8C74A1003FB86F /* Tests */,
 				615AFF5C1C8C74A1003FB86F /* Products */,
+				C6E00B0C1E1F505600C101B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +157,8 @@
 				615AFF6C1C8C74A1003FB86F /* Info.plist */,
 				615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */,
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
+				C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */,
+				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -155,7 +179,15 @@
 				C68378C51D9CF1BB0023B528 /* ResultProtocol.swift */,
 			);
 			name = Result;
-			path = Vendors/Result/Result;
+			path = Carthage/Checkouts/Result/Result;
+			sourceTree = "<group>";
+		};
+		C6E00B0C1E1F505600C101B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C6FE0FA11DBA09F0009F8F99 /* Himotoki */ = {
@@ -175,7 +207,7 @@
 				C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */,
 			);
 			name = Himotoki;
-			path = Vendors/Himotoki/Sources;
+			path = Carthage/Checkouts/Himotoki/Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +250,7 @@
 				615AFF611C8C74A1003FB86F /* Sources */,
 				615AFF621C8C74A1003FB86F /* Frameworks */,
 				615AFF631C8C74A1003FB86F /* Resources */,
+				C6E00B101E1F58C200C101B0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -241,10 +274,13 @@
 				TargetAttributes = {
 					615AFF5A1C8C74A1003FB86F = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8ZAC8P584F;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					615AFF641C8C74A1003FB86F = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8ZAC8P584F;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -301,6 +337,7 @@
 				C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				C6FE0FB21DBA09F0009F8F99 /* DecodeError.swift in Sources */,
+				C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */,
 				C6FE0FB81DBA09F0009F8F99 /* Operators.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
 				C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */,
@@ -317,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */,
+				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,8 +472,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8ZAC8P584F;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -456,8 +495,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8ZAC8P584F;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -476,6 +516,11 @@
 		615AFF731C8C74A1003FB86F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 8ZAC8P584F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.pay.ios.PAYJPTests;
@@ -487,6 +532,11 @@
 		615AFF741C8C74A1003FB86F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 8ZAC8P584F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.pay.ios.PAYJPTests;
