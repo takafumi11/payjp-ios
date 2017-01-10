@@ -23,8 +23,8 @@ Pod::Spec.new do |s|
   }
 
   s.source_files = ['Sources/**/*', 
-                    'Vendors/Himotoki/Sources/**/*.swift', 
-                    'Vendors/Result/Result/**/*.swift']
+                    'Carthage/Checkouts/Himotoki/Sources/**/*.swift', 
+                    'Carthage/Checkouts/Result/Result/**/*.swift']
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
 end
