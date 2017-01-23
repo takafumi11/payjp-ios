@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PAYJP'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'PAY.JP iOS SDK'
-  s.description      = 'PAY.JP iOS SDK'
+  s.description      = 'PAY.JP iOS SDK https://pay.jp/docs/started'
 
   s.homepage         = 'https://github.com/payjp/payjp-ios'
   s.license          = { :type => 'MIT' }
