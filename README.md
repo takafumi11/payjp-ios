@@ -24,13 +24,13 @@ https://pay.jp/docs/apple-pay
 
 [Carthage](https://github.com/Carthage/Carthage) でインストールする場合、以下のように記述してください
 ```
-git "git@github.com:payjp/payjp-ios.git"
+github "payjp/payjp-ios"
 ```
 
 [CocoaPods](http://cocoapods.org) でもインストールすることができます。
 
 ```ruby
-pod 'PAYJP', git: 'git@github.com:payjp/payjp-ios.git', submodules: true
+pod 'PAYJP'
 ```
 
 詳しくは [サンプルコード](https://github.com/payjp/apple-pay-example) のプロジェクトを参照ください。
