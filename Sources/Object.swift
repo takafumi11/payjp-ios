@@ -15,7 +15,7 @@ enum ObjectType: String {
 
 public class Object: Decodable {
     public static func decode(_ e: Extractor) throws -> Self {
-        guard let object = try ObjectType(rawValue: e <| "object") else { return try castOrFail(any: e) }
+        guard let object = try ObjectType(rawValue: e <| "object") else { return try castOrFail(e) }
         switch object {
         case .token:
             return try castOrFail(Token(e))
