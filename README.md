@@ -6,7 +6,7 @@
 詳しくはドキュメントを参照してください。
 https://pay.jp/docs/apple-pay
 
-## ロードマップ
+## 今後の開発予定
 
 - クレジットカードによる決済(トークン化、カード情報入力フォーム)
 
@@ -17,8 +17,8 @@ https://pay.jp/docs/apple-pay
 ## 動作環境
 
 - Swift または Objective-C で開発された iOS アプリケーション
-- iOS 8.4+
-- Xcode 8.0+
+- iOS 8.4以上
+- Xcode 9.0以上
 
 ## インストール
 
@@ -37,7 +37,7 @@ pod 'PAYJP'
 
 ## SDK開発環境
 
-- Swift 3.x
+- Swift 4
 - Result: https://github.com/antitypical/Result/
 - Himotoki: https://github.com/ikesyo/Himotoki/
 
