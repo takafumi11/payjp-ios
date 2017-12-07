@@ -14,7 +14,7 @@ class PAYJPTests: XCTestCase {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path == "/v1/tokens"
         }) { (req) -> OHHTTPStubsResponse in
-           OHHTTPStubsResponse(jsonObject: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+            OHHTTPStubsResponse(jsonObject: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
         }
     }
     
@@ -22,12 +22,35 @@ class PAYJPTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateToken() {
+    func testCreateToken_withPKPaymentToken() {
         let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
         
         let expectation = self.expectation(description: self.description)
         
         apiClient.createToken(with: StubPaymentToken()) { result in
+            switch result {
+            case .success(let payToken):
+                let json = TestFixture.JSON(by: "token.json")
+                let token = try! Token.decodeValue(json)
+                
+                XCTAssertEqual(payToken, token)
+                expectation.fulfill()
+                break
+            default:
+                XCTFail()
+            }
+            
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testCreateToken_withCardInput() {
+        let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
+        
+        let expectation = self.expectation(description: self.description)
+        
+        apiClient.createToken(with: "4242424242424242", cvc: "123", expirationMonth: "02", expirationYear: "2020") { result in
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
