@@ -21,11 +21,10 @@ import PassKit
     }
     
     public typealias APIResponse = Result<Token, APIError>
-    public typealias CompletionBlock = (APIResponse) -> ()
     
     private func createToken(
         with request: URLRequest,
-        completionHandler: @escaping CompletionBlock)
+        completionHandler: @escaping (APIResponse) -> ())
     {
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, res, err) in
             if let e = err {
@@ -71,7 +70,7 @@ import PassKit
     /// - parameter token: ApplePay Token
     public func createToken(
         with token: PKPaymentToken,
-        completionHandler: @escaping CompletionBlock)
+        completionHandler: @escaping (APIResponse) -> ())
     {
         guard let url = URL(string: "\(baseURL)/tokens") else { return }
         guard let body = String(data: token.paymentData, encoding: String.Encoding.utf8)?
@@ -87,7 +86,7 @@ import PassKit
         
         createToken(with: req, completionHandler: completionHandler)
     }
-    
+
     /// Create PAY.JP Token
     /// - parameter cardNumber:         Credit card number `1234123412341234`
     /// - parameter cvc:                Credit card cvc e.g. `123`
@@ -98,7 +97,7 @@ import PassKit
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
-        completionHandler: @escaping CompletionBlock)
+        completionHandler: @escaping (APIResponse) -> ())
     {
         guard let url = URL(string: "\(baseURL)/tokens") else { return }
         let formString = "card[number]=\(cardNumber)"
@@ -112,6 +111,20 @@ import PassKit
         
         createToken(with: req, completionHandler: completionHandler)
     }
+
+    /// GET PAY.JP Token
+    /// - parameter tokenId:    identifier of the Token
+    public func getToken(
+        with tokenId: String,
+        completionHandler: @escaping (APIResponse) -> ())
+    {
+        guard let url = URL(string: "\(baseURL)/tokens/\(tokenId)") else { return }
+        var req = URLRequest(url: url)
+        req.httpMethod = "GET"
+        req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        
+        createToken(with: req, completionHandler: completionHandler)
+    }
 }
 
 // Objective-C API
@@ -121,6 +134,41 @@ extension APIClient {
         completionHandler: @escaping (Error?, Token?) -> ()) {
         
         self.createToken(with: token) { (response) in
+            switch response {
+            case .success(let token):
+                completionHandler(nil, token)
+            case .failure(let error):
+                completionHandler(error, nil)
+            }
+        }
+    }
+
+    public func createTokenWith(
+        _ cardNumber: String,
+        cvc: String,
+        expirationMonth: String,
+        expirationYear: String,
+        completionHandler: @escaping (Error?, Token?) -> ()) {
+        
+        self.createToken(with: cardNumber,
+                         cvc: cvc,
+                         expirationMonth: expirationMonth,
+                         expirationYear: expirationYear)
+        { (response) in
+            switch response {
+            case .success(let token):
+                completionHandler(nil, token)
+            case .failure(let error):
+                completionHandler(error, nil)
+            }
+        }
+    }
+
+    public func getTokenWith(
+        _ tokenId: String,
+        completionHandler: @escaping (Error?, Token?) -> ()) {
+        
+        self.getToken(with: tokenId) { (response) in
             switch response {
             case .success(let token):
                 completionHandler(nil, token)
