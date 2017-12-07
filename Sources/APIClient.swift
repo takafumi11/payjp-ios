@@ -21,26 +21,12 @@ import PassKit
     }
     
     public typealias APIResponse = Result<Token, APIError>
+    public typealias Callback = (APIResponse) -> ()
     
-    /// Create PAY.JP Token
-    /// - parameter token: ApplePay Token
-    public func createToken(
-        with token: PKPaymentToken,
-        completionHandler: @escaping (APIResponse) -> ())
-    {
-        guard let url = URL(string: "\(baseURL)/tokens") else { return }
-        guard let body = String(data: token.paymentData, encoding: String.Encoding.utf8)?
-            .addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
-                completionHandler(.failure(.invalidApplePayToken(token)))
-                return
-        }
-        
-        var req = URLRequest(url: url)
-        req.httpMethod = "POST"
-        req.httpBody = "card=\(body)".data(using: .utf8)
-        req.setValue(authCredential, forHTTPHeaderField: "Authorization")
-        
-        let task = URLSession.shared.dataTask(with: req, completionHandler: { (data, res, err) in
+    private func createToken(
+        with request: URLRequest,
+        completionHandler: @escaping Callback) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, res, err) in
             if let e = err {
                 completionHandler(.failure(.errorResponse(e)))
                 return
@@ -78,6 +64,27 @@ import PassKit
         })
         
         task.resume()
+    }
+    
+    /// Create PAY.JP Token
+    /// - parameter token: ApplePay Token
+    public func createToken(
+        with token: PKPaymentToken,
+        completionHandler: @escaping Callback)
+    {
+        guard let url = URL(string: "\(baseURL)/tokens") else { return }
+        guard let body = String(data: token.paymentData, encoding: String.Encoding.utf8)?
+            .addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
+                completionHandler(.failure(.invalidApplePayToken(token)))
+                return
+        }
+        
+        var req = URLRequest(url: url)
+        req.httpMethod = "POST"
+        req.httpBody = "card=\(body)".data(using: .utf8)
+        req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        
+        createToken(with: req, completionHandler: completionHandler)
     }
 }
 
