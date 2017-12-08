@@ -10,7 +10,7 @@
 
 import Foundation
 
-@objc(PAYToken) public final class Token: NSObject{
+@objcMembers @objc(PAYToken) public final class Token: NSObject {
     public let identifer: String
     public let livemode: Bool
     public let used: Bool
