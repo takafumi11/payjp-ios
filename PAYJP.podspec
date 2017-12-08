@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PAYJP'
-  s.version          = '0.1.3'
+  s.version          = '0.2.0'
   s.summary          = 'PAY.JP iOS SDK'
   s.description      = 'PAY.JP iOS SDK https://pay.jp/docs/started'
 
@@ -19,12 +19,12 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.xcconfig = {
-    'SWIFT_VERSION' => '3.0'
+    'SWIFT_VERSION' => '4.0'
   }
 
-  s.source_files = ['Sources/**/*', 
-                    'Carthage/Checkouts/Himotoki/Sources/**/*.swift', 
-                    'Carthage/Checkouts/Result/Result/**/*.swift']
+  s.source_files = 'Sources/**/*'
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
+  s.dependency "Result", "~> 3.0"
+  s.dependency "Himotoki", "~> 3.0"
 end
