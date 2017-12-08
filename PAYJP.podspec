@@ -22,9 +22,9 @@ Pod::Spec.new do |s|
     'SWIFT_VERSION' => '4.0'
   }
 
-  s.source_files = 'Sources/**/*'
+  s.source_files = ['Sources/**/*',
+                    'Carthage/Checkouts/Himotoki/Sources/**/*.swift',
+                    'Carthage/Checkouts/Result/Result/**/*.swift']
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
-  s.dependency "Result", "~> 3.0"
-  s.dependency "Himotoki", "~> 3.0"
 end
