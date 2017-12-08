@@ -12,6 +12,7 @@
 		32E4E3661FD93A4D008509E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E4E3641FD93A4D008509E5 /* Main.storyboard */; };
 		32E4E3681FD93A4D008509E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E4E3671FD93A4D008509E5 /* Assets.xcassets */; };
 		32E4E36B1FD93A4D008509E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E4E3691FD93A4D008509E5 /* LaunchScreen.storyboard */; };
+		32E4E38E1FDA36A3008509E5 /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 615AFF5E1C8C74A1003FB86F /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */; };
@@ -44,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		32E4E38C1FDA3689008509E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 615AFF521C8C74A1003FB86F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 615AFF5A1C8C74A1003FB86F;
+			remoteInfo = PAYJP;
+		};
 		615AFF671C8C74A1003FB86F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 615AFF521C8C74A1003FB86F /* Project object */;
@@ -112,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32E4E38E1FDA36A3008509E5 /* PAYJP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +279,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				32E4E38D1FDA3689008509E5 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -438,6 +448,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		32E4E38D1FDA3689008509E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 615AFF5A1C8C74A1003FB86F /* PAYJP */;
+			targetProxy = 32E4E38C1FDA3689008509E5 /* PBXContainerItemProxy */;
+		};
 		615AFF681C8C74A1003FB86F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 615AFF5A1C8C74A1003FB86F /* PAYJP */;
@@ -479,7 +494,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.jp.pay.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,7 +519,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.jp.pay.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
