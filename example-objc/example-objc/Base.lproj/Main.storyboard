@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="PTe-vB-Ews">
             <objects>
-                <tableViewController id="VKh-Lw-K9Y" customClass="ViewController" customModule="example_objc" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VKh-Lw-K9Y" customClass="ViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="1hC-Zo-UoR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -207,8 +207,8 @@
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="VKh-Lw-K9Y" id="Mjl-YK-djD"/>
-                            <outlet property="delegate" destination="VKh-Lw-K9Y" id="V2N-G3-hUu"/>
+                            <outlet property="dataSource" destination="VKh-Lw-K9Y" id="akr-SI-CLy"/>
+                            <outlet property="delegate" destination="VKh-Lw-K9Y" id="pk0-Lj-Uzb"/>
                         </connections>
                     </tableView>
                 </tableViewController>
