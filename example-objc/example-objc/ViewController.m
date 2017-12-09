@@ -68,7 +68,8 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 
          NSLog(@"token = %@", [wself displayToken:token]);
          dispatch_async(dispatch_get_main_queue(), ^{
-             wself.labelTokenId.text = nil;
+             wself.labelTokenId.text = token.identifer;
+             [wself.tableView reloadData];
              [wself showToken:token];
          });
      }];
@@ -90,7 +91,8 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
          
          NSLog(@"token = %@", [wself displayToken:token]);
          dispatch_async(dispatch_get_main_queue(), ^{
-             wself.labelTokenId.text = nil;
+             wself.labelTokenId.text = token.identifer;
+             [wself.tableView reloadData];
              [wself showToken:token];
          });
      }];

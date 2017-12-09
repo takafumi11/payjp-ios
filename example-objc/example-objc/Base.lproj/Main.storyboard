@@ -211,6 +211,13 @@
                             <outlet property="delegate" destination="VKh-Lw-K9Y" id="pk0-Lj-Uzb"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="fieldCardCvc" destination="Lz7-lQ-qoo" id="XaM-MQ-SjW"/>
+                        <outlet property="fieldCardMonth" destination="ySB-th-XuK" id="YVo-54-QwL"/>
+                        <outlet property="fieldCardNumber" destination="Exr-dr-g0q" id="6TY-8s-aao"/>
+                        <outlet property="fieldCardYear" destination="IQz-rn-7eQ" id="UPj-ef-UQZ"/>
+                        <outlet property="labelTokenId" destination="iSQ-BN-wpX" id="XHS-Op-nou"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="auZ-wy-SU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
