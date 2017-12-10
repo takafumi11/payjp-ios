@@ -1,9 +1,8 @@
 //
 //  AppDelegate.swift
-//  Example
+//  example-swift
 //
-//  Created by Tatsuya Kitagawa on 2017/12/07.
-//  Copyright © 2017年 BASE, Inc. All rights reserved.
+//  Created by Tatsuya Kitagawa on 2017/12/08.
 //
 
 import UIKit

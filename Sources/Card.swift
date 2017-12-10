@@ -11,7 +11,7 @@
 
 import Foundation
 
-public final class Card: Object {
+@objcMembers @objc(PAYCard) public final class Card: NSObject {
     public let identifer: String
     public let name: String?
     public let last4Number: String
@@ -34,6 +34,12 @@ public final class Card: Object {
         liveMode = try! e <| "livemode"
         createdAt = try! DateTransformer.apply(e <| "created")
         rawValue = e.rawValue
+    }
+}
+
+extension Card: Decodable {
+    public static func decode(_ e: Extractor) throws -> Self {
+        return try castOrFail(Card(e))
     }
 }
 

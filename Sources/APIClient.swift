@@ -16,7 +16,7 @@ import PassKit
         return "Basic \(base64Credential)"
     }()
 
-    public init(publicKey: String) {
+    @objc public init(publicKey: String) {
         self.publicKey = publicKey
     }
     
@@ -129,7 +129,7 @@ import PassKit
 
 // Objective-C API
 extension APIClient {
-    public func createTokenWith(
+    @objc public func createTokenWith(
         _ token: PKPaymentToken,
         completionHandler: @escaping (Error?, Token?) -> ()) {
         
@@ -143,7 +143,7 @@ extension APIClient {
         }
     }
 
-    public func createTokenWith(
+    @objc public func createTokenWith(
         _ cardNumber: String,
         cvc: String,
         expirationMonth: String,
@@ -164,7 +164,7 @@ extension APIClient {
         }
     }
 
-    public func getTokenWith(
+    @objc public func getTokenWith(
         _ tokenId: String,
         completionHandler: @escaping (Error?, Token?) -> ()) {
         
