@@ -28,7 +28,7 @@ import PassKit
     {
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, res, err) in
             if let e = err {
-                completionHandler(.failure(.errorResponse(e)))
+                completionHandler(.failure(.systemError(e)))
                 return
             }
             
@@ -51,8 +51,12 @@ import PassKit
             }
             
             if response.statusCode != 200 {
-                completionHandler(.failure(.errorJSON(json)))
-                return
+                if let error = try? PAYError.decodeValue(json, rootKeyPath: "error") {
+                    completionHandler(.failure(.serviceError(error)))
+                    return
+                } else {
+                    completionHandler(.failure(.invalidJSON(json)))
+                }
             }
             
             do {

@@ -9,11 +9,28 @@
 import Foundation
 import PassKit
 
-public enum APIError: Error {
+public enum APIError: LocalizedError {
+    /// The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
-    case errorResponse(Error)
+    /// The system error.
+    case systemError(Error)
+    /// No body data or no response error.
     case invalidResponse(HTTPURLResponse?)
+    /// The content of response body is not a valid JSON.
     case invalidResponseBody(Data)
-    case errorJSON(Any)
+    /// The error came back from server side.
+    case serviceError(PAYErrorType)
+    /// Invalid JSON object.
     case invalidJSON(Any)
+    
+    // MARK: - LocalizedError
+    
+    public var errorDescription: String? {
+        switch self {
+        case .serviceError(let error):
+            return error.message
+        default:
+            return ""
+        }
+    }
 }
