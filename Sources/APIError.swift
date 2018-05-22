@@ -82,26 +82,3 @@ public enum APIError: LocalizedError {
         }
     }
 }
-
-/// PAY.JP SDK related error's main domain.
-let PAYErrorDomain = "PAYErrorDomain";
-
-/// The Apple Pay token is invalid.
-let PAYErrorInvalidApplePayToken = 0
-/// The system error.
-let PAYErrorSystemError = 1
-/// No body data or no response error.
-let PAYErrorInvalidResponse = 2
-/// The content of response body is not a valid JSON.
-let PAYErrorInvalidResponseBody = 3
-/// The error came back from server side.
-let PAYErrorServiceError = 4
-/// Invalid JSON object.
-let PAYErrorInvalidJSON = 5
-
-let PAYErrorInvalidApplePayTokenObject = "PAYErrorInvalidApplePayToken"
-let PAYErrorSystemErrorObject = "PAYErrorSystemErrorObject"
-let PAYErrorInvalidResponseObject = "PAYErrorInvalidResponseObject"
-let PAYErrorInvalidResponseData = "PAYErrorInvalidResponseData"
-let PAYErrorServiceErrorObject = "PAYErrorServiceErrorObject"
-let PAYErrorInvalidJSONObject = "PAYErrorInvalidJSONObject"
