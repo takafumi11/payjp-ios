@@ -45,7 +45,7 @@ import PassKit
             var json: Any
             do {
                 json = try JSONSerialization.jsonObject(with: data, options:.mutableContainers)
-            }catch {
+            } catch {
                 completionHandler(.failure(.invalidResponseBody(data)))
                 return
             }
@@ -135,14 +135,14 @@ import PassKit
 extension APIClient {
     @objc public func createTokenWith(
         _ token: PKPaymentToken,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: token) { (response) in
             switch response {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }
@@ -152,7 +152,7 @@ extension APIClient {
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: cardNumber,
                          cvc: cvc,
@@ -163,21 +163,21 @@ extension APIClient {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }
 
     @objc public func getTokenWith(
         _ tokenId: String,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.getToken(with: tokenId) { (response) in
             switch response {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }

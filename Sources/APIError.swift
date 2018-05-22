@@ -27,10 +27,81 @@ public enum APIError: LocalizedError {
     
     public var errorDescription: String? {
         switch self {
+        case .invalidApplePayToken(_):
+            return "Invalid Apple Pay Token"
+        case .systemError(let error):
+            return error.localizedDescription
+        case .invalidResponse(_):
+            return "The response is not a HTTPURLResponse instance."
+        case .invalidResponseBody(_):
+            return "The response body's data is not a valid JSON object."
         case .serviceError(let error):
             return error.message
-        default:
-            return ""
+        case .invalidJSON(_):
+            return "Unable parse JSON object to expect class."
+        }
+    }
+    
+    // MARK: - NSError helper
+    
+    public func nsErrorValue()-> NSError? {
+        var userInfo = [String: Any]()
+        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
+        
+        switch self {
+        case .invalidApplePayToken(let token):
+            userInfo[PAYErrorInvalidApplePayTokenObject] = token
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorServiceError,
+                           userInfo: userInfo)
+        case .systemError(let error):
+            userInfo[PAYErrorSystemErrorObject] = error
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorSystemError,
+                           userInfo: userInfo)
+        case .invalidResponse(let response):
+            userInfo[PAYErrorInvalidResponseObject] = response
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorInvalidResponse,
+                           userInfo: userInfo)
+        case .invalidResponseBody(let data):
+            userInfo[PAYErrorInvalidResponseData] = data
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorInvalidResponseBody,
+                           userInfo: userInfo)
+        case .serviceError(let error):
+            userInfo[PAYErrorServiceErrorObject] = error
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorServiceError,
+                           userInfo: userInfo)
+        case .invalidJSON(let json):
+            userInfo[PAYErrorInvalidJSONObject] = json
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorInvalidJSON,
+                           userInfo: userInfo)
         }
     }
 }
+
+/// PAY.JP SDK related error's main domain.
+let PAYErrorDomain = "PAYErrorDomain";
+
+/// The Apple Pay token is invalid.
+let PAYErrorInvalidApplePayToken = 0
+/// The system error.
+let PAYErrorSystemError = 1
+/// No body data or no response error.
+let PAYErrorInvalidResponse = 2
+/// The content of response body is not a valid JSON.
+let PAYErrorInvalidResponseBody = 3
+/// The error came back from server side.
+let PAYErrorServiceError = 4
+/// Invalid JSON object.
+let PAYErrorInvalidJSON = 5
+
+let PAYErrorInvalidApplePayTokenObject = "PAYErrorInvalidApplePayToken"
+let PAYErrorSystemErrorObject = "PAYErrorSystemErrorObject"
+let PAYErrorInvalidResponseObject = "PAYErrorInvalidResponseObject"
+let PAYErrorInvalidResponseData = "PAYErrorInvalidResponseData"
+let PAYErrorServiceErrorObject = "PAYErrorServiceErrorObject"
+let PAYErrorInvalidJSONObject = "PAYErrorInvalidJSONObject"
