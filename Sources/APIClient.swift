@@ -7,6 +7,7 @@ import Foundation
 import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
+    @objc public var locale: Locale?
     private let publicKey: String
     private let baseURL: String = "https://api.pay.jp/v1"
     
@@ -87,6 +88,7 @@ import PassKit
         req.httpMethod = "POST"
         req.httpBody = "card=\(body)".data(using: .utf8)
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
@@ -112,6 +114,7 @@ import PassKit
         req.httpMethod = "POST"
         req.httpBody = formString.data(using: .utf8)
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
@@ -126,6 +129,7 @@ import PassKit
         var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
