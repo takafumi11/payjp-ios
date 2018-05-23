@@ -38,7 +38,7 @@ public enum APIError: LocalizedError {
         case .serviceError(let error):
             return error.message
         case .invalidJSON(_):
-            return "Unable parse JSON object to expect class."
+            return "Unable parse JSON object into expected classes."
         }
     }
     
