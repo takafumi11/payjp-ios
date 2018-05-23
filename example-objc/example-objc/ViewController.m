@@ -29,6 +29,9 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.payjpClient = [[PAYAPIClient alloc] initWithPublicKey:PAYJPPublicKey];
+    
+    // You can set the locale of error message like this.
+    self.payjpClient.locale = [NSLocale currentLocale];
 }
 
 #pragma MARK: - UITableView

@@ -7,7 +7,9 @@ import Foundation
 import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
+    /// Able to set the locale of the error messages. We provide messages in Japanese and English. Default is nil.
     @objc public var locale: Locale?
+    
     private let publicKey: String
     private let baseURL: String = "https://api.pay.jp/v1"
     
