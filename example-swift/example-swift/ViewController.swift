@@ -30,6 +30,9 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // You can set the locale of error message like this.
+        payjpClient.locale = Locale.current
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,6 +68,10 @@ class ViewController: UITableViewController {
                     self?.showToken(token: token)
                 }
             case .failure(let error):
+                if let payError = error.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+                
                 DispatchQueue.main.async {
                     self?.labelTokenId.text = ""
                     self?.showError(error: error)

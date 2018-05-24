@@ -7,6 +7,9 @@ import Foundation
 import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
+    /// Able to set the locale of the error messages. We provide messages in Japanese and English. Default is nil.
+    @objc public var locale: Locale?
+    
     private let publicKey: String
     private let baseURL: String = "https://api.pay.jp/v1"
     
@@ -28,7 +31,7 @@ import PassKit
     {
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, res, err) in
             if let e = err {
-                completionHandler(.failure(.errorResponse(e)))
+                completionHandler(.failure(.systemError(e)))
                 return
             }
             
@@ -45,14 +48,18 @@ import PassKit
             var json: Any
             do {
                 json = try JSONSerialization.jsonObject(with: data, options:.mutableContainers)
-            }catch {
+            } catch {
                 completionHandler(.failure(.invalidResponseBody(data)))
                 return
             }
             
             if response.statusCode != 200 {
-                completionHandler(.failure(.errorJSON(json)))
-                return
+                if let error = try? PAYErrorResponse.decodeValue(json, rootKeyPath: "error") {
+                    completionHandler(.failure(.serviceError(error)))
+                    return
+                } else {
+                    completionHandler(.failure(.invalidJSON(json)))
+                }
             }
             
             do {
@@ -83,6 +90,7 @@ import PassKit
         req.httpMethod = "POST"
         req.httpBody = "card=\(body)".data(using: .utf8)
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
@@ -108,6 +116,7 @@ import PassKit
         req.httpMethod = "POST"
         req.httpBody = formString.data(using: .utf8)
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
@@ -122,6 +131,7 @@ import PassKit
         var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
+        req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
         createToken(with: req, completionHandler: completionHandler)
     }
@@ -131,14 +141,14 @@ import PassKit
 extension APIClient {
     @objc public func createTokenWith(
         _ token: PKPaymentToken,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: token) { (response) in
             switch response {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }
@@ -148,7 +158,7 @@ extension APIClient {
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: cardNumber,
                          cvc: cvc,
@@ -159,21 +169,21 @@ extension APIClient {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }
 
     @objc public func getTokenWith(
         _ tokenId: String,
-        completionHandler: @escaping (Error?, Token?) -> ()) {
+        completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.getToken(with: tokenId) { (response) in
             switch response {
             case .success(let token):
                 completionHandler(nil, token)
             case .failure(let error):
-                completionHandler(error, nil)
+                completionHandler(error.nsErrorValue(), nil)
             }
         }
     }

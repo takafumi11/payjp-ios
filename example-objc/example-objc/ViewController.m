@@ -29,6 +29,9 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.payjpClient = [[PAYAPIClient alloc] initWithPublicKey:PAYJPPublicKey];
+    
+    // You can set the locale of error message like this.
+    self.payjpClient.locale = [NSLocale currentLocale];
 }
 
 #pragma MARK: - UITableView
@@ -58,6 +61,12 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
                        expirationYear:year
                     completionHandler:
      ^(NSError *error, PAYToken *token) {
+         APIError *apiError = (APIError *)error;
+         if (apiError) {
+             id<PAYErrorResponseType> errorResponse = apiError.payError;
+             NSLog(@"[errorResponse] %@", errorResponse.description);
+         }
+         
          if (!token) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  wself.labelTokenId.text = nil;
@@ -65,7 +74,7 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
              });
              return;
          }
-
+         
          NSLog(@"token = %@", [wself displayToken:token]);
          dispatch_async(dispatch_get_main_queue(), ^{
              wself.labelTokenId.text = token.identifer;
