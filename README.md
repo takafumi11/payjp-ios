@@ -19,8 +19,8 @@
 ## サンプルコード
 
 - Apple Pay: https://github.com/payjp/apple-pay-example
-- CreditCard (Swift): https://github.com/payjp/payjp-ios/tree/master/example-swift
-- CreditCard (Objective-C): https://github.com/payjp/payjp-ios/tree/master/example-objc
+- CreditCard (Swift, Carthage): https://github.com/payjp/payjp-ios/tree/master/example-swift
+- CreditCard (Objective-C, CocoaPods): https://github.com/payjp/payjp-ios/tree/master/example-objc
 
 ## 動作環境
 
@@ -45,7 +45,7 @@ pod 'PAYJP'
 
 ## SDK開発環境
 
-- Swift 4
+- Swift 4.1
 - Result: https://github.com/antitypical/Result/
 - Himotoki: https://github.com/ikesyo/Himotoki/
 
