@@ -68,6 +68,10 @@ class ViewController: UITableViewController {
                     self?.showToken(token: token)
                 }
             case .failure(let error):
+                if let payError = error.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+                
                 DispatchQueue.main.async {
                     self?.labelTokenId.text = ""
                     self?.showError(error: error)
