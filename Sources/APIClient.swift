@@ -54,7 +54,7 @@ import PassKit
             }
             
             if response.statusCode != 200 {
-                if let error = try? PAYError.decodeValue(json, rootKeyPath: "error") {
+                if let error = try? PAYErrorResponse.decodeValue(json, rootKeyPath: "error") {
                     completionHandler(.failure(.serviceError(error)))
                     return
                 } else {

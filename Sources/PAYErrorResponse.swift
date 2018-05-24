@@ -1,5 +1,5 @@
 //
-//  PAYError.swift
+//  PAYErrorResponse.swift
 //  PAYJP
 //
 //  Created by Li-Hsuan Chen on 2018/05/21.
@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-public protocol PAYErrorType {
+public protocol PAYErrorResponseType {
     /// The origin reponse's HTTP status code.
     var status: Int { get }
     /// The detail message of the error.
@@ -22,9 +22,9 @@ public protocol PAYErrorType {
 }
 
 @objcMembers @objc
-public final class PAYError: NSObject, PAYErrorType {
+public final class PAYErrorResponse: NSObject, PAYErrorResponseType {
     
-    // MARK: - PAYErrorType properties
+    // MARK: - PAYErrorResponseType properties
     
     public let status: Int
     public let message: String?
@@ -43,8 +43,8 @@ public final class PAYError: NSObject, PAYErrorType {
     }
 }
 
-extension PAYError: Decodable {
+extension PAYErrorResponse: Decodable {
     public static func decode(_ e: Extractor) throws -> Self {
-        return try castOrFail(PAYError(e))
+        return try castOrFail(PAYErrorResponse(e))
     }
 }

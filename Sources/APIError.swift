@@ -18,8 +18,8 @@ public enum APIError: LocalizedError {
     case invalidResponse(HTTPURLResponse?)
     /// The content of response body is not a valid JSON.
     case invalidResponseBody(Data)
-    /// The error came back from server side.
-    case serviceError(PAYErrorType)
+    /// The error response object that is coming back from the server side.
+    case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
     case invalidJSON(Any)
     
@@ -35,8 +35,8 @@ public enum APIError: LocalizedError {
             return "The response is not a HTTPURLResponse instance."
         case .invalidResponseBody(_):
             return "The response body's data is not a valid JSON object."
-        case .serviceError(let error):
-            return error.message
+        case .serviceError(let errorResponse):
+            return errorResponse.message
         case .invalidJSON(_):
             return "Unable parse JSON object into expected classes."
         }
@@ -79,6 +79,15 @@ public enum APIError: LocalizedError {
             return NSError(domain: PAYErrorDomain,
                            code: PAYErrorInvalidJSON,
                            userInfo: userInfo)
+        }
+    }
+    
+    var payError: PAYErrorResponseType? {
+        switch self {
+        case .serviceError(let error):
+            return error
+        default:
+            return nil
         }
     }
 }

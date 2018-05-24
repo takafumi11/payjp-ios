@@ -64,12 +64,12 @@ class APIErrorNSErrorTests: XCTestCase {
     
     func testServiceError() {
         let json = TestFixture.JSON(by: "error.json")
-        let payError = try! PAYError.decodeValue(json, rootKeyPath: "error")
+        let payError = try! PAYErrorResponse.decodeValue(json, rootKeyPath: "error")
         
         let apiError = APIError.serviceError(payError)
         let nserror =  apiError.nsErrorValue()
         
-        let errorObject = nserror?.userInfo[PAYErrorServiceErrorObject] as? PAYError
+        let errorObject = nserror?.userInfo[PAYErrorServiceErrorObject] as? PAYErrorResponse
         
         XCTAssertNotNil(payError)
         XCTAssertEqual(payError, errorObject)
