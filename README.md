@@ -26,7 +26,7 @@
 
 - Swift または Objective-C で開発された iOS アプリケーション
 - iOS 8.4以上
-- Xcode 9.0以上
+- 最新安定版のXcode
 
 ## インストール
 
