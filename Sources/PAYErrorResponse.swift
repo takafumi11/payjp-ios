@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-public protocol PAYErrorResponseType {
+public protocol PAYErrorResponseType: NSObjectProtocol {
     /// The origin reponse's HTTP status code.
     var status: Int { get }
     /// The detail message of the error.
@@ -40,6 +40,10 @@ public final class PAYErrorResponse: NSObject, PAYErrorResponseType {
         param = try? e <| "param"
         code = try? e <| "code"
         type = try? e <| "type"
+    }
+    
+    public override var description: String {
+        return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
     }
 }
 
