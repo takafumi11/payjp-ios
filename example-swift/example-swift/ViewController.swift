@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
     @IBOutlet weak var fieldCardCvc: UITextField!
     @IBOutlet weak var fieldCardMonth: UITextField!
     @IBOutlet weak var fieldCardYear: UITextField!
+    @IBOutlet weak var filedCardName: UITextField!
     @IBOutlet weak var labelTokenId: UILabel!
     
     lazy var payjpClient: PAYJP.APIClient = PAYJP.APIClient(publicKey: PAYJPPublicKey)
@@ -53,12 +54,14 @@ class ViewController: UITableViewController {
         let cvc = fieldCardCvc.text ?? ""
         let month = fieldCardMonth.text ?? ""
         let year = fieldCardYear.text ?? ""
+        let name = filedCardName.text
         print("input number=\(number), cvc=\(cvc), month=\(month), year=\(year)")
         payjpClient.createToken(
             with: number,
             cvc: cvc,
             expirationMonth: month,
-            expirationYear: year)
+            expirationYear: year,
+            name: name)
         { [weak self] result in
             switch result {
             case .success(let token):
@@ -124,7 +127,8 @@ private extension Token {
         return "id=\(identifer),\n"
             + "card.id=\(card.identifer),\n"
             + "card.last4=\(card.last4Number)\n,"
-            + "card.exp=\(card.expirationMonth)/\(card.expirationYear)"
+            + "card.exp=\(card.expirationMonth)/\(card.expirationYear)\n"
+            + "card.name=\(card.name ?? "nil")"
     }
 }
 
