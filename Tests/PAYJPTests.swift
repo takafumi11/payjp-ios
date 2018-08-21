@@ -55,7 +55,7 @@ class PAYJPTests: XCTestCase {
                     + "&card[cvc]=123"
                     + "&card[exp_month]=02"
                     + "&card[exp_year]=2020"
-                    + "&card[name]=YUI ARAGAKI", bodyString)
+                    + "&card[name]=TARO YAMADA", bodyString)
                 return true
             }
             return false
@@ -71,7 +71,7 @@ class PAYJPTests: XCTestCase {
                               cvc: "123",
                               expirationMonth: "02",
                               expirationYear: "2020",
-                              name: "YUI ARAGAKI")
+                              name: "TARO YAMADA")
         { result in
             switch result {
             case .success(let payToken):

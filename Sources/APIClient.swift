@@ -100,7 +100,7 @@ import PassKit
     /// - parameter cvc:                Credit card cvc e.g. `123`
     /// - parameter expirationMonth:    Credit card expiration month `01`
     /// - parameter expirationYear:     Credit card expiration year `2020`
-    /// - parameter name:               Credit card holder name `YUI ARAGAKI`
+    /// - parameter name:               Credit card holder name `TARO YAMADA`
     public func createToken(
         with cardNumber: String,
         cvc: String,
@@ -163,7 +163,7 @@ extension APIClient {
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
-        name: String? = nil,
+        name: String?,
         completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: cardNumber,
