@@ -54,8 +54,8 @@ class ViewController: UITableViewController {
         let cvc = fieldCardCvc.text ?? ""
         let month = fieldCardMonth.text ?? ""
         let year = fieldCardYear.text ?? ""
-        let name = filedCardName.text
-        print("input number=\(number), cvc=\(cvc), month=\(month), year=\(year) name=\(name ?? "nil")")
+        let name = filedCardName.text ?? ""
+        print("input number=\(number), cvc=\(cvc), month=\(month), year=\(year) name=\(name)")
         payjpClient.createToken(
             with: number,
             cvc: cvc,
