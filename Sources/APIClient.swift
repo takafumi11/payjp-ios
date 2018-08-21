@@ -100,18 +100,23 @@ import PassKit
     /// - parameter cvc:                Credit card cvc e.g. `123`
     /// - parameter expirationMonth:    Credit card expiration month `01`
     /// - parameter expirationYear:     Credit card expiration year `2020`
+    /// - parameter name:               Credit card holder name `TARO YAMADA`
     public func createToken(
         with cardNumber: String,
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
+        name: String? = nil,
         completionHandler: @escaping (APIResponse) -> ())
     {
         guard let url = URL(string: "\(baseURL)/tokens") else { return }
-        let formString = "card[number]=\(cardNumber)"
+        var formString = "card[number]=\(cardNumber)"
             + "&card[cvc]=\(cvc)"
             + "&card[exp_month]=\(expirationMonth)"
             + "&card[exp_year]=\(expirationYear)"
+        if let name = name {
+            formString += "&card[name]=\(name)"
+        }
         var req = URLRequest(url: url)
         req.httpMethod = "POST"
         req.httpBody = formString.data(using: .utf8)
@@ -158,12 +163,14 @@ extension APIClient {
         cvc: String,
         expirationMonth: String,
         expirationYear: String,
+        name: String?,
         completionHandler: @escaping (NSError?, Token?) -> ()) {
         
         self.createToken(with: cardNumber,
                          cvc: cvc,
                          expirationMonth: expirationMonth,
-                         expirationYear: expirationYear)
+                         expirationYear: expirationYear,
+                         name: name)
         { (response) in
             switch response {
             case .success(let token):

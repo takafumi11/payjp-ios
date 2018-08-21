@@ -18,6 +18,7 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 @property (nonatomic, weak) IBOutlet UITextField *fieldCardCvc;
 @property (nonatomic, weak) IBOutlet UITextField *fieldCardMonth;
 @property (nonatomic, weak) IBOutlet UITextField *fieldCardYear;
+@property (nonatomic, weak) IBOutlet UITextField *fieldCardName;
 @property (nonatomic, weak) IBOutlet UILabel *labelTokenId;
 
 @property (nonatomic, strong) PAYAPIClient *payjpClient;
@@ -53,12 +54,14 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
     NSString *cvc = self.fieldCardCvc.text;
     NSString *month = self.fieldCardMonth.text;
     NSString *year = self.fieldCardYear.text;
-    NSLog(@"input number=%@, cvc=%@, month=%@, year=%@", number, cvc, month, year);
+    NSString *name = self.fieldCardName.text;
+    NSLog(@"input number=%@, cvc=%@, month=%@, year=%@ name=%@", number, cvc, month, year, name);
     __weak typeof(self) wself = self;
     [self.payjpClient createTokenWith:number
                                   cvc:cvc
                       expirationMonth:month
                        expirationYear:year
+                                 name:name
                     completionHandler:
      ^(NSError *error, PAYToken *token) {
          APIError *apiError = (APIError *)error;
@@ -136,8 +139,8 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 #pragma MARK: - misc
 
 - (NSString *)displayToken:(PAYToken *)token {
-    return [NSString stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu",
-            token.identifer, token.card.identifer, token.card.last4Number, token.card.expirationMonth, token.card.expirationYear];
+    return [NSString stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu\ncard.name=%@",
+            token.identifer, token.card.identifer, token.card.last4Number, token.card.expirationMonth, token.card.expirationYear, token.card.name];
 }
 
 @end
