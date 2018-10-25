@@ -4,9 +4,6 @@ matrix:
     - osx_image: xcode10
 
 before_install:
-  - brew update
-  - brew unlink carthage
-  - brew install carthage
   - carthage bootstrap --no-use-binaries --platform ios
 
 script:
