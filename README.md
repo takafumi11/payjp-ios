@@ -45,7 +45,7 @@ pod 'PAYJP'
 
 ## SDK開発環境
 
-- Swift 4.1
+- Swift 4.2
 - Result: https://github.com/antitypical/Result/
 - Himotoki: https://github.com/ikesyo/Himotoki/
 

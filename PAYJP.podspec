@@ -19,10 +19,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.xcconfig = {
-    'SWIFT_VERSION' => '4.1'
+    'SWIFT_VERSION' => '4.2'
   }
 
-  s.source_files = ['Sources/**/*',
+  s.source_files = ['Sources/**/*.{h,m,swift}',
                     'Carthage/Checkouts/Himotoki/Sources/**/*.swift',
                     'Carthage/Checkouts/Result/Result/**/*.swift']
   s.public_header_files = 'Sources/**/*.h'

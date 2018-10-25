@@ -3,7 +3,7 @@
 //  PAYJP
 //
 //  Created by Li-Hsuan Chen on 2018/05/21.
-//  Copyright © 2018年 BASE, Inc. All rights reserved.
+//  Copyright © 2018年 PAY, Inc. All rights reserved.
 //
 
 import Foundation

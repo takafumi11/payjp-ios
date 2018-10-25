@@ -52,7 +52,7 @@ public enum APIError: LocalizedError {
         case .invalidApplePayToken(let token):
             userInfo[PAYErrorInvalidApplePayTokenObject] = token
             return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorServiceError,
+                              code: PAYErrorInvalidApplePayToken,
                               userInfo: userInfo)
         case .systemError(let error):
             userInfo[PAYErrorSystemErrorObject] = error

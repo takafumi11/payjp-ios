@@ -3,7 +3,7 @@
 //  PAYJP
 //
 //  Created by k@binc.jp on 10/4/16.
-//  Copyright © 2016 BASE, Inc. All rights reserved.
+//  Copyright © 2016 PAY, Inc. All rights reserved.
 //
 
 import Foundation

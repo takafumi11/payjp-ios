@@ -3,6 +3,7 @@
 //  example-swift
 //
 //  Created by Tatsuya Kitagawa on 2017/12/08.
+//  Copyright © 2017年 PAY, Inc. All rights reserved.
 //
 
 import UIKit
@@ -12,9 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
     }
 
