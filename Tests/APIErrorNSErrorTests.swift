@@ -20,6 +20,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(errorToken)
         XCTAssertEqual(errorToken, token)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorInvalidApplePayToken)
         XCTAssertEqual(nserror?.localizedDescription, "Invalid Apple Pay Token")
     }
     
@@ -33,6 +35,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(systemError)
         XCTAssertEqual(systemError, error)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorSystemError)
         XCTAssertEqual(nserror?.localizedDescription, "mock error")
     }
     
@@ -46,6 +50,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(errorResponse)
         XCTAssertEqual(errorResponse, response)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorInvalidResponse)
         XCTAssertEqual(nserror?.localizedDescription, "The response is not a HTTPURLResponse instance.")
     }
     
@@ -59,6 +65,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(errorData)
         XCTAssertEqual(errorData, data)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorInvalidResponseBody)
         XCTAssertEqual(nserror?.localizedDescription, "The response body\'s data is not a valid JSON object.")
     }
     
@@ -73,6 +81,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(payError)
         XCTAssertEqual(payError, errorObject)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorServiceError)
         XCTAssertEqual(nserror?.localizedDescription, "Invalid card number")
     }
     
@@ -86,6 +96,8 @@ class APIErrorNSErrorTests: XCTestCase {
         
         XCTAssertNotNil(someObject)
         XCTAssertEqual(someObject, errorObject)
+        
+        XCTAssertEqual(nserror?.code, PAYErrorInvalidJSON)
         XCTAssertEqual(nserror?.localizedDescription, "Unable parse JSON object into expected classes.")
     }
 }
