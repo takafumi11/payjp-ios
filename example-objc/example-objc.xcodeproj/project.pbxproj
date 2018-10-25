@@ -125,7 +125,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = "Tatsuya Kitagawa";
+				ORGANIZATIONNAME = "PAY, Inc.";
 				TargetAttributes = {
 					32CB11631FDA97A1007AD8F5 = {
 						CreatedOnToolsVersion = 9.2;
