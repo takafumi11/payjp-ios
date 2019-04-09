@@ -14,7 +14,8 @@ class PAYJPTests: XCTestCase {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }) { (req) -> OHHTTPStubsResponse in
-            OHHTTPStubsResponse(jsonObject: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+            let data = TestFixture.JSON(by: "token.json")
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }.name = "default"
     }
     
@@ -32,7 +33,7 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! Token.decodeValue(json)
+                let token = try! createJSONDecoder().decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
@@ -60,7 +61,7 @@ class PAYJPTests: XCTestCase {
             }
             return false
         }) { (req) -> OHHTTPStubsResponse in
-            OHHTTPStubsResponse(jsonObject: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+            OHHTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
             }
         
         let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
@@ -76,7 +77,7 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! Token.decodeValue(json)
+                let token = try! createJSONDecoder().decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
@@ -98,7 +99,7 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! Token.decodeValue(json)
+                let token = try! createJSONDecoder().decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
@@ -113,7 +114,9 @@ class PAYJPTests: XCTestCase {
 
     class StubPaymentToken: PKPaymentToken {
         override var paymentData: Data {
-            return try! JSONSerialization.data(withJSONObject: TestFixture.JSON(by: "paymentData.json"), options: .prettyPrinted)
+            let data = TestFixture.JSON(by: "paymentData.json")
+            let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            return try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
         }
     }
 }

@@ -72,7 +72,7 @@ class APIErrorNSErrorTests: XCTestCase {
     
     func testServiceError() {
         let json = TestFixture.JSON(by: "error.json")
-        let payError = try! PAYErrorResponse.decodeValue(json, rootKeyPath: "error")
+        let payError = try! createJSONDecoder().decode(PAYErrorResponse.self, from: json)
         
         let apiError = APIError.serviceError(payError)
         let nserror =  apiError.nsErrorValue()
@@ -87,12 +87,12 @@ class APIErrorNSErrorTests: XCTestCase {
     }
     
     func testInvalidJSON() {
-        let someObject = "Not a JSON"
+        let someObject = "Not a JSON".data(using: .utf8)!
         
         let apiError = APIError.invalidJSON(someObject)
         let nserror =  apiError.nsErrorValue()
         
-        let errorObject = nserror?.userInfo[PAYErrorInvalidJSONObject] as? String
+        let errorObject = nserror?.userInfo[PAYErrorInvalidJSONObject] as? Data
         
         XCTAssertNotNil(someObject)
         XCTAssertEqual(someObject, errorObject)

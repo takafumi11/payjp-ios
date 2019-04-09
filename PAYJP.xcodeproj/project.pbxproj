@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		322BD1D6225C83CA00D83B5E /* JSONDecoderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */; };
 		615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 615AFF5E1C8C74A1003FB86F /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */; };
@@ -19,9 +20,7 @@
 		BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */; };
 		C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B7CB91DA2071100CAFD7B /* TokenTests.swift */; };
 		C62B7CBC1DA2078A00CAFD7B /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = C62B7CBB1DA2078A00CAFD7B /* Fixtures */; };
-		C65513731DA24DF5009D6DA5 /* Transformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65513721DA24DF5009D6DA5 /* Transformers.swift */; };
 		C65513751DA24E18009D6DA5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65513741DA24E18009D6DA5 /* Card.swift */; };
-		C65513881DA36749009D6DA5 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65513871DA36749009D6DA5 /* Object.swift */; };
 		C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65513BD1DA37AD4009D6DA5 /* APIError.swift */; };
 		C68378261D9CD1330023B528 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378251D9CD1330023B528 /* Token.swift */; };
 		C68378C81D9CF1BB0023B528 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68378C41D9CF1BB0023B528 /* Result.swift */; };
@@ -56,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderFactory.swift; sourceTree = "<group>"; };
 		615AFF5B1C8C74A1003FB86F /* PAYJP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PAYJP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AFF5E1C8C74A1003FB86F /* PAYJP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
 		615AFF601C8C74A1003FB86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,9 +71,7 @@
 		BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorNSErrorTests.swift; sourceTree = "<group>"; };
 		C62B7CB91DA2071100CAFD7B /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		C62B7CBB1DA2078A00CAFD7B /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
-		C65513721DA24DF5009D6DA5 /* Transformers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformers.swift; sourceTree = "<group>"; };
 		C65513741DA24E18009D6DA5 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		C65513871DA36749009D6DA5 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		C65513BD1DA37AD4009D6DA5 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		C68378251D9CD1330023B528 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		C68378C41D9CF1BB0023B528 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -131,11 +129,10 @@
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				C65513741DA24E18009D6DA5 /* Card.swift */,
 				615AFF601C8C74A1003FB86F /* Info.plist */,
-				C65513871DA36749009D6DA5 /* Object.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				C68378251D9CD1330023B528 /* Token.swift */,
-				C65513721DA24DF5009D6DA5 /* Transformers.swift */,
+				322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -300,9 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE6C230320B2DCBB00C4FE1E /* AnyError.swift in Sources */,
-				C65513731DA24DF5009D6DA5 /* Transformers.swift in Sources */,
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
-				C65513881DA36749009D6DA5 /* Object.swift in Sources */,
 				C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
@@ -310,6 +305,7 @@
 				BE6C230420B2DCBB00C4FE1E /* NoError.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
 				C68378C81D9CF1BB0023B528 /* Result.swift in Sources */,
+				322BD1D6225C83CA00D83B5E /* JSONDecoderFactory.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				C68378261D9CD1330023B528 /* Token.swift in Sources */,
 			);

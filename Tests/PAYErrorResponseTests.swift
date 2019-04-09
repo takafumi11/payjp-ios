@@ -17,7 +17,8 @@ class PAYErrorResponseTests: XCTestCase {
     
     override func setUp() {
         let json = TestFixture.JSON(by: "error.json")
-        errorResponse = try! PAYErrorResponse.decodeValue(json, rootKeyPath: "error")
+        let decoder = createJSONDecoder()
+        errorResponse = try! decoder.decode(PAYErrorResponse.self, from: json)
     }
     
     func testErrorProperties() {

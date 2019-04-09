@@ -21,7 +21,7 @@ public enum APIError: LocalizedError {
     /// The error response object that is coming back from the server side.
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
-    case invalidJSON(Any)
+    case invalidJSON(Data)
     
     // MARK: - LocalizedError
     
