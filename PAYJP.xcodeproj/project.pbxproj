@@ -30,18 +30,6 @@
 		C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F91E1E2369001D7F75 /* TestFixture.swift */; };
 		C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; };
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C6FE0FAF1DBA09F0009F8F99 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA21DBA09F0009F8F99 /* Casting.swift */; };
-		C6FE0FB01DBA09F0009F8F99 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */; };
-		C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA41DBA09F0009F8F99 /* decode.swift */; };
-		C6FE0FB21DBA09F0009F8F99 /* DecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */; };
-		C6FE0FB31DBA09F0009F8F99 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */; };
-		C6FE0FB41DBA09F0009F8F99 /* Himotoki.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */; };
-		C6FE0FB61DBA09F0009F8F99 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */; };
-		C6FE0FB71DBA09F0009F8F99 /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */; };
-		C6FE0FB81DBA09F0009F8F99 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */; };
-		C6FE0FB91DBA09F0009F8F99 /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */; };
-		C6FE0FBA1DBA09F0009F8F99 /* StandardLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */; };
-		C6FE0FBB1DBA09F0009F8F99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,18 +81,6 @@
 		C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFromTokenTests.swift; sourceTree = "<group>"; };
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
-		C6FE0FA21DBA09F0009F8F99 /* Casting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casting.swift; sourceTree = "<group>"; };
-		C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
-		C6FE0FA41DBA09F0009F8F99 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
-		C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeError.swift; sourceTree = "<group>"; };
-		C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
-		C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Himotoki.h; sourceTree = "<group>"; };
-		C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
-		C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
-		C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
-		C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardLib.swift; sourceTree = "<group>"; };
-		C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +158,6 @@
 		C683781B1D9BD9A30023B528 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				C6FE0FA11DBA09F0009F8F99 /* Himotoki */,
 				C68378C11D9CF1BB0023B528 /* Result */,
 			);
 			name = Vendors;
@@ -208,26 +183,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C6FE0FA11DBA09F0009F8F99 /* Himotoki */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE0FA21DBA09F0009F8F99 /* Casting.swift */,
-				C6FE0FA31DBA09F0009F8F99 /* Decodable.swift */,
-				C6FE0FA41DBA09F0009F8F99 /* decode.swift */,
-				C6FE0FA51DBA09F0009F8F99 /* DecodeError.swift */,
-				C6FE0FA61DBA09F0009F8F99 /* Extractor.swift */,
-				C6FE0FA71DBA09F0009F8F99 /* Himotoki.h */,
-				C6FE0FA91DBA09F0009F8F99 /* KeyPath.swift */,
-				C6FE0FAA1DBA09F0009F8F99 /* NSNumber.swift */,
-				C6FE0FAB1DBA09F0009F8F99 /* Operators.swift */,
-				C6FE0FAC1DBA09F0009F8F99 /* RawRepresentable.swift */,
-				C6FE0FAD1DBA09F0009F8F99 /* StandardLib.swift */,
-				C6FE0FAE1DBA09F0009F8F99 /* Transformer.swift */,
-			);
-			name = Himotoki;
-			path = Carthage/Checkouts/Himotoki/Sources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -235,7 +190,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FE0FB41DBA09F0009F8F99 /* Himotoki.h in Headers */,
 				615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,29 +299,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FE0FB31DBA09F0009F8F99 /* Extractor.swift in Sources */,
-				C6FE0FAF1DBA09F0009F8F99 /* Casting.swift in Sources */,
-				C6FE0FBB1DBA09F0009F8F99 /* Transformer.swift in Sources */,
 				BE6C230320B2DCBB00C4FE1E /* AnyError.swift in Sources */,
-				C6FE0FB61DBA09F0009F8F99 /* KeyPath.swift in Sources */,
 				C65513731DA24DF5009D6DA5 /* Transformers.swift in Sources */,
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
 				C65513881DA36749009D6DA5 /* Object.swift in Sources */,
-				C6FE0FB91DBA09F0009F8F99 /* RawRepresentable.swift in Sources */,
-				C6FE0FB01DBA09F0009F8F99 /* Decodable.swift in Sources */,
 				C68378C91D9CF1BB0023B528 /* ResultProtocol.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
-				C6FE0FB21DBA09F0009F8F99 /* DecodeError.swift in Sources */,
 				C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */,
 				BE6C230420B2DCBB00C4FE1E /* NoError.swift in Sources */,
-				C6FE0FB81DBA09F0009F8F99 /* Operators.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
-				C6FE0FB11DBA09F0009F8F99 /* decode.swift in Sources */,
 				C68378C81D9CF1BB0023B528 /* Result.swift in Sources */,
-				C6FE0FBA1DBA09F0009F8F99 /* StandardLib.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
-				C6FE0FB71DBA09F0009F8F99 /* NSNumber.swift in Sources */,
 				C68378261D9CD1330023B528 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
