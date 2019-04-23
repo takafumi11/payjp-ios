@@ -21,7 +21,7 @@ import Foundation
     public let fingerprint: String
     public let liveMode: Bool
     public let createdAt: Date
-//    public let rawValue: [String: Any]
+//    public let rawValue: [String: Any] TODO
     
     // MARK: - Decodable
     

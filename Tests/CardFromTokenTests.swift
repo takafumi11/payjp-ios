@@ -27,4 +27,12 @@ class CardFromTokenTests: XCTestCase {
     func testNameIsNullable() {
         XCTAssertNil(card.name)
     }
+    
+    // TODO
+//    func testCardMetadata() {
+//        let rawValue = card.rawValue as! [String: Any]
+//        let metadata = rawValue["metadata"] as! [String: Any]
+//        XCTAssertEqual(metadata.count, 1)
+//        XCTAssertEqual(metadata["foo"] as! String, "bar")
+//    }
 }
