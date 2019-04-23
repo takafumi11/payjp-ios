@@ -52,19 +52,16 @@ import PassKit
                     let error = try self.decoder.decode(PAYErrorResponse.self, from: data)
                     completionHandler(.failure(.serviceError(error)))
                 } catch let decodeError {
-                    // TODO: return decode error
-                    completionHandler(.failure(.invalidJSON(data)))
+                    completionHandler(.failure(.invalidJSON(data, decodeError)))
                 }
                 return
             }
             
             do {
-                // TODO: decode
-                let token = try self.decoder.decode(Token.self, from: data)
+                let token = try Token.decodeJson(with: self.decoder, data: data)
                 completionHandler(.success(token))
             } catch let decodeError {
-                // TODO: return decode error
-                completionHandler(.failure(.invalidJSON(data)))
+                completionHandler(.failure(.invalidJSON(data, decodeError)))
             }
         })
         

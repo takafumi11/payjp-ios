@@ -21,7 +21,7 @@ import Foundation
     public let fingerprint: String
     public let liveMode: Bool
     public let createdAt: Date
-//    public let rawValue: [String: Any] TODO
+    public var rawValue: [String: Any]?
     
     // MARK: - Decodable
     
@@ -48,7 +48,6 @@ import Foundation
         fingerprint = try container.decode(String.self, forKey: .fingerprint)
         liveMode = try container.decode(Bool.self, forKey: .liveMode)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
-//        rawValue = try decoder.singleValueContainer().decode([String:Any].self)
     }
 }
 

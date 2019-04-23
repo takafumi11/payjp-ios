@@ -55,21 +55,6 @@ class APIErrorNSErrorTests: XCTestCase {
         XCTAssertEqual(nserror?.localizedDescription, "The response is not a HTTPURLResponse instance.")
     }
     
-    func testInvalidResponseBody() {
-        let data = "mock data".data(using: .utf8)
-        
-        let apiError = APIError.invalidResponseBody(data!)
-        let nserror =  apiError.nsErrorValue()
-        
-        let errorData = nserror?.userInfo[PAYErrorInvalidResponseData] as? Data
-        
-        XCTAssertNotNil(errorData)
-        XCTAssertEqual(errorData, data)
-        
-        XCTAssertEqual(nserror?.code, PAYErrorInvalidResponseBody)
-        XCTAssertEqual(nserror?.localizedDescription, "The response body\'s data is not a valid JSON object.")
-    }
-    
     func testServiceError() {
         let json = TestFixture.JSON(by: "error.json")
         let payError = try! createJSONDecoder().decode(PAYErrorResponse.self, from: json)
@@ -87,15 +72,18 @@ class APIErrorNSErrorTests: XCTestCase {
     }
     
     func testInvalidJSON() {
-        let someObject = "Not a JSON".data(using: .utf8)!
+        let someData = "Not a JSON".data(using: .utf8)!
+        let error = NSError(domain: "mock_domain", code: 0, userInfo: [NSLocalizedDescriptionKey: "mock error"])
         
-        let apiError = APIError.invalidJSON(someObject)
+        let apiError = APIError.invalidJSON(someData, error)
         let nserror =  apiError.nsErrorValue()
         
-        let errorObject = nserror?.userInfo[PAYErrorInvalidJSONObject] as? Data
+        let errorData = nserror?.userInfo[PAYErrorInvalidJSONObject] as? Data
+        let errorObject = nserror?.userInfo[PAYErrorInvalidJSONErrorObject] as? NSError
         
-        XCTAssertNotNil(someObject)
-        XCTAssertEqual(someObject, errorObject)
+        XCTAssertNotNil(someData)
+        XCTAssertEqual(someData, errorData)
+        XCTAssertEqual(error, errorObject)
         
         XCTAssertEqual(nserror?.code, PAYErrorInvalidJSON)
         XCTAssertEqual(nserror?.localizedDescription, "Unable parse JSON object into expected classes.")

@@ -16,12 +16,10 @@ public enum APIError: LocalizedError {
     case systemError(Error)
     /// No body data or no response error.
     case invalidResponse(HTTPURLResponse?)
-    /// The content of response body is not a valid JSON.
-    case invalidResponseBody(Data)
     /// The error response object that is coming back from the server side.
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
-    case invalidJSON(Data)
+    case invalidJSON(Data, Error?)
     
     // MARK: - LocalizedError
     
@@ -33,8 +31,6 @@ public enum APIError: LocalizedError {
             return error.localizedDescription
         case .invalidResponse(_):
             return "The response is not a HTTPURLResponse instance."
-        case .invalidResponseBody(_):
-            return "The response body's data is not a valid JSON object."
         case .serviceError(let errorResponse):
             return errorResponse.message
         case .invalidJSON(_):
@@ -64,18 +60,16 @@ public enum APIError: LocalizedError {
             return APINSError(domain: PAYErrorDomain,
                               code: PAYErrorInvalidResponse,
                               userInfo: userInfo)
-        case .invalidResponseBody(let data):
-            userInfo[PAYErrorInvalidResponseData] = data
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidResponseBody,
-                              userInfo: userInfo)
         case .serviceError(let errorResponse):
             userInfo[PAYErrorServiceErrorObject] = errorResponse
             return APINSError(domain: PAYErrorDomain,
                               code: PAYErrorServiceError,
                               userInfo: userInfo)
-        case .invalidJSON(let json):
+        case .invalidJSON(let json, let error):
             userInfo[PAYErrorInvalidJSONObject] = json
+            if (error != nil) {
+                userInfo[PAYErrorInvalidJSONErrorObject] = error
+            }
             return APINSError(domain: PAYErrorDomain,
                               code: PAYErrorInvalidJSON,
                               userInfo: userInfo)

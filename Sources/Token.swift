@@ -16,7 +16,7 @@ import Foundation
     public let used: Bool
     public let card: Card
     public let createdAt: Date
-//    public let rawValue: String
+    public var rawValue: [String: Any]?
     
     // MARK: - Decodable
     
@@ -35,7 +35,27 @@ import Foundation
         used = try container.decode(Bool.self, forKey: .used)
         card = try container.decode(Card.self, forKey: .card)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
-//        rawValue = try decoder.singleValueContainer().decode(String.self)
+    }
+}
+
+extension Token {
+    
+    /**
+     * Provide a factory function to decode json by JSONDecoder
+     * and also desereialize all fields as a arbitrary dictionary by JSONSerialization.
+     */
+    public static func decodeJson(with decoder: JSONDecoder, data: Data) throws -> Token {
+        let token = try decoder.decode(Token.self, from: data)
+        // assign rawValue by JSONSerialization
+        guard let rawValue = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any],
+            let cardRawValue = rawValue["card"] as? [String: Any] else {
+                let context = DecodingError.Context(codingPath: [],
+                                                    debugDescription: "Cannot deserialize rawValue")
+                throw DecodingError.dataCorrupted(context)
+        }
+        token.rawValue = rawValue
+        token.card.rawValue = cardRawValue
+        return token
     }
 }
 

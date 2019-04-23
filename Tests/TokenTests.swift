@@ -18,7 +18,7 @@ class TokenTests: XCTestCase {
     override func setUp() {
         json = TestFixture.JSON(by: "token.json")
         let decoder = createJSONDecoder()
-        token = try! decoder.decode(Token.self, from: json)
+        token = try! Token.decodeJson(with: decoder, data: json)
     }
         
     func testTokenProperties() {
@@ -31,8 +31,8 @@ class TokenTests: XCTestCase {
         XCTAssertEqual(token.createdAt, Date(timeIntervalSince1970: 1475462082))
     }
     
-//    func testRawObject() {
-//        let rawValue = token.rawValue as [String: Any]
-//        XCTAssertEqual(rawValue.count, 6)
-//    }
+    func testRawObject() {
+        let rawValue = token.rawValue
+        XCTAssertEqual(rawValue?.count, 6)
+    }
 }
