@@ -45,7 +45,7 @@ extension Token {
      * and also desereialize all fields as a arbitrary dictionary by JSONSerialization.
      */
     static func decodeJson(with data: Data, using decoder: JSONDecoder) throws -> Token {
-        let token = try decoder.decode(Token.self, from: data)
+        let token = try decoder.decode(self, from: data)
         // assign rawValue by JSONSerialization
         guard let rawValue = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any],
             let cardRawValue = rawValue["card"] as? [String: Any] else {
