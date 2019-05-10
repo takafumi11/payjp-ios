@@ -10,6 +10,8 @@
 
 import Foundation
 
+typealias RawValue = [String: Any]
+
 @objcMembers @objc(PAYToken) public final class Token: NSObject, Decodable {
     public let identifer: String
     public let livemode: Bool
@@ -47,7 +49,6 @@ extension Token {
     static func decodeJson(with data: Data, using decoder: JSONDecoder) throws -> Token {
         let token = try decoder.decode(self, from: data)
         // assign rawValue by JSONSerialization
-        typealias RawValue = [String: Any]
         let jsonOptions = JSONSerialization.ReadingOptions.allowFragments
         guard let rawValue = try JSONSerialization.jsonObject(with: data,
                                                               options: jsonOptions) as? RawValue,
