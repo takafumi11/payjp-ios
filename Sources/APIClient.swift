@@ -58,7 +58,7 @@ import PassKit
             }
             
             do {
-                let token = try Token.decodeJson(with: self.decoder, data: data)
+                let token = try Token.decodeJson(with: data, using: self.decoder)
                 completionHandler(.success(token))
             } catch let decodeError {
                 completionHandler(.failure(.invalidJSON(data, decodeError)))
