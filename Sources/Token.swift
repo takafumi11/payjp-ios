@@ -47,8 +47,11 @@ extension Token {
     static func decodeJson(with data: Data, using decoder: JSONDecoder) throws -> Token {
         let token = try decoder.decode(self, from: data)
         // assign rawValue by JSONSerialization
-        guard let rawValue = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any],
-            let cardRawValue = rawValue["card"] as? [String: Any] else {
+        typealias RawValue = [String: Any]
+        let jsonOptions = JSONSerialization.ReadingOptions.allowFragments
+        guard let rawValue = try JSONSerialization.jsonObject(with: data,
+                                                              options: jsonOptions) as? RawValue,
+            let cardRawValue = rawValue["card"] as? RawValue else {
                 let context = DecodingError.Context(codingPath: [],
                                                     debugDescription: "Cannot deserialize rawValue")
                 throw DecodingError.dataCorrupted(context)
