@@ -8,8 +8,11 @@
 
 import Foundation
 
-func createJSONDecoder() -> JSONDecoder {
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .secondsSince1970
-    return decoder
+extension JSONDecoder {
+    
+    static var since1970StrategyDecoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return decoder
+    }
 }

@@ -57,7 +57,8 @@ class APIErrorNSErrorTests: XCTestCase {
     
     func testServiceError() {
         let json = TestFixture.JSON(by: "error.json")
-        let payError = try! createJSONDecoder().decode(PAYErrorResponse.self, from: json)
+        let decoder = JSONDecoder.since1970StrategyDecoder
+        let payError = try! decoder.decode(PAYErrorResponse.self, from: json)
         
         let apiError = APIError.serviceError(payError)
         let nserror =  apiError.nsErrorValue()

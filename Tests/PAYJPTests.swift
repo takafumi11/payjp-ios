@@ -33,7 +33,8 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! createJSONDecoder().decode(Token.self, from: json)
+                let decoder = JSONDecoder.since1970StrategyDecoder
+                let token = try! decoder.decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
@@ -77,7 +78,8 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! createJSONDecoder().decode(Token.self, from: json)
+                let decoder = JSONDecoder.since1970StrategyDecoder
+                let token = try! decoder.decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
@@ -99,7 +101,8 @@ class PAYJPTests: XCTestCase {
             switch result {
             case .success(let payToken):
                 let json = TestFixture.JSON(by: "token.json")
-                let token = try! createJSONDecoder().decode(Token.self, from: json)
+                let decoder = JSONDecoder.since1970StrategyDecoder
+                let token = try! decoder.decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
                 expectation.fulfill()
