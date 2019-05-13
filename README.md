@@ -48,7 +48,6 @@ pod 'PAYJP'
 
 - Swift 4.2
 - Result: https://github.com/antitypical/Result/
-- Himotoki: https://github.com/ikesyo/Himotoki/
 
 ## License
 
