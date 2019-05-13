@@ -13,10 +13,12 @@ import PassKit
 
 class TokenTests: XCTestCase {
     var token: Token!
+    var json: Data!
     
     override func setUp() {
-        let json = TestFixture.JSON(by: "token.json")
-        token = try! Token.decodeValue(json)
+        json = TestFixture.JSON(by: "token.json")
+        let decoder = JSONDecoder.since1970StrategyDecoder
+        token = try! Token.decodeJson(with: json, using: decoder)
     }
         
     func testTokenProperties() {
@@ -30,7 +32,7 @@ class TokenTests: XCTestCase {
     }
     
     func testRawObject() {
-        let rawValue = token.rawValue as! [String: Any]
-        XCTAssertEqual(rawValue.count, 6)
+        let rawValue = token.rawValue
+        XCTAssertEqual(rawValue?.count, 6)
     }
 }

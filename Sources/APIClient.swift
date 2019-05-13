@@ -18,6 +18,8 @@ import PassKit
         let base64Credential = credentialData.base64EncodedString()
         return "Basic \(base64Credential)"
     }()
+    
+    private let decoder: JSONDecoder = .since1970StrategyDecoder
 
     @objc public init(publicKey: String) {
         self.publicKey = publicKey
@@ -45,28 +47,21 @@ import PassKit
                 return
             }
             
-            var json: Any
-            do {
-                json = try JSONSerialization.jsonObject(with: data, options:.mutableContainers)
-            } catch {
-                completionHandler(.failure(.invalidResponseBody(data)))
+            guard response.statusCode == 200 else {
+                do {
+                    let error = try self.decoder.decode(PAYErrorResponse.self, from: data)
+                    completionHandler(.failure(.serviceError(error)))
+                } catch let decodeError {
+                    completionHandler(.failure(.invalidJSON(data, decodeError)))
+                }
                 return
             }
             
-            if response.statusCode != 200 {
-                if let error = try? PAYErrorResponse.decodeValue(json, rootKeyPath: "error") {
-                    completionHandler(.failure(.serviceError(error)))
-                    return
-                } else {
-                    completionHandler(.failure(.invalidJSON(json)))
-                }
-            }
-            
             do {
-                let token = try Token.decodeValue(json)
+                let token = try Token.decodeJson(with: data, using: self.decoder)
                 completionHandler(.success(token))
-            } catch {
-                completionHandler(.failure(.invalidJSON(json)))
+            } catch let decodeError {
+                completionHandler(.failure(.invalidJSON(data, decodeError)))
             }
         })
         

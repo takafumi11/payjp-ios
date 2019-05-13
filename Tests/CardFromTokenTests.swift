@@ -15,7 +15,8 @@ class CardFromTokenTests: XCTestCase {
     
     override func setUp() {
         let json = TestFixture.JSON(by: "token.json")
-        let token = try! Token.decodeValue(json)
+        let decoder = JSONDecoder.since1970StrategyDecoder
+        let token = try! Token.decodeJson(with: json, using: decoder)
         card = token.card
     }
     
@@ -25,5 +26,12 @@ class CardFromTokenTests: XCTestCase {
     
     func testNameIsNullable() {
         XCTAssertNil(card.name)
+    }
+    
+    func testCardMetadata() {
+        let rawValue = card.rawValue!
+        let metadata = rawValue["metadata"] as! [String: Any]
+        XCTAssertEqual(metadata.count, 1)
+        XCTAssertEqual(metadata["foo"] as! String, "bar")
     }
 }

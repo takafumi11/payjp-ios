@@ -22,7 +22,7 @@ public protocol PAYErrorResponseType: NSObjectProtocol {
 }
 
 @objcMembers @objc
-public final class PAYErrorResponse: NSObject, PAYErrorResponseType {
+public final class PAYErrorResponse: NSObject, PAYErrorResponseType, Decodable {
     
     // MARK: - PAYErrorResponseType properties
     
@@ -34,21 +34,29 @@ public final class PAYErrorResponse: NSObject, PAYErrorResponseType {
     
     // MARK: - Decodable
     
-    init(_ e: Extractor) {
-        status = (try? e <| "status") ?? 0
-        message = try? e <| "message"
-        param = try? e <| "param"
-        code = try? e <| "code"
-        type = try? e <| "type"
+    private enum CodingKeys: String, CodingKey {
+        case error
+    }
+    
+    private enum ErrorKeys: String, CodingKey {
+        case status
+        case message
+        case param
+        case code
+        case type
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let error = try container.nestedContainer(keyedBy: ErrorKeys.self, forKey: .error)
+        status = try error.decodeIfPresent(Int.self, forKey: .status) ?? 0
+        message = try error.decode(String.self, forKey: .message)
+        param = try error.decode(String.self, forKey: .param)
+        code = try error.decode(String.self, forKey: .code)
+        type = try error.decode(String.self, forKey: .type)
     }
     
     public override var description: String {
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
-    }
-}
-
-extension PAYErrorResponse: Decodable {
-    public static func decode(_ e: Extractor) throws -> Self {
-        return try castOrFail(PAYErrorResponse(e))
     }
 }
