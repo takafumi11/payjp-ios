@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PAYJP'
-  s.version          = '0.5.0'
+  s.version          = '0.6.0'
   s.summary          = 'PAY.JP iOS SDK'
   s.description      = 'PAY.JP iOS SDK https://pay.jp/docs/started'
 
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.xcconfig = {
-    'SWIFT_VERSION' => '4.2'
+    'SWIFT_VERSION' => '5.0'
   }
 
   s.source_files = ['Sources/**/*.{h,m,swift}',
