@@ -49,7 +49,7 @@ import PassKit
             
             guard response.statusCode == 200 else {
                 do {
-                    let error = try self.decoder.decode(PAYErrorResponse.self, from: data)
+                    let error = try self.decoder.decode(PAYErrorResult.self, from: data).error
                     completionHandler(.failure(.serviceError(error)))
                 } catch let decodeError {
                     completionHandler(.failure(.invalidJSON(data, decodeError)))
