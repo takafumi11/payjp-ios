@@ -84,6 +84,8 @@ import PassKit
         var req = URLRequest(url: url)
         req.httpMethod = "POST"
         req.httpBody = "card=\(body)".data(using: .utf8)
+        
+        req.setValue(UserAgent.default, forHTTPHeaderField: "User-Agent")
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
         req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
@@ -115,6 +117,8 @@ import PassKit
         var req = URLRequest(url: url)
         req.httpMethod = "POST"
         req.httpBody = formString.data(using: .utf8)
+        
+        req.setValue(UserAgent.default, forHTTPHeaderField: "User-Agent")
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
         req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
@@ -130,6 +134,8 @@ import PassKit
         guard let url = URL(string: "\(baseURL)/tokens/\(tokenId)") else { return }
         var req = URLRequest(url: url)
         req.httpMethod = "GET"
+        
+        req.setValue(UserAgent.default, forHTTPHeaderField: "User-Agent")
         req.setValue(authCredential, forHTTPHeaderField: "Authorization")
         req.setValue(locale?.languageCode, forHTTPHeaderField: "Locale")
         
