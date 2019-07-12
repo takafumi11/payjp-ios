@@ -41,9 +41,9 @@
 		32CB111B1FDA7E3D007AD8F5 = {
 			isa = PBXGroup;
 			children = (
-				32CB11261FDA7E3D007AD8F5 /* example-swift */,
-				32CB11251FDA7E3D007AD8F5 /* Products */,
 				32CB11391FDA8507007AD8F5 /* Frameworks */,
+				32CB11251FDA7E3D007AD8F5 /* Products */,
+				32CB11261FDA7E3D007AD8F5 /* example-swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,11 +59,11 @@
 			isa = PBXGroup;
 			children = (
 				32CB11271FDA7E3D007AD8F5 /* AppDelegate.swift */,
-				32CB11291FDA7E3D007AD8F5 /* ViewController.swift */,
-				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
 				32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */,
-				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
 				32CB11331FDA7E3D007AD8F5 /* Info.plist */,
+				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
+				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
+				32CB11291FDA7E3D007AD8F5 /* ViewController.swift */,
 			);
 			path = "example-swift";
 			sourceTree = "<group>";
@@ -181,6 +181,7 @@
 				32CB112C1FDA7E3D007AD8F5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */ = {
@@ -189,6 +190,7 @@
 				32CB11311FDA7E3D007AD8F5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
