@@ -46,8 +46,7 @@ pod 'PAYJP'
 
 ## SDK開発環境
 
-- Swift 4.2
-- Result: https://github.com/antitypical/Result/
+- Swift 5
 
 ## License
 
