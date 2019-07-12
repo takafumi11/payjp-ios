@@ -13,7 +13,7 @@ cache_step:
       keys: &all_cache_keys_gem
         - *primary_cache_key_gem
         - gem-v1-
-  - gem_cache:
+  - carthage_cache:
       primary: &primary_cache_key_carthage carthage-v1-{{ checksum "Cartfile.resolved" }}
       keys: &all_cache_keys_carthage
         - *primary_cache_key_carthage
