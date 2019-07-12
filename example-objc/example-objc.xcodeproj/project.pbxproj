@@ -47,10 +47,10 @@
 		32CB115B1FDA97A1007AD8F5 = {
 			isa = PBXGroup;
 			children = (
-				32CB11661FDA97A1007AD8F5 /* example-objc */,
-				32CB11651FDA97A1007AD8F5 /* Products */,
-				A857BC3C438D075415DA80CF /* Pods */,
 				4464DD5FD078DD91F07609AD /* Frameworks */,
+				A857BC3C438D075415DA80CF /* Pods */,
+				32CB11651FDA97A1007AD8F5 /* Products */,
+				32CB11661FDA97A1007AD8F5 /* example-objc */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,12 +67,12 @@
 			children = (
 				32CB11671FDA97A1007AD8F5 /* AppDelegate.h */,
 				32CB11681FDA97A1007AD8F5 /* AppDelegate.m */,
+				32CB11701FDA97A1007AD8F5 /* Assets.xcassets */,
+				32CB11751FDA97A1007AD8F5 /* Info.plist */,
+				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
+				32CB116D1FDA97A1007AD8F5 /* Main.storyboard */,
 				32CB116A1FDA97A1007AD8F5 /* ViewController.h */,
 				32CB116B1FDA97A1007AD8F5 /* ViewController.m */,
-				32CB116D1FDA97A1007AD8F5 /* Main.storyboard */,
-				32CB11701FDA97A1007AD8F5 /* Assets.xcassets */,
-				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
-				32CB11751FDA97A1007AD8F5 /* Info.plist */,
 				32CB11761FDA97A1007AD8F5 /* main.m */,
 			);
 			path = "example-objc";
@@ -222,6 +222,7 @@
 				32CB116E1FDA97A1007AD8F5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */ = {
@@ -230,6 +231,7 @@
 				32CB11731FDA97A1007AD8F5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct PAYErrorResult: Decodable {
+    let error: PAYErrorResponse
+}
+
 @objc
 public protocol PAYErrorResponseType: NSObjectProtocol {
     /// The origin reponse's HTTP status code.
@@ -31,30 +35,6 @@ public final class PAYErrorResponse: NSObject, PAYErrorResponseType, Decodable {
     public let param: String?
     public let code: String?
     public let type: String?
-    
-    // MARK: - Decodable
-    
-    private enum CodingKeys: String, CodingKey {
-        case error
-    }
-    
-    private enum ErrorKeys: String, CodingKey {
-        case status
-        case message
-        case param
-        case code
-        case type
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let error = try container.nestedContainer(keyedBy: ErrorKeys.self, forKey: .error)
-        status = try error.decodeIfPresent(Int.self, forKey: .status) ?? 0
-        message = try error.decode(String.self, forKey: .message)
-        param = try error.decode(String.self, forKey: .param)
-        code = try error.decode(String.self, forKey: .code)
-        type = try error.decode(String.self, forKey: .type)
-    }
     
     public override var description: String {
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
