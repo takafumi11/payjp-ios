@@ -17,7 +17,10 @@ struct ExpirationFormatter: ExpirationFormatterType {
         if let expiration = expiration {
             let digitSet = CharacterSet.decimalDigits
             var filtered = String(expiration.unicodeScalars.filter { digitSet.contains($0) })
-            filtered = String(filtered.prefix(4))
+            
+            if filtered.isEmpty { return nil }
+            
+            filtered = String(filtered.unicodeScalars.prefix(4))
             
             if filtered.count >= 3 {
                 filtered.insert("/", at: filtered.index(filtered.startIndex, offsetBy: 2))

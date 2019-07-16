@@ -49,4 +49,10 @@ class ExpirationFormatterTests: XCTestCase {
         let output = formatter.string(from: input)
         XCTAssertEqual(output, "1")
     }
+    
+    func testAllBan() {
+        let input: String? = "aaa"
+        let output = formatter.string(from: input)
+        XCTAssertNil(output)
+    }
 }
