@@ -117,6 +117,8 @@
 		615AFF5D1C8C74A1003FB86F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BE734B8222DD7868008679EC /* Formatters */,
+				BE734B8322DD7873008679EC /* Validators */,
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				C65513741DA24E18009D6DA5 /* Card.swift */,
@@ -134,6 +136,8 @@
 		615AFF691C8C74A1003FB86F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE734B8522DD7888008679EC /* Formatters */,
+				BE734B8422DD787E008679EC /* Validators */,
 				BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */,
 				C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */,
 				C62B7CBB1DA2078A00CAFD7B /* Fixtures */,
@@ -144,6 +148,34 @@
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		BE734B8222DD7868008679EC /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		BE734B8322DD7873008679EC /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		BE734B8422DD787E008679EC /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		BE734B8522DD7888008679EC /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Formatters;
 			sourceTree = "<group>";
 		};
 		C6E00B0C1E1F505600C101B0 /* Frameworks */ = {
