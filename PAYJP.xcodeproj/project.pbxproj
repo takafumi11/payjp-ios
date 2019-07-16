@@ -66,7 +66,7 @@
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
 		BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorNSErrorTests.swift; sourceTree = "<group>"; };
-		BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpirationFormatter.swift; path = Sources/Formatter/ExpirationFormatter.swift; sourceTree = SOURCE_ROOT; };
+		BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpirationFormatter.swift; path = ExpirationFormatter.swift; sourceTree = "<group>"; };
 		BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationFormatterTests.swift; sourceTree = "<group>"; };
 		BEECFBD422D71E4400049BFB /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		C62B7CB91DA2071100CAFD7B /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
