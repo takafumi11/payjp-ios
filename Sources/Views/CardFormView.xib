@@ -122,7 +122,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V6C-JV-e96" secondAttribute="bottom" id="SjW-vf-wTe"/>
+                <constraint firstAttribute="bottom" secondItem="V6C-JV-e96" secondAttribute="bottom" id="SjW-vf-wTe"/>
                 <constraint firstAttribute="trailing" secondItem="V6C-JV-e96" secondAttribute="trailing" id="b87-fQ-VQ7"/>
                 <constraint firstItem="V6C-JV-e96" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bME-Ky-po4"/>
                 <constraint firstItem="V6C-JV-e96" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nFO-O8-IBL"/>

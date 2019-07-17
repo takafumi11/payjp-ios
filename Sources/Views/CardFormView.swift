@@ -10,7 +10,6 @@ import UIKit
 
 @IBDesignable
 public class CardFormView: UIView {
-    
     private var contentView: UIView!
     
     // MARK: Lifecycle
@@ -26,8 +25,8 @@ public class CardFormView: UIView {
     }
     
     private func initialize() {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "DescriptionFooterView", bundle: bundle)
+        let bundle = Bundle(for: CardFormView.self)
+        let nib = UINib(nibName: "CardFormView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
         
         if let view = view {
