@@ -26,8 +26,8 @@
 		C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F91E1E2369001D7F75 /* TestFixture.swift */; };
 		C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; };
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED36838522DD817A00764265 /* CardBrandValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36838422DD817A00764265 /* CardBrandValidator.swift */; };
-		ED36838A22DDA49300764265 /* CardBrandValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36838922DDA49300764265 /* CardBrandValidatorTests.swift */; };
+		ED36838522DD817A00764265 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36838422DD817A00764265 /* CardBrandTransformer.swift */; };
+		ED36838A22DDA49300764265 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36838922DDA49300764265 /* CardBrandTransformerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +75,8 @@
 		C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFromTokenTests.swift; sourceTree = "<group>"; };
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
-		ED36838422DD817A00764265 /* CardBrandValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrandValidator.swift; sourceTree = "<group>"; };
-		ED36838922DDA49300764265 /* CardBrandValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrandValidatorTests.swift; sourceTree = "<group>"; };
+		ED36838422DD817A00764265 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
+		ED36838922DDA49300764265 /* CardBrandTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrandTransformerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 		BE734B8322DD7873008679EC /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				ED36838422DD817A00764265 /* CardBrandValidator.swift */,
+				ED36838422DD817A00764265 /* CardBrandTransformer.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 		BE734B8422DD787E008679EC /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				ED36838922DDA49300764265 /* CardBrandValidatorTests.swift */,
+				ED36838922DDA49300764265 /* CardBrandTransformerTests.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 			files = (
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
-				ED36838522DD817A00764265 /* CardBrandValidator.swift in Sources */,
+				ED36838522DD817A00764265 /* CardBrandTransformer.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */,
 				BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */,
@@ -325,7 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED36838A22DDA49300764265 /* CardBrandValidatorTests.swift in Sources */,
+				ED36838A22DDA49300764265 /* CardBrandTransformerTests.swift in Sources */,
 				615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
