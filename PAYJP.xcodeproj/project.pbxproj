@@ -22,6 +22,7 @@
 		BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */; };
 		BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */; };
 		BE734B8A22DD7DE2008679EC /* ExpirationFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */; };
+		BE734B8D22DEE300008679EC /* CardFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE734B8C22DEE300008679EC /* CardFormView.xib */; };
 		BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECFBD422D71E4400049BFB /* UserAgent.swift */; };
 		C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B7CB91DA2071100CAFD7B /* TokenTests.swift */; };
 		C62B7CBC1DA2078A00CAFD7B /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = C62B7CBB1DA2078A00CAFD7B /* Fixtures */; };
@@ -82,6 +83,7 @@
 		BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorNSErrorTests.swift; sourceTree = "<group>"; };
 		BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationFormatter.swift; sourceTree = "<group>"; };
 		BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationFormatterTests.swift; sourceTree = "<group>"; };
+		BE734B8C22DEE300008679EC /* CardFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardFormView.xib; sourceTree = "<group>"; };
 		BEECFBD422D71E4400049BFB /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		C62B7CB91DA2071100CAFD7B /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		C62B7CBB1DA2078A00CAFD7B /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				BE734B8222DD7868008679EC /* Formatters */,
 				BE734B8322DD7873008679EC /* Validators */,
+				BE734B8B22DEE2DA008679EC /* Views */,
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				C65513741DA24E18009D6DA5 /* Card.swift */,
@@ -212,6 +215,14 @@
 				BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */,
 			);
 			path = Formatters;
+			sourceTree = "<group>";
+		};
+		BE734B8B22DEE2DA008679EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE734B8C22DEE300008679EC /* CardFormView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C6E00B0C1E1F505600C101B0 /* Frameworks */ = {
@@ -320,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE734B8D22DEE300008679EC /* CardFormView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
