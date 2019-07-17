@@ -1,5 +1,5 @@
 //
-//  CardBrandValidatorTests.swift
+//  CardBrandTransformerTests.swift
 //  PAYJPTests
 //
 //  Created by Tadashi Wakayanagi on 2019/07/16.
