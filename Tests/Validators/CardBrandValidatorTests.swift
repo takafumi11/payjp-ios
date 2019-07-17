@@ -11,11 +11,11 @@ import XCTest
 
 class CardBrandValidatorTests: XCTestCase {
 
-    private func testCardBrandType(numbers: [String], type: CardBrandType) {
+    private func testCardBrandType(numbers: [String], brand: CardBrand) {
         let validator = CardBrandValidator.shared
         for number in numbers {
             let brandType = validator.validate(number: number)
-            XCTAssertEqual(brandType, type)
+            XCTAssertEqual(brandType, brand)
         }
     }
 
@@ -26,7 +26,7 @@ class CardBrandValidatorTests: XCTestCase {
             "4211",
             "4242111122223333"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Visa)
+        testCardBrandType(numbers: numbers, brand: .visa)
     }
 
     func testMastercardType() {
@@ -45,20 +45,16 @@ class CardBrandValidatorTests: XCTestCase {
             "5151222233334444",
             "2221222233334444",
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Mastercard)
+        testCardBrandType(numbers: numbers, brand: .masterCard)
     }
 
     func testJCBType() {
         let numbers = [
-            "2131",
-            "1800",
-            "21312222",
-            "213122223333444",
             "35",
             "3511",
             "3511222233334444"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.JCB)
+        testCardBrandType(numbers: numbers, brand: .JCB)
     }
 
     func testAmexType() {
@@ -69,7 +65,7 @@ class CardBrandValidatorTests: XCTestCase {
             "3718",
             "341122223333444"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Amex)
+        testCardBrandType(numbers: numbers, brand: .amex)
     }
 
     func testDinersType() {
@@ -89,7 +85,7 @@ class CardBrandValidatorTests: XCTestCase {
             "30012222333344",
             "38012222333344"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Diners)
+        testCardBrandType(numbers: numbers, brand: .dinersClub)
     }
 
     func testDiscoverType() {
@@ -101,7 +97,7 @@ class CardBrandValidatorTests: XCTestCase {
             "6011222233334444",
             "6511222233334444"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Discover)
+        testCardBrandType(numbers: numbers, brand: .discover)
     }
 
     func testUnknownType() {
@@ -113,6 +109,6 @@ class CardBrandValidatorTests: XCTestCase {
             "111122223333444455556666",
             "99999999999999999999999999999999999999999999999999"
         ]
-        testCardBrandType(numbers: numbers, type: CardBrandType.Unknown)
+        testCardBrandType(numbers: numbers, brand: .unknown)
     }
 }
