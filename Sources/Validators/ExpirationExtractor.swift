@@ -8,14 +8,12 @@
 
 import Foundation
 
-struct ExpirationExtractorResult {
-    let expiration: String?
-    let month: String?
-    let year: String?
-}
-
 protocol ExpirationExtractorType {
-    func monthYear(expiration: String?) throws -> ExpirationExtractorResult?
+    /// フォーマットされた文字列を月と年に分離する
+    /// - parameter expiration: MM/yy にフォーマットされた文字列。
+    /// - throws: 月は 1~12 の間の数字ではなかったら、エラー `monthOverflow` を投げ出します
+    /// - returns: 月と年の tuple 、インプットは想定中なフォーマットではなかったら nil で返します。
+    func extract(expiration: String?) throws -> (month: String, year: String)?
 }
 
 struct ExpirationExtractor: ExpirationExtractorType {
@@ -26,18 +24,18 @@ struct ExpirationExtractor: ExpirationExtractorType {
         self.formatter = formatter
     }
     
-    func monthYear(expiration: String?) throws -> ExpirationExtractorResult? {
-        if let expiration = formatter.string(from: expiration) {
+    func extract(expiration: String?) throws -> (month: String, year: String)? {
+        if let expiration = expiration, !expiration.isEmpty {
             let monthYear = expiration.split(separator: "/").map { String($0) }
             
-            if monthYear.count < 2 { return ExpirationExtractorResult(expiration: expiration, month: nil, year: nil) }
+            if monthYear.count < 2 { return nil }
             
             let month = monthYear[0]
             let year = monthYear[1]
             
             if !(1...12 ~= Int(month) ?? 0) { throw ExpirationError.monthOverflow }
             
-            return ExpirationExtractorResult(expiration: expiration, month: month, year: year)
+            return (month, year)
         }
         
         return nil
