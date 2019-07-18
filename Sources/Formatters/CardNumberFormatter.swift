@@ -21,10 +21,10 @@ struct CardNumberFormatter: CardNumberFormatterType {
             if filtered.isEmpty { return nil }
 
             // ブランドによって区切り方を変える
-            let validator = CardBrandValidator.shared
-            let brand = validator.validate(number: number)
+            let transfomer = CardBrandTransformer.shared
+            let brand = transfomer.transform(cardNumber: number)
             switch brand {
-            case .amex, .dinersClub:
+            case .americanExpress, .dinersClub:
                 let formattedNumber = filtered
                     .enumerated()
                     .map { offset, element in
