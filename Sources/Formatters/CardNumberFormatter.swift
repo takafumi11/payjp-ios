@@ -16,13 +16,13 @@ struct CardNumberFormatter: CardNumberFormatterType {
     func string(from number: String?) -> String? {
         if let number = number {
             let digitSet = CharacterSet.decimalDigits
-            let filtered = String(number.unicodeScalars.filter { digitSet.contains($0) })
+            var filtered = String(number.unicodeScalars.filter { digitSet.contains($0) })
 
             if filtered.isEmpty { return nil }
 
-            // ブランドによって区切り方を変える
-            let transfomer = CardBrandTransformer.shared
-            let brand = transfomer.transform(cardNumber: number)
+            let transformer = CardBrandTransformer.shared
+            let brand = transformer.transform(cardNumber: number)
+            filtered = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
             switch brand {
             case .americanExpress, .dinersClub:
                 let formattedNumber = filtered
