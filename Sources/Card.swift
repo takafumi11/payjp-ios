@@ -22,9 +22,9 @@ import Foundation
     public let liveMode: Bool
     public let createdAt: Date
     public var rawValue: [String: Any]?
-    
+
     // MARK: - Decodable
-    
+
     private enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -53,13 +53,37 @@ import Foundation
 
 public enum CardBrand: String, Codable {
     case visa = "Visa"
-    case masterCard = "MasterCard"
-    case JCB = "JCB"
-    case amex = "American Express"
+    case mastercard = "MasterCard"
+    case jcb = "JCB"
+    case americanExpress = "American Express"
     case dinersClub = "Diners Club"
     case discover = "Discover"
-    
+    case unknown = "Unknown"
+
     func display() -> String {
         return String(describing: self).uppercased()
+    }
+}
+
+extension CardBrand {
+    static let allBrands = [visa, mastercard, jcb, americanExpress, dinersClub, discover]
+
+    var regex: String {
+        switch self {
+        case .visa:
+            return "^4(?:[0-9]{0,15})$"
+        case .mastercard:
+            return "^(?:5[1-5]|2[2-7])[0-9]{0,14}$"
+        case .jcb:
+            return "^35(?:[0-9]{0,14})$"
+        case .americanExpress:
+            return "^3(?:[47][0-9]{0,13})$"
+        case .dinersClub:
+            return "^3(?:[0689][0-9]{0,12})$"
+        case .discover:
+            return "^6(?:[0245][0-9]{0,14})$"
+        case .unknown:
+            return ""
+        }
     }
 }
