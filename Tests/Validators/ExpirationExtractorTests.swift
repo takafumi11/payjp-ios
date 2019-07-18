@@ -70,4 +70,23 @@ class ExpirationExtractorTests: XCTestCase {
         XCTAssertNil(result?.month)
         XCTAssertNil(result?.year)
     }
+    
+    func testNotWellFormatted() {
+        let extractor = ExpirationExtractor()
+        
+        let source = "あら/がき"
+        var result: (month: String, year: String)?
+        var catchedError: Error?
+        
+        do {
+            result = try extractor.extract(expiration: source)
+        } catch {
+            catchedError = error
+        }
+        
+        XCTAssertNil(result)
+        XCTAssertNil(catchedError)
+        
+        XCTAssertNil(result)
+    }
 }
