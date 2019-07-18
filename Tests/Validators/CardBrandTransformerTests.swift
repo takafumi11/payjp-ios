@@ -11,10 +11,11 @@ import XCTest
 
 class CardBrandTransformerTests: XCTestCase {
 
+    let transformer = CardBrandTransformer()
+
     private func testCardBrandType(numbers: [String], brand: CardBrand) {
-        let transformer = CardBrandTransformer.shared
         for number in numbers {
-            let brandType = transformer.transform(cardNumber: number)
+            let brandType = transformer.transform(from: number)
             XCTAssertEqual(brandType, brand)
         }
     }

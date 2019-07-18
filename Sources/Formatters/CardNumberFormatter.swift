@@ -9,19 +9,28 @@
 import Foundation
 
 protocol CardNumberFormatterType {
-    func string(from number: String?) -> String?
+    /// カード番号をカード種類別でフォーマットします
+    /// - parameter cardNumber: カード番号
+    /// - returns: フォーマットしたカード番号、カード種類
+    func string(from cardNumber: String?) -> (String, CardBrand)?
 }
 
 struct CardNumberFormatter: CardNumberFormatterType {
-    func string(from number: String?) -> String? {
-        if let number = number {
+
+    let transformer: CardBrandTransformerType
+
+    init(transformer: CardBrandTransformerType = CardBrandTransformer()) {
+        self.transformer = transformer
+    }
+
+    func string(from cardNumber: String?) -> (String, CardBrand)? {
+        if let cardNumber = cardNumber, !cardNumber.isEmpty {
             let digitSet = CharacterSet.decimalDigits
-            var filtered = String(number.unicodeScalars.filter { digitSet.contains($0) })
+            var filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
 
             if filtered.isEmpty { return nil }
 
-            let transformer = CardBrandTransformer.shared
-            let brand = transformer.transform(cardNumber: number)
+            let brand = transformer.transform(from: cardNumber)
             filtered = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
             switch brand {
             case .americanExpress, .dinersClub:
@@ -31,7 +40,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         ((offset == 4 || offset == 10) && offset != filtered.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return String(formattedNumber)
+                return (String(formattedNumber), brand)
             default:
                 let formattedNumber = filtered
                     .enumerated()
@@ -39,7 +48,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         (offset != 0 && offset % 4 == 0 && offset != filtered.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return String(formattedNumber)
+                return (String(formattedNumber), brand)
             }
         }
         return nil
