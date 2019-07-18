@@ -11,13 +11,13 @@ import Foundation
 struct CardBrandTransformer {
     static let shared = CardBrandTransformer()
 
-    func transform(cardNumber: String) -> CardBrand? {
+    func transform(cardNumber: String) -> CardBrand {
         for brand in CardBrand.allBrands {
             if isMatched(source: cardNumber, regex: brand.regex) {
                 return brand
             }
         }
-        return nil
+        return .unknown
     }
 
     private func isMatched(source: String, regex: String) -> Bool {

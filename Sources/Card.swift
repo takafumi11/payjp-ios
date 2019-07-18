@@ -58,6 +58,7 @@ public enum CardBrand: String, Codable {
     case americanExpress = "American Express"
     case dinersClub = "Diners Club"
     case discover = "Discover"
+    case unknown = "Unknown"
 
     func display() -> String {
         return String(describing: self).uppercased()
@@ -81,6 +82,8 @@ extension CardBrand {
             return "^3(?:[0689][0-9]{0,12})$"
         case .discover:
             return "^6(?:[0245][0-9]{0,14})$"
+        case .unknown:
+            return ""
         }
     }
 }

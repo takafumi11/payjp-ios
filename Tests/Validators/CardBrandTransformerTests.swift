@@ -11,7 +11,7 @@ import XCTest
 
 class CardBrandTransformerTests: XCTestCase {
 
-    private func testCardBrandType(numbers: [String], brand: CardBrand?) {
+    private func testCardBrandType(numbers: [String], brand: CardBrand) {
         let transformer = CardBrandTransformer.shared
         for number in numbers {
             let brandType = transformer.transform(cardNumber: number)
@@ -109,6 +109,6 @@ class CardBrandTransformerTests: XCTestCase {
             "111122223333444455556666",
             "99999999999999999999999999999999999999999999999999"
         ]
-        testCardBrandType(numbers: numbers, brand: nil)
+        testCardBrandType(numbers: numbers, brand: .unknown)
     }
 }
