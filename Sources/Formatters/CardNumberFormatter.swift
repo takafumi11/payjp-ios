@@ -20,12 +20,19 @@ struct CardNumberFormatter: CardNumberFormatterType {
 
             if filtered.isEmpty { return nil }
 
-            // ブランドのチェック
+            // ブランドによって区切り方を変える
             let validator = CardBrandValidator.shared
             let brand = validator.validate(number: number)
-            // 桁数の決定
             switch brand {
-            case .visa,.masterCard,.JCB,.discover:
+            case .amex, .dinersClub:
+                let formattedNumber = filtered
+                    .enumerated()
+                    .map { offset, element in
+                        ((offset == 4 || offset == 10) && offset != filtered.count) ? [" ", element] : [element]
+                    }
+                    .joined()
+                return String(formattedNumber)
+            default:
                 let formattedNumber = filtered
                     .enumerated()
                     .map { offset, element in
@@ -33,12 +40,6 @@ struct CardNumberFormatter: CardNumberFormatterType {
                     }
                     .joined()
                 return String(formattedNumber)
-            case .amex:
-                return String("formattedNumber")
-            case .dinersClub:
-                return String("formattedNumber")
-            case .unknown:
-                return String("formattedNumber")
             }
         }
         return nil
