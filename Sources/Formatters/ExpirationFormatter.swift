@@ -9,12 +9,15 @@
 import Foundation
 
 protocol ExpirationFormatterType {
+    /// Returns a formatted value from given string.
+    /// - parameter expiration: 変換したい文字列。
+    /// - returns: MM/yy のフォーマットで返します、例： `01/20` 。変換できない場合は nil で返します。
     func string(from expiration: String?) -> String?
 }
 
 struct ExpirationFormatter: ExpirationFormatterType {
     func string(from expiration: String?) -> String? {
-        if let expiration = expiration {
+        if let expiration = expiration, !expiration.isEmpty {
             let digitSet = CharacterSet.decimalDigits
             var filtered = String(expiration.unicodeScalars.filter { digitSet.contains($0) })
             
