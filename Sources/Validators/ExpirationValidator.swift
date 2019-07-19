@@ -9,6 +9,10 @@
 import Foundation
 
 protocol ExpirationValidatorType {
+    /// 月と年は今より未来なのかをチェックする
+    /// - parameter month: 月
+    /// - parameter year: 年
+    /// - returns: true 渡された年月は `>= 今月`、 false 渡された年月は `< 今月`
     func isValid(month: String, year: String) -> Bool
 }
 
