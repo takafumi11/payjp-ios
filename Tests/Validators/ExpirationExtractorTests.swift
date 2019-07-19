@@ -27,7 +27,7 @@ class ExpirationExtractorTests: XCTestCase {
         XCTAssertNil(catchedError)
         
         XCTAssertEqual(result?.month, "01")
-        XCTAssertEqual(result?.year, "22")
+        XCTAssertEqual(result?.year, "2022")
     }
     
     func testMonthError() {
@@ -44,11 +44,8 @@ class ExpirationExtractorTests: XCTestCase {
         }
         
         XCTAssertNil(result)
-        XCTAssertTrue(catchedError is ExpirationError)
+        XCTAssertTrue(catchedError is ExpirationExtractorError)
         XCTAssertTrue((catchedError as? ExpirationExtractorError) == ExpirationExtractorError.monthOverflow)
-        
-        XCTAssertNil(result?.month)
-        XCTAssertNil(result?.year)
     }
     
     func testNotFull() {
@@ -66,9 +63,6 @@ class ExpirationExtractorTests: XCTestCase {
         
         XCTAssertNil(result)
         XCTAssertNil(catchedError)
-        
-        XCTAssertNil(result?.month)
-        XCTAssertNil(result?.year)
     }
     
     func testNotWellFormatted() {
@@ -86,7 +80,5 @@ class ExpirationExtractorTests: XCTestCase {
         
         XCTAssertNil(result)
         XCTAssertNil(catchedError)
-        
-        XCTAssertNil(result)
     }
 }
