@@ -60,4 +60,11 @@ public class CardFormView: UIView {
     override public var intrinsicContentSize: CGSize {
         return contentView.intrinsicContentSize
     }
+    
+    // MARK: - Out bound actions
+    
+    var isValid: Bool = false
+    func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
+        // TODO: ask the view model
+    }
 }
