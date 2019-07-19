@@ -9,11 +9,17 @@
 import Foundation
 
 protocol CvcValidatorType {
-    func isValid(cvc: String)->Bool
+    func isValid(cvc: String) -> Bool
 }
 
 class CvcValidator: CvcValidatorType {
-    
+
+    let transformer: CardBrandTransformer
+
+    init(transformer: CardBrandTransformerType = CardBrandTransformer()) {
+//        self.transformer = transformer
+    }
+
     func isValid(cvc: String) -> Bool {
         return false
     }
