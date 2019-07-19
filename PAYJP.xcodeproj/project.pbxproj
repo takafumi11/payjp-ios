@@ -93,8 +93,6 @@
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
-		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
-		EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +120,6 @@
 			children = (
 				C6E00B0C1E1F505600C101B0 /* Frameworks */,
 				615AFF5C1C8C74A1003FB86F /* Products */,
-				BE0417C822E1A17900B944CB /* Recovered References */,
 				615AFF5D1C8C74A1003FB86F /* Sources */,
 				615AFF691C8C74A1003FB86F /* Tests */,
 			);
@@ -171,16 +168,6 @@
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		BE0417C822E1A17900B944CB /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */,
-				EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */,
-			);
-			name = "Recovered References";
-			path = "Recovered References";
 			sourceTree = "<group>";
 		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
