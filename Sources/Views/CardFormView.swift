@@ -26,6 +26,10 @@ public class CardFormView: UIView {
     
     private var contentView: UIView!
     
+    // MARK:
+    
+    private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    
     // MARK: Lifecycle
     
     override public init(frame: CGRect) {
