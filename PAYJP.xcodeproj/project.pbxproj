@@ -177,6 +177,15 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		BE0417C822E1A17900B944CB /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				BE0417C922E1A1C000B944CB /* CardBrandTransformer.swift */,
+				BE0417CB22E1A25200B944CB /* CardBrandTransformerTests.swift */,
+			);
+			path = "Recovered References";
+			sourceTree = "<group>";
+		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +371,7 @@
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
 				C68378261D9CD1330023B528 /* Token.swift in Sources */,
+				EDA3EE8F22E1B0F900D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
