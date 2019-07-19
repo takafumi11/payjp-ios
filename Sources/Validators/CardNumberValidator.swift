@@ -15,7 +15,7 @@ protocol CardNumberValidatorType {
     func isValid(cardNumber: String) -> Bool
 }
 
-class CardNumberValidator: CardNumberValidatorType {
+struct CardNumberValidator: CardNumberValidatorType {
 
     func isValid(cardNumber: String) -> Bool {
         let digitSet = CharacterSet.decimalDigits
