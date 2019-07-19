@@ -72,8 +72,6 @@
 		615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYJPTests.swift; sourceTree = "<group>"; };
 		615AFF6C1C8C74A1003FB86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615AFF751C8C76E2003FB86F /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		BE0417C922E1A1C000B944CB /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
-		BE0417CB22E1A25200B944CB /* CardBrandTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformerTests.swift; sourceTree = "<group>"; };
 		BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidator.swift; sourceTree = "<group>"; };
 		BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidatorTests.swift; sourceTree = "<group>"; };
 		BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtractor.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				615AFF5C1C8C74A1003FB86F /* Products */,
 				615AFF5D1C8C74A1003FB86F /* Sources */,
 				615AFF691C8C74A1003FB86F /* Tests */,
-				EDA3EE9922E1CD4D00D9A6C9 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,15 +174,6 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		BE0417C822E1A17900B944CB /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				BE0417C922E1A1C000B944CB /* CardBrandTransformer.swift */,
-				BE0417CB22E1A25200B944CB /* CardBrandTransformerTests.swift */,
-			);
-			path = "Recovered References";
-			sourceTree = "<group>";
-		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,15 +220,6 @@
 				C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EDA3EE9922E1CD4D00D9A6C9 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				BE0417C922E1A1C000B944CB /* CardBrandTransformer.swift */,
-				BE0417CB22E1A25200B944CB /* CardBrandTransformerTests.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,7 +343,6 @@
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
-				EDA3EE9122E1B2E100D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
