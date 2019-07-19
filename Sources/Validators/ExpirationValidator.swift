@@ -12,7 +12,7 @@ protocol ExpirationValidatorType {
     /// 月と年は今より未来なのかをチェックする
     /// - parameter month: 月
     /// - parameter year: 年
-    /// - returns: true 渡された年月は `>= 今月`、 false 渡された年月は `< 今月`
+    /// - returns: 渡された年月は `>= 今月` であれば true 、 `< 今月` であれば false
     func isValid(month: String, year: String) -> Bool
 }
 
@@ -29,9 +29,9 @@ struct ExpirationValidator: ExpirationValidatorType {
         let currentYear = self.currentYear()
         
         if moddedIntYear == currentYear {
-            return intMonth >= currentMonth ? true : false
+            return intMonth >= currentMonth
         } else {
-            return moddedIntYear > currentYear ? true : false
+            return moddedIntYear > currentYear
         }
     }
     
