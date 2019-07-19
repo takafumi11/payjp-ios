@@ -18,11 +18,7 @@ protocol ExpirationExtractorType {
 
 struct ExpirationExtractor: ExpirationExtractorType {
     
-    let formatter: ExpirationFormatterType
-    
-    init(formatter: ExpirationFormatterType = ExpirationFormatter()) {
-        self.formatter = formatter
-    }
+    static let shared = ExpirationExtractor()
     
     func extract(expiration: String?) throws -> (month: String, year: String)? {
         if let expiration = expiration, !expiration.isEmpty {
