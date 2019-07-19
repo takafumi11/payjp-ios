@@ -44,6 +44,7 @@
 		EDA3EE8C22E19D7800D9A6C9 /* CardNumberValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8B22E19D7800D9A6C9 /* CardNumberValidatorTests.swift */; };
 		EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */; };
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
+		EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformerTests.swift; sourceTree = "<group>"; };
 		EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberValidator.swift; sourceTree = "<group>"; };
 		EDA3EE8B22E19D7800D9A6C9 /* CardNumberValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberValidatorTests.swift; sourceTree = "<group>"; };
+		EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */,
 				BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */,
 				BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */,
+				EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				C68681FA1E1E2369001D7F75 /* TestFixture.swift in Sources */,
+				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
 				BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
