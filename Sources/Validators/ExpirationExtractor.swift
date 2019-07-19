@@ -26,7 +26,7 @@ struct ExpirationExtractor: ExpirationExtractorType {
     
     func extract(expiration: String?) throws -> (month: String, year: String)? {
         if let expiration = expiration, !expiration.isEmpty {
-            let monthYear = expiration.split(separator: "/").map { String($0) }
+            let monthYear = expiration.split(separator: "/").map(String.init)
             
             if monthYear.count < 2 { return nil }
             
