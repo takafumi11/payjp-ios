@@ -20,15 +20,11 @@ struct CvcValidator: CvcValidatorType {
     func isValid(cvc: String) -> Bool {
         let digitSet = CharacterSet.decimalDigits
         let filtered = String(cvc.unicodeScalars.filter { digitSet.contains($0) })
-        
+
         if cvc.count != filtered.count {
             return false
         }
-
-        if case 3...4 = filtered.count {
-            return true
-        } else {
-            return false
-        }
+        
+        return 3...4 ~= filtered.count
     }
 }
