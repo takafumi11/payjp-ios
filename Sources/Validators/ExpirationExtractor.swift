@@ -12,7 +12,7 @@ protocol ExpirationExtractorType {
     /// フォーマットされた文字列を月と年に分離する
     /// - parameter expiration: MM/yy にフォーマットされた文字列。
     /// - throws: 月は 1~12 の間の数字ではなかったら、エラー `monthOverflow` を投げ出します
-    /// - returns: 月と年の tuple 、インプットは想定中なフォーマットではなかったら nil で返します。
+    /// - returns: (month: String, year: String)? の tuple 、年は yyyy で返します。インプットは想定中なフォーマットではなかったら nil で返します。
     func extract(expiration: String?) throws -> (month: String, year: String)?
 }
 
