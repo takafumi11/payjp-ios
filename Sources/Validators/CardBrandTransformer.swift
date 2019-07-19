@@ -8,10 +8,16 @@
 
 import Foundation
 
-struct CardBrandTransformer {
-    static let shared = CardBrandTransformer()
+protocol CardBrandTransformerType{
+    /// カード番号をチェックしてカード種類に変換します
+    /// - parameter cardNumber: カード番号
+    /// - returns: カード種類
+    func transform(from cardNumber: String) -> CardBrand
+}
 
-    func transform(cardNumber: String) -> CardBrand {
+struct CardBrandTransformer: CardBrandTransformerType {
+
+    func transform(from cardNumber: String) -> CardBrand {
         for brand in CardBrand.allBrands {
             if isMatched(source: cardNumber, regex: brand.regex) {
                 return brand

@@ -11,10 +11,11 @@ import XCTest
 
 class CardBrandTransformerTests: XCTestCase {
 
+    let transformer = CardBrandTransformer()
+
     private func testCardBrandType(numbers: [String], brand: CardBrand) {
-        let transformer = CardBrandTransformer.shared
         for number in numbers {
-            let brandType = transformer.transform(cardNumber: number)
+            let brandType = transformer.transform(from: number)
             XCTAssertEqual(brandType, brand)
         }
     }
@@ -24,7 +25,8 @@ class CardBrandTransformerTests: XCTestCase {
             "4",
             "42",
             "4211",
-            "4242111122223333"
+            "4242111122223333",
+            "42421111222233334444",
         ]
         testCardBrandType(numbers: numbers, brand: .visa)
     }
@@ -44,6 +46,7 @@ class CardBrandTransformerTests: XCTestCase {
             "2720",
             "5151222233334444",
             "2221222233334444",
+            "22212222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .mastercard)
     }
@@ -52,7 +55,8 @@ class CardBrandTransformerTests: XCTestCase {
         let numbers = [
             "35",
             "3511",
-            "3511222233334444"
+            "3511222233334444",
+            "35112222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .jcb)
     }
@@ -63,7 +67,8 @@ class CardBrandTransformerTests: XCTestCase {
             "37",
             "340",
             "3718",
-            "341122223333444"
+            "341122223333444",
+            "34112222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .americanExpress)
     }
@@ -83,7 +88,8 @@ class CardBrandTransformerTests: XCTestCase {
             "363",
             "384",
             "30012222333344",
-            "38012222333344"
+            "38012222333344",
+            "38012222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .dinersClub)
     }
@@ -95,7 +101,8 @@ class CardBrandTransformerTests: XCTestCase {
             "60112",
             "650",
             "6011222233334444",
-            "6511222233334444"
+            "6511222233334444",
+            "65112222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .discover)
     }

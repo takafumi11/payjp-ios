@@ -36,7 +36,7 @@ import Foundation
         case liveMode = "livemode"
         case createdAt = "created"
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifer = try container.decode(String.self, forKey: .id)
@@ -71,19 +71,30 @@ extension CardBrand {
     var regex: String {
         switch self {
         case .visa:
-            return "^4(?:[0-9]{0,15})$"
+            return "^4(?:[0-9]{0,})$"
         case .mastercard:
-            return "^(?:5[1-5]|2[2-7])[0-9]{0,14}$"
+            return "^(?:5[1-5]|2[2-7])[0-9]{0,}$"
         case .jcb:
-            return "^35(?:[0-9]{0,14})$"
+            return "^35(?:[0-9]{0,})$"
         case .americanExpress:
-            return "^3(?:[47][0-9]{0,13})$"
+            return "^3(?:[47][0-9]{0,})$"
         case .dinersClub:
-            return "^3(?:[0689][0-9]{0,12})$"
+            return "^3(?:[0689][0-9]{0,})$"
         case .discover:
-            return "^6(?:[0245][0-9]{0,14})$"
+            return "^6(?:[0245][0-9]{0,})$"
         case .unknown:
             return ""
+        }
+    }
+
+    var maxNumberLength: Int {
+        switch self {
+        case .americanExpress:
+            return 15
+        case .dinersClub:
+            return 14
+        default:
+            return 16
         }
     }
 }
