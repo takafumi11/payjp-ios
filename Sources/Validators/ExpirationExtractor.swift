@@ -38,7 +38,7 @@ struct ExpirationExtractor: ExpirationExtractorType {
             
             if intMonth == nil || intYear == nil { return nil }
             
-            if !(1...12 ~= intMonth ?? 0) { throw ExpirationError.monthOverflow }
+            if !(1...12 ~= intMonth ?? 0) { throw ExpirationExtractorError.monthOverflow }
             
             return (month, year)
         }
@@ -47,6 +47,6 @@ struct ExpirationExtractor: ExpirationExtractorType {
     }
 }
 
-enum ExpirationError: Error {
+enum ExpirationExtractorError: Error {
     case monthOverflow
 }

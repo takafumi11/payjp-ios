@@ -45,7 +45,7 @@ class ExpirationExtractorTests: XCTestCase {
         
         XCTAssertNil(result)
         XCTAssertTrue(catchedError is ExpirationError)
-        XCTAssertTrue((catchedError as? ExpirationError) == ExpirationError.monthOverflow)
+        XCTAssertTrue((catchedError as? ExpirationExtractorError) == ExpirationExtractorError.monthOverflow)
         
         XCTAssertNil(result?.month)
         XCTAssertNil(result?.year)
