@@ -9,18 +9,26 @@
 import Foundation
 
 protocol CvcValidatorType {
+    /// セキュリティコードのバリデーションチェックを行います
+    /// - Parameter cvc: セキュリティコード
+    /// - Returns: true 文字数が3〜4文字である
     func isValid(cvc: String) -> Bool
 }
 
-class CvcValidator: CvcValidatorType {
-
-    let transformer: CardBrandTransformer
-
-    init(transformer: CardBrandTransformerType = CardBrandTransformer()) {
-//        self.transformer = transformer
-    }
+struct CvcValidator: CvcValidatorType {
 
     func isValid(cvc: String) -> Bool {
-        return false
+        let digitSet = CharacterSet.decimalDigits
+        let filtered = String(cvc.unicodeScalars.filter { digitSet.contains($0) })
+        
+        if cvc.count != filtered.count {
+            return false
+        }
+
+        if case 3...4 = filtered.count {
+            return true
+        } else {
+            return false
+        }
     }
 }

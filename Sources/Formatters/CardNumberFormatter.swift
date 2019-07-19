@@ -30,7 +30,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
 
             if filtered.isEmpty { return nil }
 
-            let brand = transformer.transform(from: cardNumber)
+            let brand = transformer.transform(from: filtered)
             filtered = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
             switch brand {
             case .americanExpress, .dinersClub:
