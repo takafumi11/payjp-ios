@@ -40,7 +40,7 @@ struct ExpirationExtractor: ExpirationExtractorType {
             
             if !(1...12 ~= intMonth ?? 0) { throw ExpirationExtractorError.monthOverflow }
             
-            return (month, year)
+            return (month, "20" + year)
         }
         
         return nil
