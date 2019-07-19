@@ -27,19 +27,15 @@ class CardNumberValidator: CardNumberValidatorType {
     }
 
     private func isCardNumberLengthValid(cardNumber: String) -> Bool {
-        if case 14...16 = cardNumber.count {
-            return true
-        } else {
-            return false
-        }
+        return 14...16 ~= cardNumber.count
     }
 
     private func isLuhnValid(cardNumber: String) -> Bool {
         var sum = 0
-        let digitStrings = cardNumber.reversed().map { String($0) }
+        let digitStrings = cardNumber.reversed().map(String.init).map(Int.init)
 
         for (offset, element) in digitStrings.enumerated() {
-            if var digit = Int(element) {
+            if var digit = element {
                 let odd = offset % 2 == 1
                 if (odd) {
                     digit *= 2
