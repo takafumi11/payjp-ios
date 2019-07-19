@@ -9,7 +9,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormView" customModule="PAYJP" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormView" customModule="PAYJP" customModuleProvider="target">
+            <connections>
+                <outlet property="cardHolderTextField" destination="GUy-pg-STB" id="CiK-nS-Q0V"/>
+                <outlet property="cardHolderTitleLabel" destination="OLn-al-5TE" id="pMA-Sv-e3X"/>
+                <outlet property="cardNumberTextField" destination="T4u-qt-kxC" id="F58-Lk-k2D"/>
+                <outlet property="cardNumberTitleLabel" destination="2Mc-Ax-wI5" id="BZh-EY-jBS"/>
+                <outlet property="cvcInformationButton" destination="PZM-AB-FYA" id="XMF-fH-zMo"/>
+                <outlet property="cvcTextField" destination="cFx-df-SwM" id="Gxd-bt-0cY"/>
+                <outlet property="cvcTitleLabel" destination="tmA-pb-eTQ" id="Z4a-MO-0zz"/>
+                <outlet property="expirationTextField" destination="G9O-hO-3ha" id="O7B-i9-Pkc"/>
+                <outlet property="expirationTitleLabel" destination="10d-c5-GDc" id="GsM-zo-qfl"/>
+                <outlet property="ocrButton" destination="Edh-Qk-Qqn" id="2Im-K9-h0D"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="332" height="191"/>

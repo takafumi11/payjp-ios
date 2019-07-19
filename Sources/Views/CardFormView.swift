@@ -10,6 +10,20 @@ import UIKit
 
 @IBDesignable
 public class CardFormView: UIView {
+    
+    @IBOutlet private weak var cardNumberTitleLabel: UILabel!
+    @IBOutlet private weak var expirationTitleLabel: UILabel!
+    @IBOutlet private weak var cvcTitleLabel: UILabel!
+    @IBOutlet private weak var cardHolderTitleLabel: UILabel!
+    
+    @IBOutlet private weak var cardNumberTextField: UITextField!
+    @IBOutlet private weak var expirationTextField: UITextField!
+    @IBOutlet private weak var cvcTextField: UITextField!
+    @IBOutlet private weak var cardHolderTextField: UITextField!
+    
+    @IBOutlet private weak var ocrButton: UIButton!
+    @IBOutlet private weak var cvcInformationButton: UIButton!
+    
     private var contentView: UIView!
     
     // MARK: Lifecycle
