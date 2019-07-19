@@ -46,6 +46,8 @@
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
 		EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */; };
 		EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE9322E1B88F00D9A6C9 /* CvcValidatorTests.swift */; };
+		EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */; };
+		EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		EDA3EE8B22E19D7800D9A6C9 /* CardNumberValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberValidatorTests.swift; sourceTree = "<group>"; };
 		EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcValidator.swift; sourceTree = "<group>"; };
 		EDA3EE9322E1B88F00D9A6C9 /* CvcValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcValidatorTests.swift; sourceTree = "<group>"; };
+		EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatter.swift; sourceTree = "<group>"; };
+		EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,7 @@
 			children = (
 				EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */,
 				BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */,
+				EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			children = (
 				EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */,
 				BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */,
+				EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
+				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +432,7 @@
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,
 				BE21781422E806730098128D /* PAYJPSDKTests.m in Sources */,
+				EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */,
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,
