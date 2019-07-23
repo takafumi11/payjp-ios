@@ -20,15 +20,15 @@
                         <sections>
                             <tableViewSection id="f2J-H4-97A">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pvm-Vu-6Mi" style="IBUITableViewCellStyleDefault" id="d4k-J2-4EB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="pvm-Vu-6Mi" style="IBUITableViewCellStyleDefault" id="d4k-J2-4EB">
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4k-J2-4EB" id="0l4-PO-8JH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pvm-Vu-6Mi">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Request Directly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pvm-Vu-6Mi">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -36,22 +36,19 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="textLabel.text" value="Request Directly"/>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="VKh-Lw-K9Y" kind="show" id="9Ie-5p-hfV"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="PMl-4S-vLX" style="IBUITableViewCellStyleDefault" id="rP2-oW-81h">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="PMl-4S-vLX" style="IBUITableViewCellStyleDefault" id="rP2-oW-81h">
                                         <rect key="frame" x="0.0" y="79" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rP2-oW-81h" id="XTN-9S-di7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PMl-4S-vLX">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PMl-4S-vLX">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -59,9 +56,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="textLabel.text" value="Card Form View"/>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="OBK-L6-feX" kind="show" id="Ayr-3u-eWY"/>
                                         </connections>
