@@ -342,7 +342,7 @@
         <!--Card Form View-->
         <scene sceneID="9Y5-TT-EXE">
             <objects>
-                <tableViewController title="Card Form View" id="OBK-L6-feX" sceneMemberID="viewController">
+                <tableViewController title="Card Form View" id="OBK-L6-feX" customClass="CardFormViewExampleViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="I1R-oF-FfK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,28 +357,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcw-3p-Ecn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="282.5"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="CardFormView" customModule="PAYJP">
-                                                            <rect key="frame" x="16" y="16" width="343" height="266.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </view>
-                                                    </subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
+                                                    <rect key="frame" x="16" y="11" width="343" height="21.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="72d-mz-CTM" secondAttribute="trailing" constant="16" id="fjr-7d-Bba"/>
-                                                        <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="16" id="iFM-aQ-gue"/>
-                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="leading" secondItem="kcw-3p-Ecn" secondAttribute="leading" constant="16" id="jgr-1E-E6Z"/>
-                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="top" secondItem="kcw-3p-Ecn" secondAttribute="top" constant="16" id="ubg-UJ-97l"/>
-                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="kcw-3p-Ecn" secondAttribute="trailing" id="KpK-zf-cUa"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kcw-3p-Ecn" secondAttribute="bottom" id="aZx-YB-22j"/>
-                                                <constraint firstItem="kcw-3p-Ecn" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="top" id="bPz-jm-NaN"/>
-                                                <constraint firstItem="kcw-3p-Ecn" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leading" id="igc-2U-bMQ"/>
+                                                <constraint firstItem="72d-mz-CTM" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="top" constant="11" id="JH5-2p-2Dg"/>
+                                                <constraint firstAttribute="trailing" secondItem="72d-mz-CTM" secondAttribute="trailing" constant="16" id="mr6-2s-pv7"/>
+                                                <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="11" id="o2g-QL-Uvu"/>
+                                                <constraint firstItem="72d-mz-CTM" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leading" constant="16" id="xTi-a1-kgd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -427,11 +418,19 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="OBK-L6-feX" id="Yy0-dH-u8Y"/>
+                            <outlet property="delegate" destination="OBK-L6-feX" id="idW-wZ-EhO"/>
+                        </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="cardFormView" destination="72d-mz-CTM" id="HQC-2G-c0b"/>
+                        <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="ka4-yu-WpG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP6-o4-hRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="248.80000000000001" y="509.59520239880067"/>
+            <point key="canvasLocation" x="249" y="510"/>
         </scene>
     </scenes>
 </document>

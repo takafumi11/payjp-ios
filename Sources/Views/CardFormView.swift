@@ -8,8 +8,13 @@
 
 import UIKit
 
-@IBDesignable
+@IBDesignable @objcMembers @objc(PAYCardFormView)
 public class CardFormView: UIView {
+    @IBInspectable public var isHolderRequired: Bool = true {
+        didSet {
+            holderContainer.isHidden = !isHolderRequired
+        }
+    }
     
     @IBOutlet private weak var cardNumberTitleLabel: UILabel!
     @IBOutlet private weak var expirationTitleLabel: UILabel!
@@ -25,6 +30,8 @@ public class CardFormView: UIView {
     @IBOutlet private weak var expirationErrorLabel: UILabel!
     @IBOutlet private weak var cvcErrorLabel: UILabel!
     @IBOutlet private weak var cardHolderErrorLabel: UILabel!
+    
+    @IBOutlet private weak var holderContainer: UIStackView!
     
     @IBOutlet private weak var ocrButton: UIButton!
     @IBOutlet private weak var cvcInformationButton: UIButton!
@@ -68,12 +75,12 @@ public class CardFormView: UIView {
     
     // MARK: - Out bound actions
     
-    var isValid: Bool {
+    public var isValid: Bool {
         // TODO: ask the view model
         return false
     }
     
-    func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
+    public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
     }
 }

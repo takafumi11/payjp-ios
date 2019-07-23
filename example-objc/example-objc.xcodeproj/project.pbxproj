@@ -14,6 +14,7 @@
 		32CB11771FDA97A1007AD8F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB11761FDA97A1007AD8F5 /* main.m */; };
 		32D3A20E1FDAB3EE00B5C3BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB116D1FDA97A1007AD8F5 /* Main.storyboard */; };
 		66EE585F918805A23FDDDCC9 /* Pods_example_objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */; };
+		BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		3AF6A7B964A72227087585F7 /* Pods-example-objc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-objc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-example-objc/Pods-example-objc.debug.xcconfig"; sourceTree = "<group>"; };
 		55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_example_objc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76CA4BCF5842CACDFD23EC1A /* Pods-example-objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-objc.release.xcconfig"; path = "Pods/Target Support Files/Pods-example-objc/Pods-example-objc.release.xcconfig"; sourceTree = "<group>"; };
+		BE0417D422E6DF6600B944CB /* CardFormViewExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewExampleViewController.h; sourceTree = "<group>"; };
+		BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewExampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				32CB11671FDA97A1007AD8F5 /* AppDelegate.h */,
 				32CB11681FDA97A1007AD8F5 /* AppDelegate.m */,
 				32CB11701FDA97A1007AD8F5 /* Assets.xcassets */,
+				BE0417D422E6DF6600B944CB /* CardFormViewExampleViewController.h */,
+				BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */,
 				32CB11751FDA97A1007AD8F5 /* Info.plist */,
 				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
 				32CB116D1FDA97A1007AD8F5 /* Main.storyboard */,
@@ -209,6 +214,7 @@
 			files = (
 				32CB116C1FDA97A1007AD8F5 /* ViewController.m in Sources */,
 				32CB11771FDA97A1007AD8F5 /* main.m in Sources */,
+				BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */,
 				32CB11691FDA97A1007AD8F5 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
