@@ -21,6 +21,11 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcTextField: UITextField!
     @IBOutlet private weak var cardHolderTextField: UITextField!
     
+    @IBOutlet private weak var cardNumberErrorLabel: UILabel!
+    @IBOutlet private weak var expirationErrorLabel: UILabel!
+    @IBOutlet private weak var cvcErrorLabel: UILabel!
+    @IBOutlet private weak var cardHolderErrorLabel: UILabel!
+    
     @IBOutlet private weak var ocrButton: UIButton!
     @IBOutlet private weak var cvcInformationButton: UIButton!
     
@@ -63,7 +68,11 @@ public class CardFormView: UIView {
     
     // MARK: - Out bound actions
     
-    var isValid: Bool = false
+    var isValid: Bool {
+        // TODO: ask the view model
+        return false
+    }
+    
     func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
     }
