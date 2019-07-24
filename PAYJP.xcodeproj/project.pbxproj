@@ -17,6 +17,9 @@
 		BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */; };
 		BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */; };
 		BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DAA7B22E0536800D15A84 /* ExpirationExtractorTests.swift */; };
+		BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21780E22E802A00098128D /* PAYJPSDK.swift */; };
+		BE21781422E806730098128D /* PAYJPSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21781322E806730098128D /* PAYJPSDKTests.m */; };
+		BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781522E8091A0098128D /* PAYJPSDKTests.swift */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
 		BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230D20B4064200C4FE1E /* PAYJP.m */; };
@@ -80,6 +83,10 @@
 		BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewViewModel.swift; sourceTree = "<group>"; };
 		BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtractor.swift; sourceTree = "<group>"; };
 		BE1DAA7B22E0536800D15A84 /* ExpirationExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtractorTests.swift; sourceTree = "<group>"; };
+		BE21780E22E802A00098128D /* PAYJPSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYJPSDK.swift; sourceTree = "<group>"; };
+		BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PAYJPTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE21781322E806730098128D /* PAYJPSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAYJPSDKTests.m; sourceTree = "<group>"; };
+		BE21781522E8091A0098128D /* PAYJPSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYJPSDKTests.swift; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
@@ -147,6 +154,7 @@
 		615AFF5D1C8C74A1003FB86F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BE21781022E8061D0098128D /* Core */,
 				BE734B8222DD7868008679EC /* Formatters */,
 				BE734B8322DD7873008679EC /* Validators */,
 				BE734B8B22DEE2DA008679EC /* Views */,
@@ -167,6 +175,7 @@
 		615AFF691C8C74A1003FB86F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE21781122E806580098128D /* Core */,
 				BE734B8522DD7888008679EC /* Formatters */,
 				BE734B8422DD787E008679EC /* Validators */,
 				BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */,
@@ -174,11 +183,29 @@
 				C62B7CBB1DA2078A00CAFD7B /* Fixtures */,
 				615AFF6C1C8C74A1003FB86F /* Info.plist */,
 				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
+				BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */,
 				615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		BE21781022E8061D0098128D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BE21780E22E802A00098128D /* PAYJPSDK.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BE21781122E806580098128D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BE21781322E806730098128D /* PAYJPSDKTests.m */,
+				BE21781522E8091A0098128D /* PAYJPSDKTests.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
@@ -373,6 +400,7 @@
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
+				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,9 +412,11 @@
 				615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */,
 				EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */,
 				EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */,
+				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,
+				BE21781422E806730098128D /* PAYJPSDKTests.m in Sources */,
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,
@@ -569,6 +599,7 @@
 		615AFF731C8C74A1003FB86F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8ZAC8P584F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -578,6 +609,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.pay.ios.PAYJPTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/PAYJPTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -585,6 +618,7 @@
 		615AFF741C8C74A1003FB86F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8ZAC8P584F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -594,6 +628,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.pay.ios.PAYJPTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/PAYJPTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
