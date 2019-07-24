@@ -24,8 +24,8 @@ struct CvcFormatter: CvcFormatterType {
 
             if filtered.isEmpty { return nil }
 
-            filtered = String(filtered.unicodeScalars.prefix(4))
-            return filtered
+            let trimmed = String(filtered.unicodeScalars.prefix(4))
+            return trimmed
         }
         return nil
     }
