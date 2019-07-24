@@ -10,6 +10,12 @@ import Foundation
 
 extension JSONDecoder {
     
+    static var shared: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return decoder
+    }
+    
     static var since1970StrategyDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
