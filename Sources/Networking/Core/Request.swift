@@ -28,6 +28,7 @@ enum RequestError: Error {
 extension Request {
     
     var queryParameters: [String: Any]?  { return nil }
+    var bodyParameters: [String: String]?  { return nil }
     var httpMethod: String { return "GET" }
     
     func buildUrlRequest() throws -> URLRequest {
