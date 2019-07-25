@@ -25,7 +25,7 @@ struct CreateTokenRequest: BaseRequest {
         return parameters
     }
     
-    // MARK: Data
+    // MARK: - Data
     
     private let cardNumber: String
     private let cvc: String

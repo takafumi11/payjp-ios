@@ -27,6 +27,8 @@
 		BE21785222E982A60098128D /* CreateTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785122E982A60098128D /* CreateTokenRequest.swift */; };
 		BE21785422E982E30098128D /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785322E982E30098128D /* BaseRequest.swift */; };
 		BE21785722E995C40098128D /* CreateTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785622E995C40098128D /* CreateTokenRequestTests.swift */; };
+		BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785822E9993D0098128D /* CreateTokenForApplePayRequest.swift */; };
+		BE21785B22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785A22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
 		BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230D20B4064200C4FE1E /* PAYJP.m */; };
@@ -105,6 +107,8 @@
 		BE21785122E982A60098128D /* CreateTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenRequest.swift; sourceTree = "<group>"; };
 		BE21785322E982E30098128D /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		BE21785622E995C40098128D /* CreateTokenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenRequestTests.swift; sourceTree = "<group>"; };
+		BE21785822E9993D0098128D /* CreateTokenForApplePayRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenForApplePayRequest.swift; sourceTree = "<group>"; };
+		BE21785A22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenForApplePayRequestTests.swift; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 		BE21785022E9827F0098128D /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				BE21785822E9993D0098128D /* CreateTokenForApplePayRequest.swift */,
 				BE21785122E982A60098128D /* CreateTokenRequest.swift */,
 			);
 			path = Requests;
@@ -288,6 +293,7 @@
 		BE21785522E995AE0098128D /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				BE21785A22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift */,
 				BE21785622E995C40098128D /* CreateTokenRequestTests.swift */,
 			);
 			path = Requests;
@@ -495,6 +501,7 @@
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
+				BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
@@ -519,6 +526,7 @@
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,
+				BE21785B22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift in Sources */,
 				BE734B8A22DD7DE2008679EC /* ExpirationFormatterTests.swift in Sources */,
 				BE21785722E995C40098128D /* CreateTokenRequestTests.swift in Sources */,
 			);
