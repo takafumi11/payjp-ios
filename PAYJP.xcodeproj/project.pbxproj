@@ -23,7 +23,10 @@
 		BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781922E82AA50098128D /* CallbackQueue.swift */; };
 		BE21781C22E82AFD0098128D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781B22E82AFD0098128D /* Client.swift */; };
 		BE21781E22E82B350098128D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781D22E82B350098128D /* Request.swift */; };
-		BE21782022E82B820098128D /* QuerySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781F22E82B820098128D /* QuerySerialization.swift */; };
+		BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21781F22E82B820098128D /* ParametersSerialization.swift */; };
+		BE21785222E982A60098128D /* CreateTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785122E982A60098128D /* CreateTokenRequest.swift */; };
+		BE21785422E982E30098128D /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785322E982E30098128D /* BaseRequest.swift */; };
+		BE21785722E995C40098128D /* CreateTokenRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21785622E995C40098128D /* CreateTokenRequestTests.swift */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
 		BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230D20B4064200C4FE1E /* PAYJP.m */; };
@@ -98,7 +101,10 @@
 		BE21781922E82AA50098128D /* CallbackQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackQueue.swift; sourceTree = "<group>"; };
 		BE21781B22E82AFD0098128D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		BE21781D22E82B350098128D /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		BE21781F22E82B820098128D /* QuerySerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuerySerialization.swift; sourceTree = "<group>"; };
+		BE21781F22E82B820098128D /* ParametersSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersSerialization.swift; sourceTree = "<group>"; };
+		BE21785122E982A60098128D /* CreateTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenRequest.swift; sourceTree = "<group>"; };
+		BE21785322E982E30098128D /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		BE21785622E995C40098128D /* CreateTokenRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenRequestTests.swift; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
@@ -222,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				BE21784F22E9657F0098128D /* Models */,
+				BE21785522E995AE0098128D /* Requests */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -231,6 +238,7 @@
 			children = (
 				BE21782222E85A880098128D /* Core */,
 				BE21782122E858740098128D /* Models */,
+				BE21785022E9827F0098128D /* Requests */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -249,10 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
+				BE21785322E982E30098128D /* BaseRequest.swift */,
 				BE21781922E82AA50098128D /* CallbackQueue.swift */,
 				BE21781B22E82AFD0098128D /* Client.swift */,
 				322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */,
-				BE21781F22E82B820098128D /* QuerySerialization.swift */,
+				BE21781F22E82B820098128D /* ParametersSerialization.swift */,
 				BE21781D22E82B350098128D /* Request.swift */,
 				BEECFBD422D71E4400049BFB /* UserAgent.swift */,
 			);
@@ -266,6 +275,22 @@
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BE21785022E9827F0098128D /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				BE21785122E982A60098128D /* CreateTokenRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		BE21785522E995AE0098128D /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				BE21785622E995C40098128D /* CreateTokenRequestTests.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
@@ -456,8 +481,10 @@
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
 				BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */,
+				BE21785422E982E30098128D /* BaseRequest.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
+				BE21785222E982A60098128D /* CreateTokenRequest.swift in Sources */,
 				322BD1D6225C83CA00D83B5E /* JSONDecoderFactory.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
@@ -470,7 +497,7 @@
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
-				BE21782022E82B820098128D /* QuerySerialization.swift in Sources */,
+				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +520,7 @@
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,
 				BE734B8A22DD7DE2008679EC /* ExpirationFormatterTests.swift in Sources */,
+				BE21785722E995C40098128D /* CreateTokenRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

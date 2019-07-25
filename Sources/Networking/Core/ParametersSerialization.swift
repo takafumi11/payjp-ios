@@ -1,5 +1,5 @@
 //
-//  QuerySerialization.swift
+//  ParametersSerialization.swift
 //  PAYJP
 //
 //  Created by Li-Hsuan Chen on 2019/07/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct QuerySerialization {
+struct ParametersSerialization {
     static func string(from parameters: [String: Any]) -> String {
         let pairs = parameters.map { key, value -> String in
             if value is NSNull {

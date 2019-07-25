@@ -14,6 +14,8 @@ protocol Request {
     var baseUrl: URL { get }
     var path: String { get }
     var queryParameters: [String: Any]?  { get }
+    var bodyParameters: [String: String]?  { get } // Dealing with String content only
+    var headerFields: [String: String] { get }
     var httpMethod: String { get }
     
     func response(data: Data, response: HTTPURLResponse) throws -> Response
@@ -25,7 +27,7 @@ enum RequestError: Error {
 
 extension Request {
     
-    var queryParameters: [String: Any]?  { return [:] }
+    var queryParameters: [String: Any]?  { return nil }
     var httpMethod: String { return "GET" }
     
     func buildUrlRequest() throws -> URLRequest {
@@ -37,11 +39,22 @@ extension Request {
         }
         
         if let queryParameters = queryParameters, !queryParameters.isEmpty {
-            components.percentEncodedQuery = QuerySerialization.string(from: queryParameters)
+            components.percentEncodedQuery = ParametersSerialization.string(from: queryParameters)
+        }
+        
+        let method = httpMethod.uppercased()
+        
+        if ["POST", "PUT", "PATCH"].contains(method), let bodyParameters = bodyParameters {
+            let body = ParametersSerialization.string(from: bodyParameters)
+            request.httpBody = body.data(using: .utf8)
+        }
+        
+        headerFields.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
         }
         
         request.url = components.url
-        request.httpMethod = httpMethod.uppercased()
+        request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         return request
