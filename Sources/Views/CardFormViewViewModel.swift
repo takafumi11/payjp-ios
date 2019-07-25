@@ -9,7 +9,28 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
+    func formatCardNumber(input: String?) -> (String, CardBrand)?
+    func checkCardNumberValid(input: String) -> Bool
 }
 
 struct CardFormViewViewModel: CardFormViewViewModelType {
+
+    let cardNumberFormatter: CardNumberFormatterType
+    let cardNumberValidator: CardNumberValidatorType
+    
+    private var cardNumber: String? = nil
+
+    init(cardNumberFormatter: CardNumberFormatterType = CardNumberFormatter(),
+        cardNumberValidator: CardNumberValidatorType = CardNumberValidator()) {
+        self.cardNumberFormatter = cardNumberFormatter
+        self.cardNumberValidator = cardNumberValidator
+    }
+
+    func formatCardNumber(input: String?) -> (String, CardBrand)? {
+        return cardNumberFormatter.string(from: input)
+    }
+
+    func checkCardNumberValid(input: String) -> Bool {
+        return cardNumberValidator.isValid(cardNumber: input)
+    }
 }

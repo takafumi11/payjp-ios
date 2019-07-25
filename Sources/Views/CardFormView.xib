@@ -53,6 +53,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" textContentType="cc-number"/>
+                                            <connections>
+                                                <action selector="cardNumberChanged:" destination="-1" eventType="editingChanged" id="t9D-3L-ByX"/>
+                                            </connections>
                                         </textField>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFQ-GY-Vr8">
                                             <rect key="frame" x="0.0" y="58.333333333333336" width="286" height="0.0"/>

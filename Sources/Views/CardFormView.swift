@@ -36,6 +36,17 @@ public class CardFormView: UIView {
     @IBOutlet private weak var ocrButton: UIButton!
     @IBOutlet private weak var cvcInformationButton: UIButton!
     
+    @IBAction func cardNumberChanged(_ sender: UITextField) {
+        let formatted = viewModel.formatCardNumber(input: sender.text)
+        cardNumberTextField.text = formatted?.0
+        let valid = viewModel.checkCardNumberValid(input: sender.text!)
+        if valid {
+            cardNumberErrorLabel.text = nil
+        } else {
+            cardNumberErrorLabel.text = "カード番号が正しくありません"
+        }
+    }
+    
     private var contentView: UIView!
     
     // MARK:
