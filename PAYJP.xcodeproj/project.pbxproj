@@ -194,11 +194,9 @@
 				C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */,
 				C62B7CBB1DA2078A00CAFD7B /* Fixtures */,
 				615AFF6C1C8C74A1003FB86F /* Info.plist */,
-				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
 				BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */,
 				615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
-				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -223,6 +221,7 @@
 		BE21781722E82A420098128D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				BE21784F22E9657F0098128D /* Models */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -258,6 +257,15 @@
 				BEECFBD422D71E4400049BFB /* UserAgent.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		BE21784F22E9657F0098128D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
+				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
