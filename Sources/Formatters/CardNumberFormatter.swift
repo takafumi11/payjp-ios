@@ -30,22 +30,22 @@ struct CardNumberFormatter: CardNumberFormatterType {
 
             if filtered.isEmpty { return nil }
 
-            let brand = transformer.transform(from: cardNumber)
-            filtered = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
+            let brand = transformer.transform(from: filtered)
+            let trimmed = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
             switch brand {
             case .americanExpress, .dinersClub:
-                let formattedNumber = filtered
+                let formattedNumber = trimmed
                     .enumerated()
                     .map { offset, element in
-                        ((offset == 4 || offset == 10) && offset != filtered.count) ? [" ", element] : [element]
+                        ((offset == 4 || offset == 10) && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
                 return (String(formattedNumber), brand)
             default:
-                let formattedNumber = filtered
+                let formattedNumber = trimmed
                     .enumerated()
                     .map { offset, element in
-                        (offset != 0 && offset % 4 == 0 && offset != filtered.count) ? [" ", element] : [element]
+                        (offset != 0 && offset % 4 == 0 && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
                 return (String(formattedNumber), brand)
