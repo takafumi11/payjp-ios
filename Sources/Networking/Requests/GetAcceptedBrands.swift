@@ -12,7 +12,7 @@ struct GetAcceptedBrands: BaseRequest {
     
     // MARK: - Request
     
-    typealias Response = String
+    typealias Response = GetAcceptedBrandsResponse
     
     var path: String = "accounts/brands"
     var httpMethod: String = "GET"

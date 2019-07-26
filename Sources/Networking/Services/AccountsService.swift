@@ -9,10 +9,28 @@
 import Foundation
 
 protocol AccountsServiceType {
-    func getAcceptedBrands(completion: (Result<[CardBrand], Error>) -> Void)
+    func getAcceptedBrands(tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) -> URLSessionDataTask?
 }
 
 struct AccountService: AccountsServiceType {
-    func getAcceptedBrands(completion: (Result<[CardBrand], Error>) -> Void) {
+    
+    private let client: ClientType
+    
+    static let shared = AccountService()
+    
+    init(client: ClientType = Client.shared) {
+        self.client = client
+    }
+    
+    func getAcceptedBrands(tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) -> URLSessionDataTask? {
+        let request = GetAcceptedBrands(tenantId: tenantId)
+        return client.request(with: request) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data.acceptedBrands))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

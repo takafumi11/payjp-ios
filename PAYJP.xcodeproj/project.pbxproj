@@ -43,6 +43,8 @@
 		BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8E22DEF3AE008679EC /* CardFormView.swift */; };
 		BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28422EADCC200F8906B /* TokensService.swift */; };
 		BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28622EADE5000F8906B /* AccountsService.swift */; };
+		BEA1D28922EAFB6700F8906B /* GetAcceptedBrandsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */; };
+		BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */; };
 		BEECFBD522D71E4400049BFB /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECFBD422D71E4400049BFB /* UserAgent.swift */; };
 		C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B7CB91DA2071100CAFD7B /* TokenTests.swift */; };
 		C62B7CBC1DA2078A00CAFD7B /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = C62B7CBB1DA2078A00CAFD7B /* Fixtures */; };
@@ -129,6 +131,8 @@
 		BE734B8E22DEF3AE008679EC /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
 		BEA1D28422EADCC200F8906B /* TokensService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensService.swift; sourceTree = "<group>"; };
 		BEA1D28622EADE5000F8906B /* AccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsService.swift; sourceTree = "<group>"; };
+		BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsResponse.swift; sourceTree = "<group>"; };
+		BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
 		BEECFBD422D71E4400049BFB /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		C62B7CB91DA2071100CAFD7B /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		C62B7CBB1DA2078A00CAFD7B /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				C65513741DA24E18009D6DA5 /* Card.swift */,
+				BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */,
+				BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
 				C68378251D9CD1330023B528 /* Token.swift */,
 			);
@@ -532,6 +538,8 @@
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
 				BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */,
+				BEA1D28922EAFB6700F8906B /* GetAcceptedBrandsResponse.swift in Sources */,
+				BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
