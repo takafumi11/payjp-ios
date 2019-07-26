@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct GetTokenRequest: BaseRequest {
+protocol GetTokenRequestType: BaseRequest {
+    init(tokenId: String)
+}
+
+struct GetTokenRequest: GetTokenRequestType {
     typealias Response = Token
     
     var path: String { return "tokens/\(tokenId)" }

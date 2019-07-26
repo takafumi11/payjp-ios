@@ -16,7 +16,7 @@ private var taskRequestKey = 0
 
 public class Client: ClientType {
     
-    let shared = Client()
+    static let shared = Client()
     
     private let session: URLSession
     private let callbackQueue: CallbackQueue
