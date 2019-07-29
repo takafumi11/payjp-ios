@@ -12,7 +12,9 @@ protocol CardNumberFormatterType {
     /// カード番号をカード種類別でフォーマットします
     /// - parameter cardNumber: カード番号
     /// - returns: フォーマットしたカード番号、カード種類
-    func string(from cardNumber: String?) -> (String, CardBrand)?
+    func string(from cardNumber: String?) -> (formatted: String, brand: CardBrand)?
+
+    func filter(from formatted: String?) -> String?
 }
 
 struct CardNumberFormatter: CardNumberFormatterType {
@@ -23,7 +25,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
         self.transformer = transformer
     }
 
-    func string(from cardNumber: String?) -> (String, CardBrand)? {
+    func string(from cardNumber: String?) -> (formatted: String, brand: CardBrand)? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
             let digitSet = CharacterSet.decimalDigits
             var filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
@@ -31,7 +33,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            let trimmed = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
+            let trimmed = String(filtered.unicodeScalars.prefix(16))
             switch brand {
             case .americanExpress, .dinersClub:
                 let formattedNumber = trimmed
@@ -50,6 +52,15 @@ struct CardNumberFormatter: CardNumberFormatterType {
                     .joined()
                 return (String(formattedNumber), brand)
             }
+        }
+        return nil
+    }
+
+    func filter(from formatted: String?) -> String? {
+        if let formatted = formatted, !formatted.isEmpty {
+            let digitSet = CharacterSet.decimalDigits
+            let filtered = String(formatted.unicodeScalars.filter { digitSet.contains($0) })
+            return filtered
         }
         return nil
     }

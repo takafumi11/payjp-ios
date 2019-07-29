@@ -61,7 +61,7 @@ class CardNumberFormatterTests: XCTestCase {
             ("341122", "3411 22"),
             ("371122223333", "3711 222233 33"),
             ("371122223333444", "3711 222233 33444"),
-            ("37112222333344445555", "3711 222233 33444")
+            ("37112222333344445555", "3711 222233 334444")
         ]
         testCardNumberFormat(cases: cases, brand: .americanExpress)
     }
@@ -72,7 +72,7 @@ class CardNumberFormatterTests: XCTestCase {
             ("361122", "3611 22"),
             ("381122223333", "3811 222233 33"),
             ("39112222333344", "3911 222233 3344"),
-            ("39112222333344445555", "3911 222233 3344")
+            ("39112222333344445555", "3911 222233 334444")
         ]
         testCardNumberFormat(cases: cases, brand: .dinersClub)
     }
