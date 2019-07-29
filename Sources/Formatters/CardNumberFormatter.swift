@@ -52,4 +52,13 @@ struct CardNumberFormatter: CardNumberFormatterType {
         }
         return nil
     }
+
+    func filter(from formatted: String?) -> String? {
+        if let formatted = formatted, !formatted.isEmpty {
+            let digitSet = CharacterSet.decimalDigits
+            let filtered = String(formatted.unicodeScalars.filter { digitSet.contains($0) })
+            return filtered
+        }
+        return nil
+    }
 }
