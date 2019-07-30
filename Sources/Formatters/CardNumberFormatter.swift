@@ -12,7 +12,7 @@ protocol CardNumberFormatterType {
     /// カード番号をカード種類別でフォーマットします
     /// - parameter cardNumber: カード番号
     /// - returns: フォーマットしたカード番号、カード種類
-    func string(from cardNumber: String?) -> (formatted: String, brand: CardBrand)?
+    func string(from cardNumber: String?) -> CardNumber?
 
     func filter(from formatted: String?) -> String?
 }
@@ -25,7 +25,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
         self.transformer = transformer
     }
 
-    func string(from cardNumber: String?) -> (formatted: String, brand: CardBrand)? {
+    func string(from cardNumber: String?) -> CardNumber? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
             let digitSet = CharacterSet.decimalDigits
             var filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
@@ -42,7 +42,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         ((offset == 4 || offset == 10) && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return (String(formattedNumber), brand)
+                return CardNumber(formatted: String(formattedNumber), brand: brand)
             default:
                 let formattedNumber = trimmed
                     .enumerated()
@@ -50,7 +50,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         (offset != 0 && offset % 4 == 0 && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return (String(formattedNumber), brand)
+                return CardNumber(formatted: String(formattedNumber), brand: brand)
             }
         }
         return nil

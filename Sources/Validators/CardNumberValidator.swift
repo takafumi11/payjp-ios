@@ -13,6 +13,10 @@ protocol CardNumberValidatorType {
     /// - parameter cardNumber: カード番号
     /// - returns: バリデーションOKであればtrue
     func isValid(cardNumber: String) -> Bool
+    
+    func isCardNumberLengthValid(cardNumber: String) -> Bool
+    
+    func isLuhnValid(cardNumber: String) -> Bool
 }
 
 struct CardNumberValidator: CardNumberValidatorType {
@@ -26,11 +30,11 @@ struct CardNumberValidator: CardNumberValidatorType {
         return isCardNumberLengthValid(cardNumber: filtered) && isLuhnValid(cardNumber: filtered)
     }
 
-    private func isCardNumberLengthValid(cardNumber: String) -> Bool {
+    func isCardNumberLengthValid(cardNumber: String) -> Bool {
         return 14...16 ~= cardNumber.count
     }
 
-    private func isLuhnValid(cardNumber: String) -> Bool {
+    func isLuhnValid(cardNumber: String) -> Bool {
         var sum = 0
         let digitStrings = cardNumber.reversed().map(String.init).map(Int.init)
 

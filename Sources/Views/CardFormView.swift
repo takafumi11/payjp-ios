@@ -42,13 +42,6 @@ public class CardFormView: UIView {
 
     private var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
-    private enum TextFieldTag {
-        case cardNumber
-        case expiration
-        case cvc
-        case cardHolder
-    }
-
     // MARK: Lifecycle
 
     override public init(frame: CGRect) {
@@ -75,9 +68,7 @@ public class CardFormView: UIView {
 
         backgroundColor = .clear
 
-        cardNumberTextField.tag = TextFieldTag.cardNumber.hashValue
         cardNumberTextField.delegate = self
-        expirationTextField.tag = TextFieldTag.expiration.hashValue
         expirationTextField.delegate = self
     }
 
@@ -107,11 +98,11 @@ extension CardFormView: UITextFieldDelegate {
             let range = Range(range, in: currentText)!
             let newText = currentText.replacingCharacters(in: range, with: string)
 
-            switch textField.tag {
-            case TextFieldTag.cardNumber.hashValue:
+            switch textField {
+            case cardNumberTextField:
                 updateCardNumberInput(input: newText)
                 break
-            case TextFieldTag.expiration.hashValue:
+            case expirationTextField:
                 updateExpirationInput(input: newText)
             default:
                 break
@@ -122,26 +113,54 @@ extension CardFormView: UITextFieldDelegate {
     }
 
     /// カード番号の入力フィールドを更新する
-    /// - Parameter input: カード番号
-    private func updateCardNumberInput(input: String) {
-        if let (tuple, errorMessage) = viewModel.updateCardNumber(input: input) {
-            if let (formatted, brand) = tuple {
-                cardNumberTextField.text = formatted
+    ///
+    /// - Parameters:
+    ///   - input: カード番号
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateCardNumber(input: input)
+        switch result {
+        case let .success(cardNumber):
+            if let cardNumber = cardNumber {
+                cardNumberTextField.text = cardNumber.formatted
+                cardNumberErrorLabel.text = nil
                 // TODO: show brand logo
-                print(brand)
+                print(cardNumber.brand)
             }
-            cardNumberErrorLabel.text = errorMessage
-            cardNumberErrorLabel.isHidden = errorMessage == nil
+        case let .failure(error):
+            switch error {
+            case let .error(value, message):
+                cardNumberTextField.text = value?.formatted
+                cardNumberErrorLabel.text = forceShowError ? message : nil
+            case let .instantError(value, message):
+                cardNumberTextField.text = value?.formatted
+                cardNumberErrorLabel.text = message
+            }
         }
+        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
     }
 
     /// 有効期限の入力フィールドを更新する
-    /// - Parameter input: 有効期限
-    private func updateExpirationInput(input: String) {
-        if let (formatted, errorMessage) = viewModel.updateExpiration(input: input) {
-            expirationTextField.text = formatted
-            expirationErrorLabel.text = errorMessage
-            expirationErrorLabel.isHidden = errorMessage == nil
+    ///
+    /// - Parameters:
+    ///   - input: 有効期限
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateExpirationInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateExpiration(input: input)
+        switch result {
+        case let .success(expiration):
+            expirationTextField.text = expiration
+            expirationErrorLabel.text = nil
+        case let .failure(error):
+            switch error {
+            case let .error(value, message):
+                expirationTextField.text = value
+                expirationErrorLabel.text = forceShowError ? message : nil
+            case let .instantError(value, message):
+                expirationTextField.text = value
+                expirationErrorLabel.text = message
+            }
         }
+        expirationErrorLabel.isHidden = expirationTextField.text == nil
     }
 }

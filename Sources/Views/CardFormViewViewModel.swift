@@ -9,8 +9,8 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
-    mutating func updateCardNumber(input: String?) -> ((formatted: String, brand: CardBrand)?, errorMessage: String?)?
-    mutating func updateExpiration(input: String?) -> (String?, errorMessage: String?)?
+    mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>>
+    mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>>
 
     func checkInputValid() -> Bool
 }
@@ -26,6 +26,8 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
     private var cardNumber: String? = nil
     private var monthYear: (String, String)? = nil
 
+    // MARK: - Lifecycle
+
     init(cardNumberFormatter: CardNumberFormatterType = CardNumberFormatter(),
         cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
         expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
@@ -38,48 +40,57 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
         self.expirationExtractor = expirationExtractor
     }
 
-    mutating func updateCardNumber(input: String?) -> ((formatted: String, brand: CardBrand)?, errorMessage: String?)? {
-        let tuple = self.cardNumberFormatter.string(from: input)
-        cardNumber = self.cardNumberFormatter.filter(from: tuple?.formatted)
+    // MARK: - CardFormViewViewModelType
 
-        var isValid = true
-        var errorMessage: String? = nil
-        if let cardNumber = cardNumber {
-            // リアルタイムチェックは14桁以上の時だけ行う
-            if cardNumber.count >= 14 {
-                isValid = self.cardNumberValidator.isValid(cardNumber: cardNumber)
+    mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>> {
+        let cardNumberInfo = self.cardNumberFormatter.string(from: input)
+        cardNumber = self.cardNumberFormatter.filter(from: cardNumberInfo?.formatted)
+
+        if input == nil || input!.isEmpty {
+            return .failure(.error(value: cardNumberInfo, message: "カード番号を入力してください"))
+        } else {
+            if let cardNumber = cardNumber {
+                if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
+                    return .failure(.error(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
+                } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+                    return .failure(.instantError(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
+                } else if cardNumberInfo?.brand == CardBrand.unknown {
+                    return .failure(.error(value: cardNumberInfo, message: "カードブランドが有効ではありません"))
+                }
+                // TODO: 利用可能ブランドかどうかの判定
             }
         }
-        if !isValid {
-            errorMessage = "正しいカード番号を入力してください"
-        }
-        return (tuple, errorMessage)
+        return .success(cardNumberInfo)
     }
 
-    mutating func updateExpiration(input: String?) -> (String?, errorMessage: String?)? {
-        var isValid = true
-        var errorMessage: String? = nil
+    mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>> {
+        let expiration = self.expirationFormatter.string(from: input)
 
-        do {
-            monthYear = try self.expirationExtractor.extract(expiration: input)
-        } catch (let error) {
-            // TODO: error handling
-            print(error)
-            errorMessage = "正しい有効期限を入力してください"
-        }
+        if input == nil || input!.isEmpty {
+            return .failure(.error(value: expiration, message: "有効期限を入力してください"))
+        } else {
+            do {
+                monthYear = try self.expirationExtractor.extract(expiration: input)
+            } catch {
+                return .failure(.error(value: expiration, message: "正しい有効期限を入力してください"))
+            }
 
-        if let (month, year) = monthYear {
-            isValid = self.expirationValidator.isValid(month: month, year: year)
+            if let (month, year) = monthYear {
+                if !self.expirationValidator.isValid(month: month, year: year) {
+                    return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
+                }
+            } else {
+                return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
+            }
         }
-        if !isValid {
-            errorMessage = "正しい有効期限を入力してください"
-        }
-        return (self.expirationFormatter.string(from: input), errorMessage)
+        return .success(expiration)
     }
 
     func checkInputValid() -> Bool {
         return checkCardNumberValid() && checkExpirationValid()
     }
+
+    // MARK: - Helpers
 
     func checkCardNumberValid() -> Bool {
         if let cardNumber = cardNumber {
