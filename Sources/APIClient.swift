@@ -19,7 +19,7 @@ import PassKit
         return "Basic \(base64Credential)"
     }()
     
-    private let decoder: JSONDecoder = .since1970StrategyDecoder
+    private let decoder: JSONDecoder = .shared
 
     @objc public init(publicKey: String) {
         self.publicKey = publicKey

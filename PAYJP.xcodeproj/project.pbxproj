@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		322BD1D6225C83CA00D83B5E /* JSONDecoderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */; };
+		322BD1D6225C83CA00D83B5E /* JSONDecoder+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */; };
 		615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 615AFF5E1C8C74A1003FB86F /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF6A1C8C74A1003FB86F /* PAYJPTests.swift */; };
@@ -92,7 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderFactory.swift; sourceTree = "<group>"; };
+		322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+PAYJP.swift"; sourceTree = "<group>"; };
 		615AFF5B1C8C74A1003FB86F /* PAYJP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PAYJP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AFF5E1C8C74A1003FB86F /* PAYJP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
 		615AFF601C8C74A1003FB86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,6 +232,7 @@
 		BE21781022E8061D0098128D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE21781922E82AA50098128D /* CallbackQueue.swift */,
 				BE21780E22E802A00098128D /* PAYJPSDK.swift */,
 			);
 			path = Core;
@@ -283,9 +284,8 @@
 			children = (
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				BE21785322E982E30098128D /* BaseRequest.swift */,
-				BE21781922E82AA50098128D /* CallbackQueue.swift */,
 				BE21781B22E82AFD0098128D /* Client.swift */,
-				322BD1D5225C83CA00D83B5E /* JSONDecoderFactory.swift */,
+				322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */,
 				BE21781F22E82B820098128D /* ParametersSerialization.swift */,
 				BE21781D22E82B350098128D /* Request.swift */,
 				BEECFBD422D71E4400049BFB /* UserAgent.swift */,
@@ -296,9 +296,9 @@
 		BE21784F22E9657F0098128D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */,
 				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
-				BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,7 +528,7 @@
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
 				BE21785222E982A60098128D /* CreateTokenRequest.swift in Sources */,
-				322BD1D6225C83CA00D83B5E /* JSONDecoderFactory.swift in Sources */,
+				322BD1D6225C83CA00D83B5E /* JSONDecoder+PAYJP.swift in Sources */,
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,

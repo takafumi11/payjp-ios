@@ -15,7 +15,7 @@ class CardFromTokenTests: XCTestCase {
     
     override func setUp() {
         let json = TestFixture.JSON(by: "token.json")
-        let decoder = JSONDecoder.since1970StrategyDecoder
+        let decoder = JSONDecoder.shared
         let token = try! Token.decodeJson(with: json, using: decoder)
         card = token.card
     }
