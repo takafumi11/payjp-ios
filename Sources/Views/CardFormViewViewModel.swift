@@ -12,7 +12,7 @@ protocol CardFormViewViewModelType {
     mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>>
     mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>>
 
-    func checkInputValid() -> Bool
+    func isValid() -> Bool
 }
 
 struct CardFormViewViewModel: CardFormViewViewModelType {
@@ -86,7 +86,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
         return .success(expiration)
     }
 
-    func checkInputValid() -> Bool {
+    func isValid() -> Bool {
         return checkCardNumberValid() && checkExpirationValid()
     }
 
