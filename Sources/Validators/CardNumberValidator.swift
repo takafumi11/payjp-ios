@@ -9,21 +9,29 @@
 import Foundation
 
 protocol CardNumberValidatorType {
-    /// カード番号のバリデーションチェックを行います
+    /// カード番号のバリデーションチェックを行う
+    ///
     /// - parameter cardNumber: カード番号
-    /// - returns: バリデーションOKであればtrue
+    /// - returns: true バリデーションOK
     func isValid(cardNumber: String) -> Bool
     
+    /// カード番号の長さをチェックする
+    ///
+    /// - Parameter cardNumber: カード番号
+    /// - Returns: true 長さが範囲内
     func isCardNumberLengthValid(cardNumber: String) -> Bool
     
+    /// カード番号のチェックディジットを行う
+    ///
+    /// - Parameter cardNumber: カード番号
+    /// - Returns: true チェックディジットOK
     func isLuhnValid(cardNumber: String) -> Bool
 }
 
 struct CardNumberValidator: CardNumberValidatorType {
 
     func isValid(cardNumber: String) -> Bool {
-        let digitSet = CharacterSet.decimalDigits
-        let filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
+        let filtered = cardNumber.numberfy()
         if cardNumber.count != filtered.count {
             return false
         }

@@ -18,8 +18,7 @@ protocol ExpirationFormatterType {
 struct ExpirationFormatter: ExpirationFormatterType {
     func string(from expiration: String?) -> String? {
         if let expiration = expiration, !expiration.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            var filtered = String(expiration.unicodeScalars.filter { digitSet.contains($0) })
+            var filtered = expiration.numberfy()
             
             if filtered.isEmpty { return nil }
             

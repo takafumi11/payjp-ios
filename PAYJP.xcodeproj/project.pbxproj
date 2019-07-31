@@ -59,6 +59,8 @@
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED3FEF6F22EFE71900FA73BF /* FormError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF6E22EFE71900FA73BF /* FormError.swift */; };
 		ED3FEF7122F0376500FA73BF /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7022F0376500FA73BF /* CardNumber.swift */; };
+		ED3FEF7322F133A700FA73BF /* String+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */; };
+		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
 		EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */; };
@@ -150,6 +152,8 @@
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
+		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
+		ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJPTests.swift"; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
 		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
@@ -213,6 +217,9 @@
 				615AFF601C8C74A1003FB86F /* Info.plist */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				BE6C230D20B4064200C4FE1E /* PAYJP.m */,
+				C68378251D9CD1330023B528 /* Token.swift */,
+				BEECFBD422D71E4400049BFB /* UserAgent.swift */,
+				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -232,6 +239,8 @@
 				BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */,
 				BE25B80322F15AAC00799201 /* StubPaymentToken.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
+				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
+				ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -543,6 +552,7 @@
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
+				ED3FEF7322F133A700FA73BF /* String+PAYJP.swift in Sources */,
 				BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
 				C68378261D9CD1330023B528 /* Token.swift in Sources */,
@@ -579,6 +589,7 @@
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,
 				BE21781422E806730098128D /* PAYJPSDKTests.m in Sources */,
 				EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */,
+				ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */,
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				C62B7CBA1DA2071100CAFD7B /* TokenTests.swift in Sources */,

@@ -44,7 +44,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
 
     mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>> {
         let cardNumberInfo = self.cardNumberFormatter.string(from: input)
-        cardNumber = self.cardNumberFormatter.filter(from: cardNumberInfo?.formatted)
+        cardNumber = cardNumberInfo?.formatted.numberfy()
 
         if input == nil || input!.isEmpty {
             return .failure(.error(value: cardNumberInfo, message: "カード番号を入力してください"))

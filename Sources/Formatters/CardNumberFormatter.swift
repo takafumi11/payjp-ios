@@ -13,8 +13,6 @@ protocol CardNumberFormatterType {
     /// - parameter cardNumber: カード番号
     /// - returns: フォーマットしたカード番号、カード種類
     func string(from cardNumber: String?) -> CardNumber?
-
-    func filter(from formatted: String?) -> String?
 }
 
 struct CardNumberFormatter: CardNumberFormatterType {
@@ -27,9 +25,8 @@ struct CardNumberFormatter: CardNumberFormatterType {
 
     func string(from cardNumber: String?) -> CardNumber? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            var filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
-
+            let filtered = cardNumber.numberfy()
+            
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
@@ -52,15 +49,6 @@ struct CardNumberFormatter: CardNumberFormatterType {
                     .joined()
                 return CardNumber(formatted: String(formattedNumber), brand: brand)
             }
-        }
-        return nil
-    }
-
-    func filter(from formatted: String?) -> String? {
-        if let formatted = formatted, !formatted.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            let filtered = String(formatted.unicodeScalars.filter { digitSet.contains($0) })
-            return filtered
         }
         return nil
     }

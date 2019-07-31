@@ -18,8 +18,7 @@ protocol CvcValidatorType {
 struct CvcValidator: CvcValidatorType {
 
     func isValid(cvc: String) -> Bool {
-        let digitSet = CharacterSet.decimalDigits
-        let filtered = String(cvc.unicodeScalars.filter { digitSet.contains($0) })
+        let filtered = cvc.numberfy()
 
         if cvc.count != filtered.count {
             return false
