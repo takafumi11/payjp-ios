@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+@import PAYJP;
+
+NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 
 @interface AppDelegate ()
 
@@ -16,7 +19,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    PAYJPSDK.publicKey = PAYJPPublicKey;
+    PAYJPSDK.locale = [NSLocale currentLocale];
+    
     return YES;
 }
 
