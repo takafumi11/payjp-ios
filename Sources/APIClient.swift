@@ -7,31 +7,11 @@ import Foundation
 import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
-//    /// Able to set the locale of the error messages. We provide messages in Japanese and English. Default is nil.
-//    @objc public var locale: Locale?
-//
-//    private let publicKey: String
-//    private let baseURL: String = "https://api.pay.jp/v1"
-//
-//    private lazy var authCredential: String = {
-//        let credentialData = "\(self.publicKey):".data(using: .utf8)!
-//        let base64Credential = credentialData.base64EncodedString()
-//        return "Basic \(base64Credential)"
-//    }()
-//
-//    private let decoder: JSONDecoder = .shared
-//
-//    @objc public init(publicKey: String) {
-//        self.publicKey = publicKey
-//    }
-    
-//    public typealias APIResponse = Result<Token, APIError>
-//
     
     let accountsService: AccountsServiceType
     let tokensService: TokenServiceType
     
-    public static let shared = APIClient()
+    @objc(sharedClient) public static let shared = APIClient()
     
     private init(accountsService: AccountsServiceType = AccountsService.shared,
                  tokensService: TokenServiceType = TokenService.shared) {
@@ -80,7 +60,15 @@ import PassKit
 // Objective-C API
 extension APIClient {
     @objc public func createTokenWith(_ token: PKPaymentToken,
-                                      completion: @escaping (NSError?, Token?) -> ()) {
+                                      completionHandler: @escaping (Token?, NSError?) -> ()) {
+        tokensService.createTokenForApplePay(paymentToken: token) { result in
+            switch result {
+            case .success(let result):
+                completionHandler(result, nil)
+            case .failure(let error):
+                completionHandler(nil, error.nsErrorValue())
+            }
+        }
     }
 
     @objc public func createTokenWith(_ cardNumber: String,
@@ -88,10 +76,26 @@ extension APIClient {
                                       expirationMonth: String,
                                       expirationYear: String,
                                       name: String?,
-                                      completion: @escaping (NSError?, Token?) -> ()) {
+                                      completionHandler: @escaping (Token?, NSError?) -> ()) {
+        tokensService.createToken(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name) { result in
+            switch result {
+            case .success(let result):
+                completionHandler(result, nil)
+            case .failure(let error):
+                completionHandler(nil, error.nsErrorValue())
+            }
+        }
     }
 
     @objc public func getTokenWith(_ tokenId: String,
-                                   completionHandler: @escaping (NSError?, Token?) -> ()) {
+                                   completionHandler: @escaping (Token?, NSError?) -> ()) {
+        tokensService.getToken(with: tokenId) { result in
+            switch result {
+            case .success(let result):
+                completionHandler(result, nil)
+            case .failure(let error):
+                completionHandler(nil, error.nsErrorValue())
+            }
+        }
     }
 }

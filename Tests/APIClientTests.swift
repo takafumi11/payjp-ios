@@ -1,5 +1,5 @@
 //
-//  PAYJPTests.swift
+//  APIClientTests.swift
 //  PAYJPTests
 //
 
@@ -8,7 +8,7 @@ import PassKit
 import OHHTTPStubs
 @testable import PAYJP
 
-class PAYJPTests: XCTestCase {
+class APIClientTests: XCTestCase {
     override func setUp() {
         super.setUp()
         stub(condition: { (req) -> Bool in
@@ -124,13 +124,5 @@ class PAYJPTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    class StubPaymentToken: PKPaymentToken {
-        override var paymentData: Data {
-            let data = TestFixture.JSON(by: "paymentData.json")
-            let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            return try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-        }
     }
 }
