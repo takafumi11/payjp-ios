@@ -9,6 +9,6 @@
 import Foundation
 
 struct CardNumber {
-    public let formatted: String
-    public let brand: CardBrand
+    let formatted: String
+    let brand: CardBrand
 }
