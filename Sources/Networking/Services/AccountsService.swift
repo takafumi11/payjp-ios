@@ -12,11 +12,11 @@ protocol AccountsServiceType {
     func getAcceptedBrands(tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) -> URLSessionDataTask?
 }
 
-struct AccountService: AccountsServiceType {
+struct AccountsService: AccountsServiceType {
     
     private let client: ClientType
     
-    static let shared = AccountService()
+    static let shared = AccountsService()
     
     init(client: ClientType = Client.shared) {
         self.client = client

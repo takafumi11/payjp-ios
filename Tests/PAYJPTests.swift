@@ -25,7 +25,8 @@ class PAYJPTests: XCTestCase {
     }
     
     func testCreateToken_withPKPaymentToken() {
-        let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
         
         let expectation = self.expectation(description: self.description)
         
@@ -65,7 +66,8 @@ class PAYJPTests: XCTestCase {
             OHHTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
             }
         
-        let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
 
         let expectation = self.expectation(description: self.description)
         
@@ -93,7 +95,8 @@ class PAYJPTests: XCTestCase {
     }
 
     func testGetToken() {
-        let apiClient = APIClient(publicKey: "pk_test_d5b6d618c26b898d5ed4253c")
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
         
         let expectation = self.expectation(description: self.description)
         
