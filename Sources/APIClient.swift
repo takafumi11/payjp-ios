@@ -58,7 +58,7 @@ import PassKit
 // Objective-C API
 extension APIClient {
     @objc public func createTokenWith(_ token: PKPaymentToken,
-                                      completionHandler: @escaping (Token?, NSError?) -> ()) {
+                                      completionHandler: @escaping (Token?, NSError?) -> Void) {
         tokensService.createTokenForApplePay(paymentToken: token) { result in
             switch result {
             case .success(let result):
@@ -74,7 +74,7 @@ extension APIClient {
                                       expirationMonth: String,
                                       expirationYear: String,
                                       name: String?,
-                                      completionHandler: @escaping (Token?, NSError?) -> ()) {
+                                      completionHandler: @escaping (Token?, NSError?) -> Void) {
         tokensService.createToken(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name) { result in
             switch result {
             case .success(let result):
@@ -86,7 +86,7 @@ extension APIClient {
     }
 
     @objc public func getTokenWith(_ tokenId: String,
-                                   completionHandler: @escaping (Token?, NSError?) -> ()) {
+                                   completionHandler: @escaping (Token?, NSError?) -> Void) {
         tokensService.getToken(with: tokenId) { result in
             switch result {
             case .success(let result):
