@@ -8,14 +8,12 @@ import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
     
-    let accountsService: AccountsServiceType
     let tokensService: TokenServiceType
     
     @objc(sharedClient) public static let shared = APIClient()
     
     private init(accountsService: AccountsServiceType = AccountsService.shared,
                  tokensService: TokenServiceType = TokenService.shared) {
-        self.accountsService = accountsService
         self.tokensService = tokensService
     }
     
