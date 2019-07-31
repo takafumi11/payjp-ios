@@ -10,8 +10,13 @@ import Foundation
 import PassKit
 
 protocol TokenServiceType {
+    @discardableResult
     func createToken(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
+    
+    @discardableResult
     func createTokenForApplePay(paymentToken: PKPaymentToken, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
+    
+    @discardableResult
     func getToken(with tokenId: String, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
 }
 
