@@ -15,6 +15,7 @@
 		BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */; };
 		BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */; };
 		BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */; };
+		BE196D4A22F123F100A042BE /* GetAcceptedBrandsResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */; };
 		BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */; };
 		BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DAA7B22E0536800D15A84 /* ExpirationExtractorTests.swift */; };
 		BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21780E22E802A00098128D /* PAYJPSDK.swift */; };
@@ -102,6 +103,7 @@
 		BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidator.swift; sourceTree = "<group>"; };
 		BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidatorTests.swift; sourceTree = "<group>"; };
 		BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewViewModel.swift; sourceTree = "<group>"; };
+		BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsResponseTests.swift; sourceTree = "<group>"; };
 		BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtractor.swift; sourceTree = "<group>"; };
 		BE1DAA7B22E0536800D15A84 /* ExpirationExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationExtractorTests.swift; sourceTree = "<group>"; };
 		BE21780E22E802A00098128D /* PAYJPSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYJPSDK.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
 				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
+				BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE196D4A22F123F100A042BE /* GetAcceptedBrandsResponseTests.swift in Sources */,
 				EDA3EE8C22E19D7800D9A6C9 /* CardNumberValidatorTests.swift in Sources */,
 				615AFF6B1C8C74A1003FB86F /* PAYJPTests.swift in Sources */,
 				BE21785F22E99F260098128D /* GetTokenRequestTests.swift in Sources */,
