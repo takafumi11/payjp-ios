@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ClientType {
-    func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, Error>) -> Void)?) -> URLSessionDataTask?
+    func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, APIError>) -> Void)?) -> URLSessionDataTask?
 }
 
 private var taskRequestKey = 0
@@ -31,23 +31,23 @@ public class Client: ClientType {
     }
     
     @discardableResult
-    func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, Error>) -> Void)?) -> URLSessionDataTask? {
+    func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, APIError>) -> Void)?) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
             let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
                 guard let self = self else { return }
                 
                 if error != nil && data == nil && response == nil {
-                    completion?(Result.failure(APIError.systemError(error!)))
+                    completion?(Result.failure(.systemError(error!)))
                 }
                 
                 guard let response = response as? HTTPURLResponse else {
-                    completion?(Result.failure(APIError.invalidResponse(nil)))
+                    completion?(Result.failure(.invalidResponse(nil)))
                     return
                 }
                 
                 guard let data = data else {
-                    completion?(Result.failure(APIError.invalidResponse(response)))
+                    completion?(Result.failure(.invalidResponse(response)))
                     return
                 }
             
@@ -57,20 +57,20 @@ public class Client: ClientType {
                             let result = try request.response(data: data, response: response)
                             completion?(Result.success(result))
                         } catch {
-                            completion?(Result.failure(APIError.invalidJSON(data, error)))
+                            completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else {
-                        completion?(Result.failure(APIError.invalidResponse(response)))
+                        completion?(Result.failure(.invalidResponse(response)))
                     }
                     return
                 }
                 
                 do {
                     let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
-                    completion?(Result.failure(error))
+                    completion?(Result.failure(.serviceError(error)))
                     return
                 } catch {
-                    completion?(Result.failure(APIError.invalidJSON(data, error)))
+                    completion?(Result.failure(.invalidJSON(data, error)))
                     return
                 }
             }
@@ -78,7 +78,7 @@ public class Client: ClientType {
             self.callbackQueue.execute { dataTask.resume() }
             return dataTask
         } catch {
-            completion?(Result.failure(error))
+            completion?(Result.failure(.systemError(error)))
             return nil
         }
     }

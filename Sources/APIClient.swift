@@ -41,8 +41,10 @@ import PassKit
     
     /// Create PAY.JP Token
     /// - parameter token: ApplePay Token
+    @nonobjc
     public func createToken(with token: PKPaymentToken,
-                            completion: @escaping (Result<Token, APIError>) -> ()) {
+                            completion: @escaping (Result<Token, APIError>) -> Void) {
+        tokensService.createTokenForApplePay(paymentToken: token, completion: completion)
     }
 
     /// Create PAY.JP Token
@@ -51,18 +53,27 @@ import PassKit
     /// - parameter expirationMonth:    Credit card expiration month `01`
     /// - parameter expirationYear:     Credit card expiration year `2020`
     /// - parameter name:               Credit card holder name `TARO YAMADA`
+    @nonobjc
     public func createToken(with cardNumber: String,
                             cvc: String,
                             expirationMonth: String,
                             expirationYear: String,
                             name: String? = nil,
-                            completion: @escaping (Result<Token, APIError>) -> ()) {
+                            completion: @escaping (Result<Token, APIError>) -> Void) {
+        tokensService.createToken(cardNumber: cardNumber,
+                                  cvc: cvc,
+                                  expirationMonth: expirationMonth,
+                                  expirationYear: expirationYear,
+                                  name: name,
+                                  completion: completion)
     }
 
     /// GET PAY.JP Token
     /// - parameter tokenId:    identifier of the Token
+    @nonobjc
     public func getToken(with tokenId: String,
-                         completion: @escaping (Result<Token, APIError>) -> ()) {
+                         completion: @escaping (Result<Token, APIError>) -> Void) {
+        tokensService.getToken(with: tokenId, completion: completion)
     }
 }
 

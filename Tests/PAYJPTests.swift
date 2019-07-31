@@ -53,12 +53,20 @@ class PAYJPTests: XCTestCase {
         stub(condition: { (req) -> Bool in
             // check request
             if let body = req.ohhttpStubs_httpBody {
-                let bodyString = String.init(data: body, encoding: String.Encoding.utf8)
-                XCTAssertEqual("card[number]=4242424242424242"
-                    + "&card[cvc]=123"
-                    + "&card[exp_month]=02"
-                    + "&card[exp_year]=2020"
-                    + "&card[name]=TARO YAMADA", bodyString)
+                let bodyString = String(data: body, encoding: String.Encoding.utf8)
+                let body = bodyString?.split(separator: "&").map(String.init).reduce([String: String]()) { original, string -> [String: String] in
+                    var result = original
+                    let pair = string.split(separator: "=").map(String.init)
+                    result[pair[0]] = pair[1]
+                    print(string)
+                    return result
+                }
+                
+                XCTAssertEqual(body?["card[number]"], "4242424242424242")
+                XCTAssertEqual(body?["card[cvc]"], "123")
+                XCTAssertEqual(body?["card[exp_month]"], "02")
+                XCTAssertEqual(body?["card[exp_year]"], "2020")
+                XCTAssertEqual(body?["card[name]"], "TARO YAMADA")
                 return true
             }
             return false
