@@ -12,8 +12,6 @@ protocol ClientType {
     func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, APIError>) -> Void)?) -> URLSessionDataTask?
 }
 
-private var taskRequestKey = 0
-
 public class Client: ClientType {
     
     static let shared = Client()
@@ -81,9 +79,5 @@ public class Client: ClientType {
             completion?(Result.failure(.systemError(error)))
             return nil
         }
-    }
-    
-    private func setRequest<Request: PAYJP.Request>(_ request: Request, forTask task: URLSessionDataTask) {
-        objc_setAssociatedObject(task, &taskRequestKey, request, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
