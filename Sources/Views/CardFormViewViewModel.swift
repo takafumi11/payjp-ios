@@ -72,7 +72,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
             do {
                 monthYear = try self.expirationExtractor.extract(expiration: input)
             } catch {
-                return .failure(.error(value: expiration, message: "正しい有効期限を入力してください"))
+                return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
             }
 
             if let (month, year) = monthYear {
@@ -80,7 +80,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
                     return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
                 }
             } else {
-                return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
+                return .failure(.error(value: expiration, message: "正しい有効期限を入力してください"))
             }
         }
         return .success(expiration)
