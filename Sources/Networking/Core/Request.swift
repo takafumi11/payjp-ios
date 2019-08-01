@@ -40,7 +40,13 @@ extension Request {
         }
         
         if let queryParameters = queryParameters, !queryParameters.isEmpty {
-            components.percentEncodedQuery = ParametersSerialization.string(from: queryParameters)
+            var queryItems = [URLQueryItem]()
+            
+            queryParameters.forEach { key, value in
+                queryItems.append(URLQueryItem(name: key, value: value as? String))
+            }
+            
+            components.queryItems = queryItems
         }
         
         let method = httpMethod.uppercased()
