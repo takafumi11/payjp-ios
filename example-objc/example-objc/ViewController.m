@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.payjpClient = [PAYAPIClient sharedClient];
+    self.payjpClient = PAYAPIClient.sharedClient;
 }
 
 #pragma MARK: - UITableView
