@@ -42,7 +42,7 @@ struct TokenService: TokenServiceType {
                 return nil
         }
         
-        let request = GetTokenRequest(tokenId: decodedToken)
+        let request = CreateTokenForApplePayRequest(paymentToken: decodedToken)
         return client.request(with: request, completion: completion)
     }
     
