@@ -62,11 +62,11 @@ class APIClientTests: XCTestCase {
                     return result
                 }
                 
-                XCTAssertEqual(body?["card[number]"], "4242424242424242")
-                XCTAssertEqual(body?["card[cvc]"], "123")
-                XCTAssertEqual(body?["card[exp_month]"], "02")
-                XCTAssertEqual(body?["card[exp_year]"], "2020")
-                XCTAssertEqual(body?["card[name]"], "TARO YAMADA")
+                XCTAssertEqual(body?["card%5Bnumber%5D"], "4242424242424242")
+                XCTAssertEqual(body?["card%5Bcvc%5D"], "123")
+                XCTAssertEqual(body?["card%5Bexp_month%5D"], "02")
+                XCTAssertEqual(body?["card%5Bexp_year%5D"], "2020")
+                XCTAssertEqual(body?["card%5Bname%5D"], "TARO%20YAMADA")
                 return true
             }
             return false

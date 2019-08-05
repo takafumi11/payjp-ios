@@ -16,9 +16,26 @@ struct ParametersSerialization {
             }
             
             let valueString = (value as? String) ?? "\(value)"
-            return "\(key)=\(valueString)"
+            return "\(escape(key))=\(escape(valueString))"
         }
         
         return pairs.joined(separator: "&")
     }
+    
+    private static func escape(_ string: String) -> String {
+        return string.addingPercentEncoding(withAllowedCharacters: .payUrlQueryAllowed) ?? string
+    }
+}
+
+extension CharacterSet {
+    /// RFC 3986 Section 2.2, Section 3.4
+    /// reserved    = gen-delims / sub-delims
+    /// gen-delims  = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+    /// sub-delims  = "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="
+    static let payUrlQueryAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // Remove "?" and "/" due to RFC3986, Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+        let encodableDelimiters = CharacterSet(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+        return CharacterSet.urlQueryAllowed.subtracting(encodableDelimiters)
+    }()
 }
