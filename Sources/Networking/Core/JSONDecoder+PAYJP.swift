@@ -1,5 +1,5 @@
 //
-//  JSONDecoderFactory.swift
+//  JSONDecoder+PAYJP.swift
 //  PAYJP
 //
 //  Created by Tatsuya Kitagawa on 2019/04/09.
@@ -9,8 +9,7 @@
 import Foundation
 
 extension JSONDecoder {
-    
-    static var since1970StrategyDecoder: JSONDecoder {
+    static var shared: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
         return decoder

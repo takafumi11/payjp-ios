@@ -20,6 +20,18 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
     
     // MARK: - PAYJPSDKType
     
-    public static var publicKey: String?
+    public static var publicKey: String? {
+        didSet {
+            guard let publicKey = publicKey else {
+                authToken = ""
+                return
+            }
+            let data = "\(publicKey):".data(using: .utf8)!
+            let base64String = data.base64EncodedString()
+            authToken = "Basic \(base64String)"
+        }
+    }
     public static var locale: Locale?
+    
+    static var authToken: String = ""
 }

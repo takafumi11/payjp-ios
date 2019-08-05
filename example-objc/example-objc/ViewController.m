@@ -10,8 +10,6 @@
 
 @import PAYJP;
 
-NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-
 @interface ViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *fieldCardNumber;
@@ -29,10 +27,7 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.payjpClient = [[PAYAPIClient alloc] initWithPublicKey:PAYJPPublicKey];
-    
-    // You can set the locale of error message like this.
-    self.payjpClient.locale = [NSLocale currentLocale];
+    self.payjpClient = PAYAPIClient.sharedClient;
 }
 
 #pragma MARK: - UITableView
@@ -63,7 +58,7 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
                        expirationYear:year
                                  name:name
                     completionHandler:
-     ^(NSError *error, PAYToken *token) {
+     ^(PAYToken *token, NSError *error) {
          APIError *apiError = (APIError *)error;
          if (apiError) {
              id<PAYErrorResponseType> errorResponse = apiError.payError;
@@ -92,7 +87,7 @@ NSString * const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
     NSLog(@"tokenId=%@", tokenId);
     __weak typeof(self) wself = self;
     [self.payjpClient getTokenWith:tokenId completionHandler:
-     ^(NSError *error, PAYToken *token) {
+     ^(PAYToken *token, NSError *error) {
          if (!token) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  wself.labelTokenId.text = nil;

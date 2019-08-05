@@ -26,7 +26,7 @@ public protocol PAYErrorResponseType: NSObjectProtocol {
 }
 
 @objcMembers @objc
-public final class PAYErrorResponse: NSObject, PAYErrorResponseType, Decodable {
+public final class PAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedError, Decodable {
     
     // MARK: - PAYErrorResponseType properties
     
@@ -39,4 +39,6 @@ public final class PAYErrorResponse: NSObject, PAYErrorResponseType, Decodable {
     public override var description: String {
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
     }
+    
+    public var errorDescription: String? { return description }
 }
