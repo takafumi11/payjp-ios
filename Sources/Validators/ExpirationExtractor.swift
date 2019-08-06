@@ -26,27 +26,22 @@ struct ExpirationExtractor: ExpirationExtractorType {
 
             switch monthYear.count {
             case 1:
-                let month = String(monthYear[0].unicodeScalars.prefix(2))
+                let month = monthYear[0]
 
                 if month.count < 2 { return nil }
 
-                let intMonth = Int(month)
+                guard let intMonth = Int(month) else { return nil }
 
-                if intMonth == nil { return nil }
-                if !(1...12 ~= intMonth ?? 0) { throw ExpirationExtractorError.monthOverflow }
+                if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
             case 2:
                 let month = monthYear[0]
-                let intMonth = Int(month)
-
-                if intMonth == nil { return nil }
-                if !(1...12 ~= intMonth ?? 0) { throw ExpirationExtractorError.monthOverflow }
-
                 let year = String(monthYear[1].unicodeScalars.prefix(2))
 
                 if year.count < 2 { return nil }
 
-                let intYear = Int(year)
-                if intYear == nil { return nil }
+                guard let intMonth = Int(month), Int(year) != nil else { return nil }
+
+                if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
 
                 return (month, "20" + year)
             default:

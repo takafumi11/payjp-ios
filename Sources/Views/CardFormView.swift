@@ -101,7 +101,6 @@ extension CardFormView: UITextFieldDelegate {
             switch textField {
             case cardNumberTextField:
                 updateCardNumberInput(input: newText)
-                break
             case expirationTextField:
                 updateExpirationInput(input: newText)
             default:
@@ -121,12 +120,10 @@ extension CardFormView: UITextFieldDelegate {
         let result = viewModel.updateCardNumber(input: input)
         switch result {
         case let .success(cardNumber):
-            if let cardNumber = cardNumber {
-                cardNumberTextField.text = cardNumber.formatted
-                cardNumberErrorLabel.text = nil
-                // TODO: show brand logo
-                print(cardNumber.brand)
-            }
+            cardNumberTextField.text = cardNumber?.formatted
+            cardNumberErrorLabel.text = nil
+            // TODO: show brand logo
+            
         case let .failure(error):
             switch error {
             case let .error(value, message):

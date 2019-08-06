@@ -28,7 +28,7 @@ struct ExpirationFormatter: ExpirationFormatterType {
             if filtered.count == 1 {
                 if let month = Int(filtered) {
                     if month > 1 {
-                        filtered.insert("0", at: filtered.index(filtered.startIndex, offsetBy: 0))
+                        filtered = "0" + filtered
                     }
                 }
             } else if filtered.count >= 3 {

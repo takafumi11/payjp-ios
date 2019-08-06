@@ -43,45 +43,41 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - CardFormViewViewModelType
 
     mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>> {
-        let cardNumberInfo = self.cardNumberFormatter.string(from: input)
-        cardNumber = cardNumberInfo?.formatted.numberfy()
+        guard let cardNumberInfo = self.cardNumberFormatter.string(from: input), input != nil, !input!.isEmpty else {
+            return .failure(.error(value: nil, message: "カード番号を入力してください"))
+        }
+        cardNumber = cardNumberInfo.formatted.numberfy()
 
-        if input == nil || input!.isEmpty {
-            return .failure(.error(value: cardNumberInfo, message: "カード番号を入力してください"))
-        } else {
-            if let cardNumber = cardNumber {
-                if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
-                    return .failure(.error(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
-                } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
-                    return .failure(.instantError(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
-                } else if cardNumberInfo?.brand == CardBrand.unknown {
-                    return .failure(.error(value: cardNumberInfo, message: "カードブランドが有効ではありません"))
-                }
-                // TODO: 利用可能ブランドかどうかの判定
+        if let cardNumber = cardNumber {
+            if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
+                return .failure(.error(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
+            } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+                return .failure(.instantError(value: cardNumberInfo, message: "正しいカード番号を入力してください"))
+            } else if cardNumberInfo.brand == CardBrand.unknown {
+                return .failure(.error(value: cardNumberInfo, message: "カードブランドが有効ではありません"))
             }
+            // TODO: 利用可能ブランドかどうかの判定
         }
         return .success(cardNumberInfo)
     }
 
     mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>> {
-        let expiration = self.expirationFormatter.string(from: input)
+        guard let expiration = self.expirationFormatter.string(from: input), input != nil, !input!.isEmpty else {
+            return .failure(.error(value: nil, message: "有効期限を入力してください"))
+        }
 
-        if input == nil || input!.isEmpty {
-            return .failure(.error(value: expiration, message: "有効期限を入力してください"))
-        } else {
-            do {
-                monthYear = try self.expirationExtractor.extract(expiration: input)
-            } catch {
+        do {
+            monthYear = try self.expirationExtractor.extract(expiration: expiration)
+        } catch {
+            return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
+        }
+
+        if let (month, year) = monthYear {
+            if !self.expirationValidator.isValid(month: month, year: year) {
                 return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
             }
-
-            if let (month, year) = monthYear {
-                if !self.expirationValidator.isValid(month: month, year: year) {
-                    return .failure(.instantError(value: expiration, message: "正しい有効期限を入力してください"))
-                }
-            } else {
-                return .failure(.error(value: expiration, message: "正しい有効期限を入力してください"))
-            }
+        } else {
+            return .failure(.error(value: expiration, message: "正しい有効期限を入力してください"))
         }
         return .success(expiration)
     }
