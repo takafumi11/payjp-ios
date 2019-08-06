@@ -12,7 +12,7 @@ import UIKit
 public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
-            holderContainer.isHidden = !isHolderRequired
+//            holderContainer.isHidden = !isHolderRequired
         }
     }
 
@@ -70,6 +70,8 @@ public class CardFormView: UIView {
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
+        cvcTextField.delegate = self
+        cardHolderTextField.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -79,12 +81,18 @@ public class CardFormView: UIView {
     // MARK: - Out bound actions
 
     public var isValid: Bool {
-        // TODO: ask the view model
-        return false
+        return viewModel.isValid()
     }
 
     public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
+    }
+
+    public func validateCardForm() {
+        updateCardNumberInput(input: cardHolderTextField.text, forceShowError: true)
+        updateExpirationInput(input: expirationTextField.text, forceShowError: true)
+        updateCvcInput(input: cvcTextField.text, forceShowError: true)
+        updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
     }
 }
 
@@ -103,6 +111,10 @@ extension CardFormView: UITextFieldDelegate {
                 updateCardNumberInput(input: newText)
             case expirationTextField:
                 updateExpirationInput(input: newText)
+            case cvcTextField:
+                updateCvcInput(input: newText)
+            case cardHolderTextField:
+                updateCardHolderInput(input: newText)
             default:
                 break
             }
@@ -159,5 +171,54 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         expirationErrorLabel.isHidden = expirationTextField.text == nil
+    }
+
+    /// CVCの入力フィールドを更新する
+    ///
+    /// - Parameters:
+    ///   - input: CVC
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateCvcInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateCvc(input: input)
+        switch result {
+        case let .success(cvc):
+            cvcTextField.text = cvc
+            cvcErrorLabel.text = nil
+        case let .failure(error):
+            switch error {
+            case let .error(value, message):
+                cvcTextField.text = value
+                cvcErrorLabel.text = forceShowError ? message : nil
+            case let .instantError(value, message):
+                cvcTextField.text = value
+                cvcErrorLabel.text = message
+            }
+        }
+        cvcErrorLabel.isHidden = cvcTextField.text == nil
+    }
+
+
+    /// カード名義の入力フィールドを更新する
+    ///
+    /// - Parameters:
+    ///   - input: カード名義
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateCardHolder(input: input)
+        switch result {
+        case let .success(holderName):
+            cardHolderTextField.text = holderName
+            cardHolderErrorLabel.text = nil
+        case let .failure(error):
+            switch error {
+            case let .error(value, message):
+                cardHolderTextField.text = value
+                cardHolderErrorLabel.text = forceShowError ? message : nil
+            case let .instantError(value, message):
+                cardHolderTextField.text = value
+                cardHolderErrorLabel.text = message
+            }
+        }
+        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
 }
