@@ -13,75 +13,75 @@ class CardNumberFormatterTests: XCTestCase {
 
     let formatter = CardNumberFormatter()
 
-    private func testCardNumberFormat(cases: [(String, String)], brand: CardBrand) {
-        for (input, formatted) in cases {
-            let expected = (formatted, brand)
+    private func testCardNumberFormat(cases: [(String, CardNumber)]) {
+        for (input, expected) in cases {
             if let output = formatter.string(from: input) {
-                XCTAssert(output == expected)
+                XCTAssertEqual(output.formatted, expected.formatted)
+                XCTAssertEqual(output.brand, expected.brand)
             }
         }
     }
 
     func testVisaNumberFormat() {
         let cases = [
-            ("42", "42"),
-            ("4242111", "4242 111"),
-            ("424211112222", "4242 1111 2222"),
-            ("4242111122223333", "4242 1111 2222 3333"),
-            ("42421111222233334444", "4242 1111 2222 3333")
+            ("42", CardNumber(formatted: "42", brand: .visa)),
+            ("4242111", CardNumber(formatted: "4242 111", brand: .visa)),
+            ("424211112222", CardNumber(formatted: "4242 1111 2222", brand: .visa)),
+            ("4242111122223333", CardNumber(formatted: "4242 1111 2222 3333", brand: .visa)),
+            ("42421111222233334444", CardNumber(formatted: "4242 1111 2222 3333", brand: .visa))
         ]
-        testCardNumberFormat(cases: cases, brand: .visa)
+        testCardNumberFormat(cases: cases)
     }
 
     func testMastercardNumberFormat() {
         let cases = [
-            ("51", "51"),
-            ("5211222", "5211 222"),
-            ("222122223333", "2221 2222 3333"),
-            ("2533111122223333", "2533 1111 2222 3333"),
-            ("25331111222233334444", "2533 1111 2222 3333")
+            ("51", CardNumber(formatted: "51", brand: .mastercard)),
+            ("5211222", CardNumber(formatted: "5211 222", brand: .mastercard)),
+            ("222122223333", CardNumber(formatted: "2221 2222 3333", brand: .mastercard)),
+            ("2533111122223333", CardNumber(formatted: "2533 1111 2222 3333", brand: .mastercard)),
+            ("25331111222233334444", CardNumber(formatted: "2533 1111 2222 3333", brand: .mastercard))
         ]
-        testCardNumberFormat(cases: cases, brand: .mastercard)
+        testCardNumberFormat(cases: cases)
     }
 
     func testJCBNumberFormat() {
         let cases = [
-            ("35", "35"),
-            ("3511222", "3511 222"),
-            ("351122223333", "3511 2222 3333"),
-            ("3511222233334444", "3511 2222 3333 4444"),
-            ("35112222333344445555", "3511 2222 3333 4444")
+            ("35", CardNumber(formatted: "35", brand: .jcb)),
+            ("3511222", CardNumber(formatted: "3511 222", brand: .jcb)),
+            ("351122223333", CardNumber(formatted: "3511 2222 3333", brand: .jcb)),
+            ("3511222233334444", CardNumber(formatted: "3511 2222 3333 4444", brand: .jcb)),
+            ("35112222333344445555", CardNumber(formatted: "3511 2222 3333 4444", brand: .jcb))
         ]
-        testCardNumberFormat(cases: cases, brand: .jcb)
+        testCardNumberFormat(cases: cases)
     }
 
     func testAmexNumberFormat() {
         let cases = [
-            ("34", "34"),
-            ("341122", "3411 22"),
-            ("371122223333", "3711 222233 33"),
-            ("371122223333444", "3711 222233 33444"),
-            ("37112222333344445555", "3711 222233 33444")
+            ("34", CardNumber(formatted: "34", brand: .americanExpress)),
+            ("341122", CardNumber(formatted: "3411 22", brand: .americanExpress)),
+            ("371122223333", CardNumber(formatted: "3711 222233 33", brand: .americanExpress)),
+            ("371122223333444", CardNumber(formatted: "3711 222233 33444", brand: .americanExpress)),
+            ("37112222333344445555", CardNumber(formatted: "3711 222233 334444", brand: .americanExpress))
         ]
-        testCardNumberFormat(cases: cases, brand: .americanExpress)
+        testCardNumberFormat(cases: cases)
     }
 
     func testDinnersNumberFormat() {
         let cases = [
-            ("30", "30"),
-            ("361122", "3611 22"),
-            ("381122223333", "3811 222233 33"),
-            ("39112222333344", "3911 222233 3344"),
-            ("39112222333344445555", "3911 222233 3344")
+            ("30", CardNumber(formatted: "30", brand: .dinersClub)),
+            ("361122", CardNumber(formatted: "3611 22", brand: .dinersClub)),
+            ("381122223333", CardNumber(formatted: "3811 222233 33", brand: .dinersClub)),
+            ("39112222333344", CardNumber(formatted: "3911 222233 3344", brand: .dinersClub)),
+            ("39112222333344445555", CardNumber(formatted: "3911 222233 334444", brand: .dinersClub))
         ]
-        testCardNumberFormat(cases: cases, brand: .dinersClub)
+        testCardNumberFormat(cases: cases)
     }
 
     func testUnknownNumberFormat() {
         let cases = [
-            ("9999999999999999", "9999 9999 9999 9999"),
-            ("99999999999999999999999999999999", "9999 9999 9999 9999")
+            ("9999999999999999", CardNumber(formatted: "9999 9999 9999 9999", brand: .unknown)),
+            ("99999999999999999999999999999999", CardNumber(formatted: "9999 9999 9999 9999", brand: .unknown))
         ]
-        testCardNumberFormat(cases: cases, brand: .unknown)
+        testCardNumberFormat(cases: cases)
     }
 }

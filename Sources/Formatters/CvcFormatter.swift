@@ -19,8 +19,7 @@ struct CvcFormatter: CvcFormatterType {
 
     func string(from cvc: String?) -> String? {
         if let cvc = cvc, !cvc.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            var filtered = String(cvc.unicodeScalars.filter { digitSet.contains($0) })
+            var filtered = cvc.numberfy()
 
             if filtered.isEmpty { return nil }
 

@@ -12,7 +12,7 @@ protocol CardNumberFormatterType {
     /// カード番号をカード種類別でフォーマットします
     /// - parameter cardNumber: カード番号
     /// - returns: フォーマットしたカード番号、カード種類
-    func string(from cardNumber: String?) -> (String, CardBrand)?
+    func string(from cardNumber: String?) -> CardNumber?
 }
 
 struct CardNumberFormatter: CardNumberFormatterType {
@@ -23,15 +23,14 @@ struct CardNumberFormatter: CardNumberFormatterType {
         self.transformer = transformer
     }
 
-    func string(from cardNumber: String?) -> (String, CardBrand)? {
+    func string(from cardNumber: String?) -> CardNumber? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            var filtered = String(cardNumber.unicodeScalars.filter { digitSet.contains($0) })
-
+            let filtered = cardNumber.numberfy()
+            
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            let trimmed = String(filtered.unicodeScalars.prefix(brand.maxNumberLength))
+            let trimmed = String(filtered.unicodeScalars.prefix(16))
             switch brand {
             case .americanExpress, .dinersClub:
                 let formattedNumber = trimmed
@@ -40,7 +39,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         ((offset == 4 || offset == 10) && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return (String(formattedNumber), brand)
+                return CardNumber(formatted: String(formattedNumber), brand: brand)
             default:
                 let formattedNumber = trimmed
                     .enumerated()
@@ -48,7 +47,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
                         (offset != 0 && offset % 4 == 0 && offset != trimmed.count) ? [" ", element] : [element]
                     }
                     .joined()
-                return (String(formattedNumber), brand)
+                return CardNumber(formatted: String(formattedNumber), brand: brand)
             }
         }
         return nil

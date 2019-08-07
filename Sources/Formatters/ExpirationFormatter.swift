@@ -18,17 +18,23 @@ protocol ExpirationFormatterType {
 struct ExpirationFormatter: ExpirationFormatterType {
     func string(from expiration: String?) -> String? {
         if let expiration = expiration, !expiration.isEmpty {
-            let digitSet = CharacterSet.decimalDigits
-            var filtered = String(expiration.unicodeScalars.filter { digitSet.contains($0) })
-            
+            var filtered = expiration.numberfy()
+
             if filtered.isEmpty { return nil }
-            
+
             filtered = String(filtered.unicodeScalars.prefix(4))
-            
-            if filtered.count >= 3 {
+
+            // 0埋め
+            if filtered.count == 1 {
+                if let month = Int(filtered) {
+                    if month > 1 {
+                        filtered = "0" + filtered
+                    }
+                }
+            } else if filtered.count >= 3 {
                 filtered.insert("/", at: filtered.index(filtered.startIndex, offsetBy: 2))
             }
-            
+
             return filtered
         }
         return nil

@@ -17,28 +17,38 @@ protocol ExpirationExtractorType {
 }
 
 struct ExpirationExtractor: ExpirationExtractorType {
-    
+
     static let shared = ExpirationExtractor()
-    
+
     func extract(expiration: String?) throws -> (month: String, year: String)? {
         if let expiration = expiration, !expiration.isEmpty {
             let monthYear = expiration.split(separator: "/").map(String.init)
-            
-            if monthYear.count < 2 { return nil }
-            
-            let month = monthYear[0]
-            let year = monthYear[1]
-            
-            let intMonth = Int(month)
-            let intYear = Int(year)
-            
-            if intMonth == nil || intYear == nil { return nil }
-            
-            if !(1...12 ~= intMonth ?? 0) { throw ExpirationExtractorError.monthOverflow }
-            
-            return (month, "20" + year)
+
+            switch monthYear.count {
+            case 1:
+                let month = monthYear[0]
+
+                if month.count < 2 { return nil }
+
+                guard let intMonth = Int(month) else { return nil }
+
+                if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
+            case 2:
+                let month = monthYear[0]
+                let year = String(monthYear[1].unicodeScalars.prefix(2))
+
+                if year.count < 2 { return nil }
+
+                guard let intMonth = Int(month), Int(year) != nil else { return nil }
+
+                if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
+
+                return (month, "20" + year)
+            default:
+                return nil
+            }
         }
-        
+
         return nil
     }
 }

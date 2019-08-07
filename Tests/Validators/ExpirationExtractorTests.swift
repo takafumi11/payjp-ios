@@ -81,4 +81,38 @@ class ExpirationExtractorTests: XCTestCase {
         XCTAssertNil(result)
         XCTAssertNil(catchedError)
     }
+    
+    func testOneDigitMonth() {
+        let extractor = ExpirationExtractor()
+        
+        let source = "1"
+        var result: (month: String, year: String)?
+        var catchedError: Error?
+        
+        do {
+            result = try extractor.extract(expiration: source)
+        } catch {
+            catchedError = error
+        }
+        
+        XCTAssertNil(result)
+        XCTAssertNil(catchedError)
+    }
+    
+    func testOneDigitYear() {
+        let extractor = ExpirationExtractor()
+        
+        let source = "12/3"
+        var result: (month: String, year: String)?
+        var catchedError: Error?
+        
+        do {
+            result = try extractor.extract(expiration: source)
+        } catch {
+            catchedError = error
+        }
+        
+        XCTAssertNil(result)
+        XCTAssertNil(catchedError)
+    }
 }
