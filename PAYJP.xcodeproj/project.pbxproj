@@ -141,12 +141,9 @@
 		BEA1D28622EADE5000F8906B /* AccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsService.swift; sourceTree = "<group>"; };
 		BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsResponse.swift; sourceTree = "<group>"; };
 		BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
-		BEECFBD422D71E4400049BFB /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
-		C62B7CB91DA2071100CAFD7B /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		C62B7CBB1DA2078A00CAFD7B /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		C65513741DA24E18009D6DA5 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		C65513BD1DA37AD4009D6DA5 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		C68378251D9CD1330023B528 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFromTokenTests.swift; sourceTree = "<group>"; };
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
@@ -220,8 +217,6 @@
 				615AFF601C8C74A1003FB86F /* Info.plist */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				BE6C230D20B4064200C4FE1E /* PAYJP.m */,
-				C68378251D9CD1330023B528 /* Token.swift */,
-				BEECFBD422D71E4400049BFB /* UserAgent.swift */,
 				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
 			);
 			path = Sources;
@@ -242,7 +237,6 @@
 				BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */,
 				BE25B80322F15AAC00799201 /* StubPaymentToken.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
-				C62B7CB91DA2071100CAFD7B /* TokenTests.swift */,
 				ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */,
 			);
 			path = Tests;

@@ -40,7 +40,7 @@ public class CardFormView: UIView {
 
     // MARK:
 
-    private var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     // MARK: Lifecycle
 
@@ -120,7 +120,7 @@ extension CardFormView: UITextFieldDelegate {
         let result = viewModel.updateCardNumber(input: input)
         switch result {
         case let .success(cardNumber):
-            cardNumberTextField.text = cardNumber?.formatted
+            cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
             // TODO: show brand logo
             

@@ -9,13 +9,13 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
-    mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>>
-    mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>>
+    func updateCardNumber(input: String?) -> Result<CardNumber, FormError<CardNumber>>
+    func updateExpiration(input: String?) -> Result<String, FormError<String>>
 
     func isValid() -> Bool
 }
 
-struct CardFormViewViewModel: CardFormViewViewModelType {
+class CardFormViewViewModel: CardFormViewViewModelType {
 
     let cardNumberFormatter: CardNumberFormatterType
     let cardNumberValidator: CardNumberValidatorType
@@ -42,7 +42,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
 
     // MARK: - CardFormViewViewModelType
 
-    mutating func updateCardNumber(input: String?) -> Result<CardNumber?, FormError<CardNumber>> {
+    func updateCardNumber(input: String?) -> Result<CardNumber, FormError<CardNumber>> {
         guard let cardNumberInfo = self.cardNumberFormatter.string(from: input), input != nil, !input!.isEmpty else {
             return .failure(.error(value: nil, message: "カード番号を入力してください"))
         }
@@ -61,7 +61,7 @@ struct CardFormViewViewModel: CardFormViewViewModelType {
         return .success(cardNumberInfo)
     }
 
-    mutating func updateExpiration(input: String?) -> Result<String?, FormError<String>> {
+    func updateExpiration(input: String?) -> Result<String, FormError<String>> {
         guard let expiration = self.expirationFormatter.string(from: input), input != nil, !input!.isEmpty else {
             return .failure(.error(value: nil, message: "有効期限を入力してください"))
         }
