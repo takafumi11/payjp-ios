@@ -8,6 +8,11 @@
 
 import UIKit
 
+@objc(PAYCardFormInputDelegate)
+public protocol FormInputDelegate : class {
+    func inputValidated()
+}
+
 @IBDesignable @objcMembers @objc(PAYCardFormView)
 public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
@@ -37,7 +42,8 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
-
+    public weak var delegate: FormInputDelegate?
+    
     // MARK:
 
     private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -88,11 +94,12 @@ public class CardFormView: UIView {
         // TODO: ask the view model
     }
 
-    public func validateCardForm() {
-        updateCardNumberInput(input: cardHolderTextField.text, forceShowError: true)
+    public func validateCardForm() -> Bool {
+        updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
+        return isValid
     }
 }
 
@@ -101,8 +108,6 @@ extension CardFormView: UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         if let currentText = textField.text {
-            if (range.location == 0 && string.isEmpty) { return true }
-
             let range = Range(range, in: currentText)!
             let newText = currentText.replacingCharacters(in: range, with: string)
 
@@ -119,6 +124,7 @@ extension CardFormView: UITextFieldDelegate {
                 break
             }
         }
+        self.delegate?.inputValidated()
 
         return false
     }
@@ -135,7 +141,7 @@ extension CardFormView: UITextFieldDelegate {
             cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
             // TODO: show brand logo
-            
+
         case let .failure(error):
             switch error {
             case let .error(value, message):
@@ -196,7 +202,6 @@ extension CardFormView: UITextFieldDelegate {
         }
         cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
-
 
     /// カード名義の入力フィールドを更新する
     ///

@@ -71,6 +71,7 @@
 		EDCF723122F948ED00272C10 /* FormError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF6E22EFE71900FA73BF /* FormError.swift */; };
 		EDCF723222F948F500272C10 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7022F0376500FA73BF /* CardNumber.swift */; };
 		EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */; };
+		EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		EDCF722A22F935C300272C10 /* UserAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		EDCF722C22F935D400272C10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
+		EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 		615AFF691C8C74A1003FB86F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				EDCF723A22FBF07C00272C10 /* Views */,
 				BE21781122E806580098128D /* Core */,
 				BE734B8522DD7888008679EC /* Formatters */,
 				BE21781722E82A420098128D /* Networking */,
@@ -411,6 +414,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EDCF723A22FBF07C00272C10 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -550,7 +561,6 @@
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
-				ED3FEF7322F133A700FA73BF /* String+PAYJP.swift in Sources */,
 				BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
@@ -575,6 +585,7 @@
 				BE25B80722F15AF900799201 /* TestFixture.swift in Sources */,
 				EDA3EE8C22E19D7800D9A6C9 /* CardNumberValidatorTests.swift in Sources */,
 				615AFF6B1C8C74A1003FB86F /* APIClientTests.swift in Sources */,
+				EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */,
 				BE21785F22E99F260098128D /* GetTokenRequestTests.swift in Sources */,
 				EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */,
 				EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */,
