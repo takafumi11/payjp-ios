@@ -36,6 +36,8 @@
 		BE21786322E9B9A90098128D /* GetAcceptedBrandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */; };
 		BE25B80722F15AF900799201 /* TestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F91E1E2369001D7F75 /* TestFixture.swift */; };
 		BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25B80322F15AAC00799201 /* StubPaymentToken.swift */; };
+		BE4B4FD922FC036200642192 /* CardIOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4B4FD722FC036200642192 /* CardIOProxy.h */; };
+		BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4B4FD822FC036200642192 /* CardIOProxy.m */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
 		BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230D20B4064200C4FE1E /* PAYJP.m */; };
@@ -133,6 +135,8 @@
 		BE21786022E9A4F70098128D /* GetAcceptedBrands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrands.swift; sourceTree = "<group>"; };
 		BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsTests.swift; sourceTree = "<group>"; };
 		BE25B80322F15AAC00799201 /* StubPaymentToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPaymentToken.swift; sourceTree = "<group>"; };
+		BE4B4FD722FC036200642192 /* CardIOProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardIOProxy.h; sourceTree = "<group>"; };
+		BE4B4FD822FC036200642192 /* CardIOProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardIOProxy.m; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 		615AFF5D1C8C74A1003FB86F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BE7FB8EE22FC00820090B9B8 /* CardIO */,
 				BE21781022E8061D0098128D /* Core */,
 				BE734B8222DD7868008679EC /* Formatters */,
 				BE21781822E82A880098128D /* Networking */,
@@ -407,6 +412,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		BE7FB8EE22FC00820090B9B8 /* CardIO */ = {
+			isa = PBXGroup;
+			children = (
+				BE4B4FD722FC036200642192 /* CardIOProxy.h */,
+				BE4B4FD822FC036200642192 /* CardIOProxy.m */,
+			);
+			path = CardIO;
+			sourceTree = "<group>";
+		};
 		BEA1D28322EADCA400F8906B /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */,
+				BE4B4FD922FC036200642192 /* CardIOProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +578,7 @@
 				BE21781E22E82B350098128D /* Request.swift in Sources */,
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
+				BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */,
 				BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */,
 				BE21785422E982E30098128D /* BaseRequest.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
