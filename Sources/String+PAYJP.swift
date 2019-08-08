@@ -10,6 +10,10 @@ import Foundation
 
 extension String {
 
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
     /// 文字列から数値のみを返す
     ///
     /// - Returns: 数値文字列

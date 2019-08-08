@@ -73,17 +73,17 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCardNumber(input: String?) -> Result<CardNumber, FormError<CardNumber>> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: input), input != nil, !input!.isEmpty else {
             cardNumber = nil
-            return .failure(.error(value: nil, message: "カード番号を入力してください"))
+            return .failure(.error(value: nil, message: "payjp_card_form_error_no_number".localized))
         }
         cardNumber = cardNumberInput.formatted.numberfy()
 
         if let cardNumber = cardNumber {
             if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
-                return .failure(.error(value: cardNumberInput, message: "正しいカード番号を入力してください"))
+                return .failure(.error(value: cardNumberInput, message: "payjp_card_form_error_invalid_number".localized))
             } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
-                return .failure(.instantError(value: cardNumberInput, message: "正しいカード番号を入力してください"))
+                return .failure(.instantError(value: cardNumberInput, message: "payjp_card_form_error_invalid_number".localized))
             } else if cardNumberInput.brand == CardBrand.unknown {
-                return .failure(.error(value: cardNumberInput, message: "カードブランドが有効ではありません"))
+                return .failure(.error(value: cardNumberInput, message: "payjp_card_form_error_invalid_brand".localized))
             }
             // TODO: 利用可能ブランドかどうかの判定
         }
