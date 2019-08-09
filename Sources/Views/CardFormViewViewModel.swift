@@ -41,6 +41,8 @@ protocol CardFormViewViewModelType {
     ///   - completion: 取得結果
     func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
     
+
+    func presentCardIOIfAvailable(from presentingViewController: UIViewController)
     var isCardIOAvailable: Bool { get }
 }
 
@@ -197,6 +199,12 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
     }
 
+    func presentCardIOIfAvailable(from presentingViewController: UIViewController) {
+        if CardIOProxy.isCardIOAvailable() {
+            self.cardIoProxy?.presentCardIO(from: presentingViewController)
+        }
+    }
+    
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {

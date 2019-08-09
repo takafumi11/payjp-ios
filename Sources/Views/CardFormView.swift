@@ -105,13 +105,17 @@ public class CardFormView: UIView {
     public func getAcceptedBrands(tenantId: String? = nil, completion: CardBrandsResult? = nil) {
         viewModel.getAcceptedBrands(with: tenantId, completion: completion)
     }
-
+    
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
         return isValid
+    }
+
+    @IBAction func onTapOcrButton(_ sender: Any) {
+        viewModel.presentCardIOIfAvailable(from: self.parentViewController!)
     }
 }
 
