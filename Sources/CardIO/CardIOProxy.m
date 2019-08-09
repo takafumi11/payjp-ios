@@ -90,9 +90,9 @@
 #if TARGET_OS_SIMULATOR
     return NO;
 #else
-    if ([CardIOPaymentViewControllerProxy proxiedClassExists]
-        && [CardIOCreditCardInfoProxy proxiedClassExists]
-        && [CardIOUtilitiesProxy proxiedClassExists]) {
+    if ([CardIOPaymentViewControllerProxy isProxiedClassExists]
+        && [CardIOCreditCardInfoProxy isProxiedClassExists]
+        && [CardIOUtilitiesProxy isProxiedClassExists]) {
         return [[CardIOUtilitiesProxy proxiedClass] canReadCardWithCamera];
     }
     return NO;

@@ -40,6 +40,8 @@ protocol CardFormViewViewModelType {
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
     func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
+    
+    var isCardIOAvailable: Bool { get }
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -59,6 +61,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
+    
+    let isCardIOAvailable: Bool = CardIOProxy.isCardIOAvailable()
 
     var isBrandChanged = false
 
@@ -80,6 +84,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
         self.accountsService = accountsService
+
+        self.cardIoProxy = CardIOProxy(delegate: self)
     }
 
     // MARK: - CardFormViewViewModelType
