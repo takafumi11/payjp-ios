@@ -37,18 +37,19 @@
     
     // Create Token
     if (indexPath.section == 1 && indexPath.row == 0) {
-        NSLog(@"didSelectRowAtIndexPath Create Token tapped.");
+        // TODO: call createToken
     }
     // Create Token Anyway
     if (indexPath.section == 1 && indexPath.row == 1) {
         BOOL isValid = [self.cardFormView validateCardForm];
-        NSLog(@"didSelectRowAtIndexPath isValid: %d", isValid);
+        if (isValid) {
+            // TODO: call createToken
+        }
     }
 }
 
 - (void)inputValidated {
     BOOL isValid = [self.cardFormView isValid];
-    NSLog(@"inputValidated isValid: %d", isValid);
     if (isValid) {
         self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;
         [self.createTokenButton setUserInteractionEnabled:YES];

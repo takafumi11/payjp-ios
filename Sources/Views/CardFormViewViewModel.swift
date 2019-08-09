@@ -93,21 +93,21 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateExpiration(input: String?) -> Result<String, FormError<String>> {
         guard let expirationInput = self.expirationFormatter.string(from: input), input != nil, !input!.isEmpty else {
             monthYear = nil
-            return .failure(.error(value: nil, message: "有効期限を入力してください"))
+            return .failure(.error(value: nil, message: "payjp_card_form_error_no_expiration".localized))
         }
 
         do {
             monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
         } catch {
-            return .failure(.instantError(value: expirationInput, message: "正しい有効期限を入力してください"))
+            return .failure(.instantError(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
         }
 
         if let (month, year) = monthYear {
             if !self.expirationValidator.isValid(month: month, year: year) {
-                return .failure(.instantError(value: expirationInput, message: "正しい有効期限を入力してください"))
+                return .failure(.instantError(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
             }
         } else {
-            return .failure(.error(value: expirationInput, message: "正しい有効期限を入力してください"))
+            return .failure(.error(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
         }
         return .success(expirationInput)
     }
@@ -115,13 +115,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCvc(input: String?) -> Result<String, FormError<String>> {
         guard let cvcInput = self.cvcFormatter.string(from: input), input != nil, !input!.isEmpty else {
             cvc = nil
-            return .failure(.error(value: nil, message: "CVCを入力してください"))
+            return .failure(.error(value: nil, message: "payjp_card_form_error_no_cvc".localized))
         }
         cvc = cvcInput
 
         if let cvc = cvc {
             if !self.cvcValidator.isValid(cvc: cvc) {
-                return .failure(.error(value: cvc, message: "正しいCVCを入力してください"))
+                return .failure(.error(value: cvc, message: "payjp_card_form_error_invalid_cvc".localized))
             }
         }
         return .success(cvcInput)
@@ -130,7 +130,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCardHolder(input: String?) -> Result<String, FormError<String>> {
         guard let holderInput = input, input != nil, !input!.isEmpty else {
             cardHolder = nil
-            return .failure(.error(value: nil, message: "カード名義を入力してください"))
+            return .failure(.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized))
         }
         cardHolder = holderInput
 
