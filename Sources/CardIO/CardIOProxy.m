@@ -81,7 +81,7 @@
 #pragma clang diagnostic pop
 
 @interface CardIOProxy ()
-@property (nonatomic, weak) id<CardIOProxyDelegate>delegate;
+@property (nonatomic, weak) id<CardIOProxyDelegate> delegate;
 @end
 
 @implementation CardIOProxy

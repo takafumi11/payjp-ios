@@ -38,6 +38,7 @@
 		BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25B80322F15AAC00799201 /* StubPaymentToken.swift */; };
 		BE4B4FD922FC036200642192 /* CardIOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4B4FD722FC036200642192 /* CardIOProxy.h */; };
 		BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4B4FD822FC036200642192 /* CardIOProxy.m */; };
+		BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
 		BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230D20B4064200C4FE1E /* PAYJP.m */; };
@@ -137,6 +138,7 @@
 		BE25B80322F15AAC00799201 /* StubPaymentToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPaymentToken.swift; sourceTree = "<group>"; };
 		BE4B4FD722FC036200642192 /* CardIOProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardIOProxy.h; sourceTree = "<group>"; };
 		BE4B4FD822FC036200642192 /* CardIOProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardIOProxy.m; sourceTree = "<group>"; };
+		BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PAYJP.swift"; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
 		BE6C230D20B4064200C4FE1E /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				BE7FB8EE22FC00820090B9B8 /* CardIO */,
 				BE21781022E8061D0098128D /* Core */,
+				BE4B4FDD22FD3E1D00642192 /* Extensions */,
 				BE734B8222DD7868008679EC /* Formatters */,
 				BE21781822E82A880098128D /* Networking */,
 				BE734B8322DD7873008679EC /* Validators */,
@@ -232,8 +235,6 @@
 				ED222C1F22FD1DF90006FB87 /* Localizable.strings */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				BE6C230D20B4064200C4FE1E /* PAYJP.m */,
-				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
-				ED50838023191B0800C64A7F /* StringProtocol+PAYJP.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -354,6 +355,15 @@
 				BE21785E22E99F260098128D /* GetTokenRequestTests.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		BE4B4FDD22FD3E1D00642192 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
+				BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BE734B8222DD7868008679EC /* Formatters */ = {
@@ -573,6 +583,7 @@
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
 				EDCF722B22F935C300272C10 /* UserAgent.swift in Sources */,
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,
+				BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				BE21781E22E82B350098128D /* Request.swift in Sources */,
