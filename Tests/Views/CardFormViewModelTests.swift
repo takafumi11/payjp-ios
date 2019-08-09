@@ -28,7 +28,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<CardNumber>.error(value: nil, message: "カード番号を入力してください"):
+            case FormError<CardNumber>.error(value: nil, message: "payjp_card_form_error_no_number".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -52,7 +52,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<CardNumber>.error(value: nil, message: "カード番号を入力してください"):
+            case FormError<CardNumber>.error(value: nil, message: "payjp_card_form_error_no_number".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -77,7 +77,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<CardNumber>.error(value: _, message: "正しいカード番号を入力してください"):
+            case FormError<CardNumber>.error(value: _, message: "payjp_card_form_error_invalid_number".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -102,7 +102,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<CardNumber>.instantError(value: _, message: "正しいカード番号を入力してください"):
+            case FormError<CardNumber>.instantError(value: _, message: "payjp_card_form_error_invalid_number".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -128,7 +128,7 @@ class CardFormViewModelTests: XCTestCase {
 //            let _ = try result.get()
 //        } catch {
 //            switch error {
-//            case FormError<CardNumber>.error(value: _, message: "カードブランドが有効ではありません"):
+//            case FormError<CardNumber>.error(value: _, message: "payjp_card_form_error_invalid_brand".localized):
 //                XCTAssert(true)
 //            default:
 //                print(error)
@@ -172,7 +172,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "有効期限を入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_expiration".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -196,7 +196,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "有効期限を入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_expiration".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -220,7 +220,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.instantError(value: "20", message: "正しい有効期限を入力してください"):
+            case FormError<String>.instantError(value: "20", message: "payjp_card_form_error_invalid_expiration".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -244,7 +244,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.instantError(value: "08/10", message: "正しい有効期限を入力してください"):
+            case FormError<String>.instantError(value: "08/10", message: "payjp_card_form_error_invalid_expiration".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -268,7 +268,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: "1", message: "正しい有効期限を入力してください"):
+            case FormError<String>.error(value: "1", message: "payjp_card_form_error_invalid_expiration".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -311,7 +311,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "CVCを入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_cvc".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -335,7 +335,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "CVCを入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_cvc".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -359,7 +359,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: "12", message: "正しいCVCを入力してください"):
+            case FormError<String>.error(value: "12", message: "payjp_card_form_error_invalid_cvc".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -402,7 +402,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "カード名義を入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized):
                 XCTAssert(true)
             default:
                 print(error)
@@ -426,7 +426,7 @@ class CardFormViewModelTests: XCTestCase {
             let _ = try result.get()
         } catch {
             switch error {
-            case FormError<String>.error(value: nil, message: "カード名義を入力してください"):
+            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized):
                 XCTAssert(true)
             default:
                 print(error)
