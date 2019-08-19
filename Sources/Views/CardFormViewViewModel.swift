@@ -43,7 +43,8 @@ protocol CardFormViewViewModelType {
     
 
     func presentCardIOIfAvailable(from presentingViewController: UIViewController)
-    var isCardIOAvailable: Bool { get }
+    
+    func isCardIOAvailable() -> Bool
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -64,7 +65,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private var cvc: String? = nil
     private var cardHolder: String? = nil
     
-    let isCardIOAvailable: Bool = CardIOProxy.isCardIOAvailable()
+    func isCardIOAvailable() -> Bool {
+        return CardIOProxy.isCardIOAvailable()
+    }
 
     var isBrandChanged = false
 
