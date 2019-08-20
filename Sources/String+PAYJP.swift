@@ -10,8 +10,9 @@ import Foundation
 
 extension String {
 
+    /// 多言語対応
     var localized: String {
-        return NSLocalizedString(self, comment: "")
+        return NSLocalizedString(self, bundle:Bundle(for: PAYJPSDK.self), comment: "")
     }
 
     /// 文字列から数値のみを返す
