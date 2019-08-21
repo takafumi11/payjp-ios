@@ -28,6 +28,7 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcTitleLabel: UILabel!
     @IBOutlet private weak var cardHolderTitleLabel: UILabel!
 
+    @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cardNumberTextField: UITextField!
     @IBOutlet private weak var expirationTextField: UITextField!
     @IBOutlet private weak var cvcTextField: UITextField!
@@ -180,8 +181,7 @@ extension CardFormView: UITextFieldDelegate {
         case let .success(cardNumber):
             cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
-            // TODO: show brand logo
-
+            updateBrandLogo(brand: cardNumber.brand)
         case let .failure(error):
             switch error {
             case let .cardNumberEmptyError(value, instant),
@@ -199,6 +199,17 @@ extension CardFormView: UITextFieldDelegate {
         if viewModel.isBrandChanged {
             updateCvcInput(input: cvcTextField.text)
         }
+    }
+
+    /// ブランドロゴの表示を更新する
+    ///
+    /// - Parameter brand: カードブランド
+    private func updateBrandLogo(brand: CardBrand?) {
+        guard let brand = brand else {
+            brandLogoImage.image = "default".image
+            return
+        }
+        brandLogoImage.image = brand.logoResourceName.image
     }
 
     /// 有効期限の入力フィールドを更新する
