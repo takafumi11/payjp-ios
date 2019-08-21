@@ -127,7 +127,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func updateCvc(input: String?) -> Result<String, FormError> {
-        guard let cvcInput = self.cvcFormatter.string(from: input), let input = input, !input.isEmpty else {
+        guard let cvcInput = self.cvcFormatter.string(from: input, brand: cardBrand), let input = input, !input.isEmpty else {
             cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }

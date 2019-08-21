@@ -16,7 +16,7 @@ public enum CardBrand: String, Codable {
     case dinersClub = "Diners Club"
     case discover = "Discover"
     case unknown = "Unknown"
-    
+
     func display() -> String {
         return String(describing: self).uppercased()
     }
@@ -24,7 +24,7 @@ public enum CardBrand: String, Codable {
 
 extension CardBrand {
     static let allBrands = [visa, mastercard, jcb, americanExpress, dinersClub, discover]
-    
+
     var regex: String {
         switch self {
         case .visa:
@@ -43,7 +43,7 @@ extension CardBrand {
             return ""
         }
     }
-    
+
     var numberLength: Int {
         switch self {
         case .americanExpress:
@@ -52,6 +52,15 @@ extension CardBrand {
             return 14
         default:
             return 16
+        }
+    }
+
+    var cvcLength: Int {
+        switch self {
+        case .americanExpress, .unknown:
+            return 4
+        default:
+            return 3
         }
     }
 }
