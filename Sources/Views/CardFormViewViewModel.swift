@@ -46,6 +46,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     let cvcValidator: CvcValidatorType
 
     private var cardNumber: String? = nil
+    private var cardBrand: CardBrand? = nil
     private var monthYear: (String, String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
@@ -73,19 +74,32 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: input), let input = input, !input.isEmpty else {
             cardNumber = nil
+            cardBrand = nil
             return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         cardNumber = cardNumberInput.formatted.numberfy()
+        cardBrand = cardNumberInput.brand
 
         if let cardNumber = cardNumber {
-            if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
+            // TODO: 利用可能ブランドの取得
+            let availableBrands: [CardBrand] = [.visa, .mastercard, .jcb, .americanExpress, .dinersClub, .discover]
+            if cardNumberInput.brand != .unknown && !availableBrands.contains(cardNumberInput.brand) {
                 return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
-            } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
-            } else if cardNumberInput.brand == CardBrand.unknown {
+            }
+            // 桁数チェック
+            if cardNumber.count == cardNumberInput.brand.numberLength {
+                if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+                    return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
+                }
+            } else if cardNumber.count > cardNumberInput.brand.numberLength {
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+            } else {
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+            }
+
+            if cardNumberInput.brand == .unknown {
                 return .failure(.cardNumberInvalidBrandError(value: cardNumberInput, isInstant: false))
             }
-            // TODO: 利用可能ブランドかどうかの判定
         }
         return .success(cardNumberInput)
     }
@@ -147,8 +161,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
-        if let cardNumber = cardNumber {
-            return self.cardNumberValidator.isValid(cardNumber: cardNumber)
+        if let cardNumber = cardNumber, let brand = cardBrand {
+            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: brand)
         }
         return false
     }

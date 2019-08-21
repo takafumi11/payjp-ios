@@ -44,7 +44,7 @@ extension CardBrand {
         }
     }
     
-    var maxNumberLength: Int {
+    var numberLength: Int {
         switch self {
         case .americanExpress:
             return 15

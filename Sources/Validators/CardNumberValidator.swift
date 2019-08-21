@@ -11,16 +11,18 @@ import Foundation
 protocol CardNumberValidatorType {
     /// カード番号のバリデーションチェックを行う
     ///
-    /// - parameter cardNumber: カード番号
-    /// - returns: true バリデーションOK
-    func isValid(cardNumber: String) -> Bool
-    
+    /// - Parameters:
+    ///   - cardNumber: cardNumber カード番号
+    ///   - brand: brand カードブランド
+    /// - Returns: true バリデーションOK
+    func isValid(cardNumber: String, brand: CardBrand) -> Bool
     /// カード番号の長さをチェックする
     ///
-    /// - Parameter cardNumber: カード番号
-    /// - Returns: true 長さが範囲内
-    func isCardNumberLengthValid(cardNumber: String) -> Bool
-    
+    /// - Parameters:
+    ///   - cardNumber: cardNumber カード番号
+    ///   - brand: brand カードブランド
+    /// - Returns: true 長さが正しい
+    func isCardNumberLengthValid(cardNumber: String, brand: CardBrand) -> Bool
     /// カード番号のチェックディジットを行う
     ///
     /// - Parameter cardNumber: カード番号
@@ -30,16 +32,16 @@ protocol CardNumberValidatorType {
 
 struct CardNumberValidator: CardNumberValidatorType {
 
-    func isValid(cardNumber: String) -> Bool {
+    func isValid(cardNumber: String, brand: CardBrand) -> Bool {
         let filtered = cardNumber.numberfy()
         if cardNumber.count != filtered.count {
             return false
         }
-        return isCardNumberLengthValid(cardNumber: filtered) && isLuhnValid(cardNumber: filtered)
+        return isCardNumberLengthValid(cardNumber: filtered, brand: brand) && isLuhnValid(cardNumber: filtered)
     }
 
-    func isCardNumberLengthValid(cardNumber: String) -> Bool {
-        return 14...16 ~= cardNumber.count
+    func isCardNumberLengthValid(cardNumber: String, brand: CardBrand) -> Bool {
+        return cardNumber.count == brand.numberLength
     }
 
     func isLuhnValid(cardNumber: String) -> Bool {
