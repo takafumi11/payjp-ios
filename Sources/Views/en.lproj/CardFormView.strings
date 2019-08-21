@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "有効期限"; ObjectID = "10d-c5-GDc"; */
+"10d-c5-GDc.text" = "Expiration date";
+
+/* Class = "UILabel"; text = "カード番号"; ObjectID = "2Mc-Ax-wI5"; */
+"2Mc-Ax-wI5.text" = "Card number";
+
+/* Class = "UILabel"; text = "カード名義"; ObjectID = "OLn-al-5TE"; */
+"OLn-al-5TE.text" = "Name";
+
+/* Class = "UILabel"; text = "セキュリティコード"; ObjectID = "tmA-pb-eTQ"; */
+"tmA-pb-eTQ.text" = "Security code";
