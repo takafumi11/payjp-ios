@@ -17,7 +17,9 @@ public protocol CardFormViewDelegate: class {
 public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
-//            holderContainer.isHidden = !isHolderRequired
+            holderContainer.isHidden = !isHolderRequired
+            viewModel.updateCardHolderEnabled(enabled: isHolderRequired)
+            self.delegate?.inputValidated()
         }
     }
 

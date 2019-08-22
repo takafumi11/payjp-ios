@@ -30,6 +30,10 @@ protocol CardFormViewViewModelType {
     /// - Parameter input: カード名義
     /// - Returns: 入力結果
     func updateCardHolder(input: String?) -> Result<String, FormError>
+    /// カード名義入力の有効を更新する
+    ///
+    /// - Parameter input: true 有効にする
+    func updateCardHolderEnabled(enabled: Bool)
     /// 全フィールドのバリデーションチェック
     ///
     /// - Returns: true バリデーションOK
@@ -76,6 +80,8 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
             isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
         }
     }
+    
+    private var cardHolderEnabled: Bool = false
 
     var isBrandChanged = false
 
@@ -190,11 +196,15 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         return .success(holderInput)
     }
 
+    func updateCardHolderEnabled(enabled: Bool) {
+        cardHolderEnabled = enabled
+    }
+
     func isValid() -> Bool {
         return checkCardNumberValid() &&
             checkExpirationValid() &&
             checkCvcValid() &&
-            checkCardHolderValid()
+            (!cardHolderEnabled || checkCardHolderValid())
     }
 
     func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
