@@ -13,22 +13,22 @@ protocol CardFormViewViewModelType {
     ///
     /// - Parameter input: カード番号
     /// - Returns: 入力結果
-    func updateCardNumber(input: String?) -> Result<CardNumber, FormError<CardNumber>>
+    func updateCardNumber(input: String?) -> Result<CardNumber, FormError>
     /// 有効期限の入力値を更新する
     ///
     /// - Parameter input: 有効期限
     /// - Returns: 入力結果
-    func updateExpiration(input: String?) -> Result<String, FormError<String>>
+    func updateExpiration(input: String?) -> Result<String, FormError>
     /// CVCの入力値を更新する
     ///
     /// - Parameter input: CVC
     /// - Returns: 入力結果
-    func updateCvc(input: String?) -> Result<String, FormError<String>>
+    func updateCvc(input: String?) -> Result<String, FormError>
     /// カード名義の入力値を更新する
     ///
     /// - Parameter input: カード名義
     /// - Returns: 入力結果
-    func updateCardHolder(input: String?) -> Result<String, FormError<String>>
+    func updateCardHolder(input: String?) -> Result<String, FormError>
     /// 全フィールドのバリデーションチェック
     ///
     /// - Returns: true バリデーションOK
@@ -70,67 +70,67 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     // MARK: - CardFormViewViewModelType
 
-    func updateCardNumber(input: String?) -> Result<CardNumber, FormError<CardNumber>> {
+    func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: input), input != nil, !input!.isEmpty else {
             cardNumber = nil
-            return .failure(.error(value: nil, message: "payjp_card_form_error_no_number".localized))
+            return .failure(.cardNumberEmptyError(value: nil, instant: false))
         }
         cardNumber = cardNumberInput.formatted.numberfy()
 
         if let cardNumber = cardNumber {
             if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
-                return .failure(.error(value: cardNumberInput, message: "payjp_card_form_error_invalid_number".localized))
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, instant: false))
             } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
-                return .failure(.instantError(value: cardNumberInput, message: "payjp_card_form_error_invalid_number".localized))
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, instant: true))
             } else if cardNumberInput.brand == CardBrand.unknown {
-                return .failure(.error(value: cardNumberInput, message: "payjp_card_form_error_invalid_brand".localized))
+                return .failure(.cardNumberInvalidBrandError(value: cardNumberInput, instant: false))
             }
             // TODO: 利用可能ブランドかどうかの判定
         }
         return .success(cardNumberInput)
     }
 
-    func updateExpiration(input: String?) -> Result<String, FormError<String>> {
+    func updateExpiration(input: String?) -> Result<String, FormError> {
         guard let expirationInput = self.expirationFormatter.string(from: input), input != nil, !input!.isEmpty else {
             monthYear = nil
-            return .failure(.error(value: nil, message: "payjp_card_form_error_no_expiration".localized))
+            return .failure(.expirationEmptyError(value: nil, instant: false))
         }
 
         do {
             monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
         } catch {
-            return .failure(.instantError(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
+            return .failure(.expirationInvalidError(value: expirationInput, instant: true))
         }
 
         if let (month, year) = monthYear {
             if !self.expirationValidator.isValid(month: month, year: year) {
-                return .failure(.instantError(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
+                return .failure(.expirationInvalidError(value: expirationInput, instant: true))
             }
         } else {
-            return .failure(.error(value: expirationInput, message: "payjp_card_form_error_invalid_expiration".localized))
+            return .failure(.expirationInvalidError(value: expirationInput, instant: false))
         }
         return .success(expirationInput)
     }
 
-    func updateCvc(input: String?) -> Result<String, FormError<String>> {
+    func updateCvc(input: String?) -> Result<String, FormError> {
         guard let cvcInput = self.cvcFormatter.string(from: input), input != nil, !input!.isEmpty else {
             cvc = nil
-            return .failure(.error(value: nil, message: "payjp_card_form_error_no_cvc".localized))
+            return .failure(.cvcEmptyError(value: nil, instant: false))
         }
         cvc = cvcInput
 
         if let cvc = cvc {
             if !self.cvcValidator.isValid(cvc: cvc) {
-                return .failure(.error(value: cvc, message: "payjp_card_form_error_invalid_cvc".localized))
+                return .failure(.cvcInvalidError(value: cvc, instant: false))
             }
         }
         return .success(cvcInput)
     }
 
-    func updateCardHolder(input: String?) -> Result<String, FormError<String>> {
+    func updateCardHolder(input: String?) -> Result<String, FormError> {
         guard let holderInput = input, input != nil, !input!.isEmpty else {
             cardHolder = nil
-            return .failure(.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized))
+            return .failure(.cardHolderEmptyError(value: nil, instant: false))
         }
         cardHolder = holderInput
 

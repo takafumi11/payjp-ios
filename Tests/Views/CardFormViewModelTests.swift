@@ -17,23 +17,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardNumber(input: "")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<CardNumber>.error(value: nil, message: "payjp_card_form_error_no_number".localized):
-                XCTAssert(true)
+            case .cardNumberEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -41,23 +33,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardNumber(input: nil)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<CardNumber>.error(value: nil, message: "payjp_card_form_error_no_number".localized):
-                XCTAssert(true)
+            case .cardNumberEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -66,23 +50,15 @@ class CardFormViewModelTests: XCTestCase {
 //        let cardNumber = CardNumber(formatted: "4242 4242 42", brand: .visa)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<CardNumber>.error(value: _, message: "payjp_card_form_error_invalid_number".localized):
-                XCTAssert(true)
+            case .cardNumberInvalidError(value: _, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -91,23 +67,15 @@ class CardFormViewModelTests: XCTestCase {
         //        let cardNumber = CardNumber(formatted: "4242 4242 4242 4241", brand: .visa)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<CardNumber>.instantError(value: _, message: "payjp_card_form_error_invalid_number".localized):
-                XCTAssert(true)
+            case .cardNumberInvalidError(value: _, instant: true):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -117,23 +85,15 @@ class CardFormViewModelTests: XCTestCase {
 //        //        let cardNumber = CardNumber(formatted: "0", brand: .unknown)
 //
 //        switch result {
-//        case .failure:
-//            XCTAssert(true)
-//        default:
-//            print(result)
-//            XCTFail()
-//        }
-//
-//        do {
-//            let _ = try result.get()
-//        } catch {
+//        case .failure(let error):
 //            switch error {
-//            case FormError<CardNumber>.error(value: _, message: "payjp_card_form_error_invalid_brand".localized):
-//                XCTAssert(true)
+//            case .cardNumberInvalidBrandError(value: _, instant: true):
+//                break
 //            default:
-//                print(error)
 //                XCTFail()
 //            }
+//        default:
+//            XCTFail()
 //        }
 //    }
 
@@ -141,18 +101,11 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardNumber(input: "4242424242424242")
 
         switch result {
-        case .success:
-            XCTAssert(true)
+        case .success(let value):
+            XCTAssertEqual(value.formatted, "4242 4242 4242 4242")
+            XCTAssertEqual(value.brand, .visa)
+            break
         default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let input = try result.get()
-            XCTAssertEqual(input.formatted, "4242 4242 4242 4242")
-            XCTAssertEqual(input.brand, .visa)
-        } catch {
             XCTFail()
         }
     }
@@ -161,23 +114,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: "")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_expiration".localized):
-                XCTAssert(true)
+            case .expirationEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -185,23 +130,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: nil)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_expiration".localized):
-                XCTAssert(true)
+            case .expirationEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -209,23 +146,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: "20")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.instantError(value: "20", message: "payjp_card_form_error_invalid_expiration".localized):
-                XCTAssert(true)
+            case .expirationInvalidError(value: "20", instant: true):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -233,23 +162,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: "08/10")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.instantError(value: "08/10", message: "payjp_card_form_error_invalid_expiration".localized):
-                XCTAssert(true)
+            case .expirationInvalidError(value: "08/10", instant: true):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -257,23 +178,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: "1")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: "1", message: "payjp_card_form_error_invalid_expiration".localized):
-                XCTAssert(true)
+            case .expirationInvalidError(value: "1", instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -281,17 +194,10 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateExpiration(input: "12/99")
 
         switch result {
-        case .success:
-            XCTAssert(true)
+        case .success(let value):
+            XCTAssertEqual(value, "12/99")
+            break
         default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let input = try result.get()
-            XCTAssertEqual(input, "12/99")
-        } catch {
             XCTFail()
         }
     }
@@ -300,23 +206,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCvc(input: "")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_cvc".localized):
-                XCTAssert(true)
+            case .cvcEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -324,23 +222,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCvc(input: nil)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_cvc".localized):
-                XCTAssert(true)
+            case .cvcEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -348,23 +238,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCvc(input: "12")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: "12", message: "payjp_card_form_error_invalid_cvc".localized):
-                XCTAssert(true)
+            case .cvcInvalidError(value: "12", instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -372,17 +254,10 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCvc(input: "123")
 
         switch result {
-        case .success:
-            XCTAssert(true)
+        case .success(let value):
+            XCTAssertEqual(value, "123")
+            break
         default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let input = try result.get()
-            XCTAssertEqual(input, "123")
-        } catch {
             XCTFail()
         }
     }
@@ -391,23 +266,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardHolder(input: "")
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized):
-                XCTAssert(true)
+            case .cardHolderEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -415,23 +282,15 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardHolder(input: nil)
 
         switch result {
-        case .failure:
-            XCTAssert(true)
-        default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let _ = try result.get()
-        } catch {
+        case .failure(let error):
             switch error {
-            case FormError<String>.error(value: nil, message: "payjp_card_form_error_no_holder_name".localized):
-                XCTAssert(true)
+            case .cardHolderEmptyError(value: nil, instant: false):
+                break
             default:
-                print(error)
                 XCTFail()
             }
+        default:
+            XCTFail()
         }
     }
 
@@ -439,17 +298,10 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.updateCardHolder(input: "PAY TARO")
 
         switch result {
-        case .success:
-            XCTAssert(true)
+        case .success(let value):
+            XCTAssertEqual(value, "PAY TARO")
+            break
         default:
-            print(result)
-            XCTFail()
-        }
-
-        do {
-            let input = try result.get()
-            XCTAssertEqual(input, "PAY TARO")
-        } catch {
             XCTFail()
         }
     }

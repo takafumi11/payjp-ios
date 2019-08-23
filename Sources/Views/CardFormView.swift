@@ -9,7 +9,7 @@
 import UIKit
 
 @objc(PAYCardFormInputDelegate)
-public protocol FormInputDelegate : class {
+public protocol FormInputDelegate: class {
     func inputValidated()
 }
 
@@ -43,7 +43,7 @@ public class CardFormView: UIView {
 
     private var contentView: UIView!
     public weak var delegate: FormInputDelegate?
-    
+
     // MARK:
 
     private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -73,8 +73,8 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
-        
-        cardNumberTitleLabel.text =  "payjp_card_form_number_label".localized
+
+        cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
         expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
         cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
         cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
@@ -149,12 +149,14 @@ extension CardFormView: UITextFieldDelegate {
 
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .cardNumberEmptyError(value, instant),
+                 let .cardNumberInvalidError(value, instant),
+                 let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
-                cardNumberErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                cardNumberTextField.text = value?.formatted
-                cardNumberErrorLabel.text = message
+                cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                break
+            default:
+                break
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
@@ -173,12 +175,13 @@ extension CardFormView: UITextFieldDelegate {
             expirationErrorLabel.text = nil
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .expirationEmptyError(value, instant),
+                 let .expirationInvalidError(value, instant):
                 expirationTextField.text = value
-                expirationErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                expirationTextField.text = value
-                expirationErrorLabel.text = message
+                expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                break
+            default:
+                break
             }
         }
         expirationErrorLabel.isHidden = expirationTextField.text == nil
@@ -197,12 +200,13 @@ extension CardFormView: UITextFieldDelegate {
             cvcErrorLabel.text = nil
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .cvcEmptyError(value, instant),
+                 let .cvcInvalidError(value, instant):
                 cvcTextField.text = value
-                cvcErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                cvcTextField.text = value
-                cvcErrorLabel.text = message
+                cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                break
+            default:
+                break
             }
         }
         cvcErrorLabel.isHidden = cvcTextField.text == nil
@@ -221,12 +225,12 @@ extension CardFormView: UITextFieldDelegate {
             cardHolderErrorLabel.text = nil
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .cardHolderEmptyError(value, instant):
                 cardHolderTextField.text = value
-                cardHolderErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                cardHolderTextField.text = value
-                cardHolderErrorLabel.text = message
+                cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                break
+            default:
+                break
             }
         }
         cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
