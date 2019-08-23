@@ -149,8 +149,6 @@
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		ED222C0F22FD17160006FB87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CardFormView.xib; sourceTree = "<group>"; };
-		ED222C1922FD1DA40006FB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CardFormView.strings; sourceTree = "<group>"; };
-		ED222C1A22FD1DB20006FB87 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CardFormView.strings; sourceTree = "<group>"; };
 		ED222C1E22FD1DF90006FB87 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED222C2022FD1DFD0006FB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
@@ -222,10 +220,10 @@
 				BE734B8B22DEE2DA008679EC /* Views */,
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
 				615AFF601C8C74A1003FB86F /* Info.plist */,
+				ED222C1F22FD1DF90006FB87 /* Localizable.strings */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				BE6C230D20B4064200C4FE1E /* PAYJP.m */,
 				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
-				ED222C1F22FD1DF90006FB87 /* Localizable.strings */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -233,20 +231,20 @@
 		615AFF691C8C74A1003FB86F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				EDCF723A22FBF07C00272C10 /* Views */,
 				BE21781122E806580098128D /* Core */,
 				BE734B8522DD7888008679EC /* Formatters */,
 				BE21781722E82A420098128D /* Networking */,
 				BE734B8422DD787E008679EC /* Validators */,
+				EDCF723A22FBF07C00272C10 /* Views */,
 				615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */,
 				BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */,
 				C68681F61E1E21D9001D7F75 /* CardFromTokenTests.swift */,
 				C62B7CBB1DA2078A00CAFD7B /* Fixtures */,
 				615AFF6C1C8C74A1003FB86F /* Info.plist */,
 				BE21781222E806720098128D /* PAYJPTests-Bridging-Header.h */,
+				ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */,
 				BE25B80322F15AAC00799201 /* StubPaymentToken.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
-				ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -292,11 +290,11 @@
 		BE21782122E858740098128D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EDCF722C22F935D400272C10 /* Token.swift */,
 				C65513741DA24E18009D6DA5 /* Card.swift */,
 				BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */,
 				BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
+				EDCF722C22F935D400272C10 /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,13 +302,13 @@
 		BE21782222E85A880098128D /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				EDCF722A22F935C300272C10 /* UserAgent.swift */,
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				BE21785322E982E30098128D /* BaseRequest.swift */,
 				BE21781B22E82AFD0098128D /* Client.swift */,
 				322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */,
 				BE21781F22E82B820098128D /* ParametersSerialization.swift */,
 				BE21781D22E82B350098128D /* Request.swift */,
+				EDCF722A22F935C300272C10 /* UserAgent.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -318,9 +316,9 @@
 		BE21784F22E9657F0098128D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EDCF722E22F9363600272C10 /* TokenTests.swift */,
 				BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */,
 				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
+				EDCF722E22F9363600272C10 /* TokenTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -397,8 +395,8 @@
 				BE734B8E22DEF3AE008679EC /* CardFormView.swift */,
 				ED222C0822FD16A50006FB87 /* CardFormView.xib */,
 				BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */,
-				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
+				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -631,19 +629,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				ED222C0F22FD17160006FB87 /* Base */,
-				ED222C1922FD1DA40006FB87 /* en */,
-				ED222C1A22FD1DB20006FB87 /* ja */,
 			);
 			name = CardFormView.xib;
+			path = .;
 			sourceTree = "<group>";
 		};
 		ED222C1F22FD1DF90006FB87 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				ED222C1E22FD1DF90006FB87 /* ja */,
 				ED222C2022FD1DFD0006FB87 /* en */,
+				ED222C1E22FD1DF90006FB87 /* ja */,
 			);
 			name = Localizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

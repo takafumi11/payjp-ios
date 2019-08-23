@@ -73,6 +73,11 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
+        
+        cardNumberTitleLabel.text =  "payjp_card_form_number_label".localized
+        expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
+        cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
+        cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
