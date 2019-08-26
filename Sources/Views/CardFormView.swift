@@ -83,6 +83,8 @@ public class CardFormView: UIView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
+
+        getAcceptedBrands() { _ in }
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -97,6 +99,10 @@ public class CardFormView: UIView {
 
     public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
+    }
+
+    public func getAcceptedBrands(tenantId: String? = nil, completion: @escaping (Result<[CardBrand], Error>) -> Void) {
+        viewModel.getAcceptedBrands(with: tenantId, completion: completion)
     }
 
     public func validateCardForm() -> Bool {

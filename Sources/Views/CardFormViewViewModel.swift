@@ -33,21 +33,29 @@ protocol CardFormViewViewModelType {
     ///
     /// - Returns: true バリデーションOK
     func isValid() -> Bool
+    /// 利用可能ブランドを取得する
+    ///
+    /// - Parameters:
+    ///   - tenantId: テナントID
+    ///   - completion: 取得結果
+    func getAcceptedBrands(with tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
 
-    let cardNumberFormatter: CardNumberFormatterType
-    let cardNumberValidator: CardNumberValidatorType
-    let expirationFormatter: ExpirationFormatterType
-    let expirationValidator: ExpirationValidatorType
-    let expirationExtractor: ExpirationExtractorType
-    let cvcFormatter: CvcFormatterType
-    let cvcValidator: CvcValidatorType
+    private let cardNumberFormatter: CardNumberFormatterType
+    private let cardNumberValidator: CardNumberValidatorType
+    private let expirationFormatter: ExpirationFormatterType
+    private let expirationValidator: ExpirationValidatorType
+    private let expirationExtractor: ExpirationExtractorType
+    private let cvcFormatter: CvcFormatterType
+    private let cvcValidator: CvcValidatorType
+    private let accountService: AccountsServiceType
 
     private var cardNumber: String? = nil
     private var cardBrand: CardBrand? = nil
-    private var monthYear: (String, String)? = nil
+    private var acceptedCardBrands: [CardBrand]? = nil
+    private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
 
@@ -59,7 +67,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         expirationValidator: ExpirationValidatorType = ExpirationValidator(),
         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
         cvcFormatter: CvcFormatterType = CvcFormatter(),
-        cvcValidator: CvcValidatorType = CvcValidator()) {
+        cvcValidator: CvcValidatorType = CvcValidator(),
+        accountService: AccountsServiceType = AccountsService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -67,6 +76,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.expirationExtractor = expirationExtractor
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
+        self.accountService = accountService
     }
 
     // MARK: - CardFormViewViewModelType
@@ -81,10 +91,11 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         cardBrand = cardNumberInput.brand
 
         if let cardNumber = cardNumber {
-            // TODO: 利用可能ブランドの取得
-            let availableBrands: [CardBrand] = [.visa, .mastercard, .jcb, .americanExpress, .dinersClub, .discover]
-            if cardNumberInput.brand != .unknown && !availableBrands.contains(cardNumberInput.brand) {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+            // 利用可能ブランドのチェック
+            if let acceptedCardBrands = acceptedCardBrands {
+                if cardNumberInput.brand != .unknown && !acceptedCardBrands.contains(cardNumberInput.brand) {
+                    return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+                }
             }
             // 桁数チェック
             if cardNumber.count == cardNumberInput.brand.numberLength {
@@ -156,6 +167,18 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             checkExpirationValid() &&
             checkCvcValid() &&
             checkCardHolderValid()
+    }
+
+    func getAcceptedBrands(with tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) {
+        accountService.getAcceptedBrands(tenantId: tenantId) { result in
+            switch result {
+            case .success(let brands):
+                self.acceptedCardBrands = brands
+                completion(.success(brands))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 
     // MARK: - Helpers
