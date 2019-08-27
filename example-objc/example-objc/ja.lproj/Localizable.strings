@@ -6,5 +6,5 @@
   Copyright © 2019 PAY, Inc. All rights reserved.
 */
 
-"example_card_information_section" = "カード情報";
-"example_token_id_section" = "トークンID";
+"example_card_information_section" = "Card Information";
+"example_token_id_section" = "Token ID";

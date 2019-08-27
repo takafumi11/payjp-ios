@@ -35,10 +35,10 @@
     NSString *sectionName;
     switch (section) {
         case 0:
-        sectionName = NSLocalizedString(@"example_card_information_section", @"example_card_information_section");
+        sectionName = NSLocalizedString(@"example_card_information_section", nil);
         break;
         case 2:
-        sectionName = NSLocalizedString(@"example_token_id_section", @"example_token_id_section");
+        sectionName = NSLocalizedString(@"example_token_id_section", nil);
         break;
         default:
         break;
