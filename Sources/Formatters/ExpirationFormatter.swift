@@ -19,7 +19,7 @@ struct ExpirationFormatter: ExpirationFormatterType {
     func string(from expiration: String?) -> String? {
         if let expiration = expiration, !expiration.isEmpty {
             var filtered = expiration.numberfy()
-
+            
             if filtered.isEmpty { return nil }
 
             filtered = String(filtered.unicodeScalars.prefix(4))

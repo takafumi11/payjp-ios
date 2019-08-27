@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@import PAYJP;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CardFormViewExampleViewController : UITableViewController
+@interface CardFormViewExampleViewController : UITableViewController<PAYCardFormInputDelegate>
 
 @end
 

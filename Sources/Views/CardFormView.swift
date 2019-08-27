@@ -8,11 +8,16 @@
 
 import UIKit
 
+@objc(PAYCardFormInputDelegate)
+public protocol FormInputDelegate: class {
+    func inputValidated()
+}
+
 @IBDesignable @objcMembers @objc(PAYCardFormView)
 public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
-            holderContainer.isHidden = !isHolderRequired
+//            holderContainer.isHidden = !isHolderRequired
         }
     }
 
@@ -37,6 +42,7 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
+    public weak var delegate: FormInputDelegate?
 
     // MARK:
 
@@ -68,8 +74,15 @@ public class CardFormView: UIView {
 
         backgroundColor = .clear
 
+        cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
+        expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
+        cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
+        cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
+
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
+        cvcTextField.delegate = self
+        cardHolderTextField.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -79,12 +92,19 @@ public class CardFormView: UIView {
     // MARK: - Out bound actions
 
     public var isValid: Bool {
-        // TODO: ask the view model
-        return false
+        return viewModel.isValid()
     }
 
     public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
+    }
+
+    public func validateCardForm() -> Bool {
+        updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
+        updateExpirationInput(input: expirationTextField.text, forceShowError: true)
+        updateCvcInput(input: cvcTextField.text, forceShowError: true)
+        updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
+        return isValid
     }
 }
 
@@ -93,8 +113,6 @@ extension CardFormView: UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         if let currentText = textField.text {
-            if (range.location == 0 && string.isEmpty) { return true }
-
             let range = Range(range, in: currentText)!
             let newText = currentText.replacingCharacters(in: range, with: string)
 
@@ -103,10 +121,15 @@ extension CardFormView: UITextFieldDelegate {
                 updateCardNumberInput(input: newText)
             case expirationTextField:
                 updateExpirationInput(input: newText)
+            case cvcTextField:
+                updateCvcInput(input: newText)
+            case cardHolderTextField:
+                updateCardHolderInput(input: newText)
             default:
                 break
             }
         }
+        self.delegate?.inputValidated()
 
         return false
     }
@@ -123,15 +146,16 @@ extension CardFormView: UITextFieldDelegate {
             cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
             // TODO: show brand logo
-            
+
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .cardNumberEmptyError(value, instant),
+                 let .cardNumberInvalidError(value, instant),
+                 let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
-                cardNumberErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                cardNumberTextField.text = value?.formatted
-                cardNumberErrorLabel.text = message
+                cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+            default:
+                break
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
@@ -150,14 +174,61 @@ extension CardFormView: UITextFieldDelegate {
             expirationErrorLabel.text = nil
         case let .failure(error):
             switch error {
-            case let .error(value, message):
+            case let .expirationEmptyError(value, instant),
+                 let .expirationInvalidError(value, instant):
                 expirationTextField.text = value
-                expirationErrorLabel.text = forceShowError ? message : nil
-            case let .instantError(value, message):
-                expirationTextField.text = value
-                expirationErrorLabel.text = message
+                expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+            default:
+                break
             }
         }
         expirationErrorLabel.isHidden = expirationTextField.text == nil
+    }
+
+    /// CVCの入力フィールドを更新する
+    ///
+    /// - Parameters:
+    ///   - input: CVC
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateCvcInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateCvc(input: input)
+        switch result {
+        case let .success(cvc):
+            cvcTextField.text = cvc
+            cvcErrorLabel.text = nil
+        case let .failure(error):
+            switch error {
+            case let .cvcEmptyError(value, instant),
+                 let .cvcInvalidError(value, instant):
+                cvcTextField.text = value
+                cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+            default:
+                break
+            }
+        }
+        cvcErrorLabel.isHidden = cvcTextField.text == nil
+    }
+
+    /// カード名義の入力フィールドを更新する
+    ///
+    /// - Parameters:
+    ///   - input: カード名義
+    ///   - forceShowError: エラー表示を強制するか
+    private func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
+        let result = viewModel.updateCardHolder(input: input)
+        switch result {
+        case let .success(holderName):
+            cardHolderTextField.text = holderName
+            cardHolderErrorLabel.text = nil
+        case let .failure(error):
+            switch error {
+            case let .cardHolderEmptyError(value, instant):
+                cardHolderTextField.text = value
+                cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+            default:
+                break
+            }
+        }
+        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
 }
