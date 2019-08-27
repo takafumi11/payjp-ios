@@ -71,19 +71,19 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - CardFormViewViewModelType
 
     func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
-        guard let cardNumberInput = self.cardNumberFormatter.string(from: input), input != nil, !input!.isEmpty else {
+        guard let cardNumberInput = self.cardNumberFormatter.string(from: input), let input = input, !input.isEmpty else {
             cardNumber = nil
-            return .failure(.cardNumberEmptyError(value: nil, instant: false))
+            return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         cardNumber = cardNumberInput.formatted.numberfy()
 
         if let cardNumber = cardNumber {
             if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, instant: false))
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
             } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, instant: true))
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
             } else if cardNumberInput.brand == CardBrand.unknown {
-                return .failure(.cardNumberInvalidBrandError(value: cardNumberInput, instant: false))
+                return .failure(.cardNumberInvalidBrandError(value: cardNumberInput, isInstant: false))
             }
             // TODO: 利用可能ブランドかどうかの判定
         }
@@ -91,46 +91,46 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func updateExpiration(input: String?) -> Result<String, FormError> {
-        guard let expirationInput = self.expirationFormatter.string(from: input), input != nil, !input!.isEmpty else {
+        guard let expirationInput = self.expirationFormatter.string(from: input), let input = input, !input.isEmpty else {
             monthYear = nil
-            return .failure(.expirationEmptyError(value: nil, instant: false))
+            return .failure(.expirationEmptyError(value: nil, isInstant: false))
         }
 
         do {
             monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
         } catch {
-            return .failure(.expirationInvalidError(value: expirationInput, instant: true))
+            return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
         }
 
         if let (month, year) = monthYear {
             if !self.expirationValidator.isValid(month: month, year: year) {
-                return .failure(.expirationInvalidError(value: expirationInput, instant: true))
+                return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
             }
         } else {
-            return .failure(.expirationInvalidError(value: expirationInput, instant: false))
+            return .failure(.expirationInvalidError(value: expirationInput, isInstant: false))
         }
         return .success(expirationInput)
     }
 
     func updateCvc(input: String?) -> Result<String, FormError> {
-        guard let cvcInput = self.cvcFormatter.string(from: input), input != nil, !input!.isEmpty else {
+        guard let cvcInput = self.cvcFormatter.string(from: input), let input = input, !input.isEmpty else {
             cvc = nil
-            return .failure(.cvcEmptyError(value: nil, instant: false))
+            return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
         cvc = cvcInput
 
         if let cvc = cvc {
             if !self.cvcValidator.isValid(cvc: cvc) {
-                return .failure(.cvcInvalidError(value: cvc, instant: false))
+                return .failure(.cvcInvalidError(value: cvc, isInstant: false))
             }
         }
         return .success(cvcInput)
     }
 
     func updateCardHolder(input: String?) -> Result<String, FormError> {
-        guard let holderInput = input, input != nil, !input!.isEmpty else {
+        guard let holderInput = input, let input = input, !input.isEmpty else {
             cardHolder = nil
-            return .failure(.cardHolderEmptyError(value: nil, instant: false))
+            return .failure(.cardHolderEmptyError(value: nil, isInstant: false))
         }
         cardHolder = holderInput
 

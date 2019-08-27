@@ -15,6 +15,7 @@
 		32D3A20E1FDAB3EE00B5C3BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB116D1FDA97A1007AD8F5 /* Main.storyboard */; };
 		66EE585F918805A23FDDDCC9 /* Pods_example_objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */; };
 		BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */; };
+		ED5083772314D58100C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5083792314D58100C64A7F /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +34,8 @@
 		76CA4BCF5842CACDFD23EC1A /* Pods-example-objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-objc.release.xcconfig"; path = "Pods/Target Support Files/Pods-example-objc/Pods-example-objc.release.xcconfig"; sourceTree = "<group>"; };
 		BE0417D422E6DF6600B944CB /* CardFormViewExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewExampleViewController.h; sourceTree = "<group>"; };
 		BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewExampleViewController.m; sourceTree = "<group>"; };
-		ED508367230F81F400C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		ED5083782314D58100C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED50837A2314D58500C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */,
 				32CB11751FDA97A1007AD8F5 /* Info.plist */,
 				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
+				ED5083792314D58100C64A7F /* Localizable.strings */,
 				32CB116D1FDA97A1007AD8F5 /* Main.storyboard */,
 				32CB116A1FDA97A1007AD8F5 /* ViewController.h */,
 				32CB116B1FDA97A1007AD8F5 /* ViewController.m */,
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D3A20E1FDAB3EE00B5C3BE /* Main.storyboard in Resources */,
+				ED5083772314D58100C64A7F /* Localizable.strings in Resources */,
 				32CB11741FDA97A1007AD8F5 /* LaunchScreen.storyboard in Resources */,
 				32CB11711FDA97A1007AD8F5 /* Assets.xcassets in Resources */,
 			);
@@ -228,7 +232,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				32CB116E1FDA97A1007AD8F5 /* Base */,
-				ED508367230F81F400C64A7F /* ja */,
 			);
 			name = Main.storyboard;
 			path = .;
@@ -240,6 +243,16 @@
 				32CB11731FDA97A1007AD8F5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		ED5083792314D58100C64A7F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED50837A2314D58500C64A7F /* en */,
+				ED5083782314D58100C64A7F /* ja */,
+			);
+			name = Localizable.strings;
 			path = .;
 			sourceTree = "<group>";
 		};

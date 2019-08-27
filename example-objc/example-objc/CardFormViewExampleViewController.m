@@ -30,6 +30,21 @@
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
 }
+    
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *sectionName;
+    switch (section) {
+        case 0:
+        sectionName = NSLocalizedString(@"example_card_information_section", @"example_card_information_section");
+        break;
+        case 2:
+        sectionName = NSLocalizedString(@"example_token_id_section", @"example_token_id_section");
+        break;
+        default:
+        break;
+    }
+    return sectionName;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

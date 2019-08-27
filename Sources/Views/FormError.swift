@@ -9,14 +9,14 @@
 import Foundation
 
 enum FormError: Error {
-    case cardNumberEmptyError(value: CardNumber?, instant: Bool)
-    case cardNumberInvalidError(value: CardNumber?, instant: Bool)
-    case cardNumberInvalidBrandError(value: CardNumber?, instant: Bool)
-    case expirationEmptyError(value: String?, instant: Bool)
-    case expirationInvalidError(value: String?, instant: Bool)
-    case cvcEmptyError(value: String?, instant: Bool)
-    case cvcInvalidError(value: String?, instant: Bool)
-    case cardHolderEmptyError(value: String?, instant: Bool)
+    case cardNumberEmptyError(value: CardNumber?, isInstant: Bool)
+    case cardNumberInvalidError(value: CardNumber?, isInstant: Bool)
+    case cardNumberInvalidBrandError(value: CardNumber?, isInstant: Bool)
+    case expirationEmptyError(value: String?, isInstant: Bool)
+    case expirationInvalidError(value: String?, isInstant: Bool)
+    case cvcEmptyError(value: String?, isInstant: Bool)
+    case cvcInvalidError(value: String?, isInstant: Bool)
+    case cardHolderEmptyError(value: String?, isInstant: Bool)
 }
 
 extension FormError: LocalizedError {

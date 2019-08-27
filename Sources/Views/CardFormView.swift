@@ -154,7 +154,6 @@ extension CardFormView: UITextFieldDelegate {
                  let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
                 cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-                break
             default:
                 break
             }
@@ -179,7 +178,6 @@ extension CardFormView: UITextFieldDelegate {
                  let .expirationInvalidError(value, instant):
                 expirationTextField.text = value
                 expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-                break
             default:
                 break
             }
@@ -204,7 +202,6 @@ extension CardFormView: UITextFieldDelegate {
                  let .cvcInvalidError(value, instant):
                 cvcTextField.text = value
                 cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-                break
             default:
                 break
             }
@@ -228,7 +225,6 @@ extension CardFormView: UITextFieldDelegate {
             case let .cardHolderEmptyError(value, instant):
                 cardHolderTextField.text = value
                 cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-                break
             default:
                 break
             }

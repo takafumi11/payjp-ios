@@ -19,7 +19,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardNumberEmptyError(value: nil, instant: false):
+            case .cardNumberEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -35,7 +35,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardNumberEmptyError(value: nil, instant: false):
+            case .cardNumberEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -52,7 +52,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardNumberInvalidError(value: _, instant: false):
+            case .cardNumberInvalidError(value: _, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -69,7 +69,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardNumberInvalidError(value: _, instant: true):
+            case .cardNumberInvalidError(value: _, isInstant: true):
                 break
             default:
                 XCTFail()
@@ -87,7 +87,7 @@ class CardFormViewModelTests: XCTestCase {
 //        switch result {
 //        case .failure(let error):
 //            switch error {
-//            case .cardNumberInvalidBrandError(value: _, instant: true):
+//            case .cardNumberInvalidBrandError(value: _, isInstant: true):
 //                break
 //            default:
 //                XCTFail()
@@ -116,7 +116,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationEmptyError(value: nil, instant: false):
+            case .expirationEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -132,7 +132,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationEmptyError(value: nil, instant: false):
+            case .expirationEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -148,7 +148,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "20", instant: true):
+            case .expirationInvalidError(value: "20", isInstant: true):
                 break
             default:
                 XCTFail()
@@ -164,7 +164,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "08/10", instant: true):
+            case .expirationInvalidError(value: "08/10", isInstant: true):
                 break
             default:
                 XCTFail()
@@ -180,7 +180,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "1", instant: false):
+            case .expirationInvalidError(value: "1", isInstant: false):
                 break
             default:
                 XCTFail()
@@ -208,7 +208,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cvcEmptyError(value: nil, instant: false):
+            case .cvcEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -224,7 +224,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cvcEmptyError(value: nil, instant: false):
+            case .cvcEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -240,7 +240,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cvcInvalidError(value: "12", instant: false):
+            case .cvcInvalidError(value: "12", isInstant: false):
                 break
             default:
                 XCTFail()
@@ -268,7 +268,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardHolderEmptyError(value: nil, instant: false):
+            case .cardHolderEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -284,7 +284,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .cardHolderEmptyError(value: nil, instant: false):
+            case .cardHolderEmptyError(value: nil, isInstant: false):
                 break
             default:
                 XCTFail()

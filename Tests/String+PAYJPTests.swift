@@ -28,8 +28,8 @@ class String_PAYJPTests: XCTestCase {
         ]
         testNumberfy(cases: cases)
     }
-    
+
     func testLocalizeString() {
-//        XCTAssertEqual("Please enter a card number.", "payjp_card_form_error_no_number".localized)
+        XCTAssertEqual("Please enter a card number.", "payjp_card_form_error_no_number".localized)
     }
 }

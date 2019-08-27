@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  example-objc
+
+  Created by Tadashi Wakayanagi on 2019/08/27.
+  Copyright © 2019 PAY, Inc. All rights reserved.
+*/
+
+"example_card_information_section" = "カード情報";
+"example_token_id_section" = "トークンID";
