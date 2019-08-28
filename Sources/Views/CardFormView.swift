@@ -189,6 +189,7 @@ extension CardFormView: UITextFieldDelegate {
                  let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
                 cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                updateBrandLogo(brand: value?.brand)
             default:
                 break
             }
