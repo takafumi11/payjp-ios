@@ -71,7 +71,6 @@
 		EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */; };
 		EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */; };
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
-		EDC02D5B230D18A800305B10 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC02D5D230D18A800305B10 /* Localizable.strings */; };
 		EDCF722B22F935C300272C10 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722A22F935C300272C10 /* UserAgent.swift */; };
 		EDCF722D22F935D400272C10 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722C22F935D400272C10 /* Token.swift */; };
 		EDCF723022F9369000272C10 /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722E22F9363600272C10 /* TokenTests.swift */; };
@@ -176,10 +175,6 @@
 		EDA3EE9322E1B88F00D9A6C9 /* CvcValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcValidatorTests.swift; sourceTree = "<group>"; };
 		EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatterTests.swift; sourceTree = "<group>"; };
-		EDC02D58230D17CA00305B10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CardFormView.strings; sourceTree = "<group>"; };
-		EDC02D5C230D18A800305B10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		EDC02D5E230D18B200305B10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		EDC02D60230D19E400305B10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CardFormView.strings; sourceTree = "<group>"; };
 		EDCF722A22F935C300272C10 /* UserAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		EDCF722C22F935D400272C10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
