@@ -30,7 +30,7 @@ struct CardNumberFormatter: CardNumberFormatterType {
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            let trimmed = String(filtered.unicodeScalars.prefix(16))
+            let trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
             switch brand {
             case .americanExpress, .dinersClub:
                 let formattedNumber = trimmed

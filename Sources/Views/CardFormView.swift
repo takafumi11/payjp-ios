@@ -165,6 +165,11 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
+        
+        // ブランドが変わったらcvcのチェックを走らせる
+        if viewModel.isBrandChanged {
+            updateCvcInput(input: cvcTextField.text)
+        }
     }
 
     /// 有効期限の入力フィールドを更新する

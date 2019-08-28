@@ -13,7 +13,7 @@ class CvcFormatterTests: XCTestCase {
 
     let formatter = CvcFormatter()
 
-    private func testFortmat(cases: [(String?, CardBrand?, String?)]) {
+    private func testFortmat(cases: [(String?, CardBrand, String?)]) {
         for (cvc, brand, formatted) in cases {
             let output = formatter.string(from: cvc, brand: brand)
             XCTAssertEqual(output, formatted)
@@ -21,7 +21,7 @@ class CvcFormatterTests: XCTestCase {
     }
 
     func testCvcFormat() {
-        let cases: [(String?, CardBrand?, String?)] = [
+        let cases: [(String?, CardBrand, String?)] = [
             (nil, .unknown, nil),
             (nil, .visa, nil),
             (nil, .americanExpress, nil),

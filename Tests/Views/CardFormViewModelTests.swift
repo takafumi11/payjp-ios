@@ -251,12 +251,30 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCvcSuccess() {
+        let _ = viewModel.updateCardNumber(input: "42")
         let result = viewModel.updateCvc(input: "123")
 
         switch result {
         case .success(let value):
             XCTAssertEqual(value, "123")
             break
+        default:
+            XCTFail()
+        }
+    }
+    
+    func testUpdateCvcWhenBrandChanged() {
+        let _ = viewModel.updateCardNumber(input: "4242")
+        let result = viewModel.updateCvc(input: "1234")
+        
+        switch result {
+        case .failure(let error):
+            switch error {
+            case .cvcInvalidError(value: "1234", isInstant: true):
+                break
+            default:
+                XCTFail()
+            }
         default:
             XCTFail()
         }

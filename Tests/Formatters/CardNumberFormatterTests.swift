@@ -61,18 +61,18 @@ class CardNumberFormatterTests: XCTestCase {
             ("341122", CardNumber(formatted: "3411 22", brand: .americanExpress)),
             ("371122223333", CardNumber(formatted: "3711 222233 33", brand: .americanExpress)),
             ("371122223333444", CardNumber(formatted: "3711 222233 33444", brand: .americanExpress)),
-            ("37112222333344445555", CardNumber(formatted: "3711 222233 334444", brand: .americanExpress))
+            ("37112222333344445555", CardNumber(formatted: "3711 222233 33444", brand: .americanExpress))
         ]
         testCardNumberFormat(cases: cases)
     }
 
-    func testDinnersNumberFormat() {
+    func testDinersNumberFormat() {
         let cases = [
             ("30", CardNumber(formatted: "30", brand: .dinersClub)),
             ("361122", CardNumber(formatted: "3611 22", brand: .dinersClub)),
             ("381122223333", CardNumber(formatted: "3811 222233 33", brand: .dinersClub)),
             ("39112222333344", CardNumber(formatted: "3911 222233 3344", brand: .dinersClub)),
-            ("39112222333344445555", CardNumber(formatted: "3911 222233 334444", brand: .dinersClub))
+            ("39112222333344445555", CardNumber(formatted: "3911 222233 3344", brand: .dinersClub))
         ]
         testCardNumberFormat(cases: cases)
     }

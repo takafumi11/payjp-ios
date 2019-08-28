@@ -9,6 +9,7 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
+    var isBrandChanged: Bool { get }
     /// カード番号の入力値を更新する
     ///
     /// - Parameter input: カード番号
@@ -53,11 +54,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let accountService: AccountsServiceType
 
     private var cardNumber: String? = nil
-    private var cardBrand: CardBrand? = nil
+    private var cardBrand: CardBrand = .unknown
     private var acceptedCardBrands: [CardBrand]? = nil
     private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
+    
+    var isBrandChanged = false
 
     // MARK: - Lifecycle
 
@@ -84,9 +87,11 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: input), let input = input, !input.isEmpty else {
             cardNumber = nil
-            cardBrand = nil
+            cardBrand = .unknown
+            isBrandChanged = true
             return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
+        isBrandChanged = cardBrand != cardNumberInput.brand
         cardNumber = cardNumberInput.formatted.numberfy()
         cardBrand = cardNumberInput.brand
 
@@ -103,7 +108,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                     return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
                 }
             } else if cardNumber.count > cardNumberInput.brand.numberLength {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
             } else {
                 return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
             }
@@ -138,15 +143,19 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func updateCvc(input: String?) -> Result<String, FormError> {
-        guard let cvcInput = self.cvcFormatter.string(from: input, brand: cardBrand), let input = input, !input.isEmpty else {
+        guard var cvcInput = self.cvcFormatter.string(from: input, brand: cardBrand), let input = input, !input.isEmpty else {
             cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
+        if isBrandChanged {
+            cvcInput = input
+        }
         cvc = cvcInput
 
-        if let cvc = cvc {
-            if !self.cvcValidator.isValid(cvc: cvc) {
-                return .failure(.cvcInvalidError(value: cvc, isInstant: false))
+        if let cvc = cvc{
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+            if !result.validated {
+                return .failure(.cvcInvalidError(value: cvc, isInstant: result.isInstant))
             }
         }
         return .success(cvcInput)
@@ -184,8 +193,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
-        if let cardNumber = cardNumber, let brand = cardBrand {
-            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: brand)
+        if let cardNumber = cardNumber {
+            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: cardBrand)
         }
         return false
     }
@@ -199,7 +208,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     private func checkCvcValid() -> Bool {
         if let cvc = cvc {
-            return self.cvcValidator.isValid(cvc: cvc)
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+            return result.validated
         }
         return false
     }
