@@ -140,6 +140,25 @@ extension CardFormView: UITextFieldDelegate {
         return false
     }
 
+    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+
+        switch textField {
+        case cardNumberTextField:
+            updateCardNumberInput(input: nil)
+        case expirationTextField:
+            updateExpirationInput(input: nil)
+        case cvcTextField:
+            updateCvcInput(input: nil)
+        case cardHolderTextField:
+            updateCardHolderInput(input: nil)
+        default:
+            break
+        }
+        self.delegate?.inputValidated()
+
+        return true
+    }
+
     /// カード番号の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -165,7 +184,7 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
-        
+
         // ブランドが変わったらcvcのチェックを走らせる
         if viewModel.isBrandChanged {
             updateCvcInput(input: cvcTextField.text)
