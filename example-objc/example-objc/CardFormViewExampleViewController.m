@@ -56,13 +56,17 @@
     if (indexPath.section == 1 && indexPath.row == 1) {
         // TODO: call createToken
     }
-    // Create Token Anyway
+    // Valdate and Create Token
     if (indexPath.section == 1 && indexPath.row == 2) {
         BOOL isValid = [self.cardFormView validateCardForm];
         if (isValid) {
             // TODO: call createToken
         }
     }
+}
+    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
@@ -80,5 +84,7 @@
 
 - (IBAction)cardHolderSwitchChanged:(id)sender {
     self.cardFormView.isHolderRequired = [sender isOn];
+    [self.tableView reloadData];
 }
-    @end
+
+@end
