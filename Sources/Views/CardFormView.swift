@@ -8,9 +8,9 @@
 
 import UIKit
 
-@objc(PAYCardFormInputDelegate)
-public protocol FormInputDelegate: class {
-    func inputValidated()
+@objc(PAYCardFormViewDelegate)
+public protocol CardFormViewDelegate: class {
+    func isValidChanged(in cardFormView: CardFormView)
 }
 
 @IBDesignable @objcMembers @objc(PAYCardFormView)
@@ -42,7 +42,7 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
-    public weak var delegate: FormInputDelegate?
+    public weak var delegate: CardFormViewDelegate?
 
     // MARK:
 
@@ -135,7 +135,7 @@ extension CardFormView: UITextFieldDelegate {
                 break
             }
         }
-        self.delegate?.inputValidated()
+        self.delegate?.isValidChanged(in: self)
 
         return false
     }
@@ -154,7 +154,7 @@ extension CardFormView: UITextFieldDelegate {
         default:
             break
         }
-        self.delegate?.inputValidated()
+        self.delegate?.isValidChanged(in: self)
 
         return true
     }
