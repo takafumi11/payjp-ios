@@ -413,8 +413,8 @@
 		BE734B8B22DEE2DA008679EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ED508369230FC3AB00C64A7F /* CardFormView.xib */,
 				BE734B8E22DEF3AE008679EC /* CardFormView.swift */,
+				ED508369230FC3AB00C64A7F /* CardFormView.xib */,
 				BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */,
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
