@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CardIOProxy, PaymentMethodCardParams;
 
-@protocol CardIOProxyDelegate <NSObject>
+@protocol CardIOProxyDelegate
 - (void)cardIOProxy:(CardIOProxy *)proxy didFinishWithCardParams:(NSDictionary *)cardParams;
 @end
 

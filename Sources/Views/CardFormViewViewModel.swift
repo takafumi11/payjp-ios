@@ -47,7 +47,7 @@ protocol CardFormViewViewModelType {
     func isCardIOAvailable() -> Bool
 }
 
-class CardFormViewViewModel: CardFormViewViewModelType {
+class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
 
     private let cardNumberFormatter: CardNumberFormatterType
     private let cardNumberValidator: CardNumberValidatorType
@@ -64,6 +64,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
+    
+    private var cardIoProxy: CardIOProxy!
     
     func isCardIOAvailable() -> Bool {
         return CardIOProxy.isCardIOAvailable()
@@ -237,5 +239,11 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             return !cardHolder.isEmpty
         }
         return false
+    }
+    
+    // MARK: - CardIOProxyDelegate
+    
+    func cardIOProxy(_ proxy: CardIOProxy, didFinishWithCardParams cardParams: [AnyHashable : Any]) {
+        // TODO: Implementation
     }
 }
