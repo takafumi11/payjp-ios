@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias CardBrandsResult = (Result<[CardBrand], Error>) -> Void
+
 protocol CardFormViewViewModelType {
     var isBrandChanged: Bool { get }
     /// カード番号の入力値を更新する
@@ -39,7 +41,7 @@ protocol CardFormViewViewModelType {
     /// - Parameters:
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
-    func getAcceptedBrands(with tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void)
+    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -59,7 +61,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
-    
+
     var isBrandChanged = false
 
     // MARK: - Lifecycle
@@ -152,7 +154,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
         cvc = cvcInput
 
-        if let cvc = cvc{
+        if let cvc = cvc {
             let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
             if !result.validated {
                 return .failure(.cvcInvalidError(value: cvc, isInstant: result.isInstant))
@@ -178,8 +180,10 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             checkCardHolderValid()
     }
 
-    func getAcceptedBrands(with tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) {
-        accountService.getAcceptedBrands(tenantId: tenantId) { result in
+    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
+        guard let completion = completion else { return }
+
+        let _ = accountService.getAcceptedBrands(tenantId: tenantId) { result in
             switch result {
             case .success(let brands):
                 self.acceptedCardBrands = brands
