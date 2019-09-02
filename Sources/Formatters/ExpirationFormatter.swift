@@ -32,7 +32,7 @@ struct ExpirationFormatter: ExpirationFormatterType {
                     }
                 }
             } else if filtered.count >= 3 {
-                filtered.insert("/", at: filtered.index(filtered.startIndex, offsetBy: 2))
+                filtered.insert(separator: "/", every: 2)
             }
 
             return filtered
