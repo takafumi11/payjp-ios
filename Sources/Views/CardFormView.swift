@@ -105,7 +105,7 @@ public class CardFormView: UIView {
     public func getAcceptedBrands(tenantId: String? = nil, completion: CardBrandsResult? = nil) {
         viewModel.getAcceptedBrands(with: tenantId, completion: completion)
     }
-    
+
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
