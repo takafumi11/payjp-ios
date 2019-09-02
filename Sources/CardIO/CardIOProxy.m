@@ -58,6 +58,9 @@
 @end
 
 @interface CardIOPaymentViewControllerProxy : UIViewController <ClassProxy>
+/*!
+ @param id The parameter here is going to bridge to `CardIOPaymentViewControllerDelegate` at runtime.
+ */
 + (id)initWithPaymentDelegate:id;
 @property (nonatomic, assign, readwrite) BOOL hideCardIOLogo;
 @property (nonatomic, assign, readwrite) BOOL disableManualEntryButtons;
