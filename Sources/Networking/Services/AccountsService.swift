@@ -8,8 +8,11 @@
 
 import Foundation
 
+public typealias CardBrandsResult = (Result<[CardBrand], Error>) -> Void
+
 protocol AccountsServiceType {
-    func getAcceptedBrands(tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) -> URLSessionDataTask?
+    @discardableResult
+    func getAcceptedBrands(tenantId: String?, completion: CardBrandsResult?) -> URLSessionDataTask?
 }
 
 struct AccountsService: AccountsServiceType {
@@ -22,14 +25,14 @@ struct AccountsService: AccountsServiceType {
         self.client = client
     }
     
-    func getAcceptedBrands(tenantId: String?, completion: @escaping (Result<[CardBrand], Error>) -> Void) -> URLSessionDataTask? {
+    func getAcceptedBrands(tenantId: String?, completion: CardBrandsResult?) -> URLSessionDataTask? {
         let request = GetAcceptedBrands(tenantId: tenantId)
         return client.request(with: request) { result in
             switch result {
             case .success(let data):
-                completion(.success(data.acceptedBrands))
+                completion?(.success(data.acceptedBrands))
             case .failure(let error):
-                completion(.failure(error))
+                completion?(.failure(error))
             }
         }
     }

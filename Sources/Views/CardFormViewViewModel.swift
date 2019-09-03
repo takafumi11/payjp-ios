@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias CardBrandsResult = (Result<[CardBrand], Error>) -> Void
-
 protocol CardFormViewViewModelType {
     var isBrandChanged: Bool { get }
     /// カード番号の入力値を更新する
@@ -53,7 +51,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let expirationExtractor: ExpirationExtractorType
     private let cvcFormatter: CvcFormatterType
     private let cvcValidator: CvcValidatorType
-    private let accountService: AccountsServiceType
+    private let accountsService: AccountsServiceType
 
     private var cardNumber: String? = nil
     private var cardBrand: CardBrand = .unknown
@@ -73,7 +71,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
         cvcFormatter: CvcFormatterType = CvcFormatter(),
         cvcValidator: CvcValidatorType = CvcValidator(),
-        accountService: AccountsServiceType = AccountsService.shared) {
+        accountsService: AccountsServiceType = AccountsService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -81,7 +79,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.expirationExtractor = expirationExtractor
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
-        self.accountService = accountService
+        self.accountsService = accountsService
     }
 
     // MARK: - CardFormViewViewModelType
@@ -181,15 +179,14 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
-        guard let completion = completion else { return }
-
-        let _ = accountService.getAcceptedBrands(tenantId: tenantId) { result in
+        accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let brands):
                 self.acceptedCardBrands = brands
-                completion(.success(brands))
+                completion?(.success(brands))
             case .failure(let error):
-                completion(.failure(error))
+                completion?(.failure(error))
             }
         }
     }
