@@ -243,7 +243,13 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     
     // MARK: - CardIOProxyDelegate
     
+    func didCancel(_ proxy: CardIOProxy) {
+        // TODO: Implementation
+        debugPrint(#function)
+    }
+    
     func cardIOProxy(_ proxy: CardIOProxy, didFinishWithCardParams cardParams: [AnyHashable : Any]) {
         // TODO: Implementation
+        debugPrint(#function)
     }
 }

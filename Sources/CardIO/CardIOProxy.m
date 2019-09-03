@@ -120,6 +120,7 @@
 
 - (void)userDidCancelPaymentViewController:(UIViewController *)scanViewController {
     [scanViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate didCancelCardIOProxy:self];
 }
 
 - (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfoProxy *)info inPaymentViewController:(UIViewController *)scanViewController {

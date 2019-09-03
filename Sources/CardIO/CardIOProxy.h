@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CardIOProxyDelegate
 - (void)cardIOProxy:(CardIOProxy *)proxy didFinishWithCardParams:(NSDictionary *)cardParams;
+- (void)didCancelCardIOProxy:(CardIOProxy *)proxy;
 @end
 
 @interface CardIOProxy : NSObject
