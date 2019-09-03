@@ -26,28 +26,18 @@ struct CardNumberFormatter: CardNumberFormatterType {
     func string(from cardNumber: String?) -> CardNumber? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
             let filtered = cardNumber.numberfy()
-            
+
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            let trimmed = String(filtered.unicodeScalars.prefix(16))
+            var trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
             switch brand {
             case .americanExpress, .dinersClub:
-                let formattedNumber = trimmed
-                    .enumerated()
-                    .map { offset, element in
-                        ((offset == 4 || offset == 10) && offset != trimmed.count) ? [" ", element] : [element]
-                    }
-                    .joined()
-                return CardNumber(formatted: String(formattedNumber), brand: brand)
+                trimmed.insert(separator: " ", positions: [4, 10])
+                return CardNumber(formatted: trimmed, brand: brand)
             default:
-                let formattedNumber = trimmed
-                    .enumerated()
-                    .map { offset, element in
-                        (offset != 0 && offset % 4 == 0 && offset != trimmed.count) ? [" ", element] : [element]
-                    }
-                    .joined()
-                return CardNumber(formatted: String(formattedNumber), brand: brand)
+                trimmed.insert(separator: " ", every: 4)
+                return CardNumber(formatted: trimmed, brand: brand)
             }
         }
         return nil

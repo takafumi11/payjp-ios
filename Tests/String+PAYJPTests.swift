@@ -12,9 +12,9 @@ import XCTest
 class String_PAYJPTests: XCTestCase {
 
     private func testNumberfy(cases: [(String, String)]) {
-        for (input, expcted) in cases {
+        for (input, expected) in cases {
             let filtered = input.numberfy()
-            XCTAssertEqual(filtered, expcted)
+            XCTAssertEqual(filtered, expected)
         }
     }
 

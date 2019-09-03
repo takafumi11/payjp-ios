@@ -63,7 +63,7 @@
     }
 }
 
-- (void)inputValidated {
+- (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
     BOOL isValid = [self.cardFormView isValid];
     if (isValid) {
         self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;

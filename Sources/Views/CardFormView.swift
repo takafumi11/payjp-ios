@@ -8,9 +8,9 @@
 
 import UIKit
 
-@objc(PAYCardFormInputDelegate)
-public protocol FormInputDelegate: class {
-    func inputValidated()
+@objc(PAYCardFormViewDelegate)
+public protocol CardFormViewDelegate: class {
+    func isValidChanged(in cardFormView: CardFormView)
 }
 
 @IBDesignable @objcMembers @objc(PAYCardFormView)
@@ -42,7 +42,7 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
-    public weak var delegate: FormInputDelegate?
+    public weak var delegate: CardFormViewDelegate?
 
     // MARK:
 
@@ -83,6 +83,8 @@ public class CardFormView: UIView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
+
+        getAcceptedBrands()
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -97,6 +99,10 @@ public class CardFormView: UIView {
 
     public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
         // TODO: ask the view model
+    }
+
+    public func getAcceptedBrands(tenantId: String? = nil, completion: CardBrandsResult? = nil) {
+        viewModel.getAcceptedBrands(with: tenantId, completion: completion)
     }
 
     public func validateCardForm() -> Bool {
@@ -129,9 +135,28 @@ extension CardFormView: UITextFieldDelegate {
                 break
             }
         }
-        self.delegate?.inputValidated()
+        self.delegate?.isValidChanged(in: self)
 
         return false
+    }
+
+    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+
+        switch textField {
+        case cardNumberTextField:
+            updateCardNumberInput(input: nil)
+        case expirationTextField:
+            updateExpirationInput(input: nil)
+        case cvcTextField:
+            updateCvcInput(input: nil)
+        case cardHolderTextField:
+            updateCardHolderInput(input: nil)
+        default:
+            break
+        }
+        self.delegate?.isValidChanged(in: self)
+
+        return true
     }
 
     /// カード番号の入力フィールドを更新する
@@ -159,6 +184,11 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
+
+        // ブランドが変わったらcvcのチェックを走らせる
+        if viewModel.isBrandChanged {
+            updateCvcInput(input: cvcTextField.text)
+        }
     }
 
     /// 有効期限の入力フィールドを更新する

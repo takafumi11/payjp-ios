@@ -9,6 +9,7 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
+    var isBrandChanged: Bool { get }
     /// カード番号の入力値を更新する
     ///
     /// - Parameter input: カード番号
@@ -33,22 +34,33 @@ protocol CardFormViewViewModelType {
     ///
     /// - Returns: true バリデーションOK
     func isValid() -> Bool
+    /// 利用可能ブランドを取得する
+    ///
+    /// - Parameters:
+    ///   - tenantId: テナントID
+    ///   - completion: 取得結果
+    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
 
-    let cardNumberFormatter: CardNumberFormatterType
-    let cardNumberValidator: CardNumberValidatorType
-    let expirationFormatter: ExpirationFormatterType
-    let expirationValidator: ExpirationValidatorType
-    let expirationExtractor: ExpirationExtractorType
-    let cvcFormatter: CvcFormatterType
-    let cvcValidator: CvcValidatorType
+    private let cardNumberFormatter: CardNumberFormatterType
+    private let cardNumberValidator: CardNumberValidatorType
+    private let expirationFormatter: ExpirationFormatterType
+    private let expirationValidator: ExpirationValidatorType
+    private let expirationExtractor: ExpirationExtractorType
+    private let cvcFormatter: CvcFormatterType
+    private let cvcValidator: CvcValidatorType
+    private let accountsService: AccountsServiceType
 
     private var cardNumber: String? = nil
-    private var monthYear: (String, String)? = nil
+    private var cardBrand: CardBrand = .unknown
+    private var acceptedCardBrands: [CardBrand]? = nil
+    private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
+
+    var isBrandChanged = false
 
     // MARK: - Lifecycle
 
@@ -58,7 +70,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         expirationValidator: ExpirationValidatorType = ExpirationValidator(),
         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
         cvcFormatter: CvcFormatterType = CvcFormatter(),
-        cvcValidator: CvcValidatorType = CvcValidator()) {
+        cvcValidator: CvcValidatorType = CvcValidator(),
+        accountsService: AccountsServiceType = AccountsService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -66,6 +79,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.expirationExtractor = expirationExtractor
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
+        self.accountsService = accountsService
     }
 
     // MARK: - CardFormViewViewModelType
@@ -73,19 +87,35 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: input), let input = input, !input.isEmpty else {
             cardNumber = nil
+            cardBrand = .unknown
+            isBrandChanged = true
             return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
+        isBrandChanged = cardBrand != cardNumberInput.brand
         cardNumber = cardNumberInput.formatted.numberfy()
+        cardBrand = cardNumberInput.brand
 
         if let cardNumber = cardNumber {
-            if !self.cardNumberValidator.isCardNumberLengthValid(cardNumber: cardNumber) {
-                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
-            } else if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+            // 利用可能ブランドのチェック
+            if let acceptedCardBrands = acceptedCardBrands {
+                if cardNumberInput.brand != .unknown && !acceptedCardBrands.contains(cardNumberInput.brand) {
+                    return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+                }
+            }
+            // 桁数チェック
+            if cardNumber.count == cardNumberInput.brand.numberLength {
+                if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+                    return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
+                }
+            } else if cardNumber.count > cardNumberInput.brand.numberLength {
                 return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
-            } else if cardNumberInput.brand == CardBrand.unknown {
+            } else {
+                return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
+            }
+
+            if cardNumberInput.brand == .unknown {
                 return .failure(.cardNumberInvalidBrandError(value: cardNumberInput, isInstant: false))
             }
-            // TODO: 利用可能ブランドかどうかの判定
         }
         return .success(cardNumberInput)
     }
@@ -113,15 +143,19 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func updateCvc(input: String?) -> Result<String, FormError> {
-        guard let cvcInput = self.cvcFormatter.string(from: input), let input = input, !input.isEmpty else {
+        guard var cvcInput = self.cvcFormatter.string(from: input, brand: cardBrand), let input = input, !input.isEmpty else {
             cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
+        }
+        if isBrandChanged {
+            cvcInput = input
         }
         cvc = cvcInput
 
         if let cvc = cvc {
-            if !self.cvcValidator.isValid(cvc: cvc) {
-                return .failure(.cvcInvalidError(value: cvc, isInstant: false))
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+            if !result.validated {
+                return .failure(.cvcInvalidError(value: cvc, isInstant: result.isInstant))
             }
         }
         return .success(cvcInput)
@@ -144,11 +178,24 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             checkCardHolderValid()
     }
 
+    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
+        accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let brands):
+                self.acceptedCardBrands = brands
+                completion?(.success(brands))
+            case .failure(let error):
+                completion?(.failure(error))
+            }
+        }
+    }
+
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
         if let cardNumber = cardNumber {
-            return self.cardNumberValidator.isValid(cardNumber: cardNumber)
+            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: cardBrand)
         }
         return false
     }
@@ -162,7 +209,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     private func checkCvcValid() -> Bool {
         if let cvc = cvc {
-            return self.cvcValidator.isValid(cvc: cvc)
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+            return result.validated
         }
         return false
     }

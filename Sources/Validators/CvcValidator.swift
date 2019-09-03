@@ -10,20 +10,23 @@ import Foundation
 
 protocol CvcValidatorType {
     /// セキュリティコードのバリデーションチェックを行います
-    /// - Parameter cvc: セキュリティコード
-    /// - Returns: true 文字数が3〜4文字である
-    func isValid(cvc: String) -> Bool
+    ///
+    /// - Parameters:
+    ///   - cvc: セキュリティコード
+    ///   - brand: カードブランド
+    /// - Returns: バリデーションOKか、エラー即時反映か
+    func isValid(cvc: String, brand: CardBrand) -> (validated: Bool, isInstant: Bool)
 }
 
 struct CvcValidator: CvcValidatorType {
 
-    func isValid(cvc: String) -> Bool {
+    func isValid(cvc: String, brand: CardBrand) -> (validated: Bool, isInstant: Bool) {
         let filtered = cvc.numberfy()
 
         if cvc.count != filtered.count {
-            return false
+            return (false, false)
         }
-        
-        return 3...4 ~= filtered.count
+
+        return (filtered.count == brand.cvcLength, filtered.count > brand.cvcLength)
     }
 }
