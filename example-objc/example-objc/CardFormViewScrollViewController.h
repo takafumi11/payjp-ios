@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CardFormViewScrollViewController : UIViewController<PAYCardFormInputDelegate>
+@interface CardFormViewScrollViewController : UIViewController<PAYCardFormViewDelegate>
     
 @end
 

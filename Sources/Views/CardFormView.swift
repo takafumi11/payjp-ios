@@ -19,7 +19,7 @@ public class CardFormView: UIView {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             viewModel.updateCardHolderEnabled(enabled: isHolderRequired)
-            self.delegate?.inputValidated()
+            self.delegate?.isValidChanged(in: self)
         }
     }
 

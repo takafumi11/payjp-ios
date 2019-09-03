@@ -28,7 +28,7 @@
     self.cardFormView.delegate = self;
 }
     
-- (void)inputValidated {
+- (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
     BOOL isValid = [self.cardFormView isValid];
     [self.createTokenButton setEnabled:isValid];
 }
