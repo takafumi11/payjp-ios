@@ -18,7 +18,7 @@ public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
-            viewModel.updateCardHolderEnabled(enabled: isHolderRequired)
+            viewModel.update(isCardHolderEnabled: isHolderRequired)
             self.delegate?.isValidChanged(in: self)
         }
     }
@@ -108,7 +108,7 @@ public class CardFormView: UIView {
     }
 
     public func getAcceptedBrands(tenantId: String? = nil, completion: CardBrandsResult? = nil) {
-        viewModel.getAcceptedBrands(with: tenantId, completion: completion)
+        viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
 
     public func validateCardForm() -> Bool {
@@ -175,7 +175,7 @@ extension CardFormView: UITextFieldDelegate {
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
     private func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.updateCardNumber(input: input)
+        let result = viewModel.update(cardNumber: input)
         switch result {
         case let .success(cardNumber):
             cardNumberTextField.text = cardNumber.formatted
@@ -207,7 +207,7 @@ extension CardFormView: UITextFieldDelegate {
     ///   - input: 有効期限
     ///   - forceShowError: エラー表示を強制するか
     private func updateExpirationInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.updateExpiration(input: input)
+        let result = viewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
             expirationTextField.text = expiration
@@ -231,7 +231,7 @@ extension CardFormView: UITextFieldDelegate {
     ///   - input: CVC
     ///   - forceShowError: エラー表示を強制するか
     private func updateCvcInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.updateCvc(input: input)
+        let result = viewModel.update(cvc: input)
         switch result {
         case let .success(cvc):
             cvcTextField.text = cvc
@@ -255,7 +255,7 @@ extension CardFormView: UITextFieldDelegate {
     ///   - input: カード名義
     ///   - forceShowError: エラー表示を強制するか
     private func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.updateCardHolder(input: input)
+        let result = viewModel.update(cardHolder: input)
         switch result {
         case let .success(holderName):
             cardHolderTextField.text = holderName

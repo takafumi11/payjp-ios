@@ -14,7 +14,7 @@ class CardFormViewModelTests: XCTestCase {
     let viewModel = CardFormViewViewModel()
 
     func testUpdateCardNumberEmpty() {
-        let result = viewModel.updateCardNumber(input: "")
+        let result = viewModel.update(cardNumber: "")
 
         switch result {
         case .failure(let error):
@@ -30,7 +30,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardNumberNil() {
-        let result = viewModel.updateCardNumber(input: nil)
+        let result = viewModel.update(cardNumber: nil)
 
         switch result {
         case .failure(let error):
@@ -46,7 +46,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardNumberInvalidLength() {
-        let result = viewModel.updateCardNumber(input: "4242424242")
+        let result = viewModel.update(cardNumber: "4242424242")
 //        let cardNumber = CardNumber(formatted: "4242 4242 42", brand: .visa)
 
         switch result {
@@ -63,7 +63,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardNumberInvalidLuhn() {
-        let result = viewModel.updateCardNumber(input: "4242424242424241")
+        let result = viewModel.update(cardNumber: "4242424242424241")
         //        let cardNumber = CardNumber(formatted: "4242 4242 4242 4241", brand: .visa)
 
         switch result {
@@ -79,26 +79,8 @@ class CardFormViewModelTests: XCTestCase {
         }
     }
 
-    // TODO: ブランド判定を修正してから直す
-//    func testUpdateCardNumberUnknownBrand() {
-//        let result = viewModel.updateCardNumber(input: "0")
-//        //        let cardNumber = CardNumber(formatted: "0", brand: .unknown)
-//
-//        switch result {
-//        case .failure(let error):
-//            switch error {
-//            case .cardNumberInvalidBrandError(value: _, isInstant: true):
-//                break
-//            default:
-//                XCTFail()
-//            }
-//        default:
-//            XCTFail()
-//        }
-//    }
-
     func testUpdateCardNumberSuccess() {
-        let result = viewModel.updateCardNumber(input: "4242424242424242")
+        let result = viewModel.update(cardNumber: "4242424242424242")
 
         switch result {
         case .success(let value):
@@ -111,7 +93,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationEmpty() {
-        let result = viewModel.updateExpiration(input: "")
+        let result = viewModel.update(expiration: "")
 
         switch result {
         case .failure(let error):
@@ -127,7 +109,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationNil() {
-        let result = viewModel.updateExpiration(input: nil)
+        let result = viewModel.update(expiration: nil)
 
         switch result {
         case .failure(let error):
@@ -143,7 +125,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationInvalidMonth() {
-        let result = viewModel.updateExpiration(input: "20")
+        let result = viewModel.update(expiration: "20")
 
         switch result {
         case .failure(let error):
@@ -159,7 +141,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationInvalidYear() {
-        let result = viewModel.updateExpiration(input: "08/10")
+        let result = viewModel.update(expiration: "08/10")
 
         switch result {
         case .failure(let error):
@@ -175,7 +157,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationOneDigitMonth() {
-        let result = viewModel.updateExpiration(input: "1")
+        let result = viewModel.update(expiration: "1")
 
         switch result {
         case .failure(let error):
@@ -191,7 +173,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationSuccess() {
-        let result = viewModel.updateExpiration(input: "12/99")
+        let result = viewModel.update(expiration: "12/99")
 
         switch result {
         case .success(let value):
@@ -203,7 +185,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCvcEmpty() {
-        let result = viewModel.updateCvc(input: "")
+        let result = viewModel.update(cvc: "")
 
         switch result {
         case .failure(let error):
@@ -219,7 +201,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCvcNil() {
-        let result = viewModel.updateCvc(input: nil)
+        let result = viewModel.update(cvc: nil)
 
         switch result {
         case .failure(let error):
@@ -235,7 +217,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCvcInvalid() {
-        let result = viewModel.updateCvc(input: "12")
+        let result = viewModel.update(cvc: "12")
 
         switch result {
         case .failure(let error):
@@ -251,8 +233,8 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCvcSuccess() {
-        let _ = viewModel.updateCardNumber(input: "42")
-        let result = viewModel.updateCvc(input: "123")
+        let _ = viewModel.update(cardNumber: "42")
+        let result = viewModel.update(cvc: "123")
 
         switch result {
         case .success(let value):
@@ -262,11 +244,11 @@ class CardFormViewModelTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testUpdateCvcWhenBrandChanged() {
-        let _ = viewModel.updateCardNumber(input: "4242")
-        let result = viewModel.updateCvc(input: "1234")
-        
+        let _ = viewModel.update(cardNumber: "4242")
+        let result = viewModel.update(cvc: "1234")
+
         switch result {
         case .failure(let error):
             switch error {
@@ -281,7 +263,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardHolderEmpty() {
-        let result = viewModel.updateCardHolder(input: "")
+        let result = viewModel.update(cardHolder: "")
 
         switch result {
         case .failure(let error):
@@ -297,7 +279,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardHolderNil() {
-        let result = viewModel.updateCardHolder(input: nil)
+        let result = viewModel.update(cardHolder: nil)
 
         switch result {
         case .failure(let error):
@@ -313,7 +295,7 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateCardHolderSuccess() {
-        let result = viewModel.updateCardHolder(input: "PAY TARO")
+        let result = viewModel.update(cardHolder: "PAY TARO")
 
         switch result {
         case .success(let value):
@@ -325,47 +307,47 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testIsValidAllValid() {
-        viewModel.updateCardHolderEnabled(enabled: true)
-        
-        let _ = viewModel.updateCardNumber(input: "4242424242424242")
-        let _ = viewModel.updateExpiration(input: "12/99")
-        let _ = viewModel.updateCvc(input: "123")
-        let _ = viewModel.updateCardHolder(input: "PAY TARO")
+        viewModel.update(isCardHolderEnabled: true)
+
+        let _ = viewModel.update(cardNumber: "4242424242424242")
+        let _ = viewModel.update(expiration: "12/99")
+        let _ = viewModel.update(cvc: "123")
+        let _ = viewModel.update(cardHolder: "PAY TARO")
 
         let result = viewModel.isValid()
         XCTAssertTrue(result)
     }
 
     func testIsValidNotAllValid() {
-        viewModel.updateCardHolderEnabled(enabled: true)
-        
-        let _ = viewModel.updateCardNumber(input: "4242424242424242")
-        let _ = viewModel.updateExpiration(input: "12/9")
-        let _ = viewModel.updateCvc(input: "123")
-        let _ = viewModel.updateCardHolder(input: "PAY TARO")
+        viewModel.update(isCardHolderEnabled: true)
+
+        let _ = viewModel.update(cardNumber: "4242424242424242")
+        let _ = viewModel.update(expiration: "12/9")
+        let _ = viewModel.update(cvc: "123")
+        let _ = viewModel.update(cardHolder: "PAY TARO")
 
         let result = viewModel.isValid()
         XCTAssertFalse(result)
     }
-    
+
     func testIsValidAllValidCardHolderDisabled() {
-        viewModel.updateCardHolderEnabled(enabled: false)
-        
-        let _ = viewModel.updateCardNumber(input: "4242424242424242")
-        let _ = viewModel.updateExpiration(input: "12/99")
-        let _ = viewModel.updateCvc(input: "123")
-        
+        viewModel.update(isCardHolderEnabled: false)
+
+        let _ = viewModel.update(cardNumber: "4242424242424242")
+        let _ = viewModel.update(expiration: "12/99")
+        let _ = viewModel.update(cvc: "123")
+
         let result = viewModel.isValid()
         XCTAssertTrue(result)
     }
-    
+
     func testIsValidNotAllValidCardHolderDisabled() {
-        viewModel.updateCardHolderEnabled(enabled: false)
-        
-        let _ = viewModel.updateCardNumber(input: "4242424242424242")
-        let _ = viewModel.updateExpiration(input: "12/99")
-        let _ = viewModel.updateCvc(input: "1")
-        
+        viewModel.update(isCardHolderEnabled: false)
+
+        let _ = viewModel.update(cardNumber: "4242424242424242")
+        let _ = viewModel.update(expiration: "12/99")
+        let _ = viewModel.update(cvc: "1")
+
         let result = viewModel.isValid()
         XCTAssertFalse(result)
     }
