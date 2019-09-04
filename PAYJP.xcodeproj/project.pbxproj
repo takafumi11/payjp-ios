@@ -12,6 +12,7 @@
 		615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF6B1C8C74A1003FB86F /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */; };
 		615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF751C8C76E2003FB86F /* APIClient.swift */; };
+		BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0203E8231F8DCB00FE5635 /* StringProtocol+PAYJP.swift */; };
 		BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */; };
 		BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */; };
 		BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */; };
@@ -59,7 +60,6 @@
 		ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED222C1F22FD1DF90006FB87 /* Localizable.strings */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		ED50836A230FC3AC00C64A7F /* CardFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED508369230FC3AB00C64A7F /* CardFormView.xib */; };
-		ED50838123191B0800C64A7F /* StringProtocol+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50838023191B0800C64A7F /* StringProtocol+PAYJP.swift */; };
 		ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
@@ -112,6 +112,7 @@
 		615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		615AFF6C1C8C74A1003FB86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615AFF751C8C76E2003FB86F /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BE0203E8231F8DCB00FE5635 /* StringProtocol+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJP.swift"; sourceTree = "<group>"; };
 		BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidator.swift; sourceTree = "<group>"; };
 		BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationValidatorTests.swift; sourceTree = "<group>"; };
 		BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewViewModel.swift; sourceTree = "<group>"; };
@@ -163,7 +164,6 @@
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
 		ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJPTests.swift"; sourceTree = "<group>"; };
 		ED508369230FC3AB00C64A7F /* CardFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormView.xib; sourceTree = "<group>"; };
-		ED50838023191B0800C64A7F /* StringProtocol+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJP.swift"; sourceTree = "<group>"; };
 		ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJPTests.swift"; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
@@ -361,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
+				BE0203E8231F8DCB00FE5635 /* StringProtocol+PAYJP.swift */,
 				BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */,
 			);
 			path = Extensions;
@@ -598,12 +599,12 @@
 				322BD1D6225C83CA00D83B5E /* JSONDecoder+PAYJP.swift in Sources */,
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
+				BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */,
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
 				BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
-				ED50838123191B0800C64A7F /* StringProtocol+PAYJP.swift in Sources */,
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				BE21785D22E99CF10098128D /* GetTokenRequest.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
