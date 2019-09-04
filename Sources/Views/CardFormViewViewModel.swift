@@ -45,6 +45,7 @@ protocol CardFormViewViewModelType {
     func presentCardIOIfAvailable(from presentingViewController: UIViewController)
     
     func isCardIOAvailable() -> Bool
+    func registerIsCardIOAvailableChanges(completion: @escaping (Bool) -> Void)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
@@ -69,6 +70,11 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     
     func isCardIOAvailable() -> Bool {
         return CardIOProxy.isCardIOAvailable()
+    }
+    private var isCardIOAvailableCompletion: ((Bool) -> Void)? {
+        didSet {
+            isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
+        }
     }
 
     var isBrandChanged = false
@@ -210,6 +216,10 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         }
     }
     
+    func registerIsCardIOAvailableChanges(completion: @escaping (Bool) -> Void) {
+        self.isCardIOAvailableCompletion = completion
+    }
+    
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
@@ -244,8 +254,7 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     // MARK: - CardIOProxyDelegate
     
     func didCancel(_ proxy: CardIOProxy) {
-        // TODO: Implementation
-        debugPrint(#function)
+        isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
     }
     
     func cardIOProxy(_ proxy: CardIOProxy, didFinishWithCardParams cardParams: [AnyHashable : Any]) {

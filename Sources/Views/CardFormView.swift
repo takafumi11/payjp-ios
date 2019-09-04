@@ -73,7 +73,11 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
-        ocrButton.isHidden = !viewModel.isCardIOAvailable()
+        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
+            guard let self = self else { return }
+            print(isAvailable ? "available" : "not available")
+            self.ocrButton.isHidden = !isAvailable
+        }
 
         cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
         expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
