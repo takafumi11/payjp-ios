@@ -75,7 +75,6 @@ public class CardFormView: UIView {
         backgroundColor = .clear
         viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
             guard let self = self else { return }
-            print(isAvailable ? "available" : "not available")
             self.ocrButton.isHidden = !isAvailable
         }
 
