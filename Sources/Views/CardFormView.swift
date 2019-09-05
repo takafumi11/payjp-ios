@@ -73,6 +73,10 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
+        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
+            guard let self = self else { return }
+            self.ocrButton.isHidden = !isAvailable
+        }
 
         cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
         expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
@@ -111,6 +115,10 @@ public class CardFormView: UIView {
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
         return isValid
+    }
+
+    @IBAction func onTapOcrButton(_ sender: Any) {
+        viewModel.presentCardIOIfAvailable(from: self.parentViewController!)
     }
 }
 

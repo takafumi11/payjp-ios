@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CardIOProxy.h"
 
 FOUNDATION_EXPORT double PAYJPVersionNumber;
 FOUNDATION_EXPORT const unsigned char PAYJPVersionString[];
