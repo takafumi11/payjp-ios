@@ -70,7 +70,7 @@
 }
 
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
-    BOOL isValid = [self.cardFormView isValid];
+    BOOL isValid = self.cardFormView.isValid;
     if (isValid) {
         self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;
         [self.createTokenButton setUserInteractionEnabled:YES];
@@ -82,8 +82,8 @@
     }
 }
 
-- (IBAction)cardHolderSwitchChanged:(id)sender {
-    self.cardFormView.isHolderRequired = [sender isOn];
+- (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
+    self.cardFormView.isHolderRequired = sender.isOn;
     [self.tableView reloadData];
 }
 

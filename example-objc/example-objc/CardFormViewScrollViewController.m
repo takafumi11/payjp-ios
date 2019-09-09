@@ -12,7 +12,7 @@
 @interface CardFormViewScrollViewController ()
 
 @property (weak, nonatomic) IBOutlet PAYCardFormView *cardFormView;
-    @property (weak, nonatomic) IBOutlet UIButton *createTokenButton;
+@property (weak, nonatomic) IBOutlet UIButton *createTokenButton;
     
 - (IBAction)cardHolderSwitchChanged:(id)sender;
 - (IBAction)createToken:(id)sender;
@@ -29,12 +29,12 @@
 }
     
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
-    BOOL isValid = [self.cardFormView isValid];
-    [self.createTokenButton setEnabled:isValid];
+    BOOL isValid = self.cardFormView.isValid;
+    self.createTokenButton.enabled = isValid;
 }
 
-- (IBAction)cardHolderSwitchChanged:(id)sender {
-    self.cardFormView.isHolderRequired = [sender isOn];
+- (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
+    self.cardFormView.isHolderRequired = sender.isOn;
 }
     
 - (IBAction)createToken:(id)sender {
