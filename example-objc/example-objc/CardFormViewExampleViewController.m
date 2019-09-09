@@ -14,7 +14,9 @@
 @property (weak, nonatomic) IBOutlet PAYCardFormView *cardFormView;
 @property (weak, nonatomic) IBOutlet UILabel *tokenIdLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *createTokenButton;
-
+    
+- (IBAction)cardHolderSwitchChanged:(id)sender;
+    
 @property (strong, nonatomic) PAYAPIClient *payjpClient;
 
 @end
@@ -51,20 +53,24 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // Create Token
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if (indexPath.section == 1 && indexPath.row == 1) {
         // TODO: call createToken
     }
-    // Create Token Anyway
-    if (indexPath.section == 1 && indexPath.row == 1) {
+    // Valdate and Create Token
+    if (indexPath.section == 1 && indexPath.row == 2) {
         BOOL isValid = [self.cardFormView validateCardForm];
         if (isValid) {
             // TODO: call createToken
         }
     }
 }
+    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
 
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
-    BOOL isValid = [self.cardFormView isValid];
+    BOOL isValid = self.cardFormView.isValid;
     if (isValid) {
         self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;
         [self.createTokenButton setUserInteractionEnabled:YES];
@@ -74,6 +80,11 @@
         [self.createTokenButton setUserInteractionEnabled:NO];
         self.createTokenButton.contentView.alpha = 0.5;
     }
+}
+
+- (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
+    self.cardFormView.isHolderRequired = sender.isOn;
+    [self.tableView reloadData];
 }
 
 @end

@@ -12,24 +12,28 @@ protocol CardFormViewViewModelType {
     var isBrandChanged: Bool { get }
     /// カード番号の入力値を更新する
     ///
-    /// - Parameter input: カード番号
+    /// - Parameter cardNumber: カード番号
     /// - Returns: 入力結果
-    func updateCardNumber(input: String?) -> Result<CardNumber, FormError>
+    func update(cardNumber: String?) -> Result<CardNumber, FormError>
     /// 有効期限の入力値を更新する
     ///
-    /// - Parameter input: 有効期限
+    /// - Parameter expiration: 有効期限
     /// - Returns: 入力結果
-    func updateExpiration(input: String?) -> Result<String, FormError>
+    func update(expiration: String?) -> Result<String, FormError>
     /// CVCの入力値を更新する
     ///
-    /// - Parameter input: CVC
+    /// - Parameter cvc: CVC
     /// - Returns: 入力結果
-    func updateCvc(input: String?) -> Result<String, FormError>
+    func update(cvc: String?) -> Result<String, FormError>
     /// カード名義の入力値を更新する
     ///
-    /// - Parameter input: カード名義
+    /// - Parameter cardHolder: カード名義
     /// - Returns: 入力結果
-    func updateCardHolder(input: String?) -> Result<String, FormError>
+    func update(cardHolder: String?) -> Result<String, FormError>
+    /// カード名義入力の有効を更新する
+    ///
+    /// - Parameter isCardHolderEnabled: true 有効にする
+    func update(isCardHolderEnabled: Bool)
     /// 全フィールドのバリデーションチェック
     ///
     /// - Returns: true バリデーションOK
@@ -39,9 +43,8 @@ protocol CardFormViewViewModelType {
     /// - Parameters:
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
-    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
+    func fetchAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
     
-
     func presentCardIOIfAvailable(from presentingViewController: UIViewController)
     
     func isCardIOAvailable() -> Bool
@@ -76,6 +79,8 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
             isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
         }
     }
+    
+    private var isCardHolderEnabled: Bool = false
 
     var isBrandChanged = false
 
@@ -103,20 +108,20 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
 
     // MARK: - CardFormViewViewModelType
 
-    func updateCardNumber(input: String?) -> Result<CardNumber, FormError> {
-        guard let cardNumberInput = self.cardNumberFormatter.string(from: input), let input = input, !input.isEmpty else {
-            cardNumber = nil
-            cardBrand = .unknown
-            isBrandChanged = true
+    func update(cardNumber: String?) -> Result<CardNumber, FormError> {
+        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber), let cardNumber = cardNumber, !cardNumber.isEmpty else {
+            self.cardNumber = nil
+            self.cardBrand = .unknown
+            self.isBrandChanged = true
             return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
-        isBrandChanged = cardBrand != cardNumberInput.brand
-        cardNumber = cardNumberInput.formatted.numberfy()
-        cardBrand = cardNumberInput.brand
+        self.isBrandChanged = self.cardBrand != cardNumberInput.brand
+        self.cardNumber = cardNumberInput.formatted.numberfy()
+        self.cardBrand = cardNumberInput.brand
 
-        if let cardNumber = cardNumber {
+        if let cardNumber = self.cardNumber {
             // 利用可能ブランドのチェック
-            if let acceptedCardBrands = acceptedCardBrands {
+            if let acceptedCardBrands = self.acceptedCardBrands {
                 if cardNumberInput.brand != .unknown && !acceptedCardBrands.contains(cardNumberInput.brand) {
                     return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
                 }
@@ -139,19 +144,19 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         return .success(cardNumberInput)
     }
 
-    func updateExpiration(input: String?) -> Result<String, FormError> {
-        guard let expirationInput = self.expirationFormatter.string(from: input), let input = input, !input.isEmpty else {
-            monthYear = nil
+    func update(expiration: String?) -> Result<String, FormError> {
+        guard let expirationInput = self.expirationFormatter.string(from: expiration), let expiration = expiration, !expiration.isEmpty else {
+            self.monthYear = nil
             return .failure(.expirationEmptyError(value: nil, isInstant: false))
         }
 
         do {
-            monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
+            self.monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
         } catch {
             return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
         }
 
-        if let (month, year) = monthYear {
+        if let (month, year) = self.monthYear {
             if !self.expirationValidator.isValid(month: month, year: year) {
                 return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
             }
@@ -161,18 +166,18 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         return .success(expirationInput)
     }
 
-    func updateCvc(input: String?) -> Result<String, FormError> {
-        guard var cvcInput = self.cvcFormatter.string(from: input, brand: cardBrand), let input = input, !input.isEmpty else {
-            cvc = nil
+    func update(cvc: String?) -> Result<String, FormError> {
+        guard var cvcInput = self.cvcFormatter.string(from: cvc, brand: self.cardBrand), let cvc = cvc, !cvc.isEmpty else {
+            self.cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
-        if isBrandChanged {
-            cvcInput = input
+        if self.isBrandChanged {
+            cvcInput = cvc
         }
-        cvc = cvcInput
+        self.cvc = cvcInput
 
-        if let cvc = cvc {
-            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+        if let cvc = self.cvc {
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: self.cardBrand)
             if !result.validated {
                 return .failure(.cvcInvalidError(value: cvc, isInstant: result.isInstant))
             }
@@ -180,24 +185,28 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         return .success(cvcInput)
     }
 
-    func updateCardHolder(input: String?) -> Result<String, FormError> {
-        guard let holderInput = input, let input = input, !input.isEmpty else {
-            cardHolder = nil
+    func update(cardHolder: String?) -> Result<String, FormError> {
+        guard let holderInput = cardHolder, let cardHolder = cardHolder, !cardHolder.isEmpty else {
+            self.cardHolder = nil
             return .failure(.cardHolderEmptyError(value: nil, isInstant: false))
         }
-        cardHolder = holderInput
+        self.cardHolder = holderInput
 
         return .success(holderInput)
+    }
+
+    func update(isCardHolderEnabled: Bool) {
+        self.isCardHolderEnabled = isCardHolderEnabled
     }
 
     func isValid() -> Bool {
         return checkCardNumberValid() &&
             checkExpirationValid() &&
             checkCvcValid() &&
-            checkCardHolderValid()
+            (!self.isCardHolderEnabled || checkCardHolderValid())
     }
 
-    func getAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
+    func fetchAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
         accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -223,29 +232,29 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
-        if let cardNumber = cardNumber {
-            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: cardBrand)
+        if let cardNumber = self.cardNumber {
+            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: self.cardBrand)
         }
         return false
     }
 
     private func checkExpirationValid() -> Bool {
-        if let (month, year) = monthYear {
+        if let (month, year) = self.monthYear {
             return self.expirationValidator.isValid(month: month, year: year)
         }
         return false
     }
 
     private func checkCvcValid() -> Bool {
-        if let cvc = cvc {
-            let result = self.cvcValidator.isValid(cvc: cvc, brand: cardBrand)
+        if let cvc = self.cvc {
+            let result = self.cvcValidator.isValid(cvc: cvc, brand: self.cardBrand)
             return result.validated
         }
         return false
     }
 
     private func checkCardHolderValid() -> Bool {
-        if let cardHolder = cardHolder {
+        if let cardHolder = self.cardHolder {
             return !cardHolder.isEmpty
         }
         return false

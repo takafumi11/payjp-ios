@@ -537,8 +537,8 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				Base,
 				ja,
 			);
 			mainGroup = 615AFF511C8C74A1003FB86F;

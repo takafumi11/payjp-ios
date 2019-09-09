@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,6 +61,26 @@
                                             <segue destination="OBK-L6-feX" kind="show" id="Ayr-3u-eWY"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Wjs-DO-9wD" style="IBUITableViewCellStyleDefault" id="PPe-vf-fBh">
+                                        <rect key="frame" x="0.0" y="123" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PPe-vf-fBh" id="5uk-kw-vMh">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form View with ScrollView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wjs-DO-9wD">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="yyD-Mo-wif" kind="show" id="xZY-Ax-DCw"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -72,7 +93,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QhP-7o-mCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-695" y="511"/>
+            <point key="canvasLocation" x="-695.20000000000005" y="510.49475262368821"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gyF-8G-bTb">
@@ -350,26 +371,34 @@
                         <sections>
                             <tableViewSection headerTitle="Card Information" id="kqf-49-3of">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="EaW-oQ-Agg">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="380" id="EaW-oQ-Agg">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="380"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EaW-oQ-Agg" id="o5g-B2-T55">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="379.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
-                                                    <rect key="frame" x="16" y="11" width="343" height="21.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="NO"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-ij-hx2">
+                                                    <rect key="frame" x="16" y="11" width="343" height="360.5"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="360.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="width" secondItem="wlZ-ij-hx2" secondAttribute="width" id="wPv-aq-MeF"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="72d-mz-CTM" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="top" constant="11" id="JH5-2p-2Dg"/>
-                                                <constraint firstAttribute="trailing" secondItem="72d-mz-CTM" secondAttribute="trailing" constant="16" id="mr6-2s-pv7"/>
-                                                <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="11" id="o2g-QL-Uvu"/>
-                                                <constraint firstItem="72d-mz-CTM" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leading" constant="16" id="xTi-a1-kgd"/>
+                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leadingMargin" id="28d-HL-5Qv"/>
+                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="topMargin" id="FaC-W6-znz"/>
+                                                <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="8" id="fMG-iY-jpo"/>
+                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="trailing" secondItem="o5g-B2-T55" secondAttribute="trailingMargin" id="mAg-zA-ucO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -377,8 +406,32 @@
                             </tableViewSection>
                             <tableViewSection id="dlf-uk-QuC">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Khm-wJ-h1C">
+                                        <rect key="frame" x="0.0" y="471.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Khm-wJ-h1C" id="Idw-5U-aIz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="カード名義入力を有効にする" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0BD-Qr-CYs">
+                                                    <rect key="frame" x="16" y="11" width="226" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TWX-ew-U7E">
+                                                    <rect key="frame" x="312" y="6" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="cardHolderSwitchChanged:" destination="OBK-L6-feX" eventType="valueChanged" id="h2W-eo-q5W"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XUl-Z5-Mmf" style="IBUITableViewCellStyleDefault" id="c6c-l5-GFl">
-                                        <rect key="frame" x="0.0" y="135.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="515.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c6c-l5-GFl" id="2Vh-7D-lYX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -395,13 +448,13 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WBk-1o-9kM" style="IBUITableViewCellStyleDefault" id="fhy-GU-cv1" userLabel="Create Token Anyway Button">
-                                        <rect key="frame" x="0.0" y="179.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="559.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhy-GU-cv1" id="yM0-1L-mmc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Create Token Anyway" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBk-1o-9kM">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Validate Form and Create Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBk-1o-9kM">
                                                     <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -416,14 +469,14 @@
                             <tableViewSection headerTitle="last token id" footerTitle="Get token by token id. Fill it by creating token." id="5pa-fi-Rv6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="DNC-Pu-dxa" style="IBUITableViewCellStyleDefault" id="RbB-3k-qeA">
-                                        <rect key="frame" x="0.0" y="287" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="667" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RbB-3k-qeA" id="Qch-mM-Yd0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNC-Pu-dxa">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -448,7 +501,100 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP6-o4-hRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="510"/>
+            <point key="canvasLocation" x="248.80000000000001" y="509.59520239880067"/>
+        </scene>
+        <!--Card Form View-->
+        <scene sceneID="gKo-Li-Yif">
+            <objects>
+                <viewController title="Card Form View" id="yyD-Mo-wif" customClass="CardFormViewScrollViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IVY-Tz-TeI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFV-NB-jMz">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="esE-UU-05N">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="522"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormView">
+                                                <rect key="frame" x="16" y="16" width="343" height="351"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UrL-qJ-wer">
+                                                <rect key="frame" x="16" y="399" width="343" height="107"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-Y6-bbS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード名義入力を有効にする" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm9-nZ-elQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="294" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oc4-A4-eW8">
+                                                                <rect key="frame" x="294" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="cardHolderSwitchChanged:" destination="yyD-Mo-wif" eventType="valueChanged" id="M8f-zf-p5c"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lY7-bv-Jwq">
+                                                        <rect key="frame" x="0.0" y="39" width="343" height="30"/>
+                                                        <state key="normal" title="Create Token"/>
+                                                        <connections>
+                                                            <action selector="createToken:" destination="yyD-Mo-wif" eventType="touchUpInside" id="B9t-IW-FTS"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-Gk-Qdj">
+                                                        <rect key="frame" x="0.0" y="77" width="343" height="30"/>
+                                                        <state key="normal" title="Validate Form And Create Token"/>
+                                                        <connections>
+                                                            <action selector="validateAndCreateToken:" destination="yyD-Mo-wif" eventType="touchUpInside" id="CcT-cQ-kX1"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="UrL-qJ-wer" firstAttribute="top" secondItem="uRA-zd-x0N" secondAttribute="bottom" constant="32" id="4oa-1b-EvK"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="esE-UU-05N" secondAttribute="trailing" id="3vW-39-cat"/>
+                                    <constraint firstAttribute="bottom" secondItem="esE-UU-05N" secondAttribute="bottom" id="EHC-45-iZb"/>
+                                    <constraint firstItem="esE-UU-05N" firstAttribute="leading" secondItem="VFV-NB-jMz" secondAttribute="leading" id="Vo5-1e-XO7"/>
+                                    <constraint firstItem="esE-UU-05N" firstAttribute="width" secondItem="VFV-NB-jMz" secondAttribute="width" id="YZg-jV-IWb"/>
+                                    <constraint firstAttribute="trailing" secondItem="esE-UU-05N" secondAttribute="trailing" id="qTS-Yv-R4v"/>
+                                    <constraint firstAttribute="bottom" secondItem="esE-UU-05N" secondAttribute="bottom" id="sme-g8-Qi0"/>
+                                    <constraint firstItem="esE-UU-05N" firstAttribute="top" secondItem="VFV-NB-jMz" secondAttribute="top" id="yhy-iS-8eL"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VFV-NB-jMz" secondAttribute="trailing" id="1Sa-Vt-6Rk"/>
+                            <constraint firstItem="VFV-NB-jMz" firstAttribute="top" secondItem="PyC-fF-fD8" secondAttribute="top" id="CR9-3c-KMy"/>
+                            <constraint firstItem="VFV-NB-jMz" firstAttribute="bottom" secondItem="PyC-fF-fD8" secondAttribute="bottom" id="Ccz-1a-FdU"/>
+                            <constraint firstItem="VFV-NB-jMz" firstAttribute="leading" secondItem="IVY-Tz-TeI" secondAttribute="leading" id="qi9-Gp-pAk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PyC-fF-fD8"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardFormView" destination="uRA-zd-x0N" id="hym-HV-YS0"/>
+                        <outlet property="createTokenButton" destination="lY7-bv-Jwq" id="4yW-N9-AXe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFh-Dg-tFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="248.80000000000001" y="1235.5322338830586"/>
         </scene>
     </scenes>
 </document>
