@@ -268,5 +268,12 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     
     func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         debugPrint(cardParams)
+        let expiration = expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue)
+        update(expiration: expiration)
+        
+        update(cardNumber: cardParams.number)
+        update(cvc: cardParams.cvc)
+        
+        // TODO: Update the results to UIs
     }
 }
