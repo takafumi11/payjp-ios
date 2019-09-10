@@ -266,7 +266,7 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
     }
     
-    func cardIOProxy(_ proxy: CardIOProxy, didFinishWithCardParams cardParams: [AnyHashable : Any]) {
-        // TODO: Implementation
+    func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
+        debugPrint(cardParams)
     }
 }
