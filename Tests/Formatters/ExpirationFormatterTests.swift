@@ -55,4 +55,37 @@ class ExpirationFormatterTests: XCTestCase {
         let output = formatter.string(from: input)
         XCTAssertNil(output)
     }
+    
+    func testOnlyMonth() {
+        let month = 1
+        let output = formatter.string(month: month, year: nil)
+        XCTAssertEqual(output, "01/")
+    }
+    
+    func testMonthWithYear() {
+        let month = 1
+        let year = 2022
+        let output = formatter.string(month: month, year: year)
+        XCTAssertEqual(output, "01/22")
+    }
+    
+    func testMonthOverflowWithZero() {
+        let month = 0
+        let year = 2022
+        let output = formatter.string(month: month, year: year)
+        XCTAssertNil(output)
+    }
+    
+    func testMonthOverflowWithThirteen() {
+        let month = 13
+        let year = 2022
+        let output = formatter.string(month: month, year: year)
+        XCTAssertNil(output)
+    }
+    
+    func testEmptyMonth() {
+        let year = 2022
+        let output = formatter.string(month: nil, year: year)
+        XCTAssertNil(output)
+    }
 }
