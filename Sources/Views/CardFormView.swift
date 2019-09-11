@@ -278,7 +278,7 @@ extension CardFormView: UITextFieldDelegate {
 }
 
 extension CardFormView: CardIOProxyDelegate {
-    public func didCancel(_ proxy: CardIOProxy) {
+    public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
     
