@@ -45,6 +45,9 @@ public class CardFormView: UIView {
 
     private var contentView: UIView!
     public weak var delegate: CardFormViewDelegate?
+    
+    private var cardIOProxy: CardIOProxy!
+    private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
 
     // MARK:
 
@@ -75,10 +78,6 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
-        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
-            guard let self = self else { return }
-            self.ocrButton.isHidden = !isAvailable
-        }
 
         cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
         expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
@@ -90,6 +89,9 @@ public class CardFormView: UIView {
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
 
+        cardIOProxy = CardIOProxy(delegate: self)
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+        
         getAcceptedBrands()
     }
 
@@ -120,7 +122,9 @@ public class CardFormView: UIView {
     }
 
     @IBAction func onTapOcrButton(_ sender: Any) {
-        viewModel.presentCardIOIfAvailable(from: self.parentViewController!)
+        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
     }
 }
 
@@ -270,5 +274,17 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
+    }
+}
+
+extension CardFormView: CardIOProxyDelegate {
+    public func didCancel(_ proxy: CardIOProxy) {
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+    }
+    
+    public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
+        updateCardNumberInput(input: cardParams.number)
+        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
+        updateCvcInput(input: cardParams.cvc)
     }
 }
