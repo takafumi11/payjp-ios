@@ -14,6 +14,7 @@
 		32CB11321FDA7E3D007AD8F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */; };
 		32CB113B1FDA8507007AD8F5 /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CB113A1FDA8507007AD8F5 /* PAYJP.framework */; };
 		ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */; };
+		ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		32CB11331FDA7E3D007AD8F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32CB113A1FDA8507007AD8F5 /* PAYJP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PAYJP.framework; path = Carthage/Build/iOS/PAYJP.framework; sourceTree = "<group>"; };
 		ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewExampleViewController.swift; sourceTree = "<group>"; };
+		ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewScrollViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				32CB11271FDA7E3D007AD8F5 /* AppDelegate.swift */,
 				32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */,
 				ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */,
+				ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */,
 				32CB11331FDA7E3D007AD8F5 /* Info.plist */,
 				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
 				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */,
 				32CB112A1FDA7E3D007AD8F5 /* ViewController.swift in Sources */,
 				ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */,
 				32CB11281FDA7E3D007AD8F5 /* AppDelegate.swift in Sources */,

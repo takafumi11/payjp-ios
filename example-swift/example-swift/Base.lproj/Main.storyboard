@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -76,6 +77,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="5zR-1c-XlU" kind="show" id="1hi-74-GgM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -91,10 +95,10 @@
             </objects>
             <point key="canvasLocation" x="-1433" y="502"/>
         </scene>
-        <!--Card Form Vie Example View Controller-->
+        <!--Card Form View-->
         <scene sceneID="C34-he-aJ6">
             <objects>
-                <tableViewController id="wg1-r3-0O2" customClass="CardFormVieExampleViewController" customModule="example_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Card Form View" id="wg1-r3-0O2" customClass="CardFormVieExampleViewController" customModule="example_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ByJ-Ji-wtV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,6 +232,99 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eac-qq-FBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-378.39999999999998" y="501.49925037481262"/>
+        </scene>
+        <!--Card Form View-->
+        <scene sceneID="D48-TI-h8d">
+            <objects>
+                <viewController title="Card Form View" id="5zR-1c-XlU" customClass="CardFormViewScrollViewController" customModule="example_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sFh-l4-2td">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iq5-CG-r17">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tvR-ZZ-Qlw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="522"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcR-UC-zeG">
+                                                <rect key="frame" x="16" y="16" width="343" height="351"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HbA-gz-Twn">
+                                                <rect key="frame" x="16" y="399" width="343" height="107"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eje-nQ-xHx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード名義入力を有効にする" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnX-4A-Tpl">
+                                                                <rect key="frame" x="0.0" y="0.0" width="294" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dV1-zI-fq4">
+                                                                <rect key="frame" x="294" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="cardHolderSwitchChanged:" destination="5zR-1c-XlU" eventType="valueChanged" id="hAO-Jg-Vle"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uh2-Rm-h2d">
+                                                        <rect key="frame" x="0.0" y="39" width="343" height="30"/>
+                                                        <state key="normal" title="Create Token"/>
+                                                        <connections>
+                                                            <action selector="createToken:" destination="5zR-1c-XlU" eventType="touchUpInside" id="fVi-OU-Rpz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhK-Rl-R8Y">
+                                                        <rect key="frame" x="0.0" y="77" width="343" height="30"/>
+                                                        <state key="normal" title="Validate Form And Create Token"/>
+                                                        <connections>
+                                                            <action selector="validateAndCreateToken:" destination="5zR-1c-XlU" eventType="touchUpInside" id="10r-X1-iMI"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="HbA-gz-Twn" firstAttribute="top" secondItem="XcR-UC-zeG" secondAttribute="bottom" constant="32" id="FAw-fI-ejq"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tvR-ZZ-Qlw" firstAttribute="top" secondItem="Iq5-CG-r17" secondAttribute="top" id="418-44-tPp"/>
+                                    <constraint firstItem="tvR-ZZ-Qlw" firstAttribute="leading" secondItem="Iq5-CG-r17" secondAttribute="leading" id="9QP-R4-RQ3"/>
+                                    <constraint firstAttribute="bottom" secondItem="tvR-ZZ-Qlw" secondAttribute="bottom" id="BAo-FS-WAm"/>
+                                    <constraint firstAttribute="trailing" secondItem="tvR-ZZ-Qlw" secondAttribute="trailing" id="Yrn-Zw-QuS"/>
+                                    <constraint firstItem="tvR-ZZ-Qlw" firstAttribute="width" secondItem="Iq5-CG-r17" secondAttribute="width" id="hD8-LC-Oyd"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Iq5-CG-r17" firstAttribute="top" secondItem="bd8-hY-Yo6" secondAttribute="top" id="9ap-QV-iMv"/>
+                            <constraint firstAttribute="trailing" secondItem="Iq5-CG-r17" secondAttribute="trailing" id="B36-65-Gjm"/>
+                            <constraint firstItem="Iq5-CG-r17" firstAttribute="leading" secondItem="sFh-l4-2td" secondAttribute="leading" id="Cor-9r-8Ac"/>
+                            <constraint firstItem="Iq5-CG-r17" firstAttribute="trailing" secondItem="bd8-hY-Yo6" secondAttribute="trailing" id="Ed0-iz-YNt"/>
+                            <constraint firstItem="Iq5-CG-r17" firstAttribute="leading" secondItem="bd8-hY-Yo6" secondAttribute="leading" id="pvS-y0-VAm"/>
+                            <constraint firstItem="Iq5-CG-r17" firstAttribute="bottom" secondItem="bd8-hY-Yo6" secondAttribute="bottom" id="xjp-Ze-Ucb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bd8-hY-Yo6"/>
+                    </view>
+                    <connections>
+                        <outlet property="createTokenButton" destination="Uh2-Rm-h2d" id="MdB-Gc-jcF"/>
+                        <outlet property="formContentView" destination="XcR-UC-zeG" id="CKx-UG-6gQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGZ-rB-MKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="1209.4452773613195"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RMR-ub-41I">
