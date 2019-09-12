@@ -23,10 +23,10 @@ public class CardFormView: UIView {
         }
     }
 
-    @IBOutlet private weak var cardNumberTitleLabel: UILabel!
-    @IBOutlet private weak var expirationTitleLabel: UILabel!
-    @IBOutlet private weak var cvcTitleLabel: UILabel!
-    @IBOutlet private weak var cardHolderTitleLabel: UILabel!
+//    @IBOutlet private weak var cardNumberTitleLabel: UILabel!
+//    @IBOutlet private weak var expirationTitleLabel: UILabel!
+//    @IBOutlet private weak var cvcTitleLabel: UILabel!
+//    @IBOutlet private weak var cardHolderTitleLabel: UILabel!
 
     @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cardNumberTextField: UITextField!
@@ -81,10 +81,10 @@ public class CardFormView: UIView {
 
         backgroundColor = .clear
 
-        cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
-        expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
-        cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
-        cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
+//        cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
+//        expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
+//        cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
+//        cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
