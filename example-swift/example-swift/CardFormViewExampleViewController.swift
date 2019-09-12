@@ -13,7 +13,6 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
     @IBOutlet weak var formContentView: UIView!
     @IBOutlet weak var createTokenButton: UITableViewCell!
 
-    private let payjpClient: PAYJP.APIClient = PAYJP.APIClient.shared
     private var cardFormView: CardFormView!
 
     override func viewDidLoad() {
@@ -37,6 +36,19 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         self.createTokenButton.contentView.alpha = 0.5
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var sectionName: String? = nil
+        switch section {
+        case 0:
+            sectionName = NSLocalizedString("example_card_information_section", tableName: nil, comment: "")
+        case 2:
+            sectionName = NSLocalizedString("example_token_id_section", tableName: nil, comment: "")
+        default:
+            break;
+        }
+        return sectionName;
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -52,11 +64,11 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
             }
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func isValidChanged(in cardFormView: CardFormView) {
         let isValid = self.cardFormView.isValid;
         if isValid {

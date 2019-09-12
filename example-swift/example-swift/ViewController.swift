@@ -9,8 +9,6 @@
 import UIKit
 import PAYJP
 
-let PAYJPPublicKey = "pk_test_0383a1b8f91e8a6e3ea0e2a9"
-
 class ViewController: UITableViewController {
     
     @IBOutlet weak var fieldCardNumber: UITextField!
@@ -30,10 +28,6 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // You can set the locale of error message like this.
-//        payjpClient.locale = Locale.current
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

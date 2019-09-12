@@ -12,7 +12,6 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate {
     @IBOutlet weak var formContentView: UIView!
     @IBOutlet weak var createTokenButton: UIButton!
 
-    private let payjpClient: PAYJP.APIClient = PAYJP.APIClient.shared
     private var cardFormView: CardFormView!
 
     override func viewDidLoad() {
