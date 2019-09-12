@@ -52,7 +52,11 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
             }
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func isValidChanged(in cardFormView: CardFormView) {
         let isValid = self.cardFormView.isValid;
         if isValid {

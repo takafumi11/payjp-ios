@@ -110,21 +110,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BmP-UO-nns">
-                                                    <rect key="frame" x="16" y="11" width="343" height="350"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="360.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioR-dl-F1t">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="350"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="360.5"/>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="ioR-dl-F1t" firstAttribute="width" secondItem="BmP-UO-nns" secondAttribute="width" id="MAn-dU-uti"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ioR-dl-F1t" secondAttribute="bottom" id="wNw-sg-CCF"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="BmP-UO-nns" firstAttribute="top" secondItem="ynl-fn-mWS" secondAttribute="topMargin" id="4EK-2H-snS"/>
+                                                <constraint firstAttribute="bottom" secondItem="BmP-UO-nns" secondAttribute="bottom" constant="8" id="JKV-AT-W2s"/>
                                                 <constraint firstItem="BmP-UO-nns" firstAttribute="leading" secondItem="ynl-fn-mWS" secondAttribute="leadingMargin" id="RAm-tg-SPZ"/>
                                                 <constraint firstItem="BmP-UO-nns" firstAttribute="trailing" secondItem="ynl-fn-mWS" secondAttribute="trailingMargin" id="UzK-tm-fyg"/>
                                             </constraints>
@@ -204,7 +203,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xcv-4P-L4F">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
