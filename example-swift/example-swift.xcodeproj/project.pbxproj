@@ -13,6 +13,7 @@
 		32CB112F1FDA7E3D007AD8F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */; };
 		32CB11321FDA7E3D007AD8F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */; };
 		32CB113B1FDA8507007AD8F5 /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CB113A1FDA8507007AD8F5 /* PAYJP.framework */; };
+		ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		32CB11311FDA7E3D007AD8F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32CB11331FDA7E3D007AD8F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32CB113A1FDA8507007AD8F5 /* PAYJP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PAYJP.framework; path = Carthage/Build/iOS/PAYJP.framework; sourceTree = "<group>"; };
+		ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				32CB11271FDA7E3D007AD8F5 /* AppDelegate.swift */,
 				32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */,
+				ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */,
 				32CB11331FDA7E3D007AD8F5 /* Info.plist */,
 				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
 				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32CB112A1FDA7E3D007AD8F5 /* ViewController.swift in Sources */,
+				ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */,
 				32CB11281FDA7E3D007AD8F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +317,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -322,6 +328,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -330,7 +337,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -339,6 +348,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
