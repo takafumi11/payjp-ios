@@ -23,12 +23,8 @@ public class CardFormView: UIView {
         }
     }
 
-//    @IBOutlet private weak var cardNumberTitleLabel: UILabel!
-//    @IBOutlet private weak var expirationTitleLabel: UILabel!
-//    @IBOutlet private weak var cvcTitleLabel: UILabel!
-//    @IBOutlet private weak var cardHolderTitleLabel: UILabel!
-
     @IBOutlet private weak var brandLogoImage: UIImageView!
+    
     @IBOutlet private weak var cardNumberTextField: UITextField!
     @IBOutlet private weak var expirationTextField: UITextField!
     @IBOutlet private weak var cvcTextField: UITextField!
@@ -45,6 +41,7 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
+    private var editingField: UITextField!
     public weak var delegate: CardFormViewDelegate?
     
     private var cardIOProxy: CardIOProxy!
@@ -80,11 +77,6 @@ public class CardFormView: UIView {
         }
 
         backgroundColor = .clear
-
-//        cardNumberTitleLabel.text = "payjp_card_form_number_label".localized
-//        expirationTitleLabel.text = "payjp_card_form_expiration_label".localized
-//        cvcTitleLabel.text = "payjp_card_form_cvc_label".localized
-//        cardHolderTitleLabel.text = "payjp_card_form_holder_name_label".localized
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
@@ -142,6 +134,7 @@ public class CardFormView: UIView {
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
+        self.delegate?.isValidChanged(in: self)
         return isValid
     }
     
@@ -195,6 +188,10 @@ extension CardFormView: UITextFieldDelegate {
         self.delegate?.isValidChanged(in: self)
 
         return true
+    }
+
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.editingField = textField
     }
 
     /// カード番号の入力フィールドを更新する

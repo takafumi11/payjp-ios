@@ -108,11 +108,12 @@
         [self.createTokenButton setUserInteractionEnabled:NO];
         self.createTokenButton.contentView.alpha = 0.5;
     }
+    [self.tableView reloadData];
+    [self.cardFormView focusEditingField];
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
     self.cardFormView.isHolderRequired = sender.isOn;
-    [self.tableView reloadData];
 }
 
 #pragma MARK: - Alert
