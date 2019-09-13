@@ -30,7 +30,7 @@
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
 }
-    
+        
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *sectionName;
     switch (section) {
@@ -108,8 +108,9 @@
         [self.createTokenButton setUserInteractionEnabled:NO];
         self.createTokenButton.contentView.alpha = 0.5;
     }
-    [self.tableView reloadData];
-    [self.cardFormView focusEditingField];
+    // セル内の高さを更新
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {

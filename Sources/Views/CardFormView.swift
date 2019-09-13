@@ -18,6 +18,7 @@ public class CardFormView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
+            holderSeparator.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
             self.delegate?.isValidChanged(in: self)
         }
@@ -36,12 +37,12 @@ public class CardFormView: UIView {
     @IBOutlet private weak var cardHolderErrorLabel: UILabel!
 
     @IBOutlet private weak var holderContainer: UIStackView!
-
+    @IBOutlet private weak var holderSeparator: UIView!
+    
     @IBOutlet private weak var ocrButton: UIButton!
     @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
-    private var editingField: UITextField!
     public weak var delegate: CardFormViewDelegate?
     
     private var cardIOProxy: CardIOProxy!
@@ -188,10 +189,6 @@ extension CardFormView: UITextFieldDelegate {
         self.delegate?.isValidChanged(in: self)
 
         return true
-    }
-
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.editingField = textField
     }
 
     /// カード番号の入力フィールドを更新する

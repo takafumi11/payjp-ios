@@ -371,18 +371,18 @@
                         <sections>
                             <tableViewSection headerTitle="Card Information" id="kqf-49-3of">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="380" id="EaW-oQ-Agg">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="380"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="250" id="EaW-oQ-Agg">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EaW-oQ-Agg" id="o5g-B2-T55">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="379.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-ij-hx2">
-                                                    <rect key="frame" x="16" y="11" width="343" height="360.5"/>
+                                                    <rect key="frame" x="16" y="11" width="359" height="230.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="360.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="230.5"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
@@ -396,8 +396,8 @@
                                             <constraints>
                                                 <constraint firstItem="wlZ-ij-hx2" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leadingMargin" id="28d-HL-5Qv"/>
                                                 <constraint firstItem="wlZ-ij-hx2" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="topMargin" id="FaC-W6-znz"/>
+                                                <constraint firstAttribute="trailing" secondItem="wlZ-ij-hx2" secondAttribute="trailing" id="OTs-3J-gkc"/>
                                                 <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="8" id="fMG-iY-jpo"/>
-                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="trailing" secondItem="o5g-B2-T55" secondAttribute="trailingMargin" id="mAg-zA-ucO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -406,7 +406,7 @@
                             <tableViewSection id="dlf-uk-QuC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Khm-wJ-h1C">
-                                        <rect key="frame" x="0.0" y="471.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="341.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Khm-wJ-h1C" id="Idw-5U-aIz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -430,7 +430,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XUl-Z5-Mmf" style="IBUITableViewCellStyleDefault" id="c6c-l5-GFl">
-                                        <rect key="frame" x="0.0" y="515.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="385.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c6c-l5-GFl" id="2Vh-7D-lYX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -447,7 +447,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WBk-1o-9kM" style="IBUITableViewCellStyleDefault" id="fhy-GU-cv1" userLabel="Create Token Anyway Button">
-                                        <rect key="frame" x="0.0" y="559.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="429.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhy-GU-cv1" id="yM0-1L-mmc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -468,7 +468,7 @@
                             <tableViewSection headerTitle="last token id" footerTitle="Get token by token id. Fill it by creating token." id="5pa-fi-Rv6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="DNC-Pu-dxa" style="IBUITableViewCellStyleDefault" id="RbB-3k-qeA">
-                                        <rect key="frame" x="0.0" y="667" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="537" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RbB-3k-qeA" id="Qch-mM-Yd0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
