@@ -103,7 +103,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber), let cardNumber = cardNumber, !cardNumber.isEmpty else {
             self.cardNumber = nil
             self.cardBrand = .unknown
-            self.isBrandChanged = true
+            self.isBrandChanged = false
             return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isBrandChanged = self.cardBrand != cardNumberInput.brand
@@ -162,7 +162,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             self.cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
-        if self.cardBrand != .unknown && self.isBrandChanged  {
+        if self.isBrandChanged  {
             cvcInput = cvc
         }
         self.cvc = cvcInput
