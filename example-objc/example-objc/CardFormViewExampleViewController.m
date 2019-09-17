@@ -109,8 +109,10 @@
         self.createTokenButton.contentView.alpha = 0.5;
     }
     // セル内の高さを更新
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
+    [UIView performWithoutAnimation:^{
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+    }];
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
