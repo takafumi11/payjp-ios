@@ -296,7 +296,7 @@ extension CardFormView: UITextFieldDelegate {
     /// - Parameter brand: カードブランド
     private func updateCvcIcon(brand: CardBrand?) {
         guard let brand = brand else {
-            cvcIconImage.image = "icon_card_cvc_4".image
+            cvcIconImage.image = "icon_card_cvc_3".image
             return
         }
         cvcIconImage.image = brand.cvcIconResourceName.image
