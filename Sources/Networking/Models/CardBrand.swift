@@ -63,23 +63,32 @@ extension CardBrand {
             return 3
         }
     }
-    
+
     var logoResourceName: String {
         switch self {
         case .visa:
-            return "visa"
+            return "logo_visa"
         case .mastercard:
-            return "master"
+            return "logo_master"
         case .jcb:
-            return "jcb"
+            return "logo_jcb"
         case .americanExpress:
-            return "amex"
+            return "logo_amex"
         case .dinersClub:
-            return "diners"
+            return "logo_diners"
         case .discover:
-            return "discover"
+            return "logo_discover"
         case .unknown:
-            return "default"
+            return "icon_card"
+        }
+    }
+
+    var cvcIconResourceName: String {
+        switch self {
+        case .americanExpress, .unknown:
+            return "icon_card_cvc_4"
+        default:
+            return "icon_card_cvc_3"
         }
     }
 }

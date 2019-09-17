@@ -25,6 +25,7 @@ public class CardFormView: UIView {
     }
 
     @IBOutlet private weak var brandLogoImage: UIImageView!
+    @IBOutlet private weak var cvcIconImage: UIImageView!
     
     @IBOutlet private weak var cardNumberTextField: UITextField!
     @IBOutlet private weak var expirationTextField: UITextField!
@@ -40,7 +41,6 @@ public class CardFormView: UIView {
     @IBOutlet private weak var holderSeparator: UIView!
     
     @IBOutlet private weak var ocrButton: UIButton!
-    @IBOutlet private weak var cvcInformationButton: UIButton!
 
     private var contentView: UIView!
     public weak var delegate: CardFormViewDelegate?
@@ -86,6 +86,10 @@ public class CardFormView: UIView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+        
+        ocrButton.imageView?.contentMode = .scaleAspectFit
+        ocrButton.contentHorizontalAlignment = .fill
+        ocrButton.contentVerticalAlignment = .fill
         
         getAcceptedBrands()
     }
@@ -203,6 +207,7 @@ extension CardFormView: UITextFieldDelegate {
             cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
             updateBrandLogo(brand: cardNumber.brand)
+            updateCvcIcon(brand: cardNumber.brand)
             focusNextInputField(currentField: cardNumberTextField)
         case let .failure(error):
             switch error {
@@ -212,6 +217,7 @@ extension CardFormView: UITextFieldDelegate {
                 cardNumberTextField.text = value?.formatted
                 cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
                 updateBrandLogo(brand: value?.brand)
+                updateCvcIcon(brand: value?.brand)
             default:
                 break
             }
@@ -229,7 +235,7 @@ extension CardFormView: UITextFieldDelegate {
     /// - Parameter brand: カードブランド
     private func updateBrandLogo(brand: CardBrand?) {
         guard let brand = brand else {
-            brandLogoImage.image = "default".image
+            brandLogoImage.image = "icon_card".image
             return
         }
         brandLogoImage.image = brand.logoResourceName.image
@@ -283,6 +289,17 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cvcErrorLabel.isHidden = cvcTextField.text == nil
+    }
+    
+    /// cvcアイコンの表示を更新する
+    ///
+    /// - Parameter brand: カードブランド
+    private func updateCvcIcon(brand: CardBrand?) {
+        guard let brand = brand else {
+            cvcIconImage.image = "icon_card_cvc_4".image
+            return
+        }
+        cvcIconImage.image = brand.cvcIconResourceName.image
     }
 
     /// カード名義の入力フィールドを更新する

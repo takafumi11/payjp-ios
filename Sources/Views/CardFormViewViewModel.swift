@@ -162,7 +162,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             self.cvc = nil
             return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
-        if self.isBrandChanged {
+        if self.cardBrand != .unknown && self.isBrandChanged  {
             cvcInput = cvc
         }
         self.cvc = cvcInput

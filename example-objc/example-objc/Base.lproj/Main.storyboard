@@ -399,6 +399,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="wlZ-ij-hx2" secondAttribute="trailing" id="OTs-3J-gkc"/>
                                                 <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="8" id="fMG-iY-jpo"/>
                                             </constraints>
+                                            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
