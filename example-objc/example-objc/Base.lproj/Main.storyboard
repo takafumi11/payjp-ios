@@ -515,20 +515,26 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="esE-UU-05N">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="522"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="478"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormView">
-                                                <rect key="frame" x="16" y="16" width="343" height="351"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="347"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormView">
+                                                        <rect key="frame" x="16" y="8" width="359" height="331"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="0.0"/>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UrL-qJ-wer">
-                                                <rect key="frame" x="16" y="399" width="343" height="107"/>
+                                                <rect key="frame" x="0.0" y="355" width="375" height="123"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-Y6-bbS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                                        <rect key="frame" x="16" y="8" width="343" height="31"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード名義入力を有効にする" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm9-nZ-elQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="294" height="31"/>
@@ -545,26 +551,23 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lY7-bv-Jwq">
-                                                        <rect key="frame" x="0.0" y="39" width="343" height="30"/>
+                                                        <rect key="frame" x="16" y="47" width="343" height="30"/>
                                                         <state key="normal" title="Create Token"/>
                                                         <connections>
                                                             <action selector="createToken:" destination="yyD-Mo-wif" eventType="touchUpInside" id="B9t-IW-FTS"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-Gk-Qdj">
-                                                        <rect key="frame" x="0.0" y="77" width="343" height="30"/>
+                                                        <rect key="frame" x="16" y="85" width="343" height="30"/>
                                                         <state key="normal" title="Validate Form And Create Token"/>
                                                         <connections>
                                                             <action selector="validateAndCreateToken:" destination="yyD-Mo-wif" eventType="touchUpInside" id="CcT-cQ-kX1"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="UrL-qJ-wer" firstAttribute="top" secondItem="uRA-zd-x0N" secondAttribute="bottom" constant="32" id="4oa-1b-EvK"/>
-                                        </constraints>
-                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
