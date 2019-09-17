@@ -23,4 +23,6 @@ Pod::Spec.new do |s|
   s.source_files = ['Sources/**/*.{h,m,swift,xib,strings}']
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
+  s.resources = 'Assets.xcassets'
+  
 end

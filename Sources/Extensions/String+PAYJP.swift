@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
 
+    /// 画像を取得
+    var image: UIImage? {
+        return UIImage(named: self, in: Bundle(for: PAYJPSDK.self), compatibleWith: nil)
+    }
+
     /// 多言語対応
     var localized: String {
-        return NSLocalizedString(self, bundle:Bundle(for: PAYJPSDK.self), comment: "")
+        return NSLocalizedString(self, bundle: Bundle(for: PAYJPSDK.self), comment: "")
     }
 
     /// 文字列から数値のみを返す

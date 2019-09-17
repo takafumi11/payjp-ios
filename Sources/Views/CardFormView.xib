@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormView" customModule="PAYJP" customModuleProvider="target">
             <connections>
+                <outlet property="brandLogoImage" destination="6O6-nL-6Y3" id="XVc-Pz-Lds"/>
                 <outlet property="cardHolderErrorLabel" destination="NaF-fa-61z" id="TBj-9a-JB1"/>
                 <outlet property="cardHolderTextField" destination="GUy-pg-STB" id="CiK-nS-Q0V"/>
                 <outlet property="cardHolderTitleLabel" destination="OLn-al-5TE" id="pMA-Sv-e3X"/>
@@ -48,8 +49,15 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v9u-ED-moM">
                                     <rect key="frame" x="0.0" y="28.333333333333329" width="352" height="30"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="6O6-nL-6Y3">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="8QW-lq-brs"/>
+                                                <constraint firstAttribute="width" constant="50" id="uQn-r8-72v"/>
+                                            </constraints>
+                                        </imageView>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="T4u-qt-kxC">
-                                            <rect key="frame" x="0.0" y="0.0" width="314" height="30"/>
+                                            <rect key="frame" x="58" y="0.0" width="256" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" textContentType="cc-number"/>
@@ -218,4 +226,7 @@
             <point key="canvasLocation" x="82.608695652173921" y="460.59782608695656"/>
         </view>
     </objects>
+    <resources>
+        <image name="default" width="225" height="225"/>
+    </resources>
 </document>
