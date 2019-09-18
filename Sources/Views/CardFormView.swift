@@ -26,7 +26,7 @@ public class CardFormView: UIView {
 
     @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cvcIconImage: UIImageView!
-    
+
     @IBOutlet private weak var cardNumberTextField: UITextField!
     @IBOutlet private weak var expirationTextField: UITextField!
     @IBOutlet private weak var cvcTextField: UITextField!
@@ -39,7 +39,7 @@ public class CardFormView: UIView {
 
     @IBOutlet private weak var holderContainer: UIStackView!
     @IBOutlet private weak var holderSeparator: UIView!
-    
+
     @IBOutlet private weak var ocrButton: UIButton!
 
     private var contentView: UIView!
@@ -90,7 +90,7 @@ public class CardFormView: UIView {
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
-        
+
         getAcceptedBrands()
     }
 
@@ -181,6 +181,7 @@ extension CardFormView: UITextFieldDelegate {
         switch textField {
         case cardNumberTextField:
             updateCardNumberInput(input: nil)
+            updateCvcInput(input: cvcTextField.text)
         case expirationTextField:
             updateExpirationInput(input: nil)
         case cvcTextField:
@@ -225,7 +226,7 @@ extension CardFormView: UITextFieldDelegate {
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
 
         // ブランドが変わったらcvcのチェックを走らせる
-        if viewModel.isBrandChanged {
+        if viewModel.isBrandChanged || input?.isEmpty == true {
             updateCvcInput(input: cvcTextField.text)
         }
     }
@@ -290,7 +291,7 @@ extension CardFormView: UITextFieldDelegate {
         }
         cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
-    
+
     /// cvcアイコンの表示を更新する
     ///
     /// - Parameter brand: カードブランド

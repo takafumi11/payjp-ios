@@ -164,6 +164,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
         if self.isBrandChanged  {
             cvcInput = cvc
+            self.isBrandChanged = false
         }
         self.cvc = cvcInput
 

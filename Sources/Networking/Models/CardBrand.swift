@@ -85,7 +85,7 @@ extension CardBrand {
 
     var cvcIconResourceName: String {
         switch self {
-        case .americanExpress, .unknown:
+        case .americanExpress:
             return "icon_card_cvc_4"
         default:
             return "icon_card_cvc_3"
