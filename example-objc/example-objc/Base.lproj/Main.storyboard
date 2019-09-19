@@ -379,25 +379,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-ij-hx2">
-                                                    <rect key="frame" x="16" y="11" width="359" height="230.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="230.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="width" secondItem="wlZ-ij-hx2" secondAttribute="width" id="wPv-aq-MeF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" id="HHg-tu-tyW"/>
+                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="leading" secondItem="wlZ-ij-hx2" secondAttribute="leading" id="IMz-oe-XxD"/>
+                                                        <constraint firstItem="72d-mz-CTM" firstAttribute="top" secondItem="wlZ-ij-hx2" secondAttribute="top" id="Lts-gN-veL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="72d-mz-CTM" secondAttribute="trailing" id="OD7-jI-JBV"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leadingMargin" id="28d-HL-5Qv"/>
-                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="topMargin" id="FaC-W6-znz"/>
-                                                <constraint firstAttribute="trailing" secondItem="wlZ-ij-hx2" secondAttribute="trailing" id="OTs-3J-gkc"/>
-                                                <constraint firstAttribute="bottom" secondItem="72d-mz-CTM" secondAttribute="bottom" constant="8" id="fMG-iY-jpo"/>
+                                                <constraint firstAttribute="trailing" secondItem="wlZ-ij-hx2" secondAttribute="trailing" id="KF0-Fw-aPk"/>
+                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="leading" secondItem="o5g-B2-T55" secondAttribute="leading" id="LnE-PU-EjZ"/>
+                                                <constraint firstItem="wlZ-ij-hx2" firstAttribute="top" secondItem="o5g-B2-T55" secondAttribute="top" id="NSS-0k-V7x"/>
+                                                <constraint firstAttribute="bottom" secondItem="wlZ-ij-hx2" secondAttribute="bottom" id="bhW-nn-kae"/>
                                             </constraints>
                                             <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                         </tableViewCellContentView>
@@ -515,23 +518,22 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="esE-UU-05N">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="478"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="470"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="347"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormView">
-                                                        <rect key="frame" x="16" y="8" width="359" height="331"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
-                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="0.0"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UrL-qJ-wer">
-                                                <rect key="frame" x="0.0" y="355" width="375" height="123"/>
+                                                <rect key="frame" x="0.0" y="347" width="375" height="123"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-Y6-bbS">
                                                         <rect key="frame" x="16" y="8" width="343" height="31"/>
