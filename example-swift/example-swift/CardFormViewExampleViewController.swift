@@ -16,8 +16,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
     private var cardFormView: CardFormView!
 
     override func viewDidLoad() {
-        // Carthageを使用している関係でstoryboardでCardFormViewを指定できないため
-        // storyboardに設置しているViewにaddSubviewする形で実装している
+        
         let x: CGFloat = self.formContentView.bounds.origin.x
         let y: CGFloat = self.formContentView.bounds.origin.y
 
