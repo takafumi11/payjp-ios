@@ -15,7 +15,7 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate {
     private var cardFormView: CardFormView!
 
     override func viewDidLoad() {
-
+        
         let x: CGFloat = self.formContentView.bounds.origin.x
         let y: CGFloat = self.formContentView.bounds.origin.y
 
