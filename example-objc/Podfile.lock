@@ -1,0 +1,16 @@
+PODS:
+  - PAYJP (0.6.0)
+
+DEPENDENCIES:
+  - PAYJP
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - PAYJP
+
+SPEC CHECKSUMS:
+  PAYJP: 70d2ea7946b7fb9c7b66852a4024122570c05b6b
+
+PODFILE CHECKSUM: 33494a2846e61bc19d8fb789b93fd9cd6eea1fd6
+
+COCOAPODS: 1.7.5
