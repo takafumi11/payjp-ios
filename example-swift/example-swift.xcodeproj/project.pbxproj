@@ -13,6 +13,9 @@
 		32CB112F1FDA7E3D007AD8F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */; };
 		32CB11321FDA7E3D007AD8F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */; };
 		32CB113B1FDA8507007AD8F5 /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CB113A1FDA8507007AD8F5 /* PAYJP.framework */; };
+		ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */; };
+		ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */; };
+		ED5085C1232A1A2B00C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5085C3232A1A2B00C64A7F /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,10 @@
 		32CB11311FDA7E3D007AD8F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32CB11331FDA7E3D007AD8F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32CB113A1FDA8507007AD8F5 /* PAYJP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PAYJP.framework; path = Carthage/Build/iOS/PAYJP.framework; sourceTree = "<group>"; };
+		ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewExampleViewController.swift; sourceTree = "<group>"; };
+		ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewScrollViewController.swift; sourceTree = "<group>"; };
+		ED5085C2232A1A2B00C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED5085C4232A1A3200C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +67,11 @@
 			children = (
 				32CB11271FDA7E3D007AD8F5 /* AppDelegate.swift */,
 				32CB112E1FDA7E3D007AD8F5 /* Assets.xcassets */,
+				ED50839223278BB800C64A7F /* CardFormViewExampleViewController.swift */,
+				ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */,
 				32CB11331FDA7E3D007AD8F5 /* Info.plist */,
 				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
+				ED5085C3232A1A2B00C64A7F /* Localizable.strings */,
 				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
 				32CB11291FDA7E3D007AD8F5 /* ViewController.swift */,
 			);
@@ -120,6 +130,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 32CB111B1FDA7E3D007AD8F5;
 			productRefGroup = 32CB11251FDA7E3D007AD8F5 /* Products */;
@@ -137,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32CB11321FDA7E3D007AD8F5 /* LaunchScreen.storyboard in Resources */,
+				ED5085C1232A1A2B00C64A7F /* Localizable.strings in Resources */,
 				32CB112F1FDA7E3D007AD8F5 /* Assets.xcassets in Resources */,
 				32CB112D1FDA7E3D007AD8F5 /* Main.storyboard in Resources */,
 			);
@@ -167,7 +179,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */,
 				32CB112A1FDA7E3D007AD8F5 /* ViewController.swift in Sources */,
+				ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */,
 				32CB11281FDA7E3D007AD8F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +207,15 @@
 			path = .;
 			sourceTree = "<group>";
 		};
+		ED5085C3232A1A2B00C64A7F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED5085C2232A1A2B00C64A7F /* ja */,
+				ED5085C4232A1A3200C64A7F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -200,6 +223,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -260,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -313,7 +338,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -322,6 +349,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -330,7 +358,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -339,6 +369,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import PAYJP;
+
+let PAYJPPublicKey = "pk_test_0383a1b8f91e8a6e3ea0e2a9"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+
+        PAYJPSDK.publicKey = PAYJPPublicKey;
+        PAYJPSDK.locale = Locale.current
+
         return true
     }
 
