@@ -182,6 +182,7 @@ extension CardFormView: UITextFieldDelegate {
             cardNumberTextField.text = cardNumber.formatted
             cardNumberErrorLabel.text = nil
             updateBrandLogo(brand: cardNumber.brand)
+            focusNextInputField(currentField: cardNumberTextField)
         case let .failure(error):
             switch error {
             case let .cardNumberEmptyError(value, instant),
@@ -224,6 +225,7 @@ extension CardFormView: UITextFieldDelegate {
         case let .success(expiration):
             expirationTextField.text = expiration
             expirationErrorLabel.text = nil
+            focusNextInputField(currentField: expirationTextField)
         case let .failure(error):
             switch error {
             case let .expirationEmptyError(value, instant),
@@ -248,6 +250,7 @@ extension CardFormView: UITextFieldDelegate {
         case let .success(cvc):
             cvcTextField.text = cvc
             cvcErrorLabel.text = nil
+            focusNextInputField(currentField: cvcTextField)
         case let .failure(error):
             switch error {
             case let .cvcEmptyError(value, instant),
@@ -282,5 +285,28 @@ extension CardFormView: UITextFieldDelegate {
             }
         }
         cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
+    }
+
+    /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
+    ///
+    /// - Parameter currentField: 現在のTextField
+    private func focusNextInputField(currentField: UITextField) {
+
+        switch currentField {
+        case cardNumberTextField:
+            if cardNumberTextField.isFirstResponder {
+                expirationTextField.becomeFirstResponder()
+            }
+        case expirationTextField:
+            if expirationTextField.isFirstResponder {
+                cvcTextField.becomeFirstResponder()
+            }
+        case cvcTextField:
+            if cvcTextField.isFirstResponder && isHolderRequired {
+                cardHolderTextField.becomeFirstResponder()
+            }
+        default:
+            break
+        }
     }
 }
