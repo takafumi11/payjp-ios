@@ -42,11 +42,12 @@ typedef NS_ENUM(NSInteger, ColorTheme) {
     
     self.cardFormView.delegate = self;
     
-    self.list = @[@"Nomal",@"Red", @"Blue", @"Dark"];
+    self.list = @[@"Nomal", @"Red", @"Blue", @"Dark"];
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
+    self.selectColorField.delegate = self;
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, 40)];
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:self action:nil];
@@ -171,6 +172,10 @@ typedef NS_ENUM(NSInteger, ColorTheme) {
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return self.list[row];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return NO;
 }
 
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
