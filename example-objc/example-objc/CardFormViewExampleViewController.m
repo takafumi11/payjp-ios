@@ -14,9 +14,25 @@
 @property (weak, nonatomic) IBOutlet PAYCardFormView *cardFormView;
 @property (weak, nonatomic) IBOutlet UILabel *tokenIdLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *createTokenButton;
-    
+@property (weak, nonatomic) IBOutlet UITextField *selectColorField;
+
 - (IBAction)cardHolderSwitchChanged:(id)sender;
     
+@property (strong, nonatomic) PAYAPIClient *payjpClient;
+
+@property (strong, nonatomic) NSArray *list;
+@property (strong, nonatomic) UIPickerView *pickerView;
+
+typedef NS_ENUM(NSInteger, ColorTheme) {
+    Nomal,
+    Red,
+    Blue,
+    Dark
+};
+#define GetColorThemeText(type) ColorThemeTextList[type]
+#define GetColorTheme(typeText) (ColorTheme)[ColorThemeTextList indexOfObject:typeText]
+#define ColorThemeTextList @[@"Nomal",@"Red",@"Blue",@"Dark"]
+
 @end
 
 @implementation CardFormViewExampleViewController
@@ -26,13 +42,57 @@
     
     self.cardFormView.delegate = self;
     
-    // style
-    PAYCardFormStyle *redStyle = [[PAYCardFormStyle alloc] initWithFontColor:@"ff4500" cursorColor:@"ff4500"];
-    [self.cardFormView applyWithStyle:redStyle];
+    self.list = @[@"Nomal",@"Red", @"Blue", @"Dark"];
+    self.pickerView = [[UIPickerView alloc] init];
+    self.pickerView.delegate = self;
+    self.pickerView.dataSource = self;
+    self.pickerView.showsSelectionIndicator = YES;
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, 40)];
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone target:self action:@selector(colorSelected:)];
+    [toolbar setItems:@[spaceItem, doneItem]];
+    
+    self.selectColorField.inputView = self.pickerView;
+    self.selectColorField.inputAccessoryView = toolbar;
     
     self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
+}
+
+-(void)colorSelected:(id)sender {
+    [self.selectColorField endEditing:YES];
+    NSString *selected = self.list[[self.pickerView selectedRowInComponent:0]];
+    self.selectColorField.text = selected;
+    ColorTheme theme = GetColorTheme(selected);
+    
+    switch (theme) {
+            case Red:{
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithFontColor:@"ff4500" cursorColor:@"ff4500"];
+                [self.cardFormView applyWithStyle:style];
+                self.cardFormView.backgroundColor = UIColor.clearColor;
+                break;
+            }
+            case Blue:{
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithFontColor:@"0000ff" cursorColor:@"0000ff"];
+                [self.cardFormView applyWithStyle:style];
+                self.cardFormView.backgroundColor = UIColor.clearColor;
+                break;
+            }
+            case Dark:{
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithFontColor:@"ffffff" cursorColor:@"ffffff"];
+                [self.cardFormView applyWithStyle:style];
+                self.cardFormView.backgroundColor = [UIColor colorWithRed:(CGFloat)61/255 green:(CGFloat)61/255 blue:(CGFloat)61/255 alpha:1];
+                break;
+            }
+        default:{
+            PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithFontColor:@"000000" cursorColor:@"0c5ffa"];
+            [self.cardFormView applyWithStyle:style];
+            self.cardFormView.backgroundColor = UIColor.clearColor;
+            break;
+        }
+    }
 }
         
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -99,6 +159,18 @@
     
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return self.list.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.list[row];
 }
 
 - (void)isValidChangedIn:(PAYCardFormView *)cardFormView {

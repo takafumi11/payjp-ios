@@ -467,12 +467,29 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MTf-yB-iWB" userLabel="Create Token Anyway Button">
+                                        <rect key="frame" x="0.0" y="473.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MTf-yB-iWB" id="0Oz-qm-aQL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Color" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cy7-tt-tBj">
+                                                    <rect key="frame" x="16" y="7" width="343" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="last token id" footerTitle="Get token by token id. Fill it by creating token." id="5pa-fi-Rv6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="DNC-Pu-dxa" style="IBUITableViewCellStyleDefault" id="RbB-3k-qeA">
-                                        <rect key="frame" x="0.0" y="537" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="581" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RbB-3k-qeA" id="Qch-mM-Yd0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -499,7 +516,8 @@
                     <connections>
                         <outlet property="cardFormView" destination="72d-mz-CTM" id="HQC-2G-c0b"/>
                         <outlet property="createTokenButton" destination="c6c-l5-GFl" id="SLp-4e-fKZ"/>
-                        <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="XT4-rW-pVj"/>
+                        <outlet property="selectColorField" destination="Cy7-tt-tBj" id="LmJ-AN-mQH"/>
+                        <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="ka4-yu-WpG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP6-o4-hRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
