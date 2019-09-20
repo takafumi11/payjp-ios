@@ -204,7 +204,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PAYJP/PAYJP.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -213,7 +213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
