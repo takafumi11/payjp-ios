@@ -142,7 +142,22 @@ public class CardFormView: UIView {
         self.delegate?.isValidChanged(in: self)
         return isValid
     }
-    
+
+    public func apply(style: FormStyle) {
+        let fontColor = UIColor(hex: style.fontColor)
+        let cursorColor = UIColor(hex: style.cursorColor)
+        // font
+        cardNumberTextField.textColor = fontColor
+        expirationTextField.textColor = fontColor
+        cvcTextField.textColor = fontColor
+        cardHolderTextField.textColor = fontColor
+        // cursor
+        cardNumberTextField.tintColor = cursorColor
+        expirationTextField.tintColor = cursorColor
+        cvcTextField.tintColor = cursorColor
+        cardHolderTextField.tintColor = cursorColor
+    }
+
     @IBAction func onTapOcrButton(_ sender: Any) {
         if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
             cardIOProxy.presentCardIO(from: viewController)

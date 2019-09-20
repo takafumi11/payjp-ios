@@ -26,6 +26,10 @@
     
     self.cardFormView.delegate = self;
     
+    // style
+    PAYCardFormStyle *redStyle = [[PAYCardFormStyle alloc] initWithFontColor:@"ff4500" cursorColor:@"ff4500"];
+    [self.cardFormView applyWithStyle:redStyle];
+    
     self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
