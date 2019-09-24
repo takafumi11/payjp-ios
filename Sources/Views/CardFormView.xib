@@ -52,7 +52,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="M23-cb-EDY"/>
                                             </constraints>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" textContentType="cc-number"/>
                                         </textField>
@@ -96,7 +96,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="iUn-Hz-T5P"/>
                                             </constraints>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                         </textField>
@@ -130,7 +130,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="AZ0-nT-5aF"/>
                                             </constraints>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" secureTextEntry="YES"/>
                                         </textField>
@@ -170,7 +170,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="Rlj-Z3-MHF"/>
                                             </constraints>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="name"/>
                                         </textField>

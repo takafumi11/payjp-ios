@@ -541,9 +541,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormViewLabelStyle">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
@@ -590,6 +589,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="esE-UU-05N" secondAttribute="trailing" id="3vW-39-cat"/>
                                     <constraint firstAttribute="bottom" secondItem="esE-UU-05N" secondAttribute="bottom" id="EHC-45-iZb"/>
@@ -611,7 +611,7 @@
                         <viewLayoutGuide key="safeArea" id="PyC-fF-fD8"/>
                     </view>
                     <connections>
-                        <outlet property="cardFormView" destination="uRA-zd-x0N" id="hym-HV-YS0"/>
+                        <outlet property="cardFormView" destination="uRA-zd-x0N" id="2R8-DD-cXO"/>
                         <outlet property="createTokenButton" destination="lY7-bv-Jwq" id="4yW-N9-AXe"/>
                     </connections>
                 </viewController>

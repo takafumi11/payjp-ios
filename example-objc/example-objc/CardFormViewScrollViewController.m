@@ -11,7 +11,7 @@
 
 @interface CardFormViewScrollViewController ()
 
-@property (weak, nonatomic) IBOutlet PAYCardFormView *cardFormView;
+@property (weak, nonatomic) IBOutlet PAYCardFormViewLabelStyle *cardFormView;
 @property (weak, nonatomic) IBOutlet UIButton *createTokenButton;
     
 - (IBAction)cardHolderSwitchChanged:(id)sender;
