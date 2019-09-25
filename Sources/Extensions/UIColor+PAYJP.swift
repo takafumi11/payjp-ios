@@ -20,4 +20,12 @@ extension UIColor {
     convenience init(hex: String) {
         self.init(hex: hex, alpha: 1.0)
     }
+    
+    var hexString: String {
+        guard let components = self.cgColor.components else { return "000000" }
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+        return String(format: "%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
+    }
 }

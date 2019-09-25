@@ -79,6 +79,12 @@ public class CardFormView: UIView {
 
         backgroundColor = .clear
 
+        // placeholder
+        cardNumberTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_number_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        expirationTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_expiration_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cvcTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_cvc_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cardHolderTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_holder_name_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
         cvcTextField.delegate = self
@@ -144,7 +150,7 @@ public class CardFormView: UIView {
     }
 
     public func apply(style: FormStyle) {
-        let fontColor = UIColor(hex: style.fontColor)
+        let fontColor = UIColor(hex: style.inputFontColor)
         let cursorColor = UIColor(hex: style.cursorColor)
         // font
         cardNumberTextField.textColor = fontColor

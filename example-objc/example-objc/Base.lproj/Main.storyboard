@@ -477,6 +477,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Color" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cy7-tt-tBj">
                                                     <rect key="frame" x="16" y="7" width="343" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -536,7 +537,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="esE-UU-05N">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="470"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="508"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
@@ -550,7 +551,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UrL-qJ-wer">
-                                                <rect key="frame" x="0.0" y="347" width="375" height="123"/>
+                                                <rect key="frame" x="0.0" y="347" width="375" height="161"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-Y6-bbS">
                                                         <rect key="frame" x="16" y="8" width="343" height="31"/>
@@ -583,6 +584,13 @@
                                                             <action selector="validateAndCreateToken:" destination="yyD-Mo-wif" eventType="touchUpInside" id="CcT-cQ-kX1"/>
                                                         </connections>
                                                     </button>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Color" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWe-7X-jUk">
+                                                        <rect key="frame" x="16" y="123" width="343" height="30"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
                                                 </subviews>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
                                             </stackView>
@@ -613,6 +621,7 @@
                     <connections>
                         <outlet property="cardFormView" destination="uRA-zd-x0N" id="2R8-DD-cXO"/>
                         <outlet property="createTokenButton" destination="lY7-bv-Jwq" id="4yW-N9-AXe"/>
+                        <outlet property="selectColorField" destination="iWe-7X-jUk" id="sg3-dW-DXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFh-Dg-tFf" userLabel="First Responder" sceneMemberID="firstResponder"/>

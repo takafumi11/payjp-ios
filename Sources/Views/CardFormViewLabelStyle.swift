@@ -23,23 +23,27 @@ public class CardFormViewLabelStyle: UIView {
         }
     }
 
-    @IBOutlet weak var brandLogoImage: UIImageView!
-    @IBOutlet weak var cvcIconImage: UIImageView!
+    @IBOutlet private weak var brandLogoImage: UIImageView!
+    @IBOutlet private weak var cvcIconImage: UIImageView!
 
-    @IBOutlet weak var cardNumberFieldBackground: UIView!
-    @IBOutlet weak var expirationFieldBackground: UIView!
-    @IBOutlet weak var cvcFieldBackground: UIView!
-    @IBOutlet weak var cardHolderFieldBackground: UIView!
-    
-    @IBOutlet weak var cardNumberTextField: UITextField!
-    @IBOutlet weak var expirationTextField: UITextField!
-    @IBOutlet weak var cvcTextField: UITextField!
-    @IBOutlet weak var cardHolderTextField: UITextField!
+    @IBOutlet private weak var cardNumberLabel: UILabel!
+    @IBOutlet private weak var expirationLabel: UILabel!
+    @IBOutlet private weak var cvcLabel: UILabel!
+    @IBOutlet private weak var cardHolderLabel: UILabel!
+    @IBOutlet private weak var cardNumberFieldBackground: UIView!
+    @IBOutlet private weak var expirationFieldBackground: UIView!
+    @IBOutlet private weak var cvcFieldBackground: UIView!
+    @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
-    @IBOutlet weak var cardNumberErrorLabel: UILabel!
-    @IBOutlet weak var expirationErrorLabel: UILabel!
-    @IBOutlet weak var cvcErrorLabel: UILabel!
-    @IBOutlet weak var cardHolderErrorLabel: UILabel!
+    @IBOutlet private weak var cardNumberTextField: UITextField!
+    @IBOutlet private weak var expirationTextField: UITextField!
+    @IBOutlet private weak var cvcTextField: UITextField!
+    @IBOutlet private weak var cardHolderTextField: UITextField!
+
+    @IBOutlet private weak var cardNumberErrorLabel: UILabel!
+    @IBOutlet private weak var expirationErrorLabel: UILabel!
+    @IBOutlet private weak var cvcErrorLabel: UILabel!
+    @IBOutlet private weak var cardHolderErrorLabel: UILabel!
 
     @IBOutlet weak var holderContainer: UIStackView!
 
@@ -47,6 +51,8 @@ public class CardFormViewLabelStyle: UIView {
 
     private var contentView: UIView!
     public weak var delegate: CardFormViewLabelStyleDelegate?
+
+    private var fontColor: UIColor = Style.Color.black
 
     // MARK:
 
@@ -81,7 +87,19 @@ public class CardFormViewLabelStyle: UIView {
 //            guard let self = self else { return }
 //            self.ocrButton.isHidden = !isAvailable
 //        }
-        
+
+        // label
+        cardNumberLabel.text = "payjp_card_form_number_label".localized
+        expirationLabel.text = "payjp_card_form_expiration_label".localized
+        cvcLabel.text = "payjp_card_form_cvc_label".localized
+        cardHolderLabel.text = "payjp_card_form_holder_name_label".localized
+
+        // placeholder
+        cardNumberTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_label_style_number_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        expirationTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_label_style_expiration_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cvcTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_label_style_cvc_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cardHolderTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_label_style_holder_name_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+
         cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
@@ -124,6 +142,28 @@ public class CardFormViewLabelStyle: UIView {
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
         self.delegate?.isValidChanged(in: self)
         return isValid
+    }
+
+    public func apply(style: FormStyle) {
+        let labelColor = UIColor(hex: style.labelFontColor ?? Style.Color.black.hexString)
+        let fontColor = UIColor(hex: style.inputFontColor)
+        let cursorColor = UIColor(hex: style.cursorColor)
+        self.fontColor = fontColor
+        // label font
+        cardNumberLabel.textColor = labelColor
+        expirationLabel.textColor = labelColor
+        cvcLabel.textColor = labelColor
+        cardHolderLabel.textColor = labelColor
+        // textField font
+        cardNumberTextField.textColor = fontColor
+        expirationTextField.textColor = fontColor
+        cvcTextField.textColor = fontColor
+        cardHolderTextField.textColor = fontColor
+        // cursor
+        cardNumberTextField.tintColor = cursorColor
+        expirationTextField.tintColor = cursorColor
+        cvcTextField.tintColor = cursorColor
+        cardHolderTextField.tintColor = cursorColor
     }
 
     @IBAction func onTapOcrButton(_ sender: Any) {
@@ -187,7 +227,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(cardNumber):
             cardNumberTextField.text = cardNumber.formatted
-            cardNumberTextField.textColor = Style.Color.black
+            cardNumberTextField.textColor = self.fontColor
             cardNumberErrorLabel.text = nil
             updateBrandLogo(brand: cardNumber.brand)
             updateCvcIcon(brand: cardNumber.brand)
@@ -197,7 +237,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
                  let .cardNumberInvalidError(value, instant),
                  let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
-                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : Style.Color.black
+                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
                 cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
                 updateBrandLogo(brand: value?.brand)
                 updateCvcIcon(brand: value?.brand)
@@ -234,14 +274,14 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(expiration):
             expirationTextField.text = expiration
-            expirationTextField.textColor = Style.Color.black
+            expirationTextField.textColor = self.fontColor
             expirationErrorLabel.text = nil
         case let .failure(error):
             switch error {
             case let .expirationEmptyError(value, instant),
                  let .expirationInvalidError(value, instant):
                 expirationTextField.text = value
-                expirationTextField.textColor = forceShowError || instant ? Style.Color.red : Style.Color.black
+                expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
                 expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break
@@ -260,14 +300,14 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(cvc):
             cvcTextField.text = cvc
-            cvcTextField.textColor = Style.Color.black
+            cvcTextField.textColor = self.fontColor
             cvcErrorLabel.text = nil
         case let .failure(error):
             switch error {
             case let .cvcEmptyError(value, instant),
                  let .cvcInvalidError(value, instant):
                 cvcTextField.text = value
-                cvcTextField.textColor = forceShowError || instant ? Style.Color.red : Style.Color.black
+                cvcTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
                 cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break
@@ -297,13 +337,13 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(holderName):
             cardHolderTextField.text = holderName
-            cardHolderTextField.textColor = Style.Color.black
+            cardHolderTextField.textColor = self.fontColor
             cardHolderErrorLabel.text = nil
         case let .failure(error):
             switch error {
             case let .cardHolderEmptyError(value, instant):
                 cardHolderTextField.text = value
-                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : Style.Color.black
+                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
                 cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break

@@ -13,6 +13,9 @@ extension Style {
         static var black: UIColor {
             return .init(hex: "030300")
         }
+        static var gray: UIColor {
+            return .init(hex: "8e8e93")
+        }
         static var red: UIColor {
             return .init(hex: "ff0000")
         }

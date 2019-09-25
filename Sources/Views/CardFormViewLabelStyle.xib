@@ -14,16 +14,20 @@
                 <outlet property="brandLogoImage" destination="w6k-hZ-nkl" id="gDA-sR-G0N"/>
                 <outlet property="cardHolderErrorLabel" destination="0eX-6y-NFG" id="3Vl-ho-fnq"/>
                 <outlet property="cardHolderFieldBackground" destination="Ek4-XT-5rJ" id="3hD-JD-N1v"/>
+                <outlet property="cardHolderLabel" destination="1ay-nw-vn1" id="YIA-wY-Qb3"/>
                 <outlet property="cardHolderTextField" destination="K5S-bf-dwx" id="5lx-1y-eYg"/>
                 <outlet property="cardNumberErrorLabel" destination="3sB-1R-fme" id="7Bm-Gd-kGy"/>
                 <outlet property="cardNumberFieldBackground" destination="xSv-iy-RO8" id="xOk-2s-DHb"/>
+                <outlet property="cardNumberLabel" destination="S7B-o6-abT" id="nB8-hd-TNF"/>
                 <outlet property="cardNumberTextField" destination="rRc-xY-Mxs" id="Lje-OV-S4p"/>
                 <outlet property="cvcErrorLabel" destination="YVS-Sx-5xU" id="q0W-nu-AJJ"/>
                 <outlet property="cvcFieldBackground" destination="Jon-7l-YgQ" id="5rg-cV-oCJ"/>
                 <outlet property="cvcIconImage" destination="mCd-Fn-CwL" id="PQa-vb-kpW"/>
+                <outlet property="cvcLabel" destination="xak-wc-KAo" id="xsc-kx-yQE"/>
                 <outlet property="cvcTextField" destination="1cT-9j-hzJ" id="Hns-1e-mOq"/>
                 <outlet property="expirationErrorLabel" destination="Lrv-TP-VGx" id="fC4-h3-AXE"/>
                 <outlet property="expirationFieldBackground" destination="2v1-AK-upi" id="WXn-Os-lHi"/>
+                <outlet property="expirationLabel" destination="lUv-JX-rJC" id="YOm-Ls-aqY"/>
                 <outlet property="expirationTextField" destination="Kfm-ax-Mxe" id="rSq-tJ-jCy"/>
                 <outlet property="holderContainer" destination="tgn-Ty-UYl" id="ep3-5P-GOG"/>
                 <outlet property="ocrButton" destination="Wm2-WI-Uu8" id="Lkh-4g-ex0"/>
