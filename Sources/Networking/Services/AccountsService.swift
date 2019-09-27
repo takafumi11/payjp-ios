@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias CardBrandsResult = (Result<[CardBrand], Error>) -> Void
+public typealias CardBrandsResult = (Result<[CardBrand], APIError>) -> Void
 
 protocol AccountsServiceType {
     @discardableResult

@@ -125,4 +125,28 @@ class APIClientTests: XCTestCase {
         
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testGetAcceptedBrands() {
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
+        
+        let expectation = self.expectation(description: self.description)
+        
+        apiClient.getAcceptedBrands(with: "tenand_id") { result in
+            switch result {
+            case .success(let brands):
+                let json = TestFixture.JSON(by: "cardBrands.json")
+                let decoder = JSONDecoder.shared
+                let response = try! decoder.decode(GetAcceptedBrandsResponse.self, from: json)
+                
+                XCTAssertEqual(brands, response.acceptedBrands)
+                expectation.fulfill()
+                break
+            default:
+                XCTFail()
+            }
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

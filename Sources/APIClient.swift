@@ -8,12 +8,14 @@ import PassKit
 
 @objc(PAYAPIClient) public class APIClient: NSObject {
     
+    let accountsService: AccountsServiceType
     let tokensService: TokenServiceType
     
     @objc(sharedClient) public static let shared = APIClient()
     
     private init(accountsService: AccountsServiceType = AccountsService.shared,
                  tokensService: TokenServiceType = TokenService.shared) {
+        self.accountsService = accountsService
         self.tokensService = tokensService
     }
     
@@ -53,6 +55,14 @@ import PassKit
                          completion: @escaping (Result<Token, APIError>) -> Void) {
         tokensService.getToken(with: tokenId, completion: completion)
     }
+    
+    /// GET PAY.JP CardBrands
+    /// - parameter tenantId:    identifier of the Tenant
+    @nonobjc
+    public func getAcceptedBrands(with tenantId: String?,
+                                  completion: CardBrandsResult?) {
+        accountsService.getAcceptedBrands(tenantId: tenantId, completion: completion)
+    }
 }
 
 // Objective-C API
@@ -91,6 +101,19 @@ extension APIClient {
             switch result {
             case .success(let result):
                 completionHandler(result, nil)
+            case .failure(let error):
+                completionHandler(nil, error.nsErrorValue())
+            }
+        }
+    }
+    
+    @objc public func getAcceptedBrandsWith(_ tenantId: String?,
+                                            completionHandler: @escaping ([NSString]?, NSError?) -> Void) {
+        accountsService.getAcceptedBrands(tenantId: tenantId) { result in
+            switch result {
+            case .success(let result):
+                let converted = result.map({(brand : CardBrand) -> NSString in return NSString(string: brand.rawValue)})
+                completionHandler(converted, nil)
             case .failure(let error):
                 completionHandler(nil, error.nsErrorValue())
             }
