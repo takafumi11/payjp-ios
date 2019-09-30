@@ -38,6 +38,12 @@ protocol CardFormViewViewModelType {
     ///
     /// - Returns: true バリデーションOK
     func isValid() -> Bool
+    /// トークンを生成する
+    ///
+    /// - Parameters:
+    ///   - tenantId: テナントID
+    ///   - completion: 取得結果
+    func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
     /// 利用可能ブランドを取得する
     ///
     /// - Parameters:

@@ -476,7 +476,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNC-Pu-dxa">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -496,7 +496,7 @@
                     <connections>
                         <outlet property="cardFormView" destination="72d-mz-CTM" id="HQC-2G-c0b"/>
                         <outlet property="createTokenButton" destination="c6c-l5-GFl" id="SLp-4e-fKZ"/>
-                        <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="ka4-yu-WpG"/>
+                        <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="XT4-rW-pVj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP6-o4-hRl" userLabel="First Responder" sceneMemberID="firstResponder"/>

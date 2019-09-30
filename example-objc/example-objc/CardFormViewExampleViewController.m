@@ -17,8 +17,6 @@
     
 - (IBAction)cardHolderSwitchChanged:(id)sender;
     
-@property (strong, nonatomic) PAYAPIClient *payjpClient;
-
 @end
 
 @implementation CardFormViewExampleViewController
@@ -49,20 +47,51 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     // Create Token
     if (indexPath.section == 1 && indexPath.row == 1) {
-        // TODO: call createToken
+        if (!self.cardFormView.isValid) {
+            return;
+        }
+        [self createToken];
     }
     // Valdate and Create Token
     if (indexPath.section == 1 && indexPath.row == 2) {
         BOOL isValid = [self.cardFormView validateCardForm];
         if (isValid) {
-            // TODO: call createToken
+            [self createToken];
         }
     }
+}
+
+- (void)createToken {
+    __weak typeof(self) wself = self;
+    
+    [self.cardFormView createTokenWith:nil
+                            completion:
+     ^(PAYToken *token, NSError *error) {
+         APIError *apiError = (APIError *)error;
+         if (apiError) {
+             id<PAYErrorResponseType> errorResponse = apiError.payError;
+             NSLog(@"[errorResponse] %@", errorResponse.description);
+         }
+         
+         if (!token) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 wself.tokenIdLabel.text = nil;
+                 [wself showError:error];
+             });
+             return;
+         }
+         
+         NSLog(@"token = %@", [wself displayToken:token]);
+         dispatch_async(dispatch_get_main_queue(), ^{
+             wself.tokenIdLabel.text = token.identifer;
+             [wself.tableView reloadData];
+             [wself showToken:token];
+         });
+     }];
 }
     
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,6 +114,39 @@
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
     self.cardFormView.isHolderRequired = sender.isOn;
     [self.tableView reloadData];
+}
+
+#pragma MARK: - Alert
+
+- (void)showToken:(PAYToken *)token {
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"success"
+                                message:[self displayToken:token]
+                                preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleCancel
+                      handler:nil]];
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+- (void)showError:(NSError *)error {
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"error"
+                                message:error.localizedDescription
+                                preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleCancel
+                      handler:nil]];
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+#pragma MARK: - misc
+
+- (NSString *)displayToken:(PAYToken *)token {
+    return [NSString stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu\ncard.name=%@",
+            token.identifer, token.card.identifer, token.card.last4Number, token.card.expirationMonth, token.card.expirationYear, token.card.name];
 }
 
 @end
