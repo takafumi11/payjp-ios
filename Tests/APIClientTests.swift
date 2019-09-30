@@ -11,10 +11,18 @@ import OHHTTPStubs
 class APIClientTests: XCTestCase {
     override func setUp() {
         super.setUp()
+        // token
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }) { (req) -> OHHTTPStubsResponse in
             let data = TestFixture.JSON(by: "token.json")
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        }.name = "default"
+        // card brands
+        stub(condition: { (req) -> Bool in
+            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/accounts/brands") ?? false
+        }) { (req) -> OHHTTPStubsResponse in
+            let data = TestFixture.JSON(by: "cardBrands.json")
             return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }.name = "default"
     }
@@ -116,6 +124,30 @@ class APIClientTests: XCTestCase {
                 let token = try! decoder.decode(Token.self, from: json)
                 
                 XCTAssertEqual(payToken, token)
+                expectation.fulfill()
+                break
+            default:
+                XCTFail()
+            }
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testGetAcceptedBrands() {
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
+        
+        let expectation = self.expectation(description: self.description)
+        
+        apiClient.getAcceptedBrands(with: "tenand_id") { result in
+            switch result {
+            case .success(let brands):
+                let json = TestFixture.JSON(by: "cardBrands.json")
+                let decoder = JSONDecoder.shared
+                let response = try! decoder.decode(GetAcceptedBrandsResponse.self, from: json)
+                
+                XCTAssertEqual(brands, response.acceptedBrands)
                 expectation.fulfill()
                 break
             default:
