@@ -116,7 +116,7 @@ extension APIClient {
         accountsService.getAcceptedBrands(tenantId: tenantId) { result in
             switch result {
             case .success(let result):
-                let converted = result.map { (brand: CardBrand) -> NSString in return NSString(string: brand.rawValue) }
+                let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
                 completionHandler(converted, nil)
             case .failure(let error):
                 completionHandler(nil, error.nsErrorValue())

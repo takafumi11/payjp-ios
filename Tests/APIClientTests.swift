@@ -11,10 +11,18 @@ import OHHTTPStubs
 class APIClientTests: XCTestCase {
     override func setUp() {
         super.setUp()
+        // token
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }) { (req) -> OHHTTPStubsResponse in
             let data = TestFixture.JSON(by: "token.json")
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        }.name = "default"
+        // card brands
+        stub(condition: { (req) -> Bool in
+            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/accounts/brands") ?? false
+        }) { (req) -> OHHTTPStubsResponse in
+            let data = TestFixture.JSON(by: "cardBrands.json")
             return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }.name = "default"
     }
