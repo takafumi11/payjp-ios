@@ -11,7 +11,7 @@ import PassKit
 
 protocol TokenServiceType {
     @discardableResult
-    func createToken(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
+    func createToken(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?, tenantId: String?, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
     
     @discardableResult
     func createTokenForApplePay(paymentToken: PKPaymentToken, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask?
@@ -30,8 +30,8 @@ struct TokenService: TokenServiceType {
         self.client = client
     }
     
-    func createToken(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
-        let request = CreateTokenRequest(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name)
+    func createToken(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?, tenantId: String?, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        let request = CreateTokenRequest(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name, tenantId: tenantId)
         return client.request(with: request, completion: completion)
     }
     

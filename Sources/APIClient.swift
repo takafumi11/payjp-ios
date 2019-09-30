@@ -41,12 +41,14 @@ import PassKit
                             expirationMonth: String,
                             expirationYear: String,
                             name: String? = nil,
+                            tenantId: String? = nil,
                             completion: @escaping (Result<Token, APIError>) -> Void) {
         tokensService.createToken(cardNumber: cardNumber,
                                   cvc: cvc,
                                   expirationMonth: expirationMonth,
                                   expirationYear: expirationYear,
                                   name: name,
+                                  tenantId: tenantId,
                                   completion: completion)
     }
 
@@ -88,8 +90,14 @@ extension APIClient {
                                       expirationMonth: String,
                                       expirationYear: String,
                                       name: String?,
+                                      tenantId: String?,
                                       completionHandler: @escaping (Token?, NSError?) -> Void) {
-        tokensService.createToken(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name) { result in
+        tokensService.createToken(cardNumber: cardNumber,
+                                  cvc: cvc,
+                                  expirationMonth: expirationMonth,
+                                  expirationYear: expirationYear,
+                                  name: name,
+                                  tenantId: tenantId) { result in
             switch result {
             case .success(let result):
                 completionHandler(result, nil)

@@ -57,6 +57,7 @@
                       expirationMonth:month
                        expirationYear:year
                                  name:name
+                             tenantId:nil
                     completionHandler:
      ^(PAYToken *token, NSError *error) {
          APIError *apiError = (APIError *)error;

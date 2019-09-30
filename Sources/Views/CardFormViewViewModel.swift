@@ -56,6 +56,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let cvcFormatter: CvcFormatterType
     private let cvcValidator: CvcValidatorType
     private let accountsService: AccountsServiceType
+    private let tokenService: TokenServiceType
 
     private var cardNumber: String? = nil
     private var cardBrand: CardBrand = .unknown
@@ -77,7 +78,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
         cvcFormatter: CvcFormatterType = CvcFormatter(),
         cvcValidator: CvcValidatorType = CvcValidator(),
-        accountsService: AccountsServiceType = AccountsService.shared) {
+        accountsService: AccountsServiceType = AccountsService.shared,
+        tokenService: TokenServiceType = TokenService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -86,6 +88,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
         self.accountsService = accountsService
+        self.tokenService = tokenService
     }
 
     // MARK: - CardFormViewViewModelType
@@ -186,6 +189,24 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             checkExpirationValid() &&
             checkCvcValid() &&
             (!self.isCardHolderEnabled || checkCardHolderValid())
+    }
+    
+    func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
+        if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+            tokenService.createToken(cardNumber: cardNumber,
+                                     cvc: cvc,
+                                     expirationMonth: month,
+                                     expirationYear: year,
+                                     name: cardHolder,
+                                     tenantId: tenantId) { result in
+                                        switch result {
+                                        case .success(let token): completion(.success(token))
+                                        case .failure(let error): completion(.failure(error))
+                                        }
+            }
+        } else {
+            completion(.failure(NSError(domain: PAYErrorDomain, code: PAYErrorFormInvalid, userInfo: nil)))
+        }
     }
 
     func fetchAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?) {
