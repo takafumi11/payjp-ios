@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class CardIOProxy, CardIOCardParams;
 
 @protocol CardIOProxyDelegate
-- (void)cardIOProxy:(nonnull CardIOProxy *)proxy didFinishWithCardParams:(nonnull CardIOCardParams *)cardParams NS_SWIFT_NAME(cardIOProxy(_:didFinishWith:));
-- (void)didCancelCardIOProxy:(nonnull CardIOProxy *)proxy NS_SWIFT_NAME(didCancel(in:));
+- (void)cardIOProxy:(CardIOProxy *)proxy didFinishWithCardParams:(CardIOCardParams *)cardParams NS_SWIFT_NAME(cardIOProxy(_:didFinishWith:));
+- (void)didCancelCardIOProxy:(CardIOProxy *)proxy NS_SWIFT_NAME(didCancel(in:));
 @end
 
 @interface CardIOProxy : NSObject
