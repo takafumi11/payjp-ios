@@ -128,8 +128,8 @@
     [scanViewController dismissViewControllerAnimated:YES completion:^{
         CardIOCardParams *cardParams = [CardIOCardParams new];
         cardParams.number = info.cardNumber;
-        cardParams.expiryMonth = @(info.expiryMonth);
-        cardParams.expiryYear = @(info.expiryYear);
+        cardParams.expiryMonth = info.expiryMonth > 0 ? @(info.expiryMonth) : nil;
+        cardParams.expiryYear = info.expiryYear > 0 ? @(info.expiryYear) : nil;
         cardParams.cvc = info.cvv;
         [self.delegate cardIOProxy:self didFinishWithCardParams:cardParams];
     }];
