@@ -286,5 +286,7 @@ extension CardFormView: CardIOProxyDelegate {
         updateCardNumberInput(input: cardParams.number)
         updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
+        
+        self.delegate?.isValidChanged(in: self)
     }
 }
