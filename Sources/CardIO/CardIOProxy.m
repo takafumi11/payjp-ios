@@ -37,7 +37,7 @@
 @end
 
 @interface CardIOCreditCardInfoProxy : NSObject <ClassProxy>
-@property (nonatomic, strong) NSString *cardNumber;
+@property (nonatomic, copy, readwrite) NSString *cardNumber;
 @property (nonatomic, assign, readwrite) NSUInteger expiryMonth;
 @property (nonatomic, assign, readwrite) NSUInteger expiryYear;
 @property (nonatomic, copy, readwrite) NSString *cvv;
