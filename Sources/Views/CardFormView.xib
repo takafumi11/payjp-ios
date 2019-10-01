@@ -28,14 +28,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="352" height="372"/>
+            <rect key="frame" x="0.0" y="0.0" width="352" height="364"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-DO-8mH">
-                    <rect key="frame" x="0.0" y="0.0" width="352" height="371.66666666666669"/>
+                    <rect key="frame" x="0.0" y="0.0" width="352" height="363.66666666666669"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-sY-8Xd">
-                            <rect key="frame" x="16" y="8" width="336" height="82"/>
+                            <rect key="frame" x="16" y="4" width="336" height="82"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v9u-ED-moM">
                                     <rect key="frame" x="8" y="0.0" width="320" height="32"/>
@@ -78,14 +78,14 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-X5-gpG" userLabel="Separator">
-                            <rect key="frame" x="16" y="94" width="336" height="0.6666666666666714"/>
+                            <rect key="frame" x="16" y="90" width="336" height="0.6666666666666714"/>
                             <color key="backgroundColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="WRN-5a-uUU"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LoV-x3-iVm">
-                            <rect key="frame" x="16" y="98.666666666666686" width="336" height="82"/>
+                            <rect key="frame" x="16" y="94.666666666666686" width="336" height="82"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-PX-Ntf">
                                     <rect key="frame" x="8" y="0.0" width="320" height="32"/>
@@ -103,7 +103,7 @@
                                     <edgeInsets key="layoutMargins" top="4" left="0.0" bottom="4" right="8"/>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyD-K5-tRI">
-                                    <rect key="frame" x="8" y="31.999999999999986" width="320" height="50"/>
+                                    <rect key="frame" x="8" y="32" width="320" height="50"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -112,14 +112,14 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx1-iF-Ehn" userLabel="Separator">
-                            <rect key="frame" x="16" y="184.66666666666666" width="336" height="0.33333333333334281"/>
+                            <rect key="frame" x="16" y="180.66666666666666" width="336" height="0.33333333333334281"/>
                             <color key="backgroundColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="xcX-2n-Sxp"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BYN-rt-K6C">
-                            <rect key="frame" x="16" y="189" width="336" height="82"/>
+                            <rect key="frame" x="16" y="185" width="336" height="82"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EJN-1F-AHB">
                                     <rect key="frame" x="8" y="0.0" width="320" height="32"/>
@@ -152,14 +152,14 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV3-z2-UU5">
-                            <rect key="frame" x="16" y="275" width="336" height="0.66666666666668561"/>
+                            <rect key="frame" x="16" y="271" width="336" height="0.66666666666668561"/>
                             <color key="backgroundColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="dic-26-lEL"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5jR-px-r6W">
-                            <rect key="frame" x="16" y="279.66666666666669" width="336" height="84"/>
+                            <rect key="frame" x="16" y="275.66666666666669" width="336" height="84"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6pe-yT-sJJ">
                                     <rect key="frame" x="8" y="0.0" width="320" height="32"/>
@@ -186,7 +186,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
                     </subviews>
-                    <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="0.0"/>
+                    <edgeInsets key="layoutMargins" top="4" left="16" bottom="4" right="0.0"/>
                 </stackView>
             </subviews>
             <constraints>
@@ -198,7 +198,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="82.608695652173921" y="419.02173913043481"/>
+            <point key="canvasLocation" x="82.608695652173921" y="415.76086956521743"/>
         </view>
     </objects>
     <resources>
