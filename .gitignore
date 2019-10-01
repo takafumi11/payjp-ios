@@ -71,3 +71,4 @@ fastlane/test_output
 
 vendor/bundle
 .bundle
+.ruby-version

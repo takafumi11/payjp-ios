@@ -26,6 +26,16 @@ Run test
 fastlane ios create_pr_to_public
 ```
 Create GitHub PR to `payjp/payjp-ios` from internal repo. (internal only)
+### ios check_swift_format
+```
+fastlane ios check_swift_format
+```
+Check Swift format with swiftLint
+### ios check_objc_format
+```
+fastlane ios check_objc_format
+```
+Check Objective-C format with clang-format
 
 ----
 
