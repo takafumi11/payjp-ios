@@ -43,7 +43,7 @@ protocol CardFormViewViewModelType {
     /// - Parameters:
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
-    func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
+    func createToken(with tenantId: String?, completion: @escaping (Result<Token, APIError>) -> Void)
     /// 利用可能ブランドを取得する
     ///
     /// - Parameters:
@@ -197,7 +197,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             (!self.isCardHolderEnabled || checkCardHolderValid())
     }
     
-    func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
+    func createToken(with tenantId: String?, completion: @escaping (Result<Token, APIError>) -> Void) {
         if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumber,
                                      cvc: cvc,
@@ -211,7 +211,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                                         }
             }
         } else {
-            completion(.failure(NSError(domain: PAYErrorDomain, code: PAYErrorFormInvalid, userInfo: nil)))
+            completion(.failure(.invalidFormInput))
         }
     }
 

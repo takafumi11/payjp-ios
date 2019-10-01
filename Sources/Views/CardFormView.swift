@@ -106,19 +106,27 @@ public class CardFormView: UIView {
         return viewModel.isValid()
     }
 
-    @nonobjc
-    public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
+    /// create token for swift
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, APIError>) -> Void) {
         self.viewModel.createToken(with: tenantId, completion: completion)
     }
-    
-    @objc
-    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        self.viewModel.createToken(with: tenantId){result in
+
+    // create token for objective-c
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+        self.viewModel.createToken(with: tenantId) { result in
             switch result {
             case .success(let result):
                 completion(result, nil)
             case .failure(let error):
-                completion(nil, error as NSError)
+                completion(nil, error.nsErrorValue())
             }
         }
     }

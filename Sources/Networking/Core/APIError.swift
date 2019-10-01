@@ -20,6 +20,8 @@ public enum APIError: LocalizedError {
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
     case invalidJSON(Data, Error?)
+    /// Invalid Form input.
+    case invalidFormInput
     
     // MARK: - LocalizedError
     
@@ -35,6 +37,8 @@ public enum APIError: LocalizedError {
             return errorResponse.message
         case .invalidJSON(_):
             return "Unable parse JSON object into expected classes."
+        case .invalidFormInput:
+            return "Form input data is invalid."
         }
     }
     
@@ -73,6 +77,10 @@ public enum APIError: LocalizedError {
             return APINSError(domain: PAYErrorDomain,
                               code: PAYErrorInvalidJSON,
                               userInfo: userInfo)
+        case .invalidFormInput:
+            return APINSError(domain: PAYErrorDomain,
+                              code: PAYErrorFormInvalid,
+                              userInfo: nil)
         }
     }
     
