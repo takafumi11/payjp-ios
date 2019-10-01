@@ -44,14 +44,9 @@ protocol CardFormViewViewModelType {
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
     func fetchAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
-    
-    func presentCardIOIfAvailable(from presentingViewController: UIViewController)
-    
-    func isCardIOAvailable() -> Bool
-    func registerIsCardIOAvailableChanges(completion: @escaping (Bool) -> Void)
 }
 
-class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
+class CardFormViewViewModel: CardFormViewViewModelType {
 
     private let cardNumberFormatter: CardNumberFormatterType
     private let cardNumberValidator: CardNumberValidatorType
@@ -68,17 +63,6 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
     private var monthYear: (month: String, year: String)? = nil
     private var cvc: String? = nil
     private var cardHolder: String? = nil
-    
-    private var cardIoProxy: CardIOProxy!
-    
-    func isCardIOAvailable() -> Bool {
-        return CardIOProxy.isCardIOAvailable()
-    }
-    private var isCardIOAvailableCompletion: ((Bool) -> Void)? {
-        didSet {
-            isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
-        }
-    }
     
     private var isCardHolderEnabled: Bool = false
 
@@ -102,8 +86,6 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         self.cvcFormatter = cvcFormatter
         self.cvcValidator = cvcValidator
         self.accountsService = accountsService
-
-        self.cardIoProxy = CardIOProxy(delegate: self)
     }
 
     // MARK: - CardFormViewViewModelType
@@ -219,16 +201,6 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
         }
     }
 
-    func presentCardIOIfAvailable(from presentingViewController: UIViewController) {
-        if CardIOProxy.isCardIOAvailable() {
-            self.cardIoProxy?.presentCardIO(from: presentingViewController)
-        }
-    }
-    
-    func registerIsCardIOAvailableChanges(completion: @escaping (Bool) -> Void) {
-        self.isCardIOAvailableCompletion = completion
-    }
-    
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
@@ -258,15 +230,5 @@ class CardFormViewViewModel: CardFormViewViewModelType, CardIOProxyDelegate {
             return !cardHolder.isEmpty
         }
         return false
-    }
-    
-    // MARK: - CardIOProxyDelegate
-    
-    func didCancel(_ proxy: CardIOProxy) {
-        isCardIOAvailableCompletion?(CardIOProxy.isCardIOAvailable())
-    }
-    
-    func cardIOProxy(_ proxy: CardIOProxy, didFinishWithCardParams cardParams: [AnyHashable : Any]) {
-        // TODO: Implementation
     }
 }

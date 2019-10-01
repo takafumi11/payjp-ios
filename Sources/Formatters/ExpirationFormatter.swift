@@ -13,6 +13,8 @@ protocol ExpirationFormatterType {
     /// - parameter expiration: 変換したい文字列。
     /// - returns: MM/yy のフォーマットで返します、例： `01/20` 。変換できない場合は nil で返します。
     func string(from expiration: String?) -> String?
+    
+    func string(month: Int?, year: Int?) -> String?
 }
 
 struct ExpirationFormatter: ExpirationFormatterType {
@@ -38,5 +40,20 @@ struct ExpirationFormatter: ExpirationFormatterType {
             return filtered
         }
         return nil
+    }
+    
+    func string(month: Int?, year: Int?) -> String? {
+        guard let month = month else { return nil }
+        
+        let trimmedMonth = month % 100
+        if !(1...12 ~= trimmedMonth) { return nil }
+        
+        var result = String(format: "%02d", trimmedMonth) + "/"
+        
+        if let year = year {
+            result += String(format: "%02d", year % 100)
+        }
+        
+        return result
     }
 }

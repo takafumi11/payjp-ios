@@ -10,6 +10,7 @@
 //
 
 #import "CardIOProxy.h"
+#import "CardIOCardParams.h"
 
 @protocol ClassProxy
 
@@ -36,7 +37,7 @@
 @end
 
 @interface CardIOCreditCardInfoProxy : NSObject <ClassProxy>
-@property (nonatomic, strong) NSString *cardNumber;
+@property (nonatomic, copy, readwrite) NSString *cardNumber;
 @property (nonatomic, assign, readwrite) NSUInteger expiryMonth;
 @property (nonatomic, assign, readwrite) NSUInteger expiryYear;
 @property (nonatomic, copy, readwrite) NSString *cvv;
@@ -125,10 +126,11 @@
 
 - (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfoProxy *)info inPaymentViewController:(UIViewController *)scanViewController {
     [scanViewController dismissViewControllerAnimated:YES completion:^{
-        NSDictionary<NSString *, id> *cardParams = @{@"number": info.cardNumber,
-                                                     @"expiryMonth": @(info.expiryMonth),
-                                                     @"expiryYear": @(info.expiryYear),
-                                                     @"expirycvv": info.cvv};
+        CardIOCardParams *cardParams = [CardIOCardParams new];
+        cardParams.number = info.cardNumber;
+        cardParams.expiryMonth = info.expiryMonth > 0 ? @(info.expiryMonth) : nil;
+        cardParams.expiryYear = info.expiryYear > 0 ? @(info.expiryYear) : nil;
+        cardParams.cvc = info.cvv;
         [self.delegate cardIOProxy:self didFinishWithCardParams:cardParams];
     }];
 }
