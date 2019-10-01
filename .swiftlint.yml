@@ -1,0 +1,5 @@
+excluded:
+  - Carthage
+  - example-objc
+  - example-swift
+  - vendor/bundle/ruby/
