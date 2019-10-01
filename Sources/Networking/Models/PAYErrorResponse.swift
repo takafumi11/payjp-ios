@@ -27,18 +27,18 @@ public protocol PAYErrorResponseType: NSObjectProtocol {
 
 @objcMembers @objc
 public final class PAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedError, Decodable {
-    
+
     // MARK: - PAYErrorResponseType properties
-    
+
     public let status: Int
     public let message: String?
     public let param: String?
     public let code: String?
     public let type: String?
-    
+
     public override var description: String {
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
     }
-    
+
     public var errorDescription: String? { return description }
 }

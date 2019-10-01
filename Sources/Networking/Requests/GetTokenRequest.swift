@@ -10,12 +10,12 @@ import Foundation
 
 struct GetTokenRequest: BaseRequest {
     typealias Response = Token
-    
+
     var path: String { return "tokens/\(tokenId)" }
     var httpMethod: String = "GET"
-    
+
     let tokenId: String
-    
+
     init(tokenId: String) {
         self.tokenId = tokenId
     }

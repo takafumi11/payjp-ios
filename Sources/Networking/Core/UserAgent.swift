@@ -16,7 +16,7 @@ struct UserAgent {
         let deviceName = self.device
         return "jp.pay.ios/\(version); iOS/\(osVersion); apple; \(deviceName)"
     }
-    
+
     private static var device: String {
         var systemInfo = utsname()
         uname(&systemInfo)

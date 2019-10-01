@@ -12,10 +12,10 @@ import XCTest
 class GetTokenRequestTests: XCTestCase {
     func testInitialization() {
         let request = GetTokenRequest(tokenId: "mock_id")
-        
+
         XCTAssertEqual(request.httpMethod, "GET")
         XCTAssertEqual(request.path, "tokens/mock_id")
-        
+
         XCTAssertNil(request.bodyParameters)
         XCTAssertNil(request.queryParameters)
     }

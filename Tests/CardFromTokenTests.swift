@@ -12,22 +12,22 @@ import XCTest
 
 class CardFromTokenTests: XCTestCase {
     var card: Card!
-    
+
     override func setUp() {
         let json = TestFixture.JSON(by: "token.json")
         let decoder = JSONDecoder.shared
         let token = try! Token.decodeJson(with: json, using: decoder)
         card = token.card
     }
-    
+
     func testCardProperties() {
         XCTAssertEqual(card.brand, "Visa")
     }
-    
+
     func testNameIsNullable() {
         XCTAssertNil(card.name)
     }
-    
+
     func testCardMetadata() {
         let rawValue = card.rawValue!
         let metadata = rawValue["metadata"] as! [String: Any]

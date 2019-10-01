@@ -9,17 +9,17 @@
 import Foundation
 
 protocol PAYJPSDKType: class {
-    static var publicKey: String? { set get }
-    static var locale: Locale? { set get }
+    static var publicKey: String? { get set }
+    static var locale: Locale? { get set }
 }
 
 @objc(PAYJPSDK) @objcMembers
 public final class PAYJPSDK: NSObject, PAYJPSDKType {
-    
+
     private override init() {}
-    
+
     // MARK: - PAYJPSDKType
-    
+
     public static var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
@@ -32,6 +32,6 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
         }
     }
     public static var locale: Locale?
-    
+
     static var authToken: String = ""
 }

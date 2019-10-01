@@ -19,9 +19,9 @@ typealias RawValue = [String: Any]
     public let card: Card
     public let createdAt: Date
     public var rawValue: [String: Any]?
-    
+
     // MARK: - Decodable
-    
+
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case livemode
@@ -29,7 +29,7 @@ typealias RawValue = [String: Any]
         case card
         case createdAt = "created"
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifer = try container.decode(String.self, forKey: .id)
@@ -41,7 +41,7 @@ typealias RawValue = [String: Any]
 }
 
 extension Token {
-    
+
     /**
      * Provide a factory function to decode json by JSONDecoder
      * and also desereialize all fields as a arbitrary dictionary by JSONSerialization.
@@ -68,7 +68,7 @@ extension Token {
         if let object = object as? Token {
             return self.identifer == object.identifer
         }
-        
+
         return false
     }
 }

@@ -16,15 +16,15 @@ protocol AccountsServiceType {
 }
 
 struct AccountsService: AccountsServiceType {
-    
+
     private let client: ClientType
-    
+
     static let shared = AccountsService()
-    
+
     init(client: ClientType = Client.shared) {
         self.client = client
     }
-    
+
     func getAcceptedBrands(tenantId: String?, completion: CardBrandsResult?) -> URLSessionDataTask? {
         let request = GetAcceptedBrands(tenantId: tenantId)
         return client.request(with: request) { result in

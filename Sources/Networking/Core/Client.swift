@@ -13,13 +13,13 @@ protocol ClientType {
 }
 
 public class Client: ClientType {
-    
+
     static let shared = Client()
-    
+
     private let session: URLSession
     private let callbackQueue: CallbackQueue
     private let jsonDecoder: JSONDecoder
-    
+
     private init(session: URLSession = URLSession(configuration: .default),
                  callbackQueue: CallbackQueue = CallbackQueue.dispatch(DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
                  jsonDecoder: JSONDecoder = JSONDecoder.shared) {
@@ -27,28 +27,28 @@ public class Client: ClientType {
         self.callbackQueue = callbackQueue
         self.jsonDecoder = jsonDecoder
     }
-    
+
     @discardableResult
     func request<Request: PAYJP.Request>(with request: Request, completion: ((Result<Request.Response, APIError>) -> Void)?) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
             let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
                 guard let self = self else { return }
-                
+
                 if error != nil && data == nil && response == nil {
                     completion?(Result.failure(.systemError(error!)))
                 }
-                
+
                 guard let response = response as? HTTPURLResponse else {
                     completion?(Result.failure(.invalidResponse(nil)))
                     return
                 }
-                
+
                 guard let data = data else {
                     completion?(Result.failure(.invalidResponse(response)))
                     return
                 }
-            
+
                 guard error != nil else {
                     if response.statusCode == 200 {
                         do {
@@ -62,7 +62,7 @@ public class Client: ClientType {
                     }
                     return
                 }
-                
+
                 do {
                     let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
                     completion?(Result.failure(.serviceError(error)))
@@ -72,7 +72,7 @@ public class Client: ClientType {
                     return
                 }
             }
-            
+
             self.callbackQueue.execute { dataTask.resume() }
             return dataTask
         } catch {

@@ -10,20 +10,20 @@ import Foundation
 import PassKit
 
 struct CreateTokenForApplePayRequest: BaseRequest {
-    
+
     // MARK: - Request
-    
+
     typealias Response = Token
     var path: String = "tokens"
     var httpMethod: String = "POST"
-    var bodyParameters: [String : String]? {
+    var bodyParameters: [String: String]? {
         return ["card": paymentToken]
     }
-    
+
     // MARK: - Data
-    
+
     let paymentToken: String
-    
+
     init(paymentToken: String) {
         self.paymentToken = paymentToken
     }

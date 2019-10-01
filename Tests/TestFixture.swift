@@ -10,7 +10,7 @@ import Foundation
 
 struct TestFixture {
     private static let bundle = Bundle(identifier: "jp.pay.ios.PAYJPTests")!
-    
+
     static func JSON(by name: String) -> Data {
         let url = self.bundle.url(forResource: name, withExtension: nil, subdirectory: "Fixtures", localization: nil)
         let data = try! Data(contentsOf: url!)

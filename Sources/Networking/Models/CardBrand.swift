@@ -63,7 +63,7 @@ extension CardBrand {
             return 3
         }
     }
-    
+
     var logoResourceName: String {
         switch self {
         case .visa:

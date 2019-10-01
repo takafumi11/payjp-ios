@@ -46,11 +46,11 @@ public class CardFormView: UIView {
 
     private var contentView: UIView!
     public weak var delegate: CardFormViewDelegate?
-    
+
     private var cardIOProxy: CardIOProxy!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
 
-    // MARK:
+    // MARK: 
 
     private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -92,7 +92,7 @@ public class CardFormView: UIView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-        
+
         getAcceptedBrands()
     }
 
@@ -319,12 +319,12 @@ extension CardFormView: CardIOProxyDelegate {
     public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
-    
+
     public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         updateCardNumberInput(input: cardParams.number)
         updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
-        
+
         self.delegate?.isValidChanged(in: self)
     }
 }

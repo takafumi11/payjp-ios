@@ -57,13 +57,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let cvcValidator: CvcValidatorType
     private let accountsService: AccountsServiceType
 
-    private var cardNumber: String? = nil
+    private var cardNumber: String?
     private var cardBrand: CardBrand = .unknown
-    private var acceptedCardBrands: [CardBrand]? = nil
-    private var monthYear: (month: String, year: String)? = nil
-    private var cvc: String? = nil
-    private var cardHolder: String? = nil
-    
+    private var acceptedCardBrands: [CardBrand]?
+    private var monthYear: (month: String, year: String)?
+    private var cvc: String?
+    private var cardHolder: String?
+
     private var isCardHolderEnabled: Bool = false
 
     var isBrandChanged = false

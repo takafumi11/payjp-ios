@@ -14,13 +14,13 @@ import XCTest
 
 class PAYErrorResponseTests: XCTestCase {
     var errorResponse: PAYErrorResponse!
-    
+
     override func setUp() {
         let json = TestFixture.JSON(by: "error.json")
         let decoder = JSONDecoder.shared
         errorResponse = try! decoder.decode(PAYErrorResult.self, from: json).error
     }
-    
+
     func testErrorProperties() {
         XCTAssertEqual(errorResponse.status, 402)
         XCTAssertEqual(errorResponse.message, "Invalid card number")

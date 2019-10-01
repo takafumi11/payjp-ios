@@ -10,31 +10,31 @@ import Foundation
 
 struct CreateTokenRequest: BaseRequest {
     typealias Response = Token
-    
+
     var path: String = "tokens"
     var httpMethod: String = "POST"
-    var bodyParameters: [String : String]? {
+    var bodyParameters: [String: String]? {
         var parameters = [
             "card[number]": cardNumber,
             "card[cvc]": cvc,
             "card[exp_month]": expirationMonth,
-            "card[exp_year]": expirationYear,
+            "card[exp_year]": expirationYear
         ]
-        
+
         parameters["card[name]"] = name
         return parameters
     }
-    
+
     // MARK: - Data
-    
+
     private let cardNumber: String
     private let cvc: String
     private let expirationMonth: String
     private let expirationYear: String
     private let name: String?
-    
+
     // MARK: - Lifecycle
-    
+
     init(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?) {
         self.cardNumber = cardNumber
         self.cvc = cvc

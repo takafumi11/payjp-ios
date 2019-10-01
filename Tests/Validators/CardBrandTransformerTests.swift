@@ -26,7 +26,7 @@ class CardBrandTransformerTests: XCTestCase {
             "42",
             "4211",
             "4242111122223333",
-            "42421111222233334444",
+            "42421111222233334444"
         ]
         testCardBrandType(numbers: numbers, brand: .visa)
     }

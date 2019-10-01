@@ -17,30 +17,30 @@ protocol ExpirationValidatorType {
 }
 
 struct ExpirationValidator: ExpirationValidatorType {
-    
+
     static let shared = ExpirationValidator()
-    
+
     func isValid(month: String, year: String) -> Bool {
         guard let intMonth = Int(month), let intYear = Int(year) else { return false }
-        
+
         let moddedIntYear = intYear % 100
-        
+
         let currentMonth = self.currentMonth()
         let currentYear = self.currentYear()
-        
+
         if moddedIntYear == currentYear {
             return intMonth >= currentMonth
         } else {
             return moddedIntYear > currentYear
         }
     }
-    
+
     private func currentYear() -> Int {
         let calendar = Calendar(identifier: .gregorian)
         let year = calendar.component(.year, from: Date())
         return year % 100
     }
-    
+
     private func currentMonth() -> Int {
         let calendar = Calendar(identifier: .gregorian)
         let month = calendar.component(.month, from: Date())

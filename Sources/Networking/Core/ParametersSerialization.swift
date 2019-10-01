@@ -14,14 +14,14 @@ struct ParametersSerialization {
             if value is NSNull {
                 return key
             }
-            
+
             let valueString = (value as? String) ?? "\(value)"
             return "\(escape(key))=\(escape(valueString))"
         }
-        
+
         return pairs.joined(separator: "&")
     }
-    
+
     private static func escape(_ string: String) -> String {
         return string.addingPercentEncoding(withAllowedCharacters: .payUrlQueryAllowed) ?? string
     }

@@ -12,7 +12,7 @@ import XCTest
 class CreateTokenForApplePayRequestTests: XCTestCase {
     func testInitialization() {
         let request = CreateTokenForApplePayRequest(paymentToken: "token")
-        
+
         XCTAssertEqual(request.httpMethod, "POST")
         XCTAssertEqual(request.path, "tokens")
         XCTAssertEqual(request.bodyParameters?["card"], "token")
