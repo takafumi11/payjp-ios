@@ -22,7 +22,7 @@ public class CardFormView: UIView {
             self.delegate?.isValidChanged(in: self)
         }
     }
-
+    
     @IBOutlet private weak var cardNumberTitleLabel: UILabel!
     @IBOutlet private weak var expirationTitleLabel: UILabel!
     @IBOutlet private weak var cvcTitleLabel: UILabel!
