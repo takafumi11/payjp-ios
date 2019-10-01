@@ -81,6 +81,7 @@
 		EDCF723222F948F500272C10 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7022F0376500FA73BF /* CardNumber.swift */; };
 		EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */; };
 		EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */; };
+		EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF4DB1234322B00036F449 /* LocalError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		EDCF722C22F935D400272C10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModelTests.swift; sourceTree = "<group>"; };
+		EDFF4DB1234322B00036F449 /* LocalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +327,7 @@
 				BE21785322E982E30098128D /* BaseRequest.swift */,
 				BE21781B22E82AFD0098128D /* Client.swift */,
 				322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */,
+				EDFF4DB1234322B00036F449 /* LocalError.swift */,
 				BE21781F22E82B820098128D /* ParametersSerialization.swift */,
 				BE21781D22E82B350098128D /* Request.swift */,
 				EDCF722A22F935C300272C10 /* UserAgent.swift */,
@@ -623,6 +626,7 @@
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
 				BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */,
 				BEA1D28922EAFB6700F8906B /* GetAcceptedBrandsResponse.swift in Sources */,
+				EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */,
 				BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,

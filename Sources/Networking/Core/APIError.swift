@@ -9,8 +9,12 @@
 import Foundation
 import PassKit
 
-public enum APIError: LocalizedError {
-    /// The Apple Pay token is invalid.
+public protocol NSErrorCompatible: Error {
+    func nsErrorValue() -> NSError?
+}
+
+public enum APIError: LocalizedError, NSErrorCompatible {
+    // The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
     /// The system error.
     case systemError(Error)
@@ -20,8 +24,6 @@ public enum APIError: LocalizedError {
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
     case invalidJSON(Data, Error?)
-    /// Invalid Form input.
-    case invalidFormInput
     
     // MARK: - LocalizedError
     
@@ -37,14 +39,12 @@ public enum APIError: LocalizedError {
             return errorResponse.message
         case .invalidJSON(_):
             return "Unable parse JSON object into expected classes."
-        case .invalidFormInput:
-            return "Form input data is invalid."
         }
     }
     
     // MARK: - NSError helper
     
-    public func nsErrorValue()-> APINSError? {
+    public func nsErrorValue() -> NSError? {
         var userInfo = [String: Any]()
         userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
         
@@ -77,10 +77,6 @@ public enum APIError: LocalizedError {
             return APINSError(domain: PAYErrorDomain,
                               code: PAYErrorInvalidJSON,
                               userInfo: userInfo)
-        case .invalidFormInput:
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorFormInvalid,
-                              userInfo: nil)
         }
     }
     

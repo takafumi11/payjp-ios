@@ -111,7 +111,7 @@ public class CardFormView: UIView {
     /// - Parameters:
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
-    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, APIError>) -> Void) {
+    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
         self.viewModel.createToken(with: tenantId, completion: completion)
     }
 
@@ -126,7 +126,13 @@ public class CardFormView: UIView {
             case .success(let result):
                 completion(result, nil)
             case .failure(let error):
-                completion(nil, error.nsErrorValue())
+                switch error {
+                case is NSErrorCompatible:
+                    let error = error as! NSErrorCompatible
+                    completion(nil, error.nsErrorValue())
+                default:
+                    completion(nil, NSError(domain: PAYErrorDomain, code: PAYErrorSystemError, userInfo: nil))
+                }
             }
         }
     }
