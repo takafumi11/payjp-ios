@@ -12,7 +12,10 @@ public typealias CardBrandsResult = (Result<[CardBrand], APIError>) -> Void
 
 protocol AccountsServiceType {
     @discardableResult
-    func getAcceptedBrands(tenantId: String?, completion: CardBrandsResult?) -> URLSessionDataTask?
+    func getAcceptedBrands(
+        tenantId: String?,
+        completion: CardBrandsResult?
+        ) -> URLSessionDataTask?
 }
 
 struct AccountsService: AccountsServiceType {
@@ -25,7 +28,10 @@ struct AccountsService: AccountsServiceType {
         self.client = client
     }
 
-    func getAcceptedBrands(tenantId: String?, completion: CardBrandsResult?) -> URLSessionDataTask? {
+    func getAcceptedBrands(
+        tenantId: String?,
+        completion: CardBrandsResult?
+        ) -> URLSessionDataTask? {
         let request = GetAcceptedBrands(tenantId: tenantId)
         return client.request(with: request) { result in
             switch result {

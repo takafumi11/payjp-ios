@@ -11,7 +11,11 @@ import XCTest
 
 class CreateTokenRequestTests: XCTestCase {
     func testFullFields() {
-        let request = CreateTokenRequest(cardNumber: "4242424242424242", cvc: "8888", expirationMonth: "01", expirationYear: "2022", name: "YUI ARAGAKI")
+        let request = CreateTokenRequest(cardNumber: "4242424242424242",
+                                         cvc: "8888",
+                                         expirationMonth: "01",
+                                         expirationYear: "2022",
+                                         name: "YUI ARAGAKI")
 
         XCTAssertEqual(request.path, "tokens")
         XCTAssertEqual(request.httpMethod, "POST")
@@ -24,7 +28,11 @@ class CreateTokenRequestTests: XCTestCase {
     }
 
     func testFieldsWithoutName() {
-        let request = CreateTokenRequest(cardNumber: "4242424242424242", cvc: "8888", expirationMonth: "01", expirationYear: "2022", name: nil)
+        let request = CreateTokenRequest(cardNumber: "4242424242424242",
+                                         cvc: "8888",
+                                         expirationMonth: "01",
+                                         expirationYear: "2022",
+                                         name: nil)
 
         XCTAssertEqual(request.path, "tokens")
         XCTAssertEqual(request.httpMethod, "POST")

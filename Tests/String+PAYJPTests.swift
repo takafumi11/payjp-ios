@@ -9,6 +9,7 @@
 import XCTest
 @testable import PAYJP
 
+// swiftlint:disable type_name
 class String_PAYJPTests: XCTestCase {
 
     private func testNumberfy(cases: [(String, String)]) {
@@ -33,3 +34,4 @@ class String_PAYJPTests: XCTestCase {
         XCTAssertEqual("Please enter a card number.", "payjp_card_form_error_no_number".localized)
     }
 }
+// swiftlint:enable type_name

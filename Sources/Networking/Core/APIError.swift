@@ -67,7 +67,7 @@ public enum APIError: LocalizedError {
                               userInfo: userInfo)
         case .invalidJSON(let json, let error):
             userInfo[PAYErrorInvalidJSONObject] = json
-            if (error != nil) {
+            if error != nil {
                 userInfo[PAYErrorInvalidJSONErrorObject] = error
             }
             return APINSError(domain: PAYErrorDomain,

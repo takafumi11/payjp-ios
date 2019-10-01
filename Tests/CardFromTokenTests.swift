@@ -10,6 +10,7 @@ import Foundation
 import XCTest
 @testable import PAYJP
 
+// swiftlint:disable force_try
 class CardFromTokenTests: XCTestCase {
     var card: Card!
 
@@ -28,10 +29,13 @@ class CardFromTokenTests: XCTestCase {
         XCTAssertNil(card.name)
     }
 
+    // swiftlint:disable force_cast
     func testCardMetadata() {
         let rawValue = card.rawValue!
         let metadata = rawValue["metadata"] as! [String: Any]
         XCTAssertEqual(metadata.count, 1)
         XCTAssertEqual(metadata["foo"] as! String, "bar")
     }
+    // swiftlint:enable force_cast
 }
+// swiftlint:enable force_try

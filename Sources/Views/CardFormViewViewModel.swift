@@ -71,13 +71,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Lifecycle
 
     init(cardNumberFormatter: CardNumberFormatterType = CardNumberFormatter(),
-        cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
-        expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
-        expirationValidator: ExpirationValidatorType = ExpirationValidator(),
-        expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
-        cvcFormatter: CvcFormatterType = CvcFormatter(),
-        cvcValidator: CvcValidatorType = CvcValidator(),
-        accountsService: AccountsServiceType = AccountsService.shared) {
+         cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
+         expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
+         expirationValidator: ExpirationValidatorType = ExpirationValidator(),
+         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
+         cvcFormatter: CvcFormatterType = CvcFormatter(),
+         cvcValidator: CvcValidatorType = CvcValidator(),
+         accountsService: AccountsServiceType = AccountsService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -91,11 +91,12 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - CardFormViewViewModelType
 
     func update(cardNumber: String?) -> Result<CardNumber, FormError> {
-        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber), let cardNumber = cardNumber, !cardNumber.isEmpty else {
-            self.cardNumber = nil
-            self.cardBrand = .unknown
-            self.isBrandChanged = true
-            return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
+        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber),
+            let cardNumber = cardNumber, !cardNumber.isEmpty else {
+                self.cardNumber = nil
+                self.cardBrand = .unknown
+                self.isBrandChanged = true
+                return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isBrandChanged = self.cardBrand != cardNumberInput.brand
         self.cardNumber = cardNumberInput.formatted.numberfy()
@@ -127,9 +128,10 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func update(expiration: String?) -> Result<String, FormError> {
-        guard let expirationInput = self.expirationFormatter.string(from: expiration), let expiration = expiration, !expiration.isEmpty else {
-            self.monthYear = nil
-            return .failure(.expirationEmptyError(value: nil, isInstant: false))
+        guard let expirationInput = self.expirationFormatter.string(from: expiration),
+            let expiration = expiration, !expiration.isEmpty else {
+                self.monthYear = nil
+                return .failure(.expirationEmptyError(value: nil, isInstant: false))
         }
 
         do {
@@ -149,9 +151,10 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func update(cvc: String?) -> Result<String, FormError> {
-        guard var cvcInput = self.cvcFormatter.string(from: cvc, brand: self.cardBrand), let cvc = cvc, !cvc.isEmpty else {
-            self.cvc = nil
-            return .failure(.cvcEmptyError(value: nil, isInstant: false))
+        guard var cvcInput = self.cvcFormatter.string(from: cvc, brand: self.cardBrand),
+            let cvc = cvc, !cvc.isEmpty else {
+                self.cvc = nil
+                return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
         if self.isBrandChanged {
             cvcInput = cvc

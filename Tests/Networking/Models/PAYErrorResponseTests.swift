@@ -8,7 +8,6 @@
 
 import Foundation
 
-import Foundation
 import XCTest
 @testable import PAYJP
 
@@ -18,7 +17,9 @@ class PAYErrorResponseTests: XCTestCase {
     override func setUp() {
         let json = TestFixture.JSON(by: "error.json")
         let decoder = JSONDecoder.shared
+        // swiftlint:disable force_try
         errorResponse = try! decoder.decode(PAYErrorResult.self, from: json).error
+        // swiftlint:enable force_try
     }
 
     func testErrorProperties() {

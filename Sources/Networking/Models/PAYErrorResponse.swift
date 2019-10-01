@@ -37,7 +37,9 @@ public final class PAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedEr
     public let type: String?
 
     public override var description: String {
+        // swiftlint:disable line_length
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
+        // swiftlint:enable line_length
     }
 
     public var errorDescription: String? { return description }

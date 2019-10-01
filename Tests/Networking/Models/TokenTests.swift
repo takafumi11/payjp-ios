@@ -18,7 +18,9 @@ class TokenTests: XCTestCase {
     override func setUp() {
         json = TestFixture.JSON(by: "token.json")
         let decoder = JSONDecoder.shared
+        // swiftlint:disable force_try
         token = try! Token.decodeJson(with: json, using: decoder)
+        // swiftlint:enable force_try
     }
 
     func testTokenProperties() {

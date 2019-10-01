@@ -10,6 +10,7 @@ import XCTest
 import PassKit
 @testable import PAYJP
 
+// swiftlint:disable force_try
 class APIErrorNSErrorTests: XCTestCase {
     func testInvalidApplePayTokenConversion() {
         let token = PKPaymentToken()
@@ -90,3 +91,4 @@ class APIErrorNSErrorTests: XCTestCase {
         XCTAssertEqual(nserror?.localizedDescription, "Unable parse JSON object into expected classes.")
     }
 }
+// swiftlint:enable force_try

@@ -51,10 +51,10 @@ struct CardNumberValidator: CardNumberValidatorType {
         for (offset, element) in digitStrings.enumerated() {
             if var digit = element {
                 let odd = offset % 2 == 1
-                if (odd) {
+                if odd {
                     digit *= 2
                 }
-                if (digit > 9) {
+                if digit > 9 {
                     digit -= 9
                 }
                 sum += digit

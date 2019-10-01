@@ -35,7 +35,13 @@ struct CreateTokenRequest: BaseRequest {
 
     // MARK: - Lifecycle
 
-    init(cardNumber: String, cvc: String, expirationMonth: String, expirationYear: String, name: String?) {
+    init(
+        cardNumber: String,
+        cvc: String,
+        expirationMonth: String,
+        expirationYear: String,
+        name: String?
+        ) {
         self.cardNumber = cardNumber
         self.cvc = cvc
         self.expirationMonth = expirationMonth

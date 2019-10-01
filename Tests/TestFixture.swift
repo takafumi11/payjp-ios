@@ -13,7 +13,9 @@ struct TestFixture {
 
     static func JSON(by name: String) -> Data {
         let url = self.bundle.url(forResource: name, withExtension: nil, subdirectory: "Fixtures", localization: nil)
+        // swiftlint:disable force_try
         let data = try! Data(contentsOf: url!)
+        // swiftlint:enable force_try
         return data
     }
 }

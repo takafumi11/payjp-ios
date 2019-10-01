@@ -9,6 +9,7 @@
 import XCTest
 @testable import PAYJP
 
+// swiftlint:disable type_body_length
 class CardFormViewModelTests: XCTestCase {
 
     let viewModel = CardFormViewViewModel()
@@ -47,7 +48,7 @@ class CardFormViewModelTests: XCTestCase {
 
     func testUpdateCardNumberInvalidLength() {
         let result = viewModel.update(cardNumber: "4242424242")
-//        let cardNumber = CardNumber(formatted: "4242 4242 42", brand: .visa)
+        //        let cardNumber = CardNumber(formatted: "4242 4242 42", brand: .visa)
 
         switch result {
         case .failure(let error):
@@ -86,7 +87,6 @@ class CardFormViewModelTests: XCTestCase {
         case .success(let value):
             XCTAssertEqual(value.formatted, "4242 4242 4242 4242")
             XCTAssertEqual(value.brand, .visa)
-            break
         default:
             XCTFail()
         }
@@ -178,7 +178,6 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .success(let value):
             XCTAssertEqual(value, "12/99")
-            break
         default:
             XCTFail()
         }
@@ -239,7 +238,6 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .success(let value):
             XCTAssertEqual(value, "123")
-            break
         default:
             XCTFail()
         }
@@ -300,7 +298,6 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .success(let value):
             XCTAssertEqual(value, "PAY TARO")
-            break
         default:
             XCTFail()
         }
@@ -352,3 +349,4 @@ class CardFormViewModelTests: XCTestCase {
         XCTAssertFalse(result)
     }
 }
+// swiftlint:enable type_body_length

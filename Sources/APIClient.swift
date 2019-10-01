@@ -13,8 +13,10 @@ import PassKit
 
     @objc(sharedClient) public static let shared = APIClient()
 
-    private init(accountsService: AccountsServiceType = AccountsService.shared,
-                 tokensService: TokenServiceType = TokenService.shared) {
+    private init(
+        accountsService: AccountsServiceType = AccountsService.shared,
+        tokensService: TokenServiceType = TokenService.shared
+        ) {
         self.accountsService = accountsService
         self.tokensService = tokensService
     }
@@ -23,8 +25,10 @@ import PassKit
     /// - parameter token:         ApplePay Token
     /// - parameter completion:    completion action
     @nonobjc
-    public func createToken(with token: PKPaymentToken,
-                            completion: @escaping (Result<Token, APIError>) -> Void) {
+    public func createToken(
+        with token: PKPaymentToken,
+        completion: @escaping (Result<Token, APIError>) -> Void
+        ) {
         tokensService.createTokenForApplePay(paymentToken: token, completion: completion)
     }
 
@@ -36,12 +40,14 @@ import PassKit
     /// - parameter name:               Credit card holder name `TARO YAMADA`
     /// - parameter completion:         completion action
     @nonobjc
-    public func createToken(with cardNumber: String,
-                            cvc: String,
-                            expirationMonth: String,
-                            expirationYear: String,
-                            name: String? = nil,
-                            completion: @escaping (Result<Token, APIError>) -> Void) {
+    public func createToken(
+        with cardNumber: String,
+        cvc: String,
+        expirationMonth: String,
+        expirationYear: String,
+        name: String? = nil,
+        completion: @escaping (Result<Token, APIError>) -> Void
+        ) {
         tokensService.createToken(cardNumber: cardNumber,
                                   cvc: cvc,
                                   expirationMonth: expirationMonth,
@@ -54,8 +60,10 @@ import PassKit
     /// - parameter tokenId:       identifier of the Token
     /// - parameter completion:    completion action
     @nonobjc
-    public func getToken(with tokenId: String,
-                         completion: @escaping (Result<Token, APIError>) -> Void) {
+    public func getToken(
+        with tokenId: String,
+        completion: @escaping (Result<Token, APIError>) -> Void
+        ) {
         tokensService.getToken(with: tokenId, completion: completion)
     }
 
@@ -63,16 +71,20 @@ import PassKit
     /// - parameter tenantId:      identifier of the Tenant
     /// - parameter completion:    completion action
     @nonobjc
-    public func getAcceptedBrands(with tenantId: String?,
-                                  completion: CardBrandsResult?) {
+    public func getAcceptedBrands(
+        with tenantId: String?,
+        completion: CardBrandsResult?
+        ) {
         accountsService.getAcceptedBrands(tenantId: tenantId, completion: completion)
     }
 }
 
 // Objective-C API
 extension APIClient {
-    @objc public func createTokenWith(_ token: PKPaymentToken,
-                                      completionHandler: @escaping (Token?, NSError?) -> Void) {
+    @objc public func createTokenWith(
+        _ token: PKPaymentToken,
+        completionHandler: @escaping (Token?, NSError?) -> Void
+        ) {
         tokensService.createTokenForApplePay(paymentToken: token) { result in
             switch result {
             case .success(let result):
@@ -83,24 +95,33 @@ extension APIClient {
         }
     }
 
-    @objc public func createTokenWith(_ cardNumber: String,
-                                      cvc: String,
-                                      expirationMonth: String,
-                                      expirationYear: String,
-                                      name: String?,
-                                      completionHandler: @escaping (Token?, NSError?) -> Void) {
-        tokensService.createToken(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name) { result in
-            switch result {
-            case .success(let result):
-                completionHandler(result, nil)
-            case .failure(let error):
-                completionHandler(nil, error.nsErrorValue())
-            }
+    @objc public func createTokenWith(
+        _ cardNumber: String,
+        cvc: String,
+        expirationMonth: String,
+        expirationYear: String,
+        name: String?,
+        completionHandler: @escaping (Token?, NSError?) -> Void
+        ) {
+        tokensService.createToken(
+            cardNumber: cardNumber,
+            cvc: cvc,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            name: name) { result in
+                switch result {
+                case .success(let result):
+                    completionHandler(result, nil)
+                case .failure(let error):
+                    completionHandler(nil, error.nsErrorValue())
+                }
         }
     }
 
-    @objc public func getTokenWith(_ tokenId: String,
-                                   completionHandler: @escaping (Token?, NSError?) -> Void) {
+    @objc public func getTokenWith(
+        _ tokenId: String,
+        completionHandler: @escaping (Token?, NSError?) -> Void
+        ) {
         tokensService.getToken(with: tokenId) { result in
             switch result {
             case .success(let result):
@@ -111,8 +132,10 @@ extension APIClient {
         }
     }
 
-    @objc public func getAcceptedBrandsWith(_ tenantId: String?,
-                                            completionHandler: @escaping ([NSString]?, NSError?) -> Void) {
+    @objc public func getAcceptedBrandsWith(
+        _ tenantId: String?,
+        completionHandler: @escaping ([NSString]?, NSError?) -> Void
+        ) {
         accountsService.getAcceptedBrands(tenantId: tenantId) { result in
             switch result {
             case .success(let result):
