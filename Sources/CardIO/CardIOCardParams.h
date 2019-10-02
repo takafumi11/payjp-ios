@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CardIOCardParams : NSObject
 
-@property (nonatomic, copy, nullable) NSString *number;
-@property (nonatomic, nullable) NSNumber *expiryMonth;
-@property (nonatomic, nullable) NSNumber *expiryYear;
-@property (nonatomic, copy, nullable) NSString *cvc;
+@property(nonatomic, copy, nullable) NSString *number;
+@property(nonatomic, nullable) NSNumber *expiryMonth;
+@property(nonatomic, nullable) NSNumber *expiryYear;
+@property(nonatomic, copy, nullable) NSString *cvc;
 
 @end
 

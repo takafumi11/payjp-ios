@@ -4,8 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CardIOProxy.h"
 #import "CardIOCardParams.h"
+#import "CardIOProxy.h"
 
 FOUNDATION_EXPORT double PAYJPVersionNumber;
 FOUNDATION_EXPORT const unsigned char PAYJPVersionString[];
@@ -24,11 +24,13 @@ FOUNDATION_EXPORT NSInteger const PAYErrorServiceError;
 /// Invalid JSON object.
 FOUNDATION_EXPORT NSInteger const PAYErrorInvalidJSON;
 
-/// Use this key name to get `PAYErrorInvalidApplePayToken` error's data which is stored in the `userInfo`.
+/// Use this key name to get `PAYErrorInvalidApplePayToken` error's data which is stored in the
+/// `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorInvalidApplePayTokenObject;
 /// Use this key name to get `PAYErrorSystemError` error's data which is stored in the `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorSystemErrorObject;
-/// Use this key name to get `PAYErrorInvalidResponse` error's data which is stored in the `userInfo`.
+/// Use this key name to get `PAYErrorInvalidResponse` error's data which is stored in the
+/// `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorInvalidResponseObject;
 /// Use this key name to get `PAYErrorServiceError` error's data which is stored in the `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorServiceErrorObject;
