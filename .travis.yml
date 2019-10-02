@@ -4,10 +4,15 @@ matrix:
     - osx_image: xcode10.2
 
 before_install:
+  - brew update
+  - brew install swiftlint clang-format
   - bundle install --path=vendor/bundle --clean
   - carthage bootstrap --no-use-binaries --platform ios
 
 script:
+    - bundle exec danger
+    - bundle exec fastlane ios check_swift_format
+    - bundle exec fastlane ios check_objc_format
     - bundle exec fastlane ios test
 
 cache:
