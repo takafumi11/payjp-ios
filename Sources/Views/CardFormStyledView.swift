@@ -1,5 +1,5 @@
 //
-//  CardFormViewLabelStyle.swift
+//  CardFormStyledView.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2019/09/19.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-@objc(PAYCardFormViewLabelStyleDelegate)
-public protocol CardFormViewLabelStyleDelegate: class {
-    func isValidChanged(in cardFormView: CardFormViewLabelStyle)
+@objc(PAYCardFormStyledViewDelegate)
+public protocol CardFormStyledViewDelegate: class {
+    func isValidChanged(in cardFormView: CardFormStyledView)
 }
 
-@IBDesignable @objcMembers @objc(PAYCardFormViewLabelStyle)
-public class CardFormViewLabelStyle: UIView {
+@IBDesignable @objcMembers @objc(PAYCardFormStyledView)
+public class CardFormStyledView: UIView {
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -50,9 +50,9 @@ public class CardFormViewLabelStyle: UIView {
     @IBOutlet weak var ocrButton: UIButton!
 
     private var contentView: UIView!
-    public weak var delegate: CardFormViewLabelStyleDelegate?
+    public weak var delegate: CardFormStyledViewDelegate?
 
-    private var fontColor: UIColor = Style.Color.black
+    private var inputTextColor: UIColor = Style.Color.black
 
     // MARK:
 
@@ -72,7 +72,7 @@ public class CardFormViewLabelStyle: UIView {
 
     private func initialize() {
         let bundle = Bundle(for: CardFormView.self)
-        let nib = UINib(nibName: "CardFormViewLabelStyle", bundle: bundle)
+        let nib = UINib(nibName: "CardFormStyledView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -83,10 +83,10 @@ public class CardFormViewLabelStyle: UIView {
         }
 
         backgroundColor = .clear
-//        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
-//            guard let self = self else { return }
-//            self.ocrButton.isHidden = !isAvailable
-//        }
+        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
+            guard let self = self else { return }
+            self.ocrButton.isHidden = !isAvailable
+        }
 
         // label
         cardNumberLabel.text = "payjp_card_form_number_label".localized
@@ -145,25 +145,25 @@ public class CardFormViewLabelStyle: UIView {
     }
 
     public func apply(style: FormStyle) {
-        let labelColor = UIColor(hex: style.labelFontColor ?? Style.Color.black.hexString)
-        let fontColor = UIColor(hex: style.inputFontColor)
-        let cursorColor = UIColor(hex: style.cursorColor)
-        self.fontColor = fontColor
-        // label font
-        cardNumberLabel.textColor = labelColor
-        expirationLabel.textColor = labelColor
-        cvcLabel.textColor = labelColor
-        cardHolderLabel.textColor = labelColor
-        // textField font
-        cardNumberTextField.textColor = fontColor
-        expirationTextField.textColor = fontColor
-        cvcTextField.textColor = fontColor
-        cardHolderTextField.textColor = fontColor
-        // cursor
-        cardNumberTextField.tintColor = cursorColor
-        expirationTextField.tintColor = cursorColor
-        cvcTextField.tintColor = cursorColor
-        cardHolderTextField.tintColor = cursorColor
+        let labelTextColor = UIColor(hex: style.labelTextColor ?? Style.Color.black.hexString)
+        let inputTextColor = UIColor(hex: style.inputTextColor)
+        let tintColor = UIColor(hex: style.tintColor)
+        self.inputTextColor = inputTextColor
+        // label text
+        cardNumberLabel.textColor = labelTextColor
+        expirationLabel.textColor = labelTextColor
+        cvcLabel.textColor = labelTextColor
+        cardHolderLabel.textColor = labelTextColor
+        // input text
+        cardNumberTextField.textColor = inputTextColor
+        expirationTextField.textColor = inputTextColor
+        cvcTextField.textColor = inputTextColor
+        cardHolderTextField.textColor = inputTextColor
+        // tint
+        cardNumberTextField.tintColor = tintColor
+        expirationTextField.tintColor = tintColor
+        cvcTextField.tintColor = tintColor
+        cardHolderTextField.tintColor = tintColor
     }
 
     @IBAction func onTapOcrButton(_ sender: Any) {
@@ -171,7 +171,7 @@ public class CardFormViewLabelStyle: UIView {
     }
 }
 
-extension CardFormViewLabelStyle: UITextFieldDelegate {
+extension CardFormStyledView: UITextFieldDelegate {
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
@@ -227,7 +227,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(cardNumber):
             cardNumberTextField.text = cardNumber.formatted
-            cardNumberTextField.textColor = self.fontColor
+            cardNumberTextField.textColor = self.inputTextColor
             cardNumberErrorLabel.text = nil
             updateBrandLogo(brand: cardNumber.brand)
             updateCvcIcon(brand: cardNumber.brand)
@@ -238,7 +238,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
                  let .cardNumberInvalidError(value, instant),
                  let .cardNumberInvalidBrandError(value, instant):
                 cardNumberTextField.text = value?.formatted
-                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
+                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
                 updateBrandLogo(brand: value?.brand)
                 updateCvcIcon(brand: value?.brand)
@@ -275,7 +275,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(expiration):
             expirationTextField.text = expiration
-            expirationTextField.textColor = self.fontColor
+            expirationTextField.textColor = self.inputTextColor
             expirationErrorLabel.text = nil
             focusNextInputField(currentField: expirationTextField)
         case let .failure(error):
@@ -283,7 +283,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
             case let .expirationEmptyError(value, instant),
                  let .expirationInvalidError(value, instant):
                 expirationTextField.text = value
-                expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
+                expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break
@@ -302,7 +302,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(cvc):
             cvcTextField.text = cvc
-            cvcTextField.textColor = self.fontColor
+            cvcTextField.textColor = self.inputTextColor
             cvcErrorLabel.text = nil
             focusNextInputField(currentField: cvcTextField)
         case let .failure(error):
@@ -310,7 +310,7 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
             case let .cvcEmptyError(value, instant),
                  let .cvcInvalidError(value, instant):
                 cvcTextField.text = value
-                cvcTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
+                cvcTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break
@@ -340,13 +340,13 @@ extension CardFormViewLabelStyle: UITextFieldDelegate {
         switch result {
         case let .success(holderName):
             cardHolderTextField.text = holderName
-            cardHolderTextField.textColor = self.fontColor
+            cardHolderTextField.textColor = self.inputTextColor
             cardHolderErrorLabel.text = nil
         case let .failure(error):
             switch error {
             case let .cardHolderEmptyError(value, instant):
                 cardHolderTextField.text = value
-                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.fontColor
+                cardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
                 break

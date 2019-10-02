@@ -10,13 +10,13 @@ import Foundation
 
 @objcMembers @objc(PAYCardFormStyle)
 public class FormStyle: NSObject {
-    public let labelFontColor: String?
-    public let inputFontColor: String
-    public let cursorColor: String
+    public let labelTextColor: String?
+    public let inputTextColor: String
+    public let tintColor: String
 
-    public init(labelFontColor: String? = nil, inputFontColor: String, cursorColor: String) {
-        self.labelFontColor = labelFontColor
-        self.inputFontColor = inputFontColor
-        self.cursorColor = cursorColor
+    public init(labelTextColor: String? = nil, inputTextColor: String, tintColor: String) {
+        self.labelTextColor = labelTextColor
+        self.inputTextColor = inputTextColor
+        self.tintColor = tintColor
     }
 }

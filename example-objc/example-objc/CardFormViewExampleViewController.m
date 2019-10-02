@@ -33,7 +33,7 @@
     
     self.cardFormView.delegate = self;
     
-    self.list = @[@"Nomal", @"Red", @"Blue", @"Dark"];
+    self.list = @[@"Normal", @"Red", @"Blue", @"Dark"];
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
@@ -61,25 +61,25 @@
     
     switch (theme) {
             case Red:{
-                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelFontColor:nil inputFontColor:@"ff4500" cursorColor:@"ff4500"];
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil inputTextColor:@"ff4500" tintColor:@"ff4500"];
                 [self.cardFormView applyWithStyle:style];
                 self.cardFormView.backgroundColor = UIColor.clearColor;
                 break;
             }
             case Blue:{
-                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelFontColor:nil inputFontColor:@"0000ff" cursorColor:@"0000ff"];
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil inputTextColor:@"0000ff" tintColor:@"0000ff"];
                 [self.cardFormView applyWithStyle:style];
                 self.cardFormView.backgroundColor = UIColor.clearColor;
                 break;
             }
             case Dark:{
-                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelFontColor:nil inputFontColor:@"ffffff" cursorColor:@"ffffff"];
+                PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil inputTextColor:@"ffffff" tintColor:@"ffffff"];
                 [self.cardFormView applyWithStyle:style];
                 self.cardFormView.backgroundColor = [UIColor colorWithRed:(CGFloat)61/255 green:(CGFloat)61/255 blue:(CGFloat)61/255 alpha:1];
                 break;
             }
         default:{
-            PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelFontColor:nil inputFontColor:@"000000" cursorColor:@"0c5ffa"];
+            PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil inputTextColor:@"000000" tintColor:@"0c5ffa"];
             [self.cardFormView applyWithStyle:style];
             self.cardFormView.backgroundColor = UIColor.clearColor;
             break;

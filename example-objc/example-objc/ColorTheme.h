@@ -10,13 +10,13 @@
 #define ColorStyle_h
 
 typedef NS_ENUM(NSInteger, ColorTheme) {
-    Nomal,
+    Normal,
     Red,
     Blue,
     Dark
 };
 #define GetColorThemeText(type) ColorThemeTextList[type]
 #define GetColorTheme(typeText) (ColorTheme)[ColorThemeTextList indexOfObject:typeText]
-#define ColorThemeTextList @[@"Nomal",@"Red",@"Blue",@"Dark"]
+#define ColorThemeTextList @[@"Normal",@"Red",@"Blue",@"Dark"]
 
-#endif /* ColorStyle_h */
+#endif

@@ -150,18 +150,18 @@ public class CardFormView: UIView {
     }
 
     public func apply(style: FormStyle) {
-        let fontColor = UIColor(hex: style.inputFontColor)
-        let cursorColor = UIColor(hex: style.cursorColor)
-        // font
-        cardNumberTextField.textColor = fontColor
-        expirationTextField.textColor = fontColor
-        cvcTextField.textColor = fontColor
-        cardHolderTextField.textColor = fontColor
-        // cursor
-        cardNumberTextField.tintColor = cursorColor
-        expirationTextField.tintColor = cursorColor
-        cvcTextField.tintColor = cursorColor
-        cardHolderTextField.tintColor = cursorColor
+        let inputTextColor = UIColor(hex: style.inputTextColor)
+        let tintColor = UIColor(hex: style.tintColor)
+        // input text
+        cardNumberTextField.textColor = inputTextColor
+        expirationTextField.textColor = inputTextColor
+        cvcTextField.textColor = inputTextColor
+        cardHolderTextField.textColor = inputTextColor
+        // tint
+        cardNumberTextField.tintColor = tintColor
+        expirationTextField.tintColor = tintColor
+        cvcTextField.tintColor = tintColor
+        cardHolderTextField.tintColor = tintColor
     }
 
     @IBAction func onTapOcrButton(_ sender: Any) {
