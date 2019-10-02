@@ -52,6 +52,9 @@ public class CardFormStyledView: UIView {
     private var contentView: UIView!
     public weak var delegate: CardFormStyledViewDelegate?
 
+    private var cardIOProxy: CardIOProxy!
+    private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
+    
     private var inputTextColor: UIColor = Style.Color.black
 
     // MARK:
@@ -71,7 +74,7 @@ public class CardFormStyledView: UIView {
     }
 
     private func initialize() {
-        let bundle = Bundle(for: CardFormView.self)
+        let bundle = Bundle(for: CardFormStyledView.self)
         let nib = UINib(nibName: "CardFormStyledView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
@@ -83,10 +86,6 @@ public class CardFormStyledView: UIView {
         }
 
         backgroundColor = .clear
-        viewModel.registerIsCardIOAvailableChanges { [weak self] isAvailable in
-            guard let self = self else { return }
-            self.ocrButton.isHidden = !isAvailable
-        }
 
         // label
         cardNumberLabel.text = "payjp_card_form_number_label".localized
@@ -113,6 +112,9 @@ public class CardFormStyledView: UIView {
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
+        
+        cardIOProxy = CardIOProxy(delegate: self)
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         getAcceptedBrands()
     }
@@ -167,7 +169,9 @@ public class CardFormStyledView: UIView {
     }
 
     @IBAction func onTapOcrButton(_ sender: Any) {
-        viewModel.presentCardIOIfAvailable(from: self.parentViewController!)
+        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
     }
 }
 
@@ -379,3 +383,16 @@ extension CardFormStyledView: UITextFieldDelegate {
     }
 }
 
+extension CardFormStyledView: CardIOProxyDelegate {
+    public func didCancel(in proxy: CardIOProxy) {
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+    }
+    
+    public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
+        updateCardNumberInput(input: cardParams.number)
+        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
+        updateCvcInput(input: cardParams.cvc)
+        
+        self.delegate?.isValidChanged(in: self)
+    }
+}

@@ -90,12 +90,12 @@ public class CardFormView: UIView {
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
 
-        cardIOProxy = CardIOProxy(delegate: self)
-        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-        
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
+        
+        cardIOProxy = CardIOProxy(delegate: self)
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         getAcceptedBrands()
     }
