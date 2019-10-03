@@ -8,7 +8,8 @@
 
 import Foundation
 
-public enum LocalError: NSErrorCompatible {
+public enum LocalError: PAYError {
+    public typealias TypedError = NSError
     /// Invalid Form input.
     case invalidFormInput
 
@@ -20,18 +21,11 @@ public enum LocalError: NSErrorCompatible {
             return "Form input data is invalid."
         }
     }
-
-    // MARK: - NSError helper
-
-    public func nsErrorValue() -> NSError? {
-        var userInfo = [String: Any]()
-        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
-
+    
+    public var errorCode: Int {
         switch self {
         case .invalidFormInput:
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorFormInvalid,
-                              userInfo: userInfo)
+            return PAYErrorFormInvalid
         }
     }
 }

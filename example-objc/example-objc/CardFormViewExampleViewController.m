@@ -71,10 +71,12 @@
     [self.cardFormView createTokenWith:nil
                             completion:
      ^(PAYToken *token, NSError *error) {
-         APIError *apiError = (APIError *)error;
-         if (apiError) {
-             id<PAYErrorResponseType> errorResponse = apiError.payError;
-             NSLog(@"[errorResponse] %@", errorResponse.description);
+         if ([error isKindOfClass:APIError.class]) {
+             APIError *apiError = (APIError *)error;
+             if (apiError) {
+                 id<PAYErrorResponseType> errorResponse = apiError.payError;
+                 NSLog(@"[errorResponse] %@", errorResponse.description);
+             }
          }
          
          if (!token) {

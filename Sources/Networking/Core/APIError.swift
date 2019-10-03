@@ -9,11 +9,51 @@
 import Foundation
 import PassKit
 
-public protocol NSErrorCompatible: Error {
-    func nsErrorValue() -> NSError?
+protocol NSErrorSerializable: Error {
+    associatedtype TypedError: NSError
+    var errorCode: Int { get }
+    var errorDescription: String? { get }
+    var userInfo: [String: Any] { get }
+    var addUserInfo: [String: Any] { get }
 }
 
-public enum APIError: LocalizedError, NSErrorCompatible {
+extension NSErrorSerializable {
+    public var userInfo: [String: Any] {
+        var userInfo = [String: Any]()
+        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
+        return userInfo.merging(self.addUserInfo) { $1 }
+    }
+    
+    public var addUserInfo: [String: Any] {
+        return [String: Any]()
+    }
+
+    public func nsErrorValue() -> TypedError? {
+        guard let convertible = self as? NSErrorCastable else {
+            return nil
+        }
+        return convertible.nsErrorValue()
+    }
+}
+
+protocol NSErrorCastable {
+    func nsErrorValue<T>() -> T?
+}
+
+protocol PAYError: NSErrorSerializable, NSErrorCastable {
+    func nsErrorValue() -> TypedError?
+}
+
+extension PAYError {
+    func nsErrorValue<T>() -> T {
+        return TypedError(domain: PAYErrorDomain,
+                          code: self.errorCode,
+                          userInfo: self.userInfo) as! T
+    }
+}
+
+public enum APIError: LocalizedError, PAYError {
+    public typealias TypedError = APINSError
     // The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
     /// The system error.
@@ -41,45 +81,44 @@ public enum APIError: LocalizedError, NSErrorCompatible {
             return "Unable parse JSON object into expected classes."
         }
     }
-    
-    // MARK: - NSError helper
-    
-    public func nsErrorValue() -> NSError? {
+
+    public var errorCode: Int {
+        switch self {
+        case .invalidApplePayToken(_):
+            return PAYErrorInvalidApplePayToken
+        case .systemError(_):
+            return PAYErrorSystemError
+        case .invalidResponse(_):
+            return PAYErrorInvalidResponse
+        case .serviceError(_):
+            return PAYErrorServiceError
+        case .invalidJSON(_):
+            return PAYErrorInvalidJSON
+        }
+    }
+
+    public var addUserInfo: [String: Any] {
         var userInfo = [String: Any]()
-        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
-        
         switch self {
         case .invalidApplePayToken(let token):
             userInfo[PAYErrorInvalidApplePayTokenObject] = token
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidApplePayToken,
-                              userInfo: userInfo)
         case .systemError(let error):
             userInfo[PAYErrorSystemErrorObject] = error
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorSystemError,
-                              userInfo: userInfo)
         case .invalidResponse(let response):
             userInfo[PAYErrorInvalidResponseObject] = response
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidResponse,
-                              userInfo: userInfo)
         case .serviceError(let errorResponse):
             userInfo[PAYErrorServiceErrorObject] = errorResponse
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorServiceError,
-                              userInfo: userInfo)
         case .invalidJSON(let json, let error):
             userInfo[PAYErrorInvalidJSONObject] = json
             if (error != nil) {
                 userInfo[PAYErrorInvalidJSONErrorObject] = error
             }
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidJSON,
-                              userInfo: userInfo)
         }
+        return userInfo
     }
-    
+
+    // MARK: - NSError helper
+
     /// Returns error response object if the type is `.serviceError`.
     public var payError: PAYErrorResponseType? {
         switch self {
