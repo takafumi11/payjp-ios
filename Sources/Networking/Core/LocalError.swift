@@ -8,8 +8,7 @@
 
 import Foundation
 
-public enum LocalError: PAYError {
-    public typealias TypedError = NSError
+public enum LocalError: NSErrorSerializable {
     /// Invalid Form input.
     case invalidFormInput
 

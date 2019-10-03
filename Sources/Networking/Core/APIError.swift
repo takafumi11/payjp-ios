@@ -10,50 +10,32 @@ import Foundation
 import PassKit
 
 protocol NSErrorSerializable: Error {
-    associatedtype TypedError: NSError
     var errorCode: Int { get }
     var errorDescription: String? { get }
     var userInfo: [String: Any] { get }
-    var addUserInfo: [String: Any] { get }
+    var additionalUserInfo: [String: Any] { get }
+    func nsErrorValue() -> NSError?
 }
 
 extension NSErrorSerializable {
     public var userInfo: [String: Any] {
         var userInfo = [String: Any]()
         userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
-        return userInfo.merging(self.addUserInfo) { $1 }
+        return userInfo.merging(self.additionalUserInfo) { $1 }
     }
     
-    public var addUserInfo: [String: Any] {
+    public var additionalUserInfo: [String: Any] {
         return [String: Any]()
     }
 
-    public func nsErrorValue() -> TypedError? {
-        guard let convertible = self as? NSErrorCastable else {
-            return nil
-        }
-        return convertible.nsErrorValue()
+    public func nsErrorValue() -> NSError? {
+        return NSError(domain: PAYErrorDomain,
+                       code: self.errorCode,
+                       userInfo: self.userInfo)
     }
 }
 
-protocol NSErrorCastable {
-    func nsErrorValue<T>() -> T?
-}
-
-protocol PAYError: NSErrorSerializable, NSErrorCastable {
-    func nsErrorValue() -> TypedError?
-}
-
-extension PAYError {
-    func nsErrorValue<T>() -> T {
-        return TypedError(domain: PAYErrorDomain,
-                          code: self.errorCode,
-                          userInfo: self.userInfo) as! T
-    }
-}
-
-public enum APIError: LocalizedError, PAYError {
-    public typealias TypedError = APINSError
+public enum APIError: LocalizedError, NSErrorSerializable {
     // The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
     /// The system error.
@@ -97,7 +79,7 @@ public enum APIError: LocalizedError, PAYError {
         }
     }
 
-    public var addUserInfo: [String: Any] {
+    public var additionalUserInfo: [String: Any] {
         var userInfo = [String: Any]()
         switch self {
         case .invalidApplePayToken(let token):
@@ -127,17 +109,5 @@ public enum APIError: LocalizedError, PAYError {
         default:
             return nil
         }
-    }
-}
-
-@objcMembers @objc(APIError)
-public class APINSError: NSError {
-    /// Returns error response object if the type is `.serviceError`.
-    public var payError: PAYErrorResponseType? {
-        if domain == PAYErrorDomain && code == PAYErrorServiceError {
-            return userInfo[PAYErrorServiceErrorObject] as? PAYErrorResponseType
-        }
-        
-        return nil
     }
 }

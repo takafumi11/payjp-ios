@@ -126,13 +126,7 @@ public class CardFormView: UIView {
             case .success(let result):
                 completion(result, nil)
             case .failure(let error):
-                if let error = error as? NSErrorCastable  {
-                    completion(nil, error.nsErrorValue())
-                } else {
-                    completion(nil, NSError(domain: PAYErrorDomain,
-                                            code: PAYErrorSystemError,
-                                            userInfo: [NSLocalizedDescriptionKey: error.localizedDescription]))
-                }
+                completion(nil, NSErrorConverter(error: error).value)
             }
         }
     }
