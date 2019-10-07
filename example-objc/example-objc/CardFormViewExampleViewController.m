@@ -12,7 +12,7 @@
 
 @interface CardFormViewExampleViewController ()
 
-@property (weak, nonatomic) IBOutlet PAYCardFormView *cardFormView;
+@property (weak, nonatomic) IBOutlet PAYCardFormTableStyledView *cardFormView;
 @property (weak, nonatomic) IBOutlet UILabel *tokenIdLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *createTokenButton;
 @property (weak, nonatomic) IBOutlet UITextField *selectColorField;
@@ -169,7 +169,7 @@
     return NO;
 }
 
-- (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
+- (void)isValidChangedIn:(PAYCardFormTableStyledView *)cardFormView {
     BOOL isValid = self.cardFormView.isValid;
     if (isValid) {
         self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;

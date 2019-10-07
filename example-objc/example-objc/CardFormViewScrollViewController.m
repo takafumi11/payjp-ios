@@ -12,7 +12,7 @@
 
 @interface CardFormViewScrollViewController ()
 
-@property (weak, nonatomic) IBOutlet PAYCardFormStyledView *cardFormView;
+@property (weak, nonatomic) IBOutlet PAYCardFormLabelStyledView *cardFormView;
 @property (weak, nonatomic) IBOutlet UIButton *createTokenButton;
 @property (weak, nonatomic) IBOutlet UITextField *selectColorField;
 
@@ -98,7 +98,7 @@
     return NO;
 }
     
-- (void)isValidChangedIn:(PAYCardFormView *)cardFormView {
+- (void)isValidChangedIn:(PAYCardFormLabelStyledView *)cardFormView {
     BOOL isValid = self.cardFormView.isValid;
     self.createTokenButton.enabled = isValid;
 }

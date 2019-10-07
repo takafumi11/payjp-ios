@@ -50,7 +50,7 @@
 		BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */; };
 		BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */; };
 		BE734B8A22DD7DE2008679EC /* ExpirationFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */; };
-		BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8E22DEF3AE008679EC /* CardFormView.swift */; };
+		BE734B8F22DEF3AE008679EC /* CardFormTableStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */; };
 		BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28422EADCC200F8906B /* TokensService.swift */; };
 		BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28622EADE5000F8906B /* AccountsService.swift */; };
 		BEA1D28922EAFB6700F8906B /* GetAcceptedBrandsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */; };
@@ -64,7 +64,7 @@
 		ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */; };
 		ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED222C1F22FD1DF90006FB87 /* Localizable.strings */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
-		ED50836A230FC3AC00C64A7F /* CardFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED508369230FC3AB00C64A7F /* CardFormView.xib */; };
+		ED50836A230FC3AC00C64A7F /* CardFormTableStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */; };
 		ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */; };
 		ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE6233A0F02002F1639 /* Style.swift */; };
 		ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE8233A0F35002F1639 /* Color.swift */; };
@@ -88,8 +88,8 @@
 		EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */; };
 		EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */; };
 		EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF4DB1234322B00036F449 /* LocalError.swift */; };
-		EDEAE9572344431200E061C8 /* CardFormStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAE9552344431100E061C8 /* CardFormStyledView.swift */; };
-		EDEAE9582344431200E061C8 /* CardFormStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDEAE9562344431200E061C8 /* CardFormStyledView.xib */; };
+		EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */; };
+		EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,7 +162,7 @@
 		BE6C230F20B566AE00C4FE1E /* APIErrorNSErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorNSErrorTests.swift; sourceTree = "<group>"; };
 		BE734B8622DD7C2D008679EC /* ExpirationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationFormatter.swift; sourceTree = "<group>"; };
 		BE734B8922DD7DE2008679EC /* ExpirationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationFormatterTests.swift; sourceTree = "<group>"; };
-		BE734B8E22DEF3AE008679EC /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
+		BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormTableStyledView.swift; sourceTree = "<group>"; };
 		BEA1D28422EADCC200F8906B /* TokensService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensService.swift; sourceTree = "<group>"; };
 		BEA1D28622EADE5000F8906B /* AccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsService.swift; sourceTree = "<group>"; };
 		BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsResponse.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
 		ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJPTests.swift"; sourceTree = "<group>"; };
-		ED508369230FC3AB00C64A7F /* CardFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormView.xib; sourceTree = "<group>"; };
+		ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormTableStyledView.xib; sourceTree = "<group>"; };
 		ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJPTests.swift"; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		ED7C3FE8233A0F35002F1639 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModelTests.swift; sourceTree = "<group>"; };
 		EDFF4DB1234322B00036F449 /* LocalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalError.swift; sourceTree = "<group>"; };
-		EDEAE9552344431100E061C8 /* CardFormStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormStyledView.swift; sourceTree = "<group>"; };
-		EDEAE9562344431200E061C8 /* CardFormStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormStyledView.xib; sourceTree = "<group>"; };
+		EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormLabelStyledView.swift; sourceTree = "<group>"; };
+		EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormLabelStyledView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -444,10 +444,11 @@
 		BE734B8B22DEE2DA008679EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EDEAE9552344431100E061C8 /* CardFormStyledView.swift */,
-				EDEAE9562344431200E061C8 /* CardFormStyledView.xib */,
-				BE734B8E22DEF3AE008679EC /* CardFormView.swift */,
-				ED508369230FC3AB00C64A7F /* CardFormView.xib */,
+				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
+				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
+				BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */,
+				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
+				ED016AB0234ADCD40049E6CE /* CardFormView.swift */,
 				BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */,
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
@@ -602,9 +603,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED50836A230FC3AC00C64A7F /* CardFormView.xib in Resources */,
+				ED50836A230FC3AC00C64A7F /* CardFormTableStyledView.xib in Resources */,
 				EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */,
-				EDEAE9582344431200E061C8 /* CardFormStyledView.xib in Resources */,
+				EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */,
 				ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */,
+				ED016AB1234ADCD40049E6CE /* CardFormView.swift in Sources */,
 				EDCF723222F948F500272C10 /* CardNumber.swift in Sources */,
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
@@ -654,11 +656,11 @@
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,
 				ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
-				BE734B8F22DEF3AE008679EC /* CardFormView.swift in Sources */,
+				BE734B8F22DEF3AE008679EC /* CardFormTableStyledView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
-				EDEAE9572344431200E061C8 /* CardFormStyledView.swift in Sources */,
+				EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */,
 				BE21785D22E99CF10098128D /* GetTokenRequest.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,

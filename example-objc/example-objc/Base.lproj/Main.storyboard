@@ -381,7 +381,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-ij-hx2">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormView">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72d-mz-CTM" customClass="PAYCardFormTableStyledView">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
