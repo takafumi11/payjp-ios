@@ -14,6 +14,7 @@ NSInteger const PAYErrorSystemError = 1;
 NSInteger const PAYErrorInvalidResponse = 2;
 NSInteger const PAYErrorServiceError = 3;
 NSInteger const PAYErrorInvalidJSON = 4;
+NSInteger const PAYErrorFormInvalid = 5;
 
 NSString *const PAYErrorInvalidApplePayTokenObject = @"PAYErrorInvalidApplePayToken";
 NSString *const PAYErrorSystemErrorObject = @"PAYErrorSystemErrorObject";

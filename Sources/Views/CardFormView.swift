@@ -49,6 +49,7 @@ public class CardFormView: UIView {
     
     private var cardIOProxy: CardIOProxy!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
+    private let nsErrorConverter: NSErrorConverterType = NSErrorConverter.shared
 
     // MARK:
 
@@ -106,14 +107,36 @@ public class CardFormView: UIView {
         return viewModel.isValid()
     }
 
-    public func createToken(tenantId: String? = nil, completion: (Result<String, Error>) -> Void) {
-        // TODO: ask the view model
+    /// create token for swift
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
+        self.viewModel.createToken(with: tenantId, completion: completion)
+    }
+
+    // create token for objective-c
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+        self.viewModel.createToken(with: tenantId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                completion(result, nil)
+            case .failure(let error):
+                completion(nil, self.nsErrorConverter.convert(from: error))
+            }
+        }
     }
 
     public func getAcceptedBrands(tenantId: String? = nil, completion: CardBrandsResult? = nil) {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
-
+    
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
@@ -121,7 +144,7 @@ public class CardFormView: UIView {
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
         return isValid
     }
-
+    
     @IBAction func onTapOcrButton(_ sender: Any) {
         if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
             cardIOProxy.presentCardIO(from: viewController)

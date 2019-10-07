@@ -9,8 +9,21 @@
 import Foundation
 import PassKit
 
-public enum APIError: LocalizedError {
-    /// The Apple Pay token is invalid.
+protocol NSErrorSerializable: Error {
+    var errorCode: Int { get }
+    var errorDescription: String? { get }
+    var userInfo: [String: Any] { get }
+}
+
+extension NSErrorSerializable {
+    
+    var userInfo: [String: Any] {
+        return [String: Any]()
+    }
+}
+
+public enum APIError: LocalizedError, NSErrorSerializable {
+    // The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
     /// The system error.
     case systemError(Error)
@@ -37,45 +50,44 @@ public enum APIError: LocalizedError {
             return "Unable parse JSON object into expected classes."
         }
     }
-    
-    // MARK: - NSError helper
-    
-    public func nsErrorValue()-> APINSError? {
+
+    public var errorCode: Int {
+        switch self {
+        case .invalidApplePayToken(_):
+            return PAYErrorInvalidApplePayToken
+        case .systemError(_):
+            return PAYErrorSystemError
+        case .invalidResponse(_):
+            return PAYErrorInvalidResponse
+        case .serviceError(_):
+            return PAYErrorServiceError
+        case .invalidJSON(_):
+            return PAYErrorInvalidJSON
+        }
+    }
+
+    public var userInfo: [String: Any] {
         var userInfo = [String: Any]()
-        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
-        
         switch self {
         case .invalidApplePayToken(let token):
             userInfo[PAYErrorInvalidApplePayTokenObject] = token
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidApplePayToken,
-                              userInfo: userInfo)
         case .systemError(let error):
             userInfo[PAYErrorSystemErrorObject] = error
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorSystemError,
-                              userInfo: userInfo)
         case .invalidResponse(let response):
             userInfo[PAYErrorInvalidResponseObject] = response
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidResponse,
-                              userInfo: userInfo)
         case .serviceError(let errorResponse):
             userInfo[PAYErrorServiceErrorObject] = errorResponse
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorServiceError,
-                              userInfo: userInfo)
         case .invalidJSON(let json, let error):
             userInfo[PAYErrorInvalidJSONObject] = json
             if (error != nil) {
                 userInfo[PAYErrorInvalidJSONErrorObject] = error
             }
-            return APINSError(domain: PAYErrorDomain,
-                              code: PAYErrorInvalidJSON,
-                              userInfo: userInfo)
         }
+        return userInfo
     }
-    
+
+    // MARK: - NSError helper
+
     /// Returns error response object if the type is `.serviceError`.
     public var payError: PAYErrorResponseType? {
         switch self {
@@ -84,17 +96,5 @@ public enum APIError: LocalizedError {
         default:
             return nil
         }
-    }
-}
-
-@objcMembers @objc(APIError)
-public class APINSError: NSError {
-    /// Returns error response object if the type is `.serviceError`.
-    public var payError: PAYErrorResponseType? {
-        if domain == PAYErrorDomain && code == PAYErrorServiceError {
-            return userInfo[PAYErrorServiceErrorObject] as? PAYErrorResponseType
-        }
-        
-        return nil
     }
 }
