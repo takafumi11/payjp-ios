@@ -84,7 +84,7 @@ extension APIClient {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, self.nsErrorConverter.convert(error: error))
+                completionHandler(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }
@@ -107,7 +107,7 @@ extension APIClient {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, self.nsErrorConverter.convert(error: error))
+                completionHandler(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }
@@ -120,7 +120,7 @@ extension APIClient {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, self.nsErrorConverter.convert(error: error))
+                completionHandler(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }
@@ -134,7 +134,7 @@ extension APIClient {
                 let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
                 completionHandler(converted, nil)
             case .failure(let error):
-                completionHandler(nil, self.nsErrorConverter.convert(error: error))
+                completionHandler(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }

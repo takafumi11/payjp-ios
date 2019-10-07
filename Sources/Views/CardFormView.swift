@@ -128,7 +128,7 @@ public class CardFormView: UIView {
             case .success(let result):
                 completion(result, nil)
             case .failure(let error):
-                completion(nil, self.nsErrorConverter.convert(error: error))
+                completion(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }

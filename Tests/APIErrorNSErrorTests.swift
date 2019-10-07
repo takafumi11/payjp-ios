@@ -17,7 +17,7 @@ class APIErrorNSErrorTests: XCTestCase {
     func testInvalidApplePayTokenConversion() {
         let token = PKPaymentToken()
         let apiError = APIError.invalidApplePayToken(token)
-        let nserror =  nsErrorConverter.convert(error:apiError)
+        let nserror = nsErrorConverter.convert(from: apiError)
         
         let errorToken = nserror?.userInfo[PAYErrorInvalidApplePayTokenObject] as? PKPaymentToken
         
@@ -32,7 +32,7 @@ class APIErrorNSErrorTests: XCTestCase {
         let error = NSError(domain: "mock_domain", code: 0, userInfo: [NSLocalizedDescriptionKey: "mock error"])
         
         let apiError = APIError.systemError(error)
-        let nserror =  nsErrorConverter.convert(error:apiError)
+        let nserror = nsErrorConverter.convert(from: apiError)
         
         let systemError = nserror?.userInfo[PAYErrorSystemErrorObject] as? NSError
         
@@ -47,7 +47,7 @@ class APIErrorNSErrorTests: XCTestCase {
         let response = HTTPURLResponse()
         
         let apiError = APIError.invalidResponse(response)
-        let nserror =  nsErrorConverter.convert(error:apiError)
+        let nserror = nsErrorConverter.convert(from: apiError)
         
         let errorResponse = nserror?.userInfo[PAYErrorInvalidResponseObject] as? HTTPURLResponse
         
@@ -64,7 +64,7 @@ class APIErrorNSErrorTests: XCTestCase {
         let payError = try! decoder.decode(PAYErrorResult.self, from: json).error
         
         let apiError = APIError.serviceError(payError)
-        let nserror =  nsErrorConverter.convert(error:apiError)
+        let nserror = nsErrorConverter.convert(from: apiError)
         
         let errorObject = nserror?.userInfo[PAYErrorServiceErrorObject] as? PAYErrorResponse
         
@@ -80,7 +80,7 @@ class APIErrorNSErrorTests: XCTestCase {
         let error = NSError(domain: "mock_domain", code: 0, userInfo: [NSLocalizedDescriptionKey: "mock error"])
         
         let apiError = APIError.invalidJSON(someData, error)
-        let nserror =  nsErrorConverter.convert(error:apiError)
+        let nserror = nsErrorConverter.convert(from: apiError)
         
         let errorData = nserror?.userInfo[PAYErrorInvalidJSONObject] as? Data
         let errorObject = nserror?.userInfo[PAYErrorInvalidJSONErrorObject] as? NSError

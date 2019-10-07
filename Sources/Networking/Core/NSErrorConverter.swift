@@ -9,14 +9,14 @@
 import Foundation
 
 protocol NSErrorConverterType {
-    func convert(error: Error) -> NSError?
+    func convert(from error: Error) -> NSError?
 }
 
 struct NSErrorConverter: NSErrorConverterType {
 
     static let shared = NSErrorConverter()
     
-    func convert(error: Error) -> NSError? {
+    func convert(from error: Error) -> NSError? {
         if let error = error as? NSErrorSerializable {
             var baseUserInfo = [String: Any]()
             baseUserInfo[NSLocalizedDescriptionKey] = error.errorDescription ?? "Unknown error."

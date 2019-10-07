@@ -15,7 +15,7 @@ class NSErrorConverterTests: XCTestCase {
 
     func testConvertAPIError() {
         let error = APIError.invalidResponse(nil)
-        let nsError = converter.convert(error: error)
+        let nsError = converter.convert(from: error)
         XCTAssertEqual(nsError?.domain, PAYErrorDomain)
         XCTAssertEqual(nsError?.code, PAYErrorInvalidResponse)
         let description = nsError?.userInfo[NSLocalizedDescriptionKey] as? String
@@ -24,7 +24,7 @@ class NSErrorConverterTests: XCTestCase {
 
     func testConvertOtherError() {
         let error = NSError(domain: "other", code: 100, userInfo: nil)
-        let nsError = converter.convert(error: error)
+        let nsError = converter.convert(from: error)
         XCTAssertEqual(nsError?.domain, PAYErrorDomain)
         XCTAssertEqual(nsError?.code, PAYErrorSystemError)
         XCTAssertNotNil(nsError?.userInfo)
