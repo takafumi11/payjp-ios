@@ -13,25 +13,12 @@ protocol NSErrorSerializable: Error {
     var errorCode: Int { get }
     var errorDescription: String? { get }
     var userInfo: [String: Any] { get }
-    var additionalUserInfo: [String: Any] { get }
-    func nsErrorValue() -> NSError?
 }
 
 extension NSErrorSerializable {
-    public var userInfo: [String: Any] {
-        var userInfo = [String: Any]()
-        userInfo[NSLocalizedDescriptionKey] = self.errorDescription ?? "Unknown error."
-        return userInfo.merging(self.additionalUserInfo) { $1 }
-    }
     
-    public var additionalUserInfo: [String: Any] {
+    var userInfo: [String: Any] {
         return [String: Any]()
-    }
-
-    public func nsErrorValue() -> NSError? {
-        return NSError(domain: PAYErrorDomain,
-                       code: self.errorCode,
-                       userInfo: self.userInfo)
     }
 }
 
@@ -79,7 +66,7 @@ public enum APIError: LocalizedError, NSErrorSerializable {
         }
     }
 
-    public var additionalUserInfo: [String: Any] {
+    public var userInfo: [String: Any] {
         var userInfo = [String: Any]()
         switch self {
         case .invalidApplePayToken(let token):

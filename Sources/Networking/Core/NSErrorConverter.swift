@@ -8,17 +8,27 @@
 
 import Foundation
 
-class NSErrorConverter {
+protocol NSErrorConverterType {
+    func convert(error: Error) -> NSError?
+}
 
-    var value: NSError?
+struct NSErrorConverter: NSErrorConverterType {
 
-    init(error: Error) {
+    static let shared = NSErrorConverter()
+    
+    func convert(error: Error) -> NSError? {
         if let error = error as? NSErrorSerializable {
-            value = error.nsErrorValue()
+            var baseUserInfo = [String: Any]()
+            baseUserInfo[NSLocalizedDescriptionKey] = error.errorDescription ?? "Unknown error."
+            let mergedUserInfo = baseUserInfo.merging(error.userInfo) { $1 }
+            
+            return NSError(domain: PAYErrorDomain,
+                           code: error.errorCode,
+                           userInfo: mergedUserInfo)
         } else {
-            value = NSError(domain: PAYErrorDomain,
-                            code: PAYErrorSystemError,
-                            userInfo: [NSLocalizedDescriptionKey: error.localizedDescription])
+            return NSError(domain: PAYErrorDomain,
+                           code: PAYErrorSystemError,
+                           userInfo: [NSLocalizedDescriptionKey: error.localizedDescription])
         }
     }
 }

@@ -10,13 +10,16 @@ import PassKit
 
     let accountsService: AccountsServiceType
     let tokensService: TokenServiceType
+    let nsErrorConverter: NSErrorConverterType
 
     @objc(sharedClient) public static let shared = APIClient()
 
     private init(accountsService: AccountsServiceType = AccountsService.shared,
-                 tokensService: TokenServiceType = TokenService.shared) {
+                 tokensService: TokenServiceType = TokenService.shared,
+                 nsErrorConverter: NSErrorConverterType = NSErrorConverter.shared) {
         self.accountsService = accountsService
         self.tokensService = tokensService
+        self.nsErrorConverter = nsErrorConverter
     }
 
     /// Create PAY.JP Token
@@ -75,12 +78,13 @@ import PassKit
 extension APIClient {
     @objc public func createTokenWith(_ token: PKPaymentToken,
                                       completionHandler: @escaping (Token?, NSError?) -> Void) {
-        tokensService.createTokenForApplePay(paymentToken: token) { result in
+        tokensService.createTokenForApplePay(paymentToken: token) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, error.nsErrorValue())
+                completionHandler(nil, self.nsErrorConverter.convert(error: error))
             }
         }
     }
@@ -97,37 +101,40 @@ extension APIClient {
                                   expirationMonth: expirationMonth,
                                   expirationYear: expirationYear,
                                   name: name,
-                                  tenantId: tenantId) { result in
+                                  tenantId: tenantId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, error.nsErrorValue())
+                completionHandler(nil, self.nsErrorConverter.convert(error: error))
             }
         }
     }
 
     @objc public func getTokenWith(_ tokenId: String,
                                    completionHandler: @escaping (Token?, NSError?) -> Void) {
-        tokensService.getToken(with: tokenId) { result in
+        tokensService.getToken(with: tokenId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 completionHandler(result, nil)
             case .failure(let error):
-                completionHandler(nil, error.nsErrorValue())
+                completionHandler(nil, self.nsErrorConverter.convert(error: error))
             }
         }
     }
 
     @objc public func getAcceptedBrandsWith(_ tenantId: String?,
                                             completionHandler: @escaping ([NSString]?, NSError?) -> Void) {
-        accountsService.getAcceptedBrands(tenantId: tenantId) { result in
+        accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
                 completionHandler(converted, nil)
             case .failure(let error):
-                completionHandler(nil, error.nsErrorValue())
+                completionHandler(nil, self.nsErrorConverter.convert(error: error))
             }
         }
     }

@@ -49,6 +49,7 @@ public class CardFormView: UIView {
     
     private var cardIOProxy: CardIOProxy!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
+    private let nsErrorConverter: NSErrorConverterType = NSErrorConverter.shared
 
     // MARK:
 
@@ -121,12 +122,13 @@ public class CardFormView: UIView {
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
     @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        self.viewModel.createToken(with: tenantId) { result in
+        self.viewModel.createToken(with: tenantId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 completion(result, nil)
             case .failure(let error):
-                completion(nil, NSErrorConverter(error: error).value)
+                completion(nil, self.nsErrorConverter.convert(error: error))
             }
         }
     }
