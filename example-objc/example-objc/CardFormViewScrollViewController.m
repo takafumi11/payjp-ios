@@ -31,6 +31,7 @@
     [super viewDidLoad];
     
     self.cardFormView.delegate = self;
+    self.cardFormView.tenantId = @"tenant_id";
     
     self.list = @[@"Normal", @"Red", @"Blue", @"Dark"];
     self.pickerView = [[UIPickerView alloc] init];

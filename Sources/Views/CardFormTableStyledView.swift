@@ -24,6 +24,12 @@ public class CardFormTableStyledView: UIView {
             self.delegate?.isValidChanged(in: self)
         }
     }
+    
+    @IBInspectable public var tenantId: String? {
+        didSet {
+            viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
+        }
+    }
 
     @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cvcIconImage: UIImageView!
@@ -95,8 +101,6 @@ public class CardFormTableStyledView: UIView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-
-        viewModel.fetchAcceptedBrands(with: nil, completion: nil)
     }
 
     override public var intrinsicContentSize: CGSize {
