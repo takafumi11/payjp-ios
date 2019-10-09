@@ -542,7 +542,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormStyledView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormLabelStyledView">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
