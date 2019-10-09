@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CardFormView {
+protocol CardFormView {
     var isValid: Bool { get }
     var baseInputTextColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
@@ -29,18 +29,24 @@ public protocol CardFormView {
     var baseCvcErrorLabel: UILabel { get }
     var baseCardHolderErrorLabel: UILabel { get }
 
-    func createToken(tenantId: String?, completion: (Result<String, Error>) -> Void)
-    func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
+    @nonobjc func createToken(tenantId: String?, completion: (Result<String, Error>) -> Void)
+    @objc func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
     
     func validateCardForm() -> Bool
     func apply(style: FormStyle)
     func isValidChanged()
 }
 
+
+
 extension CardFormView {
     
     var viewModel: CardFormViewViewModelType {
         return CardFormViewViewModel()
+    }
+    
+    var nsErrorConverter: NSErrorConverterType {
+        return NSErrorConverter()
     }
 
     public var isValid: Bool {
@@ -70,8 +76,7 @@ extension CardFormView {
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
     @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        self.viewModel.createToken(with: tenantId) { [weak self] result in
-            guard let self = self else { return }
+        self.viewModel.createToken(with: tenantId) { result in
             switch result {
             case .success(let result):
                 completion(result, nil)
@@ -79,10 +84,6 @@ extension CardFormView {
                 completion(nil, self.nsErrorConverter.convert(from: error))
             }
         }
-    }
-    
-    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        // TODO: ask the view model
     }
     
     public func validateCardForm() -> Bool {
