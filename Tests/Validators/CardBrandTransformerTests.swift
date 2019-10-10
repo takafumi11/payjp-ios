@@ -53,10 +53,10 @@ class CardBrandTransformerTests: XCTestCase {
 
     func testJCBType() {
         let numbers = [
-            "35",
-            "3511",
-            "3511222233334444",
-            "35112222333344445555"
+            "353",
+            "358",
+            "3528222233334444",
+            "35292222333344445555"
         ]
         testCardBrandType(numbers: numbers, brand: .jcb)
     }

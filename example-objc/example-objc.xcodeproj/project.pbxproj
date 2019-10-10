@@ -39,6 +39,7 @@
 		ED50837A2314D58500C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewScrollViewController.h; sourceTree = "<group>"; };
 		ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewScrollViewController.m; sourceTree = "<group>"; };
+		ED7C3FEA233B4092002F1639 /* ColorTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorTheme.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 				BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */,
 				ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */,
 				ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */,
+				ED7C3FEA233B4092002F1639 /* ColorTheme.h */,
 				32CB11751FDA97A1007AD8F5 /* Info.plist */,
 				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
 				ED5083792314D58100C64A7F /* Localizable.strings */,

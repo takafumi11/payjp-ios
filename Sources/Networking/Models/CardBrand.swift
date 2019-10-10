@@ -28,17 +28,17 @@ extension CardBrand {
     var regex: String {
         switch self {
         case .visa:
-            return "^4(?:[0-9]{0,})$"
+            return "^4[0-9]*$"
         case .mastercard:
-            return "^(?:5[1-5]|2[2-7])[0-9]{0,}$"
+            return "^(?:5[1-5]|2[2-7])[0-9]*$"
         case .jcb:
-            return "^35(?:[0-9]{0,})$"
+            return "^(?:352[8-9]|35[3-8])[0-9]*$"
         case .americanExpress:
-            return "^3(?:[47][0-9]{0,})$"
+            return "^3[47][0-9]*$"
         case .dinersClub:
-            return "^3(?:[0689][0-9]{0,})$"
+            return "^3(?:0[0-5]|[68])[0-9]*$"
         case .discover:
-            return "^6(?:[0245][0-9]{0,})$"
+            return "^6(?:011|5)[0-9]*$"
         case .unknown:
             return ""
         }
@@ -63,23 +63,32 @@ extension CardBrand {
             return 3
         }
     }
-    
+
     var logoResourceName: String {
         switch self {
         case .visa:
-            return "visa"
+            return "logo_visa"
         case .mastercard:
-            return "master"
+            return "logo_master"
         case .jcb:
-            return "jcb"
+            return "logo_jcb"
         case .americanExpress:
-            return "amex"
+            return "logo_amex"
         case .dinersClub:
-            return "diners"
+            return "logo_diners"
         case .discover:
-            return "discover"
+            return "logo_discover"
         case .unknown:
-            return "default"
+            return "icon_card"
+        }
+    }
+
+    var cvcIconResourceName: String {
+        switch self {
+        case .americanExpress:
+            return "icon_card_cvc_4"
+        default:
+            return "icon_card_cvc_3"
         }
     }
 }

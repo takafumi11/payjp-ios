@@ -33,10 +33,10 @@ struct CardNumberFormatter: CardNumberFormatterType {
             var trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
             switch brand {
             case .americanExpress, .dinersClub:
-                trimmed.insert(separator: " ", positions: [4, 10])
+                trimmed.insert(separator: "-", positions: [4, 10])
                 return CardNumber(formatted: trimmed, brand: brand)
             default:
-                trimmed.insert(separator: " ", every: 4)
+                trimmed.insert(separator: "-", every: 4)
                 return CardNumber(formatted: trimmed, brand: brand)
             }
         }
