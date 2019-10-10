@@ -25,12 +25,6 @@ public class CardFormTableStyledView: UIView {
         }
     }
     
-    @IBInspectable public var tenantId: String? {
-        didSet {
-            viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
-        }
-    }
-
     @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cvcIconImage: UIImageView!
 
@@ -137,6 +131,13 @@ public class CardFormTableStyledView: UIView {
                 completion(nil, self.nsErrorConverter.convert(from: error))
             }
         }
+    }
+    
+    /// fetch accepted card brands
+    ///
+    /// - Parameter tenantId: identifier of tenant
+    public func fetchBrands(tenantId: String? = nil) {
+        viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
     }
 
     public func validateCardForm() -> Bool {

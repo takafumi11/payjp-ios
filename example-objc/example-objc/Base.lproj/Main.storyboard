@@ -385,7 +385,6 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="tenantId" value="tenant_id"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
