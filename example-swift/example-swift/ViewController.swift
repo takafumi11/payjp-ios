@@ -96,27 +96,9 @@ class ViewController: UITableViewController {
             }
         }
     }
-    
-    private func showToken(token: Token) {
-        let alert = UIAlertController(
-            title: "success",
-            message: token.display,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    private func showError(error: Error) {
-        let alert = UIAlertController(
-            title: "error",
-            message: error.localizedDescription,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 
-private extension Token {
+extension Token {
     var display: String {
         return "id=\(identifer),\n"
             + "card.id=\(card.identifer),\n"
@@ -126,3 +108,22 @@ private extension Token {
     }
 }
 
+extension UIViewController {
+    func showToken(token: Token) {
+        let alert = UIAlertController(
+            title: "success",
+            message: token.display,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showError(error: Error) {
+        let alert = UIAlertController(
+            title: "error",
+            message: error.localizedDescription,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}

@@ -10,13 +10,14 @@ import PAYJP
 
 class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate {
 
-    @IBOutlet weak var formContentView: UIView!
-    @IBOutlet weak var createTokenButton: UITableViewCell!
-
-    private var cardFormView: CardFormView!
+    @IBOutlet private weak var formContentView: UIView!
+    @IBOutlet private weak var createTokenButton: UITableViewCell!
+    @IBOutlet private weak var tokenIdLabel: UILabel!
+    
+    private var cardFormView: CardFormTableStyledView!
 
     override func viewDidLoad() {
-        
+
         let x: CGFloat = self.formContentView.bounds.origin.x
         let y: CGFloat = self.formContentView.bounds.origin.y
 
@@ -24,7 +25,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         let height: CGFloat = self.formContentView.bounds.height
 
         let frame: CGRect = CGRect(x: x, y: y, width: width, height: height)
-        cardFormView = CardFormView(frame: frame)
+        cardFormView = CardFormTableStyledView(frame: frame)
         cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cardFormView.isHolderRequired = true
         cardFormView.delegate = self
@@ -54,13 +55,16 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
 
         // Create Token
         if indexPath.section == 1 && indexPath.row == 1 {
-            // TODO: call createToken
+            if !self.cardFormView.isValid {
+                return
+            }
+            createToken()
         }
         // Valdate and Create Token
         if indexPath.section == 1 && indexPath.row == 2 {
             let isValid = self.cardFormView.validateCardForm()
             if isValid {
-                // TODO: call createToken
+                createToken()
             }
         }
     }
@@ -69,7 +73,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         return UITableView.automaticDimension
     }
 
-    func isValidChanged(in cardFormView: CardFormView) {
+    func isValidChanged(in cardFormView: UIView) {
         let isValid = self.cardFormView.isValid;
         if isValid {
             self.createTokenButton.selectionStyle = .default
@@ -80,10 +84,38 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
             self.createTokenButton.isUserInteractionEnabled = false
             self.createTokenButton.contentView.alpha = 0.5
         }
+        
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
     }
 
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
         self.cardFormView.isHolderRequired = sender.isOn
         self.tableView.reloadData()
+    }
+
+    func createToken() {
+        self.cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                DispatchQueue.main.async {
+                    self.tokenIdLabel.text = token.identifer
+                    self.tableView.reloadData()
+                    self.showToken(token: token)
+                }
+            case .failure(let error):
+                if let apiError = error as? APIError, let payError = apiError.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+                
+                DispatchQueue.main.async {
+                    self.tokenIdLabel.text = nil
+                    self.showError(error: error)
+                }
+            }
+        }
     }
 }

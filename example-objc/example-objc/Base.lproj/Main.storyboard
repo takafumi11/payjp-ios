@@ -537,21 +537,16 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="esE-UU-05N">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="611.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="610.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9s-uW-vef">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormLabelStyledView">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-zd-x0N" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </view>
-                                                </subviews>
-                                            </stackView>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UrL-qJ-wer">
-                                                <rect key="frame" x="0.0" y="347" width="375" height="264.5"/>
+                                                <rect key="frame" x="0.0" y="347" width="375" height="263.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-Y6-bbS">
                                                         <rect key="frame" x="16" y="8" width="343" height="31"/>
@@ -592,25 +587,25 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="grH-gp-NrN">
-                                                        <rect key="frame" x="16" y="161" width="343" height="95.5"/>
+                                                        <rect key="frame" x="16" y="161" width="343" height="94.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="token id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wP4-fN-NSH">
-                                                                <rect key="frame" x="0.0" y="9" width="343" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="8" width="343" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JZ-EV-iGf">
-                                                                <rect key="frame" x="0.0" y="37.5" width="343" height="50"/>
+                                                                <rect key="frame" x="0.0" y="36.5" width="343" height="50"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <edgeInsets key="layoutMargins" top="9" left="0.0" bottom="8" right="0.0"/>
+                                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                                                     </stackView>
                                                 </subviews>
-                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
+                                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
