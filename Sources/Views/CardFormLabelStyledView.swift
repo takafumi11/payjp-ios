@@ -1,5 +1,5 @@
 //
-//  CardFormStyledView.swift
+//  CardFormLabelStyledView.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2019/09/19.
@@ -8,13 +8,8 @@
 
 import UIKit
 
-@objc(PAYCardFormLabelStyledViewDelegate)
-public protocol CardFormLabelStyledViewDelegate: class {
-    func isValidChanged(in cardFormView: CardFormLabelStyledView)
-}
-
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
-public class CardFormLabelStyledView: UIView {
+public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
@@ -49,10 +44,65 @@ public class CardFormLabelStyledView: UIView {
     @IBOutlet weak var holderContainer: UIStackView!
 
     @IBOutlet weak var ocrButton: UIButton!
-
-    // MARK: 
-
-    public weak var delegate: CardFormLabelStyledViewDelegate?
+    
+    /// camera scan action
+    ///
+    /// - Parameter sender: sender
+    @IBAction func onTapOcrButton(_ sender: Any) {
+        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+    
+    // MARK: CardFormView
+    
+    var baseBrandLogoImage: UIImageView {
+        return brandLogoImage
+    }
+    var baseCvcIconImage: UIImageView {
+        return cvcIconImage
+    }
+    var baseHolderContainer: UIStackView {
+        return holderContainer
+    }
+    var baseOcrButton: UIButton {
+        return ocrButton
+    }
+    var baseCardNumberTextField: UITextField {
+        return cardNumberTextField
+    }
+    var baseExpirationTextField: UITextField {
+        return expirationTextField
+    }
+    var baseCvcTextField: UITextField {
+        return cvcTextField
+    }
+    var baseCardHolderTextField: UITextField {
+        return cardHolderTextField
+    }
+    var baseCardNumberErrorLabel: UILabel {
+        return cardNumberErrorLabel
+    }
+    var baseExpirationErrorLabel: UILabel {
+        return expirationErrorLabel
+    }
+    var baseCvcErrorLabel: UILabel {
+        return cvcErrorLabel
+    }
+    var baseCardHolderErrorLabel: UILabel {
+        return cardHolderErrorLabel
+    }
+    var baseViewModel: CardFormViewViewModelType {
+        return viewModel
+    }
+    var baseInputTextColor: UIColor {
+        return inputTextColor
+    }
+    var inputTextErrorColorEnabled: Bool {
+        return true
+    }
+    
+    public weak var delegate: CardFormViewDelegate?
     private var contentView: UIView!
     private var cardIOProxy: CardIOProxy!
     private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -128,8 +178,9 @@ public class CardFormLabelStyledView: UIView {
         return contentView.intrinsicContentSize
     }
 
-    // MARK: - Out bound actions
+    // MARK: CardForm
 
+    /// is valid form
     public var isValid: Bool {
         return viewModel.isValid()
     }
@@ -143,7 +194,7 @@ public class CardFormLabelStyledView: UIView {
         self.viewModel.createToken(with: tenantId, completion: completion)
     }
 
-    // create token for objective-c
+    /// create token for objective-c
     ///
     /// - Parameters:
     ///   - tenantId: identifier of tenant
@@ -167,6 +218,9 @@ public class CardFormLabelStyledView: UIView {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
     }
 
+    /// validate card form
+    ///
+    /// - Returns: is valid form
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
@@ -176,6 +230,9 @@ public class CardFormLabelStyledView: UIView {
         return isValid
     }
 
+    /// apply card form style
+    ///
+    /// - Parameter style: card form style
     public func apply(style: FormStyle) {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor
@@ -196,12 +253,6 @@ public class CardFormLabelStyledView: UIView {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
-    }
-
-    @IBAction func onTapOcrButton(_ sender: Any) {
-        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
     }
 }
 
@@ -252,167 +303,6 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
         self.delegate?.isValidChanged(in: self)
 
         return true
-    }
-
-    /// カード番号の入力フィールドを更新する
-    ///
-    /// - Parameters:
-    ///   - input: カード番号
-    ///   - forceShowError: エラー表示を強制するか
-    public func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cardNumber: input)
-        switch result {
-        case let .success(cardNumber):
-            cardNumberTextField.text = cardNumber.formatted
-            cardNumberTextField.textColor = self.inputTextColor
-            cardNumberErrorLabel.text = nil
-            updateBrandLogo(brand: cardNumber.brand)
-            updateCvcIcon(brand: cardNumber.brand)
-            focusNextInputField(currentField: cardNumberTextField)
-        case let .failure(error):
-            switch error {
-            case let .cardNumberEmptyError(value, instant),
-                 let .cardNumberInvalidError(value, instant),
-                 let .cardNumberInvalidBrandError(value, instant):
-                cardNumberTextField.text = value?.formatted
-                cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
-                cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-                updateBrandLogo(brand: value?.brand)
-                updateCvcIcon(brand: value?.brand)
-            default:
-                break
-            }
-        }
-        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
-
-        // ブランドが変わったらcvcのチェックを走らせる
-        if viewModel.isBrandChanged || input?.isEmpty == true {
-            updateCvcInput(input: cvcTextField.text)
-        }
-    }
-
-    /// ブランドロゴの表示を更新する
-    ///
-    /// - Parameter brand: カードブランド
-    public func updateBrandLogo(brand: CardBrand?) {
-        guard let brand = brand else {
-            brandLogoImage.image = "icon_card".image
-            return
-        }
-        brandLogoImage.image = brand.logoResourceName.image
-    }
-
-    /// 有効期限の入力フィールドを更新する
-    ///
-    /// - Parameters:
-    ///   - input: 有効期限
-    ///   - forceShowError: エラー表示を強制するか
-    public func updateExpirationInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(expiration: input)
-        switch result {
-        case let .success(expiration):
-            expirationTextField.text = expiration
-            expirationTextField.textColor = self.inputTextColor
-            expirationErrorLabel.text = nil
-            focusNextInputField(currentField: expirationTextField)
-        case let .failure(error):
-            switch error {
-            case let .expirationEmptyError(value, instant),
-                 let .expirationInvalidError(value, instant):
-                expirationTextField.text = value
-                expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
-                expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-            default:
-                break
-            }
-        }
-        expirationErrorLabel.isHidden = expirationTextField.text == nil
-    }
-
-    /// CVCの入力フィールドを更新する
-    ///
-    /// - Parameters:
-    ///   - input: CVC
-    ///   - forceShowError: エラー表示を強制するか
-    public func updateCvcInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cvc: input)
-        switch result {
-        case let .success(cvc):
-            cvcTextField.text = cvc
-            cvcTextField.textColor = self.inputTextColor
-            cvcErrorLabel.text = nil
-            focusNextInputField(currentField: cvcTextField)
-        case let .failure(error):
-            switch error {
-            case let .cvcEmptyError(value, instant),
-                 let .cvcInvalidError(value, instant):
-                cvcTextField.text = value
-                cvcTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
-                cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-            default:
-                break
-            }
-        }
-        cvcErrorLabel.isHidden = cvcTextField.text == nil
-    }
-
-    /// cvcアイコンの表示を更新する
-    ///
-    /// - Parameter brand: カードブランド
-    public func updateCvcIcon(brand: CardBrand?) {
-        guard let brand = brand else {
-            cvcIconImage.image = "icon_card_cvc_3".image
-            return
-        }
-        cvcIconImage.image = brand.cvcIconResourceName.image
-    }
-
-    /// カード名義の入力フィールドを更新する
-    ///
-    /// - Parameters:
-    ///   - input: カード名義
-    ///   - forceShowError: エラー表示を強制するか
-    public func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cardHolder: input)
-        switch result {
-        case let .success(holderName):
-            cardHolderTextField.text = holderName
-            cardHolderTextField.textColor = self.inputTextColor
-            cardHolderErrorLabel.text = nil
-        case let .failure(error):
-            switch error {
-            case let .cardHolderEmptyError(value, instant):
-                cardHolderTextField.text = value
-                cardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
-                cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-            default:
-                break
-            }
-        }
-        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
-    }
-
-    /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
-    ///
-    /// - Parameter currentField: 現在のTextField
-    public func focusNextInputField(currentField: UITextField) {
-
-        switch currentField {
-        case cardNumberTextField:
-            if cardNumberTextField.isFirstResponder {
-                expirationTextField.becomeFirstResponder()
-            }
-        case expirationTextField:
-            if expirationTextField.isFirstResponder {
-                cvcTextField.becomeFirstResponder()
-            }
-        case cvcTextField:
-            if cvcTextField.isFirstResponder && isHolderRequired {
-                cardHolderTextField.becomeFirstResponder()
-            }
-        default:
-            break
-        }
     }
 }
 

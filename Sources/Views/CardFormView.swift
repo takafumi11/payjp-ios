@@ -8,8 +8,22 @@
 
 import Foundation
 
-public protocol CardFormView {
+@objc(PAYCardFormViewDelegate)
+public protocol CardFormViewDelegate: class {
+    func isValidChanged(in cardFormView: UIView)
+}
+
+protocol CardFormAction {
     var isValid: Bool { get }
+    func createToken(tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
+    func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
+    func fetchBrands(tenantId: String?)
+    func validateCardForm() -> Bool
+    func apply(style: FormStyle)
+}
+
+protocol CardFormView {
+    var baseViewModel: CardFormViewViewModelType { get }
     var baseInputTextColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
@@ -28,77 +42,15 @@ public protocol CardFormView {
     var baseExpirationErrorLabel: UILabel { get }
     var baseCvcErrorLabel: UILabel { get }
     var baseCardHolderErrorLabel: UILabel { get }
-    
-    func createToken(tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
-    func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
-    func fetchBrands(tenantId: String?)
-    
-    func validateCardForm() -> Bool
-    func apply(style: FormStyle)
-    func isValidChanged()
 }
 
 extension CardFormView {
     
-    var viewModel: CardFormViewViewModelType {
-        return CardFormViewViewModel()
-    }
-    
-    var nsErrorConverter: NSErrorConverterType {
-        return NSErrorConverter()
-    }
-    
-    public var isValid: Bool {
-        return viewModel.isValid()
-    }
-    
-    public var baseInputTextColor: UIColor {
+    var baseInputTextColor: UIColor {
         return Style.Color.black
     }
-    
-    public var inputTextErrorColorEnabled: Bool {
+    var inputTextErrorColorEnabled: Bool {
         return false
-    }
-    
-    /// create token for swift
-    ///
-    /// - Parameters:
-    ///   - tenantId: identifier of tenant
-    ///   - completion: completion action
-    public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
-        self.viewModel.createToken(with: tenantId, completion: completion)
-    }
-    
-    // create token for objective-c
-    ///
-    /// - Parameters:
-    ///   - tenantId: identifier of tenant
-    ///   - completion: completion action
-    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        self.viewModel.createToken(with: tenantId) { result in
-            switch result {
-            case .success(let result):
-                completion(result, nil)
-            case .failure(let error):
-                completion(nil, self.nsErrorConverter.convert(from: error))
-            }
-        }
-    }
-    
-    /// fetch accepted card brands
-    ///
-    /// - Parameter tenantId: identifier of tenant
-    public func fetchBrands(tenantId: String? = nil) {
-        viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
-    }
-    
-    public func validateCardForm() -> Bool {
-        updateCardNumberInput(input: baseCardNumberTextField.text, forceShowError: true)
-        updateExpirationInput(input: baseExpirationTextField.text, forceShowError: true)
-        updateCvcInput(input: baseCvcTextField.text, forceShowError: true)
-        updateCardHolderInput(input: baseCardHolderTextField.text, forceShowError: true)
-        isValidChanged()
-        return isValid
     }
     
     /// カード番号の入力フィールドを更新する
@@ -106,8 +58,8 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
-    public func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cardNumber: input)
+    func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
+        let result = baseViewModel.update(cardNumber: input)
         switch result {
         case let .success(cardNumber):
             baseCardNumberTextField.text = cardNumber.formatted
@@ -137,7 +89,7 @@ extension CardFormView {
         baseCardNumberErrorLabel.isHidden = baseCardNumberTextField.text == nil
         
         // ブランドが変わったらcvcのチェックを走らせる
-        if viewModel.isBrandChanged || input?.isEmpty == true {
+        if baseViewModel.isBrandChanged || input?.isEmpty == true {
             updateCvcInput(input: baseCvcTextField.text)
         }
     }
@@ -145,7 +97,7 @@ extension CardFormView {
     /// ブランドロゴの表示を更新する
     ///
     /// - Parameter brand: カードブランド
-    public func updateBrandLogo(brand: CardBrand?) {
+    func updateBrandLogo(brand: CardBrand?) {
         guard let brand = brand else {
             baseBrandLogoImage.image = "icon_card".image
             return
@@ -159,7 +111,7 @@ extension CardFormView {
     ///   - input: 有効期限
     ///   - forceShowError: エラー表示を強制するか
     public func updateExpirationInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(expiration: input)
+        let result = baseViewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
             baseExpirationTextField.text = expiration
@@ -190,7 +142,7 @@ extension CardFormView {
     ///   - input: CVC
     ///   - forceShowError: エラー表示を強制するか
     public func updateCvcInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cvc: input)
+        let result = baseViewModel.update(cvc: input)
         switch result {
         case let .success(cvc):
             baseCvcTextField.text = cvc
@@ -232,7 +184,7 @@ extension CardFormView {
     ///   - input: カード名義
     ///   - forceShowError: エラー表示を強制するか
     public func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
-        let result = viewModel.update(cardHolder: input)
+        let result = baseViewModel.update(cardHolder: input)
         switch result {
         case let .success(holderName):
             baseCardHolderTextField.text = holderName
