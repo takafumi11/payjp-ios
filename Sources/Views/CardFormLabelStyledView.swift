@@ -172,6 +172,9 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         }
     }
 
+    /// validate card form
+    ///
+    /// - Returns: is valid form
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
@@ -181,6 +184,9 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
+    /// apply card form style
+    ///
+    /// - Parameter style: card form style
     public func apply(style: FormStyle) {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor

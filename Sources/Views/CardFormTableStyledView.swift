@@ -17,7 +17,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             holderSeparator.isHidden = !isHolderRequired
-            viewModel.update(isCardHolderEnabled: isHolderRequired)
+            baseViewModel.update(isCardHolderEnabled: isHolderRequired)
             self.delegate?.isValidChanged(in: self)
         }
     }
@@ -55,7 +55,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     private var contentView: UIView!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
-
+    
     // MARK: Lifecycle
 
     override public init(frame: CGRect) {
@@ -161,6 +161,9 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
+    /// apply card form style
+    ///
+    /// - Parameter style: card form style
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
