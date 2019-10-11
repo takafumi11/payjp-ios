@@ -160,9 +160,22 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             }
         }
     }
-
-    public func fetchBrands(tenantId: String? = nil) {
-        viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
+    
+    @nonobjc public func fetchBrands(tenantId: String?, completion: CardBrandsResult?) {
+        viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
+    }
+    
+    @objc public func fetchBrandsWith(_ tenantId: String?, completion: @escaping ([NSString]?, NSError?) -> Void) {
+        viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
+                completion(converted, nil)
+            case .failure(let error):
+                completion(nil, self.nsErrorConverter.convert(from: error))
+            }
+        }
     }
 
     public func validateCardForm() -> Bool {

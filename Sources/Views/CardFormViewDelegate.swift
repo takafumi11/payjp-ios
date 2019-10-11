@@ -36,10 +36,19 @@ protocol CardFormAction {
     ///   - completion: completion action
     func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
     
-    /// fetch accepted card brands
+    /// fetch accepted card brands for swift
     ///
-    /// - Parameter tenantId: identifier of tenant
-    func fetchBrands(tenantId: String?)
+    /// - Parameters:
+    ///   - tenantId: tenantId identifier of tenant
+    ///   - completion: completion action
+    func fetchBrands(tenantId: String?, completion: CardBrandsResult?)
+    
+    /// fetch accepted card brands for objective-c
+    ///
+    /// - Parameters:
+    ///   - tenantId: tenantId identifier of tenant
+    ///   - completion: completion action
+    func fetchBrandsWith(_ tenantId: String?, completion: @escaping ([NSString]?, NSError?) -> Void)
     
     /// validate card form
     ///
