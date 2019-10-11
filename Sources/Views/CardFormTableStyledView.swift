@@ -123,7 +123,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         viewModel.createToken(with: tenantId, completion: completion)
     }
 
-    @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
         viewModel.createToken(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -139,7 +139,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
 
-    @objc public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
+    public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
         viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
