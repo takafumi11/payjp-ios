@@ -184,7 +184,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-    ) -> Bool {
+        ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
@@ -237,7 +237,7 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
     public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         updateCardNumberInput(input: cardParams.number)
         updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue,
-            year: cardParams.expiryYear?.intValue))
+                                                                year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
 
         self.delegate?.isValidChanged(in: self)
