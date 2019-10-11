@@ -17,7 +17,7 @@ public protocol CardFormViewDelegate: class {
     func isValidChanged(in cardFormView: UIView)
 }
 
-protocol CardFormAction {
+public protocol CardFormAction {
     
     /// form is valid
     var isValid: Bool { get }
@@ -48,7 +48,7 @@ protocol CardFormAction {
     /// - Parameters:
     ///   - tenantId: tenantId identifier of tenant
     ///   - completion: completion action
-    func fetchBrandsWith(_ tenantId: String?, completion: @escaping ([NSString]?, NSError?) -> Void)
+    func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?)
     
     /// validate card form
     ///

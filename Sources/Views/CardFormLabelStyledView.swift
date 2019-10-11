@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
 public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
-
+    
     // MARK: CardFormView
     
     @IBInspectable public var isHolderRequired: Bool = true {
@@ -46,13 +46,8 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
     
-    var inputTextColor: UIColor {
-        return inputTextStyledColor
-    }
-    var inputTextErrorColorEnabled: Bool {
-        return true
-    }
-    
+    var inputTextColor: UIColor = Style.Color.black
+    let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
     
     /// camera scan action
@@ -69,7 +64,6 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     private var cardIOProxy: CardIOProxy!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
-    private var inputTextStyledColor: UIColor = Style.Color.black
 
     // MARK: Lifecycle
 
@@ -165,15 +159,15 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
     
-    @objc public func fetchBrandsWith(_ tenantId: String?, completion: @escaping ([NSString]?, NSError?) -> Void) {
+    @objc public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
         viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):
                 let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
-                completion(converted, nil)
+                completion?(converted, nil)
             case .failure(let error):
-                completion(nil, self.nsErrorConverter.convert(from: error))
+                completion?(nil, self.nsErrorConverter.convert(from: error))
             }
         }
     }
@@ -191,7 +185,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
-        inputTextStyledColor = inputTextColor
+        self.inputTextColor = inputTextColor
         
         // label text
         cardNumberLabel.textColor = labelTextColor
