@@ -9,41 +9,51 @@
 import Foundation
 
 protocol CardFormViewViewModelType {
+
+    /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
+
     /// カード番号の入力値を更新する
     ///
     /// - Parameter cardNumber: カード番号
     /// - Returns: 入力結果
     func update(cardNumber: String?) -> Result<CardNumber, FormError>
+
     /// 有効期限の入力値を更新する
     ///
     /// - Parameter expiration: 有効期限
     /// - Returns: 入力結果
     func update(expiration: String?) -> Result<String, FormError>
+
     /// CVCの入力値を更新する
     ///
     /// - Parameter cvc: CVC
     /// - Returns: 入力結果
     func update(cvc: String?) -> Result<String, FormError>
+
     /// カード名義の入力値を更新する
     ///
     /// - Parameter cardHolder: カード名義
     /// - Returns: 入力結果
     func update(cardHolder: String?) -> Result<String, FormError>
+
     /// カード名義入力の有効を更新する
     ///
     /// - Parameter isCardHolderEnabled: true 有効にする
     func update(isCardHolderEnabled: Bool)
+
     /// 全フィールドのバリデーションチェック
     ///
     /// - Returns: true バリデーションOK
     func isValid() -> Bool
+
     /// トークンを生成する
     ///
     /// - Parameters:
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
+
     /// 利用可能ブランドを取得する
     ///
     /// - Parameters:
@@ -105,6 +115,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             !cardNumber.isEmpty else {
                 self.cardNumber = nil
                 self.cardBrand = .unknown
+                // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
                 self.isBrandChanged = false
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
@@ -166,6 +177,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 self.cvc = nil
                 return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
+        // ブランドが変わった時に入力文字数のままエラー表示にするための処理
         if self.isBrandChanged {
             cvcInput = cvc
             self.isBrandChanged = false

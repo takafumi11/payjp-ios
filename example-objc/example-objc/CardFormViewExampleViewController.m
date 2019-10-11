@@ -32,7 +32,7 @@
   [super viewDidLoad];
 
   self.cardFormView.delegate = self;
-  [self.cardFormView fetchBrandsWithTenantId:@"tenant_id"];
+  [self fetchBrands];
 
   self.list = @[ @"Normal", @"Red", @"Blue", @"Dark" ];
   self.pickerView = [[UIPickerView alloc] init];
@@ -168,6 +168,25 @@
                [wself.tableView reloadData];
                [wself showToken:token];
              });
+           }];
+}
+
+- (void)fetchBrands {
+  __weak typeof(self) wself = self;
+
+  [self.cardFormView
+      fetchBrandsWith:@"tenant_id"
+           completion:^(NSArray<NSString *> *cardBrands, NSError *error) {
+             if (error.domain == PAYErrorDomain && error.code == PAYErrorServiceError) {
+               id<PAYErrorResponseType> errorResponse = error.userInfo[PAYErrorServiceErrorObject];
+               NSLog(@"[errorResponse] %@", errorResponse.description);
+             }
+
+             if (!cardBrands) {
+               dispatch_async(dispatch_get_main_queue(), ^{
+                 [wself showError:error];
+               });
+             }
            }];
 }
 
