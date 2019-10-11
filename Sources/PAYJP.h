@@ -23,6 +23,8 @@ FOUNDATION_EXPORT NSInteger const PAYErrorInvalidResponse;
 FOUNDATION_EXPORT NSInteger const PAYErrorServiceError;
 /// Invalid JSON object.
 FOUNDATION_EXPORT NSInteger const PAYErrorInvalidJSON;
+/// Form validation error.
+FOUNDATION_EXPORT NSInteger const PAYErrorFormInvalid;
 
 /// Use this key name to get `PAYErrorInvalidApplePayToken` error's data which is stored in the
 /// `userInfo`.

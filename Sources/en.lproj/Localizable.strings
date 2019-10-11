@@ -8,14 +8,25 @@
 
 "payjp_card_form_number_label" = "Card number";
 "payjp_card_form_expiration_label" = "Expiration date";
-"payjp_card_form_cvc_label" = "CVC";
+"payjp_card_form_cvc_label" = "Security code";
 "payjp_card_form_holder_name_label" = "Name";
+
+// table style
+"payjp_card_form_number_placeholder" = "Card number";
+"payjp_card_form_expiration_placeholder" = "Expiration month/year";
+"payjp_card_form_cvc_placeholder" = "Security code";
+"payjp_card_form_holder_name_placeholder" = "Card holder name";
+// label style
+"payjp_card_form_label_style_number_placeholder" = "Card number";
+"payjp_card_form_label_style_expiration_placeholder" = "month/year";
+"payjp_card_form_label_style_cvc_placeholder" = "000";
+"payjp_card_form_label_style_holder_name_placeholder" = "TARO TANAKA";
 
 "payjp_card_form_error_no_number" = "Please enter a card number.";
 "payjp_card_form_error_invalid_number" = "Please enter a valid card number.";
 "payjp_card_form_error_invalid_brand" = "Your card\'s brand is not accepted.";
 "payjp_card_form_error_no_expiration" = "Please enter a card expiration.";
 "payjp_card_form_error_invalid_expiration" = "Please enter a valid card expiration.";
-"payjp_card_form_error_no_cvc" = "Please enter a card cvc.";
-"payjp_card_form_error_invalid_cvc" = "Please enter a valid card cvc.";
+"payjp_card_form_error_no_cvc" = "Please enter a security code.";
+"payjp_card_form_error_invalid_cvc" = "Please enter a valid security code.";
 "payjp_card_form_error_no_holder_name" = "Please enter a card holder name.";

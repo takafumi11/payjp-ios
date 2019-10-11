@@ -17,6 +17,7 @@ protocol TokenServiceType {
         expirationMonth: String,
         expirationYear: String,
         name: String?,
+        tenantId: String?,
         completion: @escaping (Result<Token, APIError>) -> Void
         ) -> URLSessionDataTask?
 
@@ -49,14 +50,10 @@ struct TokenService: TokenServiceType {
         expirationMonth: String,
         expirationYear: String,
         name: String?,
+        tenantId: String?,
         completion: @escaping (Result<Token, APIError>) -> Void
         ) -> URLSessionDataTask? {
-        let request = CreateTokenRequest(
-            cardNumber: cardNumber,
-            cvc: cvc,
-            expirationMonth: expirationMonth,
-            expirationYear: expirationYear,
-            name: name)
+        let request = CreateTokenRequest(cardNumber: cardNumber, cvc: cvc, expirationMonth: expirationMonth, expirationYear: expirationYear, name: name, tenantId: tenantId)
         return client.request(with: request, completion: completion)
     }
 

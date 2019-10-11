@@ -57,10 +57,11 @@
                     expirationMonth:month
                      expirationYear:year
                                name:name
+                           tenantId:nil
                   completionHandler:^(PAYToken *token, NSError *error) {
-                    APIError *apiError = (APIError *)error;
-                    if (apiError) {
-                      id<PAYErrorResponseType> errorResponse = apiError.payError;
+                    if (error.domain == PAYErrorDomain && error.code == PAYErrorServiceError) {
+                      id<PAYErrorResponseType> errorResponse =
+                          error.userInfo[PAYErrorServiceErrorObject];
                       NSLog(@"[errorResponse] %@", errorResponse.description);
                     }
 
