@@ -13,22 +13,22 @@ enum CallbackQueue {
     case current
     case operation(OperationQueue)
     case dispatch(DispatchQueue)
-    
+
     public func execute(handler: @escaping () -> Void) {
         switch self {
         case .main:
             DispatchQueue.main.async {
                 handler()
             }
-            
+
         case .current:
             handler()
-            
+
         case .operation(let operationQueue):
             operationQueue.addOperation {
                 handler()
             }
-            
+
         case .dispatch(let dispatchQueue):
             dispatchQueue.async {
                 handler()

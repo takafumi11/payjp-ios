@@ -16,7 +16,7 @@ protocol NSErrorSerializable: Error {
 }
 
 extension NSErrorSerializable {
-    
+
     var userInfo: [String: Any] {
         return [String: Any]()
     }
@@ -33,35 +33,35 @@ public enum APIError: LocalizedError, NSErrorSerializable {
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
     case invalidJSON(Data, Error?)
-    
+
     // MARK: - LocalizedError
-    
+
     public var errorDescription: String? {
         switch self {
-        case .invalidApplePayToken(_):
+        case .invalidApplePayToken:
             return "Invalid Apple Pay Token"
         case .systemError(let error):
             return error.localizedDescription
-        case .invalidResponse(_):
+        case .invalidResponse:
             return "The response is not a HTTPURLResponse instance."
         case .serviceError(let errorResponse):
             return errorResponse.message
-        case .invalidJSON(_):
+        case .invalidJSON:
             return "Unable parse JSON object into expected classes."
         }
     }
 
     public var errorCode: Int {
         switch self {
-        case .invalidApplePayToken(_):
+        case .invalidApplePayToken:
             return PAYErrorInvalidApplePayToken
-        case .systemError(_):
+        case .systemError:
             return PAYErrorSystemError
-        case .invalidResponse(_):
+        case .invalidResponse:
             return PAYErrorInvalidResponse
-        case .serviceError(_):
+        case .serviceError:
             return PAYErrorServiceError
-        case .invalidJSON(_):
+        case .invalidJSON:
             return PAYErrorInvalidJSON
         }
     }
@@ -79,7 +79,7 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             userInfo[PAYErrorServiceErrorObject] = errorResponse
         case .invalidJSON(let json, let error):
             userInfo[PAYErrorInvalidJSONObject] = json
-            if (error != nil) {
+            if error != nil {
                 userInfo[PAYErrorInvalidJSONErrorObject] = error
             }
         }

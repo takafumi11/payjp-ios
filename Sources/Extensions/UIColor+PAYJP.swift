@@ -20,7 +20,7 @@ extension UIColor {
     convenience init(hex: String) {
         self.init(hex: hex, alpha: 1.0)
     }
-    
+
     var hexString: String {
         guard let components = self.cgColor.components else { return "000000" }
         let r = components[0]

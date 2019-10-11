@@ -1,0 +1,12 @@
+excluded:
+  - Carthage
+  - example-objc
+  - example-swift
+  - vendor/bundle/ruby/
+disabled_rules:
+  - xctfail_message
+  - identifier_name
+  - large_tuple
+# custom
+function_parameter_count: 6
+file_length: 500

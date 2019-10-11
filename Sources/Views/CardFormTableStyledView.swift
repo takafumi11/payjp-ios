@@ -24,7 +24,7 @@ public class CardFormTableStyledView: UIView {
             self.delegate?.isValidChanged(in: self)
         }
     }
-    
+
     @IBOutlet private weak var brandLogoImage: UIImageView!
     @IBOutlet private weak var cvcIconImage: UIImageView!
 
@@ -43,7 +43,7 @@ public class CardFormTableStyledView: UIView {
 
     @IBOutlet private weak var ocrButton: UIButton!
 
-    // MARK:
+    // MARK: 
 
     public weak var delegate: CardFormTableStyledViewDelegate?
     private var cardIOProxy: CardIOProxy!
@@ -79,10 +79,18 @@ public class CardFormTableStyledView: UIView {
         backgroundColor = .clear
 
         // placeholder
-        cardNumberTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_number_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
-        expirationTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_expiration_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
-        cvcTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_cvc_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
-        cardHolderTextField.attributedPlaceholder = NSAttributedString(string: "payjp_card_form_holder_name_placeholder".localized, attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cardNumberTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_number_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        expirationTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_expiration_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cvcTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_cvc_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+        cardHolderTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_holder_name_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
@@ -121,7 +129,7 @@ public class CardFormTableStyledView: UIView {
     /// - Parameters:
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
-    @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
         self.viewModel.createToken(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -132,7 +140,7 @@ public class CardFormTableStyledView: UIView {
             }
         }
     }
-    
+
     /// fetch accepted card brands
     ///
     /// - Parameter tenantId: identifier of tenant
@@ -173,7 +181,11 @@ public class CardFormTableStyledView: UIView {
 
 extension CardFormTableStyledView: UITextFieldDelegate {
 
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+        ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
@@ -378,7 +390,8 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
 
     public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         updateCardNumberInput(input: cardParams.number)
-        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
+        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue,
+                                                                year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
 
         self.delegate?.isValidChanged(in: self)

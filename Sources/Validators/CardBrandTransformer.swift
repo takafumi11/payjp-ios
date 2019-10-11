@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CardBrandTransformerType{
+protocol CardBrandTransformerType {
     /// カード番号をチェックしてカード種類に変換します
     /// - parameter cardNumber: カード番号
     /// - returns: カード種類

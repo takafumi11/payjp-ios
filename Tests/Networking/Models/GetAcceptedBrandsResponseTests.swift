@@ -14,9 +14,9 @@ class GetAcceptedBrandsResponseTests: XCTestCase {
         let jsonData = """
             {"card_types_supported": ["Visa"], "livemode": true}
         """.data(using: .utf8)!
-        
+
         let response = try? JSONDecoder.shared.decode(GetAcceptedBrandsResponse.self, from: jsonData)
-        
+
         XCTAssertEqual(response?.acceptedBrands.count, 1)
         XCTAssertEqual(response?.acceptedBrands.first, .visa)
         XCTAssertEqual(response?.liveMode, true)

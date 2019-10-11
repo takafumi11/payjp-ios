@@ -9,24 +9,24 @@
 import Foundation
 
 struct GetAcceptedBrands: BaseRequest {
-    
+
     // MARK: - Request
-    
+
     typealias Response = GetAcceptedBrandsResponse
-    
+
     var path: String = "accounts/brands"
     var httpMethod: String = "GET"
-    var queryParameters: [String : Any]? {
+    var queryParameters: [String: Any]? {
         if let tenantId = tenantId {
             return ["tenant": tenantId]
         }
         return nil
     }
-    
+
     // MARK: - Data
-    
+
     let tenantId: String?
-    
+
     init(tenantId: String?) {
         self.tenantId = tenantId
     }

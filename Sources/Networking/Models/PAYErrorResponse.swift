@@ -27,18 +27,20 @@ public protocol PAYErrorResponseType: NSObjectProtocol {
 
 @objcMembers @objc
 public final class PAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedError, Decodable {
-    
+
     // MARK: - PAYErrorResponseType properties
-    
+
     public let status: Int
     public let message: String?
     public let param: String?
     public let code: String?
     public let type: String?
-    
+
     public override var description: String {
+        // swiftlint:disable line_length
         return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
+        // swiftlint:enable line_length
     }
-    
+
     public var errorDescription: String? { return description }
 }

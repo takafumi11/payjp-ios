@@ -35,11 +35,11 @@ struct ExpirationExtractor: ExpirationExtractorType {
                 if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
             case 2:
                 let month = monthYear[0]
-                
+
                 guard let intMonth = Int(month) else { return nil }
-                
+
                 if !(1...12 ~= intMonth) { throw ExpirationExtractorError.monthOverflow }
-                
+
                 let year = String(monthYear[1].unicodeScalars.prefix(2))
 
                 if year.count < 2 || Int(year) == nil { return nil }

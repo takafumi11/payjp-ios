@@ -9,6 +9,7 @@
 import XCTest
 @testable import PAYJP
 
+// swiftlint:disable type_name
 class StringProtocol_PAYJPTests: XCTestCase {
 
     func testInsertSpaceWithCount() {
@@ -22,10 +23,11 @@ class StringProtocol_PAYJPTests: XCTestCase {
         target.insert(separator: " ", positions: [2, 4, 8, 14])
         XCTAssertEqual(target, "12 34 5678 123456 78")
     }
-    
+
     func testInsertSlashWithCount() {
         var target = "1234"
         target.insert(separator: "/", every: 2)
         XCTAssertEqual(target, "12/34")
     }
 }
+// swiftlint:enable type_name

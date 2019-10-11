@@ -20,7 +20,7 @@ public enum LocalError: NSErrorSerializable {
             return "Form input data is invalid."
         }
     }
-    
+
     public var errorCode: Int {
         switch self {
         case .invalidFormInput:

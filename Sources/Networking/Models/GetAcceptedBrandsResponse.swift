@@ -13,7 +13,7 @@ struct GetAcceptedBrandsResponse: Decodable {
     let acceptedBrands: [CardBrand]
     /// livemodeかどうか
     let liveMode: Bool
-    
+
     private enum CodingKeys: String, CodingKey {
         case acceptedBrands = "card_types_supported"
         case liveMode = "livemode"
