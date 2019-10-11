@@ -17,7 +17,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             holderSeparator.isHidden = !isHolderRequired
-            baseViewModel.update(isCardHolderEnabled: isHolderRequired)
+            viewModel.update(isCardHolderEnabled: isHolderRequired)
             self.delegate?.isValidChanged(in: self)
         }
     }
@@ -55,7 +55,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     private var contentView: UIView!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
-    
+
     // MARK: Lifecycle
 
     override public init(frame: CGRect) {

@@ -27,17 +27,17 @@ protocol CardFormView {
     var baseInputTextColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
-    
+
     var baseBrandLogoImage: UIImageView { get }
     var baseCvcIconImage: UIImageView { get }
     var baseHolderContainer: UIStackView { get }
     var baseOcrButton: UIButton { get }
-    
+
     var baseCardNumberTextField: UITextField { get }
     var baseExpirationTextField: UITextField { get }
     var baseCvcTextField: UITextField { get }
     var baseCardHolderTextField: UITextField { get }
-    
+
     var baseCardNumberErrorLabel: UILabel { get }
     var baseExpirationErrorLabel: UILabel { get }
     var baseCvcErrorLabel: UILabel { get }
@@ -45,14 +45,14 @@ protocol CardFormView {
 }
 
 extension CardFormView {
-    
+
     var baseInputTextColor: UIColor {
         return Style.Color.black
     }
     var inputTextErrorColorEnabled: Bool {
         return false
     }
-    
+
     /// カード番号の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -77,7 +77,8 @@ extension CardFormView {
                  let .cardNumberInvalidBrandError(value, instant):
                 baseCardNumberTextField.text = value?.formatted
                 if inputTextErrorColorEnabled {
-                    baseCardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.baseInputTextColor
+                    baseCardNumberTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : self.baseInputTextColor
                 }
                 baseCardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
                 updateBrandLogo(brand: value?.brand)
@@ -87,13 +88,13 @@ extension CardFormView {
             }
         }
         baseCardNumberErrorLabel.isHidden = baseCardNumberTextField.text == nil
-        
+
         // ブランドが変わったらcvcのチェックを走らせる
         if baseViewModel.isBrandChanged || input?.isEmpty == true {
             updateCvcInput(input: baseCvcTextField.text)
         }
     }
-    
+
     /// ブランドロゴの表示を更新する
     ///
     /// - Parameter brand: カードブランド
@@ -104,7 +105,7 @@ extension CardFormView {
         }
         baseBrandLogoImage.image = brand.logoResourceName.image
     }
-    
+
     /// 有効期限の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -126,7 +127,8 @@ extension CardFormView {
                  let .expirationInvalidError(value, instant):
                 baseExpirationTextField.text = value
                 if inputTextErrorColorEnabled {
-                    baseExpirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.baseInputTextColor
+                    baseExpirationTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : self.baseInputTextColor
                 }
                 baseExpirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
@@ -135,7 +137,7 @@ extension CardFormView {
         }
         baseExpirationErrorLabel.isHidden = baseExpirationTextField.text == nil
     }
-    
+
     /// CVCの入力フィールドを更新する
     ///
     /// - Parameters:
@@ -166,7 +168,7 @@ extension CardFormView {
         }
         baseCvcErrorLabel.isHidden = baseCvcTextField.text == nil
     }
-    
+
     /// cvcアイコンの表示を更新する
     ///
     /// - Parameter brand: カードブランド
@@ -177,7 +179,7 @@ extension CardFormView {
         }
         baseCvcIconImage.image = brand.cvcIconResourceName.image
     }
-    
+
     /// カード名義の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -197,7 +199,8 @@ extension CardFormView {
             case let .cardHolderEmptyError(value, instant):
                 baseCardHolderTextField.text = value
                 if inputTextErrorColorEnabled {
-                    baseCardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : self.baseInputTextColor
+                    baseCardHolderTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : self.baseInputTextColor
                 }
                 baseCardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
             default:
@@ -206,12 +209,12 @@ extension CardFormView {
         }
         baseCardHolderErrorLabel.isHidden = baseCardHolderTextField.text == nil
     }
-    
+
     /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
     ///
     /// - Parameter currentField: 現在のTextField
     public func focusNextInputField(currentField: UITextField) {
-        
+
         switch currentField {
         case baseCardNumberTextField:
             if baseCardNumberTextField.isFirstResponder {
