@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
 public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
+    // MARK: CardFormView
+    
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -18,32 +20,40 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             self.delegate?.isValidChanged(in: self)
         }
     }
+    
+    @IBOutlet weak var brandLogoImage: UIImageView!
+    @IBOutlet weak var cvcIconImage: UIImageView!
+    @IBOutlet weak var holderContainer: UIStackView!
+    @IBOutlet weak var ocrButton: UIButton!
+    
+    @IBOutlet weak var cardNumberLabel: UILabel!
+    @IBOutlet weak var expirationLabel: UILabel!
+    @IBOutlet weak var cvcLabel: UILabel!
+    @IBOutlet weak var cardHolderLabel: UILabel!
 
-    @IBOutlet private weak var brandLogoImage: UIImageView!
-    @IBOutlet private weak var cvcIconImage: UIImageView!
+    @IBOutlet weak var cardNumberTextField: UITextField!
+    @IBOutlet weak var expirationTextField: UITextField!
+    @IBOutlet weak var cvcTextField: UITextField!
+    @IBOutlet weak var cardHolderTextField: UITextField!
 
-    @IBOutlet private weak var cardNumberLabel: UILabel!
-    @IBOutlet private weak var expirationLabel: UILabel!
-    @IBOutlet private weak var cvcLabel: UILabel!
-    @IBOutlet private weak var cardHolderLabel: UILabel!
+    @IBOutlet weak var cardNumberErrorLabel: UILabel!
+    @IBOutlet weak var expirationErrorLabel: UILabel!
+    @IBOutlet weak var cvcErrorLabel: UILabel!
+    @IBOutlet weak var cardHolderErrorLabel: UILabel!
+    
     @IBOutlet private weak var cardNumberFieldBackground: UIView!
     @IBOutlet private weak var expirationFieldBackground: UIView!
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
-
-    @IBOutlet private weak var cardNumberTextField: UITextField!
-    @IBOutlet private weak var expirationTextField: UITextField!
-    @IBOutlet private weak var cvcTextField: UITextField!
-    @IBOutlet private weak var cardHolderTextField: UITextField!
-
-    @IBOutlet private weak var cardNumberErrorLabel: UILabel!
-    @IBOutlet private weak var expirationErrorLabel: UILabel!
-    @IBOutlet private weak var cvcErrorLabel: UILabel!
-    @IBOutlet private weak var cardHolderErrorLabel: UILabel!
-
-    @IBOutlet weak var holderContainer: UIStackView!
-
-    @IBOutlet weak var ocrButton: UIButton!
+    
+    var inputTextColor: UIColor {
+        return inputTextStyledColor
+    }
+    var inputTextErrorColorEnabled: Bool {
+        return true
+    }
+    
+    let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
     
     /// camera scan action
     ///
@@ -54,61 +64,12 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         }
     }
     
-    // MARK: CardFormView
-    
-    var baseBrandLogoImage: UIImageView {
-        return brandLogoImage
-    }
-    var baseCvcIconImage: UIImageView {
-        return cvcIconImage
-    }
-    var baseHolderContainer: UIStackView {
-        return holderContainer
-    }
-    var baseOcrButton: UIButton {
-        return ocrButton
-    }
-    var baseCardNumberTextField: UITextField {
-        return cardNumberTextField
-    }
-    var baseExpirationTextField: UITextField {
-        return expirationTextField
-    }
-    var baseCvcTextField: UITextField {
-        return cvcTextField
-    }
-    var baseCardHolderTextField: UITextField {
-        return cardHolderTextField
-    }
-    var baseCardNumberErrorLabel: UILabel {
-        return cardNumberErrorLabel
-    }
-    var baseExpirationErrorLabel: UILabel {
-        return expirationErrorLabel
-    }
-    var baseCvcErrorLabel: UILabel {
-        return cvcErrorLabel
-    }
-    var baseCardHolderErrorLabel: UILabel {
-        return cardHolderErrorLabel
-    }
-    var baseViewModel: CardFormViewViewModelType {
-        return viewModel
-    }
-    var baseInputTextColor: UIColor {
-        return inputTextColor
-    }
-    var inputTextErrorColorEnabled: Bool {
-        return true
-    }
-    
     public weak var delegate: CardFormViewDelegate?
     private var contentView: UIView!
     private var cardIOProxy: CardIOProxy!
-    private let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
-    private var inputTextColor: UIColor = Style.Color.black
+    private var inputTextStyledColor: UIColor = Style.Color.black
 
     // MARK: Lifecycle
 
@@ -178,28 +139,17 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         return contentView.intrinsicContentSize
     }
 
-    // MARK: CardForm
+    // MARK: CardFormAction
 
-    /// is valid form
     public var isValid: Bool {
         return viewModel.isValid()
     }
 
-    /// create token for swift
-    ///
-    /// - Parameters:
-    ///   - tenantId: identifier of tenant
-    ///   - completion: completion action
     @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
         self.viewModel.createToken(with: tenantId, completion: completion)
     }
 
-    /// create token for objective-c
-    ///
-    /// - Parameters:
-    ///   - tenantId: identifier of tenant
-    ///   - completion: completion action
-    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+    @objc public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
         self.viewModel.createToken(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -211,16 +161,10 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         }
     }
 
-    /// fetch accepted card brands
-    ///
-    /// - Parameter tenantId: identifier of tenant
     public func fetchBrands(tenantId: String? = nil) {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: nil)
     }
 
-    /// validate card form
-    ///
-    /// - Returns: is valid form
     public func validateCardForm() -> Bool {
         updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
@@ -230,14 +174,12 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    /// apply card form style
-    ///
-    /// - Parameter style: card form style
     public func apply(style: FormStyle) {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
-        self.inputTextColor = inputTextColor
+        inputTextStyledColor = inputTextColor
+        
         // label text
         cardNumberLabel.textColor = labelTextColor
         expirationLabel.textColor = labelTextColor
