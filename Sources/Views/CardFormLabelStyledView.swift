@@ -207,7 +207,10 @@ public class CardFormLabelStyledView: UIView {
 
 extension CardFormLabelStyledView: UITextFieldDelegate {
 
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
@@ -420,7 +423,10 @@ extension CardFormLabelStyledView: CardIOProxyDelegate {
 
     public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         updateCardNumberInput(input: cardParams.number)
-        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue, year: cardParams.expiryYear?.intValue))
+        updateExpirationInput(
+            input: expirationFormatter.string(
+                month: cardParams.expiryMonth?.intValue,
+                year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
 
         self.delegate?.isValidChanged(in: self)

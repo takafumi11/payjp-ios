@@ -6,6 +6,7 @@
 import Foundation
 import PassKit
 
+// swiftlint:disable function_parameter_count
 @objc(PAYAPIClient) public class APIClient: NSObject {
 
     let accountsService: AccountsServiceType
@@ -155,3 +156,4 @@ extension APIClient {
         }
     }
 }
+// swiftlint:enable function_parameter_count

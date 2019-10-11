@@ -142,7 +142,6 @@
     }
   }
 }
-}
 
 - (void)createToken {
   __weak typeof(self) wself = self;
