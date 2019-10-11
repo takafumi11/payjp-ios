@@ -9,40 +9,40 @@
 import Foundation
 
 protocol CardFormView {
-    
+
     /// property
     var inputTextColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
-    
+
     /// view
     var brandLogoImage: UIImageView! { get }
     var cvcIconImage: UIImageView! { get }
     var holderContainer: UIStackView! { get }
     var ocrButton: UIButton! { get }
-    
+
     var cardNumberTextField: UITextField! { get }
     var expirationTextField: UITextField! { get }
     var cvcTextField: UITextField! { get }
     var cardHolderTextField: UITextField! { get }
-    
+
     var cardNumberErrorLabel: UILabel! { get }
     var expirationErrorLabel: UILabel! { get }
     var cvcErrorLabel: UILabel! { get }
     var cardHolderErrorLabel: UILabel! { get }
-    
+
     var viewModel: CardFormViewViewModelType { get }
 }
 
 extension CardFormView {
-    
+
     var inputTextColor: UIColor {
         return Style.Color.black
     }
     var inputTextErrorColorEnabled: Bool {
         return false
     }
-    
+
     /// カード番号の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -77,13 +77,13 @@ extension CardFormView {
             }
         }
         cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
-        
+
         // ブランドが変わったらcvcのチェックを走らせる
         if viewModel.isBrandChanged || input?.isEmpty == true {
             updateCvcInput(input: cvcTextField.text)
         }
     }
-    
+
     /// ブランドロゴの表示を更新する
     ///
     /// - Parameter brand: カードブランド
@@ -94,7 +94,7 @@ extension CardFormView {
         }
         brandLogoImage.image = brand.logoResourceName.image
     }
-    
+
     /// 有効期限の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -125,7 +125,7 @@ extension CardFormView {
         }
         expirationErrorLabel.isHidden = expirationTextField.text == nil
     }
-    
+
     /// CVCの入力フィールドを更新する
     ///
     /// - Parameters:
@@ -156,7 +156,7 @@ extension CardFormView {
         }
         cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
-    
+
     /// cvcアイコンの表示を更新する
     ///
     /// - Parameter brand: カードブランド
@@ -167,7 +167,7 @@ extension CardFormView {
         }
         cvcIconImage.image = brand.cvcIconResourceName.image
     }
-    
+
     /// カード名義の入力フィールドを更新する
     ///
     /// - Parameters:
@@ -196,12 +196,12 @@ extension CardFormView {
         }
         cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
-    
+
     /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
     ///
     /// - Parameter currentField: 現在のTextField
     public func focusNextInputField(currentField: UITextField) {
-        
+
         switch currentField {
         case cardNumberTextField:
             if cardNumberTextField.isFirstResponder {

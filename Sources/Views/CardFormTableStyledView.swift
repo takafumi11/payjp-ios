@@ -12,7 +12,7 @@ import UIKit
 public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     // MARK: CardFormView
-    
+
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -21,12 +21,12 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
             self.delegate?.isValidChanged(in: self)
         }
     }
-    
+
     @IBOutlet weak var brandLogoImage: UIImageView!
     @IBOutlet weak var cvcIconImage: UIImageView!
     @IBOutlet weak var holderContainer: UIStackView!
     @IBOutlet weak var ocrButton: UIButton!
-    
+
     @IBOutlet weak var cardNumberTextField: UITextField!
     @IBOutlet weak var expirationTextField: UITextField!
     @IBOutlet weak var cvcTextField: UITextField!
@@ -36,11 +36,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet weak var expirationErrorLabel: UILabel!
     @IBOutlet weak var cvcErrorLabel: UILabel!
     @IBOutlet weak var cardHolderErrorLabel: UILabel!
-    
+
     @IBOutlet private weak var holderSeparator: UIView!
-    
+
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
-    
+
     /// camera scan action
     ///
     /// - Parameter sender: sender
@@ -49,13 +49,13 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
             cardIOProxy.presentCardIO(from: viewController)
         }
     }
-    
+
     public weak var delegate: CardFormViewDelegate?
     private var cardIOProxy: CardIOProxy!
     private var contentView: UIView!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
-    
+
     // MARK: Lifecycle
 
     override public init(frame: CGRect) {
@@ -138,7 +138,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     @nonobjc public func fetchBrands(tenantId: String?, completion: CardBrandsResult?) {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
-    
+
     @objc public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
         viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
             guard let self = self else { return }
@@ -164,7 +164,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
-        
+
         // input text
         cardNumberTextField.textColor = inputTextColor
         expirationTextField.textColor = inputTextColor
@@ -184,7 +184,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-        ) -> Bool {
+    ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
@@ -237,7 +237,7 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
     public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
         updateCardNumberInput(input: cardParams.number)
         updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue,
-                                                                year: cardParams.expiryYear?.intValue))
+            year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
 
         self.delegate?.isValidChanged(in: self)

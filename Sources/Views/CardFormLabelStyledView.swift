@@ -10,9 +10,9 @@ import UIKit
 
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
 public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
-    
+
     // MARK: CardFormView
-    
+
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -20,12 +20,12 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             self.delegate?.isValidChanged(in: self)
         }
     }
-    
+
     @IBOutlet weak var brandLogoImage: UIImageView!
     @IBOutlet weak var cvcIconImage: UIImageView!
     @IBOutlet weak var holderContainer: UIStackView!
     @IBOutlet weak var ocrButton: UIButton!
-    
+
     @IBOutlet weak var cardNumberLabel: UILabel!
     @IBOutlet weak var expirationLabel: UILabel!
     @IBOutlet weak var cvcLabel: UILabel!
@@ -40,16 +40,16 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet weak var expirationErrorLabel: UILabel!
     @IBOutlet weak var cvcErrorLabel: UILabel!
     @IBOutlet weak var cardHolderErrorLabel: UILabel!
-    
+
     @IBOutlet private weak var cardNumberFieldBackground: UIView!
     @IBOutlet private weak var expirationFieldBackground: UIView!
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
-    
+
     var inputTextColor: UIColor = Style.Color.black
     let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
-    
+
     /// camera scan action
     ///
     /// - Parameter sender: sender
@@ -58,7 +58,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             cardIOProxy.presentCardIO(from: viewController)
         }
     }
-    
+
     public weak var delegate: CardFormViewDelegate?
     private var contentView: UIView!
     private var cardIOProxy: CardIOProxy!
@@ -154,11 +154,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             }
         }
     }
-    
+
     @nonobjc public func fetchBrands(tenantId: String?, completion: CardBrandsResult?) {
         viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
     }
-    
+
     @objc public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
         viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
             guard let self = self else { return }
@@ -186,7 +186,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
         self.inputTextColor = inputTextColor
-        
+
         // label text
         cardNumberLabel.textColor = labelTextColor
         expirationLabel.textColor = labelTextColor
