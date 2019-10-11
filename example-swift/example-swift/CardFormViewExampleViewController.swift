@@ -13,7 +13,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UITableViewCell!
     @IBOutlet private weak var tokenIdLabel: UILabel!
-    
+
     private var cardFormView: CardFormTableStyledView!
 
     override func viewDidLoad() {
@@ -38,16 +38,16 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var sectionName: String? = nil
+        var sectionName: String?
         switch section {
         case 0:
             sectionName = NSLocalizedString("example_card_information_section", tableName: nil, comment: "")
         case 2:
             sectionName = NSLocalizedString("example_token_id_section", tableName: nil, comment: "")
         default:
-            break;
+            break
         }
-        return sectionName;
+        return sectionName
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -74,7 +74,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
     }
 
     func isValidChanged(in cardFormView: UIView) {
-        let isValid = self.cardFormView.isValid;
+        let isValid = self.cardFormView.isValid
         if isValid {
             self.createTokenButton.selectionStyle = .default
             self.createTokenButton.isUserInteractionEnabled = true
@@ -84,7 +84,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
             self.createTokenButton.isUserInteractionEnabled = false
             self.createTokenButton.contentView.alpha = 0.5
         }
-        
+
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
@@ -110,7 +110,7 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
                 if let apiError = error as? APIError, let payError = apiError.payError {
                     print("[errorResponse] \(payError.description)")
                 }
-                
+
                 DispatchQueue.main.async {
                     self.tokenIdLabel.text = nil
                     self.showError(error: error)

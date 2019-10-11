@@ -39,7 +39,7 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate {
     }
 
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
-        self.cardFormView.isHolderRequired = sender.isOn;
+        self.cardFormView.isHolderRequired = sender.isOn
     }
 
     @IBAction func createToken(_ sender: Any) {
