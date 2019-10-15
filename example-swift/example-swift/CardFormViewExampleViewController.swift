@@ -8,7 +8,8 @@
 import UIKit
 import PAYJP
 
-class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate,
+UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UITableViewCell!
@@ -47,13 +48,19 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         self.selectColorField.delegate = self
 
         let toolbar = UIToolbar()
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(colorSelected(_:)))
+        let spaceItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil)
+        let doneItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.done,
+            target: self,
+            action: #selector(colorSelected(_:)))
         toolbar.setItems([spaceItem, doneItem], animated: true)
         toolbar.sizeToFit()
 
-        self.selectColorField.inputView = self.pickerView;
-        self.selectColorField.inputAccessoryView = toolbar;
+        self.selectColorField.inputView = self.pickerView
+        self.selectColorField.inputAccessoryView = toolbar
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -133,10 +140,14 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         return self.list[row].rawValue
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+        ) -> Bool {
         return false
     }
-    
+
     func isValidChanged(in cardFormView: UIView) {
         let isValid = self.cardFormView.isValid
         if isValid {

@@ -100,6 +100,7 @@
 				32CB11211FDA7E3D007AD8F5 /* Frameworks */,
 				32CB11221FDA7E3D007AD8F5 /* Resources */,
 				32CB113C1FDA8517007AD8F5 /* ShellScript */,
+				32563D972355C184009A59AE /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -160,6 +161,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		32563D972355C184009A59AE /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh ./run-swiftlint.sh\n";
+		};
 		32CB113C1FDA8517007AD8F5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

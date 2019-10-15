@@ -8,10 +8,10 @@
 import UIKit
 
 enum ColorTheme: String {
-    case Normal = "Normal"
-    case Red = "Red"
-    case Blue = "Blue"
-    case Dark = "Dark"
+    case Normal
+    case Red
+    case Blue
+    case Dark
 }
 
 extension UIColor {
