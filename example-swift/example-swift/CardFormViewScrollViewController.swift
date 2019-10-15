@@ -70,7 +70,8 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, 
             self.cardFormView.backgroundColor = .clear
         case .Dark:
             let darkGray = UIColor(61, 61, 61)
-            let style = FormStyle(labelTextColor: .white, inputTextColor: .darkGray, tintColor: .darkGray)
+            let lightGray = UIColor(80, 80, 80)
+            let style = FormStyle(labelTextColor: .white, inputTextColor: .white, tintColor: .white, inputFieldBackgroundColor: lightGray)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = darkGray
         default:
