@@ -185,7 +185,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
-        let textFieldBackgroundColor = style.textFieldBackgroundColor ?? .white
+        let textFieldBackgroundColor = style.inputFieldBackgroundColor ?? .white
         self.inputTextColor = inputTextColor
 
         // label text
