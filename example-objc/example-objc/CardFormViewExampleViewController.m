@@ -41,8 +41,7 @@
   self.pickerView.showsSelectionIndicator = YES;
   self.selectColorField.delegate = self;
 
-  UIToolbar *toolbar =
-      [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.pickerView.frame.size.width, 40)];
+  UIToolbar *toolbar = [[UIToolbar alloc] init];
   UIBarButtonItem *spaceItem =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                     target:self
@@ -52,6 +51,7 @@
                                                     target:self
                                                     action:@selector(colorSelected:)];
   [toolbar setItems:@[ spaceItem, doneItem ]];
+  [toolbar sizeToFit];
 
   self.selectColorField.inputView = self.pickerView;
   self.selectColorField.inputAccessoryView = toolbar;
@@ -72,7 +72,8 @@
       UIColor *red = RGB(255, 69, 0);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:red
-                                                                       tintColor:red];
+                                                                       tintColor:red
+                                                        textFieldBackgroundColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -81,7 +82,8 @@
       UIColor *blue = RGB(0, 103, 187);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:blue
-                                                                       tintColor:blue];
+                                                                       tintColor:blue
+                                                        textFieldBackgroundColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -91,7 +93,8 @@
       UIColor *darkGray = RGB(61, 61, 61);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:white
-                                                                       tintColor:white];
+                                                                       tintColor:white
+                                                        textFieldBackgroundColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = darkGray;
       break;
@@ -101,7 +104,8 @@
       UIColor *defaultBlue = RGB(12, 95, 250);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:black
-                                                                       tintColor:defaultBlue];
+                                                                       tintColor:defaultBlue
+                                                        textFieldBackgroundColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;

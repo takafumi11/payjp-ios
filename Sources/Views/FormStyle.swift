@@ -13,10 +13,12 @@ public class FormStyle: NSObject {
     public let labelTextColor: UIColor?
     public let inputTextColor: UIColor
     public let tintColor: UIColor
+    public let textFieldBackgroundColor: UIColor?
 
-    public init(labelTextColor: UIColor? = nil, inputTextColor: UIColor, tintColor: UIColor) {
+    public init(labelTextColor: UIColor? = nil, inputTextColor: UIColor, tintColor: UIColor, textFieldBackgroundColor: UIColor? = nil) {
         self.labelTextColor = labelTextColor
         self.inputTextColor = inputTextColor
         self.tintColor = tintColor
+        self.textFieldBackgroundColor = textFieldBackgroundColor
     }
 }

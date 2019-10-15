@@ -185,6 +185,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let labelTextColor = style.labelTextColor ?? Style.Color.black
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
+        let textFieldBackgroundColor = style.textFieldBackgroundColor ?? .white
         self.inputTextColor = inputTextColor
 
         // label text
@@ -202,6 +203,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
+        // textField background
+        cardNumberFieldBackground.backgroundColor = textFieldBackgroundColor
+        expirationFieldBackground.backgroundColor = textFieldBackgroundColor
+        cvcFieldBackground.backgroundColor = textFieldBackgroundColor
+        cardHolderFieldBackground.backgroundColor = textFieldBackgroundColor
     }
 }
 
