@@ -161,9 +161,6 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    /// apply card form style
-    ///
-    /// - Parameter style: card form style
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
