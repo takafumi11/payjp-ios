@@ -8,13 +8,17 @@
 import UIKit
 import PAYJP
 
-class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate {
+class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UITableViewCell!
     @IBOutlet private weak var tokenIdLabel: UILabel!
+    @IBOutlet private weak var selectColorField: UITextField!
 
     private var cardFormView: CardFormTableStyledView!
+
+    private let list: [ColorTheme] = [.Normal, .Red, .Blue, .Dark]
+    private var pickerView: UIPickerView!
 
     override func viewDidLoad() {
 
@@ -35,6 +39,50 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         self.createTokenButton.selectionStyle = .none
         self.createTokenButton.isUserInteractionEnabled = false
         self.createTokenButton.contentView.alpha = 0.5
+
+        self.pickerView = UIPickerView()
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
+        self.pickerView.showsSelectionIndicator = true
+        self.selectColorField.delegate = self
+
+        let toolbar = UIToolbar()
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(colorSelected(_:)))
+        toolbar.setItems([spaceItem, doneItem], animated: true)
+        toolbar.sizeToFit()
+
+        self.selectColorField.inputView = self.pickerView;
+        self.selectColorField.inputAccessoryView = toolbar;
+    }
+
+    @objc private func colorSelected(_ sender: UIButton) {
+        self.selectColorField.endEditing(true)
+        let theme = self.list[self.pickerView.selectedRow(inComponent: 0)]
+        self.selectColorField.text = theme.rawValue
+
+        switch theme {
+        case .Red:
+            let red = UIColor(255, 69, 0)
+            let style = FormStyle(inputTextColor: red, tintColor: red)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        case .Blue:
+            let blue = UIColor(0, 103, 187)
+            let style = FormStyle(inputTextColor: blue, tintColor: blue)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        case .Dark:
+            let darkGray = UIColor(61, 61, 61)
+            let style = FormStyle(inputTextColor: .white, tintColor: .white)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = darkGray
+        default:
+            let defaultBlue = UIColor(12, 95, 250)
+            let style = FormStyle(inputTextColor: .black, tintColor: defaultBlue)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -73,6 +121,22 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
         return UITableView.automaticDimension
     }
 
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.list.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.list[row].rawValue
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
+    
     func isValidChanged(in cardFormView: UIView) {
         let isValid = self.cardFormView.isValid
         if isValid {
