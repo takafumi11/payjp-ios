@@ -7,12 +7,17 @@
 
 import PAYJP
 
-class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate {
+class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-    @IBOutlet weak var formContentView: UIView!
-    @IBOutlet weak var createTokenButton: UIButton!
+    @IBOutlet private weak var formContentView: UIView!
+    @IBOutlet private weak var createTokenButton: UIButton!
+    @IBOutlet private weak var tokenIdLabel: UILabel!
+    @IBOutlet private weak var selectColorField: UITextField!
 
-    private var cardFormView: CardFormView!
+    private var cardFormView: CardFormLabelStyledView!
+
+    private let list: [ColorTheme] = [.Normal, .Red, .Blue, .Dark]
+    private var pickerView: UIPickerView!
 
     override func viewDidLoad() {
         // Carthageを使用している関係でstoryboardでCardFormViewを指定できないため
@@ -24,31 +29,116 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate {
         let height: CGFloat = self.formContentView.bounds.height
 
         let frame: CGRect = CGRect(x: x, y: y, width: width, height: height)
-        cardFormView = CardFormView(frame: frame)
+        cardFormView = CardFormLabelStyledView(frame: frame)
         cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cardFormView.isHolderRequired = true
         cardFormView.delegate = self
 
         self.formContentView.addSubview(cardFormView)
+
+        self.pickerView = UIPickerView()
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
+        self.pickerView.showsSelectionIndicator = true
+        self.selectColorField.delegate = self
+
+        let toolbar = UIToolbar()
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(colorSelected(_:)))
+        toolbar.setItems([spaceItem, doneItem], animated: true)
+        toolbar.sizeToFit()
+
+        self.selectColorField.inputView = self.pickerView;
+        self.selectColorField.inputAccessoryView = toolbar;
     }
 
-    func isValidChanged(in cardFormView: CardFormView) {
+    @objc private func colorSelected(_ sender: UIButton) {
+        self.selectColorField.endEditing(true)
+        let theme = self.list[self.pickerView.selectedRow(inComponent: 0)]
+        self.selectColorField.text = theme.rawValue
+
+        switch theme {
+        case .Red:
+            let red = UIColor(255, 69, 0)
+            let style = FormStyle(labelTextColor: red, inputTextColor: red, tintColor: red)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        case .Blue:
+            let blue = UIColor(0, 103, 187)
+            let style = FormStyle(labelTextColor: blue, inputTextColor: blue, tintColor: blue)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        case .Dark:
+            let darkGray = UIColor(61, 61, 61)
+            let style = FormStyle(labelTextColor: .white, inputTextColor: .darkGray, tintColor: .darkGray)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = darkGray
+        default:
+            let defaultBlue = UIColor(12, 95, 250)
+            let style = FormStyle(labelTextColor: .black, inputTextColor: .black, tintColor: defaultBlue)
+            self.cardFormView.apply(style: style)
+            self.cardFormView.backgroundColor = .clear
+        }
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.list.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.list[row].rawValue
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
+
+    func isValidChanged(in cardFormView: UIView) {
         let isValid = self.cardFormView.isValid
         self.createTokenButton.isEnabled = isValid
     }
 
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
-        self.cardFormView.isHolderRequired = sender.isOn;
+        self.cardFormView.isHolderRequired = sender.isOn
     }
 
     @IBAction func createToken(_ sender: Any) {
-        // TODO: call createToken
+        if !self.cardFormView.isValid {
+            return
+        }
+        createToken()
     }
 
     @IBAction func validateAndCreateToken(_ sender: Any) {
         let isValid = self.cardFormView.validateCardForm()
         if (isValid) {
-            // TODO: call createToken
+            createToken()
+        }
+    }
+
+    func createToken() {
+        self.cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                DispatchQueue.main.async {
+                    self.tokenIdLabel.text = token.identifer
+                    self.showToken(token: token)
+                }
+            case .failure(let error):
+                if let apiError = error as? APIError, let payError = apiError.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+
+                DispatchQueue.main.async {
+                    self.tokenIdLabel.text = nil
+                    self.showError(error: error)
+                }
+            }
         }
     }
 }

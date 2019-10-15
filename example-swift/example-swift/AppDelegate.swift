@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PAYJP;
+import PAYJP
 
 let PAYJPPublicKey = "pk_test_0383a1b8f91e8a6e3ea0e2a9"
 
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
-        PAYJPSDK.publicKey = PAYJPPublicKey;
+        PAYJPSDK.publicKey = PAYJPPublicKey
         PAYJPSDK.locale = Locale.current
 
         return true
@@ -46,6 +46,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
-

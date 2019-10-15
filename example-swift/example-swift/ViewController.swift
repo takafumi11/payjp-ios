@@ -10,16 +10,16 @@ import UIKit
 import PAYJP
 
 class ViewController: UITableViewController {
-    
+
     @IBOutlet weak var fieldCardNumber: UITextField!
     @IBOutlet weak var fieldCardCvc: UITextField!
     @IBOutlet weak var fieldCardMonth: UITextField!
     @IBOutlet weak var fieldCardYear: UITextField!
     @IBOutlet weak var filedCardName: UITextField!
     @IBOutlet weak var labelTokenId: UILabel!
-    
+
     private let payjpClient: PAYJP.APIClient = PAYJP.APIClient.shared
-    
+
     enum CellSection: Int {
         case CardInformation = 0
         case CreateToken = 1
@@ -41,7 +41,7 @@ class ViewController: UITableViewController {
         default: break
         }
     }
-    
+
     private func createToken() {
         print("createToken")
         let number = fieldCardNumber.text ?? ""
@@ -55,28 +55,27 @@ class ViewController: UITableViewController {
             cvc: cvc,
             expirationMonth: month,
             expirationYear: year,
-            name: name)
-        { [weak self] result in
-            switch result {
-            case .success(let token):
-                DispatchQueue.main.async {
-                    self?.labelTokenId.text = token.identifer
-                    self?.tableView.reloadData()
-                    self?.showToken(token: token)
+            name: name) { [weak self] result in
+                switch result {
+                case .success(let token):
+                    DispatchQueue.main.async {
+                        self?.labelTokenId.text = token.identifer
+                        self?.tableView.reloadData()
+                        self?.showToken(token: token)
+                    }
+                case .failure(let error):
+                    if let payError = error.payError {
+                        print("[errorResponse] \(payError.description)")
+                    }
+
+                    DispatchQueue.main.async {
+                        self?.labelTokenId.text = ""
+                        self?.showError(error: error)
+                    }
                 }
-            case .failure(let error):
-                if let payError = error.payError {
-                    print("[errorResponse] \(payError.description)")
-                }
-                
-                DispatchQueue.main.async {
-                    self?.labelTokenId.text = ""
-                    self?.showError(error: error)
-                }
-            }
         }
     }
-    
+
     private func getToken() {
         let tokenId = labelTokenId.text ?? ""
         print("getToken with \(tokenId)")
@@ -96,27 +95,9 @@ class ViewController: UITableViewController {
             }
         }
     }
-    
-    private func showToken(token: Token) {
-        let alert = UIAlertController(
-            title: "success",
-            message: token.display,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    private func showError(error: Error) {
-        let alert = UIAlertController(
-            title: "error",
-            message: error.localizedDescription,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 
-private extension Token {
+extension Token {
     var display: String {
         return "id=\(identifer),\n"
             + "card.id=\(card.identifer),\n"
@@ -126,3 +107,22 @@ private extension Token {
     }
 }
 
+extension UIViewController {
+    func showToken(token: Token) {
+        let alert = UIAlertController(
+            title: "success",
+            message: token.display,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func showError(error: Error) {
+        let alert = UIAlertController(
+            title: "error",
+            message: error.localizedDescription,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
