@@ -26,15 +26,14 @@ struct ExpirationFormatter: ExpirationFormatterType {
 
             filtered = String(filtered.unicodeScalars.prefix(4))
 
-            // 0埋め
-            if filtered.count == 1 {
-                if let month = Int(filtered) {
-                    if month > 1 {
-                        filtered = "0" + filtered
-                    }
+            if let firstNumber = Int(String(filtered.prefix(1))) {
+                // 0埋め
+                if (2...9 ~= firstNumber) {
+                    filtered = "0" + filtered
                 }
-            } else if filtered.count >= 3 {
-                filtered.insert(separator: "/", every: 2)
+                if filtered.count >= 3 {
+                    filtered.insert(separator: "/", every: 2)
+                }
             }
 
             return filtered

@@ -241,7 +241,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
         }
         notifyIsValidChanged()
 
-        return false
+        return adjustInputFieldCursor(textField: textField, range: range, replacement: string)
     }
 
     public func textFieldShouldClear(_ textField: UITextField) -> Bool {
