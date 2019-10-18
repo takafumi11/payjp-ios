@@ -211,10 +211,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     }
 
     private func notifyIsValidChanged() {
-        viewModel.checkValidations()
-        if viewModel.isValidChanged {
-            self.delegate?.isValidChanged(in: self, isValid: isValid)
-        }
+        self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 }
 

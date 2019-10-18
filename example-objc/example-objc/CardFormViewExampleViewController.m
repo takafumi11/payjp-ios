@@ -218,7 +218,7 @@
   return NO;
 }
 
-- (void)isValidChangedIn:(UIView *)cardFormView isValid:(BOOL)isValid {
+- (void)formInputValidatedIn:(UIView *)cardFormView isValid:(BOOL)isValid {
   if (isValid) {
     self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;
     [self.createTokenButton setUserInteractionEnabled:YES];

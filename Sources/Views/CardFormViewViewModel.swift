@@ -16,9 +16,6 @@ protocol CardFormViewViewModelType {
     /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
 
-    /// isValidが変更されたかどうか
-    var isValidChanged: Bool { get }
-
     /// カード番号の入力値を更新する
     ///
     /// - Parameter cardNumber: カード番号
@@ -47,9 +44,6 @@ protocol CardFormViewViewModelType {
     ///
     /// - Parameter isCardHolderEnabled: true 有効にする
     func update(isCardHolderEnabled: Bool)
-
-    /// バリデーションをチェックし、isValidを更新する
-    func checkValidations()
 
     /// トークンを生成する
     ///
@@ -87,13 +81,14 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     private var isCardHolderEnabled: Bool = false
 
-    var isValid: Bool = false {
-        didSet {
-            isValidChanged = oldValue != isValid
-        }
+    var isValid: Bool {
+        return checkCardNumberValid() &&
+            checkExpirationValid() &&
+            checkCvcValid() &&
+            (!self.isCardHolderEnabled || checkCardHolderValid())
     }
+    
     var isBrandChanged = false
-    var isValidChanged: Bool = false
 
     // MARK: - Lifecycle
 
@@ -215,13 +210,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func update(isCardHolderEnabled: Bool) {
         self.isCardHolderEnabled = isCardHolderEnabled
-    }
-
-    func checkValidations() {
-        isValid = checkCardNumberValid() &&
-            checkExpirationValid() &&
-            checkCvcValid() &&
-            (!self.isCardHolderEnabled || checkCardHolderValid())
     }
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
