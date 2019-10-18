@@ -130,8 +130,7 @@
   return NO;
 }
 
-- (void)isValidChangedIn:(PAYCardFormLabelStyledView *)cardFormView {
-  BOOL isValid = self.cardFormView.isValid;
+- (void)formInputValidatedIn:(UIView *)cardFormView isValid:(BOOL)isValid {
   self.createTokenButton.enabled = isValid;
 }
 

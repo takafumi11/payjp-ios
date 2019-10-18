@@ -311,7 +311,7 @@ class CardFormViewModelTests: XCTestCase {
         _ = viewModel.update(cvc: "123")
         _ = viewModel.update(cardHolder: "PAY TARO")
 
-        let result = viewModel.isValid()
+        let result = viewModel.isValid
         XCTAssertTrue(result)
     }
 
@@ -323,7 +323,7 @@ class CardFormViewModelTests: XCTestCase {
         _ = viewModel.update(cvc: "123")
         _ = viewModel.update(cardHolder: "PAY TARO")
 
-        let result = viewModel.isValid()
+        let result = viewModel.isValid
         XCTAssertFalse(result)
     }
 
@@ -334,7 +334,7 @@ class CardFormViewModelTests: XCTestCase {
         _ = viewModel.update(expiration: "12/99")
         _ = viewModel.update(cvc: "123")
 
-        let result = viewModel.isValid()
+        let result = viewModel.isValid
         XCTAssertTrue(result)
     }
 
@@ -345,7 +345,7 @@ class CardFormViewModelTests: XCTestCase {
         _ = viewModel.update(expiration: "12/99")
         _ = viewModel.update(cvc: "1")
 
-        let result = viewModel.isValid()
+        let result = viewModel.isValid
         XCTAssertFalse(result)
     }
 }

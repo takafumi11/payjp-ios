@@ -147,9 +147,8 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         ) -> Bool {
         return false
     }
-
-    func isValidChanged(in cardFormView: UIView) {
-        let isValid = self.cardFormView.isValid
+    
+    func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         if isValid {
             self.createTokenButton.selectionStyle = .default
             self.createTokenButton.isUserInteractionEnabled = true

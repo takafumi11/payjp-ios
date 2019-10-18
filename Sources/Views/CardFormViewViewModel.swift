@@ -10,6 +10,9 @@ import Foundation
 
 protocol CardFormViewViewModelType {
 
+    /// バリデーションOKかどうか
+    var isValid: Bool { get }
+
     /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
 
@@ -41,11 +44,6 @@ protocol CardFormViewViewModelType {
     ///
     /// - Parameter isCardHolderEnabled: true 有効にする
     func update(isCardHolderEnabled: Bool)
-
-    /// 全フィールドのバリデーションチェック
-    ///
-    /// - Returns: true バリデーションOK
-    func isValid() -> Bool
 
     /// トークンを生成する
     ///
@@ -82,6 +80,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private var cardHolder: String?
 
     private var isCardHolderEnabled: Bool = false
+
+    var isValid: Bool {
+        return checkCardNumberValid() &&
+            checkExpirationValid() &&
+            checkCvcValid() &&
+            (!self.isCardHolderEnabled || checkCardHolderValid())
+    }
 
     var isBrandChanged = false
 
@@ -205,13 +210,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func update(isCardHolderEnabled: Bool) {
         self.isCardHolderEnabled = isCardHolderEnabled
-    }
-
-    func isValid() -> Bool {
-        return checkCardNumberValid() &&
-            checkExpirationValid() &&
-            checkCvcValid() &&
-            (!self.isCardHolderEnabled || checkCardHolderValid())
     }
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {

@@ -18,7 +18,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
             holderContainer.isHidden = !isHolderRequired
             holderSeparator.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
-            self.delegate?.isValidChanged(in: self)
+            notifyIsValidChanged()
         }
     }
 
@@ -116,7 +116,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     // MARK: CardFormAction
 
     public var isValid: Bool {
-        return viewModel.isValid()
+        return viewModel.isValid
     }
 
     @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
@@ -157,7 +157,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
-        self.delegate?.isValidChanged(in: self)
+        notifyIsValidChanged()
         return isValid
     }
 
@@ -175,6 +175,10 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
+    }
+
+    private func notifyIsValidChanged() {
+        self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 }
 
@@ -203,7 +207,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
                 break
             }
         }
-        self.delegate?.isValidChanged(in: self)
+        notifyIsValidChanged()
 
         return false
     }
@@ -223,7 +227,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         default:
             break
         }
-        self.delegate?.isValidChanged(in: self)
+        notifyIsValidChanged()
 
         return true
     }
@@ -240,6 +244,6 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
                                                                 year: cardParams.expiryYear?.intValue))
         updateCvcInput(input: cardParams.cvc)
 
-        self.delegate?.isValidChanged(in: self)
+        notifyIsValidChanged()
     }
 }

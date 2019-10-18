@@ -11,10 +11,12 @@ import Foundation
 @objc(PAYCardFormViewDelegate)
 public protocol CardFormViewDelegate: class {
 
-    /// callback when form valid is changed
+    /// callback when form input validated
     ///
-    /// - Parameter cardFormView: CardFormView
-    func isValidChanged(in cardFormView: UIView)
+    /// - Parameters:
+    ///   - cardFormView: CardFormView
+    ///   - isValid: form is valid
+    func formInputValidated(in cardFormView: UIView, isValid: Bool)
 }
 
 public protocol CardFormAction {
