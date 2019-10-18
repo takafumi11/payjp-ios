@@ -10,8 +10,14 @@ import Foundation
 
 protocol CardFormViewViewModelType {
 
+    /// バリデーションOKかどうか
+    var isValid: Bool { get }
+
     /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
+
+    /// isValidが変更されたかどうか
+    var isValidChanged: Bool { get }
 
     /// カード番号の入力値を更新する
     ///
@@ -42,10 +48,8 @@ protocol CardFormViewViewModelType {
     /// - Parameter isCardHolderEnabled: true 有効にする
     func update(isCardHolderEnabled: Bool)
 
-    /// 全フィールドのバリデーションチェック
-    ///
-    /// - Returns: true バリデーションOK
-    func isValid() -> Bool
+    /// バリデーションをチェックし、isValidを更新する
+    func checkValidations()
 
     /// トークンを生成する
     ///
@@ -83,19 +87,25 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     private var isCardHolderEnabled: Bool = false
 
+    var isValid: Bool = false {
+        didSet {
+            isValidChanged = oldValue != isValid
+        }
+    }
     var isBrandChanged = false
+    var isValidChanged: Bool = false
 
     // MARK: - Lifecycle
 
     init(cardNumberFormatter: CardNumberFormatterType = CardNumberFormatter(),
-         cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
-         expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
-         expirationValidator: ExpirationValidatorType = ExpirationValidator(),
-         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
-         cvcFormatter: CvcFormatterType = CvcFormatter(),
-         cvcValidator: CvcValidatorType = CvcValidator(),
-         accountsService: AccountsServiceType = AccountsService.shared,
-         tokenService: TokenServiceType = TokenService.shared) {
+        cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
+        expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
+        expirationValidator: ExpirationValidatorType = ExpirationValidator(),
+        expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
+        cvcFormatter: CvcFormatterType = CvcFormatter(),
+        cvcValidator: CvcValidatorType = CvcValidator(),
+        accountsService: AccountsServiceType = AccountsService.shared,
+        tokenService: TokenServiceType = TokenService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -207,8 +217,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.isCardHolderEnabled = isCardHolderEnabled
     }
 
-    func isValid() -> Bool {
-        return checkCardNumberValid() &&
+    func checkValidations() {
+        isValid = checkCardNumberValid() &&
             checkExpirationValid() &&
             checkCvcValid() &&
             (!self.isCardHolderEnabled || checkCardHolderValid())
@@ -217,15 +227,15 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
         if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumber,
-                                     cvc: cvc,
-                                     expirationMonth: month,
-                                     expirationYear: year,
-                                     name: cardHolder,
-                                     tenantId: tenantId) { result in
-                                        switch result {
-                                        case .success(let token): completion(.success(token))
-                                        case .failure(let error): completion(.failure(error))
-                                        }
+                cvc: cvc,
+                expirationMonth: month,
+                expirationYear: year,
+                name: cardHolder,
+                tenantId: tenantId) { result in
+                switch result {
+                case .success(let token): completion(.success(token))
+                case .failure(let error): completion(.failure(error))
+                }
             }
         } else {
             completion(.failure(LocalError.invalidFormInput))
