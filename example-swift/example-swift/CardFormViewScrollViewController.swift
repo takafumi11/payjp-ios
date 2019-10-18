@@ -7,7 +7,8 @@
 
 import PAYJP
 
-class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate,
+UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UIButton!
@@ -43,13 +44,19 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, 
         self.selectColorField.delegate = self
 
         let toolbar = UIToolbar()
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(colorSelected(_:)))
+        let spaceItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+            target: nil,
+            action: nil)
+        let doneItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.done,
+            target: self,
+            action: #selector(colorSelected(_:)))
         toolbar.setItems([spaceItem, doneItem], animated: true)
         toolbar.sizeToFit()
 
-        self.selectColorField.inputView = self.pickerView;
-        self.selectColorField.inputAccessoryView = toolbar;
+        self.selectColorField.inputView = self.pickerView
+        self.selectColorField.inputAccessoryView = toolbar
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -60,23 +67,36 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, 
         switch theme {
         case .Red:
             let red = UIColor(255, 69, 0)
-            let style = FormStyle(labelTextColor: red, inputTextColor: red, tintColor: red)
+            let style = FormStyle(
+                labelTextColor: red,
+                inputTextColor: red,
+                tintColor: red)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = .clear
         case .Blue:
             let blue = UIColor(0, 103, 187)
-            let style = FormStyle(labelTextColor: blue, inputTextColor: blue, tintColor: blue)
+            let style = FormStyle(
+                labelTextColor: blue,
+                inputTextColor: blue,
+                tintColor: blue)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = .clear
         case .Dark:
             let darkGray = UIColor(61, 61, 61)
             let lightGray = UIColor(80, 80, 80)
-            let style = FormStyle(labelTextColor: .white, inputTextColor: .white, tintColor: .white, inputFieldBackgroundColor: lightGray)
+            let style = FormStyle(
+                labelTextColor: .white,
+                inputTextColor: .white,
+                tintColor: .white,
+                inputFieldBackgroundColor: lightGray)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = darkGray
         default:
             let defaultBlue = UIColor(12, 95, 250)
-            let style = FormStyle(labelTextColor: .black, inputTextColor: .black, tintColor: defaultBlue)
+            let style = FormStyle(
+                labelTextColor: .black,
+                inputTextColor: .black,
+                tintColor: defaultBlue)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = .clear
         }
@@ -94,7 +114,11 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, 
         return self.list[row].rawValue
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+        ) -> Bool {
         return false
     }
 
@@ -116,7 +140,7 @@ class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate, 
 
     @IBAction func validateAndCreateToken(_ sender: Any) {
         let isValid = self.cardFormView.validateCardForm()
-        if (isValid) {
+        if isValid {
             createToken()
         }
     }
