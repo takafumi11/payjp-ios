@@ -122,7 +122,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         return false
     }
 
-    func isValidChanged(in cardFormView: UIView, isValid: Bool) {
+    func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         self.createTokenButton.isEnabled = isValid
     }
 
