@@ -176,7 +176,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
     }
-    
+
     private func notifyIsValidChanged() {
         viewModel.checkValidations()
         if viewModel.isValidChanged {

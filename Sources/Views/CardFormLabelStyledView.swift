@@ -209,7 +209,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         cvcFieldBackground.backgroundColor = inputFieldBackgroundColor
         cardHolderFieldBackground.backgroundColor = inputFieldBackgroundColor
     }
-    
+
     private func notifyIsValidChanged() {
         viewModel.checkValidations()
         if viewModel.isValidChanged {

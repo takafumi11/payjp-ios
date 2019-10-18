@@ -98,14 +98,14 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Lifecycle
 
     init(cardNumberFormatter: CardNumberFormatterType = CardNumberFormatter(),
-        cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
-        expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
-        expirationValidator: ExpirationValidatorType = ExpirationValidator(),
-        expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
-        cvcFormatter: CvcFormatterType = CvcFormatter(),
-        cvcValidator: CvcValidatorType = CvcValidator(),
-        accountsService: AccountsServiceType = AccountsService.shared,
-        tokenService: TokenServiceType = TokenService.shared) {
+         cardNumberValidator: CardNumberValidatorType = CardNumberValidator(),
+         expirationFormatter: ExpirationFormatterType = ExpirationFormatter(),
+         expirationValidator: ExpirationValidatorType = ExpirationValidator(),
+         expirationExtractor: ExpirationExtractorType = ExpirationExtractor(),
+         cvcFormatter: CvcFormatterType = CvcFormatter(),
+         cvcValidator: CvcValidatorType = CvcValidator(),
+         accountsService: AccountsServiceType = AccountsService.shared,
+         tokenService: TokenServiceType = TokenService.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -227,15 +227,15 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
         if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumber,
-                cvc: cvc,
-                expirationMonth: month,
-                expirationYear: year,
-                name: cardHolder,
-                tenantId: tenantId) { result in
-                switch result {
-                case .success(let token): completion(.success(token))
-                case .failure(let error): completion(.failure(error))
-                }
+                                     cvc: cvc,
+                                     expirationMonth: month,
+                                     expirationYear: year,
+                                     name: cardHolder,
+                                     tenantId: tenantId) { result in
+                                        switch result {
+                                        case .success(let token): completion(.success(token))
+                                        case .failure(let error): completion(.failure(error))
+                                        }
             }
         } else {
             completion(.failure(LocalError.invalidFormInput))
