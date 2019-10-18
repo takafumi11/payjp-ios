@@ -87,7 +87,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             checkCvcValid() &&
             (!self.isCardHolderEnabled || checkCardHolderValid())
     }
-    
+
     var isBrandChanged = false
 
     // MARK: - Lifecycle
