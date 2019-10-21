@@ -40,12 +40,25 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v9u-ED-moM">
                                     <rect key="frame" x="8" y="0.0" width="320" height="32"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_card" translatesAutoresizingMaskIntoConstraints="NO" id="6O6-nL-6Y3">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yv5-Dy-oPq">
                                             <rect key="frame" x="0.0" y="4" width="30" height="24"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_card" translatesAutoresizingMaskIntoConstraints="NO" id="6O6-nL-6Y3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="3Lc-F4-3QA"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="3U7-Na-oqt"/>
+                                                <constraint firstItem="6O6-nL-6Y3" firstAttribute="width" secondItem="yv5-Dy-oPq" secondAttribute="width" id="RFy-P3-Lxh"/>
+                                                <constraint firstItem="6O6-nL-6Y3" firstAttribute="leading" secondItem="yv5-Dy-oPq" secondAttribute="leading" id="S9B-4M-d1y"/>
+                                                <constraint firstAttribute="trailing" secondItem="6O6-nL-6Y3" secondAttribute="trailing" id="X3e-qn-McD"/>
+                                                <constraint firstAttribute="width" constant="30" id="eYp-NN-AKo"/>
+                                                <constraint firstItem="6O6-nL-6Y3" firstAttribute="centerY" secondItem="yv5-Dy-oPq" secondAttribute="centerY" id="xCR-lC-4Mv"/>
                                             </constraints>
-                                        </imageView>
+                                        </view>
                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="カード入力" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="T4u-qt-kxC">
                                             <rect key="frame" x="36" y="4" width="246" height="24"/>
                                             <constraints>
