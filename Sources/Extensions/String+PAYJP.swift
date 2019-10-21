@@ -22,8 +22,8 @@ extension String {
     }
 
     /// 数字かどうか
-    var isNumber: Bool {
-        return !self.isEmpty && self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    var isDigitsOnly: Bool {
+        return self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
 
     /// 文字列から数値のみを返す

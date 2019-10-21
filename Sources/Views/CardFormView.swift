@@ -12,6 +12,7 @@ protocol CardFormView {
 
     /// property
     var inputTextColor: UIColor { get }
+    var inputTintColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
 
@@ -39,6 +40,9 @@ extension CardFormView {
     var inputTextColor: UIColor {
         return Style.Color.black
     }
+    var inputTintColor: UIColor {
+        return Style.Color.blue
+    }
     var inputTextErrorColorEnabled: Bool {
         return false
     }
@@ -49,6 +53,7 @@ extension CardFormView {
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
     func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
+        cardNumberTextField.tintColor = .clear
         let result = viewModel.update(cardNumber: input)
         switch result {
         case let .success(cardNumber):
@@ -247,11 +252,12 @@ extension CardFormView {
                     let range = textField.textRange(from: newPosition, to: newSelectedRange.start),
                     let textBeforeCursor = textField.text(in: range) {
                     if replacement != "" &&
-                        !textBeforeCursor.isNumber ||
+                        !textBeforeCursor.isDigitsOnly ||
                         (textBeforeCursor == "0" && textField == expirationTextField) {
                         if let adjustPosition = textField.position(from: newSelectedRange.start, offset: 1),
                             let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
                             textField.selectedTextRange = adjustSelectedRange
+                            cardNumberTextField.tintColor = self.inputTintColor
                             return false
                         }
                     }
@@ -259,6 +265,7 @@ extension CardFormView {
                 textField.selectedTextRange = newSelectedRange
             }
         }
+        cardNumberTextField.tintColor = self.inputTintColor
         return false
     }
 }

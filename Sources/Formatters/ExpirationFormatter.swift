@@ -24,16 +24,17 @@ struct ExpirationFormatter: ExpirationFormatterType {
 
             if filtered.isEmpty { return nil }
 
-            filtered = String(filtered.unicodeScalars.prefix(4))
-
             if let firstNumber = Int(String(filtered.prefix(1))) {
                 // 0埋め
-                if (2...9 ~= firstNumber) {
+                if firstNumber > 1 {
                     filtered = "0" + filtered
                 }
-                if filtered.count >= 3 {
-                    filtered.insert(separator: "/", every: 2)
-                }
+            }
+
+            filtered = String(filtered.unicodeScalars.prefix(4))
+
+            if filtered.count >= 3 {
+                filtered.insert(separator: "/", every: 2)
             }
 
             return filtered

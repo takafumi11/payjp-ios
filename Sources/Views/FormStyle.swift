@@ -15,7 +15,10 @@ public class FormStyle: NSObject {
     public let tintColor: UIColor
     public let inputFieldBackgroundColor: UIColor?
 
-    public init(labelTextColor: UIColor? = nil, inputTextColor: UIColor, tintColor: UIColor, inputFieldBackgroundColor: UIColor? = nil) {
+    public init(labelTextColor: UIColor? = nil,
+                inputTextColor: UIColor,
+                tintColor: UIColor,
+                inputFieldBackgroundColor: UIColor? = nil) {
         self.labelTextColor = labelTextColor
         self.inputTextColor = inputTextColor
         self.tintColor = tintColor
