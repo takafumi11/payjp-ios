@@ -94,7 +94,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = darkGray
         default:
-            let defaultBlue = UIColor(12, 95, 250)
+            let defaultBlue = UIColor(0, 122, 255)
             let style = FormStyle(
                 labelTextColor: .black,
                 inputTextColor: .black,
