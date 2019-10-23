@@ -260,6 +260,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
         case cardNumberTextField:
             updateCardNumberInput(input: nil)
             updateCvcInput(input: cvcTextField.text)
+            cardNumberTextField.tintColor = self.inputTintColor
         case expirationTextField:
             updateExpirationInput(input: nil)
         case cvcTextField:
