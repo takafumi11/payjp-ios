@@ -125,12 +125,12 @@ class CardFormViewModelTests: XCTestCase {
     }
 
     func testUpdateExpirationInvalidMonth() {
-        let result = viewModel.update(expiration: "20")
+        let result = viewModel.update(expiration: "15")
 
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "20", isInstant: true):
+            case .expirationInvalidError(value: "15", isInstant: true):
                 break
             default:
                 XCTFail()
@@ -163,6 +163,22 @@ class CardFormViewModelTests: XCTestCase {
         case .failure(let error):
             switch error {
             case .expirationInvalidError(value: "1", isInstant: false):
+                break
+            default:
+                XCTFail()
+            }
+        default:
+            XCTFail()
+        }
+    }
+
+    func testUpdateExpirationTwoDigitMonth() {
+        let result = viewModel.update(expiration: "20")
+
+        switch result {
+        case .failure(let error):
+            switch error {
+            case .expirationInvalidError(value: "02/0", isInstant: false):
                 break
             default:
                 XCTFail()

@@ -21,6 +21,11 @@ extension String {
         return NSLocalizedString(self, bundle: Bundle(for: PAYJPSDK.self), comment: "")
     }
 
+    /// 数字かどうか
+    var isDigitsOnly: Bool {
+        return self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+
     /// 文字列から数値のみを返す
     ///
     /// - Returns: 数値文字列

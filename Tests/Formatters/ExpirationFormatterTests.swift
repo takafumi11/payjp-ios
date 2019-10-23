@@ -44,6 +44,12 @@ class ExpirationFormatterTests: XCTestCase {
         XCTAssertEqual(output, "11/22")
     }
 
+    func test5DigitsWithSlash() {
+        let input: String? = "112/23"
+        let output = formatter.string(from: input)
+        XCTAssertEqual(output, "11/22")
+    }
+
     func testmixWithNotNumberDigits() {
         let input: String? = "1a"
         let output = formatter.string(from: input)
@@ -54,6 +60,30 @@ class ExpirationFormatterTests: XCTestCase {
         let input: String? = "aaa"
         let output = formatter.string(from: input)
         XCTAssertNil(output)
+    }
+
+    func testZeroFill1Digit() {
+        let input: String? = "2"
+        let output = formatter.string(from: input)
+        XCTAssertEqual(output, "02")
+    }
+
+    func testZeroFill2Digits() {
+        let input: String? = "20"
+        let output = formatter.string(from: input)
+        XCTAssertEqual(output, "02/0")
+    }
+
+    func testZeroFill5Digits() {
+        let input: String? = "50123"
+        let output = formatter.string(from: input)
+        XCTAssertEqual(output, "05/01")
+    }
+
+    func testZeroFill5DigitsWithSlash() {
+        let input: String? = "501/23"
+        let output = formatter.string(from: input)
+        XCTAssertEqual(output, "05/01")
     }
 
     func testOnlyMonth() {

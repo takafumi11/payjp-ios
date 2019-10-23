@@ -56,18 +56,31 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mZD-kL-M1M">
                                             <rect key="frame" x="0.0" y="3" width="382" height="38"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_card" translatesAutoresizingMaskIntoConstraints="NO" id="w6k-hZ-nkl">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szf-4z-fxg">
                                                     <rect key="frame" x="16" y="4" width="30" height="30"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_card" translatesAutoresizingMaskIntoConstraints="NO" id="w6k-hZ-nkl">
+                                                            <rect key="frame" x="0.0" y="3" width="30" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="MgO-qr-1OP"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="VXf-Za-HbM"/>
+                                                        <constraint firstItem="w6k-hZ-nkl" firstAttribute="width" secondItem="szf-4z-fxg" secondAttribute="width" id="5Hw-kG-ELj"/>
+                                                        <constraint firstAttribute="width" constant="30" id="cZh-VI-tI9"/>
+                                                        <constraint firstItem="w6k-hZ-nkl" firstAttribute="centerY" secondItem="szf-4z-fxg" secondAttribute="centerY" id="i6S-dK-2VD"/>
+                                                        <constraint firstItem="w6k-hZ-nkl" firstAttribute="leading" secondItem="szf-4z-fxg" secondAttribute="leading" id="sTs-qh-dya"/>
+                                                        <constraint firstAttribute="trailing" secondItem="w6k-hZ-nkl" secondAttribute="trailing" id="zu9-fD-61L"/>
                                                     </constraints>
-                                                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                                </imageView>
+                                                </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="カード番号入力" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rRc-xY-Mxs">
                                                     <rect key="frame" x="54" y="4" width="280" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="KXz-Nm-N4Q"/>
                                                     </constraints>
+                                                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                                     <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" textContentType="cc-number"/>

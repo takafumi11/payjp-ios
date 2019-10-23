@@ -61,6 +61,8 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
         self.selectColorField.inputView = self.pickerView
         self.selectColorField.inputAccessoryView = toolbar
+
+        self.fetchBrands()
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -85,7 +87,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = darkGray
         default:
-            let defaultBlue = UIColor(12, 95, 250)
+            let defaultBlue = UIColor(0, 122, 255)
             let style = FormStyle(inputTextColor: .black, tintColor: defaultBlue)
             self.cardFormView.apply(style: style)
             self.cardFormView.backgroundColor = .clear
@@ -147,7 +149,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         ) -> Bool {
         return false
     }
-    
+
     func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         if isValid {
             self.createTokenButton.selectionStyle = .default
@@ -182,6 +184,25 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
                 }
             case .failure(let error):
                 if let apiError = error as? APIError, let payError = apiError.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+
+                DispatchQueue.main.async {
+                    self.tokenIdLabel.text = nil
+                    self.showError(error: error)
+                }
+            }
+        }
+    }
+
+    func fetchBrands() {
+        self.cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let brands):
+                print("card brands => \(brands)")
+            case .failure(let error):
+                if let payError = error.payError {
                     print("[errorResponse] \(payError.description)")
                 }
 

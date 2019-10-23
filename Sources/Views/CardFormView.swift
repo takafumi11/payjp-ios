@@ -12,6 +12,7 @@ protocol CardFormView {
 
     /// property
     var inputTextColor: UIColor { get }
+    var inputTintColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
 
@@ -39,6 +40,9 @@ extension CardFormView {
     var inputTextColor: UIColor {
         return Style.Color.black
     }
+    var inputTintColor: UIColor {
+        return Style.Color.blue
+    }
     var inputTextErrorColorEnabled: Bool {
         return false
     }
@@ -49,6 +53,7 @@ extension CardFormView {
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
     func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
+        cardNumberTextField.tintColor = .clear
         let result = viewModel.update(cardNumber: input)
         switch result {
         case let .success(cardNumber):
@@ -218,5 +223,49 @@ extension CardFormView {
         default:
             break
         }
+    }
+
+    /// 入力フィールドのカーソル位置を調整する
+    ///
+    /// - Parameters:
+    ///   - textField: テキストフィールド
+    ///   - range: 置換される文字列範囲
+    ///   - replacement: 置換文字列
+    /// - Returns: 古いテキストを保持する場合はfalse
+    public func adjustInputFieldCursor(
+        textField: UITextField,
+        range: NSRange,
+        replacement: String) -> Bool {
+        // 文字挿入時にカーソルの位置を調整する
+        let beginning = textField.beginningOfDocument
+        let start = textField.position(from: beginning, offset: range.location)
+
+        if let start = start {
+            let cursorOffset = textField.offset(from: beginning, to: start) + replacement.count
+            let newCursorPosition = textField.position(from: textField.beginningOfDocument, offset: cursorOffset)
+
+            if let newCursorPosition = newCursorPosition,
+                let newSelectedRange = textField.textRange(from: newCursorPosition, to: newCursorPosition) {
+                // カーソル直前の文字列が数字以外（-, /）の場合 あるいは 0（有効期限の0埋め）の場合
+                // カーソルを 1文字 後ろに移動させる
+                if let newPosition = textField.position(from: newSelectedRange.start, offset: -1),
+                    let range = textField.textRange(from: newPosition, to: newSelectedRange.start),
+                    let textBeforeCursor = textField.text(in: range) {
+                    if replacement != "" &&
+                        !textBeforeCursor.isDigitsOnly ||
+                        (textBeforeCursor == "0" && textField == expirationTextField) {
+                        if let adjustPosition = textField.position(from: newSelectedRange.start, offset: 1),
+                            let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
+                            textField.selectedTextRange = adjustSelectedRange
+                            cardNumberTextField.tintColor = self.inputTintColor
+                            return false
+                        }
+                    }
+                }
+                textField.selectedTextRange = newSelectedRange
+            }
+        }
+        cardNumberTextField.tintColor = self.inputTintColor
+        return false
     }
 }

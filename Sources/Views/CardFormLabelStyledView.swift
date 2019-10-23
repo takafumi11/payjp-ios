@@ -47,6 +47,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
     var inputTextColor: UIColor = Style.Color.black
+    var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -187,6 +188,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let tintColor = style.tintColor
         let inputFieldBackgroundColor = style.inputFieldBackgroundColor ?? .white
         self.inputTextColor = inputTextColor
+        self.inputTintColor = tintColor
 
         // label text
         cardNumberLabel.textColor = labelTextColor
@@ -241,7 +243,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
         }
         notifyIsValidChanged()
 
-        return false
+        return adjustInputFieldCursor(textField: textField, range: range, replacement: string)
     }
 
     public func textFieldShouldClear(_ textField: UITextField) -> Bool {

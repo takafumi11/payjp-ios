@@ -33,5 +33,12 @@ class String_PAYJPTests: XCTestCase {
     func testLocalizeString() {
         XCTAssertEqual("Please enter a card number.", "payjp_card_form_error_no_number".localized)
     }
+
+    func testIsDigistOnly() {
+        XCTAssertTrue("1".isDigitsOnly)
+        XCTAssertTrue("1234".isDigitsOnly)
+        XCTAssertFalse("a1".isDigitsOnly)
+        XCTAssertFalse("abc".isDigitsOnly)
+    }
 }
 // swiftlint:enable type_name

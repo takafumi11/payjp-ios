@@ -39,6 +39,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     @IBOutlet private weak var holderSeparator: UIView!
 
+    var inputTintColor: UIColor = Style.Color.blue
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     /// camera scan action
@@ -164,6 +165,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let tintColor = style.tintColor
+        self.inputTintColor = tintColor
 
         // input text
         cardNumberTextField.textColor = inputTextColor
@@ -209,7 +211,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         }
         notifyIsValidChanged()
 
-        return false
+        return adjustInputFieldCursor(textField: textField, range: range, replacement: string)
     }
 
     public func textFieldShouldClear(_ textField: UITextField) -> Bool {

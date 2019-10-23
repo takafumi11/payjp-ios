@@ -98,7 +98,7 @@
     }
     default: {
       UIColor *black = UIColor.blackColor;
-      UIColor *defaultBlue = RGB(12, 95, 250);
+      UIColor *defaultBlue = RGB(0, 122, 255);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:black
                                                                   inputTextColor:black
                                                                        tintColor:defaultBlue
