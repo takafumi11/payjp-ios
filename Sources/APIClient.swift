@@ -7,12 +7,16 @@ import Foundation
 import PassKit
 
 // swiftlint:disable function_parameter_count
+
+/// PAY.JP API client.
+/// cf. https://pay.jp/docs/api/#introduction
 @objc(PAYAPIClient) public class APIClient: NSObject {
 
     let accountsService: AccountsServiceType
     let tokensService: TokenServiceType
     let nsErrorConverter: NSErrorConverterType
 
+    /// Shared instance.
     @objc(sharedClient) public static let shared = APIClient()
 
     private init(
@@ -85,7 +89,7 @@ import PassKit
     }
 }
 
-// Objective-C API
+/// Objective-C API
 extension APIClient {
     @objc public func createTokenWith(
         _ token: PKPaymentToken,

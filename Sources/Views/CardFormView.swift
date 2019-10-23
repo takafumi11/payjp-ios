@@ -105,7 +105,7 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: 有効期限
     ///   - forceShowError: エラー表示を強制するか
-    public func updateExpirationInput(input: String?, forceShowError: Bool = false) {
+    func updateExpirationInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
@@ -136,7 +136,7 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: CVC
     ///   - forceShowError: エラー表示を強制するか
-    public func updateCvcInput(input: String?, forceShowError: Bool = false) {
+    func updateCvcInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(cvc: input)
         switch result {
         case let .success(cvc):
@@ -165,7 +165,7 @@ extension CardFormView {
     /// cvcアイコンの表示を更新する
     ///
     /// - Parameter brand: カードブランド
-    public func updateCvcIcon(brand: CardBrand?) {
+    func updateCvcIcon(brand: CardBrand?) {
         guard let brand = brand else {
             cvcIconImage.image = "icon_card_cvc_3".image
             return
@@ -178,7 +178,7 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: カード名義
     ///   - forceShowError: エラー表示を強制するか
-    public func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
+    func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(cardHolder: input)
         switch result {
         case let .success(holderName):
@@ -205,7 +205,7 @@ extension CardFormView {
     /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
     ///
     /// - Parameter currentField: 現在のTextField
-    public func focusNextInputField(currentField: UITextField) {
+    func focusNextInputField(currentField: UITextField) {
 
         switch currentField {
         case cardNumberTextField:
@@ -232,7 +232,7 @@ extension CardFormView {
     ///   - range: 置換される文字列範囲
     ///   - replacement: 置換文字列
     /// - Returns: 古いテキストを保持する場合はfalse
-    public func adjustInputFieldCursor(
+    func adjustInputFieldCursor(
         textField: UITextField,
         range: NSRange,
         replacement: String) -> Bool {

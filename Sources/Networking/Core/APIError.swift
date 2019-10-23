@@ -22,8 +22,9 @@ extension NSErrorSerializable {
     }
 }
 
+/// API error types.
 public enum APIError: LocalizedError, NSErrorSerializable {
-    // The Apple Pay token is invalid.
+    /// The Apple Pay token is invalid.
     case invalidApplePayToken(PKPaymentToken)
     /// The system error.
     case systemError(Error)

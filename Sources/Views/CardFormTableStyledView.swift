@@ -8,11 +8,14 @@
 
 import UIKit
 
+/// CardFormView without label.
+/// It's suitable for UITableView design.
 @IBDesignable @objcMembers @objc(PAYCardFormTableStyledView)
 public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     // MARK: CardFormView
 
+    /// Card holder input field enabled.
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -42,7 +45,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     var inputTintColor: UIColor = Style.Color.blue
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
-    /// camera scan action
+    /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
@@ -51,7 +54,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         }
     }
 
+    // MARK: CardFormViewDelegate
+
+    /// CardFormView delegate.
     public weak var delegate: CardFormViewDelegate?
+
     private var cardIOProxy: CardIOProxy!
     private var contentView: UIView!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
@@ -184,6 +191,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     }
 }
 
+// MARK: UITextFieldDelegate
 extension CardFormTableStyledView: UITextFieldDelegate {
 
     public func textField(
@@ -235,6 +243,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
     }
 }
 
+// MARK: CardIOProxyDelegate
 extension CardFormTableStyledView: CardIOProxyDelegate {
     public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()

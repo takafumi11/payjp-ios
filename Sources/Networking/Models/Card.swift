@@ -11,6 +11,10 @@
 
 import Foundation
 
+/// PAY.JP card object.
+/// For security reasons, the card number is masked and you can get only last4 character.
+/// The full documentations are following.
+/// cf. [https://pay.jp/docs/api/#cardオブジェクト](https://pay.jp/docs/api/#cardオブジェクト)
 @objcMembers @objc(PAYCard) public final class Card: NSObject, Decodable {
     public let identifer: String
     public let name: String?

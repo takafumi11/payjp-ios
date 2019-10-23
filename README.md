@@ -1,11 +1,11 @@
-# PAY.JP iOS SDK Beta
+# PAY.JP iOS SDK
 [![CocoaPods](https://img.shields.io/cocoapods/v/PAYJP.svg)](https://github.com/payjp/payjp-ios)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Travis CI](https://api.travis-ci.org/payjp/payjp-ios.svg?branch=master)](https://travis-ci.org/payjp/payjp-ios)
 
 オンライン決済サービス「[PAY.JP](https://pay.jp/)」のiOSアプリ組込み用のSDKです。
 
-現在のBetaバージョンでは以下を実現するための機能が提供されています。
+最新バージョンでは以下を実現するための機能が提供されています。
 詳細はドキュメントを参照してください。
 
 - Apple Payアプリ内決済
@@ -15,7 +15,7 @@
 
 ## 今後の開発予定
 
-- カード情報入力フォーム
+- カード情報入力フォーム画面
 
 ## サンプルコード
 
@@ -26,7 +26,7 @@
 ## 動作環境
 
 - Swift または Objective-C で開発された iOS アプリケーション
-- iOS 8.4以上
+- iOS 9.0以上
 - 最新安定版のXcode
 
 ## インストール

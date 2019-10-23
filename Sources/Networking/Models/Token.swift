@@ -12,6 +12,8 @@ import Foundation
 
 typealias RawValue = [String: Any]
 
+/// PAY.JP token object.
+/// cf. [https://pay.jp/docs/api/#token-トークン](https://pay.jp/docs/api/#token-トークン)
 @objcMembers @objc(PAYToken) public final class Token: NSObject, Decodable {
     public let identifer: String
     public let livemode: Bool
