@@ -14,6 +14,9 @@
 		32CB11771FDA97A1007AD8F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB11761FDA97A1007AD8F5 /* main.m */; };
 		32D3A20E1FDAB3EE00B5C3BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32CB116D1FDA97A1007AD8F5 /* Main.storyboard */; };
 		66EE585F918805A23FDDDCC9 /* Pods_example_objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */; };
+		BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */; };
+		ED5083772314D58100C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5083792314D58100C64A7F /* Localizable.strings */; };
+		ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,13 @@
 		3AF6A7B964A72227087585F7 /* Pods-example-objc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-objc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-example-objc/Pods-example-objc.debug.xcconfig"; sourceTree = "<group>"; };
 		55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_example_objc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76CA4BCF5842CACDFD23EC1A /* Pods-example-objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-objc.release.xcconfig"; path = "Pods/Target Support Files/Pods-example-objc/Pods-example-objc.release.xcconfig"; sourceTree = "<group>"; };
+		BE0417D422E6DF6600B944CB /* CardFormViewExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewExampleViewController.h; sourceTree = "<group>"; };
+		BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewExampleViewController.m; sourceTree = "<group>"; };
+		ED5083782314D58100C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED50837A2314D58500C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewScrollViewController.h; sourceTree = "<group>"; };
+		ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewScrollViewController.m; sourceTree = "<group>"; };
+		ED7C3FEA233B4092002F1639 /* ColorTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorTheme.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +78,14 @@
 				32CB11671FDA97A1007AD8F5 /* AppDelegate.h */,
 				32CB11681FDA97A1007AD8F5 /* AppDelegate.m */,
 				32CB11701FDA97A1007AD8F5 /* Assets.xcassets */,
+				BE0417D422E6DF6600B944CB /* CardFormViewExampleViewController.h */,
+				BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */,
+				ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */,
+				ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */,
+				ED7C3FEA233B4092002F1639 /* ColorTheme.h */,
 				32CB11751FDA97A1007AD8F5 /* Info.plist */,
 				32CB11721FDA97A1007AD8F5 /* LaunchScreen.storyboard */,
+				ED5083792314D58100C64A7F /* Localizable.strings */,
 				32CB116D1FDA97A1007AD8F5 /* Main.storyboard */,
 				32CB116A1FDA97A1007AD8F5 /* ViewController.h */,
 				32CB116B1FDA97A1007AD8F5 /* ViewController.m */,
@@ -123,7 +139,7 @@
 		32CB115C1FDA97A1007AD8F5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "PAY, Inc.";
 				TargetAttributes = {
 					32CB11631FDA97A1007AD8F5 = {
@@ -139,6 +155,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 32CB115B1FDA97A1007AD8F5;
 			productRefGroup = 32CB11651FDA97A1007AD8F5 /* Products */;
@@ -156,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D3A20E1FDAB3EE00B5C3BE /* Main.storyboard in Resources */,
+				ED5083772314D58100C64A7F /* Localizable.strings in Resources */,
 				32CB11741FDA97A1007AD8F5 /* LaunchScreen.storyboard in Resources */,
 				32CB11711FDA97A1007AD8F5 /* Assets.xcassets in Resources */,
 			);
@@ -188,7 +206,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PAYJP/PAYJP.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -197,7 +215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example-objc/Pods-example-objc-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -209,7 +227,9 @@
 			files = (
 				32CB116C1FDA97A1007AD8F5 /* ViewController.m in Sources */,
 				32CB11771FDA97A1007AD8F5 /* main.m in Sources */,
+				BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */,
 				32CB11691FDA97A1007AD8F5 /* AppDelegate.m in Sources */,
+				ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +254,16 @@
 			path = .;
 			sourceTree = "<group>";
 		};
+		ED5083792314D58100C64A7F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED50837A2314D58500C64A7F /* en */,
+				ED5083782314D58100C64A7F /* ja */,
+			);
+			name = Localizable.strings;
+			path = .;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -241,6 +271,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -251,6 +282,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -258,6 +290,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -296,6 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -306,6 +340,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -313,6 +348,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -347,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "example-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-objc";
@@ -362,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "example-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exmaple.jp.pay.example-objc";

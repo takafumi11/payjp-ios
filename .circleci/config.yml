@@ -44,6 +44,14 @@ shared_build_step:
       name: carthage bootstrap
       command: carthage bootstrap --no-use-binaries --platform ios
 
+  - run: &swiftlint_install
+      name: install swiftlint
+      command: brew install swiftlint
+
+  - run: &clang_format_install
+      name: install clang-format
+      command: brew install clang-format
+
 jobs:
   build:
     <<: *defaults
@@ -53,6 +61,12 @@ jobs:
       - restore_cache: *restore_cache_gem
       - run: *bundle_install
       - save_cache: *save_cache_gem
+      - run: brew update
+      - run: *swiftlint_install
+      - run: *clang_format_install
+      - run: bundle exec danger
+      - run: bundle exec fastlane ios check_swift_format
+      - run: bundle exec fastlane ios check_objc_format
       - restore_cache: *restore_cache_carthage
       - run: *carthage_bootstrap
       - save_cache: *save_cache_carthage
