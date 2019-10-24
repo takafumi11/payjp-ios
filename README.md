@@ -14,7 +14,7 @@
   - https://pay.jp/docs/started
 - カード情報入力フォームの組み込み
 
-|CardFormTableStyleView|CardFormLabelStyleView|
+|CardFormTableStyledView|CardFormLabelStyledView|
 |:--:|:--:|
 |<img src="https://user-images.githubusercontent.com/38201241/67450886-c3dbe080-f659-11e9-91a2-c3cf87309ea5.png" width="240px">|<img src="https://user-images.githubusercontent.com/38201241/67450887-c4747700-f659-11e9-8f3b-e207200a01f6.png" width="240px">|
 
