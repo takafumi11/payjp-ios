@@ -8,11 +8,15 @@
 
 import Foundation
 
-protocol PAYJPSDKType: class {
+/// PAY.JP SDK initial settings.
+public protocol PAYJPSDKType: class {
+    /// PAY.JP public key.
     static var publicKey: String? { get set }
+    /// Locale.
     static var locale: Locale? { get set }
 }
 
+/// see PAYJPSDKType.
 @objc(PAYJPSDK) @objcMembers
 public final class PAYJPSDK: NSObject, PAYJPSDKType {
 

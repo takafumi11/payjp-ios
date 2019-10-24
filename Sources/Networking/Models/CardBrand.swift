@@ -8,13 +8,21 @@
 
 import Foundation
 
+/// Card brand types.
 public enum CardBrand: String, Codable {
+    /// VISA.
     case visa = "Visa"
+    /// MasterCard.
     case mastercard = "MasterCard"
+    /// JCB.
     case jcb = "JCB"
+    /// American Express.
     case americanExpress = "American Express"
+    /// Diners Club.
     case dinersClub = "Diners Club"
+    /// Discover.
     case discover = "Discover"
+    /// Unknown brand.
     case unknown = "Unknown"
 
     func display() -> String {

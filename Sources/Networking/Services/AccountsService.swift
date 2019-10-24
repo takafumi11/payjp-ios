@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// CardBrands Result typealias.
 public typealias CardBrandsResult = (Result<[CardBrand], APIError>) -> Void
 
 protocol AccountsServiceType {

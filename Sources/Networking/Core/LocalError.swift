@@ -8,8 +8,9 @@
 
 import Foundation
 
+/// Local error types.
 public enum LocalError: NSErrorSerializable {
-    /// Invalid Form input.
+    /// Invalid form input.
     case invalidFormInput
 
     // MARK: - LocalizedError

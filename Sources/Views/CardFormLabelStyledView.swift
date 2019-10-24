@@ -8,11 +8,14 @@
 
 import UIKit
 
+/// CardFormView with label.
+/// It's recommended to implement with UIScrollView.
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
 public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
     // MARK: CardFormView
 
+    /// Card holder input field enabled.
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
             holderContainer.isHidden = !isHolderRequired
@@ -51,7 +54,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
-    /// camera scan action
+    /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
@@ -60,7 +63,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         }
     }
 
+    // MARK: CardFormViewDelegate
+
+    /// CardFormView delegate.
     public weak var delegate: CardFormViewDelegate?
+
     private var contentView: UIView!
     private var cardIOProxy: CardIOProxy!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
@@ -217,6 +224,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     }
 }
 
+// MARK: UITextFieldDelegate
 extension CardFormLabelStyledView: UITextFieldDelegate {
 
     public func textField(
@@ -252,6 +260,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
         case cardNumberTextField:
             updateCardNumberInput(input: nil)
             updateCvcInput(input: cvcTextField.text)
+            cardNumberTextField.tintColor = self.inputTintColor
         case expirationTextField:
             updateExpirationInput(input: nil)
         case cvcTextField:
@@ -267,6 +276,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
     }
 }
 
+// MARK: CardIOProxyDelegate
 extension CardFormLabelStyledView: CardIOProxyDelegate {
     public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()

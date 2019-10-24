@@ -15,7 +15,7 @@ protocol ClientType {
         ) -> URLSessionDataTask?
 }
 
-public class Client: ClientType {
+class Client: ClientType {
 
     static let shared = Client()
 

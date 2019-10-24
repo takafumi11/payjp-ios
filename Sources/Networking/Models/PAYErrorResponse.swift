@@ -11,6 +11,7 @@ struct PAYErrorResult: Decodable {
     let error: PAYErrorResponse
 }
 
+/// PAY.JP API error response.
 @objc
 public protocol PAYErrorResponseType: NSObjectProtocol {
     /// The origin reponse's HTTP status code.
@@ -25,6 +26,7 @@ public protocol PAYErrorResponseType: NSObjectProtocol {
     var type: String? { get }
 }
 
+/// see PAYErrorResponseType.
 @objcMembers @objc
 public final class PAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedError, Decodable {
 

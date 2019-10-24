@@ -8,10 +8,11 @@
 
 import Foundation
 
+/// CardFormView delegate.
 @objc(PAYCardFormViewDelegate)
 public protocol CardFormViewDelegate: class {
 
-    /// callback when form input validated
+    /// Callback when form input validated
     ///
     /// - Parameters:
     ///   - cardFormView: CardFormView
@@ -19,45 +20,46 @@ public protocol CardFormViewDelegate: class {
     func formInputValidated(in cardFormView: UIView, isValid: Bool)
 }
 
+/// CardForm action protocol.
 public protocol CardFormAction {
 
-    /// form is valid
+    /// Form is valid
     var isValid: Bool { get }
 
-    /// create token for swift
+    /// Create token for swift
     ///
     /// - Parameters:
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
     func createToken(tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
 
-    /// create token for objective-c
+    /// Create token for objective-c
     ///
     /// - Parameters:
     ///   - tenantId: identifier of tenant
     ///   - completion: completion action
     func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
 
-    /// fetch accepted card brands for swift
+    /// Fetch accepted card brands for swift
     ///
     /// - Parameters:
     ///   - tenantId: tenantId identifier of tenant
     ///   - completion: completion action
     func fetchBrands(tenantId: String?, completion: CardBrandsResult?)
 
-    /// fetch accepted card brands for objective-c
+    /// Fetch accepted card brands for objective-c
     ///
     /// - Parameters:
     ///   - tenantId: tenantId identifier of tenant
     ///   - completion: completion action
     func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?)
 
-    /// validate card form
+    /// Validate card form
     ///
     /// - Returns: is valid form
     func validateCardForm() -> Bool
 
-    /// apply card form style
+    /// Apply card form style
     ///
     /// - Parameter style: card form style
     func apply(style: FormStyle)

@@ -8,11 +8,17 @@
 
 import Foundation
 
+/// CardForm style settings.
+/// It's possible to change the color of each UIComponent.
 @objcMembers @objc(PAYCardFormStyle)
 public class FormStyle: NSObject {
+    /// Text color of UILabel.
     public let labelTextColor: UIColor?
+    /// Text color of UITextField.
     public let inputTextColor: UIColor
+    /// Tint color of UITextField.
     public let tintColor: UIColor
+    /// Background color of UITextField.
     public let inputFieldBackgroundColor: UIColor?
 
     public init(labelTextColor: UIColor? = nil,
