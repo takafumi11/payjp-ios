@@ -185,6 +185,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
+        cardNumberTextField.tintColor = self.inputTintColor
         notifyIsValidChanged()
         return isValid
     }
