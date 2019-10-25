@@ -49,6 +49,9 @@ pod 'PAYJP'
 
 - Swift 5
 
+## リファレンス
+- https://payjp.github.io/payjp-ios/
+
 ## License
 
 PAY.JP iOS SDK is available under the MIT license. See the LICENSE file for more info.
