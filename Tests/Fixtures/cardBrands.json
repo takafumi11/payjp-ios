@@ -1,0 +1,11 @@
+{
+  "card_types_supported": [
+    "Visa",
+    "MasterCard",
+    "JCB",
+    "American Express",
+    "Diners Club",
+    "Discover"
+  ],
+  "livemode": false
+}

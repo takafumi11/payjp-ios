@@ -1,0 +1,66 @@
+//
+//  CardFormViewDelegate.swift
+//  PAYJP
+//
+//  Created by Tadashi Wakayanagi on 2019/10/11.
+//  Copyright © 2019 PAY, Inc. All rights reserved.
+//
+
+import Foundation
+
+/// CardFormView delegate.
+@objc(PAYCardFormViewDelegate)
+public protocol CardFormViewDelegate: class {
+
+    /// Callback when form input validated
+    ///
+    /// - Parameters:
+    ///   - cardFormView: CardFormView
+    ///   - isValid: form is valid
+    func formInputValidated(in cardFormView: UIView, isValid: Bool)
+}
+
+/// CardForm action protocol.
+public protocol CardFormAction {
+
+    /// Form is valid
+    var isValid: Bool { get }
+
+    /// Create token for swift
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    func createToken(tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void)
+
+    /// Create token for objective-c
+    ///
+    /// - Parameters:
+    ///   - tenantId: identifier of tenant
+    ///   - completion: completion action
+    func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void)
+
+    /// Fetch accepted card brands for swift
+    ///
+    /// - Parameters:
+    ///   - tenantId: tenantId identifier of tenant
+    ///   - completion: completion action
+    func fetchBrands(tenantId: String?, completion: CardBrandsResult?)
+
+    /// Fetch accepted card brands for objective-c
+    ///
+    /// - Parameters:
+    ///   - tenantId: tenantId identifier of tenant
+    ///   - completion: completion action
+    func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?)
+
+    /// Validate card form
+    ///
+    /// - Returns: is valid form
+    func validateCardForm() -> Bool
+
+    /// Apply card form style
+    ///
+    /// - Parameter style: card form style
+    func apply(style: FormStyle)
+}

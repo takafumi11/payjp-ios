@@ -52,4 +52,22 @@ platform :ios do
       success: true
     )
   end
+
+  desc "Check Swift format with swiftLint"
+  lane :check_swift_format do
+    sh('../scripts/run-swift-format.sh')
+    modified_files = sh('git status --porcelain').split
+    unless modified_files.empty?
+      UI.user_error! "Some diffs have generated after Swift format."
+    end
+  end
+
+  desc "Check Objective-C format with clang-format"
+  lane :check_objc_format do
+    sh('../scripts/run-clang-format.sh')
+    modified_files = sh('git status --porcelain').split
+    unless modified_files.empty?
+      UI.user_error! "Some diffs have generated after Objective-C format."
+    end
+  end
 end

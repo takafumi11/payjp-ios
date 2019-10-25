@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  example-swift
+
+  Created by Tadashi Wakayanagi on 2019/09/12.
+  
+*/
+
+"example_card_information_section" = "Card Information";
+"example_token_id_section" = "Token ID";
