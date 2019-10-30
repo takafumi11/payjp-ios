@@ -165,7 +165,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
-        cardNumberTextField.tintColor = self.inputTintColor
+        resetTintColor()
         notifyIsValidChanged()
         return isValid
     }
@@ -229,7 +229,6 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         case cardNumberTextField:
             updateCardNumberInput(input: nil)
             updateCvcInput(input: cvcTextField.text)
-            cardNumberTextField.tintColor = self.inputTintColor
         case expirationTextField:
             updateExpirationInput(input: nil)
         case cvcTextField:
@@ -239,8 +238,14 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         default:
             break
         }
+        resetTintColor()
         notifyIsValidChanged()
 
+        return true
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        cardHolderTextField.resignFirstResponder()
         return true
     }
 }
