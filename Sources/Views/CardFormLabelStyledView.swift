@@ -275,7 +275,7 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
 
         return true
     }
-    
+
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cardHolderTextField.resignFirstResponder()
         return true
