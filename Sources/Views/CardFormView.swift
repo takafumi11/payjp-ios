@@ -183,7 +183,7 @@ extension CardFormView {
     func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(cardHolder: input)
         switch result {
-        case .success(_):
+        case .success:
             if inputTextErrorColorEnabled {
                 cardHolderTextField.textColor = self.inputTextColor
             }
@@ -236,12 +236,12 @@ extension CardFormView {
         textField: UITextField,
         range: NSRange,
         replacement: String) -> Bool {
-        
+
         // カード名義の場合は入力値をそのまま使用
         if textField == cardHolderTextField {
             return true
         }
-        
+
         // 文字挿入時にカーソルの位置を調整する
         let beginning = textField.beginningOfDocument
         let start = textField.position(from: beginning, offset: range.location)
@@ -274,8 +274,7 @@ extension CardFormView {
         resetTintColor()
         return false
     }
-    
-    
+
     /// textFieldのtintColorをリセットする
     func resetTintColor() {
         cardNumberTextField.tintColor = self.inputTintColor
