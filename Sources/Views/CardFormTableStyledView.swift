@@ -42,6 +42,10 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     @IBOutlet private weak var holderSeparator: UIView!
 
+    @IBOutlet private weak var expirationSeparatorConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var cvcSeparatorConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var holderSeparatorConstraint: NSLayoutConstraint!
+
     var inputTintColor: UIColor = Style.Color.blue
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -115,6 +119,13 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+
+        // separatorのheightを 0.5 で指定すると太さが統一ではなくなってしまうためscaleを使って対応
+        // cf. https://stackoverflow.com/a/21553495
+        let height = 1.0 / UIScreen.main.scale
+        expirationSeparatorConstraint.constant = height
+        cvcSeparatorConstraint.constant = height
+        holderSeparatorConstraint.constant = height
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -165,7 +176,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         updateExpirationInput(input: expirationTextField.text, forceShowError: true)
         updateCvcInput(input: cvcTextField.text, forceShowError: true)
         updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
-        cardNumberTextField.tintColor = self.inputTintColor
+        resetTintColor()
         notifyIsValidChanged()
         return isValid
     }
@@ -229,7 +240,6 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         case cardNumberTextField:
             updateCardNumberInput(input: nil)
             updateCvcInput(input: cvcTextField.text)
-            cardNumberTextField.tintColor = self.inputTintColor
         case expirationTextField:
             updateExpirationInput(input: nil)
         case cvcTextField:
@@ -239,8 +249,14 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         default:
             break
         }
+        resetTintColor()
         notifyIsValidChanged()
 
+        return true
+    }
+
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        cardHolderTextField.resignFirstResponder()
         return true
     }
 }

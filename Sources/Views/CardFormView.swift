@@ -106,6 +106,7 @@ extension CardFormView {
     ///   - input: 有効期限
     ///   - forceShowError: エラー表示を強制するか
     func updateExpirationInput(input: String?, forceShowError: Bool = false) {
+        expirationTextField.tintColor = .clear
         let result = viewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
@@ -137,6 +138,7 @@ extension CardFormView {
     ///   - input: CVC
     ///   - forceShowError: エラー表示を強制するか
     func updateCvcInput(input: String?, forceShowError: Bool = false) {
+        cvcTextField.tintColor = .clear
         let result = viewModel.update(cvc: input)
         switch result {
         case let .success(cvc):
@@ -181,16 +183,14 @@ extension CardFormView {
     func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(cardHolder: input)
         switch result {
-        case let .success(holderName):
-            cardHolderTextField.text = holderName
+        case .success:
             if inputTextErrorColorEnabled {
                 cardHolderTextField.textColor = self.inputTextColor
             }
             cardHolderErrorLabel.text = nil
         case let .failure(error):
             switch error {
-            case let .cardHolderEmptyError(value, instant):
-                cardHolderTextField.text = value
+            case let .cardHolderEmptyError(_, instant):
                 if inputTextErrorColorEnabled {
                     cardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 }
@@ -236,6 +236,12 @@ extension CardFormView {
         textField: UITextField,
         range: NSRange,
         replacement: String) -> Bool {
+
+        // カード名義の場合は入力値をそのまま使用
+        if textField == cardHolderTextField {
+            return true
+        }
+
         // 文字挿入時にカーソルの位置を調整する
         let beginning = textField.beginningOfDocument
         let start = textField.position(from: beginning, offset: range.location)
@@ -257,7 +263,7 @@ extension CardFormView {
                         if let adjustPosition = textField.position(from: newSelectedRange.start, offset: 1),
                             let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
                             textField.selectedTextRange = adjustSelectedRange
-                            cardNumberTextField.tintColor = self.inputTintColor
+                            resetTintColor()
                             return false
                         }
                     }
@@ -265,7 +271,14 @@ extension CardFormView {
                 textField.selectedTextRange = newSelectedRange
             }
         }
-        cardNumberTextField.tintColor = self.inputTintColor
+        resetTintColor()
         return false
+    }
+
+    /// textFieldのtintColorをリセットする
+    func resetTintColor() {
+        cardNumberTextField.tintColor = self.inputTintColor
+        expirationTextField.tintColor = self.inputTintColor
+        cvcTextField.tintColor = self.inputTintColor
     }
 }
