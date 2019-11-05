@@ -16,7 +16,9 @@
 
 |CardFormTableStyledView|CardFormLabelStyledView|
 |:--:|:--:|
-|<img src="https://user-images.githubusercontent.com/38201241/67450886-c3dbe080-f659-11e9-91a2-c3cf87309ea5.png" width="240px">|<img src="https://user-images.githubusercontent.com/38201241/67450887-c4747700-f659-11e9-8f3b-e207200a01f6.png" width="240px">|
+|<img src="https://user-images.githubusercontent.com/38201241/68008844-94654d80-fcc3-11e9-9d54-757e5a4387b6.png" width="240px">|<img src="https://user-images.githubusercontent.com/38201241/68008897-bbbc1a80-fcc3-11e9-8970-1f5c76a787b7.png" width="240px">|
+
+
 
 ## サンプルコード
 
