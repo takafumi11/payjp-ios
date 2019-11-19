@@ -18,7 +18,8 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
 
     @objc(createCardFormViewControllerWithStyle:tenantId:)
-    public static func createCardFormViewController(style: FormStyle? = nil, tenantId: String? = nil) -> CardFormViewController {
+    public static func createCardFormViewController(style: FormStyle? = nil,
+                                                    tenantId: String? = nil) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
         guard
             let cardFormVc = stotyboard.instantiateInitialViewController() as? CardFormViewController
