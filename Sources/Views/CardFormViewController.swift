@@ -8,30 +8,31 @@
 
 import Foundation
 
-@objc(PAYCardFormViewControllerFactory)
-public class CardFormViewControllerFactory: NSObject {
-    //    private override init() {}
-    public static func create(style: FormStyle) -> CardFormViewController {
-        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
-        guard
-            let vc = stotyboard.instantiateViewController(withIdentifier: "CardFormViewController") as? CardFormViewController
-            else { fatalError("Couldn't instantiate CardFormViewController") }
-        vc.formStyle = style
-        return vc
-    }
-}
-
 @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: UIButton!
 
-    fileprivate var formStyle: FormStyle!
+    private var formStyle: FormStyle?
+    private var tenantId: String?
+
+    @objc(createCardFormViewControllerWithStyle:tenantId:)
+    public static func createCardFormViewController(style: FormStyle? = nil, tenantId: String? = nil) -> CardFormViewController {
+        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
+        guard
+            let cardFormVc = stotyboard.instantiateInitialViewController() as? CardFormViewController
+            else { fatalError("Couldn't instantiate CardFormViewController") }
+        cardFormVc.formStyle = style
+        cardFormVc.tenantId = tenantId
+        return cardFormVc
+    }
 
     public override func viewDidLoad() {
         cardFormView.delegate = self
-        cardFormView.apply(style: formStyle)
+        if let formStyle = formStyle {
+            cardFormView.apply(style: formStyle)
+        }
     }
 }
 
@@ -40,14 +41,3 @@ extension CardFormViewController: CardFormViewDelegate {
         saveButton.isEnabled = isValid
     }
 }
-
-//extension CardFormViewController {
-//    public static func create(style: FormStyle) -> CardFormViewController {
-//        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
-//        guard
-//            let vc = stotyboard.instantiateViewController(withIdentifier: "CardFormViewController") as? CardFormViewController
-//            else { fatalError("Couldn't instantiate CardFormViewController") }
-//        vc.formStyle = style
-//        return vc
-//    }
-//}

@@ -20,13 +20,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row == 3) {
-      UIColor *red = RGB(255, 69, 0);
-      PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:red
-                                                                  inputTextColor:red
-                                                                       tintColor:red
+      UIColor *color = RGB(0, 122, 255);
+      PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
+                                                                  inputTextColor:color
+                                                                       tintColor:color
                                                        inputFieldBackgroundColor:nil];
-//      PAYCardFormViewController *nextView = [PAYCardFormViewControllerFactory create:style];
-      [self.navigationController pushViewController:nextView animated:true];
+      PAYCardFormViewController *cardFormVc = [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+                                                                                                      tenantId:nil];
+      [self.navigationController pushViewController:cardFormVc animated:true];
   }
 }
 
