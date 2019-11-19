@@ -62,6 +62,8 @@
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */; };
 		ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED222C1F22FD1DF90006FB87 /* Localizable.strings */; };
+		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
+		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		ED50836A230FC3AC00C64A7F /* CardFormTableStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */; };
 		ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */; };
@@ -178,6 +180,8 @@
 		ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverterTests.swift; sourceTree = "<group>"; };
 		ED222C1E22FD1DF90006FB87 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED222C2022FD1DFD0006FB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
+		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
@@ -453,8 +457,10 @@
 				BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */,
 				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
 				EDB319CB234EDF0300CB0212 /* CardFormView.swift */,
+				ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */,
 				EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */,
 				BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */,
+				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
@@ -611,6 +617,7 @@
 			files = (
 				ED50836A230FC3AC00C64A7F /* CardFormTableStyledView.xib in Resources */,
 				EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */,
+				ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */,
 				EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */,
 				ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */,
 			);
@@ -699,6 +706,7 @@
 				BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
+				ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
