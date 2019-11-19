@@ -16,8 +16,6 @@
 
 @implementation TopViewController
 
-#pragma MARK : -UITableView
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row == 3) {
     UIColor *color = RGB(0, 122, 255);
@@ -27,7 +25,7 @@
                                                      inputFieldBackgroundColor:nil];
     PAYCardFormViewController *cardFormVc =
         [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
-    [self.navigationController pushViewController:cardFormVc animated:true];
+    [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 }
 
