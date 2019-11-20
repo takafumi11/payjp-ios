@@ -53,11 +53,10 @@
 - (void)cardFormViewController:(PAYCardFormViewController *_Nonnull)_
               didProducedToken:(PAYToken *_Nonnull)didProducedToken
              completionHandler:(void (^_Nonnull)(NSError *_Nullable))completionHandler {
-    
-    NSLog(@"token = %@", [self displayToken:didProducedToken]);
-    
-    // TODO: サーバにトークンを送信
-    completionHandler(nil);
+  NSLog(@"token = %@", [self displayToken:didProducedToken]);
+
+  // TODO: サーバにトークンを送信
+  completionHandler(nil);
 }
 
 @end
