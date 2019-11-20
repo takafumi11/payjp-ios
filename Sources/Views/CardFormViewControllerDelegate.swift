@@ -9,11 +9,11 @@ import Foundation
 
 @objc(PAYCardFormViewControllerDelegate)
 public protocol CardFormViewControllerDelegate: class {
-    func cardFormViewController(_: CardFormViewController, didCompleteWithResult: CardFormResult) -> Void
-    func cardFormViewController(_: CardFormViewController, didProducedToken: Token, completionHandler: TokenHandler?) -> Void
+    func cardFormViewController(_: CardFormViewController, didCompleteWithResult: CardFormResult)
+    func cardFormViewController(_: CardFormViewController, didProducedToken: Token, completionHandler: TokenHandler?)
 }
 
-@objc public enum CardFormResult : Int {
+@objc public enum CardFormResult: Int {
     case cancel = 0
     case success = 1
 }
