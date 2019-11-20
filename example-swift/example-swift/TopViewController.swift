@@ -39,14 +39,12 @@ extension TopViewController: CardFormViewControllerDelegate {
         }
     }
 
-    func cardFormViewController(_: CardFormViewController, didProducedToken: Token, completionHandler: TokenHandler?) {
+    func cardFormViewController(_: CardFormViewController,
+                                didProducedToken: Token,
+                                completionHandler: @escaping (Error?) -> Void) {
+        print("token = \(didProducedToken.display)")
 
-        if completionHandler == nil {
-            DispatchQueue.main.async { [weak self] in
-                self?.showToken(token: didProducedToken)
-            }
-        } else {
-            // TODO: エラー
-        }
+        // TODO: サーバにトークンを送信
+        completionHandler(nil)
     }
 }
