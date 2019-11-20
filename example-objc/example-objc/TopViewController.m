@@ -55,7 +55,7 @@
              completionHandler:(void (^_Nullable)(NSError *_Nullable))completionHandler {
   __weak typeof(self) wself = self;
 
-  if (didProducedToken != nil) {
+  if (completionHandler == nil) {
     NSLog(@"didProducedToken %@", didProducedToken);
     dispatch_async(dispatch_get_main_queue(), ^{
       [wself showToken:didProducedToken];
