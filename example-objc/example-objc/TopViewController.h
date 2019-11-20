@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@import PAYJP;
 
-@interface TopViewController : UITableViewController
+@interface TopViewController : UITableViewController <PAYCardFormViewControllerDelegate>
 
 @end

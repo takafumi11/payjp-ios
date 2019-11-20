@@ -16,6 +16,7 @@
 		66EE585F918805A23FDDDCC9 /* Pods_example_objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4D506C5DBE722593C3283 /* Pods_example_objc.framework */; };
 		BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */; };
 		ED2ECF88238241A00066D6C2 /* TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF87238241A00066D6C2 /* TopViewController.m */; };
+		ED4ACE1B23850BCA00349BBF /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4ACE1A23850BCA00349BBF /* UIViewController+Alert.m */; };
 		ED5083772314D58100C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5083792314D58100C64A7F /* Localizable.strings */; };
 		ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,8 @@
 		BE0417D522E6DF6600B944CB /* CardFormViewExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewExampleViewController.m; sourceTree = "<group>"; };
 		ED2ECF87238241A00066D6C2 /* TopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopViewController.m; sourceTree = "<group>"; };
 		ED2ECF89238241B20066D6C2 /* TopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopViewController.h; sourceTree = "<group>"; };
+		ED4ACE1923850AA400349BBF /* UIViewController+Alert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
+		ED4ACE1A23850BCA00349BBF /* UIViewController+Alert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
 		ED5083782314D58100C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED50837A2314D58500C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewScrollViewController.h; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				32CB116A1FDA97A1007AD8F5 /* ViewController.h */,
 				32CB116B1FDA97A1007AD8F5 /* ViewController.m */,
 				32CB11761FDA97A1007AD8F5 /* main.m */,
+				ED4ACE1923850AA400349BBF /* UIViewController+Alert.h */,
+				ED4ACE1A23850BCA00349BBF /* UIViewController+Alert.m */,
 			);
 			path = "example-objc";
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */,
 				32CB11691FDA97A1007AD8F5 /* AppDelegate.m in Sources */,
 				ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */,
+				ED4ACE1B23850BCA00349BBF /* UIViewController+Alert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

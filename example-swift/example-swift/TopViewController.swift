@@ -18,7 +18,33 @@ class TopViewController: UITableViewController {
                 inputTextColor: color,
                 tintColor: color)
             let cardFormVc = CardFormViewController.createCardFormViewController(style: style)
+            cardFormVc.delegate = self
             self.navigationController?.pushViewController(cardFormVc, animated: true)
         }
+    }
+}
+
+extension TopViewController: CardFormViewControllerDelegate {
+
+    func cardFormViewController(_: CardFormViewController, didCompleteWithResult: CardFormResult) {
+
+        switch didCompleteWithResult {
+        case .cancel:
+            print("CardFormResult.cancel")
+        case .success:
+            print("CardFormResult.success")
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+
+    func cardFormViewController(_: CardFormViewController,
+                                didProducedToken: Token,
+                                completionHandler: @escaping (Error?) -> Void) {
+        print("token = \(didProducedToken.display)")
+
+        // TODO: サーバにトークンを送信
+        completionHandler(nil)
     }
 }
