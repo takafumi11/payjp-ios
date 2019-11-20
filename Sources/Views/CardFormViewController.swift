@@ -47,14 +47,18 @@ public class CardFormViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                // TODO: サーバーに送信する
-                self.delegate?.cardFormViewController(self, didCompleteWithResult: .success)
-                self.delegate?.cardFormViewController(self, didProducedToken: token, completionHandler: nil)
+                self.delegate?.cardFormViewController(self, didProducedToken: token) { error in
+                    if let error = error {
+                        print("[errorResponse] \(error.localizedDescription)")
+                        // TODO: エラー
+                    } else {
+                        self.delegate?.cardFormViewController(self, didCompleteWithResult: .success)
+                    }
+                }
             case .failure(let error):
                 if let apiError = error as? APIError, let payError = apiError.payError {
                     print("[errorResponse] \(payError.description)")
                 }
-                self.delegate?.cardFormViewController(self, didCompleteWithResult: .cancel)
                 // TODO: エラー
             }
         }

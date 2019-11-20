@@ -52,17 +52,12 @@
 
 - (void)cardFormViewController:(PAYCardFormViewController *_Nonnull)_
               didProducedToken:(PAYToken *_Nonnull)didProducedToken
-             completionHandler:(void (^_Nullable)(NSError *_Nullable))completionHandler {
-  __weak typeof(self) wself = self;
-
-  if (completionHandler == nil) {
-    NSLog(@"didProducedToken %@", didProducedToken);
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [wself showToken:didProducedToken];
-    });
-  } else {
-    // TODO: エラー
-  }
+             completionHandler:(void (^_Nonnull)(NSError *_Nullable))completionHandler {
+    
+    NSLog(@"token = %@", [self displayToken:didProducedToken]);
+    
+    // TODO: サーバにトークンを送信
+    completionHandler(nil);
 }
 
 @end
