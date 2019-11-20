@@ -7,6 +7,7 @@
 //
 
 #import "TopViewController.h"
+#import "UIViewController+Alert.h"
 #import "ColorTheme.h"
 @import PAYJP;
 
@@ -25,8 +26,45 @@
                                                      inputFieldBackgroundColor:nil];
     PAYCardFormViewController *cardFormVc =
         [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
+      cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
   }
+}
+
+#pragma MARK : PAYCardFormViewControllerDelegate
+
+- (void)cardFormViewController:(PAYCardFormViewController * _Nonnull)_
+         didCompleteWithResult:(enum CardFormResult)didCompleteWithResult {
+    
+    __weak typeof(self) wself = self;
+    
+    switch (didCompleteWithResult) {
+        case CardFormResultCancel:
+            NSLog(@"CardFormResultCancel");
+            break;
+        case CardFormResultSuccess:
+            NSLog(@"CardFormResultSuccess");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [wself.navigationController popViewControllerAnimated:YES];
+            });
+            break;
+    }
+}
+
+- (void)cardFormViewController:(PAYCardFormViewController * _Nonnull)_
+              didProducedToken:(PAYToken * _Nonnull)didProducedToken
+             completionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler {
+    
+    __weak typeof(self) wself = self;
+    
+    if (didProducedToken != nil) {
+        NSLog(@"didProducedToken %@", didProducedToken);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [wself showToken:didProducedToken];
+        });
+    } else {
+        // TODO: エラー
+    }
 }
 
 @end

@@ -34,11 +34,10 @@
                                                     <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
                                                     <constraint firstAttribute="width" constant="200" id="XeQ-ho-Qw8"/>
                                                 </constraints>
-                                                <state key="normal">
-                                                    <string key="title" base64-UTF8="YES">
-EFJlZ2lzdGVyA
-</string>
-                                                </state>
+                                                <state key="normal" title="カードを登録"/>
+                                                <connections>
+                                                    <action selector="registerCardTapped:" destination="zoS-GO-cdH" eventType="touchUpInside" id="uTc-Vm-bOj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
