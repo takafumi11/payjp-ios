@@ -13,9 +13,11 @@ public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var acceptedBrandsView: AcceptedBrandsView!
 
     private var formStyle: FormStyle?
     private var tenantId: String?
+//    private var accptedBrands: [CardBrand]?
 
     public weak var delegate: CardFormViewControllerDelegate?
 
@@ -37,9 +39,14 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         cardFormView.delegate = self
+//        acceptedBrandsView.delegate = self
+//        acceptedBrandsView.dataSource = self
+        
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
         }
+        
+        fetchAccpetedBrands()
     }
 
     private func createToken() {
@@ -63,6 +70,25 @@ public class CardFormViewController: UIViewController {
             }
         }
     }
+    
+    private func fetchAccpetedBrands() {
+        cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let brands):
+//                self.accptedBrands = brands
+                DispatchQueue.main.async {
+                    self.acceptedBrandsView.cardBrands = brands
+                }
+//                self.acceptedBrandsView.reloadData()
+            case .failure(let error):
+                if let payError = error.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+                // TODO: エラー
+            }
+        }
+    }
 }
 
 extension CardFormViewController: CardFormViewDelegate {
@@ -70,3 +96,19 @@ extension CardFormViewController: CardFormViewDelegate {
         saveButton.isEnabled = isValid
     }
 }
+
+//extension CardFormViewController: UICollectionViewDataSource {
+//
+//    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        accptedBrands?.count ?? 0
+//    }
+//
+//    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = acceptedBrandsView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath)
+//        if let brands = accptedBrands, let brand = brands[indexPath.row] {
+//            if let image = cell.contentView.viewWithTag(1) as? UIImageView {
+//
+//            }
+//        }
+//    }
+//}
