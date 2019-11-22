@@ -81,13 +81,15 @@ public class CardFormViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let brands):
-                self.accptedBrands = brands
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.accptedBrands = brands
                     self.activityIndicator.stopAnimating()
                     self.brandsView.reloadData()
                 }
             case .failure(let error):
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
                 }
                 if let payError = error.payError {
