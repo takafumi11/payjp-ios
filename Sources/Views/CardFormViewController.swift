@@ -14,6 +14,7 @@ public class CardFormViewController: UIViewController {
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var brandsView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private var formStyle: FormStyle?
     private var tenantId: String?
@@ -75,15 +76,20 @@ public class CardFormViewController: UIViewController {
     }
 
     private func fetchAccpetedBrands() {
+        activityIndicator.startAnimating()
         cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let brands):
                 self.accptedBrands = brands
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
                     self.brandsView.reloadData()
                 }
             case .failure(let error):
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
                 if let payError = error.payError {
                     print("[errorResponse] \(payError.description)")
                 }

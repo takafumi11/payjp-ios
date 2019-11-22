@@ -73,9 +73,16 @@
                                             <constraint firstItem="5iu-cW-k9Z" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="qEi-1q-WVo"/>
                                         </constraints>
                                     </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uGj-64-kZm">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="9tn-bp-Yaa"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="trailing" secondItem="rc8-Nd-tg5" secondAttribute="trailing" id="YTk-S7-MMS"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="rc8-Nd-tg5" secondAttribute="leading" id="dYR-aU-ZiP"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="eHF-iG-0Zs"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="bottom" secondItem="rc8-Nd-tg5" secondAttribute="bottom" id="hqX-B2-Ih6"/>
                                     <constraint firstAttribute="trailing" secondItem="PCg-wC-bhZ" secondAttribute="trailing" id="pRT-kY-YBm"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="rxC-qC-6Fz"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="ugf-c8-jut"/>
@@ -99,6 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="uGj-64-kZm" id="y9m-6o-q0h"/>
                         <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
