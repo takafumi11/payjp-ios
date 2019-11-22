@@ -13,7 +13,6 @@ public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: UIButton!
-//    @IBOutlet weak var acceptedBrandsView: AcceptedBrandsView!
     @IBOutlet weak var brandsView: UICollectionView!
 
     private var formStyle: FormStyle?
@@ -42,8 +41,7 @@ public class CardFormViewController: UIViewController {
     public override func viewDidLoad() {
         cardFormView.delegate = self
         brandsView.dataSource = self
-//        brandsView.backgroundColor = .orange
-        
+
         let bundle = Bundle(for: BrandImageCell.self)
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
 
@@ -83,10 +81,8 @@ public class CardFormViewController: UIViewController {
             case .success(let brands):
                 self.accptedBrands = brands
                 DispatchQueue.main.async {
-//                    self.acceptedBrandsView.cardBrands = brands
                     self.brandsView.reloadData()
                 }
-//                self.acceptedBrandsView.reloadData()
             case .failure(let error):
                 if let payError = error.payError {
                     print("[errorResponse] \(payError.description)")
@@ -105,14 +101,8 @@ extension CardFormViewController: CardFormViewDelegate {
 
 extension CardFormViewController: UICollectionViewDataSource {
 
-//    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("accptedBrands count = \(accptedBrands?.count)")
         return accptedBrands?.count ?? 0
-//        return 10
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -123,13 +113,6 @@ extension CardFormViewController: UICollectionViewDataSource {
                 cell.setup(brand: brand)
             }
         }
-
-//        if let imageView = cell.contentView.viewWithTag(1) as? UIImageView {
-//            if let brand = accptedBrands?[indexPath.row] {
-//                 print("brand image = \(brand.logoResourceName)")
-//                imageView.image = brand.logoResourceName.image
-//            }
-//        }
 
         return cell
     }
