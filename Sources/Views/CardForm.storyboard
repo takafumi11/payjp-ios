@@ -11,7 +11,7 @@
         <!--CardFormViewController-->
         <scene sceneID="Che-2y-xde">
             <objects>
-                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="PAYCardFormViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="CardFormViewController" customModule="PAYJP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bes-nP-2cY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,16 +20,42 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="603"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="357"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ua3-wA-bvi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i3B-Nd-fRB">
+                                                            <size key="itemSize" width="30" height="20"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells/>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="centerX" secondItem="cmB-pl-3uh" secondAttribute="centerX" id="4qL-xr-YjI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ua3-wA-bvi" secondAttribute="trailing" id="CzJ-q4-ia2"/>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="centerY" secondItem="cmB-pl-3uh" secondAttribute="centerY" id="G5k-G9-cF8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ua3-wA-bvi" secondAttribute="bottom" id="eAa-tc-507"/>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="leading" secondItem="cmB-pl-3uh" secondAttribute="leading" id="pKb-FI-vpJ"/>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="top" secondItem="cmB-pl-3uh" secondAttribute="top" id="q1p-P8-aI2"/>
+                                                    <constraint firstAttribute="height" constant="50" id="wyu-kI-oPD"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="CardFormLabelStyledView" customModule="PAYJP" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="58" width="414" height="493"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7">
-                                                <rect key="frame" x="107" y="365" width="200" height="44"/>
+                                                <rect key="frame" x="107" y="559" width="200" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
                                                     <constraint firstAttribute="width" constant="200" id="XeQ-ho-Qw8"/>
@@ -42,12 +68,21 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="5iu-cW-k9Z" secondAttribute="trailing" id="QiD-Fm-KNg"/>
+                                            <constraint firstItem="cmB-pl-3uh" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="atn-33-slF"/>
+                                            <constraint firstAttribute="trailing" secondItem="cmB-pl-3uh" secondAttribute="trailing" id="mvx-3A-6Gn"/>
                                             <constraint firstItem="5iu-cW-k9Z" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="qEi-1q-WVo"/>
                                         </constraints>
                                     </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uGj-64-kZm">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="9tn-bp-Yaa"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="trailing" secondItem="rc8-Nd-tg5" secondAttribute="trailing" id="YTk-S7-MMS"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="rc8-Nd-tg5" secondAttribute="leading" id="dYR-aU-ZiP"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="eHF-iG-0Zs"/>
+                                    <constraint firstItem="uGj-64-kZm" firstAttribute="bottom" secondItem="rc8-Nd-tg5" secondAttribute="bottom" id="hqX-B2-Ih6"/>
                                     <constraint firstAttribute="trailing" secondItem="PCg-wC-bhZ" secondAttribute="trailing" id="pRT-kY-YBm"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="rxC-qC-6Fz"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="ugf-c8-jut"/>
@@ -71,6 +106,8 @@
                         <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="uGj-64-kZm" id="y9m-6o-q0h"/>
+                        <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
                     </connections>
