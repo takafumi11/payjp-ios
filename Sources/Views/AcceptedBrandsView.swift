@@ -10,19 +10,19 @@ import Foundation
 
 //@objc(PAYAcceptedBrandsView)
 class AcceptedBrandsView: UIView {
-    
+
     @IBOutlet weak var brandsView: UICollectionView!
-    
+
     private var contentView: UIView!
-    
-//    public var cardBrands: [CardBrand]? = nil {
-//        didSet {
-//            brandsView.reloadData()
-//        }
-//    }
-    
-    public var cardBrands: [CardBrand]?
-    
+
+    public var cardBrands: [CardBrand]? = nil {
+        didSet {
+            brandsView.reloadData()
+        }
+    }
+
+//    public var cardBrands: [CardBrand]?
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
@@ -32,16 +32,13 @@ class AcceptedBrandsView: UIView {
         super.init(coder: aDecoder)
         initialize()
     }
-    
+
     override public var intrinsicContentSize: CGSize {
         return contentView.intrinsicContentSize
     }
 
     private func initialize() {
-        let bundle = Bundle(for: AcceptedBrandsView.self)
-        print(bundle)
-        let nib = UINib(nibName: "AcceptedBrandsView", bundle: bundle)
-        print(nib)
+        let nib = UINib(nibName: "AcceptedBrandsView", bundle: Bundle(for: AcceptedBrandsView.self))
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -52,20 +49,20 @@ class AcceptedBrandsView: UIView {
         }
 
         brandsView.dataSource = self
-        brandsView.register(UINib(nibName: "CardBrandImageCell", bundle: nil), forCellWithReuseIdentifier: "CardBrandImageCell")
+        brandsView.register(UINib(nibName: "BrandImageCell", bundle: Bundle(for: BrandImageCell.self)), forCellWithReuseIdentifier: "BrandCell")
     }
 }
 
 extension AcceptedBrandsView: UICollectionViewDataSource {
-    
+
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         cardBrands?.count ?? 0
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardBrandImageCell", for: indexPath)
-        
-        if let cell = cell as? CardBrandImageCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandCell", for: indexPath)
+
+        if let cell = cell as? BrandImageCell {
             if let brand = cardBrands?[indexPath.row] {
                 cell.setup(brand: brand)
             }

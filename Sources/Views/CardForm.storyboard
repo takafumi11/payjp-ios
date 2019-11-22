@@ -11,7 +11,7 @@
         <!--CardFormViewController-->
         <scene sceneID="Che-2y-xde">
             <objects>
-                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="PAYCardFormViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="CardFormViewController" customModule="PAYJP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bes-nP-2cY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,20 +20,30 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="545"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="653"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iiT-Y3-TsG" customClass="AcceptedBrandsView" customModule="PAYJP" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="CardFormLabelStyledView" customModule="PAYJP" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="136" width="414" height="357"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ua3-wA-bvi">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="fDX-qm-bdT"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i3B-Nd-fRB">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells/>
+                                            </collectionView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                <rect key="frame" x="0.0" y="108" width="414" height="493"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7">
-                                                <rect key="frame" x="107" y="501" width="200" height="44"/>
+                                                <rect key="frame" x="107" y="609" width="200" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
                                                     <constraint firstAttribute="width" constant="200" id="XeQ-ho-Qw8"/>
@@ -45,9 +55,9 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="iiT-Y3-TsG" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="PUz-DI-puH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ua3-wA-bvi" secondAttribute="trailing" id="MLx-ut-dY0"/>
                                             <constraint firstAttribute="trailing" secondItem="5iu-cW-k9Z" secondAttribute="trailing" id="QiD-Fm-KNg"/>
-                                            <constraint firstAttribute="trailing" secondItem="iiT-Y3-TsG" secondAttribute="trailing" id="iOT-8U-MnL"/>
+                                            <constraint firstItem="Ua3-wA-bvi" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="hSd-rH-Stp"/>
                                             <constraint firstItem="5iu-cW-k9Z" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="qEi-1q-WVo"/>
                                         </constraints>
                                     </stackView>
@@ -77,7 +87,7 @@
                         <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
                     </view>
                     <connections>
-                        <outlet property="acceptedBrandsView" destination="iiT-Y3-TsG" id="85g-Fy-p7M"/>
+                        <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
                     </connections>
