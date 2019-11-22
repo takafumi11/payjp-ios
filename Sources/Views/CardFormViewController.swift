@@ -113,7 +113,8 @@ extension CardFormViewController: UICollectionViewDataSource {
         return accptedBrands?.count ?? 0
     }
 
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView,
+                               cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandCell", for: indexPath)
 
         if let cell = cell as? BrandImageCell {
