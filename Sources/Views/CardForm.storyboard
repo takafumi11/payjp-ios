@@ -48,7 +48,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="wyu-kI-oPD"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="CardFormLabelStyledView" customModule="PAYJP" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="58" width="414" height="493"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
