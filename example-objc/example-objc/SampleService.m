@@ -8,7 +8,8 @@
 
 #import "SampleService.h"
 
-NSString *const BACKEND_URL = @"https://payjp-tokenize.herokuapp.com";
+// TODO: REPLACE WITH YOUR ENDPOINT URL
+NSString *const BACKEND_URL = @"";
 NSString *const API_PATH = @"/save_card";
 
 @implementation SampleService
@@ -26,7 +27,7 @@ static SampleService *shared = nil;
 - (void)saveCardWithToken:(NSString *)token
                completion:(void (^)(SampleStatus, NSError *))completion {
   NSMutableDictionary *dict = [NSMutableDictionary new];
-  [dict setValue:token forKey:@"cards"];
+  [dict setValue:token forKey:@"card"];
   NSData *data = [NSJSONSerialization dataWithJSONObject:dict
                                                  options:NSJSONWritingPrettyPrinted
                                                    error:nil];
@@ -56,7 +57,7 @@ static SampleService *shared = nil;
               completion(Error, error);
             } else {
               NSLog(@"SampleService Error other.");
-              NSDictionary *info = @{@"NSLocalizedDescriptionKey" : @"error"};
+              NSDictionary *info = @{@"NSLocalizedDescriptionKey" : @"予期しない問題が発生しました。"};
               NSError *error = [NSError errorWithDomain:@"SampleErrorDomain" code:0 userInfo:info];
               completion(Error, error);
             }
