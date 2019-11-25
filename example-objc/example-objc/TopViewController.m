@@ -8,6 +8,7 @@
 
 #import "TopViewController.h"
 #import "ColorTheme.h"
+#import "SampleService.h"
 #import "UIViewController+Alert.h"
 @import PAYJP;
 
@@ -55,8 +56,22 @@
              completionHandler:(void (^_Nonnull)(NSError *_Nullable))completionHandler {
   NSLog(@"token = %@", [self displayToken:didProducedToken]);
 
-  // TODO: サーバにトークンを送信
-  completionHandler(nil);
+  // サーバにトークンを送信
+  SampleService *service = [SampleService sharedService];
+  [service
+      saveCardWithToken:didProducedToken.identifer
+             completion:^(SampleStatus status, NSError *error) {
+               switch (status) {
+                 case Complete:
+                   NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
+                   completionHandler(nil);
+                   break;
+                 case Error:
+                   NSLog(@"Failed save card. error = %@", error);
+                   completionHandler(error);
+                   break;
+               }
+             }];
 }
 
 @end

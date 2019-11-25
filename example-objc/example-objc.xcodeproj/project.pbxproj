@@ -19,6 +19,7 @@
 		ED4ACE1B23850BCA00349BBF /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4ACE1A23850BCA00349BBF /* UIViewController+Alert.m */; };
 		ED5083772314D58100C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5083792314D58100C64A7F /* Localizable.strings */; };
 		ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */; };
+		EDADA25E238B9DE60057FDF3 /* SampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = EDADA25D238B9DE60057FDF3 /* SampleService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		ED50837B23167B2400C64A7F /* CardFormViewScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardFormViewScrollViewController.h; sourceTree = "<group>"; };
 		ED50837C23167B9100C64A7F /* CardFormViewScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardFormViewScrollViewController.m; sourceTree = "<group>"; };
 		ED7C3FEA233B4092002F1639 /* ColorTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorTheme.h; sourceTree = "<group>"; };
+		EDADA25C238B9DCE0057FDF3 /* SampleService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleService.h; sourceTree = "<group>"; };
+		EDADA25D238B9DE60057FDF3 /* SampleService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 				32CB116A1FDA97A1007AD8F5 /* ViewController.h */,
 				32CB116B1FDA97A1007AD8F5 /* ViewController.m */,
 				32CB11761FDA97A1007AD8F5 /* main.m */,
+				EDADA25C238B9DCE0057FDF3 /* SampleService.h */,
+				EDADA25D238B9DE60057FDF3 /* SampleService.m */,
 				ED4ACE1923850AA400349BBF /* UIViewController+Alert.h */,
 				ED4ACE1A23850BCA00349BBF /* UIViewController+Alert.m */,
 			);
@@ -240,6 +245,7 @@
 				ED2ECF88238241A00066D6C2 /* TopViewController.m in Sources */,
 				BE0417D622E6DF6600B944CB /* CardFormViewExampleViewController.m in Sources */,
 				32CB11691FDA97A1007AD8F5 /* AppDelegate.m in Sources */,
+				EDADA25E238B9DE60057FDF3 /* SampleService.m in Sources */,
 				ED50837D23167B9100C64A7F /* CardFormViewScrollViewController.m in Sources */,
 				ED4ACE1B23850BCA00349BBF /* UIViewController+Alert.m in Sources */,
 			);

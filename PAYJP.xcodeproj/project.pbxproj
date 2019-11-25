@@ -84,6 +84,7 @@
 		EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */; };
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
 		EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */; };
+		EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */; };
 		EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CB234EDF0300CB0212 /* CardFormView.swift */; };
 		EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */; };
 		EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC02D61230D2A0C00305B10 /* Assets.xcassets */; };
@@ -207,6 +208,7 @@
 		EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatterTests.swift; sourceTree = "<group>"; };
 		EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverter.swift; sourceTree = "<group>"; };
+		EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PAYJP.swift"; sourceTree = "<group>"; };
 		EDB319CB234EDF0300CB0212 /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
 		EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewDelegate.swift; sourceTree = "<group>"; };
 		EDC02D61230D2A0C00305B10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
 				BE0203E8231F8DCB00FE5635 /* StringProtocol+PAYJP.swift */,
 				BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */,
+				EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */,
 				325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */,
 			);
 			path = Extensions;
@@ -683,6 +686,7 @@
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				BE21781E22E82B350098128D /* Request.swift in Sources */,
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
+				EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
 				ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */,
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
