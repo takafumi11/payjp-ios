@@ -57,7 +57,8 @@ static SampleService *shared = nil;
               completion(Error, error);
             } else {
               NSLog(@"SampleService Error other.");
-              NSDictionary *info = @{@"NSLocalizedDescriptionKey" : @"予期しない問題が発生しました。"};
+              NSDictionary *info =
+                  @{@"NSLocalizedDescriptionKey" : @"予期しない問題が発生しました。"};
               NSError *error = [NSError errorWithDomain:@"SampleErrorDomain" code:0 userInfo:info];
               completion(Error, error);
             }
