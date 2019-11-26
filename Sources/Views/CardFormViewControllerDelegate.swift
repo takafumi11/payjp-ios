@@ -9,9 +9,9 @@ import Foundation
 
 @objc(PAYCardFormViewControllerDelegate)
 public protocol CardFormViewControllerDelegate: class {
-    func cardFormViewController(_: CardFormViewController, didCompleteWithResult: CardFormResult)
+    func cardFormViewController(_: CardFormViewController, didCompleteWithResult result: CardFormResult)
     func cardFormViewController(_: CardFormViewController,
-                                didProducedToken: Token,
+                                didProducedToken token: Token,
                                 completionHandler: @escaping (Error?) -> Void)
 }
 

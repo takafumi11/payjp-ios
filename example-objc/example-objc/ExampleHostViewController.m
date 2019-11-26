@@ -35,10 +35,10 @@
 #pragma MARK : PAYCardFormViewControllerDelegate
 
 - (void)cardFormViewController:(PAYCardFormViewController *_Nonnull)_
-         didCompleteWithResult:(enum CardFormResult)didCompleteWithResult {
+         didCompleteWithResult:(enum CardFormResult)result {
   __weak typeof(self) wself = self;
 
-  switch (didCompleteWithResult) {
+  switch (result) {
     case CardFormResultCancel:
       NSLog(@"CardFormResultCancel");
       break;
@@ -51,20 +51,20 @@
   }
 }
 
-- (void)cardFormViewController:(PAYCardFormViewController *_Nonnull)_
-              didProducedToken:(PAYToken *_Nonnull)didProducedToken
-             completionHandler:(void (^_Nonnull)(NSError *_Nullable))completionHandler {
-  NSLog(@"token = %@", [self displayToken:didProducedToken]);
+- (void)cardFormViewController:(PAYCardFormViewController *)_
+              didProducedToken:(PAYToken *)token
+             completionHandler:(void (^)(NSError *_Nullable))completionHandler {
+  NSLog(@"token = %@", [self displayToken:token]);
 
   // サーバにトークンを送信
   SampleService *service = [SampleService sharedService];
-  [service saveCardWithToken:didProducedToken.identifer
+  [service saveCardWithToken:token.identifer
                   completion:^(NSError *error) {
                     if (error != nil) {
                       NSLog(@"Failed save card. error = %@", error);
                       completionHandler(error);
                     } else {
-                      NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
+                      NSLog(@"Success save card. token = %@", [self displayToken:token]);
                       completionHandler(nil);
                     }
                   }];
