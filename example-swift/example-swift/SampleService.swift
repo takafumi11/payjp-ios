@@ -37,7 +37,7 @@ struct SampleService {
             request.httpMethod = "POST"
             request.httpBody = data
 
-            let configuration = URLSessionConfiguration.default
+            let configuration = URLSessionConfiguration.ephemeral
             let session = URLSession(configuration: configuration)
             let dataTask = session.dataTask(with: request as URLRequest) { (_, response, error) in
                 if let httpResponse = response as? HTTPURLResponse {
