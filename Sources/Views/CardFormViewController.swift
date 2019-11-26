@@ -61,7 +61,7 @@ public class CardFormViewController: UIViewController {
             case .success(let token):
                 self.delegate?.cardFormViewController(self, didProducedToken: token) { error in
                     if let error = error {
-                        print("[errorResponse] \(error.localizedDescription)")
+                        print(debug: "[errorResponse] \(error.localizedDescription)")
                         // エラー
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
@@ -77,9 +77,7 @@ public class CardFormViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                if let apiError = error as? APIError, let payError = apiError.payError {
-                    print("[errorResponse] \(payError.description)")
-                }
+                print(debug: "[errorResponse] \(error.localizedDescription)")
                 // エラー
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
@@ -103,14 +101,12 @@ public class CardFormViewController: UIViewController {
                     self.brandsView.reloadData()
                 }
             case .failure(let error):
+                print(debug: "[errorResponse] \(error.localizedDescription)")
+                // TODO: エラー
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
                 }
-                if let payError = error.payError {
-                    print("[errorResponse] \(payError.description)")
-                }
-                // TODO: エラー
             }
         }
     }
