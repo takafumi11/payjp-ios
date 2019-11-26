@@ -16,8 +16,8 @@ import Foundation
 ///   - line: line number
 func print(debug: Any = "", function: String = #function, file: String = #file, line: Int = #line) {
     #if DEBUG
-        var filename: NSString = file as NSString
-        filename = filename.lastPathComponent as NSString
-        Swift.print("File: \(filename), Line: \(line), Func: \(function) \n\(debug)")
+    var filename: NSString = file as NSString
+    filename = filename.lastPathComponent as NSString
+    Swift.print("File: \(filename), Line: \(line), Func: \(function) \n\(debug)")
     #endif
 }
