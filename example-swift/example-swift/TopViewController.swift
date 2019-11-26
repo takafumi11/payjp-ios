@@ -44,7 +44,15 @@ extension TopViewController: CardFormViewControllerDelegate {
                                 completionHandler: @escaping (Error?) -> Void) {
         print("token = \(didProducedToken.display)")
 
-        // TODO: サーバにトークンを送信
-        completionHandler(nil)
+        // サーバにトークンを送信
+        SampleService.shared.saveCard(withToken: didProducedToken.identifer) { (error) in
+            if let error = error {
+                print("Failed save card. error = \(error)")
+                completionHandler(error)
+            } else {
+                print("Success save card. token = \(didProducedToken.display)")
+                completionHandler(nil)
+            }
+        }
     }
 }
