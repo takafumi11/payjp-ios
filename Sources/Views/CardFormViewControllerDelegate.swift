@@ -16,6 +16,6 @@ public protocol CardFormViewControllerDelegate: class {
 }
 
 @objc public enum CardFormResult: Int {
-    case cancel = 0
-    case success = 1
+    case success = 0
+    case cancel = 1
 }

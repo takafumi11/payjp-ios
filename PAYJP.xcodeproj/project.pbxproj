@@ -61,6 +61,7 @@
 		C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; };
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */; };
+		ED05B173238CF18200DCA1C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED05B172238CF18200DCA1C9 /* Log.swift */; };
 		ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0673682387844B00F86D18 /* BrandImageCell.swift */; };
 		ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0673692387844B00F86D18 /* BrandImageCell.xib */; };
 		ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED222C1F22FD1DF90006FB87 /* Localizable.strings */; };
@@ -84,6 +85,7 @@
 		EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */; };
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
 		EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */; };
+		EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */; };
 		EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CB234EDF0300CB0212 /* CardFormView.swift */; };
 		EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */; };
 		EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC02D61230D2A0C00305B10 /* Assets.xcassets */; };
@@ -181,6 +183,7 @@
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverterTests.swift; sourceTree = "<group>"; };
+		ED05B172238CF18200DCA1C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		ED0673682387844B00F86D18 /* BrandImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandImageCell.swift; sourceTree = "<group>"; };
 		ED0673692387844B00F86D18 /* BrandImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandImageCell.xib; sourceTree = "<group>"; };
 		ED222C1E22FD1DF90006FB87 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -207,6 +210,7 @@
 		EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatterTests.swift; sourceTree = "<group>"; };
 		EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverter.swift; sourceTree = "<group>"; };
+		EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PAYJP.swift"; sourceTree = "<group>"; };
 		EDB319CB234EDF0300CB0212 /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
 		EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewDelegate.swift; sourceTree = "<group>"; };
 		EDC02D61230D2A0C00305B10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
 				615AFF601C8C74A1003FB86F /* Info.plist */,
 				ED222C1F22FD1DF90006FB87 /* Localizable.strings */,
+				ED05B172238CF18200DCA1C9 /* Log.swift */,
 				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
 				BE6C230D20B4064200C4FE1E /* PAYJP.m */,
 			);
@@ -406,6 +411,7 @@
 				ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */,
 				BE0203E8231F8DCB00FE5635 /* StringProtocol+PAYJP.swift */,
 				BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */,
+				EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */,
 				325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */,
 			);
 			path = Extensions;
@@ -683,6 +689,7 @@
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
 				BE21781E22E82B350098128D /* Request.swift in Sources */,
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
+				EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
 				ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */,
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
@@ -712,6 +719,7 @@
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
 				BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */,
+				ED05B173238CF18200DCA1C9 /* Log.swift in Sources */,
 				325E36B1233484C90037E6BE /* UIColor+PAYJP.swift in Sources */,
 				BEA1D28922EAFB6700F8906B /* GetAcceptedBrandsResponse.swift in Sources */,
 				EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */,

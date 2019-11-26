@@ -54,23 +54,36 @@ public class CardFormViewController: UIViewController {
     }
 
     private func createToken() {
+        activityIndicator.startAnimating()
         cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let token):
                 self.delegate?.cardFormViewController(self, didProducedToken: token) { error in
                     if let error = error {
-                        print("[errorResponse] \(error.localizedDescription)")
-                        // TODO: エラー
+                        print(debug: "[errorResponse] \(error.localizedDescription)")
+                        // エラー
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self else { return }
+                            self.activityIndicator.stopAnimating()
+                            self.showError(message: error.localizedDescription)
+                        }
                     } else {
-                        self.delegate?.cardFormViewController(self, didCompleteWithResult: .success)
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self else { return }
+                            self.activityIndicator.stopAnimating()
+                            self.delegate?.cardFormViewController(self, didCompleteWithResult: .success)
+                        }
                     }
                 }
             case .failure(let error):
-                if let apiError = error as? APIError, let payError = apiError.payError {
-                    print("[errorResponse] \(payError.description)")
+                print(debug: "[errorResponse] \(error.localizedDescription)")
+                // エラー
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.activityIndicator.stopAnimating()
+                    self.showError(message: error.localizedDescription)
                 }
-                // TODO: エラー
             }
         }
     }
@@ -88,14 +101,12 @@ public class CardFormViewController: UIViewController {
                     self.brandsView.reloadData()
                 }
             case .failure(let error):
+                print(debug: "[errorResponse] \(error.localizedDescription)")
+                // TODO: エラー
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
                 }
-                if let payError = error.payError {
-                    print("[errorResponse] \(payError.description)")
-                }
-                // TODO: エラー
             }
         }
     }

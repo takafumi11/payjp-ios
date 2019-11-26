@@ -1,5 +1,5 @@
 //
-//  TopViewController.h
+//  ExampleHostViewController.h
 //  example-objc
 //
 //  Created by Tadashi Wakayanagi on 2019/11/18.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 @import PAYJP;
 
-@interface TopViewController : UITableViewController <PAYCardFormViewControllerDelegate>
+@interface ExampleHostViewController : UITableViewController <PAYCardFormViewControllerDelegate>
 
 @end
