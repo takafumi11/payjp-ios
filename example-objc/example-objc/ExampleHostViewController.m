@@ -60,14 +60,14 @@
   SampleService *service = [SampleService sharedService];
   [service saveCardWithToken:didProducedToken.identifer
                   completion:^(NSError *error) {
-      if (error != nil) {
-          NSLog(@"Failed save card. error = %@", error);
-          completionHandler(error);
-      } else {
-          NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
-          completionHandler(nil);
-      }
-    }];
+                    if (error != nil) {
+                      NSLog(@"Failed save card. error = %@", error);
+                      completionHandler(error);
+                    } else {
+                      NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
+                      completionHandler(nil);
+                    }
+                  }];
 }
 
 @end

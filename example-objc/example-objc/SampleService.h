@@ -12,7 +12,6 @@
 @interface SampleService : NSObject
 
 + (SampleService *)sharedService;
-- (void)saveCardWithToken:(NSString *)token
-               completion:(void (^)(NSError *error))completion;
+- (void)saveCardWithToken:(NSString *)token completion:(void (^)(NSError *error))completion;
 
 @end

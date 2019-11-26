@@ -24,8 +24,12 @@ static SampleService *shared = nil;
   return shared;
 }
 
-- (void)saveCardWithToken:(NSString *)token
-               completion:(void (^)(NSError *))completion {
+- (void)saveCardWithToken:(NSString *)token completion:(void (^)(NSError *))completion {
+  if (![BACKEND_URL length]) {
+    completion(nil);
+    return;
+  }
+
   NSMutableDictionary *dict = [NSMutableDictionary new];
   [dict setValue:token forKey:@"card"];
   NSData *data = [NSJSONSerialization dataWithJSONObject:dict
@@ -57,8 +61,7 @@ static SampleService *shared = nil;
               completion(error);
             } else {
               NSLog(@"SampleService Error other.");
-              NSDictionary *info =
-                  @{NSLocalizedDescriptionKey : @"予期しない問題が発生しました。"};
+              NSDictionary *info = @{NSLocalizedDescriptionKey : @"予期しない問題が発生しました。"};
               NSError *error = [NSError errorWithDomain:@"SampleErrorDomain" code:0 userInfo:info];
               completion(error);
             }
