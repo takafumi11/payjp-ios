@@ -9,15 +9,10 @@
 #import <Foundation/Foundation.h>
 @import PAYJP;
 
-typedef NS_ENUM(NSInteger, SampleStatus) {
-  Complete,
-  Error,
-};
-
 @interface SampleService : NSObject
 
 + (SampleService *)sharedService;
 - (void)saveCardWithToken:(NSString *)token
-               completion:(void (^)(SampleStatus status, NSError *error))completion;
+               completion:(void (^)(NSError *error))completion;
 
 @end

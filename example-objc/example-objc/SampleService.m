@@ -25,7 +25,7 @@ static SampleService *shared = nil;
 }
 
 - (void)saveCardWithToken:(NSString *)token
-               completion:(void (^)(SampleStatus, NSError *))completion {
+               completion:(void (^)(NSError *))completion {
   NSMutableDictionary *dict = [NSMutableDictionary new];
   [dict setValue:token forKey:@"card"];
   NSData *data = [NSJSONSerialization dataWithJSONObject:dict
@@ -50,17 +50,17 @@ static SampleService *shared = nil;
 
           if (httpUrlResponse.statusCode == 201) {
             NSLog(@"SampleService Success.");
-            completion(Complete, nil);
+            completion(nil);
           } else {
             if (error != nil) {
               NSLog(@"SampleService Error => %@", error);
-              completion(Error, error);
+              completion(error);
             } else {
               NSLog(@"SampleService Error other.");
               NSDictionary *info =
-                  @{@"NSLocalizedDescriptionKey" : @"予期しない問題が発生しました。"};
+                  @{NSLocalizedDescriptionKey : @"予期しない問題が発生しました。"};
               NSError *error = [NSError errorWithDomain:@"SampleErrorDomain" code:0 userInfo:info];
-              completion(Error, error);
+              completion(error);
             }
           }
         }];

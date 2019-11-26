@@ -1,22 +1,22 @@
 //
-//  TopViewController.m
+//  ExampleHostViewController.m
 //  example-objc
 //
 //  Created by Tadashi Wakayanagi on 2019/11/18.
 //  Copyright © 2019 PAY, Inc. All rights reserved.
 //
 
-#import "TopViewController.h"
+#import "ExampleHostViewController.h"
 #import "ColorTheme.h"
 #import "SampleService.h"
 #import "UIViewController+Alert.h"
 @import PAYJP;
 
-@interface TopViewController ()
+@interface ExampleHostViewController ()
 
 @end
 
-@implementation TopViewController
+@implementation ExampleHostViewController
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row == 3) {
@@ -58,20 +58,16 @@
 
   // サーバにトークンを送信
   SampleService *service = [SampleService sharedService];
-  [service
-      saveCardWithToken:didProducedToken.identifer
-             completion:^(SampleStatus status, NSError *error) {
-               switch (status) {
-                 case Complete:
-                   NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
-                   completionHandler(nil);
-                   break;
-                 case Error:
-                   NSLog(@"Failed save card. error = %@", error);
-                   completionHandler(error);
-                   break;
-               }
-             }];
+  [service saveCardWithToken:didProducedToken.identifer
+                  completion:^(NSError *error) {
+      if (error != nil) {
+          NSLog(@"Failed save card. error = %@", error);
+          completionHandler(error);
+      } else {
+          NSLog(@"Success save card. token = %@", [self displayToken:didProducedToken]);
+          completionHandler(nil);
+      }
+    }];
 }
 
 @end
