@@ -11,7 +11,7 @@
         <!--Example-->
         <scene sceneID="LBK-77-tsS">
             <objects>
-                <tableViewController id="bs5-it-G0C" customClass="TopViewController" customModule="example_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="bs5-it-G0C" customClass="ExampleHostViewController" customModule="example_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="IgJ-bL-PYI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -27,6 +27,11 @@ struct SampleService {
     static let shared = SampleService()
 
     func saveCard(withToken token: String, completion: @escaping (Error?) -> Void) {
+        if BACKEND_URL.isEmpty {
+            completion(nil)
+            return
+        }
+
         do {
             let dict = ["card": token]
             let data = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
