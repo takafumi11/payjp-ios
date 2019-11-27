@@ -84,6 +84,8 @@
 		EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */; };
 		EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */; };
 		EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8422E019A000D9A6C9 /* CardBrandTransformerTests.swift */; };
+		EDA77565238E3ECD00162340 /* PublicKeyValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA77564238E3ECD00162340 /* PublicKeyValidator.swift */; };
+		EDA77569238E4CB200162340 /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA77568238E4CB200162340 /* PublicKeyValidatorTests.swift */; };
 		EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */; };
 		EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */; };
 		EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CB234EDF0300CB0212 /* CardFormView.swift */; };
@@ -209,6 +211,8 @@
 		EDA3EE9322E1B88F00D9A6C9 /* CvcValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcValidatorTests.swift; sourceTree = "<group>"; };
 		EDA3EE9522E1C26100D9A6C9 /* CvcFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE9722E1C6FE00D9A6C9 /* CvcFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CvcFormatterTests.swift; sourceTree = "<group>"; };
+		EDA77564238E3ECD00162340 /* PublicKeyValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidator.swift; sourceTree = "<group>"; };
+		EDA77568238E4CB200162340 /* PublicKeyValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidatorTests.swift; sourceTree = "<group>"; };
 		EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverter.swift; sourceTree = "<group>"; };
 		EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PAYJP.swift"; sourceTree = "<group>"; };
 		EDB319CB234EDF0300CB0212 /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
@@ -435,6 +439,7 @@
 				EDA3EE8D22E1AF9C00D9A6C9 /* CvcValidator.swift */,
 				BE1DAA7922E043AE00D15A84 /* ExpirationExtractor.swift */,
 				BE0417CE22E1A51100B944CB /* ExpirationValidator.swift */,
+				EDA77564238E3ECD00162340 /* PublicKeyValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				EDA3EE9322E1B88F00D9A6C9 /* CvcValidatorTests.swift */,
 				BE1DAA7B22E0536800D15A84 /* ExpirationExtractorTests.swift */,
 				BE0417D022E1A52500B944CB /* ExpirationValidatorTests.swift */,
+				EDA77568238E4CB200162340 /* PublicKeyValidatorTests.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -684,6 +690,7 @@
 				EDCF722B22F935C300272C10 /* UserAgent.swift in Sources */,
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,
 				BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */,
+				EDA77565238E3ECD00162340 /* PublicKeyValidator.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,
@@ -743,6 +750,7 @@
 				BE21785F22E99F260098128D /* GetTokenRequestTests.swift in Sources */,
 				EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */,
 				ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */,
+				EDA77569238E4CB200162340 /* PublicKeyValidatorTests.swift in Sources */,
 				EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */,
 				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */,

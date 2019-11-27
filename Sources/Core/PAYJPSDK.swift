@@ -30,9 +30,12 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
                 authToken = ""
                 return
             }
-            let data = "\(publicKey):".data(using: .utf8)!
-            let base64String = data.base64EncodedString()
-            authToken = "Basic \(base64String)"
+            let validated = PublicKeyValidator.shared.validate(publicKey: publicKey)
+            if validated {
+                let data = "\(publicKey):".data(using: .utf8)!
+                let base64String = data.base64EncodedString()
+                authToken = "Basic \(base64String)"
+            }
         }
     }
     public static var locale: Locale?
