@@ -9,14 +9,14 @@
 import Foundation
 
 protocol PublicKeyValidatorType {
-    func validate(publicKey key: String) -> Bool
+    func validate(publicKey key: String)
 }
 
 struct PublicKeyValidator: PublicKeyValidatorType {
 
     static let shared = PublicKeyValidator()
 
-    func validate(publicKey key: String) -> Bool {
+    func validate(publicKey key: String) {
         assert(!key.isEmpty, "❌You need to set publickey for PAY.JP. You can find in https://pay.jp/d/settings .")
         assert(!key.hasPrefix("sk_"), "❌You are using secretkey (`sk_xxxx`) instead of PAY.JP publickey." +
             "You can find **public** key like `pk_xxxxxx` in https://pay.jp/d/settings .")
@@ -25,6 +25,5 @@ struct PublicKeyValidator: PublicKeyValidatorType {
             print(debug: "⚠️PAY.JP now use **TEST** mode key." +
                 "In production, you should use livemode key like `pk_live_xxxx`.")
         }
-        return true
     }
 }
