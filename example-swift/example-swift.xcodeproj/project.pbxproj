@@ -17,7 +17,8 @@
 		ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5085BC232A0FE300C64A7F /* CardFormViewScrollViewController.swift */; };
 		ED5085C1232A1A2B00C64A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5085C3232A1A2B00C64A7F /* Localizable.strings */; };
 		ED630C1723556BF4006C061E /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED630C1623556BF4006C061E /* ColorTheme.swift */; };
-		ED8BDA062383BA3B00680C05 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BDA052383BA3B00680C05 /* TopViewController.swift */; };
+		ED8BDA062383BA3B00680C05 /* ExampleHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8BDA052383BA3B00680C05 /* ExampleHostViewController.swift */; };
+		EDADA266238CBE780057FDF3 /* SampleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADA265238CBE780057FDF3 /* SampleService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,8 @@
 		ED5085C2232A1A2B00C64A7F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED5085C4232A1A3200C64A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED630C1623556BF4006C061E /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
-		ED8BDA052383BA3B00680C05 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		ED8BDA052383BA3B00680C05 /* ExampleHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleHostViewController.swift; sourceTree = "<group>"; };
+		EDADA265238CBE780057FDF3 /* SampleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +80,8 @@
 				32CB11301FDA7E3D007AD8F5 /* LaunchScreen.storyboard */,
 				ED5085C3232A1A2B00C64A7F /* Localizable.strings */,
 				32CB112B1FDA7E3D007AD8F5 /* Main.storyboard */,
-				ED8BDA052383BA3B00680C05 /* TopViewController.swift */,
+				EDADA265238CBE780057FDF3 /* SampleService.swift */,
+				ED8BDA052383BA3B00680C05 /* ExampleHostViewController.swift */,
 				32CB11291FDA7E3D007AD8F5 /* ViewController.swift */,
 			);
 			path = "example-swift";
@@ -204,12 +207,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8BDA062383BA3B00680C05 /* TopViewController.swift in Sources */,
+				ED8BDA062383BA3B00680C05 /* ExampleHostViewController.swift in Sources */,
 				ED5085BD232A0FE300C64A7F /* CardFormViewScrollViewController.swift in Sources */,
 				ED630C1723556BF4006C061E /* ColorTheme.swift in Sources */,
 				32CB112A1FDA7E3D007AD8F5 /* ViewController.swift in Sources */,
 				ED50839323278BB800C64A7F /* CardFormViewExampleViewController.swift in Sources */,
 				32CB11281FDA7E3D007AD8F5 /* AppDelegate.swift in Sources */,
+				EDADA266238CBE780057FDF3 /* SampleService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

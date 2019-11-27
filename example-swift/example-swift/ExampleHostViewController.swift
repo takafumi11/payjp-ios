@@ -1,5 +1,5 @@
 //
-//  TopViewController.swift
+//  ExampleHostViewController.swift
 //  example-swift
 //
 //  Created by Tadashi Wakayanagi on 2019/11/19.
@@ -8,7 +8,7 @@
 import UIKit
 import PAYJP
 
-class TopViewController: UITableViewController {
+class ExampleHostViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 3 {
@@ -24,11 +24,10 @@ class TopViewController: UITableViewController {
     }
 }
 
-extension TopViewController: CardFormViewControllerDelegate {
+extension ExampleHostViewController: CardFormViewControllerDelegate {
 
-    func cardFormViewController(_: CardFormViewController, didCompleteWithResult: CardFormResult) {
-
-        switch didCompleteWithResult {
+    func cardFormViewController(_: CardFormViewController, didCompleteWith result: CardFormResult) {
+        switch result {
         case .cancel:
             print("CardFormResult.cancel")
         case .success:
@@ -40,11 +39,19 @@ extension TopViewController: CardFormViewControllerDelegate {
     }
 
     func cardFormViewController(_: CardFormViewController,
-                                didProducedToken: Token,
+                                didProduced token: Token,
                                 completionHandler: @escaping (Error?) -> Void) {
-        print("token = \(didProducedToken.display)")
+        print("token = \(token.display)")
 
-        // TODO: サーバにトークンを送信
-        completionHandler(nil)
+        // サーバにトークンを送信
+        SampleService.shared.saveCard(withToken: token.identifer) { (error) in
+            if let error = error {
+                print("Failed save card. error = \(error)")
+                completionHandler(error)
+            } else {
+                print("Success save card. token = \(token.display)")
+                completionHandler(nil)
+            }
+        }
     }
 }
