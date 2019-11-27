@@ -26,7 +26,7 @@ class ExampleHostViewController: UITableViewController {
 
 extension ExampleHostViewController: CardFormViewControllerDelegate {
 
-    func cardFormViewController(_: CardFormViewController, didCompleteWithResult result: CardFormResult) {
+    func cardFormViewController(_: CardFormViewController, didCompleteWith result: CardFormResult) {
         switch result {
         case .cancel:
             print("CardFormResult.cancel")
@@ -39,7 +39,7 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
     }
 
     func cardFormViewController(_: CardFormViewController,
-                                didProducedToken token: Token,
+                                didProduced token: Token,
                                 completionHandler: @escaping (Error?) -> Void) {
         print("token = \(token.display)")
 
