@@ -59,7 +59,7 @@ public class CardFormViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.delegate?.cardFormViewController(self, didProducedToken: token) { error in
+                self.delegate?.cardFormViewController(self, didProduced: token) { error in
                     if let error = error {
                         print(debug: "[errorResponse] \(error.localizedDescription)")
                         // エラー
@@ -72,7 +72,7 @@ public class CardFormViewController: UIViewController {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
                             self.activityIndicator.stopAnimating()
-                            self.delegate?.cardFormViewController(self, didCompleteWithResult: .success)
+                            self.delegate?.cardFormViewController(self, didCompleteWith: .success)
                         }
                     }
                 }
