@@ -35,7 +35,7 @@
 #pragma MARK : PAYCardFormViewControllerDelegate
 
 - (void)cardFormViewController:(PAYCardFormViewController *_Nonnull)_
-         didCompleteWith:(enum CardFormResult)result {
+               didCompleteWith:(enum CardFormResult)result {
   __weak typeof(self) wself = self;
 
   switch (result) {
@@ -52,7 +52,7 @@
 }
 
 - (void)cardFormViewController:(PAYCardFormViewController *)_
-              didProduced:(PAYToken *)token
+                   didProduced:(PAYToken *)token
              completionHandler:(void (^)(NSError *_Nullable))completionHandler {
   NSLog(@"token = %@", [self displayToken:token]);
 
