@@ -24,7 +24,7 @@ class PublicKeyValidatorTests: XCTestCase {
             }
             let validator = PublicKeyValidator(assert: assert)
             validator.validate(publicKey: publicKey)
-            // assertの成功をチェックするため、condtionにfalseが含まれてないことをテストする
+            // assertの成功をチェックするため、conditionにfalseが含まれていないことをテストする
             XCTAssertFalse(results.contains(false))
         }
     }
