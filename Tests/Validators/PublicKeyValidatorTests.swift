@@ -48,7 +48,7 @@ class PublicKeyValidatorTests: XCTestCase {
             validator.validate(publicKey: publicKey)
             // assertの失敗をチェックするため、conditionにfalseが含まれていることをテストする
             XCTAssertTrue(results.contains(where: { (condition, message) -> Bool in
-                return condition == false && message == expectedMessage
+                return !condition && message == expectedMessage
             }))
         }
     }
