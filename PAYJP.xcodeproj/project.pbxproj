@@ -74,6 +74,8 @@
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
 		ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE6233A0F02002F1639 /* Style.swift */; };
 		ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE8233A0F35002F1639 /* Color.swift */; };
+		ED9B33E0238FD0860079E7B8 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9B33DF238FD0860079E7B8 /* ErrorView.xib */; };
+		ED9B33E2238FD0AF0079E7B8 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
 		EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */; };
@@ -201,6 +203,8 @@
 		ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJPTests.swift"; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		ED7C3FE8233A0F35002F1639 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		ED9B33DF238FD0860079E7B8 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
 		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
@@ -483,6 +487,8 @@
 				BE0417D222E1CE4300B944CB /* CardFormViewViewModel.swift */,
 				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
+				ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */,
+				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
 			);
@@ -640,6 +646,7 @@
 				EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */,
 				ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */,
 				ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */,
+				ED9B33E0238FD0860079E7B8 /* ErrorView.xib in Resources */,
 				EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */,
 				ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */,
 			);
@@ -691,6 +698,7 @@
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,
 				BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */,
 				EDA77565238E3ECD00162340 /* PublicKeyValidator.swift in Sources */,
+				ED9B33E2238FD0AF0079E7B8 /* ErrorView.swift in Sources */,
 				C65513751DA24E18009D6DA5 /* Card.swift in Sources */,
 				EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */,
 				BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */,

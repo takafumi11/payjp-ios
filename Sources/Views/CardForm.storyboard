@@ -11,7 +11,7 @@
         <!--CardFormViewController-->
         <scene sceneID="Che-2y-xde">
             <objects>
-                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="CardFormViewController" customModule="PAYJP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="PAYCardFormViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bes-nP-2cY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +48,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="wyu-kI-oPD"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="CardFormLabelStyledView" customModule="PAYJP" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
                                                 <rect key="frame" x="0.0" y="58" width="414" height="493"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
@@ -76,13 +76,21 @@
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uGj-64-kZm">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                     </activityIndicatorView>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fp-Ih-ELw" customClass="ErrorView" customModule="PAYJP" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="9tn-bp-Yaa"/>
+                                    <constraint firstItem="rc8-Nd-tg5" firstAttribute="trailing" secondItem="5fp-Ih-ELw" secondAttribute="trailing" id="Rk4-Ts-mhN"/>
                                     <constraint firstItem="uGj-64-kZm" firstAttribute="trailing" secondItem="rc8-Nd-tg5" secondAttribute="trailing" id="YTk-S7-MMS"/>
+                                    <constraint firstItem="rc8-Nd-tg5" firstAttribute="bottom" secondItem="5fp-Ih-ELw" secondAttribute="bottom" id="ccD-en-i9u"/>
                                     <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="rc8-Nd-tg5" secondAttribute="leading" id="dYR-aU-ZiP"/>
                                     <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="eHF-iG-0Zs"/>
                                     <constraint firstItem="uGj-64-kZm" firstAttribute="bottom" secondItem="rc8-Nd-tg5" secondAttribute="bottom" id="hqX-B2-Ih6"/>
+                                    <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="rc8-Nd-tg5" secondAttribute="leading" id="jJh-qV-fGP"/>
+                                    <constraint firstItem="5fp-Ih-ELw" firstAttribute="top" secondItem="Avd-Hn-VAd" secondAttribute="top" id="ldy-QB-5vs"/>
                                     <constraint firstAttribute="trailing" secondItem="PCg-wC-bhZ" secondAttribute="trailing" id="pRT-kY-YBm"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="rxC-qC-6Fz"/>
                                     <constraint firstItem="PCg-wC-bhZ" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="ugf-c8-jut"/>
@@ -109,6 +117,7 @@
                         <outlet property="activityIndicator" destination="uGj-64-kZm" id="y9m-6o-q0h"/>
                         <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
+                        <outlet property="errorView" destination="5fp-Ih-ELw" id="e9i-z0-gq8"/>
                         <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
                     </connections>
                 </viewController>

@@ -15,7 +15,8 @@ public class CardFormViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    @IBOutlet weak var errorView: ErrorView!
+    
     private var formStyle: FormStyle?
     private var tenantId: String?
 
@@ -99,6 +100,7 @@ public class CardFormViewController: UIViewController {
                     self.accptedBrands = brands
                     self.activityIndicator.stopAnimating()
                     self.brandsView.reloadData()
+                    self.errorView.dismiss()
                 }
             case .failure(let error):
                 print(debug: "[errorResponse] \(error.localizedDescription)")
@@ -106,6 +108,7 @@ public class CardFormViewController: UIViewController {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
+                    self.errorView.show(message: error.localizedDescription)
                 }
             }
         }
