@@ -16,20 +16,20 @@ struct PublicKeyValidator: PublicKeyValidatorType {
 
     static let shared = PublicKeyValidator()
 
-    private let PAYAssert: (Bool, String, StaticString, UInt) -> Void
+    private let localAssert: (Bool, String, StaticString, UInt) -> Void
 
     /// テストのためにassert関数を置き換えられるようにしている
     /// デフォルトで Swift.assert を使用
     /// see PublicKeyValidatorTests
     init(assert: @escaping (Bool, String, StaticString, UInt) -> Void = {Swift.assert($0, $1, file: $2, line: $3)}) {
-        PAYAssert = assert
+        localAssert = assert
     }
 
     func validate(publicKey key: String) {
         let trimmed = key.trimmingCharacters(in: .whitespaces)
-        PAYAssert(!trimmed.isEmpty,
-                  "❌You need to set publickey for PAY.JP. You can find in https://pay.jp/d/settings .", #file, #line)
-        PAYAssert(!key.hasPrefix("sk_"), "❌You are using secretkey (`sk_xxxx`) instead of PAY.JP publickey." +
+        localAssert(!trimmed.isEmpty,
+                    "❌You need to set publickey for PAY.JP. You can find in https://pay.jp/d/settings .", #file, #line)
+        localAssert(!key.hasPrefix("sk_"), "❌You are using secretkey (`sk_xxxx`) instead of PAY.JP publickey." +
             "You can find **public** key like `pk_xxxxxx` in https://pay.jp/d/settings .", #file, #line)
 
         if key.hasPrefix("pk_test") {

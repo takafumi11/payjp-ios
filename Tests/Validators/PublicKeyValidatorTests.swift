@@ -12,18 +12,20 @@ import XCTest
 class PublicKeyValidatorTests: XCTestCase {
 
     func testPublicKeyValidationSuccess() {
-        // assertの成功をチェックするため、condtionがtrueであるかテストする
-        let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
-            XCTAssertTrue(condition)
-        }
-
-        let validator = PublicKeyValidator(assert: assert)
         let cases: [String] = [
             ("pk_test_123456789"),
             ("pk_live_123456789")
         ]
-        for (publicKey) in cases {
+
+        for publicKey in cases {
+            var results: [Bool] = []
+            let assert: (Bool, String, StaticString, UInt) -> Void = { condition, _, _, _ in
+                results.append(condition)
+            }
+            let validator = PublicKeyValidator(assert: assert)
             validator.validate(publicKey: publicKey)
+            // assertの成功をチェックするため、condtionにfalseが含まれてないことをテストする
+            XCTAssertFalse(results.contains(false))
         }
     }
 
@@ -38,14 +40,16 @@ class PublicKeyValidatorTests: XCTestCase {
         ]
 
         for (publicKey, expectedMessage) in cases {
-            // assertの失敗をチェックするため、conditionがfalseの場合にmessageの内容が正しいかテストする
+            var results: [(Bool, String)] = []
             let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
-                if !condition {
-                    XCTAssertEqual(message, expectedMessage)
-                }
+                results.append((condition, message))
             }
             let validator = PublicKeyValidator(assert: assert)
             validator.validate(publicKey: publicKey)
+            // assertの失敗をチェックするため、conditionにfalseが含まれていることをテストする
+            XCTAssertTrue(results.contains(where: { (condition, message) -> Bool in
+                return condition == false && message == expectedMessage
+            }))
         }
     }
 }
