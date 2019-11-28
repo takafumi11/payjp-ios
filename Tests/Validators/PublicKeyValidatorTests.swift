@@ -11,27 +11,39 @@ import XCTest
 
 class PublicKeyValidatorTests: XCTestCase {
 
-    let validator = PublicKeyValidator()
+    func testPublicKeyValidationSuccess() {
+        let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
+            XCTAssertTrue(condition)
+        }
 
-    func testValidate(cases: [(String, String?)]) {
-        for (publicKey, message) in cases {
-            expectAssertFail(expectedMessage: message) {
-                validator.validate(publicKey: publicKey)
-            }
+        let validator = PublicKeyValidator(assert: assert)
+        let cases: [String] = [
+            ("pk_test_123456789"),
+            ("pk_live_123456789")
+        ]
+        for (publicKey) in cases {
+            validator.validate(publicKey: publicKey)
         }
     }
 
-    func testPublicKeyValidation() {
-        let cases: [(String, String?)] = [
+    func testPublicKeyValidationFailed() {
+        let cases: [(String, String)] = [
             ("", "❌You need to set publickey for PAY.JP. You can find in https://pay.jp/d/settings ."),
             (" ", "❌You need to set publickey for PAY.JP. You can find in https://pay.jp/d/settings ."),
             ("sk_test_123456789", "❌You are using secretkey (`sk_xxxx`) instead of PAY.JP publickey." +
                 "You can find **public** key like `pk_xxxxxx` in https://pay.jp/d/settings ."),
             ("sk_live_123456789", "❌You are using secretkey (`sk_xxxx`) instead of PAY.JP publickey." +
-                "You can find **public** key like `pk_xxxxxx` in https://pay.jp/d/settings ."),
-            ("pk_test_123456789", nil),
-            ("pk_live_123456789", nil)
+                "You can find **public** key like `pk_xxxxxx` in https://pay.jp/d/settings .")
         ]
-        testValidate(cases: cases)
+
+        for (publicKey, expectedMessage) in cases {
+            let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
+                if !condition {
+                    XCTAssertEqual(message, expectedMessage)
+                }
+            }
+            let validator = PublicKeyValidator(assert: assert)
+            validator.validate(publicKey: publicKey)
+        }
     }
 }

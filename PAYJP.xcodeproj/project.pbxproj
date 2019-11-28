@@ -74,8 +74,6 @@
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
 		ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE6233A0F02002F1639 /* Style.swift */; };
 		ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE8233A0F35002F1639 /* Color.swift */; };
-		ED9B33C9238E729D0079E7B8 /* XCTest+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33C7238E72700079E7B8 /* XCTest+Assertions.swift */; };
-		ED9B33D5238E80F80079E7B8 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33C5238E720B0079E7B8 /* Assertions.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
 		EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */; };
@@ -203,8 +201,6 @@
 		ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+PAYJPTests.swift"; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		ED7C3FE8233A0F35002F1639 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		ED9B33C5238E720B0079E7B8 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
-		ED9B33C7238E72700079E7B8 /* XCTest+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Assertions.swift"; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
 		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
@@ -283,7 +279,6 @@
 				BE734B8322DD7873008679EC /* Validators */,
 				BE734B8B22DEE2DA008679EC /* Views */,
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
-				ED9B33C5238E720B0079E7B8 /* Assertions.swift */,
 				615AFF601C8C74A1003FB86F /* Info.plist */,
 				ED222C1F22FD1DF90006FB87 /* Localizable.strings */,
 				ED05B172238CF18200DCA1C9 /* Log.swift */,
@@ -311,7 +306,6 @@
 				ED508382231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift */,
 				BE25B80322F15AAC00799201 /* StubPaymentToken.swift */,
 				C68681F91E1E2369001D7F75 /* TestFixture.swift */,
-				ED9B33C7238E72700079E7B8 /* XCTest+Assertions.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -690,7 +684,6 @@
 				EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */,
 				EDCF723222F948F500272C10 /* CardNumber.swift in Sources */,
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
-				ED9B33D5238E80F80079E7B8 /* Assertions.swift in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
@@ -768,7 +761,6 @@
 				BE21781422E806730098128D /* PAYJPSDKTests.m in Sources */,
 				EDA3EE9822E1C6FE00D9A6C9 /* CvcFormatterTests.swift in Sources */,
 				EDCF723022F9369000272C10 /* TokenTests.swift in Sources */,
-				ED9B33C9238E729D0079E7B8 /* XCTest+Assertions.swift in Sources */,
 				ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */,
 				BE6C231020B566AE00C4FE1E /* APIErrorNSErrorTests.swift in Sources */,
 				ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */,
