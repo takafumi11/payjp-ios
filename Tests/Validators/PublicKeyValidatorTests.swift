@@ -12,6 +12,7 @@ import XCTest
 class PublicKeyValidatorTests: XCTestCase {
 
     func testPublicKeyValidationSuccess() {
+        // assertの成功をチェックするため、condtionがtrueであるかテストする
         let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
             XCTAssertTrue(condition)
         }
@@ -37,6 +38,7 @@ class PublicKeyValidatorTests: XCTestCase {
         ]
 
         for (publicKey, expectedMessage) in cases {
+            // assertの失敗をチェックするため、conditionがfalseの場合にmessageの内容が正しいかテストする
             let assert: (Bool, String, StaticString, UInt) -> Void = { condition, message, _, _ in
                 if !condition {
                     XCTAssertEqual(message, expectedMessage)
