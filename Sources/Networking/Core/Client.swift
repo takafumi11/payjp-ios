@@ -12,7 +12,7 @@ protocol ClientType {
     func request<Request: PAYJP.Request>(
         with request: Request,
         completion: ((Result<Request.Response, APIError>) -> Void)?
-        ) -> URLSessionDataTask?
+    ) -> URLSessionDataTask?
 }
 
 class Client: ClientType {
@@ -28,7 +28,7 @@ class Client: ClientType {
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
         DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
-        ) {
+    ) {
         self.session = session
         self.callbackQueue = callbackQueue
         self.jsonDecoder = jsonDecoder
@@ -38,7 +38,7 @@ class Client: ClientType {
     func request<Request: PAYJP.Request>(
         with request: Request,
         completion: ((Result<Request.Response, APIError>) -> Void)?
-        ) -> URLSessionDataTask? {
+    ) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
             let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
@@ -46,6 +46,7 @@ class Client: ClientType {
 
                 if error != nil && data == nil && response == nil {
                     completion?(Result.failure(.systemError(error!)))
+                    return
                 }
 
                 guard let response = response as? HTTPURLResponse else {
@@ -67,17 +68,13 @@ class Client: ClientType {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else {
-                        completion?(Result.failure(.invalidResponse(response)))
+                        do {
+                            let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
+                            completion?(Result.failure(.serviceError(error)))
+                        } catch {
+                            completion?(Result.failure(.invalidJSON(data, error)))
+                        }
                     }
-                    return
-                }
-
-                do {
-                    let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
-                    completion?(Result.failure(.serviceError(error)))
-                    return
-                } catch {
-                    completion?(Result.failure(.invalidJSON(data, error)))
                     return
                 }
             }

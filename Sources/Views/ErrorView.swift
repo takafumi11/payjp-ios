@@ -8,23 +8,22 @@
 
 import UIKit
 
-protocol ErrorViewDelegate : class {
+protocol ErrorViewDelegate: class {
     func reload()
 }
 
-//@IBDesignable
 class ErrorView: UIView {
-    
+
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
-    
+
     @IBAction func reloadTapped(_ sender: Any) {
         delegate?.reload()
     }
-    
+
     private var contentView: UIView!
     weak var delegate: ErrorViewDelegate?
-    
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
@@ -47,17 +46,17 @@ class ErrorView: UIView {
             addSubview(view)
         }
     }
-    
+
     override public var intrinsicContentSize: CGSize {
         return contentView.intrinsicContentSize
     }
-    
-    func show(message: String, hiddenButton: Bool = true) {
+
+    func show(message: String, reloadButtonHidden: Bool) {
         self.isHidden = false
         errorMessageLabel.text = message
-        reloadButton.isHidden = hiddenButton
+        reloadButton.isHidden = reloadButtonHidden
     }
-    
+
     func dismiss() {
         self.isHidden = true
     }

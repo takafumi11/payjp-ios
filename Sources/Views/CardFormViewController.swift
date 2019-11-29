@@ -16,11 +16,12 @@ public class CardFormViewController: UIViewController {
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
-    
+
     private var formStyle: FormStyle?
     private var tenantId: String?
-
     private var accptedBrands: [CardBrand]?
+
+    private let errorTranslator = ErrorTranslator.shared
 
     public weak var delegate: CardFormViewControllerDelegate?
 
@@ -43,6 +44,7 @@ public class CardFormViewController: UIViewController {
     public override func viewDidLoad() {
         cardFormView.delegate = self
         brandsView.dataSource = self
+        errorView.delegate = self
 
         let bundle = Bundle(for: BrandImageCell.self)
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
@@ -78,12 +80,10 @@ public class CardFormViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                print(debug: "[errorResponse] \(error.localizedDescription)")
-                // エラー
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
-                    self.showError(message: error.localizedDescription)
+                    self.showError(message: self.errorTranslator.translate(error: error))
                 }
             }
         }
@@ -91,6 +91,7 @@ public class CardFormViewController: UIViewController {
 
     private func fetchAccpetedBrands() {
         activityIndicator.startAnimating()
+        errorView.dismiss()
         cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -103,12 +104,19 @@ public class CardFormViewController: UIViewController {
                     self.errorView.dismiss()
                 }
             case .failure(let error):
-                print(debug: "[errorResponse] \(error.localizedDescription)")
-                // TODO: エラー
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.activityIndicator.stopAnimating()
-                    self.errorView.show(message: error.localizedDescription)
+                    let message = self.errorTranslator.translate(error: error)
+                    let buttonHidden: Bool = {
+                        switch error {
+                        case .systemError:
+                            return false
+                        default:
+                            return true
+                        }
+                    }()
+                    self.errorView.show(message: message, reloadButtonHidden: buttonHidden)
                 }
             }
         }
@@ -138,5 +146,11 @@ extension CardFormViewController: UICollectionViewDataSource {
         }
 
         return cell
+    }
+}
+
+extension CardFormViewController: ErrorViewDelegate {
+    func reload() {
+        fetchAccpetedBrands()
     }
 }

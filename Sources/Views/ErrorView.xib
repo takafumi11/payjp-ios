@@ -19,28 +19,34 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="494"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題が発生しました" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUJ-L4-Ahw">
-                    <rect key="frame" x="16" y="237" width="382" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE9-Id-iy7">
-                    <rect key="frame" x="168.5" y="293.5" width="77" height="30"/>
-                    <state key="normal" title="再読み込み"/>
-                    <connections>
-                        <action selector="reloadTapped:" destination="-1" eventType="touchUpInside" id="n2a-xE-Rs4"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9G1-wh-5ux">
+                    <rect key="frame" x="0.0" y="210" width="414" height="74.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題が発生しました" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUJ-L4-Ahw">
+                            <rect key="frame" x="16" y="0.0" width="382" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE9-Id-iy7">
+                            <rect key="frame" x="168.5" y="44.5" width="77" height="30"/>
+                            <state key="normal" title="再読み込み"/>
+                            <connections>
+                                <action selector="reloadTapped:" destination="-1" eventType="touchUpInside" id="n2a-xE-Rs4"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="IUJ-L4-Ahw" secondAttribute="trailing" constant="16" id="Z56-IE-cTg"/>
+                        <constraint firstItem="IUJ-L4-Ahw" firstAttribute="leading" secondItem="9G1-wh-5ux" secondAttribute="leading" constant="16" id="quf-Eb-8ot"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="mE9-Id-iy7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9D0-i9-EAz"/>
-                <constraint firstItem="IUJ-L4-Ahw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MhS-Ad-DUv"/>
-                <constraint firstItem="IUJ-L4-Ahw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="YXB-sL-LHe"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="IUJ-L4-Ahw" secondAttribute="trailing" constant="16" id="hTw-Ei-fqj"/>
-                <constraint firstItem="mE9-Id-iy7" firstAttribute="top" secondItem="IUJ-L4-Ahw" secondAttribute="bottom" constant="36" id="s09-q2-9aZ"/>
-                <constraint firstItem="IUJ-L4-Ahw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sMQ-6N-9kw"/>
+                <constraint firstItem="9G1-wh-5ux" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aIo-ct-jqw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9G1-wh-5ux" secondAttribute="trailing" id="nGp-ot-GXz"/>
+                <constraint firstItem="9G1-wh-5ux" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="xFe-me-5U9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
