@@ -9,7 +9,7 @@
 import Foundation
 
 /// Local error types.
-public enum LocalError: NSErrorSerializable {
+public enum LocalError: LocalizedError, NSErrorSerializable {
     /// Invalid form input.
     case invalidFormInput
 

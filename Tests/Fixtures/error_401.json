@@ -1,0 +1,9 @@
+{
+    "error": {
+        "status": 401,
+        "message": "401 error",
+        "param": "param",
+        "code": "code",
+        "type": "authorized_error"
+    }
+}
