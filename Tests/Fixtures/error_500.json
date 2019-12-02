@@ -1,9 +1,0 @@
-{
-    "error": {
-        "status": 500,
-        "message": "500 error",
-        "param": "param",
-        "code": "code",
-        "type": "internal_error"
-    }
-}

@@ -1,9 +1,0 @@
-{
-    "error": {
-        "status": 402,
-        "message": "402 error",
-        "param": "param",
-        "code": "code",
-        "type": "card_error"
-    }
-}
