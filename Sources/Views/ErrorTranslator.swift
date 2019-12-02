@@ -23,13 +23,13 @@ struct ErrorTranslator: ErrorTranslatorType {
                 switch response.status {
                 case 402:
                     return response.message ?? "payjp_card_form_screen_error_unknown".localized
-                case 500...600:
+                case 500..<600:
                     return "payjp_card_form_screen_error_server".localized
                 default:
                     return "payjp_card_form_screen_error_application".localized
                 }
-            case .systemError:
-                return "payjp_card_form_screen_error_network".localized
+            case .systemError(let error):
+                return error.localizedDescription
             default:
                 return "payjp_card_form_screen_error_unknown".localized
             }

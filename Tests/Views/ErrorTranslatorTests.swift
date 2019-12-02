@@ -9,7 +9,31 @@
 import XCTest
 @testable import PAYJP
 
-// swiftlint:disable force_try
+class MockPAYErrorResponse: NSObject, PAYErrorResponseType, LocalizedError {
+
+    public let status: Int
+    public let message: String?
+    public let param: String?
+    public let code: String?
+    public let type: String?
+
+    init(status: Int, message: String?, param: String? = nil, code: String? = nil, type: String? = nil) {
+        self.status = status
+        self.message = message
+        self.param = param
+        self.code = code
+        self.type = type
+    }
+
+    public override var description: String {
+        // swiftlint:disable line_length
+        return "status: \(status) message: \(message ?? "") param: \(param ?? "") code: \(code ?? "") type: \(type ?? "")"
+        // swiftlint:enable line_length
+    }
+
+    public var errorDescription: String? { return description }
+}
+
 class ErrorTranslatorTests: XCTestCase {
 
     let translator = ErrorTranslator()
@@ -18,8 +42,7 @@ class ErrorTranslatorTests: XCTestCase {
     let decoder = JSONDecoder.shared
 
     func testTranslate_error402() {
-        let json = TestFixture.JSON(by: "error_402.json")
-        let payError = try! decoder.decode(PAYErrorResult.self, from: json).error
+        let payError = MockPAYErrorResponse(status: 402, message: "402 error")
         let apiError = APIError.serviceError(payError)
 
         let result = translator.translate(error: apiError)
@@ -27,8 +50,7 @@ class ErrorTranslatorTests: XCTestCase {
     }
 
     func testTranslate_error401() {
-        let json = TestFixture.JSON(by: "error_401.json")
-        let payError = try! decoder.decode(PAYErrorResult.self, from: json).error
+        let payError = MockPAYErrorResponse(status: 401, message: "401 error")
         let apiError = APIError.serviceError(payError)
 
         let result = translator.translate(error: apiError)
@@ -36,8 +58,7 @@ class ErrorTranslatorTests: XCTestCase {
     }
 
     func testTranslate_error500() {
-        let json = TestFixture.JSON(by: "error_500.json")
-        let payError = try! decoder.decode(PAYErrorResult.self, from: json).error
+        let payError = MockPAYErrorResponse(status: 500, message: "500 error")
         let apiError = APIError.serviceError(payError)
 
         let result = translator.translate(error: apiError)
@@ -45,11 +66,13 @@ class ErrorTranslatorTests: XCTestCase {
     }
 
     func testTranslate_systemError() {
-        let error = NSError(domain: "domain", code: -1, userInfo: nil)
+        var userInfo = [String: Any]()
+        userInfo[NSLocalizedDescriptionKey] = "Network is offline."
+        let error = NSError(domain: "domain", code: -1, userInfo: userInfo)
         let apiError = APIError.systemError(error)
 
         let result = translator.translate(error: apiError)
-        XCTAssertEqual(result, "payjp_card_form_screen_error_network".localized)
+        XCTAssertEqual(result, "Network is offline.")
     }
 
     func testTranslate_unknownError() {
@@ -66,4 +89,3 @@ class ErrorTranslatorTests: XCTestCase {
         XCTAssertEqual(result, "Form input data is invalid.")
     }
 }
-// swiftlint:enable force_try
