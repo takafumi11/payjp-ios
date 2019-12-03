@@ -19,17 +19,20 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="603"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="619"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ua3-wA-bvi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i3B-Nd-fRB">
-                                                            <size key="itemSize" width="30" height="20"/>
+                                                        <rect key="frame" x="16" y="16" width="382" height="50"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="FfY-8U-GwT"/>
+                                                        </constraints>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CXg-NV-J7Y">
+                                                            <size key="itemSize" width="50" height="50"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -37,25 +40,24 @@
                                                         <cells/>
                                                     </collectionView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="Ua3-wA-bvi" firstAttribute="centerX" secondItem="cmB-pl-3uh" secondAttribute="centerX" id="4qL-xr-YjI"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ua3-wA-bvi" secondAttribute="trailing" id="CzJ-q4-ia2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ua3-wA-bvi" secondAttribute="trailing" constant="16" id="CzJ-q4-ia2"/>
                                                     <constraint firstItem="Ua3-wA-bvi" firstAttribute="centerY" secondItem="cmB-pl-3uh" secondAttribute="centerY" id="G5k-G9-cF8"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Ua3-wA-bvi" secondAttribute="bottom" id="eAa-tc-507"/>
-                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="leading" secondItem="cmB-pl-3uh" secondAttribute="leading" id="pKb-FI-vpJ"/>
-                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="top" secondItem="cmB-pl-3uh" secondAttribute="top" id="q1p-P8-aI2"/>
-                                                    <constraint firstAttribute="height" constant="50" id="wyu-kI-oPD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ua3-wA-bvi" secondAttribute="bottom" constant="16" id="eAa-tc-507"/>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="leading" secondItem="cmB-pl-3uh" secondAttribute="leading" constant="16" id="pKb-FI-vpJ"/>
+                                                    <constraint firstItem="Ua3-wA-bvi" firstAttribute="top" secondItem="cmB-pl-3uh" secondAttribute="top" constant="16" id="q1p-P8-aI2"/>
                                                 </constraints>
+                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                <rect key="frame" x="0.0" y="58" width="414" height="493"/>
+                                                <rect key="frame" x="0.0" y="82" width="414" height="493"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7">
-                                                <rect key="frame" x="107" y="559" width="200" height="44"/>
+                                                <rect key="frame" x="107" y="575" width="200" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
                                                     <constraint firstAttribute="width" constant="200" id="XeQ-ho-Qw8"/>

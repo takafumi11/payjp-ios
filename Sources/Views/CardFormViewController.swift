@@ -43,6 +43,7 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         cardFormView.delegate = self
+        brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
 
@@ -152,5 +153,26 @@ extension CardFormViewController: UICollectionViewDataSource {
 extension CardFormViewController: ErrorViewDelegate {
     func reload() {
         fetchAccpetedBrands()
+    }
+}
+
+extension CardFormViewController: UICollectionViewDelegateFlowLayout {
+
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
+        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+            let cellWidth = Int(flowLayout.itemSize.width)
+            let cellSpacing = Int(flowLayout.minimumInteritemSpacing)
+            let cellCount = accptedBrands?.count ?? 0
+
+            let totalCellWidth = cellWidth * cellCount
+            let totalSpacingWidth = cellSpacing * (cellCount - 1)
+
+            let inset = (collectionView.bounds.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+
+            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
