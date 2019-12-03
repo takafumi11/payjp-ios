@@ -52,14 +52,14 @@ public class CardFormViewController: UIViewController {
         accessorySubmitButton.cornerRadius = Style.Radius.none
         view.addSubview(accessorySubmitButton)
         cardFormView.setupInputAccessoryView(view: view)
-        
+
         cardFormView.delegate = self
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
-        
+
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
-        
+
         let bundle = Bundle(for: BrandImageCell.self)
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
 
@@ -74,12 +74,12 @@ public class CardFormViewController: UIViewController {
 
         fetchAccpetedBrands()
     }
-    
+
     @objc
     private func submitTapped(sender: UIButton) {
         createToken()
     }
-    
+
     private func createToken() {
         activityIndicator.startAnimating()
         cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in

@@ -223,7 +223,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
-    
+
     public func setupInputAccessoryView(view: UIView) {
         cardNumberTextField.inputAccessoryView = view
         expirationTextField.inputAccessoryView = view
