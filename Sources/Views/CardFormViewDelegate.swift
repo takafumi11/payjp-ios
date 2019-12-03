@@ -68,7 +68,3 @@ public protocol CardFormAction {
     /// - Parameter view: input accessory view
     func setupInputAccessoryView(view: UIView)
 }
-
-extension CardFormAction {
-    public func setupInputAccessoryView(view: UIView) { }
-}

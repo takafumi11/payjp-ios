@@ -44,8 +44,14 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         // キーボード上部にカード登録ボタンを表示
-        let view = UIView(frame: CGRect.init(x: 0, y: 0, width: (UIScreen.main.bounds.size.width), height: 44))
-        accessorySubmitButton = ActionButton(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+        let view = UIView(frame: CGRect.init(x: 0,
+                                             y: 0,
+                                             width: (UIScreen.main.bounds.size.width),
+                                             height: 44))
+        accessorySubmitButton = ActionButton(frame: CGRect.init(x: 0,
+                                                                y: 0,
+                                                                width: UIScreen.main.bounds.size.width,
+                                                                height: 44))
         accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
         accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
         accessorySubmitButton.isEnabled = false
