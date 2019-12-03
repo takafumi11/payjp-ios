@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class ActionButton: UIButton {
     
     @IBInspectable var normalBackgroundColor: UIColor = Style.Color.blue {
@@ -23,6 +22,11 @@ class ActionButton: UIButton {
             if !isEnabled {
                 self.backgroundColor = disableBackgroundColor
             }
+        }
+    }
+    @IBInspectable var cornerRadius: CGFloat = Style.Radius.large {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
         }
     }
     
@@ -51,7 +55,7 @@ class ActionButton: UIButton {
     // MARK: - Helper Methods
     
     private func initialize() {
-        self.layer.cornerRadius = Style.Radius.large
+        self.layer.cornerRadius = self.cornerRadius
         self.setTitleColor(.white, for: .normal)
         self.setTitleColor(.white, for: .disabled)
         

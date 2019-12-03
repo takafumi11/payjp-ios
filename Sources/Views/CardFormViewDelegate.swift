@@ -63,4 +63,12 @@ public protocol CardFormAction {
     ///
     /// - Parameter style: card form style
     func apply(style: FormStyle)
+    
+    /// Setup input accessory view of text field
+    /// - Parameter view: input accessory view
+    func setupInputAccessoryView(view: UIView)
+}
+
+extension CardFormAction {
+    public func setupInputAccessoryView(view: UIView) { }
 }

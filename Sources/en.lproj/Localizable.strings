@@ -37,3 +37,5 @@
 "payjp_card_form_screen_error_application" = "Application error occurred.";
 "payjp_card_form_screen_error_network" = "Network is unavailable.\nPlease check your internet connectivity.";
 "payjp_card_form_screen_error_unknown" = "Unknown error occurred.";
+
+"payjp_card_form_screen_submit_button" = "submit";

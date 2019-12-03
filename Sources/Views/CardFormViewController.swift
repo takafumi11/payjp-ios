@@ -20,6 +20,7 @@ public class CardFormViewController: UIViewController {
     private var formStyle: FormStyle?
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
+    private var accessorySubmitButton: ActionButton!
 
     private let errorTranslator = ErrorTranslator.shared
 
@@ -42,21 +43,43 @@ public class CardFormViewController: UIViewController {
     }
 
     public override func viewDidLoad() {
+        // キーボード上部にカード登録ボタンを表示
+        let view = UIView(frame: CGRect.init(x: 0, y: 0, width: (UIScreen.main.bounds.size.width), height: 44))
+        accessorySubmitButton = ActionButton(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
+        accessorySubmitButton.isEnabled = false
+        accessorySubmitButton.cornerRadius = Style.Radius.none
+        view.addSubview(accessorySubmitButton)
+        cardFormView.setupInputAccessoryView(view: view)
+        
         cardFormView.delegate = self
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
-
+        
+        saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        
         let bundle = Bundle(for: BrandImageCell.self)
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
 
+        // style
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
+            if let submitButtonColor = formStyle.submitButtonColor {
+                saveButton.normalBackgroundColor = submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = submitButtonColor
+            }
         }
 
         fetchAccpetedBrands()
     }
-
+    
+    @objc
+    private func submitTapped(sender: UIButton) {
+        createToken()
+    }
+    
     private func createToken() {
         activityIndicator.startAnimating()
         cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
@@ -127,6 +150,7 @@ public class CardFormViewController: UIViewController {
 extension CardFormViewController: CardFormViewDelegate {
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         saveButton.isEnabled = isValid
+        accessorySubmitButton.isEnabled = isValid
     }
 }
 

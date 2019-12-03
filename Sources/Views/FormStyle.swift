@@ -20,14 +20,18 @@ public class FormStyle: NSObject {
     public let tintColor: UIColor
     /// Background color of UITextField.
     public let inputFieldBackgroundColor: UIColor?
+    /// Background color of UIButton.
+    public let submitButtonColor: UIColor?
 
     public init(labelTextColor: UIColor? = nil,
                 inputTextColor: UIColor,
                 tintColor: UIColor,
-                inputFieldBackgroundColor: UIColor? = nil) {
+                inputFieldBackgroundColor: UIColor? = nil,
+                submitButtonColor: UIColor? = nil) {
         self.labelTextColor = labelTextColor
         self.inputTextColor = inputTextColor
         self.tintColor = tintColor
         self.inputFieldBackgroundColor = inputFieldBackgroundColor
+        self.submitButtonColor = submitButtonColor
     }
 }
