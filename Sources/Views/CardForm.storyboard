@@ -19,7 +19,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="619"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
@@ -56,12 +56,12 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7">
-                                                <rect key="frame" x="107" y="575" width="200" height="44"/>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
+                                                <rect key="frame" x="40" y="575" width="334" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
-                                                    <constraint firstAttribute="width" constant="200" id="XeQ-ho-Qw8"/>
                                                 </constraints>
+                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                 <state key="normal" title="カードを登録"/>
                                                 <connections>
                                                     <action selector="registerCardTapped:" destination="zoS-GO-cdH" eventType="touchUpInside" id="uTc-Vm-bOj"/>
@@ -69,8 +69,12 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="yza-qd-fV7" secondAttribute="bottom" id="CGq-kI-BVv"/>
                                             <constraint firstAttribute="trailing" secondItem="5iu-cW-k9Z" secondAttribute="trailing" id="QiD-Fm-KNg"/>
+                                            <constraint firstAttribute="trailing" secondItem="yza-qd-fV7" secondAttribute="trailing" constant="40" id="S6n-9t-1pL"/>
                                             <constraint firstItem="cmB-pl-3uh" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="atn-33-slF"/>
+                                            <constraint firstItem="yza-qd-fV7" firstAttribute="top" secondItem="5iu-cW-k9Z" secondAttribute="bottom" id="fyY-hb-3bC"/>
+                                            <constraint firstItem="yza-qd-fV7" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" constant="40" id="k7A-0l-FSD"/>
                                             <constraint firstAttribute="trailing" secondItem="cmB-pl-3uh" secondAttribute="trailing" id="mvx-3A-6Gn"/>
                                             <constraint firstItem="5iu-cW-k9Z" firstAttribute="leading" secondItem="PCg-wC-bhZ" secondAttribute="leading" id="qEi-1q-WVo"/>
                                         </constraints>

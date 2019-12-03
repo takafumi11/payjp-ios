@@ -12,7 +12,7 @@ import Foundation
 public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
