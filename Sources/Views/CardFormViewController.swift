@@ -156,6 +156,10 @@ extension CardFormViewController: CardFormViewDelegate {
         saveButton.isEnabled = isValid
         accessorySubmitButton.isEnabled = isValid
     }
+    
+    public func formInputDoneTapped(in cardFormView: UIView) {
+        createToken()
+    }
 }
 
 extension CardFormViewController: UICollectionViewDataSource {
