@@ -30,6 +30,7 @@ public class CardFormViewController: UIViewController {
     public weak var delegate: CardFormViewControllerDelegate?
 
     /// CardFormViewController factory method.
+    /// 
     /// - Parameters:
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
