@@ -259,6 +259,13 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         cardHolderTextField.resignFirstResponder()
         return true
     }
+
+    public func setupInputAccessoryView(view: UIView) {
+        cardNumberTextField.inputAccessoryView = view
+        expirationTextField.inputAccessoryView = view
+        cvcTextField.inputAccessoryView = view
+        cardHolderTextField.inputAccessoryView = view
+    }
 }
 
 // MARK: CardIOProxyDelegate

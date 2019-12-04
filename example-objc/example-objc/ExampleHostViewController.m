@@ -24,7 +24,8 @@
     PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
                                                                 inputTextColor:color
                                                                      tintColor:color
-                                                     inputFieldBackgroundColor:nil];
+                                                     inputFieldBackgroundColor:nil
+                                                             submitButtonColor:color];
     PAYCardFormViewController *cardFormVc =
         [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
     cardFormVc.delegate = self;

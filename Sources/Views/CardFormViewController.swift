@@ -12,7 +12,7 @@ import Foundation
 public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
@@ -20,6 +20,7 @@ public class CardFormViewController: UIViewController {
     private var formStyle: FormStyle?
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
+    private var accessorySubmitButton: ActionButton!
 
     private let errorTranslator = ErrorTranslator.shared
 
@@ -42,18 +43,45 @@ public class CardFormViewController: UIViewController {
     }
 
     public override func viewDidLoad() {
+        // キーボード上部にカード登録ボタンを表示
+        let frame = CGRect.init(x: 0,
+                                y: 0,
+                                width: (UIScreen.main.bounds.size.width),
+                                height: 44)
+        let view = UIView(frame: frame)
+        accessorySubmitButton = ActionButton(frame: frame)
+        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
+        accessorySubmitButton.isEnabled = false
+        accessorySubmitButton.cornerRadius = Style.Radius.none
+        view.addSubview(accessorySubmitButton)
+        cardFormView.setupInputAccessoryView(view: view)
+
         cardFormView.delegate = self
+        brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
+
+        saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
         let bundle = Bundle(for: BrandImageCell.self)
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
 
+        // style
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
+            if let submitButtonColor = formStyle.submitButtonColor {
+                saveButton.normalBackgroundColor = submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = submitButtonColor
+            }
         }
 
         fetchAccpetedBrands()
+    }
+
+    @objc
+    private func submitTapped(sender: UIButton) {
+        createToken()
     }
 
     private func createToken() {
@@ -126,6 +154,7 @@ public class CardFormViewController: UIViewController {
 extension CardFormViewController: CardFormViewDelegate {
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         saveButton.isEnabled = isValid
+        accessorySubmitButton.isEnabled = isValid
     }
 }
 
@@ -152,5 +181,26 @@ extension CardFormViewController: UICollectionViewDataSource {
 extension CardFormViewController: ErrorViewDelegate {
     func reload() {
         fetchAccpetedBrands()
+    }
+}
+
+extension CardFormViewController: UICollectionViewDelegateFlowLayout {
+
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
+        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+            let cellWidth = Int(flowLayout.itemSize.width)
+            let cellSpacing = Int(flowLayout.minimumInteritemSpacing)
+            let cellCount = accptedBrands?.count ?? 0
+
+            let totalCellWidth = cellWidth * cellCount
+            let totalSpacingWidth = cellSpacing * (cellCount - 1)
+
+            let inset = (collectionView.bounds.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+
+            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        }
+        return .zero
     }
 }

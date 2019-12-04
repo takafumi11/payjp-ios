@@ -37,3 +37,5 @@
 "payjp_card_form_screen_error_application" = "アプリケーションに問題が発生しました。";
 "payjp_card_form_screen_error_network" = "通信に失敗しました。\nネットワークの接続をご確認ください。";
 "payjp_card_form_screen_error_unknown" = "問題が発生しました。";
+
+"payjp_card_form_screen_submit_button" = "カードを登録";
