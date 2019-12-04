@@ -16,7 +16,7 @@ protocol AccountsServiceType {
     func getAcceptedBrands(
         tenantId: String?,
         completion: CardBrandsResult?
-    ) -> URLSessionDataTask?
+        ) -> URLSessionDataTask?
 }
 
 struct AccountsService: AccountsServiceType {
@@ -32,7 +32,7 @@ struct AccountsService: AccountsServiceType {
     func getAcceptedBrands(
         tenantId: String?,
         completion: CardBrandsResult?
-    ) -> URLSessionDataTask? {
+        ) -> URLSessionDataTask? {
         let request = GetAcceptedBrands(tenantId: tenantId)
         return client.request(with: request) { result in
             switch result {

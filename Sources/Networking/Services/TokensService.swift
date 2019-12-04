@@ -20,19 +20,19 @@ protocol TokenServiceType {
         name: String?,
         tenantId: String?,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask?
+        ) -> URLSessionDataTask?
 
     @discardableResult
     func createTokenForApplePay(
         paymentToken: PKPaymentToken,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask?
+        ) -> URLSessionDataTask?
 
     @discardableResult
     func getToken(
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask?
+        ) -> URLSessionDataTask?
 }
 
 struct TokenService: TokenServiceType {
@@ -53,7 +53,7 @@ struct TokenService: TokenServiceType {
         name: String?,
         tenantId: String?,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask? {
+        ) -> URLSessionDataTask? {
         let request = CreateTokenRequest(
             cardNumber: cardNumber,
             cvc: cvc,
@@ -67,7 +67,7 @@ struct TokenService: TokenServiceType {
     func createTokenForApplePay(
         paymentToken: PKPaymentToken,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask? {
+        ) -> URLSessionDataTask? {
         guard let decodedToken = String(data: paymentToken.paymentData, encoding: .utf8)?
             .addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
                 completion(.failure(APIError.invalidApplePayToken(paymentToken)))
@@ -81,7 +81,7 @@ struct TokenService: TokenServiceType {
     func getToken(
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) -> URLSessionDataTask? {
+        ) -> URLSessionDataTask? {
         let request = GetTokenRequest(tokenId: tokenId)
         return client.request(with: request, completion: completion)
     }

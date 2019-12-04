@@ -23,7 +23,7 @@ import PassKit
         accountsService: AccountsServiceType = AccountsService.shared,
         tokensService: TokenServiceType = TokenService.shared,
         nsErrorConverter: NSErrorConverterType = NSErrorConverter.shared
-    ) {
+        ) {
         self.accountsService = accountsService
         self.tokensService = tokensService
         self.nsErrorConverter = nsErrorConverter
@@ -36,7 +36,7 @@ import PassKit
     public func createToken(
         with token: PKPaymentToken,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) {
+        ) {
         tokensService.createTokenForApplePay(paymentToken: token, completion: completion)
     }
 
@@ -56,7 +56,7 @@ import PassKit
         name: String? = nil,
         tenantId: String? = nil,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) {
+        ) {
         tokensService.createToken(cardNumber: cardNumber,
                                   cvc: cvc,
                                   expirationMonth: expirationMonth,
@@ -73,7 +73,7 @@ import PassKit
     public func getToken(
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
-    ) {
+        ) {
         tokensService.getToken(with: tokenId, completion: completion)
     }
 
@@ -84,7 +84,7 @@ import PassKit
     public func getAcceptedBrands(
         with tenantId: String?,
         completion: CardBrandsResult?
-    ) {
+        ) {
         accountsService.getAcceptedBrands(tenantId: tenantId, completion: completion)
     }
 }
@@ -94,7 +94,7 @@ extension APIClient {
     @objc public func createTokenWith(
         _ token: PKPaymentToken,
         completionHandler: @escaping (Token?, NSError?) -> Void
-    ) {
+        ) {
         tokensService.createTokenForApplePay(paymentToken: token) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -114,7 +114,7 @@ extension APIClient {
         name: String?,
         tenantId: String?,
         completionHandler: @escaping (Token?, NSError?) -> Void
-    ) {
+        ) {
         tokensService.createToken(cardNumber: cardNumber,
                                   cvc: cvc,
                                   expirationMonth: expirationMonth,
@@ -147,7 +147,7 @@ extension APIClient {
     @objc public func getAcceptedBrandsWith(
         _ tenantId: String?,
         completionHandler: @escaping ([NSString]?, NSError?) -> Void
-    ) {
+        ) {
         accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
