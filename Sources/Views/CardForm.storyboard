@@ -22,8 +22,8 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313.66666666666669"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -53,8 +53,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="81.999999999999986" width="414" height="231.66666666666663"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="82" width="414" height="231.5"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
