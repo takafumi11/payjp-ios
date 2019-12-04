@@ -18,7 +18,7 @@ public protocol CardFormViewDelegate: class {
     ///   - cardFormView: CardFormView
     ///   - isValid: form is valid
     func formInputValidated(in cardFormView: UIView, isValid: Bool)
-    
+
     /// Callback when keyboard done key tapped. It's avalable only card holder input field.
     ///
     /// - Parameter cardFormView: CardFormView

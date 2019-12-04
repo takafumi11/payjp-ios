@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// CardFormViewController.
+/// It's configured with CardFormLabelStyleView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
@@ -24,8 +26,14 @@ public class CardFormViewController: UIViewController {
 
     private let errorTranslator = ErrorTranslator.shared
 
+    /// CardFormViewController delegate.
     public weak var delegate: CardFormViewControllerDelegate?
 
+    /// CardFormViewController factory method.
+    /// - Parameters:
+    ///   - style: formStyle
+    ///   - tenantId: identifier of tenant
+    /// - Returns: CardFormViewController
     @objc(createCardFormViewControllerWithStyle: tenantId:)
     public static func createCardFormViewController(style: FormStyle? = nil,
                                                     tenantId: String? = nil) -> CardFormViewController {
@@ -41,6 +49,8 @@ public class CardFormViewController: UIViewController {
     @IBAction func registerCardTapped(_ sender: Any) {
         createToken()
     }
+
+    // MARK: Lifecycle
 
     public override func viewDidLoad() {
         // キーボード上部にカード登録ボタンを表示
@@ -76,12 +86,35 @@ public class CardFormViewController: UIViewController {
             }
         }
 
+        setupKeyboardNotification()
         fetchAccpetedBrands()
     }
 
-    @objc
-    private func submitTapped(sender: UIButton) {
+    // MARK: Selector
+
+    @objc private func submitTapped(sender: UIButton) {
         createToken()
+    }
+
+    @objc private func handleKeyboardShow(notification: Notification) {
+        saveButton.isHidden = true
+    }
+
+    @objc private func handleKeyboardHide(notification: Notification) {
+        saveButton.isHidden = false
+    }
+
+    // MARK: Private
+
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
 
     private func createToken() {
@@ -92,8 +125,6 @@ public class CardFormViewController: UIViewController {
             case .success(let token):
                 self.delegate?.cardFormViewController(self, didProduced: token) { error in
                     if let error = error {
-                        print(debug: "[errorResponse] \(error.localizedDescription)")
-                        // エラー
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
                             self.activityIndicator.stopAnimating()
@@ -151,17 +182,19 @@ public class CardFormViewController: UIViewController {
     }
 }
 
+// MARK: CardFormViewDelegate
 extension CardFormViewController: CardFormViewDelegate {
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         saveButton.isEnabled = isValid
         accessorySubmitButton.isEnabled = isValid
     }
-    
+
     public func formInputDoneTapped(in cardFormView: UIView) {
         createToken()
     }
 }
 
+// MARK: UICollectionViewDataSource
 extension CardFormViewController: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -182,12 +215,14 @@ extension CardFormViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: ErrorViewDelegate
 extension CardFormViewController: ErrorViewDelegate {
     func reload() {
         fetchAccpetedBrands()
     }
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension CardFormViewController: UICollectionViewDelegateFlowLayout {
 
     public func collectionView(_ collectionView: UICollectionView,
