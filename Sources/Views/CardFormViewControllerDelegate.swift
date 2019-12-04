@@ -16,7 +16,7 @@ public protocol CardFormViewControllerDelegate: class {
     /// - Parameter result: CardFormResult
     func cardFormViewController(_: CardFormViewController, didCompleteWith result: CardFormResult)
 
-    /// Callback when token creating is completed.
+    /// Callback when creating token is completed.
     ///
     /// - Parameters:
     ///   - token: token created by card form
