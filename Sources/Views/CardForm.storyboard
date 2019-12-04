@@ -20,10 +20,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="750"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313.66666666666669"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -53,8 +53,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="82" width="414" height="231.5"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="81.999999999999986" width="414" height="231.66666666666663"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
@@ -70,7 +70,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-8f-08o">
-                                        <rect key="frame" x="0.0" y="758" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="750" width="414" height="68"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
                                                 <rect key="frame" x="36" y="8" width="342" height="44"/>
@@ -85,7 +85,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yza-qd-fV7" secondAttribute="bottom" constant="8" id="3sd-eL-3bc"/>
+                                            <constraint firstAttribute="bottom" secondItem="yza-qd-fV7" secondAttribute="bottom" constant="16" id="3sd-eL-3bc"/>
                                             <constraint firstItem="yza-qd-fV7" firstAttribute="top" secondItem="1NL-8f-08o" secondAttribute="top" constant="8" id="9XG-qG-0a3"/>
                                             <constraint firstAttribute="trailing" secondItem="yza-qd-fV7" secondAttribute="trailing" constant="36" id="b6T-GV-Y6I"/>
                                             <constraint firstItem="yza-qd-fV7" firstAttribute="leading" secondItem="1NL-8f-08o" secondAttribute="leading" constant="36" id="bzV-ow-eUp"/>
