@@ -210,7 +210,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-        ) -> Bool {
+    ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
