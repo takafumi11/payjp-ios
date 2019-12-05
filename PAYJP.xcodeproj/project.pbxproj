@@ -70,6 +70,7 @@
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
 		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
 		ED31B07E2397C6E800DDFFE5 /* CardFormScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B07D2397C6E800DDFFE5 /* CardFormScreenViewModel.swift */; };
+		ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		ED40969E2394B9FA007FD8A6 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40969C2394B9E1007FD8A6 /* ClientTests.swift */; };
 		ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ACE172383F61C00349BBF /* CardFormViewControllerDelegate.swift */; };
@@ -203,6 +204,7 @@
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
 		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
 		ED31B07D2397C6E800DDFFE5 /* CardFormScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenViewModel.swift; sourceTree = "<group>"; };
+		ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormInput.swift; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				32A6F613239608DD00747477 /* ActionButton.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,
 				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
+				ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */,
 				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
 				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
 				ED31B07D2397C6E800DDFFE5 /* CardFormScreenViewModel.swift */,
@@ -746,6 +749,7 @@
 				32A6F614239608DD00747477 /* ActionButton.swift in Sources */,
 				EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */,
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
+				ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */,
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,

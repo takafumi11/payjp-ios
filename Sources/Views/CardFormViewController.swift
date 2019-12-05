@@ -55,7 +55,7 @@ public class CardFormViewController: UIViewController {
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
-        viewModel = CardFormScreenViewModel(view: self)
+        viewModel = CardFormScreenViewModel(view: self, delegate: self)
         // キーボード上部にカード登録ボタンを表示
         let frame = CGRect.init(x: 0,
                                 y: 0,
@@ -121,32 +121,12 @@ public class CardFormViewController: UIViewController {
     }
 
     private func createToken() {
-        activityIndicator.startAnimating()
-        cardFormView.createToken(tenantId: tenantId) { [weak self] result in
-            guard let self = self else { return }
+        cardFormView.cardFormInput { result in
             switch result {
-            case .success(let token):
-                self.delegate?.cardFormViewController(self, didProduced: token) { error in
-                    if let error = error {
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else { return }
-                            self.activityIndicator.stopAnimating()
-                            self.showError(message: error.localizedDescription)
-                        }
-                    } else {
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else { return }
-                            self.activityIndicator.stopAnimating()
-                            self.delegate?.cardFormViewController(self, didCompleteWith: .success)
-                        }
-                    }
-                }
+            case .success(let formInput):
+                viewModel?.createToken(tenantId: tenantId, formInput: formInput)
             case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.activityIndicator.stopAnimating()
-                    self.showError(message: self.errorTranslator.translate(error: error))
-                }
+                showError(message: error.localizedDescription)
             }
         }
     }
@@ -181,6 +161,17 @@ extension CardFormViewController: CardFormScreenView {
 
     func showErrorAlert(message: String) {
         showError(message: message)
+    }
+}
+
+// MARK: CardFormScreenViewModelDelegate
+extension CardFormViewController: CardFormScreenViewModelDelegate {
+    func tokenOperation(didCompleteWith result: CardFormResult) {
+        delegate?.cardFormViewController(self, didCompleteWith: result)
+    }
+
+    func tokenOperation(didProduced token: Token, completionHandler: @escaping (Error?) -> Void) {
+        delegate?.cardFormViewController(self, didProduced: token, completionHandler: completionHandler)
     }
 }
 
