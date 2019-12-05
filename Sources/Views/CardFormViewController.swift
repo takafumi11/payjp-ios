@@ -9,7 +9,7 @@
 import Foundation
 
 /// CardFormViewController.
-/// It's configured with CardFormLabelStyleView.
+/// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
@@ -24,6 +24,7 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
 
+    private let viewModel = CardFormScreenViewModel()
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
@@ -87,6 +88,7 @@ public class CardFormViewController: UIViewController {
             }
         }
 
+        setupObservers()
         setupKeyboardNotification()
         fetchAccpetedBrands()
     }
@@ -120,7 +122,7 @@ public class CardFormViewController: UIViewController {
 
     private func createToken() {
         activityIndicator.startAnimating()
-        cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
+        cardFormView.createToken(tenantId: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let token):
@@ -150,34 +152,31 @@ public class CardFormViewController: UIViewController {
     }
 
     private func fetchAccpetedBrands() {
-        activityIndicator.startAnimating()
-        errorView.dismiss()
-        cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let brands):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.accptedBrands = brands
-                    self.activityIndicator.stopAnimating()
-                    self.brandsView.reloadData()
-                    self.errorView.dismiss()
+        viewModel.fetchBrands(tenantId: tenantId)
+    }
+
+    private func setupObservers() {
+        viewModel.acceptedBrands.observe = { brands in
+            self.accptedBrands = brands
+            self.brandsView.reloadData()
+        }
+
+        viewModel.loadingVisible.observe = { loading in
+            if loading {
+                self.activityIndicator.startAnimating()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+
+        viewModel.errorViewVisible.observe = { error in
+            if error {
+                if let errorText = self.viewModel.errorViewText.value,
+                    let buttonHidden = self.viewModel.reloadButtonVisible.value {
+                    self.errorView.show(message: errorText, reloadButtonHidden: buttonHidden)
                 }
-            case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.activityIndicator.stopAnimating()
-                    let message = self.errorTranslator.translate(error: error)
-                    let buttonHidden: Bool = {
-                        switch error {
-                        case .systemError:
-                            return false
-                        default:
-                            return true
-                        }
-                    }()
-                    self.errorView.show(message: message, reloadButtonHidden: buttonHidden)
-                }
+            } else {
+                self.errorView.dismiss()
             }
         }
     }
