@@ -8,56 +8,62 @@
 
 import Foundation
 
+protocol CardFormScreenView: class {
+    func reloadBrands(brands: [CardBrand])
+    func showIndicator()
+    func dismissIndicator()
+    func showErrorView(message: String, buttonHidden: Bool)
+    func dismissErrorView()
+    func showErrorAlert(message: String)
+}
+
 protocol CardFormScreenViewModelType {
-
-    var acceptedBrands: Observable<[CardBrand]> { get }
-    var loadingVisible: Observable<Bool> { get }
-    var errorViewVisible: Observable<Bool> { get }
-    var errorViewText: Observable<String> { get }
-    var reloadButtonVisible: Observable<Bool> { get }
-
     func fetchBrands(tenantId: String?)
 }
 
 class CardFormScreenViewModel: CardFormScreenViewModelType {
 
-    var acceptedBrands: Observable<[CardBrand]> = Observable<[CardBrand]>()
-    var loadingVisible: Observable<Bool> = Observable<Bool>(false)
-    var errorViewVisible: Observable<Bool> = Observable<Bool>(false)
-    var errorViewText: Observable<String> = Observable<String>()
-    var reloadButtonVisible: Observable<Bool> = Observable<Bool>(false)
+    private weak var view: CardFormScreenView?
 
     private let accountsService: AccountsServiceType
     private let errorTranslator: ErrorTranslatorType
 
-    init(accountsService: AccountsServiceType = AccountsService.shared,
+    init(view: CardFormScreenView,
+         accountsService: AccountsServiceType = AccountsService.shared,
          errorTranslator: ErrorTranslatorType = ErrorTranslator.shared) {
+        self.view = view
         self.accountsService = accountsService
         self.errorTranslator = errorTranslator
     }
 
     func fetchBrands(tenantId: String?) {
-        loadingVisible.value = true
-        errorViewVisible.value = false
+        view?.showIndicator()
+        view?.dismissErrorView()
         accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let brands):
-                self.acceptedBrands.value = brands
-                self.loadingVisible.value = false
-                self.errorViewVisible.value = false
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.view?.reloadBrands(brands: brands)
+                    self.view?.dismissIndicator()
+                    self.view?.dismissErrorView()
+                }
             case .failure(let error):
-                self.loadingVisible.value = false
-                self.errorViewText.value = self.errorTranslator.translate(error: error)
-                self.reloadButtonVisible.value = {
-                    switch error {
-                    case .systemError:
-                        return false
-                    default:
-                        return true
-                    }
-                }()
-                self.errorViewVisible.value = true
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.view?.dismissIndicator()
+                    let message = self.errorTranslator.translate(error: error)
+                    let buttonHidden: Bool = {
+                        switch error {
+                        case .systemError:
+                            return false
+                        default:
+                            return true
+                        }
+                    }()
+                    self.view?.showErrorView(message: message, buttonHidden: buttonHidden)
+                }
             }
         }
     }

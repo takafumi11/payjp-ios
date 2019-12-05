@@ -24,7 +24,7 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
 
-    private let viewModel = CardFormScreenViewModel()
+    private var viewModel: CardFormScreenViewModel?
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
@@ -55,6 +55,7 @@ public class CardFormViewController: UIViewController {
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
+        viewModel = CardFormScreenViewModel(view: self)
         // キーボード上部にカード登録ボタンを表示
         let frame = CGRect.init(x: 0,
                                 y: 0,
@@ -88,7 +89,6 @@ public class CardFormViewController: UIViewController {
             }
         }
 
-        setupObservers()
         setupKeyboardNotification()
         fetchAccpetedBrands()
     }
@@ -152,33 +152,35 @@ public class CardFormViewController: UIViewController {
     }
 
     private func fetchAccpetedBrands() {
-        viewModel.fetchBrands(tenantId: tenantId)
+        viewModel?.fetchBrands(tenantId: tenantId)
+    }
+}
+
+// MARK: CardFormScreenView
+extension CardFormViewController: CardFormScreenView {
+    func reloadBrands(brands: [CardBrand]) {
+        accptedBrands = brands
+        brandsView.reloadData()
     }
 
-    private func setupObservers() {
-        viewModel.acceptedBrands.observe = { brands in
-            self.accptedBrands = brands
-            self.brandsView.reloadData()
-        }
+    func showIndicator() {
+        activityIndicator.startAnimating()
+    }
 
-        viewModel.loadingVisible.observe = { loading in
-            if loading {
-                self.activityIndicator.startAnimating()
-            } else {
-                self.activityIndicator.stopAnimating()
-            }
-        }
+    func dismissIndicator() {
+        activityIndicator.stopAnimating()
+    }
 
-        viewModel.errorViewVisible.observe = { error in
-            if error {
-                if let errorText = self.viewModel.errorViewText.value,
-                    let buttonHidden = self.viewModel.reloadButtonVisible.value {
-                    self.errorView.show(message: errorText, reloadButtonHidden: buttonHidden)
-                }
-            } else {
-                self.errorView.dismiss()
-            }
-        }
+    func showErrorView(message: String, buttonHidden: Bool) {
+        errorView.show(message: message, reloadButtonHidden: buttonHidden)
+    }
+
+    func dismissErrorView() {
+        errorView.dismiss()
+    }
+
+    func showErrorAlert(message: String) {
+        showError(message: message)
     }
 }
 
