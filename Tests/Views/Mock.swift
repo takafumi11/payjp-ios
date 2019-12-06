@@ -98,7 +98,6 @@ class MockTokenService: TokenServiceType {
 
         if let error  = error {
             completion(.failure(error))
-//            expectation.fulfill()
         } else {
             completion(.success(token))
         }
@@ -141,8 +140,6 @@ class MockAccountService: AccountsServiceType {
             completion?(.success(brands))
         }
 
-//        expectation.fulfill()
-        
         return nil
     }
 }

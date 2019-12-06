@@ -37,12 +37,12 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
-        
+
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
-        
+
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
@@ -56,12 +56,12 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let mockService = MockTokenService(token: tokenFromJson(), error: apiError, expectation: expectation)
-        
+
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
-        
+
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
@@ -75,12 +75,12 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(error: error, expectation: expectation)
         let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
-        
+
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
-        
+
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
@@ -92,12 +92,12 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let brands = brandsFromJson()
         let mockService = MockAccountService(brands: brands, expectation: expectation)
-        
+
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
         presenter.fetchBrands(tenantId: "tenant_id")
 
         waitForExpectations(timeout: 1, handler: nil)
-        
+
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertEqual(mockDelegate.fetchedBrands, brands)
@@ -113,12 +113,12 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let mockService = MockAccountService(brands: brandsFromJson(), error: apiError, expectation: expectation)
-        
+
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
         presenter.fetchBrands(tenantId: "tenant_id")
 
         waitForExpectations(timeout: 1, handler: nil)
-        
+
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
