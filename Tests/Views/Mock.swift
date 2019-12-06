@@ -20,7 +20,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var showErrorAlertCalled = false
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
-    
+
     var isError = false
 
     func reloadBrands(brands: [CardBrand]) {
@@ -53,7 +53,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         didProducedCalled = true
-        
+
         if isError {
             completionHandler(APIError.invalidResponse(nil))
         } else {
@@ -66,7 +66,7 @@ class MockClient: ClientType {
     func request<Request: PAYJP.Request>(with request: Request,
                                          completion: ((Result<Request.Response, APIError>) -> Void)?)
         -> URLSessionDataTask? {
-        return nil
+            return nil
     }
 }
 
@@ -80,18 +80,18 @@ class MockTokenService: TokenServiceType {
                      name: String?,
                      tenantId: String?,
                      completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
-        
+
         let json = TestFixture.JSON(by: "token.json")
         // swiftlint:disable force_try
         let token = try! Token.decodeJson(with: json, using: JSONDecoder.shared)
         // swiftlint:enable force_try
-        
+
         if isError {
             completion(.failure(.invalidResponse(nil)))
         } else {
             completion(.success(token))
         }
-        
+
         let request = CreateTokenRequest(
             cardNumber: cardNumber,
             cvc: cvc,
@@ -99,16 +99,16 @@ class MockTokenService: TokenServiceType {
             expirationYear: expirationYear,
             name: name,
             tenantId: tenantId)
-        
+
         let client = MockClient()
         return client.request(with: request, completion: nil)
     }
-    
+
     func createTokenForApplePay(paymentToken: PKPaymentToken,
                                 completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
         return nil
     }
-    
+
     func getToken(with tokenId: String,
                   completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
         return nil
@@ -117,23 +117,23 @@ class MockTokenService: TokenServiceType {
 
 class MockAccountService: AccountsServiceType {
     var isError = false
-    
+
     func getAcceptedBrands(tenantId: String?,
                            completion: CardBrandsResult?) -> URLSessionDataTask? {
-        
+
         let json = TestFixture.JSON(by: "cardBrands.json")
         // swiftlint:disable force_try
         let brands = try! JSONDecoder.shared.decode(GetAcceptedBrandsResponse.self, from: json)
         // swiftlint:enable force_try
-        
+
         if isError {
             completion?(.failure(.invalidResponse(nil)))
         } else {
             completion?(.success(brands.acceptedBrands))
         }
-        
+
         let request = GetAcceptedBrands(tenantId: tenantId)
-        
+
         let client = MockClient()
         return client.request(with: request, completion: nil)
     }
