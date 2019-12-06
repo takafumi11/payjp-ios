@@ -24,7 +24,7 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
 
-    private var viewModel: CardFormScreenViewModel?
+    private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
@@ -55,7 +55,7 @@ public class CardFormViewController: UIViewController {
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
-        viewModel = CardFormScreenViewModel(view: self, delegate: self)
+        presenter = CardFormScreenPresenter(delegate: self)
         // キーボード上部にカード登録ボタンを表示
         let frame = CGRect.init(x: 0,
                                 y: 0,
@@ -124,7 +124,7 @@ public class CardFormViewController: UIViewController {
         cardFormView.cardFormInput { result in
             switch result {
             case .success(let formInput):
-                viewModel?.createToken(tenantId: tenantId, formInput: formInput)
+                presenter?.createToken(tenantId: tenantId, formInput: formInput)
             case .failure(let error):
                 showError(message: error.localizedDescription)
             }
@@ -132,12 +132,12 @@ public class CardFormViewController: UIViewController {
     }
 
     private func fetchAccpetedBrands() {
-        viewModel?.fetchBrands(tenantId: tenantId)
+        presenter?.fetchBrands(tenantId: tenantId)
     }
 }
 
-// MARK: CardFormScreenView
-extension CardFormViewController: CardFormScreenView {
+// MARK: CardFormScreenDelegate
+extension CardFormViewController: CardFormScreenDelegate {
     func reloadBrands(brands: [CardBrand]) {
         accptedBrands = brands
         brandsView.reloadData()
@@ -162,15 +162,12 @@ extension CardFormViewController: CardFormScreenView {
     func showErrorAlert(message: String) {
         showError(message: message)
     }
-}
 
-// MARK: CardFormScreenViewModelDelegate
-extension CardFormViewController: CardFormScreenViewModelDelegate {
-    func tokenOperation(didCompleteWith result: CardFormResult) {
+    func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
 
-    func tokenOperation(didProduced token: Token, completionHandler: @escaping (Error?) -> Void) {
+    func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         delegate?.cardFormViewController(self, didProduced: token, completionHandler: completionHandler)
     }
 }

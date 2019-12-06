@@ -1,5 +1,5 @@
 //
-//  CardFormScreenViewModel.swift
+//  CardFormScreenPresenter.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2019/12/04.
@@ -8,49 +8,48 @@
 
 import Foundation
 
-protocol CardFormScreenView: class {
+protocol CardFormScreenDelegate: class {
+    // update view
     func reloadBrands(brands: [CardBrand])
     func showIndicator()
     func dismissIndicator()
     func showErrorView(message: String, buttonHidden: Bool)
     func dismissErrorView()
     func showErrorAlert(message: String)
+    // callback
+    func didCompleteCardForm(with result: CardFormResult)
+    func didProduced(with token: Token,
+                     completionHandler: @escaping (Error?) -> Void)
 }
 
-protocol CardFormScreenViewModelDelegate: class {
-    func tokenOperation(didCompleteWith result: CardFormResult)
-    func tokenOperation(didProduced token: Token,
-                        completionHandler: @escaping (Error?) -> Void)
-}
-
-protocol CardFormScreenViewModelType {
+protocol CardFormScreenPresenterType {
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
 }
 
-class CardFormScreenViewModel: CardFormScreenViewModelType {
+class CardFormScreenPresenter: CardFormScreenPresenterType {
 
-    private weak var view: CardFormScreenView?
-    private weak var delegate: CardFormScreenViewModelDelegate?
+    private weak var delegate: CardFormScreenDelegate?
 
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
     private let errorTranslator: ErrorTranslatorType
+    private let dispatchQueue: DispatchQueue
 
-    init(view: CardFormScreenView,
-         delegate: CardFormScreenViewModelDelegate,
+    init(delegate: CardFormScreenDelegate,
          accountsService: AccountsServiceType = AccountsService.shared,
          tokenService: TokenServiceType = TokenService.shared,
-         errorTranslator: ErrorTranslatorType = ErrorTranslator.shared) {
-        self.view = view
+         errorTranslator: ErrorTranslatorType = ErrorTranslator.shared,
+         dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.delegate = delegate
         self.accountsService = accountsService
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
+        self.dispatchQueue = dispatchQueue
     }
 
     func createToken(tenantId: String?, formInput: CardFormInput) {
-        view?.showIndicator()
+        delegate?.showIndicator()
         tokenService.createToken(cardNumber: formInput.cardNumber,
                                  cvc: formInput.cvc,
                                  expirationMonth: formInput.expirationMonth,
@@ -62,50 +61,53 @@ class CardFormScreenViewModel: CardFormScreenViewModelType {
                                     case .success(let token):
                                         self.creatingTokenCompleted(token: token)
                                     case .failure(let error):
-                                        DispatchQueue.main.async { [weak self] in
+                                        self.dispatchQueue.async { [weak self] in
                                             guard let self = self else { return }
-                                            self.view?.dismissIndicator()
-                                            self.view?.showErrorAlert(message: self.errorTranslator.translate(error: error))
+                                            self.delegate?.dismissIndicator()
+                                            self.delegate?.showErrorAlert(
+                                                message: self.errorTranslator.translate(error: error)
+                                            )
                                         }
                                     }
         }
     }
 
     private func creatingTokenCompleted(token: Token) {
-        self.delegate?.tokenOperation(didProduced: token) { error in
+        self.delegate?.didProduced(with: token) { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
-                DispatchQueue.main.async { [weak self] in
+                self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.view?.dismissIndicator()
-                    self.view?.showErrorAlert(message: error.localizedDescription)
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.showErrorAlert(message: error.localizedDescription)
                 }
             } else {
-                DispatchQueue.main.async { [weak self] in
+                self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.view?.dismissIndicator()
-                    self.delegate?.tokenOperation(didCompleteWith: .success)
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.didCompleteCardForm(with: .success)
                 }
             }
         }
     }
 
     func fetchBrands(tenantId: String?) {
-        view?.showIndicator()
-        view?.dismissErrorView()
+        delegate?.showIndicator()
+        delegate?.dismissErrorView()
         accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let brands):
-                DispatchQueue.main.async { [weak self] in
+                self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.view?.reloadBrands(brands: brands)
-                    self.view?.dismissIndicator()
-                    self.view?.dismissErrorView()
+                    self.delegate?.reloadBrands(brands: brands)
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.dismissErrorView()
                 }
             case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
+                self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.view?.dismissIndicator()
+                    self.delegate?.dismissIndicator()
                     let message = self.errorTranslator.translate(error: error)
                     let buttonHidden: Bool = {
                         switch error {
@@ -115,7 +117,7 @@ class CardFormScreenViewModel: CardFormScreenViewModelType {
                             return true
                         }
                     }()
-                    self.view?.showErrorView(message: message, buttonHidden: buttonHidden)
+                    self.delegate?.showErrorView(message: message, buttonHidden: buttonHidden)
                 }
             }
         }
