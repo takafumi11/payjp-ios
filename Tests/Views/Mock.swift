@@ -6,25 +6,32 @@
 //  Copyright © 2019 PAY, Inc. All rights reserved.
 //
 
-import Foundation
+import XCTest
 import PassKit
 @testable import PAYJP
 
 class MockCardFormScreenDelegate: CardFormScreenDelegate {
-    var reloadBrandsCalled = false
+    var fetchedBrands: [CardBrand] = []
     var showIndicatorCalled = false
     var dismissIndicatorCalled = false
-    var showErrorViewCalled = false
+    var showErrorViewMessage: String?
     var showErrorViewButtonHidden = false
     var dismissErrorViewCalled = false
-    var showErrorAlertCalled = false
+    var showErrorAlertMessage: String?
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
 
-    var isError = false
+    let error: Error?
+    let expectation: XCTestExpectation
+
+    init(error: Error? = nil, expectation: XCTestExpectation) {
+        self.error = error
+        self.expectation = expectation
+    }
 
     func reloadBrands(brands: [CardBrand]) {
-        reloadBrandsCalled = true
+        fetchedBrands = brands
+        expectation.fulfill()
     }
 
     func showIndicator() {
@@ -36,7 +43,9 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     }
 
     func showErrorView(message: String, buttonHidden: Bool) {
-        showErrorViewCalled = true
+        showErrorViewMessage = message
+        showErrorViewButtonHidden = buttonHidden
+        expectation.fulfill()
     }
 
     func dismissErrorView() {
@@ -44,35 +53,39 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     }
 
     func showErrorAlert(message: String) {
-        showErrorAlertCalled = true
+        showErrorAlertMessage = message
+        expectation.fulfill()
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
         didCompleteCardFormCalled = true
+        expectation.fulfill()
     }
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         didProducedCalled = true
 
-        if isError {
-            completionHandler(APIError.invalidResponse(nil))
+        if let error = error {
+            completionHandler(error)
         } else {
             completionHandler(nil)
         }
     }
 }
 
-class MockClient: ClientType {
-    func request<Request: PAYJP.Request>(with request: Request,
-                                         completion: ((Result<Request.Response, APIError>) -> Void)?)
-        -> URLSessionDataTask? {
-            return nil
-    }
-}
-
 class MockTokenService: TokenServiceType {
-    var isError = false
+    let token: Token
+    let error: APIError?
+    let expectation: XCTestExpectation
+    var calledTenantId: String?
 
+    init(token: Token, error: APIError? = nil, expectation: XCTestExpectation) {
+        self.token = token
+        self.error = error
+        self.expectation = expectation
+    }
+
+    // swiftlint:disable function_parameter_count
     func createToken(cardNumber: String,
                      cvc: String,
                      expirationMonth: String,
@@ -81,28 +94,18 @@ class MockTokenService: TokenServiceType {
                      tenantId: String?,
                      completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
 
-        let json = TestFixture.JSON(by: "token.json")
-        // swiftlint:disable force_try
-        let token = try! Token.decodeJson(with: json, using: JSONDecoder.shared)
-        // swiftlint:enable force_try
+        self.calledTenantId = tenantId
 
-        if isError {
-            completion(.failure(.invalidResponse(nil)))
+        if let error  = error {
+            completion(.failure(error))
+//            expectation.fulfill()
         } else {
             completion(.success(token))
         }
 
-        let request = CreateTokenRequest(
-            cardNumber: cardNumber,
-            cvc: cvc,
-            expirationMonth: expirationMonth,
-            expirationYear: expirationYear,
-            name: name,
-            tenantId: tenantId)
-
-        let client = MockClient()
-        return client.request(with: request, completion: nil)
+        return nil
     }
+    // swiftlint:enable function_parameter_count
 
     func createTokenForApplePay(paymentToken: PKPaymentToken,
                                 completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
@@ -116,25 +119,30 @@ class MockTokenService: TokenServiceType {
 }
 
 class MockAccountService: AccountsServiceType {
-    var isError = false
+    let brands: [CardBrand]
+    let error: APIError?
+    let expectation: XCTestExpectation
+    var calledTenantId: String?
+
+    init(brands: [CardBrand], error: APIError? = nil, expectation: XCTestExpectation) {
+        self.brands = brands
+        self.error = error
+        self.expectation = expectation
+    }
 
     func getAcceptedBrands(tenantId: String?,
                            completion: CardBrandsResult?) -> URLSessionDataTask? {
 
-        let json = TestFixture.JSON(by: "cardBrands.json")
-        // swiftlint:disable force_try
-        let brands = try! JSONDecoder.shared.decode(GetAcceptedBrandsResponse.self, from: json)
-        // swiftlint:enable force_try
+        self.calledTenantId = tenantId
 
-        if isError {
-            completion?(.failure(.invalidResponse(nil)))
+        if let error = error {
+            completion?(.failure(error))
         } else {
-            completion?(.success(brands.acceptedBrands))
+            completion?(.success(brands))
         }
 
-        let request = GetAcceptedBrands(tenantId: tenantId)
-
-        let client = MockClient()
-        return client.request(with: request, completion: nil)
+//        expectation.fulfill()
+        
+        return nil
     }
 }

@@ -19,102 +19,111 @@ class CardFormScreenPresenterTests: XCTestCase {
                              cardHolder: "waka")
     }
 
+    // swiftlint:disable force_try
+    private func tokenFromJson() -> Token {
+        let json = TestFixture.JSON(by: "token.json")
+        let token = try! Token.decodeJson(with: json, using: JSONDecoder.shared)
+        return token
+    }
+
+    private func brandsFromJson() -> [CardBrand] {
+        let json = TestFixture.JSON(by: "cardBrands.json")
+        let brands = try! JSONDecoder.shared.decode(GetAcceptedBrandsResponse.self, from: json)
+        return brands.acceptedBrands
+    }
+    // swiftlint:enable force_try
+
     func testCreateToken_success() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        let mockService = MockTokenService()
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        let input = cardFormInput()
-        presenter.createToken(tenantId: "tenant_id", formInput: input)
-
         let expectation = self.expectation(description: "view update")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-            XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
-            XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-            XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
-            expectation.fulfill()
-        }
+        let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
+        let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
+        
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
+        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
+        
+        XCTAssertEqual(mockService.calledTenantId, "tenant_id")
+        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
     }
 
     func testCreateToken_failure() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        let mockService = MockTokenService()
-        mockService.isError = true
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        let input = cardFormInput()
-        presenter.createToken(tenantId: "tenant_id", formInput: input)
-
+        let error = NSError(domain: "mock_domain", code: 0, userInfo: [NSLocalizedDescriptionKey: "mock api error"])
+        let apiError = APIError.systemError(error)
         let expectation = self.expectation(description: "view update")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-            XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-            XCTAssertTrue(mockDelegate.showErrorAlertCalled, "showErrorAlertCalled not called")
-            expectation.fulfill()
-        }
+        let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
+        let mockService = MockTokenService(token: tokenFromJson(), error: apiError, expectation: expectation)
+        
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
+        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
+        
+        XCTAssertEqual(mockService.calledTenantId, "tenant_id")
+        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
     }
 
     func testCreateToken_delegate_failure() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        mockDelegate.isError = true
-        let mockService = MockTokenService()
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        let input = cardFormInput()
-        presenter.createToken(tenantId: "tenant_id", formInput: input)
-
+        let error = NSError(domain: "mock_domain",
+                            code: 0,
+                            userInfo: [NSLocalizedDescriptionKey: "mock delegate error"])
         let expectation = self.expectation(description: "view update")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-            XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-            XCTAssertTrue(mockDelegate.showErrorAlertCalled, "showErrorAlertCalled not called")
-            expectation.fulfill()
-        }
+        let mockDelegate = MockCardFormScreenDelegate(error: error, expectation: expectation)
+        let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
+        
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
+        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
 
         waitForExpectations(timeout: 1, handler: nil)
+        
+        XCTAssertEqual(mockService.calledTenantId, "tenant_id")
+        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock delegate error")
     }
 
     func testFetchBrands_success() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        let mockService = MockAccountService()
+        let expectation = self.expectation(description: "view update")
+        let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
+        let brands = brandsFromJson()
+        let mockService = MockAccountService(brands: brands, expectation: expectation)
+        
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
         presenter.fetchBrands(tenantId: "tenant_id")
 
-        let expectation = self.expectation(description: "view update")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-            XCTAssertTrue(mockDelegate.reloadBrandsCalled, "reloadBrands not called")
-            XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-            XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
-            expectation.fulfill()
-        }
-
         waitForExpectations(timeout: 1, handler: nil)
+        
+        XCTAssertEqual(mockService.calledTenantId, "tenant_id")
+        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertEqual(mockDelegate.fetchedBrands, brands)
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
     }
 
     func testFetchBrands_failure() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        let mockService = MockAccountService()
-        mockService.isError = true
+        let error = NSError(domain: "mock_domain",
+                            code: 0,
+                            userInfo: [NSLocalizedDescriptionKey: "mock api error"])
+        let apiError = APIError.systemError(error)
+        let expectation = self.expectation(description: "view update")
+        let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
+        let mockService = MockAccountService(brands: brandsFromJson(), error: apiError, expectation: expectation)
+        
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
         presenter.fetchBrands(tenantId: "tenant_id")
 
-        let expectation = self.expectation(description: "view update")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-            XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-            XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
-            XCTAssertTrue(mockDelegate.showErrorViewCalled, "showErrorView not called")
-            expectation.fulfill()
-        }
-
         waitForExpectations(timeout: 1, handler: nil)
+        
+        XCTAssertEqual(mockService.calledTenantId, "tenant_id")
+        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
+        XCTAssertEqual(mockDelegate.showErrorViewMessage, "mock api error")
+        XCTAssertFalse(mockDelegate.showErrorViewButtonHidden)
     }
 }

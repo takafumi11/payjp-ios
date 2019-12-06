@@ -100,9 +100,9 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             case .success(let brands):
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.delegate?.reloadBrands(brands: brands)
                     self.delegate?.dismissIndicator()
                     self.delegate?.dismissErrorView()
+                    self.delegate?.reloadBrands(brands: brands)
                 }
             case .failure(let error):
                 self.dispatchQueue.async { [weak self] in
