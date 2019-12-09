@@ -53,7 +53,7 @@ import Foundation
         liveMode = try container.decode(Bool.self, forKey: .liveMode)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
     }
-    
+
     public init(identifier: String,
                 name: String,
                 last4Number: String,
@@ -61,9 +61,9 @@ import Foundation
                 expirationMonth: UInt8,
                 expirationYear: UInt16,
                 fingerprint: String,
-                liveMode:Bool,
+                liveMode: Bool,
                 createAt: Date,
-                rawValue: [String:Any]? = nil ) {
+                rawValue: [String: Any]? = nil ) {
         self.identifer = identifier
         self.name = name
         self.last4Number = last4Number
