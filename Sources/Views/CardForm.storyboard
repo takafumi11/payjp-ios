@@ -22,7 +22,7 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="313.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
@@ -34,8 +34,8 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="FfY-8U-GwT"/>
                                                                 </constraints>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CXg-NV-J7Y">
-                                                                    <size key="itemSize" width="50" height="50"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="14" id="CXg-NV-J7Y">
+                                                                    <size key="itemSize" width="30" height="50"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -63,7 +63,6 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="PCg-wC-bhZ" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="0qA-sg-KSa"/>
                                             <constraint firstAttribute="width" secondItem="PCg-wC-bhZ" secondAttribute="width" id="497-4q-uKu"/>
                                             <constraint firstAttribute="trailing" secondItem="PCg-wC-bhZ" secondAttribute="trailing" id="8oQ-vN-PgY"/>
                                             <constraint firstItem="PCg-wC-bhZ" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="jjh-wb-Xg4"/>
@@ -108,11 +107,13 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="y1t-mK-97p" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="DQF-Xj-6Ui"/>
+                            <constraint firstItem="y1t-mK-97p" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="E2a-Y7-ijc"/>
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="bottom" secondItem="uGj-64-kZm" secondAttribute="bottom" id="FJk-wn-s6T"/>
                             <constraint firstItem="y1t-mK-97p" firstAttribute="centerY" secondItem="uGj-64-kZm" secondAttribute="centerY" id="M6P-n0-Mjj"/>
                             <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="Ml2-ex-LUW"/>
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="uGj-64-kZm" secondAttribute="trailing" id="QQr-JH-myf"/>
                             <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="SqO-hV-kpa"/>
+                            <constraint firstItem="blx-Ud-4tL" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="UQY-dQ-sv3"/>
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="bottom" secondItem="5fp-Ih-ELw" secondAttribute="bottom" id="YEA-ZY-7vj"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="bes-nP-2cY" secondAttribute="leading" id="p2v-sd-aUc"/>
                             <constraint firstItem="y1t-mK-97p" firstAttribute="leading" secondItem="5fp-Ih-ELw" secondAttribute="leading" id="uR2-k3-GQg"/>
