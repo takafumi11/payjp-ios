@@ -19,24 +19,33 @@ class CardFormScreenPresenterTests: XCTestCase {
                              cardHolder: "waka")
     }
 
-    // swiftlint:disable force_try
-    private func tokenFromJson() -> Token {
-        let json = TestFixture.JSON(by: "token.json")
-        let token = try! Token.decodeJson(with: json, using: JSONDecoder.shared)
+    private func mockToken() -> Token {
+        let card = Card(identifier: "card_id",
+                        name: "paykun",
+                        last4Number: "1234",
+                        brand: "visa",
+                        expirationMonth: 12,
+                        expirationYear: 19,
+                        fingerprint: "abcdefg",
+                        liveMode: false,
+                        createAt: Date())
+        let token = Token(identifier: "token_id",
+                          livemode: false,
+                          used: false,
+                          card: card,
+                          createAt: Date())
         return token
     }
 
-    private func brandsFromJson() -> [CardBrand] {
-        let json = TestFixture.JSON(by: "cardBrands.json")
-        let brands = try! JSONDecoder.shared.decode(GetAcceptedBrandsResponse.self, from: json)
-        return brands.acceptedBrands
+    private func mockAccpetedBrands() -> [CardBrand] {
+        let brands: [CardBrand] = [.visa, .mastercard, .jcb]
+        return brands
     }
-    // swiftlint:enable force_try
 
     func testCreateToken_success() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
+        let mockService = MockTokenService(token: mockToken(), expectation: expectation)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
@@ -55,7 +64,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let apiError = APIError.systemError(error)
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let mockService = MockTokenService(token: tokenFromJson(), error: apiError, expectation: expectation)
+        let mockService = MockTokenService(token: mockToken(), error: apiError, expectation: expectation)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
@@ -74,7 +83,7 @@ class CardFormScreenPresenterTests: XCTestCase {
                             userInfo: [NSLocalizedDescriptionKey: "mock delegate error"])
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(error: error, expectation: expectation)
-        let mockService = MockTokenService(token: tokenFromJson(), expectation: expectation)
+        let mockService = MockTokenService(token: mockToken(), expectation: expectation)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
@@ -90,7 +99,7 @@ class CardFormScreenPresenterTests: XCTestCase {
     func testFetchBrands_success() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let brands = brandsFromJson()
+        let brands = mockAccpetedBrands()
         let mockService = MockAccountService(brands: brands, expectation: expectation)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
@@ -112,7 +121,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let apiError = APIError.systemError(error)
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let mockService = MockAccountService(brands: brandsFromJson(), error: apiError, expectation: expectation)
+        let mockService = MockAccountService(brands: mockAccpetedBrands(), error: apiError, expectation: expectation)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, accountsService: mockService)
         presenter.fetchBrands(tenantId: "tenant_id")

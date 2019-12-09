@@ -64,12 +64,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         didProducedCalled = true
-
-        if let error = error {
-            completionHandler(error)
-        } else {
-            completionHandler(nil)
-        }
+        completionHandler(error)
     }
 }
 
