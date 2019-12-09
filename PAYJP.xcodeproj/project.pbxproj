@@ -69,6 +69,10 @@
 		ED222C1D22FD1DF90006FB87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED222C1F22FD1DF90006FB87 /* Localizable.strings */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
 		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
+		ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */; };
+		ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */; };
+		ED31B0852399FA8800DDFFE5 /* CardFormScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */; };
+		ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B086239A31B300DDFFE5 /* Mock.swift */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		ED40969E2394B9FA007FD8A6 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40969C2394B9E1007FD8A6 /* ClientTests.swift */; };
 		ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ACE172383F61C00349BBF /* CardFormViewControllerDelegate.swift */; };
@@ -201,6 +205,10 @@
 		ED222C2022FD1DFD0006FB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
 		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
+		ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenter.swift; sourceTree = "<group>"; };
+		ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormInput.swift; sourceTree = "<group>"; };
+		ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenterTests.swift; sourceTree = "<group>"; };
+		ED31B086239A31B300DDFFE5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
@@ -488,8 +496,10 @@
 				32A6F613239608DD00747477 /* ActionButton.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,
 				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
+				ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */,
 				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
 				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
+				ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */,
 				BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */,
 				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
 				EDB319CB234EDF0300CB0212 /* CardFormView.swift */,
@@ -557,8 +567,10 @@
 		EDCF723A22FBF07C00272C10 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */,
 				EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */,
 				ED9B33E52390F0B00079E7B8 /* ErrorTranslatorTests.swift */,
+				ED31B086239A31B300DDFFE5 /* Mock.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -743,6 +755,7 @@
 				32A6F614239608DD00747477 /* ActionButton.swift in Sources */,
 				EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */,
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
+				ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */,
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,
@@ -766,6 +779,7 @@
 				EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */,
 				BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
+				ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
@@ -790,6 +804,7 @@
 				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */,
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
+				ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,
@@ -802,6 +817,7 @@
 				ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */,
 				C68681F81E1E22DB001D7F75 /* CardFromTokenTests.swift in Sources */,
 				BE21785B22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift in Sources */,
+				ED31B0852399FA8800DDFFE5 /* CardFormScreenPresenterTests.swift in Sources */,
 				BE734B8A22DD7DE2008679EC /* ExpirationFormatterTests.swift in Sources */,
 				BE21785722E995C40098128D /* CreateTokenRequestTests.swift in Sources */,
 				BE21786322E9B9A90098128D /* GetAcceptedBrandsTests.swift in Sources */,

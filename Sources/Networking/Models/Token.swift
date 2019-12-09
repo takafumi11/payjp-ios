@@ -40,6 +40,20 @@ typealias RawValue = [String: Any]
         card = try container.decode(Card.self, forKey: .card)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
     }
+
+    public init(identifier: String,
+                livemode: Bool,
+                used: Bool,
+                card: Card,
+                createAt: Date,
+                rawValue: [String: Any]? = nil) {
+        self.identifer = identifier
+        self.livemode = livemode
+        self.used = used
+        self.card = card
+        self.createdAt = createAt
+        self.rawValue = rawValue
+    }
 }
 
 extension Token {

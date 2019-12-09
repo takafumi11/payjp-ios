@@ -58,6 +58,10 @@ protocol CardFormViewViewModelType {
     ///   - tenantId: テナントID
     ///   - completion: 取得結果
     func fetchAcceptedBrands(with tenantId: String?, completion: CardBrandsResult?)
+
+    /// フォームの入力値を取得する
+    /// - Parameter completion: 取得結果
+    func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -240,6 +244,19 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             case .failure(let error):
                 completion?(.failure(error))
             }
+        }
+    }
+
+    func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
+        if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+            let input = CardFormInput(cardNumber: cardNumber,
+                                      expirationMonth: month,
+                                      expirationYear: year,
+                                      cvc: cvc,
+                                      cardHolder: cardHolder)
+            completion(.success(input))
+        } else {
+            completion(.failure(LocalError.invalidFormInput))
         }
     }
 

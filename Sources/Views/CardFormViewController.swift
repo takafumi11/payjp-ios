@@ -9,7 +9,7 @@
 import Foundation
 
 /// CardFormViewController.
-/// It's configured with CardFormLabelStyleView.
+/// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
@@ -24,6 +24,7 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
 
+    private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
@@ -54,6 +55,7 @@ public class CardFormViewController: UIViewController {
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
+        presenter = CardFormScreenPresenter(delegate: self)
         // キーボード上部にカード登録ボタンを表示
         let frame = CGRect.init(x: 0,
                                 y: 0,
@@ -119,67 +121,54 @@ public class CardFormViewController: UIViewController {
     }
 
     private func createToken() {
-        activityIndicator.startAnimating()
-        cardFormView.createToken(tenantId: "tenant_id") { [weak self] result in
-            guard let self = self else { return }
+        cardFormView.cardFormInput { result in
             switch result {
-            case .success(let token):
-                self.delegate?.cardFormViewController(self, didProduced: token) { error in
-                    if let error = error {
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else { return }
-                            self.activityIndicator.stopAnimating()
-                            self.showError(message: error.localizedDescription)
-                        }
-                    } else {
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else { return }
-                            self.activityIndicator.stopAnimating()
-                            self.delegate?.cardFormViewController(self, didCompleteWith: .success)
-                        }
-                    }
-                }
+            case .success(let formInput):
+                presenter?.createToken(tenantId: tenantId, formInput: formInput)
             case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.activityIndicator.stopAnimating()
-                    self.showError(message: self.errorTranslator.translate(error: error))
-                }
+                showError(message: error.localizedDescription)
             }
         }
     }
 
     private func fetchAccpetedBrands() {
+        presenter?.fetchBrands(tenantId: tenantId)
+    }
+}
+
+// MARK: CardFormScreenDelegate
+extension CardFormViewController: CardFormScreenDelegate {
+    func reloadBrands(brands: [CardBrand]) {
+        accptedBrands = brands
+        brandsView.reloadData()
+    }
+
+    func showIndicator() {
         activityIndicator.startAnimating()
+    }
+
+    func dismissIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func showErrorView(message: String, buttonHidden: Bool) {
+        errorView.show(message: message, reloadButtonHidden: buttonHidden)
+    }
+
+    func dismissErrorView() {
         errorView.dismiss()
-        cardFormView.fetchBrands(tenantId: "tenant_id") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let brands):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.accptedBrands = brands
-                    self.activityIndicator.stopAnimating()
-                    self.brandsView.reloadData()
-                    self.errorView.dismiss()
-                }
-            case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.activityIndicator.stopAnimating()
-                    let message = self.errorTranslator.translate(error: error)
-                    let buttonHidden: Bool = {
-                        switch error {
-                        case .systemError:
-                            return false
-                        default:
-                            return true
-                        }
-                    }()
-                    self.errorView.show(message: message, reloadButtonHidden: buttonHidden)
-                }
-            }
-        }
+    }
+
+    func showErrorAlert(message: String) {
+        showError(message: message)
+    }
+
+    func didCompleteCardForm(with result: CardFormResult) {
+        delegate?.cardFormViewController(self, didCompleteWith: result)
+    }
+
+    func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
+        delegate?.cardFormViewController(self, didProduced: token, completionHandler: completionHandler)
     }
 }
 
