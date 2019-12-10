@@ -59,6 +59,9 @@
   self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
   [self.createTokenButton setUserInteractionEnabled:NO];
   self.createTokenButton.contentView.alpha = 0.5;
+
+  // processing to adjust the cell height of CardFormView when OS version is lower than 10
+  [self.tableView layoutIfNeeded];
 }
 
 - (void)colorSelected:(id)sender {
@@ -232,11 +235,15 @@
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
   }
-  // セル内の高さを更新
+  // update the cell height of CardFormView
   [UIView performWithoutAnimation:^{
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
   }];
+}
+
+- (void)formInputDoneTappedIn:(UIView *)cardFormView {
+  [self createToken];
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
