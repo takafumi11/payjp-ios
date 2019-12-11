@@ -24,7 +24,7 @@ public protocol CardFormViewDelegate: class {
     /// - Parameter cardFormView: CardFormView
     func formInputDoneTapped(in cardFormView: UIView)
 
-    func focusInputField(in cardFormView: UIView, textField: UITextField, frame: CGRect)
+    func focusTextField(in cardFormView: UIView, textFieldFrame: CGRect)
 }
 
 /// CardForm action protocol.

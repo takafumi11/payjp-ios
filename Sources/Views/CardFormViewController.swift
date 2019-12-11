@@ -24,12 +24,11 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
-    private var selectedTextField: UITextField!
-    private var selectedTextFieldFrame: CGRect!
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
     
+    private var selectedTextFieldFrame: CGRect?
     private var defaultContentInset: UIEdgeInsets?
     private var defaultScrollIndicatorInsets: UIEdgeInsets?
 
@@ -110,13 +109,14 @@ public class CardFormViewController: UIViewController {
 
         if let userInfo = notification.userInfo {
             if let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue,
-                let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
+                let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue,
+            let selectedTextFieldFrame = selectedTextFieldFrame {
                 restoreScrollViewSize()
 
                 let convertedKeyboardFrame = scrollView.convert(keyboardFrame, from: nil)
                 let convertedTextFieldFrame = cardFormView.convert(selectedTextFieldFrame, to: scrollView)
                 
-                let offsetY: CGFloat = convertedTextFieldFrame.maxY - convertedKeyboardFrame.minY - 44
+                let offsetY: CGFloat = convertedTextFieldFrame.maxY - convertedKeyboardFrame.minY
                 if offsetY < 0 { return }
                 updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
             }
@@ -224,9 +224,8 @@ extension CardFormViewController: CardFormViewDelegate {
         createToken()
     }
 
-    public func focusInputField(in cardFormView: UIView, textField: UITextField, frame: CGRect) {
-        selectedTextField = textField
-        selectedTextFieldFrame = frame
+    public func focusTextField(in cardFormView: UIView, textFieldFrame: CGRect) {
+        selectedTextFieldFrame = textFieldFrame
         defaultContentInset = scrollView.contentInset
         defaultScrollIndicatorInsets = scrollView.scrollIndicatorInsets
     }

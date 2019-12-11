@@ -20,10 +20,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="771.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh" userLabel="Brands Layout">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -51,8 +51,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="97" width="414" height="459"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="82" width="414" height="689.5"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>

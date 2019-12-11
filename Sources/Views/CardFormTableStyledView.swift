@@ -265,7 +265,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         if let convertedFrame = textField.superview?.convert(textField.frame, to: self) {
-            delegate?.focusInputField(in: self, textField: textField, frame: convertedFrame)
+            delegate?.focusTextField(in: self, textFieldFrame: convertedFrame)
         }
     }
 
