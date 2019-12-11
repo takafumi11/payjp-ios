@@ -19,13 +19,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCg-2e-93X">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCg-wC-bhZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="738.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="545"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh" userLabel="Brands Layout">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                                         <subviews>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ua3-wA-bvi">
@@ -51,8 +51,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="82" width="414" height="656.5"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="86" width="414" height="459"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
@@ -61,11 +61,10 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="PCg-wC-bhZ" secondAttribute="trailing" id="GaK-aR-MjD"/>
-                                            <constraint firstItem="PCg-wC-bhZ" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="XQ1-jJ-UsP"/>
-                                            <constraint firstItem="PCg-wC-bhZ" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="Zdw-9O-uwl"/>
-                                            <constraint firstItem="PCg-wC-bhZ" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="hZN-N0-foe"/>
-                                            <constraint firstAttribute="bottom" secondItem="PCg-wC-bhZ" secondAttribute="bottom" id="sOq-Qj-NuD"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="HF4-MD-A6f"/>
+                                            <constraint firstAttribute="trailing" secondItem="afn-Xo-Kwx" secondAttribute="trailing" id="L4Y-7R-jV0"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="hnR-ut-gMs"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="zF0-Sk-mnn"/>
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-8f-08o" userLabel="Bottom View">
@@ -92,13 +91,12 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="blx-Ud-4tL" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="18L-3w-pcG"/>
+                                    <constraint firstItem="blx-Ud-4tL" firstAttribute="top" secondItem="iCg-2e-93X" secondAttribute="top" id="8CI-zp-tv8"/>
                                     <constraint firstItem="1NL-8f-08o" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="9SP-Gc-cVK"/>
-                                    <constraint firstAttribute="trailing" secondItem="blx-Ud-4tL" secondAttribute="trailing" id="Cg0-Yw-1lz"/>
+                                    <constraint firstAttribute="trailing" secondItem="blx-Ud-4tL" secondAttribute="trailing" id="9q2-nL-RbU"/>
                                     <constraint firstAttribute="bottom" secondItem="1NL-8f-08o" secondAttribute="bottom" id="EQL-Fm-4Uj"/>
-                                    <constraint firstItem="blx-Ud-4tL" firstAttribute="width" secondItem="iCg-2e-93X" secondAttribute="width" id="UH7-BP-Yh6"/>
-                                    <constraint firstItem="1NL-8f-08o" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="bottom" id="n84-I3-XCh"/>
-                                    <constraint firstItem="blx-Ud-4tL" firstAttribute="top" secondItem="iCg-2e-93X" secondAttribute="top" id="oHR-5r-qbG"/>
+                                    <constraint firstItem="blx-Ud-4tL" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="Ym6-7W-iMX"/>
+                                    <constraint firstItem="1NL-8f-08o" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="bottom" id="w1V-wi-RUC"/>
                                     <constraint firstAttribute="trailing" secondItem="1NL-8f-08o" secondAttribute="trailing" id="wqf-xX-vft"/>
                                 </constraints>
                             </view>
