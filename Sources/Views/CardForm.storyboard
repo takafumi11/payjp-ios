@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCg-2e-93X">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
@@ -68,7 +68,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-8f-08o" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="820" width="414" height="76"/>
+                                        <rect key="frame" x="0.0" y="786" width="414" height="76"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
                                                 <rect key="frame" x="36" y="16" width="342" height="44"/>
@@ -119,7 +119,7 @@
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="jbN-NB-dz2"/>
                             <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="mRa-tP-wmA"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="moS-yQ-F4t"/>
-                            <constraint firstItem="iCg-2e-93X" firstAttribute="bottom" secondItem="bes-nP-2cY" secondAttribute="bottom" id="pUg-xN-bqG"/>
+                            <constraint firstItem="iCg-2e-93X" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="pUg-xN-bqG"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="rYu-K4-LrX"/>
                             <constraint firstItem="iCg-2e-93X" firstAttribute="top" secondItem="bes-nP-2cY" secondAttribute="top" id="s4a-Lw-u76"/>
                         </constraints>
