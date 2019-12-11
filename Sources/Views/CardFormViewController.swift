@@ -27,7 +27,7 @@ public class CardFormViewController: UIViewController {
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
-    
+
     private var selectedTextFieldFrame: CGRect?
     private var defaultContentInset: UIEdgeInsets?
     private var defaultScrollIndicatorInsets: UIEdgeInsets?
@@ -110,12 +110,12 @@ public class CardFormViewController: UIViewController {
         if let userInfo = notification.userInfo {
             if let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue,
                 let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue,
-            let selectedTextFieldFrame = selectedTextFieldFrame {
+                let selectedTextFieldFrame = selectedTextFieldFrame {
                 restoreScrollViewSize()
 
                 let convertedKeyboardFrame = scrollView.convert(keyboardFrame, from: nil)
                 let convertedTextFieldFrame = cardFormView.convert(selectedTextFieldFrame, to: scrollView)
-                
+
                 let offsetY: CGFloat = convertedTextFieldFrame.maxY - convertedKeyboardFrame.minY
                 if offsetY < 0 { return }
                 updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
@@ -127,7 +127,7 @@ public class CardFormViewController: UIViewController {
         saveButton.isHidden = false
         restoreScrollViewSize()
     }
-    
+
     // MARK: Private
 
     private func setupKeyboardNotification() {
