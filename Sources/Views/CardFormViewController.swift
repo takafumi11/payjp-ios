@@ -13,6 +13,7 @@ import Foundation
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
@@ -23,9 +24,14 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
+    private var selectedTextField: UITextField!
+    private var selectedTextFieldFrame: CGRect!
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
+    
+    private var defaultContentInset: UIEdgeInsets?
+    private var defaultScrollIndicatorInsets: UIEdgeInsets?
 
     /// CardFormViewController delegate.
     public weak var delegate: CardFormViewControllerDelegate?
@@ -101,12 +107,27 @@ public class CardFormViewController: UIViewController {
 
     @objc private func handleKeyboardShow(notification: Notification) {
         saveButton.isHidden = true
+
+        if let userInfo = notification.userInfo {
+            if let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue,
+                let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
+                restoreScrollViewSize()
+
+                let convertedKeyboardFrame = scrollView.convert(keyboardFrame, from: nil)
+                let convertedTextFieldFrame = cardFormView.convert(selectedTextFieldFrame, to: scrollView)
+                
+                let offsetY: CGFloat = convertedTextFieldFrame.maxY - convertedKeyboardFrame.minY - 44
+                if offsetY < 0 { return }
+                updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
+            }
+        }
     }
 
     @objc private func handleKeyboardHide(notification: Notification) {
         saveButton.isHidden = false
+        restoreScrollViewSize()
     }
-
+    
     // MARK: Private
 
     private func setupKeyboardNotification() {
@@ -118,6 +139,26 @@ public class CardFormViewController: UIViewController {
                                                selector: #selector(handleKeyboardHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+    }
+
+    private func updateScrollViewSize(moveSize: CGFloat, duration: TimeInterval) {
+        UIView.beginAnimations("ResizeForKeyboard", context: nil)
+        UIView.setAnimationDuration(duration)
+
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: moveSize, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        scrollView.contentOffset = CGPoint(x: 0, y: moveSize)
+
+        UIView.commitAnimations()
+    }
+
+    private func restoreScrollViewSize() {
+        if let defaultContentInset = defaultContentInset,
+            let defaultScrollIndicatorInsets = defaultScrollIndicatorInsets {
+            scrollView.contentInset = defaultContentInset
+            scrollView.scrollIndicatorInsets = defaultScrollIndicatorInsets
+        }
     }
 
     private func createToken() {
@@ -181,6 +222,13 @@ extension CardFormViewController: CardFormViewDelegate {
 
     public func formInputDoneTapped(in cardFormView: UIView) {
         createToken()
+    }
+
+    public func focusInputField(in cardFormView: UIView, textField: UITextField, frame: CGRect) {
+        selectedTextField = textField
+        selectedTextFieldFrame = frame
+        defaultContentInset = scrollView.contentInset
+        defaultScrollIndicatorInsets = scrollView.scrollIndicatorInsets
     }
 }
 

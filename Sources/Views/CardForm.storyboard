@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCg-2e-93X">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="545"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh" userLabel="Brands Layout">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -51,8 +51,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="86" width="414" height="459"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="97" width="414" height="459"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
@@ -61,14 +61,14 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="HF4-MD-A6f"/>
-                                            <constraint firstAttribute="trailing" secondItem="afn-Xo-Kwx" secondAttribute="trailing" id="L4Y-7R-jV0"/>
-                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="hnR-ut-gMs"/>
-                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="zF0-Sk-mnn"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="JCq-Fh-9MI"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="dsy-ZO-HZT"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="tB8-RW-Gst"/>
+                                            <constraint firstAttribute="trailing" secondItem="afn-Xo-Kwx" secondAttribute="trailing" id="tu2-Gh-xls"/>
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-8f-08o" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="786" width="414" height="76"/>
+                                        <rect key="frame" x="0.0" y="820" width="414" height="76"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
                                                 <rect key="frame" x="36" y="16" width="342" height="44"/>
@@ -91,12 +91,12 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="1NL-8f-08o" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="bottom" id="6bJ-gk-WH5"/>
                                     <constraint firstItem="blx-Ud-4tL" firstAttribute="top" secondItem="iCg-2e-93X" secondAttribute="top" id="8CI-zp-tv8"/>
                                     <constraint firstItem="1NL-8f-08o" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="9SP-Gc-cVK"/>
                                     <constraint firstAttribute="trailing" secondItem="blx-Ud-4tL" secondAttribute="trailing" id="9q2-nL-RbU"/>
                                     <constraint firstAttribute="bottom" secondItem="1NL-8f-08o" secondAttribute="bottom" id="EQL-Fm-4Uj"/>
                                     <constraint firstItem="blx-Ud-4tL" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="Ym6-7W-iMX"/>
-                                    <constraint firstItem="1NL-8f-08o" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="bottom" id="w1V-wi-RUC"/>
                                     <constraint firstAttribute="trailing" secondItem="1NL-8f-08o" secondAttribute="trailing" id="wqf-xX-vft"/>
                                 </constraints>
                             </view>
@@ -116,12 +116,12 @@
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="bottom" secondItem="uGj-64-kZm" secondAttribute="bottom" id="Bdk-k5-t0H"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="Eye-02-PG6"/>
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="5fp-Ih-ELw" secondAttribute="trailing" id="GWQ-L3-Na2"/>
-                            <constraint firstItem="iCg-2e-93X" firstAttribute="top" secondItem="bes-nP-2cY" secondAttribute="top" id="czE-qz-jhA"/>
                             <constraint firstItem="IuV-8P-tEi" firstAttribute="leading" secondItem="iCg-2e-93X" secondAttribute="leading" id="jbN-NB-dz2"/>
                             <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="mRa-tP-wmA"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="moS-yQ-F4t"/>
-                            <constraint firstItem="iCg-2e-93X" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="pUg-xN-bqG"/>
+                            <constraint firstItem="iCg-2e-93X" firstAttribute="bottom" secondItem="bes-nP-2cY" secondAttribute="bottom" id="pUg-xN-bqG"/>
                             <constraint firstItem="5fp-Ih-ELw" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="rYu-K4-LrX"/>
+                            <constraint firstItem="iCg-2e-93X" firstAttribute="top" secondItem="bes-nP-2cY" secondAttribute="top" id="s4a-Lw-u76"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
                     </view>
@@ -131,6 +131,7 @@
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="errorView" destination="5fp-Ih-ELw" id="e9i-z0-gq8"/>
                         <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
+                        <outlet property="scrollView" destination="blx-Ud-4tL" id="398-1X-NRm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEl-uz-dRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

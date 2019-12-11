@@ -137,6 +137,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     }
 
     public override func layoutSubviews() {
+        super.layoutSubviews()
         cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
@@ -291,6 +292,12 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
             delegate?.formInputDoneTapped(in: self)
         }
         return true
+    }
+
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let convertedFrame = textField.superview?.convert(textField.frame, to: self) {
+            delegate?.focusInputField(in: self, textField: textField, frame: convertedFrame)
+        }
     }
 }
 

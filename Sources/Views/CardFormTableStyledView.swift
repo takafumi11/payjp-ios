@@ -210,7 +210,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-        ) -> Bool {
+    ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!
@@ -261,6 +261,12 @@ extension CardFormTableStyledView: UITextFieldDelegate {
             delegate?.formInputDoneTapped(in: self)
         }
         return true
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let convertedFrame = textField.superview?.convert(textField.frame, to: self) {
+            delegate?.focusInputField(in: self, textField: textField, frame: convertedFrame)
+        }
     }
 
     public func setupInputAccessoryView(view: UIView) {
