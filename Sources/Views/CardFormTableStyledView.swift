@@ -263,12 +263,6 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         return true
     }
 
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let convertedFrame = textField.superview?.convert(textField.frame, to: self) {
-            delegate?.focusTextField(in: self, textFieldFrame: convertedFrame)
-        }
-    }
-
     public func setupInputAccessoryView(view: UIView) {
         cardNumberTextField.inputAccessoryView = view
         expirationTextField.inputAccessoryView = view

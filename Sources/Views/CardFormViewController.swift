@@ -28,10 +28,6 @@ public class CardFormViewController: UIViewController {
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
 
-    private var selectedTextFieldFrame: CGRect?
-    private var defaultContentInset: UIEdgeInsets?
-    private var defaultScrollIndicatorInsets: UIEdgeInsets?
-
     /// CardFormViewController delegate.
     public weak var delegate: CardFormViewControllerDelegate?
 
@@ -106,26 +102,25 @@ public class CardFormViewController: UIViewController {
 
     @objc private func handleKeyboardShow(notification: Notification) {
         saveButton.isHidden = true
-
-        if let userInfo = notification.userInfo {
-            if let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue,
-                let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue,
-                let selectedTextFieldFrame = selectedTextFieldFrame {
-                restoreScrollViewSize()
-
-                let convertedKeyboardFrame = scrollView.convert(keyboardFrame, from: nil)
-                let convertedTextFieldFrame = cardFormView.convert(selectedTextFieldFrame, to: scrollView)
-
-                let offsetY: CGFloat = convertedTextFieldFrame.maxY - convertedKeyboardFrame.minY
-                if offsetY < 0 { return }
-                updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
-            }
-        }
     }
 
     @objc private func handleKeyboardHide(notification: Notification) {
         saveButton.isHidden = false
-        restoreScrollViewSize()
+    }
+    
+    @objc private func keyboardDidChangeFrame(notification: Notification) {
+        let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? CGRect.zero
+        let keyboardY = scrollView.bounds.height - keyboardRect.origin.y
+        
+        var contentInset = scrollView.contentInset
+        contentInset.bottom = keyboardY
+        scrollView.contentInset = contentInset
+        
+        scrollView.showsVerticalScrollIndicator = false
+        var scrollIndicatorInsets = scrollView.scrollIndicatorInsets
+        scrollIndicatorInsets.bottom = keyboardY
+        scrollView.scrollIndicatorInsets = scrollIndicatorInsets
+        scrollView.showsVerticalScrollIndicator = true
     }
 
     // MARK: Private
@@ -139,26 +134,10 @@ public class CardFormViewController: UIViewController {
                                                selector: #selector(handleKeyboardHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
-    }
-
-    private func updateScrollViewSize(moveSize: CGFloat, duration: TimeInterval) {
-        UIView.beginAnimations("ResizeForKeyboard", context: nil)
-        UIView.setAnimationDuration(duration)
-
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: moveSize, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-        scrollView.contentOffset = CGPoint(x: 0, y: moveSize)
-
-        UIView.commitAnimations()
-    }
-
-    private func restoreScrollViewSize() {
-        if let defaultContentInset = defaultContentInset,
-            let defaultScrollIndicatorInsets = defaultScrollIndicatorInsets {
-            scrollView.contentInset = defaultContentInset
-            scrollView.scrollIndicatorInsets = defaultScrollIndicatorInsets
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidChangeFrame),
+                                               name: UIResponder.keyboardDidChangeFrameNotification,
+                                               object: nil)
     }
 
     private func createToken() {
@@ -222,12 +201,6 @@ extension CardFormViewController: CardFormViewDelegate {
 
     public func formInputDoneTapped(in cardFormView: UIView) {
         createToken()
-    }
-
-    public func focusTextField(in cardFormView: UIView, textFieldFrame: CGRect) {
-        selectedTextFieldFrame = textFieldFrame
-        defaultContentInset = scrollView.contentInset
-        defaultScrollIndicatorInsets = scrollView.scrollIndicatorInsets
     }
 }
 
