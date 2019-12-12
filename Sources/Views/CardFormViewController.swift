@@ -107,15 +107,15 @@ public class CardFormViewController: UIViewController {
     @objc private func handleKeyboardHide(notification: Notification) {
         saveButton.isHidden = false
     }
-    
+
     @objc private func keyboardDidChangeFrame(notification: Notification) {
         let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? CGRect.zero
         let keyboardY = scrollView.bounds.height - keyboardRect.origin.y
-        
+
         var contentInset = scrollView.contentInset
         contentInset.bottom = keyboardY
         scrollView.contentInset = contentInset
-        
+
         scrollView.showsVerticalScrollIndicator = false
         var scrollIndicatorInsets = scrollView.scrollIndicatorInsets
         scrollIndicatorInsets.bottom = keyboardY
