@@ -13,6 +13,7 @@ import Foundation
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
@@ -107,6 +108,21 @@ public class CardFormViewController: UIViewController {
         saveButton.isHidden = false
     }
 
+    @objc private func keyboardDidChangeFrame(notification: Notification) {
+        let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? .zero
+        let keyboardY = scrollView.bounds.height - keyboardRect.origin.y
+
+        var contentInset = scrollView.contentInset
+        contentInset.bottom = keyboardY
+        scrollView.contentInset = contentInset
+
+        scrollView.showsVerticalScrollIndicator = false
+        var scrollIndicatorInsets = scrollView.scrollIndicatorInsets
+        scrollIndicatorInsets.bottom = keyboardY
+        scrollView.scrollIndicatorInsets = scrollIndicatorInsets
+        scrollView.showsVerticalScrollIndicator = true
+    }
+
     // MARK: Private
 
     private func setupKeyboardNotification() {
@@ -117,6 +133,10 @@ public class CardFormViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleKeyboardHide),
                                                name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidChangeFrame),
+                                               name: UIResponder.keyboardDidChangeFrameNotification,
                                                object: nil)
     }
 
