@@ -109,7 +109,7 @@ public class CardFormViewController: UIViewController {
     }
 
     @objc private func keyboardDidChangeFrame(notification: Notification) {
-        let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? CGRect.zero
+        let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? .zero
         let keyboardY = scrollView.bounds.height - keyboardRect.origin.y
 
         var contentInset = scrollView.contentInset
