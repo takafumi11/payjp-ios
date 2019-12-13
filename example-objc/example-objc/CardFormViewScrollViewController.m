@@ -138,6 +138,10 @@
   self.createTokenButton.enabled = isValid;
 }
 
+- (void)formInputDoneTappedIn:(UIView *)cardFormView {
+  [self createToken];
+}
+
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
   self.cardFormView.isHolderRequired = sender.isOn;
 }

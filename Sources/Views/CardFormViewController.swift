@@ -97,6 +97,7 @@ public class CardFormViewController: UIViewController {
     // MARK: Selector
 
     @objc private func submitTapped(sender: UIButton) {
+        self.view.endEditing(true)
         createToken()
     }
 
