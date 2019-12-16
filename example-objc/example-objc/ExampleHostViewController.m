@@ -19,6 +19,8 @@
 @implementation ExampleHostViewController
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
   if (indexPath.row == 3) {
     UIColor *color = RGB(0, 122, 255);
     PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
@@ -26,10 +28,22 @@
                                                                      tintColor:color
                                                      inputFieldBackgroundColor:nil
                                                              submitButtonColor:color];
-    PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
-    cardFormVc.delegate = self;
-    [self.navigationController pushViewController:cardFormVc animated:YES];
+    // push
+//        PAYCardFormViewController *cardFormVc =
+//            [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+//                                                                    tenantId:nil
+//                                                                 displayType:DisplayTypePush];
+//        cardFormVc.delegate = self;
+//     [self.navigationController pushViewController:cardFormVc animated:YES];
+      
+      // modal
+      PAYCardFormViewController *cardFormVc =
+          [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+                                                                  tenantId:nil
+                                                               displayType:DisplayTypeModal];
+      cardFormVc.delegate = self;
+      UINavigationController *naviVc = [UINavigationController.new initWithRootViewController: cardFormVc];
+      [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 

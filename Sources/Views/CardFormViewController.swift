@@ -13,6 +13,12 @@ import Foundation
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
+    /// ViewController display type
+    @objc public enum DisplayType: Int {
+        case push = 0
+        case modal = 1
+    }
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: ActionButton!
@@ -24,6 +30,7 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
+    private var displayType: DisplayType?
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -36,23 +43,34 @@ public class CardFormViewController: UIViewController {
     /// - Parameters:
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
+    ///   - displayType: display type
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId:)
+    @objc(createCardFormViewControllerWithStyle: tenantId: displayType:)
     public static func createCardFormViewController(style: FormStyle? = nil,
-                                                    tenantId: String? = nil) -> CardFormViewController {
+                                                    tenantId: String? = nil,
+                                                    displayType: DisplayType = .modal) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
+        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
-            let cardFormVc = stotyboard.instantiateInitialViewController() as? CardFormViewController
+            let cardFormVc = naviVc?.topViewController as? CardFormViewController
             else { fatalError("Couldn't instantiate CardFormViewController") }
         cardFormVc.formStyle = style
         cardFormVc.tenantId = tenantId
+        cardFormVc.displayType = displayType
         return cardFormVc
     }
 
     @IBAction func registerCardTapped(_ sender: Any) {
         createToken()
     }
-
+    
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.didCompleteCardForm(with: .cancel)
+        }
+    }
+    
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
@@ -75,6 +93,14 @@ public class CardFormViewController: UIViewController {
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
+        
+        // pushの場合、Cancelボタンを非表示にする
+        switch displayType {
+        case .push:
+            navigationItem.leftBarButtonItem = nil
+        default:
+            break
+        }
 
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
@@ -92,6 +118,14 @@ public class CardFormViewController: UIViewController {
 
         setupKeyboardNotification()
         fetchAccpetedBrands()
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isMovingFromParent {
+            didCompleteCardForm(with: .cancel)
+        }
     }
 
     // MARK: Selector
