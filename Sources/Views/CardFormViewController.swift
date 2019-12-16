@@ -18,7 +18,7 @@ public class CardFormViewController: UIViewController {
         case push = 0
         case modal = 1
     }
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var saveButton: ActionButton!
@@ -63,14 +63,14 @@ public class CardFormViewController: UIViewController {
     @IBAction func registerCardTapped(_ sender: Any) {
         createToken()
     }
-    
+
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             self.didCompleteCardForm(with: .cancel)
         }
     }
-    
+
     // MARK: Lifecycle
 
     public override func viewDidLoad() {
@@ -93,7 +93,7 @@ public class CardFormViewController: UIViewController {
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
-        
+
         // pushの場合、Cancelボタンを非表示にする
         switch displayType {
         case .push:
@@ -119,10 +119,10 @@ public class CardFormViewController: UIViewController {
         setupKeyboardNotification()
         fetchAccpetedBrands()
     }
-    
+
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         if isMovingFromParent {
             didCompleteCardForm(with: .cancel)
         }
