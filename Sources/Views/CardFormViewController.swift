@@ -86,7 +86,7 @@ public class CardFormViewController: UIViewController {
         errorView.delegate = self
 
         // pushの場合、Cancelボタンを非表示にする
-        if self.presentingViewController == nil {
+        if !isModal {
             navigationItem.leftBarButtonItem = nil
         }
 
