@@ -35,13 +35,14 @@
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
-    //        PAYCardFormViewController *cardFormVc =
-    //            [PAYCardFormViewController createCardFormViewControllerWithStyle:style
-    //                                                                    tenantId:nil];
-    //        cardFormVc.delegate = self;
-    //        UINavigationController *naviVc =
-    //            [UINavigationController.new initWithRootViewController:cardFormVc];
-    //        [self presentViewController:naviVc animated:true completion:nil];
+    //            PAYCardFormViewController *cardFormVc =
+    //                [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+    //                                                                        tenantId:nil];
+    //            cardFormVc.delegate = self;
+    //            UINavigationController *naviVc =
+    //                [UINavigationController.new initWithRootViewController:cardFormVc];
+    //            naviVc.presentationController.delegate = cardFormVc;
+    //            [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 
@@ -62,7 +63,8 @@
         [wself.navigationController popViewControllerAnimated:YES];
 
         // dismiss
-        //          [wself.navigationController dismissViewControllerAnimated:YES completion:nil];
+        //                  [wself.navigationController dismissViewControllerAnimated:YES
+        //                  completion:nil];
       });
       break;
   }

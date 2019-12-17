@@ -36,7 +36,6 @@ public class CardFormViewController: UIViewController {
     /// - Parameters:
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
-    ///   - displayType: display type
     /// - Returns: CardFormViewController
     @objc(createCardFormViewControllerWithStyle: tenantId:)
     public static func createCardFormViewController(style: FormStyle? = nil,
@@ -274,5 +273,12 @@ extension CardFormViewController: UICollectionViewDelegateFlowLayout {
             return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         }
         return .zero
+    }
+}
+
+extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
+
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        didCompleteCardForm(with: .cancel)
     }
 }
