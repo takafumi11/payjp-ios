@@ -16,7 +16,7 @@ extension UIViewController {
     }
 
     var isModal: Bool {
-        if navigationController?.viewControllers.first != self {
+        if self.navigationController?.viewControllers.first != self {
             return false
         }
         if self.presentingViewController != nil {
