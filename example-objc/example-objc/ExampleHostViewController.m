@@ -30,19 +30,18 @@
                                                              submitButtonColor:color];
     // push
     PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:style
-                                                                tenantId:nil];
+        [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
     cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
-//        PAYCardFormViewController *cardFormVc =
-//            [PAYCardFormViewController createCardFormViewControllerWithStyle:style
-//                                                                    tenantId:nil];
-//        cardFormVc.delegate = self;
-//        UINavigationController *naviVc =
-//            [UINavigationController.new initWithRootViewController:cardFormVc];
-//        [self presentViewController:naviVc animated:true completion:nil];
+    //        PAYCardFormViewController *cardFormVc =
+    //            [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+    //                                                                    tenantId:nil];
+    //        cardFormVc.delegate = self;
+    //        UINavigationController *naviVc =
+    //            [UINavigationController.new initWithRootViewController:cardFormVc];
+    //        [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 

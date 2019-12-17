@@ -24,14 +24,14 @@ protocol CardFormScreenDelegate: class {
 
 protocol CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool { get }
-    
+
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool = false
-    
+
     private weak var delegate: CardFormScreenDelegate?
 
     private let accountsService: AccountsServiceType
