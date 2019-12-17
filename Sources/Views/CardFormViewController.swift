@@ -8,16 +8,16 @@
 
 import Foundation
 
+/// ViewController display type
+@objc public enum DisplayType: Int {
+    case push = 0
+    case modal = 1
+}
+
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
-
-    /// ViewController display type
-    @objc public enum DisplayType: Int {
-        case push = 0
-        case modal = 1
-    }
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!

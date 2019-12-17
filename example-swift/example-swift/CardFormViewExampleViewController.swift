@@ -166,7 +166,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
             self.tableView.endUpdates()
         }
     }
-    
+
     func formInputDoneTapped(in cardFormView: UIView) {
         self.createToken()
     }
