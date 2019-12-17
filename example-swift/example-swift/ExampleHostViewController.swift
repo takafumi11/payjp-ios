@@ -12,22 +12,20 @@ class ExampleHostViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         if indexPath.row == 3 {
             let color = UIColor(0, 122, 255)
             let style = FormStyle(
                 labelTextColor: color,
                 inputTextColor: color,
                 tintColor: color)
-            // push
+            
             let cardFormVc = CardFormViewController.createCardFormViewController(style: style)
             cardFormVc.delegate = self
+            // push
             self.navigationController?.pushViewController(cardFormVc, animated: true)
-            
+
             // modal
-//            let cardFormVc = CardFormViewController.createCardFormViewController(style: style,
-//                                                                                 displayType: .modal)
-//            cardFormVc.delegate = self
 //            let naviVc = UINavigationController(rootViewController: cardFormVc)
 //            self.present(naviVc, animated: true, completion: nil)
         }
@@ -45,9 +43,9 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 // pop
                 self?.navigationController?.popViewController(animated: true)
-                
+
                 // dismiss
-//                self?.dismiss(animated: true, completion: nil)
+//                                self?.dismiss(animated: true, completion: nil)
             }
         }
     }
