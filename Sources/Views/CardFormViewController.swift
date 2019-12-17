@@ -41,8 +41,9 @@ public class CardFormViewController: UIViewController {
     public static func createCardFormViewController(style: FormStyle? = nil,
                                                     tenantId: String? = nil) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
+        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
-            let cardFormVc = stotyboard.instantiateInitialViewController() as? CardFormViewController
+            let cardFormVc = naviVc?.topViewController as? CardFormViewController
             else { fatalError("Couldn't instantiate CardFormViewController") }
         cardFormVc.formStyle = style
         cardFormVc.tenantId = tenantId
@@ -51,6 +52,13 @@ public class CardFormViewController: UIViewController {
 
     @IBAction func registerCardTapped(_ sender: Any) {
         createToken()
+    }
+
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.didCompleteCardForm(with: .cancel)
+        }
     }
 
     // MARK: Lifecycle
@@ -76,6 +84,11 @@ public class CardFormViewController: UIViewController {
         brandsView.dataSource = self
         errorView.delegate = self
 
+        // pushの場合、Cancelボタンを非表示にする
+        if !isModal {
+            navigationItem.leftBarButtonItem = nil
+        }
+
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
         let bundle = Bundle(for: BrandImageCell.self)
@@ -92,6 +105,14 @@ public class CardFormViewController: UIViewController {
 
         setupKeyboardNotification()
         fetchAccpetedBrands()
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        if isMovingFromParent && presenter?.cardFormResultSuccess == false {
+            didCompleteCardForm(with: .cancel)
+        }
     }
 
     // MARK: Selector
@@ -252,5 +273,12 @@ extension CardFormViewController: UICollectionViewDelegateFlowLayout {
             return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         }
         return .zero
+    }
+}
+
+extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
+
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        didCompleteCardForm(with: .cancel)
     }
 }

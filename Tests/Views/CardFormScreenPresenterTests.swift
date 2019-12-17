@@ -57,6 +57,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
+        XCTAssertTrue(presenter.cardFormResultSuccess)
     }
 
     func testCreateToken_failure() {
@@ -75,6 +76,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
+        XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
     func testCreateToken_delegate_failure() {
@@ -94,6 +96,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock delegate error")
+        XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
     func testFetchBrands_success() {
@@ -112,6 +115,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockDelegate.fetchedBrands, brands)
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
+        XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
     func testFetchBrands_failure() {
@@ -134,5 +138,6 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.dismissErrorViewCalled, "dismissErrorView not called")
         XCTAssertEqual(mockDelegate.showErrorViewMessage, "mock api error")
         XCTAssertFalse(mockDelegate.showErrorViewButtonHidden)
+        XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 }
