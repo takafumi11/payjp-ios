@@ -29,22 +29,22 @@
                                                      inputFieldBackgroundColor:nil
                                                              submitButtonColor:color];
     // push
-            PAYCardFormViewController *cardFormVc =
-                [PAYCardFormViewController createCardFormViewControllerWithStyle:style
-                                                                        tenantId:nil
-                                                                     displayType:DisplayTypePush];
-            cardFormVc.delegate = self;
-         [self.navigationController pushViewController:cardFormVc animated:YES];
+    PAYCardFormViewController *cardFormVc =
+        [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+                                                                tenantId:nil
+                                                             displayType:DisplayTypePush];
+    cardFormVc.delegate = self;
+    [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
-//    PAYCardFormViewController *cardFormVc =
-//        [PAYCardFormViewController createCardFormViewControllerWithStyle:style
-//                                                                tenantId:nil
-//                                                             displayType:DisplayTypeModal];
-//    cardFormVc.delegate = self;
-//    UINavigationController *naviVc =
-//        [UINavigationController.new initWithRootViewController:cardFormVc];
-//    [self presentViewController:naviVc animated:true completion:nil];
+    //    PAYCardFormViewController *cardFormVc =
+    //        [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+    //                                                                tenantId:nil
+    //                                                             displayType:DisplayTypeModal];
+    //    cardFormVc.delegate = self;
+    //    UINavigationController *naviVc =
+    //        [UINavigationController.new initWithRootViewController:cardFormVc];
+    //    [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 
@@ -61,11 +61,11 @@
     case CardFormResultSuccess:
       NSLog(@"CardFormResultSuccess");
       dispatch_async(dispatch_get_main_queue(), ^{
-          // pop
+        // pop
         [wself.navigationController popViewControllerAnimated:YES];
-          
-          // dismiss
-//          [wself.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+        // dismiss
+        //          [wself.navigationController dismissViewControllerAnimated:YES completion:nil];
       });
       break;
   }
