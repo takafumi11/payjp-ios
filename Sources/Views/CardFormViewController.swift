@@ -8,12 +8,6 @@
 
 import Foundation
 
-/// ViewController display type
-@objc public enum DisplayType: Int {
-    case push = 0
-    case modal = 1
-}
-
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
@@ -30,7 +24,6 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
-    private var displayType: DisplayType = .push
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -45,10 +38,9 @@ public class CardFormViewController: UIViewController {
     ///   - tenantId: identifier of tenant
     ///   - displayType: display type
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId: displayType:)
+    @objc(createCardFormViewControllerWithStyle: tenantId:)
     public static func createCardFormViewController(style: FormStyle? = nil,
-                                                    tenantId: String? = nil,
-                                                    displayType: DisplayType = .push) -> CardFormViewController {
+                                                    tenantId: String? = nil) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
@@ -56,7 +48,6 @@ public class CardFormViewController: UIViewController {
             else { fatalError("Couldn't instantiate CardFormViewController") }
         cardFormVc.formStyle = style
         cardFormVc.tenantId = tenantId
-        cardFormVc.displayType = displayType
         return cardFormVc
     }
 
@@ -95,11 +86,8 @@ public class CardFormViewController: UIViewController {
         errorView.delegate = self
 
         // pushの場合、Cancelボタンを非表示にする
-        switch displayType {
-        case .push:
+        if self.presentingViewController == nil {
             navigationItem.leftBarButtonItem = nil
-        default:
-            break
         }
 
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
