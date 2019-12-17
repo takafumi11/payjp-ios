@@ -31,6 +31,7 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
     private var displayType: DisplayType?
+    private var cardFormResultSuccess: Bool = false
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -48,7 +49,7 @@ public class CardFormViewController: UIViewController {
     @objc(createCardFormViewControllerWithStyle: tenantId: displayType:)
     public static func createCardFormViewController(style: FormStyle? = nil,
                                                     tenantId: String? = nil,
-                                                    displayType: DisplayType = .modal) -> CardFormViewController {
+                                                    displayType: DisplayType = .push) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
@@ -123,7 +124,7 @@ public class CardFormViewController: UIViewController {
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if isMovingFromParent {
+        if isMovingFromParent && !cardFormResultSuccess {
             didCompleteCardForm(with: .cancel)
         }
     }
@@ -219,6 +220,9 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
+        if result == .success {
+            cardFormResultSuccess = true
+        }
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
 
