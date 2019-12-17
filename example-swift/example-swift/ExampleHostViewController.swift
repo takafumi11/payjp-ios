@@ -27,6 +27,7 @@ class ExampleHostViewController: UITableViewController {
 
             // modal
 //            let naviVc = UINavigationController(rootViewController: cardFormVc)
+//            naviVc.presentationController?.delegate = cardFormVc
 //            self.present(naviVc, animated: true, completion: nil)
         }
     }
