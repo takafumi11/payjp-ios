@@ -30,7 +30,7 @@ public class CardFormViewController: UIViewController {
     private var tenantId: String?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
-    private var displayType: DisplayType?
+    private var displayType: DisplayType = .push
     private var cardFormResultSuccess: Bool = false
 
     private var presenter: CardFormScreenPresenterType?
