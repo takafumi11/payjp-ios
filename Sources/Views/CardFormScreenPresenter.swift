@@ -23,12 +23,15 @@ protocol CardFormScreenDelegate: class {
 }
 
 protocol CardFormScreenPresenterType {
+    var cardFormResultSuccess: Bool { get }
+    
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
-
+    var cardFormResultSuccess: Bool = false
+    
     private weak var delegate: CardFormScreenDelegate?
 
     private let accountsService: AccountsServiceType
@@ -84,6 +87,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             } else {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
+                    self.cardFormResultSuccess = true
                     self.delegate?.dismissIndicator()
                     self.delegate?.didCompleteCardForm(with: .success)
                 }

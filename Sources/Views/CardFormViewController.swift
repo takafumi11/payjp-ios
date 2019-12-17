@@ -31,7 +31,6 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
     private var displayType: DisplayType = .push
-    private var cardFormResultSuccess: Bool = false
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -124,7 +123,7 @@ public class CardFormViewController: UIViewController {
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if isMovingFromParent && !cardFormResultSuccess {
+        if isMovingFromParent && presenter?.cardFormResultSuccess == false {
             didCompleteCardForm(with: .cancel)
         }
     }
@@ -220,9 +219,6 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
-        if result == .success {
-            cardFormResultSuccess = true
-        }
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
 
