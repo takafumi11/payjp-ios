@@ -76,7 +76,7 @@ platform :ios do
     last_commit_hash = last_git_commit[:abbreviated_commit_hash]
     new_branch = "feature/update_jazzy_#{last_commit_hash}"
 
-    sh("jazzy")
+    jazzy
     sh("git checkout -b #{new_branch}")
 
     git_add

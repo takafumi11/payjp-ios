@@ -96,7 +96,7 @@ workflows:
   version: 2
   default_flow:
     jobs:
-      - build
+      # - build
       - create_pr_to_public:
           requires:
             - build
@@ -104,8 +104,8 @@ workflows:
               branches:
                 only: master
       - create_pr_to_update_jazzy:
-          requires:
-            - build
+          # requires:
+          #   - build
           filters:
               branches:
                 only: waka/reference_update
