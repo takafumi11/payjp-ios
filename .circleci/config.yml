@@ -103,9 +103,9 @@ workflows:
           filters:
               branches:
                 only: master
-      - create_pr_to_update_jazzy:
-          requires:
-            - build
-          filters:
-              branches:
-                only: waka/reference_update
+      # - create_pr_to_update_jazzy:
+      #     requires:
+      #       - build
+      #     filters:
+      #         branches:
+      #           only: waka/reference_update
