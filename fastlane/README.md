@@ -36,11 +36,6 @@ Check Swift format with swiftLint
 fastlane ios check_objc_format
 ```
 Check Objective-C format with clang-format
-### ios create_pr_to_public
-```
-fastlane ios create_pr_to_update_jazzy
-```
-Create PR to update jazzy
 
 ----
 
