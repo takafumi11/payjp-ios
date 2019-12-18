@@ -39,3 +39,4 @@
 "payjp_card_form_screen_error_unknown" = "問題が発生しました。";
 
 "payjp_card_form_screen_submit_button" = "カードを登録";
+"payjp_card_form_screen_title" = "クレジットカードを登録";
