@@ -89,6 +89,7 @@ public class CardFormViewController: UIViewController {
             navigationItem.leftBarButtonItem = nil
         }
 
+        navigationItem.title = "payjp_card_form_screen_title".localized
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
         let bundle = Bundle(for: BrandImageCell.self)

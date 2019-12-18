@@ -39,3 +39,4 @@
 "payjp_card_form_screen_error_unknown" = "Unknown error occurred.";
 
 "payjp_card_form_screen_submit_button" = "submit";
+"payjp_card_form_screen_title" = "Add Credit Card";
