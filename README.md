@@ -12,12 +12,8 @@
   - https://pay.jp/docs/apple-pay
 - クレジットカードによる決済
   - https://pay.jp/docs/started
-- カード情報入力フォームの組み込み
-
-|CardFormTableStyledView|CardFormLabelStyledView|
-|:--:|:--:|
-|<img src="https://user-images.githubusercontent.com/38201241/68008844-94654d80-fcc3-11e9-9d54-757e5a4387b6.png" width="240px">|<img src="https://user-images.githubusercontent.com/38201241/68008897-bbbc1a80-fcc3-11e9-8970-1f5c76a787b7.png" width="240px">|
-
+- カード情報入力フォーム
+<img src="https://user-images.githubusercontent.com/38201241/71139310-295ede80-2251-11ea-9b31-5395b18efbde.png" width="240px">
 
 
 ## サンプルコード
