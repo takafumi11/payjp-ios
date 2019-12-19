@@ -72,6 +72,7 @@ public class CardFormViewController: UIViewController {
                                 height: 44)
         let view = UIView(frame: frame)
         accessorySubmitButton = ActionButton(frame: frame)
+        accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
         accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
         accessorySubmitButton.isEnabled = false
@@ -116,6 +117,11 @@ public class CardFormViewController: UIViewController {
         }
     }
 
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        brandsView.collectionViewLayout.invalidateLayout()
+    }
+
     // MARK: Selector
 
     @objc private func submitTapped(sender: UIButton) {
@@ -133,7 +139,10 @@ public class CardFormViewController: UIViewController {
 
     @objc private func keyboardDidChangeFrame(notification: Notification) {
         let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect ?? .zero
-        let keyboardY = scrollView.bounds.height - keyboardRect.origin.y
+        var keyboardY = scrollView.bounds.height - keyboardRect.origin.y
+        if keyboardY < 0 {
+            keyboardY = 0
+        }
 
         var contentInset = scrollView.contentInset
         contentInset.bottom = keyboardY
