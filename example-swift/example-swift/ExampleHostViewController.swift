@@ -14,13 +14,14 @@ class ExampleHostViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         if indexPath.row == 3 {
-            let color = UIColor(0, 122, 255)
-            let style = FormStyle(
-                labelTextColor: color,
-                inputTextColor: color,
-                tintColor: color)
+            // customize card form
+//            let color = UIColor(0, 122, 255)
+//            let style = FormStyle(
+//                labelTextColor: color,
+//                inputTextColor: color,
+//                tintColor: color)
             
-            let cardFormVc = CardFormViewController.createCardFormViewController(style: style)
+            let cardFormVc = CardFormViewController.createCardFormViewController()
             cardFormVc.delegate = self
             // push
             self.navigationController?.pushViewController(cardFormVc, animated: true)

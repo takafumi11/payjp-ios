@@ -22,21 +22,22 @@
   [tableView deselectRowAtIndexPath:indexPath animated:true];
 
   if (indexPath.row == 3) {
-    UIColor *color = RGB(0, 122, 255);
-    PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
-                                                                inputTextColor:color
-                                                                     tintColor:color
-                                                     inputFieldBackgroundColor:nil
-                                                             submitButtonColor:color];
+    // customize card form
+    //    UIColor *color = RGB(0, 122, 255);
+    //    PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
+    //                                                                inputTextColor:color
+    //                                                                     tintColor:color
+    //                                                     inputFieldBackgroundColor:nil
+    //                                                             submitButtonColor:color];
     // push
     PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:style tenantId:nil];
+        [PAYCardFormViewController createCardFormViewControllerWithStyle:nil tenantId:nil];
     cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
     //            PAYCardFormViewController *cardFormVc =
-    //                [PAYCardFormViewController createCardFormViewControllerWithStyle:style
+    //                [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
     //                                                                        tenantId:nil];
     //            cardFormVc.delegate = self;
     //            UINavigationController *naviVc =

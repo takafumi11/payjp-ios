@@ -11,7 +11,7 @@ import Foundation
 @objc(PAYCardFormViewControllerDelegate)
 public protocol CardFormViewControllerDelegate: class {
 
-    /// Callback when token operation is completed.
+    /// Callback when card form operation is completed.
     ///
     /// - Parameter result: CardFormResult
     func cardFormViewController(_: CardFormViewController, didCompleteWith result: CardFormResult)
@@ -26,8 +26,10 @@ public protocol CardFormViewControllerDelegate: class {
                                 completionHandler: @escaping (Error?) -> Void)
 }
 
-/// Result of token operation.
+/// Result of card form operation.
 @objc public enum CardFormResult: Int {
+    /// when saving token is successful
     case success = 0
+    /// when card form screen is closed
     case cancel = 1
 }

@@ -65,7 +65,7 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         presenter = CardFormScreenPresenter(delegate: self)
-        // キーボード上部にカード登録ボタンを表示
+        // show submit button on top of keyboard
         let frame = CGRect.init(x: 0,
                                 y: 0,
                                 width: (UIScreen.main.bounds.size.width),
@@ -84,7 +84,7 @@ public class CardFormViewController: UIViewController {
         brandsView.dataSource = self
         errorView.delegate = self
 
-        // pushの場合、Cancelボタンを非表示にする
+        // if not modal, hide cancel button
         if !isModal {
             navigationItem.leftBarButtonItem = nil
         }
@@ -277,6 +277,7 @@ extension CardFormViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: UIAdaptivePresentationControllerDelegate
 extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
