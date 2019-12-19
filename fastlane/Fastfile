@@ -79,6 +79,8 @@ platform :ios do
     jazzy
     sh("git checkout -b #{new_branch}")
 
+    sh('git config --global user.email "misc@pay.jp"')
+    sh('git config --global user.name "pay kun"')
     git_add
     git_commit(
       path: "./",
