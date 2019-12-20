@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CardFormViewDelegate Protocol Reference</title>
+    <title>CardFormResult Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/CardFormViewDelegate" class="dashAnchor"></a>
-    <a title="CardFormViewDelegate Protocol Reference"></a>
+    <a name="//apple_ref/swift/Enum/CardFormResult" class="dashAnchor"></a>
+    <a title="CardFormResult Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">PAYJP Docs</a> (67% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PAYJP Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CardFormViewDelegate Protocol Reference
+        CardFormResult Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -110,15 +110,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CardFormViewDelegate</h1>
+            <h1>CardFormResult</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">@objc(PAYCardFormViewDelegate)</span>
-<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CardFormViewDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CardFormResult</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
 
                 </div>
               </div>
-            <p>CardFormView delegate.</p>
+            <p>Result of card form operation.</p>
 
           </section>
           <section class="section task-group-section">
@@ -127,9 +127,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputValidatedIn:isValid:"></a>
-                    <a name="//apple_ref/swift/Method/formInputValidated(in:isValid:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputValidatedIn:isValid:">formInputValidated(in:isValid:)</a>
+                    <a name="/c:@M@PAYJP@E@CardFormResult@CardFormResultSuccess"></a>
+                    <a name="//apple_ref/swift/Element/success" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@E@CardFormResult@CardFormResultSuccess">success</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -137,47 +137,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Callback when form input validated</p>
+                        <p>when saving token is successful</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">formInputValidated</span><span class="p">(</span><span class="k">in</span> <span class="nv">cardFormView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">,</span> <span class="nv">isValid</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">success</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>cardFormView</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>CardFormView</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>isValid</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>form is valid</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -185,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputDoneTappedIn:"></a>
-                    <a name="//apple_ref/swift/Method/formInputDoneTapped(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputDoneTappedIn:">formInputDoneTapped(in:)</a>
+                    <a name="/c:@M@PAYJP@E@CardFormResult@CardFormResultCancel"></a>
+                    <a name="//apple_ref/swift/Element/cancel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@E@CardFormResult@CardFormResultCancel">cancel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -195,35 +164,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Callback when keyboard done key tapped. It&rsquo;s available only card holder input field.</p>
+                        <p>when card form screen is closed</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">formInputDoneTapped</span><span class="p">(</span><span class="k">in</span> <span class="nv">cardFormView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">cancel</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>cardFormView</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>CardFormView</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
