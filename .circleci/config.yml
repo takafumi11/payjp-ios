@@ -79,7 +79,6 @@ jobs:
       - run: *set_ruby_version
       - restore_cache: *restore_cache_gem
       - run: *bundle_install
-      - save_cache: *save_cache_gem
       - run: bundle exec fastlane ios create_pr_to_public
 
   create_pr_to_update_docs:
@@ -89,7 +88,6 @@ jobs:
       - run: *set_ruby_version
       - restore_cache: *restore_cache_gem
       - run: *bundle_install
-      - save_cache: *save_cache_gem
       - run: bundle exec fastlane ios create_pr_to_update_docs
 
 workflows:
