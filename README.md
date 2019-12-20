@@ -12,7 +12,6 @@
   - https://pay.jp/docs/apple-pay
 - クレジットカードによる決済
   - https://pay.jp/docs/started
-- カード情報入力フォーム
 
 <img src="https://user-images.githubusercontent.com/38201241/71139310-295ede80-2251-11ea-9b31-5395b18efbde.png" width="240px">
 
