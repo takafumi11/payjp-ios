@@ -167,6 +167,10 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         }
     }
 
+    func formInputDoneTapped(in cardFormView: UIView) {
+        self.createToken()
+    }
+
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
         self.cardFormView.isHolderRequired = sender.isOn
         self.tableView.reloadData()

@@ -18,6 +18,11 @@ public protocol CardFormViewDelegate: class {
     ///   - cardFormView: CardFormView
     ///   - isValid: form is valid
     func formInputValidated(in cardFormView: UIView, isValid: Bool)
+
+    /// Callback when keyboard done key tapped. It's available only card holder input field.
+    ///
+    /// - Parameter cardFormView: CardFormView
+    func formInputDoneTapped(in cardFormView: UIView)
 }
 
 /// CardForm action protocol.
@@ -63,4 +68,8 @@ public protocol CardFormAction {
     ///
     /// - Parameter style: card form style
     func apply(style: FormStyle)
+
+    /// Setup input accessory view of text field
+    /// - Parameter view: input accessory view
+    func setupInputAccessoryView(view: UIView)
 }

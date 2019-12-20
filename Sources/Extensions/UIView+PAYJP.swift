@@ -40,13 +40,11 @@ extension UIView {
             layer.maskedCorners = corners
         } else {
             let corners = UIRectCorner(rawValue: corners.rawValue)
-            let path = UIBezierPath(roundedRect: layer.bounds,
+            let path = UIBezierPath(roundedRect: bounds,
                                     byRoundingCorners: corners,
                                     cornerRadii: CGSize(width: radius, height: radius))
             let mask = CAShapeLayer()
             mask.path = path.cgPath
-
-            layer.cornerRadius = 0.0
             layer.mask = mask
         }
     }

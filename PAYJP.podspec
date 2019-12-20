@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PAYJP'
-  s.version          = '1.0.2'
+  s.version          = '1.1.0'
   s.summary          = 'PAY.JP iOS SDK'
   s.description      = 'PAY.JP iOS SDK https://pay.jp/docs/started'
 
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = ['Sources/**/*.{h,m,swift,xib,strings}']
+  s.source_files = ['Sources/**/*.{h,m,swift,xib,strings,storyboard}']
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
   s.resources = 'Assets.xcassets'

@@ -22,6 +22,7 @@
 "payjp_card_form_label_style_cvc_placeholder" = "000";
 "payjp_card_form_label_style_holder_name_placeholder" = "TARO TANAKA";
 
+// validation
 "payjp_card_form_error_no_number" = "Please enter a card number.";
 "payjp_card_form_error_invalid_number" = "Please enter a valid card number.";
 "payjp_card_form_error_invalid_brand" = "Your card\'s brand is not accepted.";
@@ -30,3 +31,12 @@
 "payjp_card_form_error_no_cvc" = "Please enter a security code.";
 "payjp_card_form_error_invalid_cvc" = "Please enter a valid security code.";
 "payjp_card_form_error_no_holder_name" = "Please enter a card holder name.";
+
+// error
+"payjp_card_form_screen_error_server" = "Server is unavailable.\nPlease try it again later.";
+"payjp_card_form_screen_error_application" = "Application error occurred.";
+"payjp_card_form_screen_error_network" = "Network is unavailable.\nPlease check your internet connectivity.";
+"payjp_card_form_screen_error_unknown" = "Unknown error occurred.";
+
+"payjp_card_form_screen_submit_button" = "submit";
+"payjp_card_form_screen_title" = "Add Credit Card";

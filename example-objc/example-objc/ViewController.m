@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "UIViewController+Alert.h"
 @import PAYJP;
 
 @interface ViewController ()
@@ -103,39 +103,6 @@
                    [wself showToken:token];
                  });
                }];
-}
-
-#pragma MARK : -Alert
-
-- (void)showToken:(PAYToken *)token {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"success"
-                                          message:[self displayToken:token]
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleCancel
-                                          handler:nil]];
-  [self presentViewController:alert animated:true completion:nil];
-}
-
-- (void)showError:(NSError *)error {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"error"
-                                          message:error.localizedDescription
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleCancel
-                                          handler:nil]];
-  [self presentViewController:alert animated:true completion:nil];
-}
-
-#pragma MARK : -misc
-
-- (NSString *)displayToken:(PAYToken *)token {
-  return [NSString
-      stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu\ncard.name=%@",
-                       token.identifer, token.card.identifer, token.card.last4Number,
-                       token.card.expirationMonth, token.card.expirationYear, token.card.name];
 }
 
 @end

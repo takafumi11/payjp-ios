@@ -257,7 +257,17 @@ extension CardFormTableStyledView: UITextFieldDelegate {
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cardHolderTextField.resignFirstResponder()
+        if isValid {
+            delegate?.formInputDoneTapped(in: self)
+        }
         return true
+    }
+
+    public func setupInputAccessoryView(view: UIView) {
+        cardNumberTextField.inputAccessoryView = view
+        expirationTextField.inputAccessoryView = view
+        cvcTextField.inputAccessoryView = view
+        cardHolderTextField.inputAccessoryView = view
     }
 }
 
