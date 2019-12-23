@@ -8,6 +8,7 @@
 
 #import "CardFormViewExampleViewController.h"
 #import "ColorTheme.h"
+#import "UIViewController+Alert.h"
 @import PAYJP;
 
 @interface CardFormViewExampleViewController ()
@@ -59,6 +60,9 @@
   self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
   [self.createTokenButton setUserInteractionEnabled:NO];
   self.createTokenButton.contentView.alpha = 0.5;
+
+  // processing to adjust the cell height of CardFormView when OS version is lower than 10
+  [self.tableView layoutIfNeeded];
 }
 
 - (void)colorSelected:(id)sender {
@@ -73,7 +77,8 @@
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:red
                                                                        tintColor:red
-                                                       inputFieldBackgroundColor:nil];
+                                                       inputFieldBackgroundColor:nil
+                                                               submitButtonColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -83,7 +88,8 @@
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:blue
                                                                        tintColor:blue
-                                                       inputFieldBackgroundColor:nil];
+                                                       inputFieldBackgroundColor:nil
+                                                               submitButtonColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -94,7 +100,8 @@
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:white
                                                                        tintColor:white
-                                                       inputFieldBackgroundColor:nil];
+                                                       inputFieldBackgroundColor:nil
+                                                               submitButtonColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = darkGray;
       break;
@@ -105,7 +112,8 @@
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:black
                                                                        tintColor:defaultBlue
-                                                       inputFieldBackgroundColor:nil];
+                                                       inputFieldBackgroundColor:nil
+                                                               submitButtonColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -228,48 +236,19 @@
     [self.createTokenButton setUserInteractionEnabled:NO];
     self.createTokenButton.contentView.alpha = 0.5;
   }
-  // セル内の高さを更新
+  // update the cell height of CardFormView
   [UIView performWithoutAnimation:^{
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
   }];
 }
 
+- (void)formInputDoneTappedIn:(UIView *)cardFormView {
+  [self createToken];
+}
+
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
   self.cardFormView.isHolderRequired = sender.isOn;
-}
-
-#pragma MARK : -Alert
-
-- (void)showToken:(PAYToken *)token {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"success"
-                                          message:[self displayToken:token]
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleCancel
-                                          handler:nil]];
-  [self presentViewController:alert animated:true completion:nil];
-}
-
-- (void)showError:(NSError *)error {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"error"
-                                          message:error.localizedDescription
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleCancel
-                                          handler:nil]];
-  [self presentViewController:alert animated:true completion:nil];
-}
-
-#pragma MARK : -misc
-
-- (NSString *)displayToken:(PAYToken *)token {
-  return [NSString
-      stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu\ncard.name=%@",
-                       token.identifer, token.card.identifer, token.card.last4Number,
-                       token.card.expirationMonth, token.card.expirationYear, token.card.name];
 }
 
 @end

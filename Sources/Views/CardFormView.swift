@@ -281,4 +281,9 @@ extension CardFormView {
         expirationTextField.tintColor = self.inputTintColor
         cvcTextField.tintColor = self.inputTintColor
     }
+
+    /// textField入力値を取得する
+    func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
+        viewModel.cardFormInput(completion: completion)
+    }
 }

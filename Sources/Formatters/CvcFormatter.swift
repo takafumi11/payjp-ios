@@ -22,7 +22,7 @@ struct CvcFormatter: CvcFormatterType {
 
     func string(from cvc: String?, brand: CardBrand?) -> String? {
         if let cvc = cvc, !cvc.isEmpty {
-            var filtered = cvc.numberfy()
+            let filtered = cvc.numberfy()
 
             if filtered.isEmpty { return nil }
 

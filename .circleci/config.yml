@@ -79,8 +79,16 @@ jobs:
       - run: *set_ruby_version
       - restore_cache: *restore_cache_gem
       - run: *bundle_install
-      - save_cache: *save_cache_gem
       - run: bundle exec fastlane ios create_pr_to_public
+
+  create_pr_to_update_docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *set_ruby_version
+      - restore_cache: *restore_cache_gem
+      - run: *bundle_install
+      - run: bundle exec fastlane ios create_pr_to_update_docs
 
 workflows:
   version: 2
@@ -93,3 +101,9 @@ workflows:
           filters:
               branches:
                 only: master
+      - create_pr_to_update_docs:
+          requires:
+            - build
+          filters:
+              branches:
+                only: develop

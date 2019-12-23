@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1aI-eK-01f">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CardFormViewController-->
+        <scene sceneID="Che-2y-xde">
+            <objects>
+                <viewController storyboardIdentifier="CardFormViewController" title="CardFormViewController" id="zoS-GO-cdH" customClass="PAYCardFormViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bes-nP-2cY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="61c-5M-xI7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="317.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh" userLabel="Brands Layout">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                                        <subviews>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ua3-wA-bvi">
+                                                                <rect key="frame" x="16" y="16" width="382" height="50"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="FfY-8U-GwT"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="14" id="CXg-NV-J7Y">
+                                                                    <size key="itemSize" width="30" height="50"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="Ua3-wA-bvi" secondAttribute="trailing" constant="16" id="CzJ-q4-ia2"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Ua3-wA-bvi" secondAttribute="bottom" constant="16" id="eAa-tc-507"/>
+                                                            <constraint firstItem="Ua3-wA-bvi" firstAttribute="leading" secondItem="cmB-pl-3uh" secondAttribute="leading" constant="16" id="pKb-FI-vpJ"/>
+                                                            <constraint firstItem="Ua3-wA-bvi" firstAttribute="top" secondItem="cmB-pl-3uh" secondAttribute="top" constant="16" id="q1p-P8-aI2"/>
+                                                        </constraints>
+                                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
+                                                        <rect key="frame" x="0.0" y="86" width="414" height="231.5"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="afn-Xo-Kwx" secondAttribute="trailing" id="Dwz-Gq-10X"/>
+                                            <constraint firstAttribute="bottom" secondItem="afn-Xo-Kwx" secondAttribute="bottom" id="Joj-cY-5Dq"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="leading" secondItem="blx-Ud-4tL" secondAttribute="leading" id="XgT-1D-eAX"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="width" secondItem="blx-Ud-4tL" secondAttribute="width" id="hTp-ak-eDX"/>
+                                            <constraint firstItem="afn-Xo-Kwx" firstAttribute="top" secondItem="blx-Ud-4tL" secondAttribute="top" id="oZL-QS-5ja"/>
+                                        </constraints>
+                                    </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-8f-08o" userLabel="Bottom View">
+                                        <rect key="frame" x="0.0" y="786" width="414" height="76"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yza-qd-fV7" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
+                                                <rect key="frame" x="36" y="16" width="342" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="2oE-59-2zM"/>
+                                                </constraints>
+                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                <state key="normal" title="カードを登録"/>
+                                                <connections>
+                                                    <action selector="registerCardTapped:" destination="zoS-GO-cdH" eventType="touchUpInside" id="uTc-Vm-bOj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="yza-qd-fV7" secondAttribute="trailing" constant="36" id="ReX-Hy-95m"/>
+                                            <constraint firstItem="yza-qd-fV7" firstAttribute="leading" secondItem="1NL-8f-08o" secondAttribute="leading" constant="36" id="V6L-fx-GqD"/>
+                                            <constraint firstAttribute="bottom" secondItem="yza-qd-fV7" secondAttribute="bottom" constant="16" id="qXu-Xj-37z"/>
+                                            <constraint firstItem="yza-qd-fV7" firstAttribute="top" secondItem="1NL-8f-08o" secondAttribute="top" constant="16" id="uM7-Lg-l7V"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uGj-64-kZm">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fp-Ih-ELw" customClass="ErrorView" customModule="PAYJP" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="0Hx-7U-5WH"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="top" secondItem="bes-nP-2cY" secondAttribute="top" id="1jd-II-XB0"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="3RT-h0-evd"/>
+                            <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="uGj-64-kZm" secondAttribute="trailing" id="4YO-B8-RNn"/>
+                            <constraint firstItem="IuV-8P-tEi" firstAttribute="bottom" secondItem="uGj-64-kZm" secondAttribute="bottom" id="Bdk-k5-t0H"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="Eye-02-PG6"/>
+                            <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="5fp-Ih-ELw" secondAttribute="trailing" id="GWQ-L3-Na2"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="trailing" secondItem="IuV-8P-tEi" secondAttribute="trailing" id="Kqa-yG-JDf"/>
+                            <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="mRa-tP-wmA"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="moS-yQ-F4t"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="rYu-K4-LrX"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="w0h-kb-oSe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="CardFormViewController" leftItemsSupplementBackButton="YES" id="Mkd-CE-3mO">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qLk-y6-8dY">
+                            <connections>
+                                <action selector="cancelTapped:" destination="zoS-GO-cdH" id="1Ao-cb-Zrq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="uGj-64-kZm" id="y9m-6o-q0h"/>
+                        <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
+                        <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
+                        <outlet property="errorView" destination="5fp-Ih-ELw" id="e9i-z0-gq8"/>
+                        <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
+                        <outlet property="scrollView" destination="blx-Ud-4tL" id="398-1X-NRm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEl-uz-dRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044.9275362318842" y="-119.19642857142857"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Dzw-uZ-hak">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1aI-eK-01f" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZJm-uP-Pni">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zoS-GO-cdH" kind="relationship" relationship="rootViewController" id="xPR-g9-X9K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qV-IW-0nt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="-119.19642857142857"/>
+        </scene>
+    </scenes>
+</document>

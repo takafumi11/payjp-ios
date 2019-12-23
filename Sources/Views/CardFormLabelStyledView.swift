@@ -119,11 +119,6 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
             string: "payjp_card_form_label_style_holder_name_placeholder".localized,
             attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
 
-        cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
-        expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
-        cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
-        cardHolderFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
-
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
         cvcTextField.delegate = self
@@ -139,6 +134,14 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
     override public var intrinsicContentSize: CGSize {
         return contentView.intrinsicContentSize
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        cardHolderFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
     }
 
     // MARK: CardFormAction
@@ -223,6 +226,13 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
+
+    public func setupInputAccessoryView(view: UIView) {
+        cardNumberTextField.inputAccessoryView = view
+        expirationTextField.inputAccessoryView = view
+        cvcTextField.inputAccessoryView = view
+        cardHolderTextField.inputAccessoryView = view
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -278,6 +288,9 @@ extension CardFormLabelStyledView: UITextFieldDelegate {
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cardHolderTextField.resignFirstResponder()
+        if isValid {
+            delegate?.formInputDoneTapped(in: self)
+        }
         return true
     }
 }

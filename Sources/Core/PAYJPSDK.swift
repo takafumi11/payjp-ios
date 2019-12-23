@@ -30,6 +30,9 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
                 authToken = ""
                 return
             }
+            // public key validation
+            PublicKeyValidator.shared.validate(publicKey: publicKey)
+
             let data = "\(publicKey):".data(using: .utf8)!
             let base64String = data.base64EncodedString()
             authToken = "Basic \(base64String)"

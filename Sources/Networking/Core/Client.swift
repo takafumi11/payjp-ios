@@ -46,6 +46,7 @@ class Client: ClientType {
 
                 if error != nil && data == nil && response == nil {
                     completion?(Result.failure(.systemError(error!)))
+                    return
                 }
 
                 guard let response = response as? HTTPURLResponse else {
@@ -67,17 +68,13 @@ class Client: ClientType {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else {
-                        completion?(Result.failure(.invalidResponse(response)))
+                        do {
+                            let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
+                            completion?(Result.failure(.serviceError(error)))
+                        } catch {
+                            completion?(Result.failure(.invalidJSON(data, error)))
+                        }
                     }
-                    return
-                }
-
-                do {
-                    let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
-                    completion?(Result.failure(.serviceError(error)))
-                    return
-                } catch {
-                    completion?(Result.failure(.invalidJSON(data, error)))
                     return
                 }
             }

@@ -128,6 +128,10 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         self.createTokenButton.isEnabled = isValid
     }
 
+    func formInputDoneTapped(in cardFormView: UIView) {
+        self.createToken()
+    }
+
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
         self.cardFormView.isHolderRequired = sender.isOn
     }
