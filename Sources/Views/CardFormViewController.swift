@@ -221,6 +221,13 @@ extension CardFormViewController: CardFormScreenDelegate {
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         delegate?.cardFormViewController(self, didProduced: token, completionHandler: completionHandler)
     }
+
+    func requireThreeDSecure(with token: Token) {
+        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tokenId: token.identifer)
+        verifyVc.delegate = self
+        let naviVc = UINavigationController(rootViewController: verifyVc)
+        self.present(naviVc, animated: true, completion: nil)
+    }
 }
 
 // MARK: CardFormViewDelegate
@@ -290,5 +297,28 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         didCompleteCardForm(with: .cancel)
+    }
+}
+
+// MARK: CardVerificationViewControllerDelegate
+extension CardFormViewController: CardVerificationViewControllerDelegate {
+
+    public func cardVarificationViewController(_ viewController: CardVerificationViewController,
+                                               didCompleteWith result: CardVerificationResult,
+                                               tokenId: String?) {
+        switch result {
+        case .cancel:
+            print("CardVerificationResult.cancel")
+        case .success:
+            print("CardVerificationResult.success => tokenId=\(tokenId)")
+            dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                // トークン再取得
+                print("CardVerificationResult.success => トークン再取得")
+                if let tokenId = tokenId {
+                    self.presenter?.fetchToken(tokenId: tokenId)
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="omN-sb-OGb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CardVerificationViewController-->
+        <scene sceneID="lco-Pw-h4H">
+            <objects>
+                <viewController storyboardIdentifier="CardVerificationViewController" title="CardVerificationViewController" id="H11-wv-isW" customClass="CardVerificationViewController" customModule="PAYJP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1g8-cn-HtI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIY-RE-4un">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GIY-RE-4un" firstAttribute="leading" secondItem="2cp-H0-ju6" secondAttribute="leading" id="1e0-Rx-p5q"/>
+                            <constraint firstItem="GIY-RE-4un" firstAttribute="top" secondItem="2cp-H0-ju6" secondAttribute="top" id="H6o-Ua-kYl"/>
+                            <constraint firstItem="2cp-H0-ju6" firstAttribute="trailing" secondItem="GIY-RE-4un" secondAttribute="trailing" id="TQW-ac-LIx"/>
+                            <constraint firstItem="2cp-H0-ju6" firstAttribute="bottom" secondItem="GIY-RE-4un" secondAttribute="bottom" id="mBr-Fx-Tfs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2cp-H0-ju6"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Identity Verification" leftItemsSupplementBackButton="YES" id="qDQ-CL-8Oy">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r7k-fv-bX4">
+                            <connections>
+                                <action selector="cancelTapped:" destination="H11-wv-isW" id="ByO-iS-HiJ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="hB2-gK-gDg">
+                            <connections>
+                                <action selector="debugDoneTapped:" destination="H11-wv-isW" id="l3H-uk-Btp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="containerView" destination="GIY-RE-4un" id="XQe-Nj-sWo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jKa-TJ-ekZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045" y="692"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OvS-oD-0Ge">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="omN-sb-OGb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="txE-UK-b0G">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H11-wv-isW" kind="relationship" relationship="rootViewController" id="HdB-dN-bOQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N2d-aN-zuc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="692"/>
+        </scene>
+    </scenes>
+</document>

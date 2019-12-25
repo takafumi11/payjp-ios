@@ -26,6 +26,7 @@ import Foundation
     public let liveMode: Bool
     public let createdAt: Date
     public var rawValue: [String: Any]?
+    public var threeDSecureStatus: ThreeDSecureStatus?
 
     // MARK: - Decodable
 
@@ -39,6 +40,7 @@ import Foundation
         case fingerprint
         case liveMode = "livemode"
         case createdAt = "created"
+        case threeDSecureStatus = "three_d_secure_status"
     }
 
     public init(from decoder: Decoder) throws {

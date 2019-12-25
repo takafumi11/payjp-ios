@@ -20,6 +20,8 @@ protocol CardFormScreenDelegate: class {
     func didCompleteCardForm(with result: CardFormResult)
     func didProduced(with token: Token,
                      completionHandler: @escaping (Error?) -> Void)
+
+    func requireThreeDSecure(with token: Token)
 }
 
 protocol CardFormScreenPresenterType {
@@ -27,6 +29,7 @@ protocol CardFormScreenPresenterType {
 
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
+    func fetchToken(tokenId: String)
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -62,7 +65,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                     guard let self = self else { return }
                                     switch result {
                                     case .success(let token):
-                                        self.creatingTokenCompleted(token: token)
+                                        self.validateThreeDSecure(token: token)
                                     case .failure(let error):
                                         self.dispatchQueue.async { [weak self] in
                                             guard let self = self else { return }
@@ -95,6 +98,29 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
+    private func validateThreeDSecure(token: Token, alreadyVerify: Bool = false) {
+        // TODO: debug用
+//        if let status = token.card.threeDSecureStatus, status == .unverified {
+        if !alreadyVerify {
+            // すでに認証を行っている場合、何かしら問題がある
+            if alreadyVerify {
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.showErrorAlert(message: "Card verification is successful. There isn`t verified card.")
+                }
+            } else {
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.requireThreeDSecure(with: token)
+                }
+            }
+        } else {
+            self.creatingTokenCompleted(token: token)
+        }
+    }
+
     func fetchBrands(tenantId: String?) {
         delegate?.showIndicator()
         delegate?.dismissErrorView()
@@ -122,6 +148,30 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                         }
                     }()
                     self.delegate?.showErrorView(message: message, buttonHidden: buttonHidden)
+                }
+            }
+        }
+    }
+
+    func fetchToken(tokenId: String) {
+        delegate?.showIndicator()
+        tokenService.getToken(with: tokenId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.dismissErrorView()
+                    self.validateThreeDSecure(token: token, alreadyVerify: true)
+                }
+            case .failure(let error):
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.dismissIndicator()
+                    self.delegate?.showErrorAlert(
+                        message: self.errorTranslator.translate(error: error)
+                    )
                 }
             }
         }

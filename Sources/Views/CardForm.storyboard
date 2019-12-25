@@ -116,7 +116,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
                     </view>
-                    <navigationItem key="navigationItem" title="CardFormViewController" leftItemsSupplementBackButton="YES" id="Mkd-CE-3mO">
+                    <navigationItem key="navigationItem" title="Add New Card" leftItemsSupplementBackButton="YES" id="Mkd-CE-3mO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qLk-y6-8dY">
                             <connections>
                                 <action selector="cancelTapped:" destination="zoS-GO-cdH" id="1Ao-cb-Zrq"/>
