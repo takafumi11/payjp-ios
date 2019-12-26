@@ -1,2 +1,4 @@
 Pods/
 vendor/bundle
+Gemfile.lock
+Podfile.lock
