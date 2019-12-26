@@ -73,3 +73,9 @@ extension Request where Response: Decodable {
         return try JSONDecoder.shared.decode(Response.self, from: data)
     }
 }
+
+extension Request where Response: Decodable & JSONDecodable {
+    func response(data: Data, response: HTTPURLResponse) throws -> Response {
+        return try Response.decodeJson(with: data, using: JSONDecoder.shared)
+    }
+}
