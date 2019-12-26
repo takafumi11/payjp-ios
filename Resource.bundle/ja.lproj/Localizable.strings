@@ -10,16 +10,18 @@
 "payjp_common_ok" = "OK";
 "payjp_common_settings" = "設定";
 
+// card form
 "payjp_card_form_number_label" = "カード番号";
 "payjp_card_form_expiration_label" = "有効期限";
 "payjp_card_form_cvc_label" = "セキュリティコード";
-"payjp_card_form_holder_name_label"="カード名義";
+"payjp_card_form_holder_name_label" = "カード名義";
 
 // table style
 "payjp_card_form_number_placeholder" = "カード番号";
 "payjp_card_form_expiration_placeholder" = "有効期限 月/年";
 "payjp_card_form_cvc_placeholder" = "セキュリティコード";
 "payjp_card_form_holder_name_placeholder" = "カード名義";
+
 // label style
 "payjp_card_form_label_style_number_placeholder" = "カード番号";
 "payjp_card_form_label_style_expiration_placeholder" = "月/年";
@@ -36,15 +38,20 @@
 "payjp_card_form_error_invalid_cvc" = "正しいセキュリティコードを入力してください";
 "payjp_card_form_error_no_holder_name" = "カード名義を入力してください";
 
+// card form screen
+"payjp_card_form_screen_submit_button" = "カードを登録";
+"payjp_card_form_screen_title" = "クレジットカードを登録";
+
 // error
 "payjp_card_form_screen_error_server" = "サーバーに接続できません。\n時間をあけて再度お試しください。";
 "payjp_card_form_screen_error_application" = "アプリケーションに問題が発生しました。";
 "payjp_card_form_screen_error_network" = "通信に失敗しました。\nネットワークの接続をご確認ください。";
 "payjp_card_form_screen_error_unknown" = "問題が発生しました。";
 
-"payjp_card_form_screen_submit_button" = "カードを登録";
-"payjp_card_form_screen_title" = "クレジットカードを登録";
-
 // permission
 "payjp_scanner_camera_permission_denied_title" = "カメラの使用が許可されていません";
 "payjp_scanner_camera_permission_denied_message" = "クレジットカード情報を読み取るにはOSの設定画面よりカメラの使用を許可してください。";
+
+// 3D Secure
+"payjp_card_verification_title" = "本人認証";
+"payjp_card_verification_error_message" = "読み込みに失敗しました。\n再読み込みをお試しください。";

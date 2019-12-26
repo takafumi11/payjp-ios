@@ -10,6 +10,7 @@
 "payjp_common_ok" = "OK";
 "payjp_common_settings" = "Settings";
 
+// card form
 "payjp_card_form_number_label" = "Card number";
 "payjp_card_form_expiration_label" = "Expiration date";
 "payjp_card_form_cvc_label" = "Security code";
@@ -20,6 +21,7 @@
 "payjp_card_form_expiration_placeholder" = "Expiration month/year";
 "payjp_card_form_cvc_placeholder" = "Security code";
 "payjp_card_form_holder_name_placeholder" = "Card holder name";
+
 // label style
 "payjp_card_form_label_style_number_placeholder" = "Card number";
 "payjp_card_form_label_style_expiration_placeholder" = "month/year";
@@ -36,15 +38,20 @@
 "payjp_card_form_error_invalid_cvc" = "Please enter a valid security code.";
 "payjp_card_form_error_no_holder_name" = "Please enter a card holder name.";
 
+// card form screen
+"payjp_card_form_screen_submit_button" = "submit";
+"payjp_card_form_screen_title" = "Add Credit Card";
+
 // error
 "payjp_card_form_screen_error_server" = "Server is unavailable.\nPlease try it again later.";
 "payjp_card_form_screen_error_application" = "Application error occurred.";
 "payjp_card_form_screen_error_network" = "Network is unavailable.\nPlease check your internet connectivity.";
 "payjp_card_form_screen_error_unknown" = "Unknown error occurred.";
 
-"payjp_card_form_screen_submit_button" = "submit";
-"payjp_card_form_screen_title" = "Add Credit Card";
-
 // permission
 "payjp_scanner_camera_permission_denied_title" = "Camera permission is denied";
 "payjp_scanner_camera_permission_denied_message" = "Please allow camera permission in os setting to read credit card information.";
+
+// 3D Secure
+"payjp_card_verification_title" = "Identity Verification";
+"payjp_card_verification_error_message" = "Falid to read. \nPlease try to reload.";

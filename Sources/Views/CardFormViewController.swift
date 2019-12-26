@@ -218,7 +218,7 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func presentVerificationScreen(with token: Token) {
-        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tokenId: token.identifer,
+        let verifyVc = CardVerificationViewController.createCardVerificationViewController(token: token,
                                                                                            delegate: self)
         let naviVc = UINavigationController(rootViewController: verifyVc)
         naviVc.presentationController?.delegate = verifyVc

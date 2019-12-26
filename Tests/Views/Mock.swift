@@ -19,6 +19,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var showErrorViewButtonHidden = false
     var dismissErrorViewCalled = false
     var showErrorAlertMessage: String?
+    var presentVerificationScreenToken: Token?
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
 
@@ -56,6 +57,10 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     func showErrorAlert(message: String) {
         showErrorAlertMessage = message
         expectation.fulfill()
+    }
+    
+    func presentVerificationScreen(with token: Token) {
+        presentVerificationScreenToken = token
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
