@@ -104,6 +104,6 @@ workflows:
       - create_pr_to_update_docs:
           requires:
             - build
-          # filters:
-          #     branches:
-          #       only: develop
+          filters:
+              branches:
+                only: develop
