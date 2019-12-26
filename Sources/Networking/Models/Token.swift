@@ -56,7 +56,7 @@ typealias RawValue = [String: Any]
     }
 }
 
-extension Token {
+extension Token: JSONDecodable {
 
     /**
      * Provide a factory function to decode json by JSONDecoder
