@@ -58,7 +58,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
         showErrorAlertMessage = message
         expectation.fulfill()
     }
-    
+
     func presentVerificationScreen(with token: Token) {
         presentVerificationScreenToken = token
     }

@@ -13,7 +13,7 @@ public class CardVerificationViewController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var errorView: ErrorView!
-    
+
     private var webView: WKWebView!
     private var progressView: UIProgressView!
     private var token: Token?
@@ -37,7 +37,7 @@ public class CardVerificationViewController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else {return}
@@ -71,20 +71,20 @@ public class CardVerificationViewController: UIViewController {
 
         navigationItem.title = "payjp_card_verification_title".localized
         webView.navigationDelegate = self
-        
+
         // TODO: 試し
         if let entryUrl = URL(string: "https://apple.com") {
             originalEntryUrl = entryUrl
             let request = URLRequest(url: entryUrl)
             webView.load(request)
         }
-        
-//        if let card = token?.card, let entryUrl = card.tdsEntryUrl {
-//            originalEntryUrl = entryUrl
-//            print("entryUrl \(entryUrl)")
-//            let request = URLRequest(url: entryUrl)
-//            webView.load(request)
-//        }
+
+        //        if let card = token?.card, let entryUrl = card.tdsEntryUrl {
+        //            originalEntryUrl = entryUrl
+        //            print("entryUrl \(entryUrl)")
+        //            let request = URLRequest(url: entryUrl)
+        //            webView.load(request)
+        //        }
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -111,7 +111,7 @@ public class CardVerificationViewController: UIViewController {
                                      webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
                                      webView.topAnchor.constraint(equalTo: containerView.topAnchor),
                                      webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)])
-        
+
         // ProgressView
         progressView = UIProgressView(frame: CGRect(x: 0.0,
                                                     y: (self.navigationController?.navigationBar.frame.size.height)! - 3.0,
@@ -120,32 +120,32 @@ public class CardVerificationViewController: UIViewController {
         progressView.progressViewStyle = .bar
         self.navigationController?.navigationBar.addSubview(progressView)
     }
-    
+
     private func setupWebViewObserver() {
         estimatedProgressObservation = webView.observe(\.estimatedProgress,
                                                        options: [.new],
                                                        changeHandler: { [weak self] (webView, change) in
-            guard let self = self else { return }
-            self.progressView.alpha = 1.0
-            self.progressView.setProgress(Float(change.newValue!), animated: true)
+                                                        guard let self = self else { return }
+                                                        self.progressView.alpha = 1.0
+                                                        self.progressView.setProgress(Float(change.newValue!), animated: true)
 
-            if self.webView.estimatedProgress >= 1.0 {
-                UIView.animate(withDuration: 0.3,
-                               delay: 0.3,
-                               options: [.curveEaseOut],
-                               animations: { [weak self] in
-                                guard let self = self else { return }
-                                self.progressView.alpha = 0.0
-                    }, completion: { [weak self] _ in
-                        guard let self = self else { return }
-                        self.progressView.setProgress(0.0, animated: false)
-                })
-            }
+                                                        if self.webView.estimatedProgress >= 1.0 {
+                                                            UIView.animate(withDuration: 0.3,
+                                                                           delay: 0.3,
+                                                                           options: [.curveEaseOut],
+                                                                           animations: { [weak self] in
+                                                                            guard let self = self else { return }
+                                                                            self.progressView.alpha = 0.0
+                                                                }, completion: { [weak self] _ in
+                                                                    guard let self = self else { return }
+                                                                    self.progressView.setProgress(0.0, animated: false)
+                                                            })
+                                                        }
         })
     }
-    
+
     private func checkVerificationFinished(url: URL?) -> Bool {
-        if let loadUrl = url?.absoluteString, let expectedUrl = token?.card.tdsFinishUrl?.absoluteString{
+        if let loadUrl = url?.absoluteString, let expectedUrl = token?.card.tdsFinishUrl?.absoluteString {
             print(debugMessage: "loadedUrl \(loadUrl)")
             print(debugMessage: "expectedUrl \(expectedUrl)")
             return loadUrl == expectedUrl
@@ -165,13 +165,13 @@ extension CardVerificationViewController: WKNavigationDelegate {
 
         decisionHandler(.allow)
     }
-    
+
     public func webView(_ webView: WKWebView,
                         decidePolicyFor navigationResponse: WKNavigationResponse,
                         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
         print(debugMessage: "response url => \(navigationResponse.response.url?.absoluteString)")
-        
+
         // 認証完了URLかどうかチェック
         if checkVerificationFinished(url: navigationResponse.response.url) {
             decisionHandler(.cancel)
@@ -182,16 +182,16 @@ extension CardVerificationViewController: WKNavigationDelegate {
             verifyCompleted = false
         }
     }
-    
+
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print(debugMessage: "didStartProvisionalNavigation")
     }
-    
+
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print(debugMessage: "didFinish")
         errorView.dismiss()
     }
-    
+
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError: Error) {
         print(debugMessage: "didFailProvisionalNavigation")
         errorView.show(message: "payjp_card_verification_error_message".localized, reloadButtonHidden: true)
