@@ -12,11 +12,13 @@ import Foundation
 public protocol CardVerificationViewControllerDelegate: AnyObject {
 
     /// Callback when card verification is completed.
-    ///
-    /// - Parameter result: CardVerificationResult
-    func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                        didCompleteWith result: CardVerificationResult,
-                                        tokenId: String?)
+    /// - Parameters:
+    ///   - tokenId: verified tokenId
+    func cardVarificationViewController(_: CardVerificationViewController,
+                                        didVerified tokenId: String?)
+
+    /// Callback when card verification is canceled.
+    func cardVarificationViewControllerDidCancel(_: CardVerificationViewController)
 }
 
 /// Result of card verification.

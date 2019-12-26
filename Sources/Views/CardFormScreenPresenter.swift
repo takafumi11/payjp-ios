@@ -16,12 +16,11 @@ protocol CardFormScreenDelegate: class {
     func showErrorView(message: String, buttonHidden: Bool)
     func dismissErrorView()
     func showErrorAlert(message: String)
+    func presentVerificationScreen(with token: Token)
     // callback
     func didCompleteCardForm(with result: CardFormResult)
     func didProduced(with token: Token,
                      completionHandler: @escaping (Error?) -> Void)
-
-    func requireThreeDSecure(with token: Token)
 }
 
 protocol CardFormScreenPresenterType {
@@ -100,7 +99,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
 
     private func validateThreeDSecure(token: Token, alreadyVerify: Bool = false) {
         // TODO: debug用
-//        if let status = token.card.threeDSecureStatus, status == .unverified {
+        //        if let status = token.card.threeDSecureStatus, status == .unverified {
         if !alreadyVerify {
             // すでに認証を行っている場合、何かしら問題がある
             if alreadyVerify {
@@ -113,7 +112,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
                     self.delegate?.dismissIndicator()
-                    self.delegate?.requireThreeDSecure(with: token)
+                    self.delegate?.presentVerificationScreen(with: token)
                 }
             }
         } else {

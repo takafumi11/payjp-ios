@@ -30,7 +30,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2cp-H0-ju6"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Identity Verification" leftItemsSupplementBackButton="YES" id="qDQ-CL-8Oy">
+                    <navigationItem key="navigationItem" title="Identity Verification" id="qDQ-CL-8Oy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r7k-fv-bX4">
                             <connections>
                                 <action selector="cancelTapped:" destination="H11-wv-isW" id="ByO-iS-HiJ"/>

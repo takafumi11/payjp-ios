@@ -16,28 +16,31 @@ public class CardVerificationViewController: UIViewController {
     private var webView: WKWebView!
     private var expectedReturnURLPatterns: [URLComponents] = []
     private var tokenId: String?
+    private var verifyCompleted: Bool = false
 
-    public weak var delegate: CardVerificationViewControllerDelegate?
+    private weak var delegate: CardVerificationViewControllerDelegate?
 
-    // TODO: debug用
+    // TODO: 消す debug用
     @IBAction func debugDoneTapped(_ sender: Any) {
-        delegate?.cardVarificationViewController(self, didCompleteWith: .success, tokenId: tokenId)
+        delegate?.cardVarificationViewController(self, didVerified: tokenId)
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else {return}
-            self.delegate?.cardVarificationViewController(self, didCompleteWith: .cancel, tokenId: self.tokenId)
+            self.delegate?.cardVarificationViewControllerDidCancel(self)
         }
     }
 
-    public static func createCardVerificationViewController(tokenId: String) -> CardVerificationViewController {
+    public static func createCardVerificationViewController(tokenId: String,
+                                                            delegate: CardVerificationViewControllerDelegate) -> CardVerificationViewController {
         let stotyboard = UIStoryboard(name: "CardVerification", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
             let verifyVc = naviVc?.topViewController as? CardVerificationViewController
             else { fatalError("Couldn't instantiate CardVerificationViewController") }
         verifyVc.tokenId = tokenId
+        verifyVc.delegate = delegate
         return verifyVc
     }
 
@@ -63,15 +66,18 @@ public class CardVerificationViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        // if not modal, hide cancel button
-        if !isModal {
-            navigationItem.leftBarButtonItem = nil
-        }
-
         webView.navigationDelegate = self
         guard let url = URL(string: "https://www.apple.com") else { fatalError() }
         let request = URLRequest(url: url)
         webView.load(request)
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        if isMovingFromParent && !verifyCompleted {
+            delegate?.cardVarificationViewControllerDidCancel(self)
+        }
     }
 
     // MARK: Private
@@ -100,9 +106,19 @@ extension CardVerificationViewController: WKNavigationDelegate {
 
         if let url = navigationAction.request.url, checkVerificationURL(url) {
             decisionHandler(.cancel)
-            delegate?.cardVarificationViewController(self, didCompleteWith: .success, tokenId: tokenId)
+            verifyCompleted = true
+            delegate?.cardVarificationViewController(self, didVerified: tokenId)
         } else {
             decisionHandler(.allow)
+            verifyCompleted = false
         }
+    }
+}
+
+// MARK: UIAdaptivePresentationControllerDelegate
+extension CardVerificationViewController: UIAdaptivePresentationControllerDelegate {
+
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        delegate?.cardVarificationViewControllerDidCancel(self)
     }
 }

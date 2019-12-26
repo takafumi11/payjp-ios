@@ -29,24 +29,27 @@ public class CardFormViewController: UIViewController {
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
-    public weak var delegate: CardFormViewControllerDelegate?
+    private weak var delegate: CardFormViewControllerDelegate?
 
     /// CardFormViewController factory method.
     ///
     /// - Parameters:
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
+    ///   - delegate: delegate of CardFormViewControllerDelegate
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId:)
-    public static func createCardFormViewController(style: FormStyle = .defaultStyle,
-                                                    tenantId: String? = nil) -> CardFormViewController {
-        let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
+    @objc(createCardFormViewControllerWithStyle: tenantId: delegate:)
+    public static func createCardFormViewController(style: FormStyle? = .defaultStyle,
+                                                    tenantId: String? = nil,
+                                                    delegate: CardFormViewControllerDelegate) -> CardFormViewController {
+        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
             let cardFormVc = naviVc?.topViewController as? CardFormViewController
             else { fatalError("Couldn't instantiate CardFormViewController") }
         cardFormVc.formStyle = style
         cardFormVc.tenantId = tenantId
+        cardFormVc.delegate = delegate
         return cardFormVc
     }
 
@@ -214,19 +217,20 @@ extension CardFormViewController: CardFormScreenDelegate {
         showError(message: message)
     }
 
+    func presentVerificationScreen(with token: Token) {
+        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tokenId: token.identifer,
+                                                                                           delegate: self)
+        let naviVc = UINavigationController(rootViewController: verifyVc)
+        naviVc.presentationController?.delegate = verifyVc
+        self.present(naviVc, animated: true, completion: nil)
+    }
+
     func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
         delegate?.cardFormViewController(self, didProduced: token, completionHandler: completionHandler)
-    }
-
-    func requireThreeDSecure(with token: Token) {
-        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tokenId: token.identifer)
-        verifyVc.delegate = self
-        let naviVc = UINavigationController(rootViewController: verifyVc)
-        self.present(naviVc, animated: true, completion: nil)
     }
 }
 
@@ -304,21 +308,19 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 extension CardFormViewController: CardVerificationViewControllerDelegate {
 
     public func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                               didCompleteWith result: CardVerificationResult,
-                                               tokenId: String?) {
-        switch result {
-        case .cancel:
-            print("CardVerificationResult.cancel")
-        case .success:
-            print("CardVerificationResult.success => tokenId=\(tokenId)")
-            dismiss(animated: true) { [weak self] in
-                guard let self = self else { return }
-                // トークン再取得
-                print("CardVerificationResult.success => トークン再取得")
-                if let tokenId = tokenId {
-                    self.presenter?.fetchToken(tokenId: tokenId)
-                }
+                                               didVerified tokenId: String?) {
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            // トークン再取得
+            print(debug: "cardVarificationViewController didVerified => トークン再取得")
+            if let tokenId = tokenId {
+                self.presenter?.fetchToken(tokenId: tokenId)
             }
         }
+    }
+
+    public func cardVarificationViewControllerDidCancel(_ viewController: CardVerificationViewController) {
+        // TODO: キャンセル時にすべき処理はある？
+        print(debug: "cardVarificationViewControllerDidCancel")
     }
 }
