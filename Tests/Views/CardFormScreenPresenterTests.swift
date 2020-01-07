@@ -174,7 +174,8 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockService.calledTokenId, "token_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertEqual(mockDelegate.showErrorAlertMessage, "Card verification is successful. There isn`t verified card.")
+        XCTAssertEqual(mockDelegate.showErrorAlertMessage,
+                       "Card verification is successful. There isn`t verified card.")
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 

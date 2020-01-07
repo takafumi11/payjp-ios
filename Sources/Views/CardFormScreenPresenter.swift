@@ -104,7 +104,8 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
                     self.delegate?.dismissIndicator()
-                    self.delegate?.showErrorAlert(message: "Card verification is successful. There isn`t verified card.")
+                    self.delegate?.showErrorAlert(
+                        message: "Card verification is successful. There isn`t verified card.")
                 }
             } else {
                 self.dispatchQueue.async { [weak self] in

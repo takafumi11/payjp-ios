@@ -41,7 +41,8 @@ public class CardFormViewController: UIViewController {
     @objc(createCardFormViewControllerWithStyle: tenantId: delegate:)
     public static func createCardFormViewController(style: FormStyle? = .defaultStyle,
                                                     tenantId: String? = nil,
-                                                    delegate: CardFormViewControllerDelegate) -> CardFormViewController {
+                                                    delegate: CardFormViewControllerDelegate)
+        -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard

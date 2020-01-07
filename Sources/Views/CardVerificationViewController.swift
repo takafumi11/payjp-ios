@@ -46,7 +46,8 @@ public class CardVerificationViewController: UIViewController {
     }
 
     public static func createCardVerificationViewController(token: Token,
-                                                            delegate: CardVerificationViewControllerDelegate) -> CardVerificationViewController {
+                                                            delegate: CardVerificationViewControllerDelegate)
+        -> CardVerificationViewController {
         let stotyboard = UIStoryboard(name: "CardVerification", bundle: Bundle(for: PAYJPSDK.self))
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
@@ -74,7 +75,8 @@ public class CardVerificationViewController: UIViewController {
 
         if let card = token?.card, let entryUrl = card.tdsEntryUrl {
             originalEntryUrl = entryUrl
-            let request = URLRequest(url: entryUrl)
+            var request = URLRequest(url: entryUrl)
+            request.setValue(PAYJPSDK.authToken, forHTTPHeaderField: "Authorization")
             webView.load(request)
         }
     }
@@ -105,7 +107,8 @@ public class CardVerificationViewController: UIViewController {
                                      webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)])
 
         // ProgressView
-        progressView = UIProgressView(frame: CGRect(x: 0.0,
+        progressView = UIProgressView(
+            frame: CGRect(x: 0.0,
                                                     y: (self.navigationController?.navigationBar.frame.size.height)! - 3.0,
                                                     width: self.view.frame.size.width,
                                                     height: 3.0))
@@ -119,7 +122,8 @@ public class CardVerificationViewController: UIViewController {
                                                        changeHandler: { [weak self] (webView, change) in
                                                         guard let self = self else { return }
                                                         self.progressView.alpha = 1.0
-                                                        self.progressView.setProgress(Float(change.newValue!), animated: true)
+                                                        self.progressView.setProgress(Float(change.newValue!),
+                                                                                      animated: true)
 
                                                         if self.webView.estimatedProgress >= 1.0 {
                                                             UIView.animate(withDuration: 0.3,
@@ -173,7 +177,9 @@ extension CardVerificationViewController: WKNavigationDelegate {
         errorView.dismiss()
     }
 
-    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError: Error) {
+    public func webView(_ webView: WKWebView,
+                        didFailProvisionalNavigation navigation: WKNavigation!,
+                        withError: Error) {
         errorView.show(message: "payjp_card_verification_error_message".localized, reloadButtonHidden: true)
     }
 }
