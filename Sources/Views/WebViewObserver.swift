@@ -15,16 +15,16 @@ protocol WebViewObserverType {
 }
 
 class WebViewObserver: WebViewObserverType {
-    
+
     private let webView: WKWebView
     private let progressView: UIProgressView
     private var estimatedProgressObservation: NSKeyValueObservation?
-    
+
     init(webView: WKWebView, progressView: UIProgressView) {
         self.webView = webView
         self.progressView = progressView
     }
-    
+
     func setup() {
         estimatedProgressObservation = webView.observe(\.estimatedProgress,
                                                        options: [.new],
@@ -48,7 +48,7 @@ class WebViewObserver: WebViewObserverType {
                                                         }
         })
     }
-    
+
     func remove() {
         estimatedProgressObservation = nil
     }

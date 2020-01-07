@@ -102,7 +102,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             creatingTokenCompleted(token: token)
         }
     }
-    
+
     private func showErrorAlert(message: String) {
         dispatchQueue.async { [weak self] in
             guard let self = self else { return }

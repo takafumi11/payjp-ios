@@ -86,7 +86,7 @@ public class CardVerificationViewController: UIViewController {
         if isMovingFromParent && !verifyCompleted {
             delegate?.cardVarificationViewControllerDidCancel(self)
         }
-        
+
         webViewObserver?.remove()
     }
 
@@ -116,7 +116,7 @@ public class CardVerificationViewController: UIViewController {
             progressView.progressViewStyle = .bar
             self.navigationController?.navigationBar.addSubview(progressView)
         }
-        
+
         // Observer
         webViewObserver = WebViewObserver(webView: webView, progressView: progressView)
         webViewObserver?.setup()
