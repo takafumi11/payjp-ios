@@ -66,26 +66,16 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                     case .success(let token):
                                         self.validateThreeDSecure(token: token)
                                     case .failure(let error):
-                                        self.dispatchQueue.async { [weak self] in
-                                            guard let self = self else { return }
-                                            self.delegate?.dismissIndicator()
-                                            self.delegate?.showErrorAlert(
-                                                message: self.errorTranslator.translate(error: error)
-                                            )
-                                        }
+                                        self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                                     }
         }
     }
 
     private func creatingTokenCompleted(token: Token) {
-        self.delegate?.didProduced(with: token) { [weak self] error in
+        delegate?.didProduced(with: token) { [weak self] error in
             guard let self = self else { return }
             if let error = error {
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.dismissIndicator()
-                    self.delegate?.showErrorAlert(message: error.localizedDescription)
-                }
+                self.showErrorAlert(message: error.localizedDescription)
             } else {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
@@ -101,21 +91,23 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         if let status = token.card.threeDSecureStatus, status == .unverified {
             // すでに認証を行っている場合、何かしら問題がある
             if alreadyVerify {
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.dismissIndicator()
-                    self.delegate?.showErrorAlert(
-                        message: "Card verification is successful. There isn`t verified card.")
-                }
+                showErrorAlert(message: "Card verification is successful. There isn`t verified card.")
             } else {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.delegate?.dismissIndicator()
                     self.delegate?.presentVerificationScreen(with: token)
                 }
             }
         } else {
-            self.creatingTokenCompleted(token: token)
+            creatingTokenCompleted(token: token)
+        }
+    }
+    
+    private func showErrorAlert(message: String) {
+        dispatchQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.dismissIndicator()
+            self.delegate?.showErrorAlert(message: message)
         }
     }
 
@@ -157,18 +149,9 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.validateThreeDSecure(token: token, alreadyVerify: true)
-                }
+                self.validateThreeDSecure(token: token, alreadyVerify: true)
             case .failure(let error):
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.dismissIndicator()
-                    self.delegate?.showErrorAlert(
-                        message: self.errorTranslator.translate(error: error)
-                    )
-                }
+                self.showErrorAlert(message: self.errorTranslator.translate(error: error))
             }
         }
     }

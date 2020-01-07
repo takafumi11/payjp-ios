@@ -72,6 +72,7 @@
 		ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2CDBB223E952570017F102 /* PermissionFetcher.swift */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
 		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
+		ED30C8C823C474E0008373E6 /* WebViewObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED30C8C723C474E0008373E6 /* WebViewObserver.swift */; };
 		ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */; };
 		ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */; };
 		ED31B0852399FA8800DDFFE5 /* CardFormScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */; };
@@ -215,6 +216,7 @@
 		ED2CDBB223E952570017F102 /* PermissionFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionFetcher.swift; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
 		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
+		ED30C8C723C474E0008373E6 /* WebViewObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewObserver.swift; sourceTree = "<group>"; };
 		ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenter.swift; sourceTree = "<group>"; };
 		ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormInput.swift; sourceTree = "<group>"; };
 		ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenterTests.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
+				ED30C8C723C474E0008373E6 /* WebViewObserver.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */,
 				BE21785D22E99CF10098128D /* GetTokenRequest.swift in Sources */,
 				BE0417CF22E1A51100B944CB /* ExpirationValidator.swift in Sources */,
+				ED30C8C823C474E0008373E6 /* WebViewObserver.swift in Sources */,
 				EDE20E9323B1E18800A38A96 /* CardVerificationViewController.swift in Sources */,
 				ED9B33E42390B7780079E7B8 /* ErrorTranslator.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,

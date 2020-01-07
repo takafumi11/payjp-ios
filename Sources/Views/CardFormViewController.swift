@@ -321,7 +321,7 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
     }
 
     public func cardVarificationViewControllerDidCancel(_ viewController: CardVerificationViewController) {
-        // TODO: キャンセル時にすべき処理はある？
         print(debug: "cardVarificationViewControllerDidCancel")
+        dismissIndicator()
     }
 }

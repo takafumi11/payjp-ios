@@ -18,8 +18,8 @@ public class CardVerificationViewController: UIViewController {
     private var progressView: UIProgressView!
     private var token: Token?
     private var verifyCompleted: Bool = false
-    private var estimatedProgressObservation: NSKeyValueObservation?
     private var originalEntryUrl: URL?
+    private var webViewObserver: WebViewObserverType?
 
     private weak var delegate: CardVerificationViewControllerDelegate?
 
@@ -64,7 +64,6 @@ public class CardVerificationViewController: UIViewController {
         super.loadView()
 
         setupViews()
-        setupWebViewObserver()
     }
 
     override public func viewDidLoad() {
@@ -87,6 +86,8 @@ public class CardVerificationViewController: UIViewController {
         if isMovingFromParent && !verifyCompleted {
             delegate?.cardVarificationViewControllerDidCancel(self)
         }
+        
+        webViewObserver?.remove()
     }
 
     // MARK: Private
@@ -115,36 +116,14 @@ public class CardVerificationViewController: UIViewController {
             progressView.progressViewStyle = .bar
             self.navigationController?.navigationBar.addSubview(progressView)
         }
-    }
-
-    private func setupWebViewObserver() {
-        estimatedProgressObservation = webView.observe(\.estimatedProgress,
-                                                       options: [.new],
-                                                       changeHandler: { [weak self] (webView, change) in
-                                                        guard let self = self else { return }
-                                                        self.progressView.alpha = 1.0
-                                                        self.progressView.setProgress(Float(change.newValue!),
-                                                                                      animated: true)
-
-                                                        if self.webView.estimatedProgress >= 1.0 {
-                                                            UIView.animate(withDuration: 0.3,
-                                                                           delay: 0.3,
-                                                                           options: [.curveEaseOut],
-                                                                           animations: { [weak self] in
-                                                                            guard let self = self else { return }
-                                                                            self.progressView.alpha = 0.0
-                                                                }, completion: { [weak self] _ in
-                                                                    guard let self = self else { return }
-                                                                    self.progressView.setProgress(0.0, animated: false)
-                                                            })
-                                                        }
-        })
+        
+        // Observer
+        webViewObserver = WebViewObserver(webView: webView, progressView: progressView)
+        webViewObserver?.setup()
     }
 
     private func checkVerificationFinished(url: URL?) -> Bool {
         if let loadUrl = url?.absoluteString, let expectedUrl = token?.card.tdsFinishUrl?.absoluteString {
-            print(debugMessage: "loadedUrl \(loadUrl)")
-            print(debugMessage: "expectedUrl \(expectedUrl)")
             return loadUrl == expectedUrl
         }
         return false
