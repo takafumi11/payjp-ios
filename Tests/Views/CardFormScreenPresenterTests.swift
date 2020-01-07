@@ -155,7 +155,6 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertEqual(mockDelegate.presentVerificationScreenToken, token)
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
