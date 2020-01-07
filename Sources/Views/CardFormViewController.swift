@@ -43,15 +43,15 @@ public class CardFormViewController: UIViewController {
                                                     tenantId: String? = nil,
                                                     delegate: CardFormViewControllerDelegate)
         -> CardFormViewController {
-        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
-        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
-        guard
-            let cardFormVc = naviVc?.topViewController as? CardFormViewController
-            else { fatalError("Couldn't instantiate CardFormViewController") }
-        cardFormVc.formStyle = style
-        cardFormVc.tenantId = tenantId
-        cardFormVc.delegate = delegate
-        return cardFormVc
+            let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
+            let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
+            guard
+                let cardFormVc = naviVc?.topViewController as? CardFormViewController
+                else { fatalError("Couldn't instantiate CardFormViewController") }
+            cardFormVc.formStyle = style
+            cardFormVc.tenantId = tenantId
+            cardFormVc.delegate = delegate
+            return cardFormVc
     }
 
     @IBAction func registerCardTapped(_ sender: Any) {

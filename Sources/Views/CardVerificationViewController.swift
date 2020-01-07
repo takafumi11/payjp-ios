@@ -48,14 +48,14 @@ public class CardVerificationViewController: UIViewController {
     public static func createCardVerificationViewController(token: Token,
                                                             delegate: CardVerificationViewControllerDelegate)
         -> CardVerificationViewController {
-        let stotyboard = UIStoryboard(name: "CardVerification", bundle: Bundle(for: PAYJPSDK.self))
-        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
-        guard
-            let verifyVc = naviVc?.topViewController as? CardVerificationViewController
-            else { fatalError("Couldn't instantiate CardVerificationViewController") }
-        verifyVc.token = token
-        verifyVc.delegate = delegate
-        return verifyVc
+            let stotyboard = UIStoryboard(name: "CardVerification", bundle: Bundle(for: PAYJPSDK.self))
+            let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
+            guard
+                let verifyVc = naviVc?.topViewController as? CardVerificationViewController
+                else { fatalError("Couldn't instantiate CardVerificationViewController") }
+            verifyVc.token = token
+            verifyVc.delegate = delegate
+            return verifyVc
     }
 
     // MARK: Lifecycle
@@ -107,13 +107,14 @@ public class CardVerificationViewController: UIViewController {
                                      webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)])
 
         // ProgressView
-        progressView = UIProgressView(
-            frame: CGRect(x: 0.0,
-                                                    y: (self.navigationController?.navigationBar.frame.size.height)! - 3.0,
-                                                    width: self.view.frame.size.width,
-                                                    height: 3.0))
-        progressView.progressViewStyle = .bar
-        self.navigationController?.navigationBar.addSubview(progressView)
+        if let naviBarHeight = self.navigationController?.navigationBar.frame.size.height {
+            progressView = UIProgressView(frame: CGRect(x: 0.0,
+                                                        y: naviBarHeight - 3.0,
+                                                        width: self.view.frame.size.width,
+                                                        height: 3.0))
+            progressView.progressViewStyle = .bar
+            self.navigationController?.navigationBar.addSubview(progressView)
+        }
     }
 
     private func setupWebViewObserver() {
