@@ -98,9 +98,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     }
 
     private func validateThreeDSecure(token: Token, alreadyVerify: Bool = false) {
-        // TODO: debug用
-        //        if let status = token.card.threeDSecureStatus, status == .unverified {
-        if !alreadyVerify {
+        if let status = token.card.threeDSecureStatus, status == .unverified {
             // すでに認証を行っている場合、何かしら問題がある
             if alreadyVerify {
                 self.dispatchQueue.async { [weak self] in
@@ -160,8 +158,6 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             case .success(let token):
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
-                    self.delegate?.dismissIndicator()
-                    self.delegate?.dismissErrorView()
                     self.validateThreeDSecure(token: token, alreadyVerify: true)
                 }
             case .failure(let error):

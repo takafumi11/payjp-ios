@@ -61,6 +61,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func presentVerificationScreen(with token: Token) {
         presentVerificationScreenToken = token
+        expectation.fulfill()
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
@@ -77,13 +78,12 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 class MockTokenService: TokenServiceType {
     let token: Token
     let error: APIError?
-    let expectation: XCTestExpectation
     var calledTenantId: String?
+    var calledTokenId: String?
 
-    init(token: Token, error: APIError? = nil, expectation: XCTestExpectation) {
+    init(token: Token, error: APIError? = nil) {
         self.token = token
         self.error = error
-        self.expectation = expectation
     }
 
     // swiftlint:disable function_parameter_count
@@ -114,6 +114,15 @@ class MockTokenService: TokenServiceType {
 
     func getToken(with tokenId: String,
                   completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        
+        self.calledTokenId = tokenId
+
+        if let error  = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(token))
+        }
+        
         return nil
     }
 }
@@ -121,13 +130,11 @@ class MockTokenService: TokenServiceType {
 class MockAccountService: AccountsServiceType {
     let brands: [CardBrand]
     let error: APIError?
-    let expectation: XCTestExpectation
     var calledTenantId: String?
 
-    init(brands: [CardBrand], error: APIError? = nil, expectation: XCTestExpectation) {
+    init(brands: [CardBrand], error: APIError? = nil) {
         self.brands = brands
         self.error = error
-        self.expectation = expectation
     }
 
     func getAcceptedBrands(tenantId: String?,
