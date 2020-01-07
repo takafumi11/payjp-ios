@@ -29,7 +29,7 @@ public class CardVerificationViewController: UIViewController {
     }
 
     @IBAction func reloadTapped(_ sender: Any) {
-        if let _ = webView.url {
+        if webView.url != nil {
             webView.reload()
         } else {
             if let original = originalEntryUrl {
@@ -72,19 +72,11 @@ public class CardVerificationViewController: UIViewController {
         navigationItem.title = "payjp_card_verification_title".localized
         webView.navigationDelegate = self
 
-        // TODO: 試し
-        if let entryUrl = URL(string: "https://apple.com") {
+        if let card = token?.card, let entryUrl = card.tdsEntryUrl {
             originalEntryUrl = entryUrl
             let request = URLRequest(url: entryUrl)
             webView.load(request)
         }
-
-        //        if let card = token?.card, let entryUrl = card.tdsEntryUrl {
-        //            originalEntryUrl = entryUrl
-        //            print("entryUrl \(entryUrl)")
-        //            let request = URLRequest(url: entryUrl)
-        //            webView.load(request)
-        //        }
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -160,18 +152,12 @@ extension CardVerificationViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView,
                         decidePolicyFor navigationAction: WKNavigationAction,
                         decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
-
-        print(debugMessage: "request url => \(navigationAction.request.url?.absoluteString)")
-
         decisionHandler(.allow)
     }
 
     public func webView(_ webView: WKWebView,
                         decidePolicyFor navigationResponse: WKNavigationResponse,
                         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-
-        print(debugMessage: "response url => \(navigationResponse.response.url?.absoluteString)")
-
         // 認証完了URLかどうかチェック
         if checkVerificationFinished(url: navigationResponse.response.url) {
             decisionHandler(.cancel)
@@ -183,22 +169,12 @@ extension CardVerificationViewController: WKNavigationDelegate {
         }
     }
 
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print(debugMessage: "didStartProvisionalNavigation")
-    }
-
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print(debugMessage: "didFinish")
         errorView.dismiss()
     }
 
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError: Error) {
-        print(debugMessage: "didFailProvisionalNavigation")
         errorView.show(message: "payjp_card_verification_error_message".localized, reloadButtonHidden: true)
-    }
-
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError: Error) {
-        print(debugMessage: "didFail")
     }
 }
 
