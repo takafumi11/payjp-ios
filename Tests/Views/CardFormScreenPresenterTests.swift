@@ -141,7 +141,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertFalse(mockDelegate.showErrorViewButtonHidden)
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
-    
+
     func testValidateThreeDSecure_execute() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
@@ -159,7 +159,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockDelegate.presentVerificationScreenToken, token)
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
-    
+
     func testValidateThreeDSecure_failure() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
@@ -177,7 +177,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "Card verification is successful. There isn`t verified card.")
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
-    
+
     func testFetchToken_success() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
@@ -196,7 +196,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
-    
+
     func testFetchToken_failure() {
         let error = NSError(domain: "mock_domain",
                             code: 0,

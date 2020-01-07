@@ -114,7 +114,7 @@ class MockTokenService: TokenServiceType {
 
     func getToken(with tokenId: String,
                   completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
-        
+
         self.calledTokenId = tokenId
 
         if let error  = error {
@@ -122,7 +122,7 @@ class MockTokenService: TokenServiceType {
         } else {
             completion(.success(token))
         }
-        
+
         return nil
     }
 }
