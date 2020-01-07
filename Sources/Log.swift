@@ -21,9 +21,3 @@ func print(debug: Any = "", function: String = #function, file: String = #file, 
     Swift.print("File: \(filename), Line: \(line), Func: \(function) \n\(debug)")
     #endif
 }
-
-func print(debugMessage: Any) {
-    #if DEBUG
-    Swift.print("\(debugMessage)")
-    #endif
-}
