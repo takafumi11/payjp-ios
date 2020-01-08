@@ -15,7 +15,7 @@ public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
-    @IBOutlet weak var saveButton: ActionButton!
+    @IBOutlet weak var submitButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
@@ -95,7 +95,7 @@ public class CardFormViewController: UIViewController {
         }
 
         navigationItem.title = "payjp_card_form_screen_title".localized
-        saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        submitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
                             forCellWithReuseIdentifier: "BrandCell")
@@ -133,11 +133,11 @@ public class CardFormViewController: UIViewController {
     }
 
     @objc private func handleKeyboardShow(notification: Notification) {
-        saveButton.isHidden = true
+        submitButton.isHidden = true
     }
 
     @objc private func handleKeyboardHide(notification: Notification) {
-        saveButton.isHidden = false
+        submitButton.isHidden = false
     }
 
     @objc private func keyboardDidChangeFrame(notification: Notification) {
@@ -207,11 +207,11 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func enableSubmitButton() {
-        saveButton.isEnabled = true
+        submitButton.isEnabled = true
     }
 
     func disableSubmitButton() {
-        saveButton.isEnabled = false
+        submitButton.isEnabled = false
     }
 
     func showErrorView(message: String, buttonHidden: Bool) {
@@ -246,7 +246,7 @@ extension CardFormViewController: CardFormScreenDelegate {
 // MARK: CardFormViewDelegate
 extension CardFormViewController: CardFormViewDelegate {
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
-        saveButton.isEnabled = isValid
+        submitButton.isEnabled = isValid
         accessorySubmitButton.isEnabled = isValid
     }
 

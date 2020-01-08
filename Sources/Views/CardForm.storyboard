@@ -128,8 +128,8 @@
                         <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
                         <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="errorView" destination="5fp-Ih-ELw" id="e9i-z0-gq8"/>
-                        <outlet property="saveButton" destination="yza-qd-fV7" id="BgJ-8d-h3m"/>
                         <outlet property="scrollView" destination="blx-Ud-4tL" id="398-1X-NRm"/>
+                        <outlet property="submitButton" destination="yza-qd-fV7" id="j5x-cy-dYY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEl-uz-dRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
