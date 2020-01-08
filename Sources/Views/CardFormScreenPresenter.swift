@@ -144,7 +144,6 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     }
 
     func fetchToken(tokenId: String) {
-        delegate?.showIndicator()
         tokenService.getToken(with: tokenId) { [weak self] result in
             guard let self = self else { return }
             switch result {

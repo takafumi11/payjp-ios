@@ -171,7 +171,6 @@ class CardFormScreenPresenterTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTokenId, "token_id")
-        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage,
                        "Card verification is successful. There isn`t verified card.")
@@ -190,7 +189,6 @@ class CardFormScreenPresenterTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTokenId, "token_id")
-        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
@@ -213,7 +211,6 @@ class CardFormScreenPresenterTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTokenId, "token_id")
-        XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
