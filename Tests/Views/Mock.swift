@@ -15,6 +15,8 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var fetchedBrands: [CardBrand] = []
     var showIndicatorCalled = false
     var dismissIndicatorCalled = false
+    var enableSubmitButtonCalled = false
+    var disableSubmitButtonCalled = false
     var showErrorViewMessage: String?
     var showErrorViewButtonHidden = false
     var dismissErrorViewCalled = false
@@ -42,6 +44,14 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func dismissIndicator() {
         dismissIndicatorCalled = true
+    }
+
+    func enableSubmitButton() {
+        enableSubmitButtonCalled = true
+    }
+
+    func disableSubmitButton() {
+        disableSubmitButtonCalled = true
     }
 
     func showErrorView(message: String, buttonHidden: Bool) {

@@ -206,6 +206,14 @@ extension CardFormViewController: CardFormScreenDelegate {
         activityIndicator.stopAnimating()
     }
 
+    func enableSubmitButton() {
+        saveButton.isEnabled = true
+    }
+
+    func disableSubmitButton() {
+        saveButton.isEnabled = false
+    }
+
     func showErrorView(message: String, buttonHidden: Bool) {
         errorView.show(message: message, reloadButtonHidden: buttonHidden)
     }
@@ -323,5 +331,6 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
     public func cardVarificationViewControllerDidCancel(_ viewController: CardVerificationViewController) {
         print(debug: "cardVarificationViewControllerDidCancel")
         dismissIndicator()
+        enableSubmitButton()
     }
 }

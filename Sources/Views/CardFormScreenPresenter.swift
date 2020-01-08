@@ -13,6 +13,8 @@ protocol CardFormScreenDelegate: class {
     func reloadBrands(brands: [CardBrand])
     func showIndicator()
     func dismissIndicator()
+    func enableSubmitButton()
+    func disableSubmitButton()
     func showErrorView(message: String, buttonHidden: Bool)
     func dismissErrorView()
     func showErrorAlert(message: String)
@@ -54,7 +56,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     }
 
     func createToken(tenantId: String?, formInput: CardFormInput) {
-        delegate?.showIndicator()
+        showLoading()
         tokenService.createToken(cardNumber: formInput.cardNumber,
                                  cvc: formInput.cvc,
                                  expirationMonth: formInput.expirationMonth,
@@ -71,43 +73,15 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    private func creatingTokenCompleted(token: Token) {
-        delegate?.didProduced(with: token) { [weak self] error in
+    func fetchToken(tokenId: String) {
+        tokenService.getToken(with: tokenId) { [weak self] result in
             guard let self = self else { return }
-            if let error = error {
-                self.showErrorAlert(message: error.localizedDescription)
-            } else {
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.cardFormResultSuccess = true
-                    self.delegate?.dismissIndicator()
-                    self.delegate?.didCompleteCardForm(with: .success)
-                }
+            switch result {
+            case .success(let token):
+                self.validateThreeDSecure(token: token, alreadyVerify: true)
+            case .failure(let error):
+                self.showErrorAlert(message: self.errorTranslator.translate(error: error))
             }
-        }
-    }
-
-    private func validateThreeDSecure(token: Token, alreadyVerify: Bool = false) {
-        if let status = token.card.threeDSecureStatus, status == .unverified {
-            // すでに認証を行っている場合、何かしら問題がある
-            if alreadyVerify {
-                showErrorAlert(message: "Card verification is successful. There isn`t verified card.")
-            } else {
-                self.dispatchQueue.async { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.presentVerificationScreen(with: token)
-                }
-            }
-        } else {
-            creatingTokenCompleted(token: token)
-        }
-    }
-
-    private func showErrorAlert(message: String) {
-        dispatchQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.dismissIndicator()
-            self.delegate?.showErrorAlert(message: message)
         }
     }
 
@@ -143,15 +117,53 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func fetchToken(tokenId: String) {
-        tokenService.getToken(with: tokenId) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let token):
-                self.validateThreeDSecure(token: token, alreadyVerify: true)
-            case .failure(let error):
-                self.showErrorAlert(message: self.errorTranslator.translate(error: error))
+    private func validateThreeDSecure(token: Token, alreadyVerify: Bool = false) {
+        if let status = token.card.threeDSecureStatus, status == .unverified {
+            // すでに認証を行っている場合、何かしら問題がある
+            if alreadyVerify {
+                showErrorAlert(message: "Card verification is successful. There isn`t verified card.")
+            } else {
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.presentVerificationScreen(with: token)
+                }
             }
+        } else {
+            creatingTokenCompleted(token: token)
+        }
+    }
+
+    private func creatingTokenCompleted(token: Token) {
+        delegate?.didProduced(with: token) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                self.showErrorAlert(message: error.localizedDescription)
+            } else {
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else { return }
+                    self.cardFormResultSuccess = true
+                    self.dismissLoading()
+                    self.delegate?.didCompleteCardForm(with: .success)
+                }
+            }
+        }
+    }
+
+    private func showLoading() {
+        delegate?.showIndicator()
+        delegate?.disableSubmitButton()
+    }
+
+    private func dismissLoading() {
+        delegate?.dismissIndicator()
+        delegate?.enableSubmitButton()
+    }
+
+    private func showErrorAlert(message: String) {
+        dispatchQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.dismissLoading()
+            self.delegate?.showErrorAlert(message: message)
         }
     }
 }

@@ -55,8 +55,10 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
@@ -75,7 +77,9 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
@@ -95,7 +99,9 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock delegate error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
@@ -155,6 +161,7 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
+        XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
         XCTAssertEqual(mockDelegate.presentVerificationScreenToken, token)
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
@@ -172,6 +179,7 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTokenId, "token_id")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage,
                        "Card verification is successful. There isn`t verified card.")
         XCTAssertFalse(presenter.cardFormResultSuccess)
@@ -191,6 +199,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockService.calledTokenId, "token_id")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
@@ -212,6 +221,7 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         XCTAssertEqual(mockService.calledTokenId, "token_id")
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
