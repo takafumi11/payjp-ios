@@ -113,6 +113,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
 
+        // set images
+        brandLogoImage.image = "icon_card".image
+        cvcIconImage.image = "icon_card_cvc_3".image
+        ocrButton.imageView?.image = "icon_camera".image
+        
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill

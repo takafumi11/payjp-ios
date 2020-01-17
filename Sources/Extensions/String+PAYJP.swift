@@ -13,7 +13,13 @@ extension String {
 
     /// 画像を取得
     var image: UIImage? {
-        return UIImage(named: self, in: Bundle(for: PAYJPSDK.self), compatibleWith: nil)
+        print(self)
+        let sdkBundle = Bundle(for: PAYJPSDK.self)
+        if let path = sdkBundle.path(forResource: "PAYJP", ofType: "bundle") {
+            let bundle = Bundle(path: path)
+            return UIImage(named: self, in: bundle, compatibleWith: nil)
+        }
+        return UIImage(named: self, in: sdkBundle, compatibleWith: nil)
     }
 
     /// 多言語対応
