@@ -13,18 +13,12 @@ extension String {
 
     /// 画像を取得
     var image: UIImage? {
-        print(self)
-        let sdkBundle = Bundle(for: PAYJPSDK.self)
-        if let path = sdkBundle.path(forResource: "PAYJP", ofType: "bundle") {
-            let bundle = Bundle(path: path)
-            return UIImage(named: self, in: bundle, compatibleWith: nil)
-        }
-        return UIImage(named: self, in: sdkBundle, compatibleWith: nil)
+        return UIImage(named: self, in: .sdkBundle, compatibleWith: nil)
     }
 
     /// 多言語対応
     var localized: String {
-        return NSLocalizedString(self, bundle: Bundle(for: PAYJPSDK.self), comment: "")
+        return NSLocalizedString(self, bundle: .frameworkBundle, comment: "")
     }
 
     /// 数字かどうか
