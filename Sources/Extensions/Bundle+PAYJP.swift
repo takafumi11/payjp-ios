@@ -15,7 +15,7 @@ extension Bundle {
         }
         return bundle
     }()
-    
+
     #if PAYJPCocoaPods
     static let payjpBundle: Bundle = {
         guard let path = frameworkBundle.path(forResource: "PAYJP", ofType: "bundle"),
@@ -27,7 +27,7 @@ extension Bundle {
     #else
     static let payjpBundle: Bundle = .frameworkBundle
     #endif
-    
+
     private static let frameworkBundle: Bundle = {
         return Bundle(for: PAYJPSDK.self)
     }()
