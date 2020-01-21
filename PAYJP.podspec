@@ -20,9 +20,9 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = ['Sources/**/*.{h,m,swift,xib,strings,storyboard}']
+  s.source_files = ['Sources/**/*.{h,m,swift}']
   s.public_header_files = 'Sources/**/*.h'
   s.frameworks = 'PassKit'
-  s.resource_bundles = { 'PAYJP' => 'Assets.xcassets' }
+  s.resource_bundles = { 'PAYJP' => ['Assets.xcassets', 'Sources/**/*.{xib,strings,storyboard}'] }
   
 end

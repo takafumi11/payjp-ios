@@ -35,8 +35,7 @@ class ErrorView: UIView {
     }
 
     private func initialize() {
-        let bundle = Bundle(for: ErrorView.self)
-        let nib = UINib(nibName: "ErrorView", bundle: bundle)
+        let nib = UINib(nibName: "ErrorView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {

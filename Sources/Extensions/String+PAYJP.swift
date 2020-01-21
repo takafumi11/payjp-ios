@@ -13,12 +13,12 @@ extension String {
 
     /// 画像を取得
     var image: UIImage? {
-        return UIImage(named: self, in: .sdkBundle, compatibleWith: nil)
+        return UIImage(named: self, in: .payjpBundle, compatibleWith: nil)
     }
 
     /// 多言語対応
     var localized: String {
-        return NSLocalizedString(self, bundle: .frameworkBundle, comment: "")
+        return NSLocalizedString(self, bundle: .payjpBundle, comment: "")
     }
 
     /// 数字かどうか

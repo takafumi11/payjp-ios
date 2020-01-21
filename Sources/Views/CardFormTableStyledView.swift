@@ -81,8 +81,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     }
 
     private func initialize() {
-        let bundle = Bundle(for: CardFormTableStyledView.self)
-        let nib = UINib(nibName: "CardFormTableStyledView", bundle: bundle)
+        let nib = UINib(nibName: "CardFormTableStyledView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
