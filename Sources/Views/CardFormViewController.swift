@@ -40,7 +40,7 @@ public class CardFormViewController: UIViewController {
     @objc(createCardFormViewControllerWithStyle: tenantId:)
     public static func createCardFormViewController(style: FormStyle? = nil,
                                                     tenantId: String? = nil) -> CardFormViewController {
-        let stotyboard = UIStoryboard(name: "CardForm", bundle: Bundle(for: PAYJPSDK.self))
+        let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
             let cardFormVc = naviVc?.topViewController as? CardFormViewController
@@ -93,8 +93,8 @@ public class CardFormViewController: UIViewController {
         navigationItem.title = "payjp_card_form_screen_title".localized
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
-        let bundle = Bundle(for: BrandImageCell.self)
-        brandsView.register(UINib(nibName: "BrandImageCell", bundle: bundle), forCellWithReuseIdentifier: "BrandCell")
+        brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
+                            forCellWithReuseIdentifier: "BrandCell")
 
         // style
         if let formStyle = formStyle {

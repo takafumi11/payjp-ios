@@ -73,36 +73,42 @@ platform :ios do
 
   desc "Create PR to update docs"
   lane :create_pr_to_update_docs do
-    last_commit_hash = last_git_commit[:abbreviated_commit_hash]
-    new_branch = "feature/update_docs_#{last_commit_hash}"
+    target_branch = 'develop'
+    diff_files = sh("git diff HEAD..origin/#{target_branch} --name-only").split
+    unless diff_files.any? { |file| file.start_with? "Sources/" }
+      UI.message "No updates in sources."
+    else
+      last_commit_hash = last_git_commit[:abbreviated_commit_hash]
+      new_branch = "feature/update_docs_#{last_commit_hash}"
 
-    jazzy
-    sh("git checkout -b #{new_branch}")
+      jazzy
+      sh("git checkout -b #{new_branch}")
 
-    sh('git config --global user.email "misc@pay.jp"')
-    sh('git config --global user.name "pay kun"')
-    git_add
-    git_commit(
-      path: "./",
-      message: "update docs."
-    )
+      sh('git config --global user.email "misc@pay.jp"')
+      sh('git config --global user.name "pay kun"')
+      git_add
+      git_commit(
+        path: "./",
+        message: "update docs."
+      )
 
-    push_to_git_remote(
-      remote: 'origin',
-      local_branch: new_branch,
-      remote_branch: new_branch
-    )
+      push_to_git_remote(
+        remote: 'origin',
+        local_branch: new_branch,
+        remote_branch: new_branch
+      )
 
-    pr_url = create_pull_request(
-      repo: 'payjp/payjp-ios-internal',
-      base: 'develop',
-      title: "update docs:#{last_commit_hash}",
-      api_token: ENV['GITHUB_API_TOKEN']
-    )
+      pr_url = create_pull_request(
+        repo: 'payjp/payjp-ios-internal',
+        base: target_branch,
+        title: "update docs:#{last_commit_hash}",
+        api_token: ENV['GITHUB_API_TOKEN']
+      )
 
-    slack(
-      message: ":rocket: PR is created!\n#{pr_url}",
-      success: true
-    )
+      slack(
+        message: ":rocket: PR is created!\n#{pr_url}",
+        success: true
+      )
+    end
   end
 end

@@ -81,8 +81,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     }
 
     private func initialize() {
-        let bundle = Bundle(for: CardFormTableStyledView.self)
-        let nib = UINib(nibName: "CardFormTableStyledView", bundle: bundle)
+        let nib = UINib(nibName: "CardFormTableStyledView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -112,6 +111,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
+
+        // set images
+        brandLogoImage.image = "icon_card".image
+        cvcIconImage.image = "icon_card_cvc_3".image
+        ocrButton.imageView?.image = "icon_camera".image
 
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
