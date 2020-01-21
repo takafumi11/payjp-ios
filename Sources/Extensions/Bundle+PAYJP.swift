@@ -9,9 +9,18 @@ import Foundation
 
 extension Bundle {
     static let payjpBundle: Bundle = {
-        let baseBundle = Bundle(for: PAYJPSDK.self)
-        guard let path = baseBundle.path(forResource: "PAYJP", ofType: "bundle"),
-            let bundle = Bundle(path: path) else { return baseBundle }
+        guard let path = frameworkBundle.path(forResource: "PAYJP", ofType: "bundle"),
+            let bundle = Bundle(path: path) else { return .frameworkBundle }
         return bundle
+    }()
+
+    static let resourceBundle: Bundle = {
+        guard let path = payjpBundle.path(forResource: "Resource", ofType: "bundle"),
+              let bundle = Bundle(path: path) else { return .frameworkBundle }
+        return bundle
+    }()
+
+    private static let frameworkBundle: Bundle = {
+        return Bundle(for: PAYJPSDK.self)
     }()
 }

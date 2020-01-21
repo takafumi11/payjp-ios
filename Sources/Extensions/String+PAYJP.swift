@@ -18,7 +18,7 @@ extension String {
 
     /// 多言語対応
     var localized: String {
-        return NSLocalizedString(self, bundle: .payjpBundle, comment: "")
+        return NSLocalizedString(self, bundle: .resourceBundle, comment: "")
     }
 
     /// 数字かどうか
