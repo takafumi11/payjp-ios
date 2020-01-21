@@ -93,7 +93,8 @@ public class CardFormViewController: UIViewController {
         navigationItem.title = "payjp_card_form_screen_title".localized
         saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
-        brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle), forCellWithReuseIdentifier: "BrandCell")
+        brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
+                            forCellWithReuseIdentifier: "BrandCell")
 
         // style
         if let formStyle = formStyle {
