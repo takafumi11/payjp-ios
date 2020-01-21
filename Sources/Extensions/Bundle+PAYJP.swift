@@ -16,7 +16,7 @@ extension Bundle {
 
     static let resourceBundle: Bundle = {
         guard let path = payjpBundle.path(forResource: "Resource", ofType: "bundle"),
-              let bundle = Bundle(path: path) else { return .frameworkBundle }
+            let bundle = Bundle(path: path) else { return .frameworkBundle }
         return bundle
     }()
 
