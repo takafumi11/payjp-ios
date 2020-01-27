@@ -115,8 +115,8 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         // set images
         brandLogoImage.image = "icon_card".image
         cvcIconImage.image = "icon_card_cvc_3".image
-        ocrButton.imageView?.image = "icon_camera".image
 
+        ocrButton.setImage("icon_camera".image, for: .normal)
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
