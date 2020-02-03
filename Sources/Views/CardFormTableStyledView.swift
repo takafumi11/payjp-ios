@@ -187,6 +187,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     public func apply(style: FormStyle = .defalutStyle) {
         let inputTextColor = style.inputTextColor
+        let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
         self.inputTintColor = tintColor
 
@@ -195,6 +196,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.textColor = inputTextColor
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
+        // error text
+        cardNumberErrorLabel.textColor = errorTextColor
+        expirationErrorLabel.textColor = errorTextColor
+        cvcErrorLabel.textColor = errorTextColor
+        cardHolderErrorLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor
