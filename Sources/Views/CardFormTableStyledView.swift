@@ -185,9 +185,9 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    public func apply(style: FormStyle) {
-        let inputTextColor = style.inputTextColor ?? Style.Color.text
-        let tintColor = style.tintColor ?? Style.Color.blue
+    public func apply(style: FormStyle = .defalutStyle) {
+        let inputTextColor = style.inputTextColor
+        let tintColor = style.tintColor
         self.inputTintColor = tintColor
 
         // input text
@@ -214,7 +214,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-        ) -> Bool {
+    ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!

@@ -25,17 +25,17 @@ public class FormStyle: NSObject {
     }()
 
     /// Text color of UILabel.
-    public let labelTextColor: UIColor?
+    public let labelTextColor: UIColor
     /// Text color of UITextField.
-    public let inputTextColor: UIColor?
+    public let inputTextColor: UIColor
     /// Text color of Error.
-    public let errorTextColor: UIColor?
+    public let errorTextColor: UIColor
     /// Tint color of UITextField.
-    public let tintColor: UIColor?
+    public let tintColor: UIColor
     /// Background color of UITextField.
-    public let inputFieldBackgroundColor: UIColor?
+    public let inputFieldBackgroundColor: UIColor
     /// Background color of UIButton.
-    public let submitButtonColor: UIColor?
+    public let submitButtonColor: UIColor
 
     public init(labelTextColor: UIColor? = nil,
                 inputTextColor: UIColor? = nil,
@@ -43,11 +43,11 @@ public class FormStyle: NSObject {
                 tintColor: UIColor? = nil,
                 inputFieldBackgroundColor: UIColor? = nil,
                 submitButtonColor: UIColor? = nil) {
-        self.labelTextColor = labelTextColor
-        self.inputTextColor = inputTextColor
-        self.errorTextColor = errorTextColor
-        self.tintColor = tintColor
-        self.inputFieldBackgroundColor = inputFieldBackgroundColor
-        self.submitButtonColor = submitButtonColor
+        self.labelTextColor = labelTextColor ?? FormStyle.defalutStyle.labelTextColor
+        self.inputTextColor = inputTextColor ?? FormStyle.defalutStyle.inputTextColor
+        self.errorTextColor = errorTextColor ?? FormStyle.defalutStyle.errorTextColor
+        self.tintColor = tintColor ?? FormStyle.defalutStyle.tintColor
+        self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? FormStyle.defalutStyle.inputFieldBackgroundColor
+        self.submitButtonColor = submitButtonColor ?? FormStyle.defalutStyle.submitButtonColor
     }
 }

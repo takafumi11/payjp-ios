@@ -197,12 +197,12 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    public func apply(style: FormStyle) {
-        let labelTextColor = style.labelTextColor ?? Style.Color.text
-        let inputTextColor = style.inputTextColor ?? Style.Color.text
-        let errorTextColor = style.errorTextColor ?? Style.Color.red
-        let tintColor = style.tintColor ?? Style.Color.blue
-        let inputFieldBackgroundColor = style.inputFieldBackgroundColor ?? Style.Color.background
+    public func apply(style: FormStyle = .defalutStyle) {
+        let labelTextColor = style.labelTextColor
+        let inputTextColor = style.inputTextColor
+        let errorTextColor = style.errorTextColor
+        let tintColor = style.tintColor
+        let inputFieldBackgroundColor = style.inputFieldBackgroundColor
         self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 

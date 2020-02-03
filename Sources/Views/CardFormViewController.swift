@@ -99,10 +99,8 @@ public class CardFormViewController: UIViewController {
         // style
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
-            if let submitButtonColor = formStyle.submitButtonColor {
-                saveButton.normalBackgroundColor = submitButtonColor
-                accessorySubmitButton.normalBackgroundColor = submitButtonColor
-            }
+            saveButton.normalBackgroundColor = formStyle.submitButtonColor
+            accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
         }
         brandsView.backgroundColor = Style.Color.background
 
