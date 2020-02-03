@@ -43,11 +43,11 @@ public class FormStyle: NSObject {
                 tintColor: UIColor? = nil,
                 inputFieldBackgroundColor: UIColor? = nil,
                 submitButtonColor: UIColor? = nil) {
-        self.labelTextColor = labelTextColor ?? FormStyle.defalutStyle.labelTextColor
-        self.inputTextColor = inputTextColor ?? FormStyle.defalutStyle.inputTextColor
-        self.errorTextColor = errorTextColor ?? FormStyle.defalutStyle.errorTextColor
-        self.tintColor = tintColor ?? FormStyle.defalutStyle.tintColor
-        self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? FormStyle.defalutStyle.inputFieldBackgroundColor
-        self.submitButtonColor = submitButtonColor ?? FormStyle.defalutStyle.submitButtonColor
+        self.labelTextColor = labelTextColor ?? Style.Color.text
+        self.inputTextColor = inputTextColor ?? Style.Color.text
+        self.errorTextColor = errorTextColor ?? Style.Color.red
+        self.tintColor = tintColor ?? Style.Color.blue
+        self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? Style.Color.background
+        self.submitButtonColor = submitButtonColor ?? Style.Color.blue
     }
 }

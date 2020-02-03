@@ -12,7 +12,7 @@ protocol ClientType {
     func request<Request: PAYJP.Request>(
         with request: Request,
         completion: ((Result<Request.Response, APIError>) -> Void)?
-        ) -> URLSessionDataTask?
+    ) -> URLSessionDataTask?
 }
 
 class Client: ClientType {
@@ -28,7 +28,7 @@ class Client: ClientType {
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
         DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
-        ) {
+    ) {
         self.session = session
         self.callbackQueue = callbackQueue
         self.jsonDecoder = jsonDecoder
@@ -38,7 +38,7 @@ class Client: ClientType {
     func request<Request: PAYJP.Request>(
         with request: Request,
         completion: ((Result<Request.Response, APIError>) -> Void)?
-        ) -> URLSessionDataTask? {
+    ) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
             let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
