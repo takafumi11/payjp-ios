@@ -33,6 +33,7 @@
   [super viewDidLoad];
 
   self.cardFormView.delegate = self;
+  [self.cardFormView applyWithStyle:PAYCardFormStyle.defalutStyle];
   [self fetchBrands];
 
   self.list = @[ @"Normal", @"Red", @"Blue", @"Dark" ];
@@ -69,6 +70,7 @@
       UIColor *red = RGB(255, 69, 0);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:red
                                                                   inputTextColor:red
+                                                                  errorTextColor:nil
                                                                        tintColor:red
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];
@@ -80,6 +82,7 @@
       UIColor *blue = RGB(0, 103, 187);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:blue
                                                                   inputTextColor:blue
+                                                                  errorTextColor:nil
                                                                        tintColor:blue
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];
@@ -93,6 +96,7 @@
       UIColor *lightGray = RGB(80, 80, 80);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:white
                                                                   inputTextColor:white
+                                                                  errorTextColor:nil
                                                                        tintColor:white
                                                        inputFieldBackgroundColor:lightGray
                                                                submitButtonColor:nil];
@@ -105,6 +109,7 @@
       UIColor *defaultBlue = RGB(0, 122, 255);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:black
                                                                   inputTextColor:black
+                                                                  errorTextColor:nil
                                                                        tintColor:defaultBlue
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];

@@ -38,7 +38,7 @@ protocol CardFormView {
 extension CardFormView {
 
     var inputTextColor: UIColor {
-        return Style.Color.black
+        return Style.Color.text
     }
     var inputTintColor: UIColor {
         return Style.Color.blue

@@ -186,8 +186,8 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     }
 
     public func apply(style: FormStyle) {
-        let inputTextColor = style.inputTextColor
-        let tintColor = style.tintColor
+        let inputTextColor = style.inputTextColor ?? Style.Color.text
+        let tintColor = style.tintColor ?? Style.Color.blue
         self.inputTintColor = tintColor
 
         // input text

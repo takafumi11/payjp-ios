@@ -10,20 +10,40 @@ import Foundation
 
 extension Style {
     final class Color {
-        static var black: UIColor {
-            return .init(hex: "030300")
+
+        static var text: UIColor {
+            if #available(iOS 13.0, *) {
+                return .label
+            } else {
+                return .init(hex: "030300")
+            }
+        }
+        static var background: UIColor {
+            if #available(iOS 13.0, *) {
+                return .secondarySystemGroupedBackground
+            } else {
+                return .white
+            }
         }
         static var gray: UIColor {
-            return .init(hex: "8e8e93")
+            if #available(iOS 13.0, *) {
+                return .placeholderText
+            } else {
+                return .systemGray
+            }
         }
         static var lightGray: UIColor {
-            return .init(hex: "d8d8dc")
-        }
-        static var red: UIColor {
-            return .init(hex: "ff0000")
+            if #available(iOS 13.0, *) {
+                return .systemGray3
+            } else {
+                return .init(hex: "d8d8dc")
+            }
         }
         static var blue: UIColor {
-            return .init(hex: "007aff")
+            return .systemBlue
+        }
+        static var red: UIColor {
+            return .systemRed
         }
     }
 }

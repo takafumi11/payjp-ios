@@ -49,7 +49,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
-    var inputTextColor: UIColor = Style.Color.black
+    var inputTextColor: UIColor = Style.Color.text
     var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -198,10 +198,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     }
 
     public func apply(style: FormStyle) {
-        let labelTextColor = style.labelTextColor ?? Style.Color.black
-        let inputTextColor = style.inputTextColor
-        let tintColor = style.tintColor
-        let inputFieldBackgroundColor = style.inputFieldBackgroundColor ?? .white
+        let labelTextColor = style.labelTextColor ?? Style.Color.text
+        let inputTextColor = style.inputTextColor ?? Style.Color.text
+        let errorTextColor = style.errorTextColor ?? Style.Color.red
+        let tintColor = style.tintColor ?? Style.Color.blue
+        let inputFieldBackgroundColor = style.inputFieldBackgroundColor ?? Style.Color.background
         self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
@@ -215,6 +216,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.textColor = inputTextColor
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
+        // error text
+        cardNumberErrorLabel.textColor = errorTextColor
+        expirationErrorLabel.textColor = errorTextColor
+        cvcErrorLabel.textColor = errorTextColor
+        cardHolderErrorLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor

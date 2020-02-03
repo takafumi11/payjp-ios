@@ -30,8 +30,9 @@
     //                                                     inputFieldBackgroundColor:nil
     //                                                             submitButtonColor:color];
     // push
-    PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:nil tenantId:nil];
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defalutStyle
+                                     tenantId:nil];
     cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
 

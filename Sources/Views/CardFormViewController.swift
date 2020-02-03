@@ -38,7 +38,7 @@ public class CardFormViewController: UIViewController {
     ///   - tenantId: identifier of tenant
     /// - Returns: CardFormViewController
     @objc(createCardFormViewControllerWithStyle: tenantId:)
-    public static func createCardFormViewController(style: FormStyle? = nil,
+    public static func createCardFormViewController(style: FormStyle = .defalutStyle,
                                                     tenantId: String? = nil) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
@@ -104,6 +104,7 @@ public class CardFormViewController: UIViewController {
                 accessorySubmitButton.normalBackgroundColor = submitButtonColor
             }
         }
+        brandsView.backgroundColor = Style.Color.background
 
         setupKeyboardNotification()
         fetchAccpetedBrands()
