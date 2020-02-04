@@ -40,7 +40,7 @@ platform :ios do
   desc "Bump up next version"
   lane :bump_up_version do |options|
     current = get_version_number
-    new_version = options[:version] || prompt(text: "next version(current is #{current}):")
+    new_version = options[:version] || prompt(text: "enter next version(current is #{current}):")
     increment_version_number(version_number: new_version)
     version_bump_podspec(
       path: "PAYJP.podspec",
