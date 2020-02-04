@@ -134,6 +134,8 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+
+        apply()
     }
 
     override public var intrinsicContentSize: CGSize {

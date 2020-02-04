@@ -136,6 +136,8 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationSeparator.backgroundColor = Style.Color.separator
         cvcSeparator.backgroundColor = Style.Color.separator
         holderSeparator.backgroundColor = Style.Color.separator
+
+        apply()
     }
 
     override public var intrinsicContentSize: CGSize {

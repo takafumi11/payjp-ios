@@ -33,7 +33,6 @@
   [super viewDidLoad];
 
   self.cardFormView.delegate = self;
-  [self.cardFormView applyWithStyle:PAYCardFormStyle.defalutStyle];
   [self fetchBrands];
 
   self.list = @[ @"Normal", @"Red", @"Blue", @"Dark" ];
