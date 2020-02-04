@@ -16,6 +16,7 @@ script:
     - bundle exec fastlane ios check_swift_format
     - bundle exec fastlane ios check_objc_format
     - bundle exec fastlane ios test
+    - bundle exec fastlane ios lint_podspec
 
 cache:
   directories:
