@@ -34,7 +34,6 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cardFormView.isHolderRequired = true
         cardFormView.delegate = self
-        cardFormView.apply()
 
         self.formContentView.addSubview(cardFormView)
 
