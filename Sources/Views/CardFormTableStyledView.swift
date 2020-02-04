@@ -137,7 +137,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cvcSeparator.backgroundColor = Style.Color.separator
         holderSeparator.backgroundColor = Style.Color.separator
 
-        apply()
+        apply(style: .defalutStyle)
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -193,7 +193,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    public func apply(style: FormStyle = .defalutStyle) {
+    public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor

@@ -135,7 +135,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
-        apply()
+        apply(style: .defalutStyle)
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -199,7 +199,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         return isValid
     }
 
-    public func apply(style: FormStyle = .defalutStyle) {
+    public func apply(style: FormStyle) {
         let labelTextColor = style.labelTextColor
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
