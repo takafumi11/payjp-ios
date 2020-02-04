@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios test
 ```
 Run test
+### ios bump_up_version
+```
+fastlane ios bump_up_version
+```
+Bump up next version
 ### ios create_pr_to_public
 ```
 fastlane ios create_pr_to_public

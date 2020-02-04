@@ -26,6 +26,17 @@ platform :ios do
       skip_slack: true
     )
   end
+
+  desc "Bump up next version"
+  lane :bump_up_version do |options|
+    current = get_version_number
+    new_version = options[:version] || prompt(text: "next version(current is #{current}):")
+    increment_version_number(version_number: new_version)
+    version_bump_podspec(
+      path: "PAYJP.podspec",
+      version_number: new_version
+    )
+  end
   
   desc "Create GitHub PR to `payjp/payjp-ios` from internal repo. (internal only)"
   lane :create_pr_to_public do
