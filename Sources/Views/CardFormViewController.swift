@@ -102,7 +102,7 @@ public class CardFormViewController: UIViewController {
             saveButton.normalBackgroundColor = formStyle.submitButtonColor
             accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
         }
-        brandsView.backgroundColor = Style.Color.background
+        brandsView.backgroundColor = Style.Color.groupedBackground
 
         setupKeyboardNotification()
         fetchAccpetedBrands()

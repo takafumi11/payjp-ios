@@ -15,11 +15,11 @@ public class FormStyle: NSObject {
 
     /// Default style.
     public static let defalutStyle: FormStyle = {
-        let style = FormStyle(labelTextColor: Style.Color.text,
-                              inputTextColor: Style.Color.text,
+        let style = FormStyle(labelTextColor: Style.Color.label,
+                              inputTextColor: Style.Color.label,
                               errorTextColor: Style.Color.red,
                               tintColor: Style.Color.blue,
-                              inputFieldBackgroundColor: Style.Color.background,
+                              inputFieldBackgroundColor: Style.Color.groupedBackground,
                               submitButtonColor: Style.Color.blue)
         return style
     }()
@@ -43,11 +43,11 @@ public class FormStyle: NSObject {
                 tintColor: UIColor? = nil,
                 inputFieldBackgroundColor: UIColor? = nil,
                 submitButtonColor: UIColor? = nil) {
-        self.labelTextColor = labelTextColor ?? Style.Color.text
-        self.inputTextColor = inputTextColor ?? Style.Color.text
+        self.labelTextColor = labelTextColor ?? Style.Color.label
+        self.inputTextColor = inputTextColor ?? Style.Color.label
         self.errorTextColor = errorTextColor ?? Style.Color.red
         self.tintColor = tintColor ?? Style.Color.blue
-        self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? Style.Color.background
+        self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? Style.Color.groupedBackground
         self.submitButtonColor = submitButtonColor ?? Style.Color.blue
     }
 }

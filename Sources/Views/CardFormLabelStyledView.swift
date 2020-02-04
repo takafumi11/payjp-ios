@@ -49,7 +49,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
-    var inputTextColor: UIColor = Style.Color.text
+    var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
     let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -107,16 +107,16 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_number_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         expirationTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_expiration_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cvcTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cardHolderTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_holder_name_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
