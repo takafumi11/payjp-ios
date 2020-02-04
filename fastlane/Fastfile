@@ -27,6 +27,16 @@ platform :ios do
     )
   end
 
+  desc "Lint podspec"
+  lane :lint_podspec do
+    sh('pod lib lint ../PAYJP.podspec')
+    pod_version = version_get_podspec(path: 'PAYJP.podspec')
+    info_version = get_version_number
+    unless pod_version == info_version then
+      UI.user_error! "Version mismatch between podspec (#{pod_version}) and info.plist (#{info_version})."
+    end
+  end
+
   desc "Bump up next version"
   lane :bump_up_version do |options|
     current = get_version_number
