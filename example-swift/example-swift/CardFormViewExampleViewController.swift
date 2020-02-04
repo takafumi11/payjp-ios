@@ -63,6 +63,9 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         self.selectColorField.inputAccessoryView = toolbar
 
         self.fetchBrands()
+        
+        // processing to adjust the cell height of CardFormView when OS version is lower than 10
+        self.tableView.layoutIfNeeded()
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
