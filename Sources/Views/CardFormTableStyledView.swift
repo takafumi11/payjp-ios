@@ -55,8 +55,22 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
-        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
-            cardIOProxy.presentCardIO(from: viewController)
+        let status = viewModel.checkCameraPermission()
+        switch status {
+        case .notDetermined:
+            _ = viewModel.requestCameraPermission { [weak self] in
+                guard let self = self else {return}
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {return}
+                    self.startScanner()
+                }
+            }
+        case .authorized:
+            startScanner()
+        case .denied:
+            showCameraPermissionAlert()
+        default:
+            print("Unsupport camera in your device.")
         }
     }
 
@@ -218,6 +232,12 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
+
+    private func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
     }
 }
 

@@ -286,4 +286,35 @@ extension CardFormView {
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
         viewModel.cardFormInput(completion: completion)
     }
+
+    /// カメラ使用を許可していない場合にアラートを表示する
+    func showCameraPermissionAlert() {
+        let alertController = UIAlertController(title: "payjp_scanner_camera_permission_denied_title".localized,
+                                                message: "payjp_scanner_camera_permission_denied_message".localized,
+                                                preferredStyle: .alert)
+
+        let settingsAction = UIAlertAction(title: "payjp_common_settings".localized,
+                                           style: .default,
+                                           handler: { (_) -> Void in
+                                            guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
+                                                return
+                                            }
+                                            if #available(iOS 10.0, *) {
+                                                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(settingsURL)
+                                            }
+        })
+        let closeAction = UIAlertAction(title: "payjp_common_close".localized,
+                                        style: .default,
+                                        handler: nil)
+        alertController.addAction(closeAction)
+        alertController.addAction(settingsAction)
+        alertController.preferredAction = settingsAction
+
+        guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }

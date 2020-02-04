@@ -6,6 +6,10 @@
   Copyright © 2019 PAY, Inc. All rights reserved.
 */
 
+// common
+"payjp_common_close" = "Close";
+"payjp_common_settings" = "Settings";
+
 "payjp_card_form_number_label" = "Card number";
 "payjp_card_form_expiration_label" = "Expiration date";
 "payjp_card_form_cvc_label" = "Security code";
@@ -40,3 +44,7 @@
 
 "payjp_card_form_screen_submit_button" = "submit";
 "payjp_card_form_screen_title" = "Add Credit Card";
+
+// permission
+"payjp_scanner_camera_permission_denied_title" = "Camera permission is denied";
+"payjp_scanner_camera_permission_denied_message" = "Please allow camera permission in os setting to read credit card information.";

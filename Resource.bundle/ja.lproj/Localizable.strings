@@ -6,6 +6,10 @@
   Copyright © 2019 PAY, Inc. All rights reserved.
 */
 
+// common
+"payjp_common_close" = "閉じる";
+"payjp_common_settings" = "設定";
+
 "payjp_card_form_number_label" = "カード番号";
 "payjp_card_form_expiration_label" = "有効期限";
 "payjp_card_form_cvc_label" = "セキュリティコード";
@@ -40,3 +44,7 @@
 
 "payjp_card_form_screen_submit_button" = "カードを登録";
 "payjp_card_form_screen_title" = "クレジットカードを登録";
+
+// permission
+"payjp_scanner_camera_permission_denied_title" = "カメラの使用が許可されていません";
+"payjp_scanner_camera_permission_denied_message" = "クレジットカード情報を読み取るにはOSの設定画面よりカメラの使用を許可してください。";

@@ -62,6 +62,9 @@ protocol CardFormViewViewModelType {
     /// フォームの入力値を取得する
     /// - Parameter completion: 取得結果
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void)
+
+    func checkCameraPermission() -> PermissionAuthorizationStatus
+    func requestCameraPermission(completion: @escaping () -> Void) -> PermissionAuthorizationStatus
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -75,6 +78,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let cvcValidator: CvcValidatorType
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
+    private let permissionFetcher: PermissionFetcherType
 
     private var cardNumber: String?
     private var cardBrand: CardBrand = .unknown
@@ -104,7 +108,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
          cvcFormatter: CvcFormatterType = CvcFormatter(),
          cvcValidator: CvcValidatorType = CvcValidator(),
          accountsService: AccountsServiceType = AccountsService.shared,
-         tokenService: TokenServiceType = TokenService.shared) {
+         tokenService: TokenServiceType = TokenService.shared,
+         permissionFetcher: PermissionFetcherType = PermissionFetcher.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -114,6 +119,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.cvcValidator = cvcValidator
         self.accountsService = accountsService
         self.tokenService = tokenService
+        self.permissionFetcher = permissionFetcher
     }
 
     // MARK: - CardFormViewViewModelType
@@ -258,6 +264,14 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         } else {
             completion(.failure(LocalError.invalidFormInput))
         }
+    }
+
+    func checkCameraPermission() -> PermissionAuthorizationStatus {
+        return permissionFetcher.checkCamera()
+    }
+
+    func requestCameraPermission(completion: @escaping () -> Void) -> PermissionAuthorizationStatus {
+        return permissionFetcher.requestCamera(completion: completion)
     }
 
     // MARK: - Helpers
