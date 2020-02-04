@@ -38,7 +38,7 @@ public class CardFormViewController: UIViewController {
     ///   - tenantId: identifier of tenant
     /// - Returns: CardFormViewController
     @objc(createCardFormViewControllerWithStyle: tenantId:)
-    public static func createCardFormViewController(style: FormStyle? = nil,
+    public static func createCardFormViewController(style: FormStyle = .defalutStyle,
                                                     tenantId: String? = nil) -> CardFormViewController {
         let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
@@ -99,11 +99,10 @@ public class CardFormViewController: UIViewController {
         // style
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
-            if let submitButtonColor = formStyle.submitButtonColor {
-                saveButton.normalBackgroundColor = submitButtonColor
-                accessorySubmitButton.normalBackgroundColor = submitButtonColor
-            }
+            saveButton.normalBackgroundColor = formStyle.submitButtonColor
+            accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
         }
+        brandsView.backgroundColor = Style.Color.groupedBackground
 
         setupKeyboardNotification()
         fetchAccpetedBrands()

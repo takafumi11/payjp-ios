@@ -40,6 +40,8 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet weak var cvcErrorLabel: UILabel!
     @IBOutlet weak var cardHolderErrorLabel: UILabel!
 
+    @IBOutlet private weak var expirationSeparator: UIView!
+    @IBOutlet private weak var cvcSeparator: UIView!
     @IBOutlet private weak var holderSeparator: UIView!
 
     @IBOutlet private weak var expirationSeparatorConstraint: NSLayoutConstraint!
@@ -96,16 +98,16 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_number_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         expirationTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_expiration_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cvcTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cardHolderTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_holder_name_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
@@ -130,6 +132,12 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationSeparatorConstraint.constant = height
         cvcSeparatorConstraint.constant = height
         holderSeparatorConstraint.constant = height
+
+        expirationSeparator.backgroundColor = Style.Color.separator
+        cvcSeparator.backgroundColor = Style.Color.separator
+        holderSeparator.backgroundColor = Style.Color.separator
+
+        apply(style: .defalutStyle)
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -187,6 +195,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
 
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
+        let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
         self.inputTintColor = tintColor
 
@@ -195,6 +204,11 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.textColor = inputTextColor
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
+        // error text
+        cardNumberErrorLabel.textColor = errorTextColor
+        expirationErrorLabel.textColor = errorTextColor
+        cvcErrorLabel.textColor = errorTextColor
+        cardHolderErrorLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor
@@ -214,7 +228,7 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
-        ) -> Bool {
+    ) -> Bool {
 
         if let currentText = textField.text {
             let range = Range(range, in: currentText)!

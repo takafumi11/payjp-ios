@@ -16,9 +16,11 @@
                 <outlet property="cardNumberTextField" destination="T4u-qt-kxC" id="F58-Lk-k2D"/>
                 <outlet property="cvcErrorLabel" destination="f2T-bl-zOV" id="MIZ-E3-axO"/>
                 <outlet property="cvcIconImage" destination="dkb-dD-D2u" id="Tm8-NH-pNM"/>
+                <outlet property="cvcSeparator" destination="sx1-iF-Ehn" id="zKc-YP-XwB"/>
                 <outlet property="cvcSeparatorConstraint" destination="MPT-Dz-owM" id="sgi-K8-Wdc"/>
                 <outlet property="cvcTextField" destination="cFx-df-SwM" id="Gxd-bt-0cY"/>
                 <outlet property="expirationErrorLabel" destination="MyD-K5-tRI" id="Rhq-Xv-gae"/>
+                <outlet property="expirationSeparator" destination="dYQ-X5-gpG" id="6gF-Gu-A0R"/>
                 <outlet property="expirationSeparatorConstraint" destination="mnt-dg-7Jt" id="Wlj-nh-rPp"/>
                 <outlet property="expirationTextField" destination="G9O-hO-3ha" id="O7B-i9-Pkc"/>
                 <outlet property="holderContainer" destination="5jR-px-r6W" id="Xpn-vD-pDM"/>
@@ -90,7 +92,7 @@
                             </subviews>
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-X5-gpG" userLabel="Separator">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-X5-gpG" userLabel="Expiration Separator">
                             <rect key="frame" x="16" y="90" width="336" height="1"/>
                             <color key="backgroundColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -124,7 +126,7 @@
                             </subviews>
                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </stackView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx1-iF-Ehn" userLabel="Separator">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx1-iF-Ehn" userLabel="Cvc Separator">
                             <rect key="frame" x="16" y="181" width="336" height="1"/>
                             <color key="backgroundColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
