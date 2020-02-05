@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol CardFormViewViewModelType {
 
@@ -15,6 +16,9 @@ protocol CardFormViewViewModelType {
 
     /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
+
+    /// CardFormViewModelDelegate
+    var delegate: CardFormViewModelDelegate? { get set }
 
     /// カード番号の入力値を更新する
     ///
@@ -63,8 +67,15 @@ protocol CardFormViewViewModelType {
     /// - Parameter completion: 取得結果
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void)
 
-    func checkCameraPermission() -> PermissionAuthorizationStatus
-    func requestCameraPermission(completion: @escaping () -> Void)
+    /// スキャナ起動をリクエストする
+    func requestOcr()
+}
+
+protocol CardFormViewModelDelegate: class {
+    /// スキャナ画面を起動する
+    func startScanner()
+    /// カメラ許可が必要な内容のらアラートを表示する
+    func showCameraPermissionAlert()
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -97,6 +108,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     var isBrandChanged = false
+    weak var delegate: CardFormViewModelDelegate?
 
     // MARK: - Lifecycle
 
@@ -266,12 +278,24 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
     }
 
-    func checkCameraPermission() -> PermissionAuthorizationStatus {
-        return permissionFetcher.checkCamera()
-    }
-
-    func requestCameraPermission(completion: @escaping () -> Void) {
-        permissionFetcher.requestCamera(completion: completion)
+    func requestOcr() {
+        let status = permissionFetcher.checkCamera()
+        switch status {
+        case .notDetermined:
+            permissionFetcher.requestCamera { [weak self] in
+                guard let self = self else {return}
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {return}
+                    self.delegate?.startScanner()
+                }
+            }
+        case .authorized:
+            delegate?.startScanner()
+        case .denied:
+            delegate?.showCameraPermissionAlert()
+        default:
+            print("Unsupport camera in your device.")
+        }
     }
 
     // MARK: - Helpers

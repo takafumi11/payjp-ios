@@ -52,29 +52,13 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
-    let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
-        let status = viewModel.checkCameraPermission()
-        switch status {
-        case .notDetermined:
-            viewModel.requestCameraPermission { [weak self] in
-                guard let self = self else {return}
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else {return}
-                    self.startScanner()
-                }
-            }
-        case .authorized:
-            startScanner()
-        case .denied:
-            showCameraPermissionAlert()
-        default:
-            print("Unsupport camera in your device.")
-        }
+        viewModel.requestOcr()
     }
 
     // MARK: CardFormViewDelegate
@@ -150,6 +134,8 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         apply(style: .defalutStyle)
+
+        viewModel.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -259,12 +245,6 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         cvcTextField.inputAccessoryView = view
         cardHolderTextField.inputAccessoryView = view
     }
-
-    private func startScanner() {
-        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
-    }
 }
 
 // MARK: UITextFieldDelegate
@@ -342,5 +322,18 @@ extension CardFormLabelStyledView: CardIOProxyDelegate {
         updateCvcInput(input: cardParams.cvc)
 
         notifyIsValidChanged()
+    }
+}
+
+extension CardFormLabelStyledView: CardFormViewModelDelegate {
+
+    func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+
+    func showCameraPermissionAlert() {
+        showCameraPermissionAlert()
     }
 }
