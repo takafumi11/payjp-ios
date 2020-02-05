@@ -74,7 +74,7 @@ protocol CardFormViewViewModelType {
 protocol CardFormViewModelDelegate: class {
     /// スキャナ画面を起動する
     func startScanner()
-    /// カメラ許可が必要な内容のらアラートを表示する
+    /// カメラ許可が必要な内容のアラートを表示する
     func showPermissionAlert()
 }
 
