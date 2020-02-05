@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import AVFoundation
 @testable import PAYJP
 
 // swiftlint:disable type_body_length
@@ -363,6 +364,54 @@ class CardFormViewModelTests: XCTestCase {
 
         let result = viewModel.isValid
         XCTAssertFalse(result)
+    }
+
+    func testRequestOcr_notAuthorized() {
+        let expectation = self.expectation(description: "view update")
+        let mockPermissionFetcher = MockPermissionFetcher(status: AVAuthorizationStatus.notDetermined,
+                                                          shouldAccess: true)
+        let delegate = MockCardFormViewModelDelegate(expectation: expectation)
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+        viewModel.delegate = delegate
+        viewModel.requestOcr()
+
+        waitForExpectations(timeout: 1, handler: nil)
+
+        XCTAssertTrue(delegate.startScannerCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
+    }
+
+    func testRequestOcr_authorized() {
+        let mockPermissionFetcher = MockPermissionFetcher(status: AVAuthorizationStatus.authorized)
+        let delegate = MockCardFormViewModelDelegate()
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+        viewModel.delegate = delegate
+        viewModel.requestOcr()
+
+        XCTAssertTrue(delegate.startScannerCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
+    }
+
+    func testRequestOcr_denied() {
+        let mockPermissionFetcher = MockPermissionFetcher(status: AVAuthorizationStatus.denied)
+        let delegate = MockCardFormViewModelDelegate()
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+        viewModel.delegate = delegate
+        viewModel.requestOcr()
+
+        XCTAssertFalse(delegate.startScannerCalled)
+        XCTAssertTrue(delegate.showPermissionAlertCalled)
+    }
+
+    func testRequestOcr_other() {
+        let mockPermissionFetcher = MockPermissionFetcher(status: AVAuthorizationStatus.restricted)
+        let delegate = MockCardFormViewModelDelegate()
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+        viewModel.delegate = delegate
+        viewModel.requestOcr()
+
+        XCTAssertFalse(delegate.startScannerCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
     }
 }
 // swiftlint:enable type_body_length

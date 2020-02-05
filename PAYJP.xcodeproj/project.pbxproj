@@ -67,6 +67,7 @@
 		ED05B173238CF18200DCA1C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED05B172238CF18200DCA1C9 /* Log.swift */; };
 		ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0673682387844B00F86D18 /* BrandImageCell.swift */; };
 		ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0673692387844B00F86D18 /* BrandImageCell.xib */; };
+		ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2CDBB223E952570017F102 /* PermissionFetcher.swift */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
 		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
 		ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */; };
@@ -204,6 +205,7 @@
 		ED05B172238CF18200DCA1C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		ED0673682387844B00F86D18 /* BrandImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandImageCell.swift; sourceTree = "<group>"; };
 		ED0673692387844B00F86D18 /* BrandImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandImageCell.xib; sourceTree = "<group>"; };
+		ED2CDBB223E952570017F102 /* PermissionFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionFetcher.swift; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
 		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
 		ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenter.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				BE7FB8EE22FC00820090B9B8 /* CardIO */,
+				ED2CDBB123E952570017F102 /* Common */,
 				BE21781022E8061D0098128D /* Core */,
 				BE4B4FDD22FD3E1D00642192 /* Extensions */,
 				BE734B8222DD7868008679EC /* Formatters */,
@@ -551,6 +554,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED2CDBB123E952570017F102 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED2CDBB223E952570017F102 /* PermissionFetcher.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		ED40969B2394B9E1007FD8A6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -755,6 +766,7 @@
 				BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */,
 				BE21785422E982E30098128D /* BaseRequest.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
+				ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */,
 				C65513BE1DA37AD4009D6DA5 /* APIError.swift in Sources */,
 				ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */,
 				BE21785222E982A60098128D /* CreateTokenRequest.swift in Sources */,

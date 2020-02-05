@@ -49,15 +49,13 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var holderSeparatorConstraint: NSLayoutConstraint!
 
     var inputTintColor: UIColor = Style.Color.blue
-    let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
-        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
+        viewModel.requestOcr()
     }
 
     // MARK: CardFormViewDelegate
@@ -138,6 +136,8 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         holderSeparator.backgroundColor = Style.Color.separator
 
         apply(style: .defalutStyle)
+
+        viewModel.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -302,5 +302,18 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
         updateCvcInput(input: cardParams.cvc)
 
         notifyIsValidChanged()
+    }
+}
+
+extension CardFormTableStyledView: CardFormViewModelDelegate {
+
+    func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+
+    func showPermissionAlert() {
+        showCameraPermissionAlert()
     }
 }

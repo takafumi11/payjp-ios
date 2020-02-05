@@ -52,15 +52,13 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
-    let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
-        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
+        viewModel.requestOcr()
     }
 
     // MARK: CardFormViewDelegate
@@ -136,6 +134,8 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         apply(style: .defalutStyle)
+
+        viewModel.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -322,5 +322,18 @@ extension CardFormLabelStyledView: CardIOProxyDelegate {
         updateCvcInput(input: cardParams.cvc)
 
         notifyIsValidChanged()
+    }
+}
+
+extension CardFormLabelStyledView: CardFormViewModelDelegate {
+
+    func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+
+    func showPermissionAlert() {
+        showCameraPermissionAlert()
     }
 }

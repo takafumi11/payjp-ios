@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol CardFormViewViewModelType {
 
@@ -15,6 +16,9 @@ protocol CardFormViewViewModelType {
 
     /// ブランドが変わったかどうか
     var isBrandChanged: Bool { get }
+
+    /// CardFormViewModelDelegate
+    var delegate: CardFormViewModelDelegate? { get set }
 
     /// カード番号の入力値を更新する
     ///
@@ -62,6 +66,16 @@ protocol CardFormViewViewModelType {
     /// フォームの入力値を取得する
     /// - Parameter completion: 取得結果
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void)
+
+    /// スキャナ起動をリクエストする
+    func requestOcr()
+}
+
+protocol CardFormViewModelDelegate: class {
+    /// スキャナ画面を起動する
+    func startScanner()
+    /// カメラ許可が必要な内容のアラートを表示する
+    func showPermissionAlert()
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -75,6 +89,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let cvcValidator: CvcValidatorType
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
+    private let permissionFetcher: PermissionFetcherType
 
     private var cardNumber: String?
     private var cardBrand: CardBrand = .unknown
@@ -93,6 +108,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     var isBrandChanged = false
+    weak var delegate: CardFormViewModelDelegate?
 
     // MARK: - Lifecycle
 
@@ -104,7 +120,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
          cvcFormatter: CvcFormatterType = CvcFormatter(),
          cvcValidator: CvcValidatorType = CvcValidator(),
          accountsService: AccountsServiceType = AccountsService.shared,
-         tokenService: TokenServiceType = TokenService.shared) {
+         tokenService: TokenServiceType = TokenService.shared,
+         permissionFetcher: PermissionFetcherType = PermissionFetcher.shared) {
         self.cardNumberFormatter = cardNumberFormatter
         self.cardNumberValidator = cardNumberValidator
         self.expirationFormatter = expirationFormatter
@@ -114,6 +131,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         self.cvcValidator = cvcValidator
         self.accountsService = accountsService
         self.tokenService = tokenService
+        self.permissionFetcher = permissionFetcher
     }
 
     // MARK: - CardFormViewViewModelType
@@ -257,6 +275,26 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             completion(.success(input))
         } else {
             completion(.failure(LocalError.invalidFormInput))
+        }
+    }
+
+    func requestOcr() {
+        let status = permissionFetcher.checkCamera()
+        switch status {
+        case .notDetermined:
+            permissionFetcher.requestCamera { [weak self] in
+                guard let self = self else {return}
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {return}
+                    self.delegate?.startScanner()
+                }
+            }
+        case .authorized:
+            delegate?.startScanner()
+        case .denied:
+            delegate?.showPermissionAlert()
+        default:
+            print("Unsupport camera in your device.")
         }
     }
 
