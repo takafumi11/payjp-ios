@@ -64,7 +64,7 @@ protocol CardFormViewViewModelType {
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void)
 
     func checkCameraPermission() -> PermissionAuthorizationStatus
-    func requestCameraPermission(completion: @escaping () -> Void) -> PermissionAuthorizationStatus
+    func requestCameraPermission(completion: @escaping () -> Void)
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -270,8 +270,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         return permissionFetcher.checkCamera()
     }
 
-    func requestCameraPermission(completion: @escaping () -> Void) -> PermissionAuthorizationStatus {
-        return permissionFetcher.requestCamera(completion: completion)
+    func requestCameraPermission(completion: @escaping () -> Void) {
+        permissionFetcher.requestCamera(completion: completion)
     }
 
     // MARK: - Helpers

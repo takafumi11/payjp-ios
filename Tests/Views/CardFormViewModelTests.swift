@@ -364,5 +364,31 @@ class CardFormViewModelTests: XCTestCase {
         let result = viewModel.isValid
         XCTAssertFalse(result)
     }
+
+    func testCheckCameraPermission() {
+        let mockPermissionFetcher = MockPermissionFetcher(status: .authorized)
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+
+        let status = viewModel.checkCameraPermission()
+        XCTAssertEqual(status, PermissionAuthorizationStatus.authorized)
+    }
+
+    func testRequestCameraPermission_completionCalled() {
+        let mockPermissionFetcher = MockPermissionFetcher(shouldAccess: true)
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+
+        let completion = { }
+        viewModel.requestCameraPermission(completion: completion)
+        XCTAssertNotNil(mockPermissionFetcher.completion)
+    }
+
+    func testRequestCameraPermission_completionNotCalled() {
+        let mockPermissionFetcher = MockPermissionFetcher(shouldAccess: false)
+        let viewModel = CardFormViewViewModel(permissionFetcher: mockPermissionFetcher)
+
+        let completion = { }
+        viewModel.requestCameraPermission(completion: completion)
+        XCTAssertNil(mockPermissionFetcher.completion)
+    }
 }
 // swiftlint:enable type_body_length

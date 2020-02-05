@@ -138,3 +138,25 @@ class MockAccountService: AccountsServiceType {
         return nil
     }
 }
+
+class MockPermissionFetcher: PermissionFetcherType {
+    let status: PermissionAuthorizationStatus
+    let shouldAccess: Bool
+    var completion : (() -> Void)?
+
+    init(status: PermissionAuthorizationStatus = .notDetermined,
+         shouldAccess: Bool = false) {
+        self.status = status
+        self.shouldAccess = shouldAccess
+    }
+
+    func checkCamera() -> PermissionAuthorizationStatus {
+        return self.status
+    }
+
+    func requestCamera(completion: @escaping () -> Void) {
+        if shouldAccess {
+            self.completion = completion
+        }
+    }
+}

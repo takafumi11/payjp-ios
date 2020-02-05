@@ -22,10 +22,10 @@ enum PermissionAuthorizationStatus {
 
 /// Request camera permission
 protocol PermissionFetcherType {
-    /// Return the authorization status without request for permission
+    /// Check permission authorization status
     func checkCamera() -> PermissionAuthorizationStatus
-    /// Return `Bool` that should granted permission.
-    func requestCamera(completion: @escaping () -> Void) -> PermissionAuthorizationStatus
+    /// Request permission
+    func requestCamera(completion: @escaping () -> Void)
 }
 
 class PermissionFetcher: PermissionFetcherType {
@@ -33,32 +33,18 @@ class PermissionFetcher: PermissionFetcherType {
     static let shared = PermissionFetcher()
 
     func checkCamera() -> PermissionAuthorizationStatus {
-        return requestAVMedia(for: .video, shouldRequestPermission: false)
-    }
-
-    /// using AVCaptureDevice AVMediaType.video
-    func requestCamera(completion: @escaping () -> Void) -> PermissionAuthorizationStatus {
-        return requestAVMedia(for: .video, completion: completion)
-    }
-
-    /// using AVCaptureDevice
-    private func requestAVMedia(for accessType: AVMediaType,
-                                shouldRequestPermission: Bool = true,
-                                completion: (() -> Void)? = nil) -> PermissionAuthorizationStatus {
-
         let status = PermissionAuthorizationStatus(
-            avAuthorizationStatus: AVCaptureDevice.authorizationStatus(for: accessType)
+            avAuthorizationStatus: AVCaptureDevice.authorizationStatus(for: .video)
         )
-
-        if shouldRequestPermission && status == .notDetermined {
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (shouldAccess) in
-                if shouldAccess {
-                    completion?()
-                }
-            })
-        }
-
         return status
+    }
+
+    func requestCamera(completion: @escaping () -> Void) {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (shouldAccess) in
+            if shouldAccess {
+                completion()
+            }
+        })
     }
 }
 

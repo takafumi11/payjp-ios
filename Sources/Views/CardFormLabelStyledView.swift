@@ -61,7 +61,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         let status = viewModel.checkCameraPermission()
         switch status {
         case .notDetermined:
-            _ = viewModel.requestCameraPermission { [weak self] in
+            viewModel.requestCameraPermission { [weak self] in
                 guard let self = self else {return}
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else {return}
