@@ -164,7 +164,7 @@ class MockPermissionFetcher: PermissionFetcherType {
 
 class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
     var startScannerCalled = false
-    var showCameraPermissionAlertCalled = false
+    var showPermissionAlertCalled = false
     let expectation: XCTestExpectation?
 
     init(expectation: XCTestExpectation? = nil) {
@@ -176,7 +176,7 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
         expectation?.fulfill()
     }
 
-    func showCameraPermissionAlert() {
-        showCameraPermissionAlertCalled = true
+    func showPermissionAlert() {
+        showPermissionAlertCalled = true
     }
 }

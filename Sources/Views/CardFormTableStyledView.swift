@@ -313,7 +313,7 @@ extension CardFormTableStyledView: CardFormViewModelDelegate {
         }
     }
 
-    func showCameraPermissionAlert() {
+    func showPermissionAlert() {
         showCameraPermissionAlert()
     }
 }

@@ -378,7 +378,7 @@ class CardFormViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertTrue(delegate.startScannerCalled)
-        XCTAssertFalse(delegate.showCameraPermissionAlertCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
     }
 
     func testRequestOcr_authorized() {
@@ -389,7 +389,7 @@ class CardFormViewModelTests: XCTestCase {
         viewModel.requestOcr()
 
         XCTAssertTrue(delegate.startScannerCalled)
-        XCTAssertFalse(delegate.showCameraPermissionAlertCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
     }
 
     func testRequestOcr_denied() {
@@ -400,7 +400,7 @@ class CardFormViewModelTests: XCTestCase {
         viewModel.requestOcr()
 
         XCTAssertFalse(delegate.startScannerCalled)
-        XCTAssertTrue(delegate.showCameraPermissionAlertCalled)
+        XCTAssertTrue(delegate.showPermissionAlertCalled)
     }
 
     func testRequestOcr_other() {
@@ -411,7 +411,7 @@ class CardFormViewModelTests: XCTestCase {
         viewModel.requestOcr()
 
         XCTAssertFalse(delegate.startScannerCalled)
-        XCTAssertFalse(delegate.showCameraPermissionAlertCalled)
+        XCTAssertFalse(delegate.showPermissionAlertCalled)
     }
 }
 // swiftlint:enable type_body_length

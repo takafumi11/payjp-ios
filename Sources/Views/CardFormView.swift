@@ -305,7 +305,7 @@ extension CardFormView {
                                                 UIApplication.shared.openURL(settingsURL)
                                             }
         })
-        let closeAction = UIAlertAction(title: "payjp_common_close".localized,
+        let closeAction = UIAlertAction(title: "payjp_common_ok".localized,
                                         style: .default,
                                         handler: nil)
         alertController.addAction(closeAction)

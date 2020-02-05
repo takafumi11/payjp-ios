@@ -75,7 +75,7 @@ protocol CardFormViewModelDelegate: class {
     /// スキャナ画面を起動する
     func startScanner()
     /// カメラ許可が必要な内容のらアラートを表示する
-    func showCameraPermissionAlert()
+    func showPermissionAlert()
 }
 
 class CardFormViewViewModel: CardFormViewViewModelType {
@@ -292,7 +292,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         case .authorized:
             delegate?.startScanner()
         case .denied:
-            delegate?.showCameraPermissionAlert()
+            delegate?.showPermissionAlert()
         default:
             print("Unsupport camera in your device.")
         }
