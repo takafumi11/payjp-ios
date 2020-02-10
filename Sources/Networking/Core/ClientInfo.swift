@@ -24,9 +24,9 @@ public final class ClientInfo: NSObject, Encodable {
     lazy var userAgent: String = buildUserAgent()
     lazy var json: String? = buildJson()
 
-    public static let `default` = ClientInfo.create()
+    public static let `default` = ClientInfo.clientInfo()
 
-    public static func create(
+    public static func clientInfo(
         with plugin: String? = nil,
         publisher: String? = nil
     ) -> ClientInfo {

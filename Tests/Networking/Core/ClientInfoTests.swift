@@ -13,7 +13,7 @@ import OHHTTPStubs
 class ClientInfoTests: XCTestCase {
 
     func testCreate() {
-        let clientInfo = ClientInfo.create()
+        let clientInfo = ClientInfo.clientInfo()
         XCTAssertEqual(clientInfo.bindingsName, "jp.pay.ios")
         XCTAssertEqual(clientInfo.platform, "ios")
         XCTAssertEqual(clientInfo.bindingsPlugin, nil)
@@ -21,7 +21,7 @@ class ClientInfoTests: XCTestCase {
     }
 
     func testCreate_plugin() {
-        let clientInfo = ClientInfo.create(with: "jp.pay.kitagawa/1.0.0", publisher: "kitagawa")
+        let clientInfo = ClientInfo.clientInfo(with: "jp.pay.kitagawa/1.0.0", publisher: "kitagawa")
         XCTAssertEqual(clientInfo.bindingsName, "jp.pay.ios")
         XCTAssertEqual(clientInfo.platform, "ios")
         XCTAssertEqual(clientInfo.bindingsPlugin, "jp.pay.kitagawa/1.0.0")
