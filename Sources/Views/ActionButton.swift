@@ -17,7 +17,7 @@ class ActionButton: UIButton {
             }
         }
     }
-    @IBInspectable var disableBackgroundColor: UIColor = Style.Color.lightGray {
+    @IBInspectable var disableBackgroundColor: UIColor = Style.Color.gray {
         didSet {
             if !isEnabled {
                 self.backgroundColor = disableBackgroundColor

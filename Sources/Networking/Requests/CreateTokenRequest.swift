@@ -44,7 +44,7 @@ struct CreateTokenRequest: BaseRequest {
         expirationYear: String,
         name: String?,
         tenantId: String?
-        ) {
+    ) {
         self.cardNumber = cardNumber
         self.cvc = cvc
         self.expirationMonth = expirationMonth

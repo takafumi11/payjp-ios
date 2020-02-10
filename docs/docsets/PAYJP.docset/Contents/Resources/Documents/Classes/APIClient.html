@@ -14,7 +14,7 @@
     <a title="APIClient Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (67% documented)</p>
+        <p><a href="../index.html">PAYJP Docs</a> (64% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -45,6 +45,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormViewController.html">CardFormViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ClientInfo.html">ClientInfo</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/FormStyle.html">FormStyle</a>
@@ -177,7 +180,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">createToken</span><span class="p">(</span>
     <span class="n">with</span> <span class="nv">token</span><span class="p">:</span> <span class="kt">PKPaymentToken</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Token.html">Token</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/APIError.html">APIError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -244,7 +247,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Token.html">Token</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/APIError.html">APIError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -354,7 +357,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">getToken</span><span class="p">(</span>
     <span class="n">with</span> <span class="nv">tokenId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Token.html">Token</a></span><span class="p">,</span> <span class="kt"><a href="../Enums/APIError.html">APIError</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -416,7 +419,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAcceptedBrands</span><span class="p">(</span>
     <span class="n">with</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
     <span class="nv">completion</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:5PAYJP16CardBrandsResulta">CardBrandsResult</a></span><span class="p">?</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -482,7 +485,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">createTokenWith</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">token</span><span class="p">:</span> <span class="kt">PKPaymentToken</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Token.html">Token</a></span><span class="p">?,</span> <span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -518,7 +521,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
     <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Token.html">Token</a></span><span class="p">?,</span> <span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -578,7 +581,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAcceptedBrandsWith</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">NSString</span><span class="p">]?,</span> <span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -590,7 +593,7 @@ cf. <a href="https://pay.jp/docs/api/#introduction">https://pay.jp/docs/api/#int
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2019-12-25)</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-02-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

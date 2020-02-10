@@ -49,18 +49,16 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
-    var inputTextColor: UIColor = Style.Color.black
+    var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     let inputTextErrorColorEnabled: Bool = true
-    let viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     /// Camera scan action
     ///
     /// - Parameter sender: sender
     @IBAction func onTapOcrButton(_ sender: Any) {
-        if let viewController = parentViewController, CardIOProxy.isCardIOAvailable() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
+        viewModel.requestOcr()
     }
 
     // MARK: CardFormViewDelegate
@@ -107,16 +105,16 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_number_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         expirationTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_expiration_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cvcTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
         cardHolderTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_holder_name_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.gray])
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
 
         cardNumberTextField.delegate = self
         expirationTextField.delegate = self
@@ -134,6 +132,10 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+
+        apply(style: .defalutStyle)
+
+        viewModel.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -198,10 +200,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     }
 
     public func apply(style: FormStyle) {
-        let labelTextColor = style.labelTextColor ?? Style.Color.black
+        let labelTextColor = style.labelTextColor
         let inputTextColor = style.inputTextColor
+        let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
-        let inputFieldBackgroundColor = style.inputFieldBackgroundColor ?? .white
+        let inputFieldBackgroundColor = style.inputFieldBackgroundColor
         self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
@@ -215,6 +218,11 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         expirationTextField.textColor = inputTextColor
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
+        // error text
+        cardNumberErrorLabel.textColor = errorTextColor
+        expirationErrorLabel.textColor = errorTextColor
+        cvcErrorLabel.textColor = errorTextColor
+        cardHolderErrorLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor
@@ -314,5 +322,18 @@ extension CardFormLabelStyledView: CardIOProxyDelegate {
         updateCvcInput(input: cardParams.cvc)
 
         notifyIsValidChanged()
+    }
+}
+
+extension CardFormLabelStyledView: CardFormViewModelDelegate {
+
+    func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+
+    func showPermissionAlert() {
+        showCameraPermissionAlert()
     }
 }

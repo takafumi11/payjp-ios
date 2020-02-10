@@ -97,9 +97,17 @@
   if ([CardIOPaymentViewControllerProxy isProxiedClassExists] &&
       [CardIOCreditCardInfoProxy isProxiedClassExists] &&
       [CardIOUtilitiesProxy isProxiedClassExists]) {
-    return [[CardIOUtilitiesProxy proxiedClass] canReadCardWithCamera];
+    return YES;
   }
   return NO;
+#endif
+}
+
++ (BOOL)canReadCardWithCamera {
+#if TARGET_OS_SIMULATOR
+  return NO;
+#else
+  return [[CardIOUtilitiesProxy proxiedClass] canReadCardWithCamera];
 #endif
 }
 
