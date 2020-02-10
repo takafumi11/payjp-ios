@@ -10,6 +10,7 @@
 		322BD1D6225C83CA00D83B5E /* JSONDecoder+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */; };
 		325E36B1233484C90037E6BE /* UIColor+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */; };
 		3289C9D123EACB6D008FFBC1 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3289C9D023EACB6D008FFBC1 /* ClientInfo.swift */; };
+		3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */; };
 		32A6F614239608DD00747477 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F613239608DD00747477 /* ActionButton.swift */; };
 		32A6F6162396093B00747477 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F6152396093B00747477 /* Radius.swift */; };
 		32A8E4CC23B4616A001D1C38 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */; };
@@ -145,6 +146,7 @@
 		325E36AE233482AC0037E6BE /* FormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormStyle.swift; sourceTree = "<group>"; };
 		325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PAYJP.swift"; sourceTree = "<group>"; };
 		3289C9D023EACB6D008FFBC1 /* ClientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
+		3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoTests.swift; sourceTree = "<group>"; };
 		32A6F613239608DD00747477 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		32A6F6152396093B00747477 /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				ED40969C2394B9E1007FD8A6 /* ClientTests.swift */,
+				3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -823,6 +826,7 @@
 				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */,
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
+				3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */,
 				ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
