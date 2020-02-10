@@ -52,23 +52,23 @@ class ClientInfoTests: XCTestCase {
 
     func testUserAgent() {
         let clientInfo = ClientInfo(
-        bindingsName: "jp.pay.ios",
-        bindingsVersion: "1.0.0",
-        bindingsPlugin: nil,
-        unameString: "iPhone X",
-        platform: "ios",
-        publisher: "payjp")
+            bindingsName: "jp.pay.ios",
+            bindingsVersion: "1.0.0",
+            bindingsPlugin: nil,
+            unameString: "iPhone X",
+            platform: "ios",
+            publisher: "payjp")
         XCTAssertEqual(clientInfo.userAgent, "jp.pay.ios/1.0.0; iPhone X")
     }
 
     func testJson() {
         let clientInfo = ClientInfo(
-        bindingsName: "jp.pay.ios",
-        bindingsVersion: "1.1.0",
-        bindingsPlugin: "jp.pay.kitagawa/1.0.0",
-        unameString: "iPhoneX",
-        platform: "ios",
-        publisher: "payjp")
+            bindingsName: "jp.pay.ios",
+            bindingsVersion: "1.1.0",
+            bindingsPlugin: "jp.pay.kitagawa/1.0.0",
+            unameString: "iPhoneX",
+            platform: "ios",
+            publisher: "payjp")
         XCTAssertNotNil(clientInfo.json)
     }
 }
