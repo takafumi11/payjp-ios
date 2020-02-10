@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		322BD1D6225C83CA00D83B5E /* JSONDecoder+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */; };
 		325E36B1233484C90037E6BE /* UIColor+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */; };
+		3289C9D123EACB6D008FFBC1 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3289C9D023EACB6D008FFBC1 /* ClientInfo.swift */; };
+		3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */; };
 		32A6F614239608DD00747477 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F613239608DD00747477 /* ActionButton.swift */; };
 		32A6F6162396093B00747477 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F6152396093B00747477 /* Radius.swift */; };
 		32A8E4CC23B4616A001D1C38 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */; };
@@ -105,7 +107,6 @@
 		EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CB234EDF0300CB0212 /* CardFormView.swift */; };
 		EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */; };
 		EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC02D61230D2A0C00305B10 /* Assets.xcassets */; };
-		EDCF722B22F935C300272C10 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722A22F935C300272C10 /* UserAgent.swift */; };
 		EDCF722D22F935D400272C10 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722C22F935D400272C10 /* Token.swift */; };
 		EDCF723022F9369000272C10 /* TokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF722E22F9363600272C10 /* TokenTests.swift */; };
 		EDCF723122F948ED00272C10 /* FormError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF6E22EFE71900FA73BF /* FormError.swift */; };
@@ -144,6 +145,8 @@
 		322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+PAYJP.swift"; sourceTree = "<group>"; };
 		325E36AE233482AC0037E6BE /* FormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormStyle.swift; sourceTree = "<group>"; };
 		325E36B0233484C90037E6BE /* UIColor+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PAYJP.swift"; sourceTree = "<group>"; };
+		3289C9D023EACB6D008FFBC1 /* ClientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
+		3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoTests.swift; sourceTree = "<group>"; };
 		32A6F613239608DD00747477 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		32A6F6152396093B00747477 /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
@@ -245,7 +248,6 @@
 		EDB319CB234EDF0300CB0212 /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
 		EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewDelegate.swift; sourceTree = "<group>"; };
 		EDC02D61230D2A0C00305B10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EDCF722A22F935C300272C10 /* UserAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		EDCF722C22F935D400272C10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModelTests.swift; sourceTree = "<group>"; };
@@ -396,13 +398,13 @@
 				C65513BD1DA37AD4009D6DA5 /* APIError.swift */,
 				BE21785322E982E30098128D /* BaseRequest.swift */,
 				BE21781B22E82AFD0098128D /* Client.swift */,
+				3289C9D023EACB6D008FFBC1 /* ClientInfo.swift */,
 				32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */,
 				322BD1D5225C83CA00D83B5E /* JSONDecoder+PAYJP.swift */,
 				EDFF4DB1234322B00036F449 /* LocalError.swift */,
 				EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */,
 				BE21781F22E82B820098128D /* ParametersSerialization.swift */,
 				BE21781D22E82B350098128D /* Request.swift */,
-				EDCF722A22F935C300272C10 /* UserAgent.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -566,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				ED40969C2394B9E1007FD8A6 /* ClientTests.swift */,
+				3289C9D223EBFC87008FFBC1 /* ClientInfoTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -746,7 +749,6 @@
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
-				EDCF722B22F935C300272C10 /* UserAgent.swift in Sources */,
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,
 				BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */,
 				EDA77565238E3ECD00162340 /* PublicKeyValidator.swift in Sources */,
@@ -761,6 +763,7 @@
 				ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */,
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
 				ED6F13442360319B00857BCC /* FormStyle.swift in Sources */,
+				3289C9D123EACB6D008FFBC1 /* ClientInfo.swift in Sources */,
 				ED66B2D423D581990095B18D /* Bundle+PAYJP.swift in Sources */,
 				BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */,
 				BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */,
@@ -823,6 +826,7 @@
 				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */,
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
+				3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */,
 				ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
