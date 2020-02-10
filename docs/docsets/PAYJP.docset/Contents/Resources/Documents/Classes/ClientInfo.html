@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PAYErrorResponseType Protocol Reference</title>
+    <title>ClientInfo Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/PAYErrorResponseType" class="dashAnchor"></a>
-    <a title="PAYErrorResponseType Protocol Reference"></a>
+    <a name="//apple_ref/swift/Class/ClientInfo" class="dashAnchor"></a>
+    <a title="ClientInfo Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">PAYJP Docs</a> (64% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PAYJP Reference</a>
         <img id="carat" src="../img/carat.png" />
-        PAYErrorResponseType Protocol Reference
+        ClientInfo Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -113,15 +113,17 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>PAYErrorResponseType</h1>
+            <h1>ClientInfo</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PAYErrorResponseType</span> <span class="p">:</span> <span class="kt">NSObjectProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@objc(PAYClientInfo)</span>
+<span class="kd">@objcMembers</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ClientInfo</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">Encodable</span></code></pre>
 
                 </div>
               </div>
-            <p>PAY.JP API error response.</p>
+            <p>リクエストに付与するクライアント情報を表す
+<code>ClientInfo:makeInfo:plugin:publisher</code> で作成する</p>
 
           </section>
           <section class="section task-group-section">
@@ -130,9 +132,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)status"></a>
-                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)status">status</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsName"></a>
+                    <a name="//apple_ref/swift/Property/bindingsName" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsName">bindingsName</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -140,14 +142,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The origin reponse&rsquo;s HTTP status code.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -157,9 +159,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)message"></a>
-                    <a name="//apple_ref/swift/Property/message" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)message">message</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsVersion"></a>
+                    <a name="//apple_ref/swift/Property/bindingsVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsVersion">bindingsVersion</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -167,14 +169,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The detail message of the error.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsVersion</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -184,9 +186,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)param"></a>
-                    <a name="//apple_ref/swift/Property/param" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)param">param</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsPlugin"></a>
+                    <a name="//apple_ref/swift/Property/bindingsPlugin" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsPlugin">bindingsPlugin</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -194,14 +196,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The param that caused the error happend.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">param</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsPlugin</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -211,9 +213,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)code"></a>
-                    <a name="//apple_ref/swift/Property/code" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)code">code</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)unameString"></a>
+                    <a name="//apple_ref/swift/Property/unameString" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)unameString">unameString</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,14 +223,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The code of the error. Check <a href="https://pay.jp/docs/api/#error">https://pay.jp/docs/api/#error</a> for more details.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">unameString</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -238,9 +240,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)type"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYErrorResponseType(py)type">type</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)platform"></a>
+                    <a name="//apple_ref/swift/Property/platform" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)platform">platform</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,14 +250,98 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The type of the error. Check <a href="https://pay.jp/docs/api/#error">https://pay.jp/docs/api/#error</a> for more details.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">platform</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)publisher"></a>
+                    <a name="//apple_ref/swift/Property/publisher" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)publisher">publisher</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">publisher</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(cpy)default"></a>
+                    <a name="//apple_ref/swift/Variable/default" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(cpy)default">default</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">let</span> <span class="err">`</span><span class="k">default</span><span class="err">`</span><span class="p">:</span> <span class="kt">ClientInfo</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(cm)makeInfoWithPlugin:publisher:"></a>
+                    <a name="//apple_ref/swift/Method/makeInfo(plugin:publisher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(cm)makeInfoWithPlugin:publisher:">makeInfo(plugin:publisher:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeInfo</span><span class="p">(</span>
+    <span class="nv">plugin</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">publisher</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ClientInfo</span></code></pre>
 
                         </div>
                       </div>
