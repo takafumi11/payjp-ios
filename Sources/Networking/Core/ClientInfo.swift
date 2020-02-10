@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// リクエストに付与するクライアント情報を表す
-/// `ClientInfo:create:` で作成する
+/// `ClientInfo:makeInfo:plugin:publisher` で作成する
 @objc(PAYClientInfo) @objcMembers
 public final class ClientInfo: NSObject, Encodable {
     public let bindingsName: String
@@ -24,10 +24,10 @@ public final class ClientInfo: NSObject, Encodable {
     lazy var userAgent: String = buildUserAgent()
     lazy var json: String? = buildJson()
 
-    public static let `default` = ClientInfo.clientInfo()
+    public static let `default` = ClientInfo.makeInfo()
 
-    public static func clientInfo(
-        with plugin: String? = nil,
+    public static func makeInfo(
+        plugin: String? = nil,
         publisher: String? = nil
     ) -> ClientInfo {
         return ClientInfo(
@@ -51,7 +51,6 @@ public final class ClientInfo: NSObject, Encodable {
         self.unameString = unameString
         self.platform = platform
         self.publisher = publisher
-        //
     }
 
     // MARK: - Encodable
