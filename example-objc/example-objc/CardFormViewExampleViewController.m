@@ -76,6 +76,7 @@
       UIColor *red = RGB(255, 69, 0);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:red
+                                                                  errorTextColor:nil
                                                                        tintColor:red
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];
@@ -87,6 +88,7 @@
       UIColor *blue = RGB(0, 103, 187);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:blue
+                                                                  errorTextColor:nil
                                                                        tintColor:blue
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];
@@ -99,6 +101,7 @@
       UIColor *darkGray = RGB(61, 61, 61);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:white
+                                                                  errorTextColor:nil
                                                                        tintColor:white
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];
@@ -111,6 +114,7 @@
       UIColor *defaultBlue = RGB(0, 122, 255);
       PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:nil
                                                                   inputTextColor:black
+                                                                  errorTextColor:nil
                                                                        tintColor:defaultBlue
                                                        inputFieldBackgroundColor:nil
                                                                submitButtonColor:nil];

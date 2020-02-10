@@ -40,5 +40,7 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
     }
     public static var locale: Locale?
 
+    public static var clientInfo: ClientInfo = .default
+
     static var authToken: String = ""
 }

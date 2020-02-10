@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CardIOProxy : NSObject
 
 + (BOOL)isCardIOAvailable;
++ (BOOL)canReadCardWithCamera;
 - (instancetype)initWithDelegate:(id<CardIOProxyDelegate>)delegate;
 - (void)presentCardIOFromViewController:(UIViewController *)viewController;
 

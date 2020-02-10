@@ -23,27 +23,30 @@
 
   if (indexPath.row == 3) {
     // customize card form
-    //    UIColor *color = RGB(0, 122, 255);
-    //    PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
-    //                                                                inputTextColor:color
-    //                                                                     tintColor:color
-    //                                                     inputFieldBackgroundColor:nil
-    //                                                             submitButtonColor:color];
+    //        UIColor *color = RGB(0, 122, 255);
+    //        PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
+    //                                                                    inputTextColor:color
+    //                                                                    errorTextColor:nil
+    //                                                                         tintColor:color
+    //                                                         inputFieldBackgroundColor:nil
+    //                                                                 submitButtonColor:color];
     // push
-    PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:nil tenantId:nil];
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defalutStyle
+                                     tenantId:nil];
     cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
-    //            PAYCardFormViewController *cardFormVc =
-    //                [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
-    //                                                                        tenantId:nil];
-    //            cardFormVc.delegate = self;
-    //            UINavigationController *naviVc =
-    //                [UINavigationController.new initWithRootViewController:cardFormVc];
-    //            naviVc.presentationController.delegate = cardFormVc;
-    //            [self presentViewController:naviVc animated:true completion:nil];
+    //                PAYCardFormViewController *cardFormVc =
+    //                    [PAYCardFormViewController
+    //                    createCardFormViewControllerWithStyle:PAYCardFormStyle.defalutStyle
+    //                                                                            tenantId:nil];
+    //                cardFormVc.delegate = self;
+    //                UINavigationController *naviVc =
+    //                    [UINavigationController.new initWithRootViewController:cardFormVc];
+    //                naviVc.presentationController.delegate = cardFormVc;
+    //                [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 

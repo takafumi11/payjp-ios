@@ -15,7 +15,8 @@ extension BaseRequest {
     var headerFields: [String: String] {
         var fields = [String: String]()
         fields["Authorization"] = PAYJPSDK.authToken
-        fields["User-Agent"] = UserAgent.default
+        fields["User-Agent"] = PAYJPSDK.clientInfo.userAgent
+        fields["X-Payjp-Client-User-Agent"] = PAYJPSDK.clientInfo.json
         fields["Locale"] = PAYJPSDK.locale?.languageCode
         return fields
     }

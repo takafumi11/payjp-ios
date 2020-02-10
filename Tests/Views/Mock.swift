@@ -8,6 +8,7 @@
 
 import XCTest
 import PassKit
+import AVFoundation
 @testable import PAYJP
 
 class MockCardFormScreenDelegate: CardFormScreenDelegate {
@@ -136,5 +137,46 @@ class MockAccountService: AccountsServiceType {
         }
 
         return nil
+    }
+}
+
+class MockPermissionFetcher: PermissionFetcherType {
+    let status: AVAuthorizationStatus
+    let shouldAccess: Bool
+    //    var completion : (() -> Void)?
+
+    init(status: AVAuthorizationStatus = .notDetermined,
+         shouldAccess: Bool = false) {
+        self.status = status
+        self.shouldAccess = shouldAccess
+    }
+
+    func checkCamera() -> AVAuthorizationStatus {
+        return self.status
+    }
+
+    func requestCamera(completion: @escaping () -> Void) {
+        if shouldAccess {
+            completion()
+        }
+    }
+}
+
+class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
+    var startScannerCalled = false
+    var showPermissionAlertCalled = false
+    let expectation: XCTestExpectation?
+
+    init(expectation: XCTestExpectation? = nil) {
+        self.expectation = expectation
+    }
+
+    func startScanner() {
+        startScannerCalled = true
+        expectation?.fulfill()
+    }
+
+    func showPermissionAlert() {
+        showPermissionAlertCalled = true
     }
 }
