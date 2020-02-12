@@ -32,7 +32,7 @@ public final class ClientInfo: NSObject, Encodable {
     ) -> ClientInfo {
         return ClientInfo(
             bindingsName: "jp.pay.ios",
-            bindingsVersion: ClientInfo.sdkVersion,
+            bindingsVersion: PAYJPSDK.sdkVersion,
             bindingsPlugin: plugin,
             unameString: "iOS/\(ClientInfo.osVersion); apple; \(ClientInfo.device)",
             platform: "ios",
@@ -90,10 +90,6 @@ extension ClientInfo {
 
     private static var osVersion: String {
         return UIDevice.current.systemVersion
-    }
-
-    private static var sdkVersion: String {
-        return Bundle(for: APIClient.self).infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
 
     private static var device: String {
