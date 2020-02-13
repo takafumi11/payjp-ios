@@ -46,6 +46,11 @@ platform :ios do
       path: "PAYJP.podspec",
       version_number: new_version
     )
+    # Update constant
+    file = '../Sources/Core/PAYJPSDK.swift'
+    new_version_line = "public static let sdkVersion: String = \"#{new_version}\""
+    regex = 'public static let sdkVersion: String = .*'
+    sh("sed -i '' -e 's/#{regex}/#{new_version_line}/g' #{file}")
   end
   
   desc "Create GitHub PR to `payjp/payjp-ios` from internal repo. (internal only)"
