@@ -135,7 +135,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cvcSeparator.backgroundColor = Style.Color.separator
         holderSeparator.backgroundColor = Style.Color.separator
 
-        apply(style: .defalutStyle)
+        apply(style: .defaultStyle)
 
         viewModel.delegate = self
     }
