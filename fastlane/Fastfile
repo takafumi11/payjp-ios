@@ -115,7 +115,7 @@ platform :ios do
       sh('git config --global user.name "pay kun"')
       git_add
       git_commit(
-        path: "./",
+        path: "./docs/*",
         message: "update docs."
       )
 
