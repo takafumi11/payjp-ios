@@ -133,7 +133,7 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
-        apply(style: .defalutStyle)
+        apply(style: .defaultStyle)
 
         viewModel.delegate = self
     }

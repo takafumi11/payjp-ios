@@ -14,7 +14,7 @@ import Foundation
 public class FormStyle: NSObject {
 
     /// Default style.
-    public static let defalutStyle: FormStyle = {
+    public static let defaultStyle: FormStyle = {
         let style = FormStyle(labelTextColor: Style.Color.label,
                               inputTextColor: Style.Color.label,
                               errorTextColor: Style.Color.red,
