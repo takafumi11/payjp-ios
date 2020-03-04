@@ -31,21 +31,22 @@
     //                                                         inputFieldBackgroundColor:nil
     //                                                                 submitButtonColor:color];
     // push
-    PAYCardFormViewController *cardFormVc =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-                                                                tenantId:nil
-                                                                delegate:self];
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                     tenantId:nil
+                                     delegate:self];
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
-//                PAYCardFormViewController *cardFormVc =
-//                    [PAYCardFormViewController createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-//                                                                            tenantId:nil
-//                                                                            delegate:self];
-//                UINavigationController *naviVc =
-//                    [UINavigationController.new initWithRootViewController:cardFormVc];
-//                naviVc.presentationController.delegate = cardFormVc;
-//                [self presentViewController:naviVc animated:true completion:nil];
+    //                PAYCardFormViewController *cardFormVc =
+    //                    [PAYCardFormViewController
+    //                    createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+    //                                                                            tenantId:nil
+    //                                                                            delegate:self];
+    //                UINavigationController *naviVc =
+    //                    [UINavigationController.new initWithRootViewController:cardFormVc];
+    //                naviVc.presentationController.delegate = cardFormVc;
+    //                [self presentViewController:naviVc animated:true completion:nil];
   }
 }
 
