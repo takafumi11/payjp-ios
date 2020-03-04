@@ -48,7 +48,7 @@ public class CardVerificationViewController: UIViewController {
     public static func createCardVerificationViewController(token: Token,
                                                             delegate: CardVerificationViewControllerDelegate)
         -> CardVerificationViewController {
-            let stotyboard = UIStoryboard(name: "CardVerification", bundle: Bundle(for: PAYJPSDK.self))
+            let stotyboard = UIStoryboard(name: "CardVerification", bundle: .payjpBundle)
             let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
             guard
                 let verifyVc = naviVc?.topViewController as? CardVerificationViewController
