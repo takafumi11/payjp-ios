@@ -7,9 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import <SafariServices/SafariServices.h>
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
+NSString *const PAYJPExampleURLScheme = @"examplepayjp";
 
 @interface AppDelegate ()
 
@@ -23,6 +25,23 @@ NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
   PAYJPSDK.locale = [NSLocale currentLocale];
 
   return YES;
+}
+
+- (BOOL)application:(__unused UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    NSLog(@"openURL : %@", url);
+    if ([[url.scheme lowercaseString] isEqualToString:[PAYJPExampleURLScheme lowercaseString]]) {
+        UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topController.presentedViewController) {
+            topController = topController.presentedViewController;
+        }
+        NSLog(@"topController => %@", topController);
+        if ([topController isKindOfClass:[SFSafariViewController class]]) {
+            NSLog(@"SFSafariViewController will close.");
+            [topController dismissViewControllerAnimated:YES completion:nil];
+        }
+        return YES;
+    }
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
@@ -227,11 +228,12 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func presentVerificationScreen(with token: Token) {
-        let verifyVc = CardVerificationViewController.createCardVerificationViewController(token: token,
-                                                                                           delegate: self)
-        let naviVc = UINavigationController(rootViewController: verifyVc)
-        naviVc.presentationController?.delegate = verifyVc
-        self.present(naviVc, animated: true, completion: nil)
+        let url = token.card.tdsEntryUrl
+        if let url = url{
+            let safariVc = SFSafariViewController(url: url)
+            safariVc.delegate = self
+            self.present(safariVc, animated: true, completion: nil)
+        }
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
@@ -330,6 +332,15 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
 
     public func cardVarificationViewControllerDidCancel(_ viewController: CardVerificationViewController) {
         print(debug: "cardVarificationViewControllerDidCancel")
+        dismissIndicator()
+        enableSubmitButton()
+    }
+}
+
+// MARK: SFSafariViewControllerDelegate
+extension CardFormViewController : SFSafariViewControllerDelegate {
+    public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        print("safariViewControllerDidFinish")
         dismissIndicator()
         enableSubmitButton()
     }
