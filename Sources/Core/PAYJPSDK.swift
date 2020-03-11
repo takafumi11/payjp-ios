@@ -14,6 +14,8 @@ public protocol PAYJPSDKType: class {
     static var publicKey: String? { get set }
     /// Locale.
     static var locale: Locale? { get set }
+    /// Return URL key from browser in 3D-Secure flow.
+    static var returnURLKey: String? { get set }
 }
 
 /// see PAYJPSDKType.
@@ -39,6 +41,8 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
         }
     }
     public static var locale: Locale?
+    
+    public static var returnURLKey: String?
 
     public static var clientInfo: ClientInfo = .default
 

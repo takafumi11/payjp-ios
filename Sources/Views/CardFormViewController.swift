@@ -28,6 +28,7 @@ public class CardFormViewController: UIViewController {
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
+    private var tdsSecureProcessing = false
 
     /// CardFormViewController delegate.
     private weak var delegate: CardFormViewControllerDelegate?
@@ -111,6 +112,16 @@ public class CardFormViewController: UIViewController {
 
         setupKeyboardNotification()
         fetchAccpetedBrands()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if tdsSecureProcessing {
+            tdsSecureProcessing = false
+            dismissIndicator()
+            enableSubmitButton()
+        }
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -231,8 +242,12 @@ extension CardFormViewController: CardFormScreenDelegate {
         let url = token.card.tdsEntryUrl
         if let url = url {
             let safariVc = SFSafariViewController(url: url)
+            if #available(iOS 11.0, *) {
+                safariVc.dismissButtonStyle = .close
+            }
             safariVc.delegate = self
             self.present(safariVc, animated: true, completion: nil)
+            tdsSecureProcessing = true
         }
     }
 

@@ -11,7 +11,8 @@
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-NSString *const PAYJPExampleURLScheme = @"tds";
+NSString *const URLScheme = @"com.exmaple.jp.pay.example-objc";
+NSString *const ReturnURLKey = @"ios-secure";
 
 @interface AppDelegate ()
 
@@ -23,6 +24,7 @@ NSString *const PAYJPExampleURLScheme = @"tds";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
+    PAYJPSDK.returnURLKey = ReturnURLKey;
 
   return YES;
 }
@@ -30,7 +32,9 @@ NSString *const PAYJPExampleURLScheme = @"tds";
 - (BOOL)application:(__unused UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-  if ([[url.scheme lowercaseString] isEqualToString:[PAYJPExampleURLScheme lowercaseString]]) {
+    NSLog(@"openURL => %@", url.absoluteString);
+    
+  if ([[url.scheme lowercaseString] isEqualToString:[URLScheme lowercaseString]]) {
     UIViewController *topController =
         [UIApplication sharedApplication].keyWindow.rootViewController;
     while (topController.presentedViewController) {

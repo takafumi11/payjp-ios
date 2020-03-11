@@ -23,7 +23,7 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tds</string>
+				<string>com.exmaple.jp.pay.example-objc</string>
 			</array>
 		</dict>
 	</array>
