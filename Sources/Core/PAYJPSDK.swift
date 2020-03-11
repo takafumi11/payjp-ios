@@ -12,7 +12,7 @@ import Foundation
 public protocol PAYJPSDKType: class {
     /// PAY.JP public key.
     static var publicKey: String? { get set }
-    /// Locale of API error message.
+    /// Locale.
     static var locale: Locale? { get set }
 }
 
