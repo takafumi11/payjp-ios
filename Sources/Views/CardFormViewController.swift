@@ -229,7 +229,7 @@ extension CardFormViewController: CardFormScreenDelegate {
 
     func presentVerificationScreen(with token: Token) {
         let url = token.card.tdsEntryUrl
-        if let url = url{
+        if let url = url {
             let safariVc = SFSafariViewController(url: url)
             safariVc.delegate = self
             self.present(safariVc, animated: true, completion: nil)
@@ -338,9 +338,9 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
 }
 
 // MARK: SFSafariViewControllerDelegate
-extension CardFormViewController : SFSafariViewControllerDelegate {
+extension CardFormViewController: SFSafariViewControllerDelegate {
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        print("safariViewControllerDidFinish")
+        print(debug: "safariViewControllerDidFinish")
         dismissIndicator()
         enableSubmitButton()
     }
