@@ -24,7 +24,7 @@ NSString *const ReturnURLKey = @"ios-secure";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
-    PAYJPSDK.returnURLKey = ReturnURLKey;
+  PAYJPSDK.returnURLKey = ReturnURLKey;
 
   return YES;
 }
@@ -32,8 +32,8 @@ NSString *const ReturnURLKey = @"ios-secure";
 - (BOOL)application:(__unused UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-    NSLog(@"openURL => %@", url.absoluteString);
-    
+  NSLog(@"openURL => %@", url.absoluteString);
+
   if ([[url.scheme lowercaseString] isEqualToString:[URLScheme lowercaseString]]) {
     UIViewController *topController =
         [UIApplication sharedApplication].keyWindow.rootViewController;

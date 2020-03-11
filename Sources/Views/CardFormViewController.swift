@@ -113,10 +113,10 @@ public class CardFormViewController: UIViewController {
         setupKeyboardNotification()
         fetchAccpetedBrands()
     }
-    
+
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if tdsSecureProcessing {
             tdsSecureProcessing = false
             dismissIndicator()

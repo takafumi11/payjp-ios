@@ -41,7 +41,7 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
         }
     }
     public static var locale: Locale?
-    
+
     public static var returnURLKey: String?
 
     public static var clientInfo: ClientInfo = .default
