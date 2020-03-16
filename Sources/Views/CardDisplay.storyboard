@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="J04-Gn-p1a">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="P4r-AR-C5D">
+            <objects>
+                <navigationController id="J04-Gn-p1a" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="631-iU-Owm">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9Ao-ea-IBt" kind="relationship" relationship="rootViewController" id="jor-2f-RMw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ate-o8-JIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="656"/>
+        </scene>
+        <!--CardDisplayViewController-->
+        <scene sceneID="V2o-zg-IxI">
+            <objects>
+                <viewController storyboardIdentifier="CardDisplayViewController" title="CardDisplayViewController" id="9Ao-ea-IBt" customClass="PAYCardDisplayViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h9E-5g-rWV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7W6-tq-JlK">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="uue-b9-L3x">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DEH-df-mbm">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="511"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM2-5o-wuM" customClass="PAYCardFormDisplayStyledView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="511"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="DEH-df-mbm" firstAttribute="top" secondItem="uue-b9-L3x" secondAttribute="top" id="3wr-og-Zjm"/>
+                                            <constraint firstItem="DEH-df-mbm" firstAttribute="leading" secondItem="uue-b9-L3x" secondAttribute="leading" id="8zo-x4-YeX"/>
+                                            <constraint firstAttribute="trailing" secondItem="DEH-df-mbm" secondAttribute="trailing" id="K5Z-fR-FVm"/>
+                                            <constraint firstAttribute="bottom" secondItem="DEH-df-mbm" secondAttribute="bottom" id="Vbm-3m-Klx"/>
+                                            <constraint firstItem="DEH-df-mbm" firstAttribute="width" secondItem="uue-b9-L3x" secondAttribute="width" id="qCq-1L-8bu"/>
+                                        </constraints>
+                                    </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggB-Ok-Qxx" userLabel="Bottom View">
+                                        <rect key="frame" x="0.0" y="786" width="414" height="76"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4V-d2-XKk" customClass="ActionButton" customModule="PAYJP" customModuleProvider="target">
+                                                <rect key="frame" x="36" y="16" width="342" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="QNr-0Y-54e"/>
+                                                </constraints>
+                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                <state key="normal" title="カードを登録"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="M4V-d2-XKk" firstAttribute="leading" secondItem="ggB-Ok-Qxx" secondAttribute="leading" constant="36" id="9SR-We-fRs"/>
+                                            <constraint firstAttribute="trailing" secondItem="M4V-d2-XKk" secondAttribute="trailing" constant="36" id="pxo-ji-IsJ"/>
+                                            <constraint firstItem="M4V-d2-XKk" firstAttribute="top" secondItem="ggB-Ok-Qxx" secondAttribute="top" constant="16" id="tBe-3c-pjf"/>
+                                            <constraint firstAttribute="bottom" secondItem="M4V-d2-XKk" secondAttribute="bottom" constant="16" id="tZS-xO-0Bp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7W6-tq-JlK" firstAttribute="trailing" secondItem="AqU-7L-boe" secondAttribute="trailing" id="1gR-O7-bOv"/>
+                            <constraint firstItem="7W6-tq-JlK" firstAttribute="bottom" secondItem="AqU-7L-boe" secondAttribute="bottom" id="3s6-VS-okI"/>
+                            <constraint firstItem="7W6-tq-JlK" firstAttribute="top" secondItem="h9E-5g-rWV" secondAttribute="top" id="9s6-ft-YBW"/>
+                            <constraint firstItem="7W6-tq-JlK" firstAttribute="leading" secondItem="AqU-7L-boe" secondAttribute="leading" id="UsT-eS-n2n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AqU-7L-boe"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="CardDisplayViewController" id="EUR-kI-UCV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OIs-n0-5Ur" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044.9275362318842" y="655.58035714285711"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,25 +1,22 @@
 //
-//  CardFormTableStyledView.swift
+//  CardDisplayView.swift
 //  PAYJP
 //
-//  Created by Li-Hsuan Chen on 2019/07/17.
-//  Copyright © 2019 PAY, Inc. All rights reserved.
+//  Created by Tadashi Wakayanagi on 2020/03/13.
 //
 
-import UIKit
+import Foundation
 
-/// CardFormView without label.
-/// It's suitable for UITableView design.
-@IBDesignable @objcMembers @objc(PAYCardFormTableStyledView)
-public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
+/// CardFormView with card animation.
+@IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
+public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
 
     // MARK: CardFormView
 
     /// Card holder input field enabled.
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
-            holderContainer.isHidden = !isHolderRequired
-            holderSeparator.isHidden = !isHolderRequired
+            //            holderContainer.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
             notifyIsValidChanged()
         }
@@ -35,27 +32,21 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     @IBOutlet weak var cvcTextField: UITextField!
     @IBOutlet weak var cardHolderTextField: UITextField!
 
-    @IBOutlet weak var cardNumberErrorLabel: UILabel!
-    @IBOutlet weak var expirationErrorLabel: UILabel!
-    @IBOutlet weak var cvcErrorLabel: UILabel!
-    @IBOutlet weak var cardHolderErrorLabel: UILabel!
+    var cardNumberErrorLabel: UILabel!
+    var expirationErrorLabel: UILabel!
+    var cvcErrorLabel: UILabel!
+    var cardHolderErrorLabel: UILabel!
 
-    @IBOutlet private weak var expirationSeparator: UIView!
-    @IBOutlet private weak var cvcSeparator: UIView!
-    @IBOutlet private weak var holderSeparator: UIView!
-
-    @IBOutlet private weak var expirationSeparatorConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var cvcSeparatorConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var holderSeparatorConstraint: NSLayoutConstraint!
+    // 追加
+    @IBOutlet weak var cardDisplayView: UIView!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var cardNumberDisplayLabel: UILabel!
+    @IBOutlet weak var cvcDisplayLabel: UILabel!
+    @IBOutlet weak var cardHolderDisplayLabel: UILabel!
+    @IBOutlet weak var expirationDisplayLabel: UILabel!
 
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
-
-    var errorMessageLabel: UILabel!
-    var cardNumberDisplayLabel: UILabel!
-    var cvcDisplayLabel: UILabel!
-    var cardHolderDisplayLabel: UILabel!
-    var expirationDisplayLabel: UILabel!
 
     /// Camera scan action
     ///
@@ -73,6 +64,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     private var contentView: UIView!
     private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
+    private var isCardDisplayFront = true
 
     // MARK: Lifecycle
 
@@ -87,7 +79,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     }
 
     private func initialize() {
-        let nib = UINib(nibName: "CardFormTableStyledView", bundle: .payjpBundle)
+        let nib = UINib(nibName: "CardFormDisplayStyledView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -119,27 +111,16 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cardHolderTextField.delegate = self
 
         // set images
-        brandLogoImage.image = "icon_card".image
-        cvcIconImage.image = "icon_card_cvc_3".image
+        //        brandLogoImage.image = "icon_card".image
+        //        cvcIconImage.image = "icon_card_cvc_3".image
 
-        ocrButton.setImage("icon_camera".image, for: .normal)
-        ocrButton.imageView?.contentMode = .scaleAspectFit
-        ocrButton.contentHorizontalAlignment = .fill
-        ocrButton.contentVerticalAlignment = .fill
+        //        ocrButton.setImage("icon_camera".image, for: .normal)
+        //        ocrButton.imageView?.contentMode = .scaleAspectFit
+        //        ocrButton.contentHorizontalAlignment = .fill
+        //        ocrButton.contentVerticalAlignment = .fill
 
         cardIOProxy = CardIOProxy(delegate: self)
-        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-
-        // separatorのheightを 0.5 で指定すると太さが統一ではなくなってしまうためscaleを使って対応
-        // cf. https://stackoverflow.com/a/21553495
-        let height = 1.0 / UIScreen.main.scale
-        expirationSeparatorConstraint.constant = height
-        cvcSeparatorConstraint.constant = height
-        holderSeparatorConstraint.constant = height
-
-        expirationSeparator.backgroundColor = Style.Color.separator
-        cvcSeparator.backgroundColor = Style.Color.separator
-        holderSeparator.backgroundColor = Style.Color.separator
+        //        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         apply(style: .defaultStyle)
 
@@ -211,10 +192,7 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
         // error text
-        cardNumberErrorLabel.textColor = errorTextColor
-        expirationErrorLabel.textColor = errorTextColor
-        cvcErrorLabel.textColor = errorTextColor
-        cardHolderErrorLabel.textColor = errorTextColor
+        errorMessageLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor
@@ -225,10 +203,45 @@ public class CardFormTableStyledView: UIView, CardFormAction, CardFormView {
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
+
+    public func setupInputAccessoryView(view: UIView) {
+        cardNumberTextField.inputAccessoryView = view
+        expirationTextField.inputAccessoryView = view
+        cvcTextField.inputAccessoryView = view
+        cardHolderTextField.inputAccessoryView = view
+    }
+
+    private func backFlipCard() {
+        isCardDisplayFront = false
+        cardDisplayView.backgroundColor = .systemBlue
+        cardNumberDisplayLabel.isHidden = true
+        expirationDisplayLabel.isHidden = true
+        cvcDisplayLabel.isHidden = false
+        cardHolderDisplayLabel.isHidden = true
+        UIView.transition(with: cardDisplayView,
+                          duration: 0.8,
+                          options: .transitionFlipFromLeft,
+                          animations: nil,
+                          completion: nil)
+    }
+
+    private func frontFlipCard() {
+        isCardDisplayFront = true
+        cardDisplayView.backgroundColor = .systemRed
+        cardNumberDisplayLabel.isHidden = false
+        expirationDisplayLabel.isHidden = false
+        cvcDisplayLabel.isHidden = true
+        cardHolderDisplayLabel.isHidden = false
+        UIView.transition(with: cardDisplayView,
+                          duration: 0.8,
+                          options: .transitionFlipFromRight,
+                          animations: nil,
+                          completion: nil)
+    }
 }
 
 // MARK: UITextFieldDelegate
-extension CardFormTableStyledView: UITextFieldDelegate {
+extension CardFormDisplayStyledView: UITextFieldDelegate {
 
     public func textField(
         _ textField: UITextField,
@@ -287,16 +300,21 @@ extension CardFormTableStyledView: UITextFieldDelegate {
         return true
     }
 
-    public func setupInputAccessoryView(view: UIView) {
-        cardNumberTextField.inputAccessoryView = view
-        expirationTextField.inputAccessoryView = view
-        cvcTextField.inputAccessoryView = view
-        cardHolderTextField.inputAccessoryView = view
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == cvcTextField {
+            // backFlip
+            backFlipCard()
+        } else {
+            // frontFlip
+            if !isCardDisplayFront {
+                frontFlipCard()
+            }
+        }
     }
 }
 
 // MARK: CardIOProxyDelegate
-extension CardFormTableStyledView: CardIOProxyDelegate {
+extension CardFormDisplayStyledView: CardIOProxyDelegate {
     public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
@@ -311,7 +329,7 @@ extension CardFormTableStyledView: CardIOProxyDelegate {
     }
 }
 
-extension CardFormTableStyledView: CardFormViewModelDelegate {
+extension CardFormDisplayStyledView: CardFormViewModelDelegate {
 
     func startScanner() {
         if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {

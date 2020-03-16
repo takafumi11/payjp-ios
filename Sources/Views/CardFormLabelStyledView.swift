@@ -54,6 +54,12 @@ public class CardFormLabelStyledView: UIView, CardFormAction, CardFormView {
     let inputTextErrorColorEnabled: Bool = true
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
+    var errorMessageLabel: UILabel!
+    var cardNumberDisplayLabel: UILabel!
+    var cvcDisplayLabel: UILabel!
+    var cardHolderDisplayLabel: UILabel!
+    var expirationDisplayLabel: UILabel!
+
     /// Camera scan action
     ///
     /// - Parameter sender: sender
