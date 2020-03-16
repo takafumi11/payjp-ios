@@ -9,22 +9,33 @@
 import Foundation
 import SafariServices
 
+/// View type of CardFormView.
+@objc public enum CardFormViewType: Int {
+    case tableStyled = 0
+    case labelStyled = 1
+    case cardDisplay = 2
+}
+
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var submitButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
+    @IBOutlet weak var brandsLayout: UIView!
+    @IBOutlet weak var formContentView: UIView!
 
     private var formStyle: FormStyle?
     private var tenantId: String?
+    private var cardFormViewType: CardFormViewType?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
+    private var cardFormView: CardFormView!
+    private var cardFormAction: CardFormAction!
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -38,21 +49,23 @@ public class CardFormViewController: UIViewController {
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
     ///   - delegate: delegate of CardFormViewControllerDelegate
+    ///   - viewType: card form type
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId: delegate:)
-    public static func createCardFormViewController(style: FormStyle? = .defaultStyle,
+    @objc(createCardFormViewControllerWithStyle: tenantId: delegate: viewType:)
+    public static func createCardFormViewController(style: FormStyle = .defaultStyle,
                                                     tenantId: String? = nil,
-                                                    delegate: CardFormViewControllerDelegate)
-        -> CardFormViewController {
-            let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
-            let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
-            guard
-                let cardFormVc = naviVc?.topViewController as? CardFormViewController
-                else { fatalError("Couldn't instantiate CardFormViewController") }
-            cardFormVc.formStyle = style
-            cardFormVc.tenantId = tenantId
-            cardFormVc.delegate = delegate
-            return cardFormVc
+                                                    delegate: CardFormViewControllerDelegate,
+                                                    viewType: CardFormViewType = .labelStyled) -> CardFormViewController {
+        let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
+        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
+        guard
+            let cardFormVc = naviVc?.topViewController as? CardFormViewController
+            else { fatalError("Couldn't instantiate CardFormViewController") }
+        cardFormVc.formStyle = style
+        cardFormVc.tenantId = tenantId
+        cardFormVc.delegate = delegate
+        cardFormVc.cardFormViewType = viewType
+        return cardFormVc
     }
 
     @IBAction func registerCardTapped(_ sender: Any) {
@@ -83,9 +96,10 @@ public class CardFormViewController: UIViewController {
         accessorySubmitButton.isEnabled = false
         accessorySubmitButton.cornerRadius = Style.Radius.none
         view.addSubview(accessorySubmitButton)
-        cardFormView.setupInputAccessoryView(view: view)
 
-        cardFormView.delegate = self
+        setupCustomFormView()
+        cardFormAction.setupInputAccessoryView(view: view)
+
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
@@ -189,6 +203,44 @@ public class CardFormViewController: UIViewController {
 
     private func fetchAccpetedBrands() {
         presenter?.fetchBrands(tenantId: tenantId)
+    }
+
+    private func setupCustomFormView() {
+        let x = self.formContentView.bounds.origin.x
+        let y = self.formContentView.bounds.origin.y
+        let width  = self.formContentView.bounds.width
+        let height = self.formContentView.bounds.height
+        let viewFrame = CGRect(x: x, y: y, width: width, height: height)
+
+        // どのカスタムViewを使うか判定
+        switch cardFormViewType {
+        case .tableStyled:
+            brandsLayout.isHidden = false
+            let cardFormView = CardFormTableStyledView(frame: viewFrame)
+            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            cardFormView.delegate = self
+            self.formContentView.addSubview(cardFormView)
+            self.cardFormView = cardFormView
+            self.cardFormAction = cardFormView
+        case .labelStyled:
+            brandsLayout.isHidden = false
+            let cardFormView = CardFormLabelStyledView(frame: viewFrame)
+            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            cardFormView.delegate = self
+            self.formContentView.addSubview(cardFormView)
+            self.cardFormView = cardFormView
+            self.cardFormAction = cardFormView
+        case .cardDisplay:
+            brandsLayout.isHidden = true
+            let cardFormView = CardDisplayFormView(frame: viewFrame)
+            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            cardFormView.delegate = self
+            self.formContentView.addSubview(cardFormView)
+            self.cardFormView = cardFormView
+            self.cardFormAction = cardFormView
+        default:
+            print("Unknown custom view style.")
+        }
     }
 }
 

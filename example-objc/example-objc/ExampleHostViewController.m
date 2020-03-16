@@ -36,7 +36,8 @@
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
-                                     delegate:self];
+                                     delegate:self
+                                     viewType:CardFormViewTypeLabelStyled];
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
@@ -50,11 +51,14 @@
     //                naviVc.presentationController.delegate = cardFormVc;
     //                [self presentViewController:naviVc animated:true completion:nil];
   }
+    
   if (indexPath.row == 4) {
-    PAYCardDisplayViewController *cardDisplayVc = [PAYCardDisplayViewController
-        createCardDisplayViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-                                        tenantId:nil];
-    [self.navigationController pushViewController:cardDisplayVc animated:YES];
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                     tenantId:nil
+                                     viewType:CardFormViewTypeCardDisplay];
+    cardFormVc.delegate = self;
+    [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 }
 

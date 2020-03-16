@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormDisplayStyledView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDisplayFormView">
             <connections>
                 <outlet property="cardDisplayView" destination="ZIu-Kf-DOT" id="YhV-2q-kXx"/>
                 <outlet property="cardHolderDisplayLabel" destination="sfn-bZ-kq4" id="ozq-3u-fWQ"/>

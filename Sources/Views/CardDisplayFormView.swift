@@ -1,5 +1,5 @@
 //
-//  CardDisplayView.swift
+//  CardDisplayFormView.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2020/03/13.
@@ -9,7 +9,7 @@ import Foundation
 
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
-public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
+public class CardDisplayFormView: UIView, CardFormAction, CardFormView {
 
     // MARK: CardFormView
 
@@ -79,7 +79,7 @@ public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
     }
 
     private func initialize() {
-        let nib = UINib(nibName: "CardFormDisplayStyledView", bundle: .payjpBundle)
+        let nib = UINib(nibName: "CardDisplayFormView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -241,7 +241,7 @@ public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
 }
 
 // MARK: UITextFieldDelegate
-extension CardFormDisplayStyledView: UITextFieldDelegate {
+extension CardDisplayFormView: UITextFieldDelegate {
 
     public func textField(
         _ textField: UITextField,
@@ -314,7 +314,7 @@ extension CardFormDisplayStyledView: UITextFieldDelegate {
 }
 
 // MARK: CardIOProxyDelegate
-extension CardFormDisplayStyledView: CardIOProxyDelegate {
+extension CardDisplayFormView: CardIOProxyDelegate {
     public func didCancel(in proxy: CardIOProxy) {
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
@@ -329,7 +329,7 @@ extension CardFormDisplayStyledView: CardIOProxyDelegate {
     }
 }
 
-extension CardFormDisplayStyledView: CardFormViewModelDelegate {
+extension CardDisplayFormView: CardFormViewModelDelegate {
 
     func startScanner() {
         if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
