@@ -213,7 +213,7 @@ public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
 
     private func backFlipCard() {
         isCardDisplayFront = false
-        cardDisplayView.backgroundColor = .systemBlue
+        cardDisplayView.backgroundColor = .systemRed
         cardNumberDisplayLabel.isHidden = true
         expirationDisplayLabel.isHidden = true
         cvcDisplayLabel.isHidden = false
@@ -227,7 +227,7 @@ public class CardFormDisplayStyledView: UIView, CardFormAction, CardFormView {
 
     private func frontFlipCard() {
         isCardDisplayFront = true
-        cardDisplayView.backgroundColor = .systemRed
+        cardDisplayView.backgroundColor = .systemBlue
         cardNumberDisplayLabel.isHidden = false
         expirationDisplayLabel.isHidden = false
         cvcDisplayLabel.isHidden = true
