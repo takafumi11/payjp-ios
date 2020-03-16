@@ -50,12 +50,12 @@
     //                naviVc.presentationController.delegate = cardFormVc;
     //                [self presentViewController:naviVc animated:true completion:nil];
   }
-    if (indexPath.row == 4) {
-        PAYCardDisplayViewController *cardDisplayVc = [PAYCardDisplayViewController
-            createCardDisplayViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-                                         tenantId:nil];
-        [self.navigationController pushViewController:cardDisplayVc animated:YES];
-    }
+  if (indexPath.row == 4) {
+    PAYCardDisplayViewController *cardDisplayVc = [PAYCardDisplayViewController
+        createCardDisplayViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                        tenantId:nil];
+    [self.navigationController pushViewController:cardDisplayVc animated:YES];
+  }
 }
 
 #pragma MARK : PAYCardFormViewControllerDelegate
