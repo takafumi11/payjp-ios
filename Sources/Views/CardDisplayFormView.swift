@@ -9,7 +9,7 @@ import Foundation
 
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
-public class CardDisplayFormView: UIView, CardFormAction, CardFormView {
+public class CardDisplayFormView: UIView, CardFormView {
 
     // MARK: CardFormView
 
@@ -31,11 +31,6 @@ public class CardDisplayFormView: UIView, CardFormAction, CardFormView {
     @IBOutlet weak var expirationTextField: UITextField!
     @IBOutlet weak var cvcTextField: UITextField!
     @IBOutlet weak var cardHolderTextField: UITextField!
-
-    var cardNumberErrorLabel: UILabel!
-    var expirationErrorLabel: UILabel!
-    var cvcErrorLabel: UILabel!
-    var cardHolderErrorLabel: UILabel!
 
     // 追加
     @IBOutlet weak var cardDisplayView: UIView!
@@ -131,7 +126,101 @@ public class CardDisplayFormView: UIView, CardFormAction, CardFormView {
         return contentView.intrinsicContentSize
     }
 
-    // MARK: CardFormAction
+    // MARK: CardFormView
+
+    func inputCardNumberSuccess(value: CardNumber) {
+        cardNumberDisplayLabel.text = value.formatted
+        errorMessageLabel.text = nil
+    }
+
+    func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardNumberDisplayLabel.text = value?.formatted
+        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardNumberComplete() {
+        errorMessageLabel.isHidden = cardNumberTextField.text == nil
+    }
+
+    func inputExpirationSuccess(value: String) {
+        expirationDisplayLabel.text = value
+        errorMessageLabel.text = nil
+    }
+
+    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        expirationDisplayLabel.text = value
+        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputExpirationComplete() {
+        errorMessageLabel.isHidden = expirationTextField.text == nil
+    }
+
+    func inputCvcSuccess(value: String) {
+        cvcDisplayLabel.text = value
+        errorMessageLabel.text = nil
+    }
+
+    func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cvcDisplayLabel.text = value
+        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCvcComplete() {
+        errorMessageLabel.isHidden = cvcTextField.text == nil
+    }
+
+    func inputCardHolderSuccess(value: String) {
+        cardHolderDisplayLabel.text = value
+        errorMessageLabel.text = nil
+    }
+
+    func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardHolderDisplayLabel.text = value
+        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardHolderComplete() {
+        errorMessageLabel.isHidden = cardHolderTextField.text == nil
+    }
+
+    // MARK: Private
+
+    private func notifyIsValidChanged() {
+        self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
+
+    private func backFlipCard() {
+        isCardDisplayFront = false
+        cardDisplayView.backgroundColor = .systemRed
+        cardNumberDisplayLabel.isHidden = true
+        expirationDisplayLabel.isHidden = true
+        cvcDisplayLabel.isHidden = false
+        cardHolderDisplayLabel.isHidden = true
+        UIView.transition(with: cardDisplayView,
+                          duration: 0.8,
+                          options: .transitionFlipFromLeft,
+                          animations: nil,
+                          completion: nil)
+    }
+
+    private func frontFlipCard() {
+        isCardDisplayFront = true
+        cardDisplayView.backgroundColor = .systemBlue
+        cardNumberDisplayLabel.isHidden = false
+        expirationDisplayLabel.isHidden = false
+        cvcDisplayLabel.isHidden = true
+        cardHolderDisplayLabel.isHidden = false
+        UIView.transition(with: cardDisplayView,
+                          duration: 0.8,
+                          options: .transitionFlipFromRight,
+                          animations: nil,
+                          completion: nil)
+    }
+}
+
+// MARK: CardFormAction
+extension CardDisplayFormView: CardFormAction {
 
     public var isValid: Bool {
         return viewModel.isValid
@@ -200,43 +289,11 @@ public class CardDisplayFormView: UIView, CardFormAction, CardFormView {
         cardHolderTextField.tintColor = tintColor
     }
 
-    private func notifyIsValidChanged() {
-        self.delegate?.formInputValidated(in: self, isValid: isValid)
-    }
-
     public func setupInputAccessoryView(view: UIView) {
         cardNumberTextField.inputAccessoryView = view
         expirationTextField.inputAccessoryView = view
         cvcTextField.inputAccessoryView = view
         cardHolderTextField.inputAccessoryView = view
-    }
-
-    private func backFlipCard() {
-        isCardDisplayFront = false
-        cardDisplayView.backgroundColor = .systemRed
-        cardNumberDisplayLabel.isHidden = true
-        expirationDisplayLabel.isHidden = true
-        cvcDisplayLabel.isHidden = false
-        cardHolderDisplayLabel.isHidden = true
-        UIView.transition(with: cardDisplayView,
-                          duration: 0.8,
-                          options: .transitionFlipFromLeft,
-                          animations: nil,
-                          completion: nil)
-    }
-
-    private func frontFlipCard() {
-        isCardDisplayFront = true
-        cardDisplayView.backgroundColor = .systemBlue
-        cardNumberDisplayLabel.isHidden = false
-        expirationDisplayLabel.isHidden = false
-        cvcDisplayLabel.isHidden = true
-        cardHolderDisplayLabel.isHidden = false
-        UIView.transition(with: cardDisplayView,
-                          duration: 0.8,
-                          options: .transitionFlipFromRight,
-                          animations: nil,
-                          completion: nil)
     }
 }
 

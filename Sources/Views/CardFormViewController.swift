@@ -35,7 +35,6 @@ public class CardFormViewController: UIViewController {
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
     private var cardFormView: CardFormView!
-    private var cardFormAction: CardFormAction!
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -83,22 +82,8 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         presenter = CardFormScreenPresenter(delegate: self)
-        // show submit button on top of keyboard
-        let frame = CGRect.init(x: 0,
-                                y: 0,
-                                width: (UIScreen.main.bounds.size.width),
-                                height: 44)
-        let view = UIView(frame: frame)
-        accessorySubmitButton = ActionButton(frame: frame)
-        accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
-        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
-        accessorySubmitButton.isEnabled = false
-        accessorySubmitButton.cornerRadius = Style.Radius.none
-        view.addSubview(accessorySubmitButton)
 
-        setupCustomFormView()
-        cardFormAction.setupInputAccessoryView(view: view)
+        setupCardFormView()
 
         brandsView.delegate = self
         brandsView.dataSource = self
@@ -114,13 +99,6 @@ public class CardFormViewController: UIViewController {
 
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
                             forCellWithReuseIdentifier: "BrandCell")
-
-        // style
-        if let formStyle = formStyle {
-            cardFormView.apply(style: formStyle)
-            submitButton.normalBackgroundColor = formStyle.submitButtonColor
-            accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
-        }
         brandsView.backgroundColor = Style.Color.groupedBackground
 
         setupKeyboardNotification()
@@ -205,7 +183,21 @@ public class CardFormViewController: UIViewController {
         presenter?.fetchBrands(tenantId: tenantId)
     }
 
-    private func setupCustomFormView() {
+    private func setupCardFormView() {
+        // show submit button on top of keyboard
+        let frame = CGRect.init(x: 0,
+                                y: 0,
+                                width: (UIScreen.main.bounds.size.width),
+                                height: 44)
+        let view = UIView(frame: frame)
+        accessorySubmitButton = ActionButton(frame: frame)
+        accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
+        accessorySubmitButton.isEnabled = false
+        accessorySubmitButton.cornerRadius = Style.Radius.none
+        view.addSubview(accessorySubmitButton)
+
         let x = self.formContentView.bounds.origin.x
         let y = self.formContentView.bounds.origin.y
         let width  = self.formContentView.bounds.width
@@ -219,25 +211,40 @@ public class CardFormViewController: UIViewController {
             let cardFormView = CardFormTableStyledView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
+            cardFormView.setupInputAccessoryView(view: view)
+            if let formStyle = formStyle {
+                cardFormView.apply(style: formStyle)
+                submitButton.normalBackgroundColor = formStyle.submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
+            }
             self.formContentView.addSubview(cardFormView)
             self.cardFormView = cardFormView
-            self.cardFormAction = cardFormView
         case .labelStyled:
             brandsLayout.isHidden = false
             let cardFormView = CardFormLabelStyledView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
+            cardFormView.setupInputAccessoryView(view: view)
+            if let formStyle = formStyle {
+                cardFormView.apply(style: formStyle)
+                submitButton.normalBackgroundColor = formStyle.submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
+            }
             self.formContentView.addSubview(cardFormView)
             self.cardFormView = cardFormView
-            self.cardFormAction = cardFormView
         case .cardDisplay:
             brandsLayout.isHidden = true
             let cardFormView = CardDisplayFormView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
+            cardFormView.setupInputAccessoryView(view: view)
+            if let formStyle = formStyle {
+                cardFormView.apply(style: formStyle)
+                submitButton.normalBackgroundColor = formStyle.submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
+            }
             self.formContentView.addSubview(cardFormView)
             self.cardFormView = cardFormView
-            self.cardFormAction = cardFormView
         default:
             print("Unknown custom view style.")
         }

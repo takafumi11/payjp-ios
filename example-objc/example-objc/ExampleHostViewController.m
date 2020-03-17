@@ -24,6 +24,15 @@
   [tableView deselectRowAtIndexPath:indexPath animated:true];
 
   if (indexPath.row == 3) {
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                     tenantId:nil
+                                     viewType:CardFormViewTypeTableStyled];
+    cardFormVc.delegate = self;
+    [self.navigationController pushViewController:cardFormVc animated:YES];
+  }
+
+  if (indexPath.row == 4) {
     // customize card form
     //        UIColor *color = RGB(0, 122, 255);
     //        PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
@@ -52,7 +61,7 @@
     //                [self presentViewController:naviVc animated:true completion:nil];
   }
 
-  if (indexPath.row == 4) {
+  if (indexPath.row == 5) {
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
