@@ -233,7 +233,7 @@ public class CardFormViewController: UIViewController {
             self.formContentView.addSubview(cardFormView)
             self.cardFormView = cardFormView
         case .cardDisplay:
-            brandsLayout.isHidden = true
+            brandsLayout.isHidden = false
             let cardFormView = CardDisplayFormView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self

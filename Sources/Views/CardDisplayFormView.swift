@@ -27,10 +27,10 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var holderContainer: UIStackView!
     @IBOutlet weak var ocrButton: UIButton!
 
-    @IBOutlet weak var cardNumberTextField: UITextField!
-    @IBOutlet weak var expirationTextField: UITextField!
-    @IBOutlet weak var cvcTextField: UITextField!
-    @IBOutlet weak var cardHolderTextField: UITextField!
+    var cardNumberTextField: UITextField!
+    var expirationTextField: UITextField!
+    var cvcTextField: UITextField!
+    var cardHolderTextField: UITextField!
 
     // 追加
     @IBOutlet weak var cardDisplayView: UIView!
@@ -39,7 +39,9 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cvcDisplayLabel: UILabel!
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
-
+    @IBOutlet weak var formScrollView: UIScrollView!
+    @IBOutlet weak var formContentView: UIStackView!
+    
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -85,25 +87,8 @@ public class CardDisplayFormView: UIView, CardFormView {
         }
 
         backgroundColor = .clear
-
-        // placeholder
-        cardNumberTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_number_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        expirationTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_expiration_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        cvcTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        cardHolderTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_holder_name_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-
-        cardNumberTextField.delegate = self
-        expirationTextField.delegate = self
-        cvcTextField.delegate = self
-        cardHolderTextField.delegate = self
+        
+        setupFormLayout()
 
         // set images
         //        brandLogoImage.image = "icon_card".image
@@ -188,6 +173,66 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
+    
+    private func setupFormLayout(){
+        NSLayoutConstraint.activate([
+            // widthはscrollView.widthAnchor x ページ数
+            formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
+                                                   multiplier: CGFloat(4))
+        ])
+        
+        let pageWidth = formScrollView.frame.width
+        let textFieldWidth = pageWidth
+        let textFieldHeight = CGFloat(60.0)
+
+        cardNumberTextField = UITextField(frame: CGRect(x: 0.0,
+                                                        y: 0.0,
+                                                        width: textFieldWidth,
+                                                        height: textFieldHeight))
+        expirationTextField = UITextField(frame: CGRect(x: pageWidth ,
+                                                        y: 0.0,
+                                                        width: textFieldWidth,
+                                                        height: textFieldHeight))
+        cvcTextField = UITextField(frame: CGRect(x: pageWidth*2,
+                                                 y: 0.0,
+                                                 width: textFieldWidth,
+                                                 height: textFieldHeight))
+        cardHolderTextField = UITextField(frame: CGRect(x: pageWidth*3,
+                                                        y: 0.0,
+                                                        width: textFieldWidth,
+                                                        height: textFieldHeight))
+        
+        cardNumberTextField.borderStyle = .roundedRect
+        expirationTextField.borderStyle = .roundedRect
+        cvcTextField.borderStyle = .roundedRect
+        cardHolderTextField.borderStyle = .roundedRect
+        
+        // placeholder
+        cardNumberTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_number_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        expirationTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_expiration_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        cvcTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_cvc_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        cardHolderTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_holder_name_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+
+        cardNumberTextField.delegate = self
+        expirationTextField.delegate = self
+        cvcTextField.delegate = self
+        cardHolderTextField.delegate = self
+        
+        formContentView.addArrangedSubview(cardNumberTextField)
+        formContentView.addArrangedSubview(expirationTextField)
+        formContentView.addArrangedSubview(cvcTextField)
+        formContentView.addArrangedSubview(cardHolderTextField)
+        
+        formScrollView.contentSize = CGSize(width: pageWidth * CGFloat(4), height: textFieldHeight)
     }
 
     private func backFlipCard() {
