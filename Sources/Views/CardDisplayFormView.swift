@@ -41,7 +41,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
     @IBOutlet weak var formContentView: UIStackView!
-    
+
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -87,7 +87,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         }
 
         backgroundColor = .clear
-        
+
         setupFormLayout()
 
         // set images
@@ -174,14 +174,14 @@ public class CardDisplayFormView: UIView, CardFormView {
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
-    
-    private func setupFormLayout(){
+
+    private func setupFormLayout() {
         NSLayoutConstraint.activate([
             // widthはscrollView.widthAnchor x ページ数
             formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
                                                    multiplier: CGFloat(4))
         ])
-        
+
         let pageWidth = formScrollView.frame.width
         let textFieldWidth = pageWidth
         let textFieldHeight = CGFloat(60.0)
@@ -202,12 +202,12 @@ public class CardDisplayFormView: UIView, CardFormView {
                                                         y: 0.0,
                                                         width: textFieldWidth,
                                                         height: textFieldHeight))
-        
+
         cardNumberTextField.borderStyle = .roundedRect
         expirationTextField.borderStyle = .roundedRect
         cvcTextField.borderStyle = .roundedRect
         cardHolderTextField.borderStyle = .roundedRect
-        
+
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_number_placeholder".localized,
@@ -226,12 +226,12 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
-        
+
         formContentView.addArrangedSubview(cardNumberTextField)
         formContentView.addArrangedSubview(expirationTextField)
         formContentView.addArrangedSubview(cvcTextField)
         formContentView.addArrangedSubview(cardHolderTextField)
-        
+
         formScrollView.contentSize = CGSize(width: pageWidth * CGFloat(4), height: textFieldHeight)
     }
 
