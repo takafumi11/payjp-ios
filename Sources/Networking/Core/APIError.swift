@@ -34,6 +34,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
     case serviceError(PAYErrorResponseType)
     /// Invalid JSON object.
     case invalidJSON(Data, Error?)
+    /// Required 3DSecure.
+    case requiredThreeDSecure(ThreeDSecureId)
 
     // MARK: - LocalizedError
 
@@ -49,6 +51,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             return errorResponse.message
         case .invalidJSON:
             return "Unable parse JSON object into expected classes."
+        case .requiredThreeDSecure:
+            return "Required 3DSecure process."
         }
     }
 
@@ -64,6 +68,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             return PAYErrorServiceError
         case .invalidJSON:
             return PAYErrorInvalidJSON
+        case .requiredThreeDSecure:
+            return PAYErrorRequiredThreeDSecure
         }
     }
 
@@ -83,6 +89,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             if error != nil {
                 userInfo[PAYErrorInvalidJSONErrorObject] = error
             }
+        case .requiredThreeDSecure(let identifier):
+            userInfo[PAYErrorRequiredThreeDSecureIdObject] = identifier
         }
         return userInfo
     }

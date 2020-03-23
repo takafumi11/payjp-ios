@@ -226,8 +226,8 @@ extension CardFormViewController: CardFormScreenDelegate {
         showError(message: message)
     }
 
-    func presentVerificationScreen(with token: Token) {
-        let verifyVc = CardVerificationViewController.createCardVerificationViewController(token: token,
+    func presentVerificationScreen(with tdsId: ThreeDSecureId) {
+        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tdsId: tdsId,
                                                                                            delegate: self)
         let naviVc = UINavigationController(rootViewController: verifyVc)
         naviVc.presentationController?.delegate = verifyVc
@@ -317,13 +317,13 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 extension CardFormViewController: CardVerificationViewControllerDelegate {
 
     public func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                               didVerified tokenId: String?) {
+                                               didVerified tdsId: String?) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             // トークン再取得
             print(debug: "cardVarificationViewController didVerified => トークン再取得")
-            if let tokenId = tokenId {
-                self.presenter?.fetchToken(tokenId: tokenId)
+            if let tdsId = tdsId {
+                self.presenter?.fetchToken(tdsId: tdsId)
             }
         }
     }

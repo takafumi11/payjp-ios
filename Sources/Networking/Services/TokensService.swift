@@ -29,6 +29,12 @@ protocol TokenServiceType {
     ) -> URLSessionDataTask?
 
     @discardableResult
+    func createTokenForThreeDSecure(
+        tdsId: String,
+        completion: @escaping (Result<Token, APIError>) -> Void
+    ) -> URLSessionDataTask?
+
+    @discardableResult
     func getToken(
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
@@ -75,6 +81,11 @@ struct TokenService: TokenServiceType {
         }
 
         let request = CreateTokenForApplePayRequest(paymentToken: decodedToken)
+        return client.request(with: request, completion: completion)
+    }
+
+    func createTokenForThreeDSecure(tdsId: String, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        let request = CreateTokenForThreeDSecureRequest(tdsId: tdsId)
         return client.request(with: request, completion: completion)
     }
 

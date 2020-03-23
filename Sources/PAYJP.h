@@ -10,6 +10,9 @@
 FOUNDATION_EXPORT double PAYJPVersionNumber;
 FOUNDATION_EXPORT const unsigned char PAYJPVersionString[];
 
+/// PAY.JP API's endpoint.
+FOUNDATION_EXPORT NSString *const PAYJPApiEndpoint;
+
 /// PAY.JP SDK related error's main domain.
 FOUNDATION_EXPORT NSString *const PAYErrorDomain;
 
@@ -25,6 +28,8 @@ FOUNDATION_EXPORT NSInteger const PAYErrorServiceError;
 FOUNDATION_EXPORT NSInteger const PAYErrorInvalidJSON;
 /// Form validation error.
 FOUNDATION_EXPORT NSInteger const PAYErrorFormInvalid;
+/// Form required 3DSecure.
+FOUNDATION_EXPORT NSInteger const PAYErrorRequiredThreeDSecure;
 
 /// Use this key name to get `PAYErrorInvalidApplePayToken` error's data which is stored in the
 /// `userInfo`.
@@ -39,3 +44,6 @@ FOUNDATION_EXPORT NSString *const PAYErrorServiceErrorObject;
 /// Use this key name to get `PAYErrorInvalidJSON` error's data which is stored in the `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorInvalidJSONObject;
 FOUNDATION_EXPORT NSString *const PAYErrorInvalidJSONErrorObject;
+/// Use this key name to get `PAYErrorRequiredThreeDSecure` tds identifier which is stored in the
+/// `userInfo`.
+FOUNDATION_EXPORT NSString *const PAYErrorRequiredThreeDSecureIdObject;

@@ -67,6 +67,14 @@ class Client: ClientType {
                         } catch {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
+                    } else if response.statusCode == 303 {
+                        print("response.statusCode == 303 , 3DSecure process start.")
+                        // TODO: headerに入っているLocationからtds_idを取り出す
+                        for item in response.allHeaderFields {
+                            print("response.allHeaderFields[\"\(item.key)\"] = \(item.value)")
+                        }
+                        let tdsId = ThreeDSecureId(identifier: "tds_xxxxx")
+                        completion?(Result.failure(.requiredThreeDSecure(tdsId)))
                     } else {
                         do {
                             let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
