@@ -152,8 +152,8 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let token = mockToken(tdsStatus: .unverified)
-        let tdsId = ThreeDSecureId(identifier: "tds_id")
-        let requiredTds = APIError.requiredThreeDSecure(tdsId)
+        let tdsToken = ThreeDSecureToken(identifier: "tds_id")
+        let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
@@ -164,7 +164,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
-        XCTAssertEqual(mockDelegate.presentVerificationScreenTdsId?.identifier, tdsId.identifier)
+        XCTAssertEqual(mockDelegate.presentVerificationScreenTdsToken?.identifier, tdsToken.identifier)
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 

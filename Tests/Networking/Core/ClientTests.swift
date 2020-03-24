@@ -216,8 +216,8 @@ class ClientTests: XCTestCase {
                                        httpVersion: "",
                                        headerFields: fields)!
 
-        let tdsId = client.findThreeDSecureId(response: response)
-        XCTAssertEqual(tdsId?.identifier, "tds_xxx")
+        let tdsToken = client.createThreeDSecureToken(response: response)
+        XCTAssertEqual(tdsToken?.identifier, "tds_xxx")
     }
 
     func testFindThreeDSecureId_nil() {
@@ -228,7 +228,7 @@ class ClientTests: XCTestCase {
                                        httpVersion: "",
                                        headerFields: fields)!
 
-        let tdsId = client.findThreeDSecureId(response: response)
-        XCTAssertNil(tdsId)
+        let tdsToken = client.createThreeDSecureToken(response: response)
+        XCTAssertNil(tdsToken)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ThreeDSecureId.swift
+//  ThreeDSecureToken.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2020/03/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ThreeDSecureId {
+public struct ThreeDSecureToken {
 
     public let identifier: String
 
@@ -17,7 +17,7 @@ public struct ThreeDSecureId {
     }
 }
 
-extension ThreeDSecureId {
+extension ThreeDSecureToken {
 
     private var tdsBaseUrl: URL? {
         return URL(string: "\(PAYJPApiEndpoint)tds/\(identifier)")

@@ -18,7 +18,7 @@ protocol CardFormScreenDelegate: class {
     func showErrorView(message: String, buttonHidden: Bool)
     func dismissErrorView()
     func showErrorAlert(message: String)
-    func presentVerificationScreen(with tdsId: ThreeDSecureId)
+    func presentVerificationScreen(with tdsToken: ThreeDSecureToken)
     // callback
     func didCompleteCardForm(with result: CardFormResult)
     func didProduced(with token: Token,
@@ -69,8 +69,8 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                         self.creatingTokenCompleted(token: token)
                                     case .failure(let error):
                                         switch error {
-                                        case .requiredThreeDSecure(let tdsId):
-                                            self.validateThreeDSecure(tdsId: tdsId)
+                                        case .requiredThreeDSecure(let tdsToken):
+                                            self.validateThreeDSecure(tdsToken: tdsToken)
                                         default:
                                             self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                                         }
@@ -122,10 +122,10 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    private func validateThreeDSecure(tdsId: ThreeDSecureId, alreadyVerify: Bool = false) {
+    private func validateThreeDSecure(tdsToken: ThreeDSecureToken, alreadyVerify: Bool = false) {
         self.dispatchQueue.async { [weak self] in
             guard let self = self else { return }
-            self.delegate?.presentVerificationScreen(with: tdsId)
+            self.delegate?.presentVerificationScreen(with: tdsToken)
         }
     }
 

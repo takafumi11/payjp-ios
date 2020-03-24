@@ -226,8 +226,8 @@ extension CardFormViewController: CardFormScreenDelegate {
         showError(message: message)
     }
 
-    func presentVerificationScreen(with tdsId: ThreeDSecureId) {
-        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tdsId: tdsId,
+    func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
+        let verifyVc = CardVerificationViewController.createCardVerificationViewController(tdsToken: tdsToken,
                                                                                            delegate: self)
         let naviVc = UINavigationController(rootViewController: verifyVc)
         naviVc.presentationController?.delegate = verifyVc

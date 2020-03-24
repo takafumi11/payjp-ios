@@ -35,7 +35,7 @@ public enum APIError: LocalizedError, NSErrorSerializable {
     /// Invalid JSON object.
     case invalidJSON(Data, Error?)
     /// Required 3DSecure.
-    case requiredThreeDSecure(ThreeDSecureId)
+    case requiredThreeDSecure(ThreeDSecureToken)
 
     // MARK: - LocalizedError
 

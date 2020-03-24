@@ -16,7 +16,7 @@ public class CardVerificationViewController: UIViewController {
 
     private var webView: WKWebView!
     private var progressView: UIProgressView!
-    private var tdsId: ThreeDSecureId?
+    private var tdsToken: ThreeDSecureToken?
     private var verifyCompleted: Bool = false
     private var originalEntryUrl: URL?
     private var webViewObserver: WebViewObserverType?
@@ -25,7 +25,7 @@ public class CardVerificationViewController: UIViewController {
 
     // TODO: 消す debug用
     @IBAction func debugDoneTapped(_ sender: Any) {
-        delegate?.cardVarificationViewController(self, didVerified: tdsId?.identifier)
+        delegate?.cardVarificationViewController(self, didVerified: tdsToken?.identifier)
     }
 
     @IBAction func reloadTapped(_ sender: Any) {
@@ -45,7 +45,7 @@ public class CardVerificationViewController: UIViewController {
         }
     }
 
-    public static func createCardVerificationViewController(tdsId: ThreeDSecureId,
+    public static func createCardVerificationViewController(tdsToken: ThreeDSecureToken,
                                                             delegate: CardVerificationViewControllerDelegate)
         -> CardVerificationViewController {
             let stotyboard = UIStoryboard(name: "CardVerification", bundle: .payjpBundle)
@@ -53,7 +53,7 @@ public class CardVerificationViewController: UIViewController {
             guard
                 let verifyVc = naviVc?.topViewController as? CardVerificationViewController
                 else { fatalError("Couldn't instantiate CardVerificationViewController") }
-            verifyVc.tdsId = tdsId
+            verifyVc.tdsToken = tdsToken
             verifyVc.delegate = delegate
             return verifyVc
     }
@@ -72,7 +72,7 @@ public class CardVerificationViewController: UIViewController {
         navigationItem.title = "payjp_card_verification_title".localized
         webView.navigationDelegate = self
 
-        if let tdsId = tdsId, let entryUrl = tdsId.tdsEntryUrl {
+        if let tdsToken = tdsToken, let entryUrl = tdsToken.tdsEntryUrl {
             originalEntryUrl = entryUrl
             var request = URLRequest(url: entryUrl)
             request.setValue(PAYJPSDK.authToken, forHTTPHeaderField: "Authorization")
@@ -123,7 +123,7 @@ public class CardVerificationViewController: UIViewController {
     }
 
     private func checkVerificationFinished(url: URL?) -> Bool {
-        if let loadUrl = url?.absoluteString, let expectedUrl = tdsId?.tdsFinishUrl?.absoluteString {
+        if let loadUrl = url?.absoluteString, let expectedUrl = tdsToken?.tdsFinishUrl?.absoluteString {
             return loadUrl == expectedUrl
         }
         return false
@@ -146,7 +146,7 @@ extension CardVerificationViewController: WKNavigationDelegate {
         if checkVerificationFinished(url: navigationResponse.response.url) {
             decisionHandler(.cancel)
             verifyCompleted = true
-            delegate?.cardVarificationViewController(self, didVerified: tdsId?.identifier)
+            delegate?.cardVarificationViewController(self, didVerified: tdsToken?.identifier)
         } else {
             decisionHandler(.allow)
             verifyCompleted = false
