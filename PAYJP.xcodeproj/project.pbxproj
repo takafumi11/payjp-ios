@@ -70,6 +70,7 @@
 		ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0673682387844B00F86D18 /* BrandImageCell.swift */; };
 		ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0673692387844B00F86D18 /* BrandImageCell.xib */; };
 		ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */; };
+		ED0C78F82429F3FE0022D544 /* CreateTokenForThreeDSecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */; };
 		ED263900242896BF006D0715 /* ThreeDSecureId.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2638FF242896BF006D0715 /* ThreeDSecureId.swift */; };
 		ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2CDBB223E952570017F102 /* PermissionFetcher.swift */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
@@ -216,6 +217,7 @@
 		ED0673682387844B00F86D18 /* BrandImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandImageCell.swift; sourceTree = "<group>"; };
 		ED0673692387844B00F86D18 /* BrandImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandImageCell.xib; sourceTree = "<group>"; };
 		ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequest.swift; sourceTree = "<group>"; };
+		ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequestTests.swift; sourceTree = "<group>"; };
 		ED2638FF242896BF006D0715 /* ThreeDSecureId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureId.swift; sourceTree = "<group>"; };
 		ED2CDBB223E952570017F102 /* PermissionFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionFetcher.swift; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				BE21785A22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift */,
+				ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */,
 				BE21785622E995C40098128D /* CreateTokenRequestTests.swift */,
 				BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */,
 				BE21785E22E99F260098128D /* GetTokenRequestTests.swift */,
@@ -856,6 +859,7 @@
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
 				3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */,
 				ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */,
+				ED0C78F82429F3FE0022D544 /* CreateTokenForThreeDSecureRequestTests.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,

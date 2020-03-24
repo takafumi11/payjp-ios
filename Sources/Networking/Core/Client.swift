@@ -72,6 +72,7 @@ class Client: ClientType {
                             completion?(Result.failure(.requiredThreeDSecure(tdsId)))
                         } else {
                             // TODO: tdsIdがない場合はエラーにする？
+                            completion?(Result.failure(.invalidResponse(response)))
                         }
                     } else {
                         do {
