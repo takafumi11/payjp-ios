@@ -68,13 +68,11 @@ class Client: ClientType {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else if response.statusCode == 303 {
-                        print("response.statusCode == 303 , 3DSecure process start.")
-                        // TODO: headerに入っているLocationからtds_idを取り出す
-                        for item in response.allHeaderFields {
-                            print("response.allHeaderFields[\"\(item.key)\"] = \(item.value)")
+                        if let tdsId = self.findThreeDSecureId(response: response) {
+                            completion?(Result.failure(.requiredThreeDSecure(tdsId)))
+                        } else {
+                            // TODO: tdsIdがない場合はエラーにする？
                         }
-                        let tdsId = ThreeDSecureId(identifier: "tds_xxxxx")
-                        completion?(Result.failure(.requiredThreeDSecure(tdsId)))
                     } else {
                         do {
                             let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
@@ -93,5 +91,20 @@ class Client: ClientType {
             completion?(Result.failure(.systemError(error)))
             return nil
         }
+    }
+
+    /// Locationヘッダからtds_idを取得する
+    /// - Parameter response: HTTPURLResponse
+    func findThreeDSecureId(response: HTTPURLResponse) -> ThreeDSecureId? {
+        if let location = response.allHeaderFields["Location"] as? String {
+            if let url = URL(string: location) {
+                let components = url.pathComponents
+                let filters = components.filter { $0.starts(with: "tds_") }
+                if let tdsId = filters.first {
+                    return ThreeDSecureId(identifier: tdsId)
+                }
+            }
+        }
+        return nil
     }
 }

@@ -154,4 +154,29 @@ class ClientTests: XCTestCase {
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testFindThreeDSecureId() {
+        var fields = [String: String]()
+        fields["Authorization"] = "auth_token"
+        fields["Location"] = "https://api.pay-test.com/v1/tds/tds_xxx/start?publickey=pk_live_xxx"
+        let response = HTTPURLResponse(url: URL(string: "https://api.pay-test.com")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: fields)!
+
+        let tdsId = client.findThreeDSecureId(response: response)
+        XCTAssertEqual(tdsId?.identifier, "tds_xxx")
+    }
+
+    func testFindThreeDSecureId_nil() {
+        var fields = [String: String]()
+        fields["Authorization"] = "auth_token"
+        let response = HTTPURLResponse(url: URL(string: "https://api.pay-test.com")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: fields)!
+
+        let tdsId = client.findThreeDSecureId(response: response)
+        XCTAssertNil(tdsId)
+    }
 }

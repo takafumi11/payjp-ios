@@ -21,7 +21,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var showErrorViewButtonHidden = false
     var dismissErrorViewCalled = false
     var showErrorAlertMessage: String?
-    var presentVerificationScreenToken: Token?
+    var presentVerificationScreenTdsId: ThreeDSecureId?
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
 
@@ -69,8 +69,8 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
         expectation.fulfill()
     }
 
-    func presentVerificationScreen(with token: Token) {
-        presentVerificationScreenToken = token
+    func presentVerificationScreen(with tdsId: ThreeDSecureId) {
+        presentVerificationScreenTdsId = tdsId
         expectation.fulfill()
     }
 
@@ -90,6 +90,7 @@ class MockTokenService: TokenServiceType {
     let error: APIError?
     var calledTenantId: String?
     var calledTokenId: String?
+    var calledTdsId: String?
 
     init(token: Token, error: APIError? = nil) {
         self.token = token
@@ -119,6 +120,19 @@ class MockTokenService: TokenServiceType {
 
     func createTokenForApplePay(paymentToken: PKPaymentToken,
                                 completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        return nil
+    }
+
+    func createTokenForThreeDSecure(tdsId: String,
+                                    completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        self.calledTdsId = tdsId
+
+        if let error  = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(token))
+        }
+
         return nil
     }
 
