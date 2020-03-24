@@ -320,8 +320,8 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
                                                didVerified tdsId: String?) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            // トークン再取得
-            print(debug: "cardVarificationViewController didVerified => トークン再取得")
+            // トークン取得
+            print(debug: "cardVarificationViewController didVerified => トークン取得")
             if let tdsId = tdsId {
                 self.presenter?.fetchToken(tdsId: tdsId)
             }
