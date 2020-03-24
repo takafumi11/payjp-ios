@@ -81,19 +81,3 @@ import Foundation
         self.rawValue = rawValue
     }
 }
-
-extension Card {
-
-    private var tdsBaseUrl: URL? {
-        // TODO
-        return URL(string: "https://api.pay-stage.com/v1/3ds/\(identifer)")
-    }
-
-    var tdsEntryUrl: URL? {
-        return tdsBaseUrl?.appendingPathComponent("start")
-    }
-
-    var tdsFinishUrl: URL? {
-        return tdsBaseUrl?.appendingPathComponent("finish")
-    }
-}
