@@ -7,7 +7,7 @@
 
 #import "PAYJP.h"
 
-NSString *const PAYJPApiEndpoint = @"https://ca421794.ngrok.io/v1/";
+NSString *const PAYJPApiEndpoint = @"https://api.pay.jp/v1/";
 
 NSString *const PAYErrorDomain = @"PAYErrorDomain";
 

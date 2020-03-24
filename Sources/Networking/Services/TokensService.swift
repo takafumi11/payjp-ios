@@ -84,7 +84,10 @@ struct TokenService: TokenServiceType {
         return client.request(with: request, completion: completion)
     }
 
-    func createTokenForThreeDSecure(tdsId: String, completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+    func createTokenForThreeDSecure(
+        tdsId: String,
+        completion: @escaping (Result<Token, APIError>) -> Void
+    ) -> URLSessionDataTask? {
         let request = CreateTokenForThreeDSecureRequest(tdsId: tdsId)
         return client.request(with: request, completion: completion)
     }
