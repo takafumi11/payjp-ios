@@ -250,7 +250,7 @@ extension CardFormViewController: CardFormScreenDelegate {
             tdsSecureProcessing = true
         }
     }
-    
+
     func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
