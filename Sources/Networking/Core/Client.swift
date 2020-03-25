@@ -96,14 +96,13 @@ class Client: ClientType {
 
     /// Locationヘッダからtds_idを取得する
     /// - Parameter response: HTTPURLResponse
+    /// - Returns: ThreeDSecureToken
     func createThreeDSecureToken(response: HTTPURLResponse) -> ThreeDSecureToken? {
-        if let location = response.allHeaderFields["Location"] as? String {
-            if let url = URL(string: location) {
-                let components = url.pathComponents
-                let filters = components.filter { $0.starts(with: "tds_") }
-                if let tdsId = filters.first {
-                    return ThreeDSecureToken(identifier: tdsId)
-                }
+        if let location = response.allHeaderFields["Location"] as? String,
+            let url = URL(string: location) {
+            if url.path.starts(with: "/v1/tds/") {
+                let tdsId = url.pathComponents[3]
+                return ThreeDSecureToken(identifier: tdsId)
             }
         }
         return nil
