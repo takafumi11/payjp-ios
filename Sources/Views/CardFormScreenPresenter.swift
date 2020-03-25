@@ -30,7 +30,7 @@ protocol CardFormScreenPresenterType {
 
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
-    func fetchToken(tdsId: String)
+    func fetchToken(tdsToken: ThreeDSecureToken)
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -78,8 +78,8 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func fetchToken(tdsId: String) {
-        tokenService.createTokenForThreeDSecure(tdsId: tdsId) { [weak self] result in
+    func fetchToken(tdsToken: ThreeDSecureToken) {
+        tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let token):
