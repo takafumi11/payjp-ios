@@ -100,8 +100,8 @@ class Client: ClientType {
     func createThreeDSecureToken(response: HTTPURLResponse) -> ThreeDSecureToken? {
         if let location = response.allHeaderFields["Location"] as? String,
             let url = URL(string: location) {
-            if url.path.starts(with: "/v1/tds/") {
-                let tdsId = url.pathComponents[3]
+            let pattern = "^/v1/tds/([\\w\\d_]+)/.*$"
+            if let tdsId = url.path.capture(pattern: pattern, group: 1) {
                 return ThreeDSecureToken(identifier: tdsId)
             }
         }

@@ -40,5 +40,38 @@ class String_PAYJPTests: XCTestCase {
         XCTAssertFalse("a1".isDigitsOnly)
         XCTAssertFalse("abc".isDigitsOnly)
     }
+
+    func testCapture() {
+        let pattern = "^(https?)://([^/]+)/?"
+        let target = "https://pay.jp/"
+
+        let result = target.capture(pattern: pattern, group: 2)
+        XCTAssertEqual(result, "pay.jp")
+    }
+
+    func testCapture_nil() {
+        let pattern = "^(https?)://([^/]+)/?"
+        let target = "pay.jp"
+
+        let result = target.capture(pattern: pattern, group: 1)
+        XCTAssertNil(result)
+    }
+
+    func testCaptureMulti() {
+        let pattern = "^(https?)://([^/]+)/?"
+        let target = "https://pay.jp/"
+
+        let result = target.capture(pattern: pattern, group: [1, 2])
+        XCTAssertEqual(result[0], "https")
+        XCTAssertEqual(result[1], "pay.jp")
+    }
+
+    func testCaptureMulti_empty() {
+        let pattern = "^(https?)://([^/]+)/?"
+        let target = "pay.jp"
+
+        let result = target.capture(pattern: pattern, group: [1, 2])
+        XCTAssertTrue(result.isEmpty)
+    }
 }
 // swiftlint:enable type_name
