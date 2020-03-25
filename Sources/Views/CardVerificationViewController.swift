@@ -25,7 +25,7 @@ public class CardVerificationViewController: UIViewController {
 
     // TODO: 消す debug用
     @IBAction func debugDoneTapped(_ sender: Any) {
-        delegate?.cardVarificationViewController(self, didVerified: tdsToken?.identifier)
+        delegate?.cardVarificationViewController(self, didVerified: tdsToken)
     }
 
     @IBAction func reloadTapped(_ sender: Any) {
@@ -146,7 +146,7 @@ extension CardVerificationViewController: WKNavigationDelegate {
         if checkVerificationFinished(url: navigationResponse.response.url) {
             decisionHandler(.cancel)
             verifyCompleted = true
-            delegate?.cardVarificationViewController(self, didVerified: tdsToken?.identifier)
+            delegate?.cardVarificationViewController(self, didVerified: tdsToken)
         } else {
             decisionHandler(.allow)
             verifyCompleted = false

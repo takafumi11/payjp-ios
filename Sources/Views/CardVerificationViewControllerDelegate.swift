@@ -13,9 +13,9 @@ public protocol CardVerificationViewControllerDelegate: AnyObject {
 
     /// Callback when card verification is completed.
     /// - Parameters:
-    ///   - tdsId: 3DSecure identifier
+    ///   - tdsToken: ThreeDSecureToken
     func cardVarificationViewController(_: CardVerificationViewController,
-                                        didVerified tdsId: String?)
+                                        didVerified tdsToken: ThreeDSecureToken?)
 
     /// Callback when card verification is canceled.
     func cardVarificationViewControllerDidCancel(_: CardVerificationViewController)

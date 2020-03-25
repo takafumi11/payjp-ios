@@ -334,13 +334,13 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 extension CardFormViewController: CardVerificationViewControllerDelegate {
 
     public func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                               didVerified tdsId: String?) {
+                                               didVerified tdsToken: ThreeDSecureToken?) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             // トークン取得
             print(debug: "cardVarificationViewController didVerified => トークン取得")
-            if let tdsId = tdsId {
-                self.presenter?.fetchToken(tdsId: tdsId)
+            if let tdsToken = tdsToken {
+                self.presenter?.fetchToken(tdsToken: tdsToken)
             }
         }
     }
