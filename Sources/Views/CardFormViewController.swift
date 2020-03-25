@@ -119,8 +119,9 @@ public class CardFormViewController: UIViewController {
 
         if tdsSecureProcessing {
             tdsSecureProcessing = false
-            dismissIndicator()
-            enableSubmitButton()
+            if let tdsToken = presenter?.tdsToken {
+                presenter?.fetchToken(tdsToken: tdsToken)
+            }
         }
     }
 

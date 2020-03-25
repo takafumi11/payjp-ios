@@ -27,6 +27,7 @@ protocol CardFormScreenDelegate: class {
 
 protocol CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool { get }
+    var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
@@ -35,6 +36,7 @@ protocol CardFormScreenPresenterType {
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool = false
+    var tdsToken: ThreeDSecureToken?
 
     private weak var delegate: CardFormScreenDelegate?
 
@@ -70,6 +72,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                     case .failure(let error):
                                         switch error {
                                         case .requiredThreeDSecure(let tdsToken):
+                                            self.tdsToken = tdsToken
                                             self.validateThreeDSecure(tdsToken: tdsToken)
                                         default:
                                             self.showErrorAlert(message: self.errorTranslator.translate(error: error))
