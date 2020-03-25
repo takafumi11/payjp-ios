@@ -67,6 +67,13 @@ class Client: ClientType {
                         } catch {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
+                    } else if response.statusCode == 303 {
+                        if let tdsToken = self.createThreeDSecureToken(response: response) {
+                            completion?(Result.failure(.requiredThreeDSecure(tdsToken)))
+                        } else {
+                            // TODO: tdsIdがない場合はエラーにする？
+                            completion?(Result.failure(.invalidResponse(response)))
+                        }
                     } else {
                         do {
                             let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
@@ -85,5 +92,19 @@ class Client: ClientType {
             completion?(Result.failure(.systemError(error)))
             return nil
         }
+    }
+
+    /// Locationヘッダからtds_idを取得する
+    /// - Parameter response: HTTPURLResponse
+    /// - Returns: ThreeDSecureToken
+    func createThreeDSecureToken(response: HTTPURLResponse) -> ThreeDSecureToken? {
+        if let location = response.allHeaderFields["Location"] as? String,
+            let url = URL(string: location) {
+            let pattern = "^/v1/tds/([\\w\\d_]+)/.*$"
+            if let tdsId = url.path.capture(pattern: pattern, group: 1) {
+                return ThreeDSecureToken(identifier: tdsId)
+            }
+        }
+        return nil
     }
 }

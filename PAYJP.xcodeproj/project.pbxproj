@@ -69,6 +69,9 @@
 		ED05B173238CF18200DCA1C9 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED05B172238CF18200DCA1C9 /* Log.swift */; };
 		ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0673682387844B00F86D18 /* BrandImageCell.swift */; };
 		ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0673692387844B00F86D18 /* BrandImageCell.xib */; };
+		ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */; };
+		ED0C78F82429F3FE0022D544 /* CreateTokenForThreeDSecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */; };
+		ED263900242896BF006D0715 /* ThreeDSecureId.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2638FF242896BF006D0715 /* ThreeDSecureId.swift */; };
 		ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2CDBB223E952570017F102 /* PermissionFetcher.swift */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
 		ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */; };
@@ -213,6 +216,9 @@
 		ED05B172238CF18200DCA1C9 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		ED0673682387844B00F86D18 /* BrandImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandImageCell.swift; sourceTree = "<group>"; };
 		ED0673692387844B00F86D18 /* BrandImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandImageCell.xib; sourceTree = "<group>"; };
+		ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequest.swift; sourceTree = "<group>"; };
+		ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequestTests.swift; sourceTree = "<group>"; };
+		ED2638FF242896BF006D0715 /* ThreeDSecureId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureId.swift; sourceTree = "<group>"; };
 		ED2CDBB223E952570017F102 /* PermissionFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionFetcher.swift; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
 		ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardForm.storyboard; sourceTree = "<group>"; };
@@ -397,6 +403,7 @@
 				BEA1D28A22EAFCBE00F8906B /* CardBrand.swift */,
 				BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
+				ED2638FF242896BF006D0715 /* ThreeDSecureId.swift */,
 				EDE20E9623B3135300A38A96 /* ThreeDSecureStatus.swift */,
 				EDCF722C22F935D400272C10 /* Token.swift */,
 			);
@@ -434,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				BE21785822E9993D0098128D /* CreateTokenForApplePayRequest.swift */,
+				ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */,
 				BE21785122E982A60098128D /* CreateTokenRequest.swift */,
 				BE21786022E9A4F70098128D /* GetAcceptedBrands.swift */,
 				BE21785C22E99CF10098128D /* GetTokenRequest.swift */,
@@ -445,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				BE21785A22E99BB30098128D /* CreateTokenForApplePayRequestTests.swift */,
+				ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */,
 				BE21785622E995C40098128D /* CreateTokenRequestTests.swift */,
 				BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */,
 				BE21785E22E99F260098128D /* GetTokenRequestTests.swift */,
@@ -764,6 +773,7 @@
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
+				ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */,
 				BE6C230E20B4064200C4FE1E /* PAYJP.m in Sources */,
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,
 				BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */,
@@ -813,6 +823,7 @@
 				ED30C8C823C474E0008373E6 /* WebViewObserver.swift in Sources */,
 				EDE20E9323B1E18800A38A96 /* CardVerificationViewController.swift in Sources */,
 				ED9B33E42390B7780079E7B8 /* ErrorTranslator.swift in Sources */,
+				ED263900242896BF006D0715 /* ThreeDSecureId.swift in Sources */,
 				BE21781C22E82AFD0098128D /* Client.swift in Sources */,
 				BE21785922E9993D0098128D /* CreateTokenForApplePayRequest.swift in Sources */,
 				ED05B173238CF18200DCA1C9 /* Log.swift in Sources */,
@@ -848,6 +859,7 @@
 				BE0417D122E1A52500B944CB /* ExpirationValidatorTests.swift in Sources */,
 				3289C9D323EBFC87008FFBC1 /* ClientInfoTests.swift in Sources */,
 				ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */,
+				ED0C78F82429F3FE0022D544 /* CreateTokenForThreeDSecureRequestTests.swift in Sources */,
 				BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */,
 				EDA3EE9422E1B88F00D9A6C9 /* CvcValidatorTests.swift in Sources */,
 				BE1DAA7C22E0536800D15A84 /* ExpirationExtractorTests.swift in Sources */,

@@ -238,8 +238,8 @@ extension CardFormViewController: CardFormScreenDelegate {
         showError(message: message)
     }
 
-    func presentVerificationScreen(with token: Token) {
-        let url = token.card.tdsEntryUrl
+    func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
+        let url = tdsToken.tdsEntryUrl
         if let url = url {
             let safariVc = SFSafariViewController(url: url)
             if #available(iOS 11.0, *) {
@@ -250,7 +250,7 @@ extension CardFormViewController: CardFormScreenDelegate {
             tdsSecureProcessing = true
         }
     }
-
+    
     func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
@@ -334,13 +334,13 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 extension CardFormViewController: CardVerificationViewControllerDelegate {
 
     public func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                               didVerified tokenId: String?) {
+                                               didVerified tdsId: String?) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            // トークン再取得
-            print(debug: "cardVarificationViewController didVerified => トークン再取得")
-            if let tokenId = tokenId {
-                self.presenter?.fetchToken(tokenId: tokenId)
+            // トークン取得
+            print(debug: "cardVarificationViewController didVerified => トークン取得")
+            if let tdsId = tdsId {
+                self.presenter?.fetchToken(tdsId: tdsId)
             }
         }
     }
