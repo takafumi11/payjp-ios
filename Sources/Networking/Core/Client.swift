@@ -15,6 +15,21 @@ protocol ClientType {
     ) -> URLSessionDataTask?
 }
 
+class InterceptRedirectDelegate: NSObject, URLSessionTaskDelegate {
+
+    static let shared = InterceptRedirectDelegate()
+
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    willPerformHTTPRedirection response: HTTPURLResponse,
+                    newRequest request: URLRequest,
+                    completionHandler: @escaping (URLRequest?) -> Void) {
+
+        // 303のresponseが返されるようにリダイレクトのrequestはスルーする
+        completionHandler(nil)
+    }
+}
+
 class Client: ClientType {
 
     static let shared = Client()
@@ -24,7 +39,9 @@ class Client: ClientType {
     private let jsonDecoder: JSONDecoder
 
     private init(
-        session: URLSession = URLSession(configuration: .default),
+        session: URLSession = URLSession(configuration: .default,
+                                         delegate: InterceptRedirectDelegate.shared,
+                                         delegateQueue: nil),
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
         DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
@@ -71,7 +88,6 @@ class Client: ClientType {
                         if let tdsToken = self.createThreeDSecureToken(response: response) {
                             completion?(Result.failure(.requiredThreeDSecure(tdsToken)))
                         } else {
-                            // TODO: tdsIdがない場合はエラーにする？
                             completion?(Result.failure(.invalidResponse(response)))
                         }
                     } else {
