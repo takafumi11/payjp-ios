@@ -121,6 +121,57 @@ class APIClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
+    func testCreateToken_withThreeDSecureToken() {
+        OHHTTPStubs.removeAllStubs()
+        stub(condition: { (req) -> Bool in
+            // check request
+            if let body = req.ohhttpStubs_httpBody {
+                let bodyString = String(data: body, encoding: String.Encoding.utf8)
+                let bodyParts = bodyString?.split(separator: "&").map(String.init)
+                let body = bodyParts?.reduce([String: String]()) { original, string -> [String: String] in
+                    var result = original
+                    let pair = string.split(separator: "=").map(String.init)
+                    result[pair[0]] = pair[1]
+                    print(string)
+                    return result
+                }
+
+                XCTAssertEqual(body?["tds_id"], "tds_xxx")
+                return true
+            }
+            return false
+        }, response: { (_) -> OHHTTPStubsResponse in
+            OHHTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+        })
+
+        PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
+        let apiClient = APIClient.shared
+
+        let expectation = self.expectation(description: self.description)
+
+        apiClient.createToken(with: ThreeDSecureToken(identifier: "tds_xxx")) { result in
+            switch result {
+            case .success(let payToken):
+                let json = TestFixture.JSON(by: "token.json")
+                let decoder = JSONDecoder.shared
+                let token = try! Token.decodeJson(with: json, using: decoder)
+
+                XCTAssertEqual(payToken.identifer, token.identifer)
+                XCTAssertEqual(payToken.used, token.used)
+                XCTAssertEqual(payToken.livemode, token.livemode)
+                XCTAssertEqual(payToken.createdAt, token.createdAt)
+                XCTAssertEqual(payToken.rawValue?.count, token.rawValue?.count)
+                XCTAssertEqual(payToken.card.identifer, token.card.identifer)
+                XCTAssertEqual(payToken.card.rawValue?.count, token.card.rawValue?.count)
+                expectation.fulfill()
+            default:
+                XCTFail()
+            }
+        }
+
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
     func testGetToken() {
         PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
         let apiClient = APIClient.shared
