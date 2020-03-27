@@ -19,15 +19,15 @@ public struct ThreeDSecureToken {
 
 extension ThreeDSecureToken {
 
-    private var tdsBaseUrl: URL? {
-        return URL(string: "\(PAYJPApiEndpoint)tds/\(identifier)")
+    private var tdsBaseUrl: URL {
+        return URL(string: "\(PAYJPApiEndpoint)tds/\(identifier)")!
     }
 
-    var tdsEntryUrl: URL? {
-        return tdsBaseUrl?.appendingPathComponent("start")
+    var tdsEntryUrl: URL {
+        return tdsBaseUrl.appendingPathComponent("start")
     }
 
-    var tdsFinishUrl: URL? {
-        return tdsBaseUrl?.appendingPathComponent("finish")
+    var tdsFinishUrl: URL {
+        return tdsBaseUrl.appendingPathComponent("finish")
     }
 }

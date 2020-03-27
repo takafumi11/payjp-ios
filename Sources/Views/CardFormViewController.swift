@@ -320,10 +320,10 @@ extension CardFormViewController: CardVerificationViewControllerDelegate {
                                                didVerified tdsToken: ThreeDSecureToken?) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            // トークン取得
-            print(debug: "cardVarificationViewController didVerified => トークン取得")
+            // トークン生成
+            print(debug: "cardVarificationViewController didVerified => トークン生成")
             if let tdsToken = tdsToken {
-                self.presenter?.fetchToken(tdsToken: tdsToken)
+                self.presenter?.createToken(tdsToken: tdsToken)
             }
         }
     }

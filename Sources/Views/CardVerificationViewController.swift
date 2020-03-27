@@ -23,11 +23,6 @@ public class CardVerificationViewController: UIViewController {
 
     private weak var delegate: CardVerificationViewControllerDelegate?
 
-    // TODO: 消す debug用
-    @IBAction func debugDoneTapped(_ sender: Any) {
-        delegate?.cardVarificationViewController(self, didVerified: tdsToken)
-    }
-
     @IBAction func reloadTapped(_ sender: Any) {
         if webView.url != nil {
             webView.reload()
@@ -72,9 +67,9 @@ public class CardVerificationViewController: UIViewController {
         navigationItem.title = "payjp_card_verification_title".localized
         webView.navigationDelegate = self
 
-        if let tdsToken = tdsToken, let entryUrl = tdsToken.tdsEntryUrl {
-            originalEntryUrl = entryUrl
-            var request = URLRequest(url: entryUrl)
+        if let tdsToken = tdsToken {
+            originalEntryUrl = tdsToken.tdsEntryUrl
+            var request = URLRequest(url: tdsToken.tdsEntryUrl)
             request.setValue(PAYJPSDK.authToken, forHTTPHeaderField: "Authorization")
             webView.load(request)
         }
@@ -123,7 +118,7 @@ public class CardVerificationViewController: UIViewController {
     }
 
     private func checkVerificationFinished(url: URL?) -> Bool {
-        if let loadUrl = url?.absoluteString, let expectedUrl = tdsToken?.tdsFinishUrl?.absoluteString {
+        if let loadUrl = url?.absoluteString, let expectedUrl = tdsToken?.tdsFinishUrl.absoluteString {
             return loadUrl == expectedUrl
         }
         return false
