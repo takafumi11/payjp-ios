@@ -168,7 +168,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
-    func testFetchToken_success() {
+    func testCreateTokenWithTds_success() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let token = mockToken(tdsStatus: .verified)
@@ -187,7 +187,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
 
-    func testFetchToken_failure() {
+    func testCreateTokenWithTds_failure() {
         let error = NSError(domain: "mock_domain",
                             code: 0,
                             userInfo: [NSLocalizedDescriptionKey: "mock api error"])
