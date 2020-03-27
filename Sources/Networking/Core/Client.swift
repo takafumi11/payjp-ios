@@ -15,40 +15,30 @@ protocol ClientType {
     ) -> URLSessionDataTask?
 }
 
-class InterceptRedirectDelegate: NSObject, URLSessionTaskDelegate {
-
-    static let shared = InterceptRedirectDelegate()
-
-    func urlSession(_ session: URLSession,
-                    task: URLSessionTask,
-                    willPerformHTTPRedirection response: HTTPURLResponse,
-                    newRequest request: URLRequest,
-                    completionHandler: @escaping (URLRequest?) -> Void) {
-
-        // 303のresponseが返されるようにリダイレクトのrequestはスルーする
-        completionHandler(nil)
-    }
-}
-
-class Client: ClientType {
+class Client: NSObject, ClientType {
 
     static let shared = Client()
 
-    private let session: URLSession
+    private var session: URLSession?
     private let callbackQueue: CallbackQueue
     private let jsonDecoder: JSONDecoder
 
     private init(
-        session: URLSession = URLSession(configuration: .default,
-                                         delegate: InterceptRedirectDelegate.shared,
-                                         delegateQueue: nil),
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
         DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
     ) {
-        self.session = session
         self.callbackQueue = callbackQueue
         self.jsonDecoder = jsonDecoder
+    }
+
+    private func getSession() -> URLSession {
+        if session == nil {
+            session = URLSession(configuration: .default,
+                                 delegate: self,
+                                 delegateQueue: nil)
+        }
+        return session!
     }
 
     @discardableResult
@@ -58,7 +48,7 @@ class Client: ClientType {
     ) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
-            let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
+            let dataTask = getSession().dataTask(with: urlRequest) { [weak self] data, response, error in
                 guard let self = self else { return }
 
                 if error != nil && data == nil && response == nil {
@@ -122,5 +112,19 @@ class Client: ClientType {
             }
         }
         return nil
+    }
+}
+
+// MARK: URLSessionTaskDelegate
+extension Client: URLSessionTaskDelegate {
+
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    willPerformHTTPRedirection response: HTTPURLResponse,
+                    newRequest request: URLRequest,
+                    completionHandler: @escaping (URLRequest?) -> Void) {
+
+        // 303のresponseが返されるようにリダイレクトのrequestはスルーする
+        completionHandler(nil)
     }
 }
