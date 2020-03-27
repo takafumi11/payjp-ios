@@ -12,9 +12,14 @@ import XCTest
 class ThreeDSecureTests: XCTestCase {
 
     func testTdsEntryUrl() {
+        PAYJPSDK.publicKey = "test_key"
+        PAYJPSDK.tdsRedirectURLKey = "ios_app"
         let tdsId = "tds_1234"
         let token = ThreeDSecureToken(identifier: tdsId)
-        XCTAssertEqual(token.tdsEntryUrl.absoluteString, "\(PAYJPApiEndpoint)tds/\(tdsId)/start")
+        XCTAssertEqual(
+            token.tdsEntryUrl.absoluteString,
+            "\(PAYJPApiEndpoint)tds/\(tdsId)/start?publickey=test_key&redirect_url=ios_app"
+        )
     }
 
     func testTdsFinishUrl() {

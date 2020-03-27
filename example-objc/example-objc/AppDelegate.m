@@ -12,7 +12,7 @@
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 NSString *const URLScheme = @"com.exmaple.jp.pay.example-objc";
-NSString *const ReturnURLKey = @"ios-secure";
+NSString *const RedirectURLKey = @"ios-app";
 
 @interface AppDelegate ()
 
@@ -24,7 +24,7 @@ NSString *const ReturnURLKey = @"ios-secure";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
-  PAYJPSDK.returnURLKey = ReturnURLKey;
+  PAYJPSDK.tdsRedirectURLKey = RedirectURLKey;
 
   return YES;
 }
