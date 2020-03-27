@@ -175,7 +175,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.fetchToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -198,7 +198,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token, error: apiError)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.fetchToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
 
         waitForExpectations(timeout: 1, handler: nil)
 

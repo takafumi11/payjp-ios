@@ -14,12 +14,12 @@ class ThreeDSecureTests: XCTestCase {
     func testTdsEntryUrl() {
         let tdsId = "tds_1234"
         let token = ThreeDSecureToken(identifier: tdsId)
-        XCTAssertEqual(token.tdsEntryUrl?.absoluteString, "\(PAYJPApiEndpoint)tds/\(tdsId)/start")
+        XCTAssertEqual(token.tdsEntryUrl.absoluteString, "\(PAYJPApiEndpoint)tds/\(tdsId)/start")
     }
 
     func testTdsFinishUrl() {
         let tdsId = "tds_1234"
         let token = ThreeDSecureToken(identifier: tdsId)
-        XCTAssertEqual(token.tdsFinishUrl?.absoluteString, "\(PAYJPApiEndpoint)tds/\(tdsId)/finish")
+        XCTAssertEqual(token.tdsFinishUrl.absoluteString, "\(PAYJPApiEndpoint)tds/\(tdsId)/finish")
     }
 }
