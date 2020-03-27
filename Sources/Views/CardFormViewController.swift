@@ -120,7 +120,7 @@ public class CardFormViewController: UIViewController {
         if tdsSecureProcessing {
             tdsSecureProcessing = false
             if let tdsToken = presenter?.tdsToken {
-                presenter?.fetchToken(tdsToken: tdsToken)
+                presenter?.createToken(tdsToken: tdsToken)
             }
         }
     }
@@ -240,16 +240,13 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
-        let url = tdsToken.tdsEntryUrl
-        if let url = url {
-            let safariVc = SFSafariViewController(url: url)
-            if #available(iOS 11.0, *) {
-                safariVc.dismissButtonStyle = .close
-            }
-            safariVc.delegate = self
-            self.present(safariVc, animated: true, completion: nil)
-            tdsSecureProcessing = true
+        let safariVc = SFSafariViewController(url: tdsToken.tdsEntryUrl)
+        if #available(iOS 11.0, *) {
+            safariVc.dismissButtonStyle = .close
         }
+        safariVc.delegate = self
+        self.present(safariVc, animated: true, completion: nil)
+        tdsSecureProcessing = true
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
@@ -359,5 +356,6 @@ extension CardFormViewController: SFSafariViewControllerDelegate {
         print(debug: "safariViewControllerDidFinish")
         dismissIndicator()
         enableSubmitButton()
+        tdsSecureProcessing = false
     }
 }
