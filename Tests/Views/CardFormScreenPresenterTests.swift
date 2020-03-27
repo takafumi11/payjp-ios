@@ -168,14 +168,14 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
-    func testFetchToken_success() {
+    func testCreateTokenWithTds_success() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let token = mockToken(tdsStatus: .verified)
         let mockService = MockTokenService(token: token)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.fetchToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -187,7 +187,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
 
-    func testFetchToken_failure() {
+    func testCreateTokenWithTds_failure() {
         let error = NSError(domain: "mock_domain",
                             code: 0,
                             userInfo: [NSLocalizedDescriptionKey: "mock api error"])
@@ -198,7 +198,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token, error: apiError)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.fetchToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
 
         waitForExpectations(timeout: 1, handler: nil)
 

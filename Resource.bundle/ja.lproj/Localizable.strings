@@ -54,4 +54,4 @@
 
 // 3D Secure
 "payjp_card_verification_title" = "本人認証";
-"payjp_card_verification_error_message" = "読み込みに失敗しました。\n再読み込みをお試しください。";
+"payjp_card_verification_error_message" = "通信に失敗しました。\nネットワークの接続をご確認ください。";

@@ -54,4 +54,4 @@
 
 // 3D Secure
 "payjp_card_verification_title" = "Identity Verification";
-"payjp_card_verification_error_message" = "Falid to read. \nPlease try to reload.";
+"payjp_card_verification_error_message" = "Network is unavailable.\nPlease check your internet connectivity.";
