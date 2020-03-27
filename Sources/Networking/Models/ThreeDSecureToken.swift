@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ThreeDSecureToken {
+public class ThreeDSecureToken: NSObject {
 
     public let identifier: String
 
