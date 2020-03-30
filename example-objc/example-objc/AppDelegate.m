@@ -11,7 +11,7 @@
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-NSString *const URLScheme = @"com.exmaple.jp.pay.example-objc";
+NSString *const App3DSURLScheme = @"com.exmaple.jp.pay.example-objc";
 NSString *const RedirectURLKey = @"ios-app";
 
 @interface AppDelegate ()
@@ -33,22 +33,14 @@ NSString *const RedirectURLKey = @"ios-app";
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
   NSLog(@"openURL => %@", url.absoluteString);
-
-  if ([[url.scheme lowercaseString] isEqualToString:[URLScheme lowercaseString]]) {
-    UIViewController *topController =
-        [UIApplication sharedApplication].keyWindow.rootViewController;
-    while (topController.presentedViewController) {
-      topController = topController.presentedViewController;
-    }
-    // SFSafariViewControllerであればdismissする
-    if ([topController isKindOfClass:[SFSafariViewController class]]) {
-      [topController dismissViewControllerAnimated:YES completion:nil];
-    }
-    // TODO: 続きの処理
-
-    return YES;
-  }
-  return NO;
+    
+    BOOL result = [[PAYJPURLSchemeHandler sharedHandler] finishThreeDSecureProcessWithAppScheme:App3DSURLScheme
+                                                                                     completion:^{
+        NSLog(@"finishThreeDSecureProcessWithAppScheme");
+    }];
+    
+    NSLog(@"openURL %d", result);
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -119,9 +119,7 @@ public class CardFormViewController: UIViewController {
 
         if tdsSecureProcessing {
             tdsSecureProcessing = false
-            if let tdsToken = presenter?.tdsToken {
-                presenter?.createToken(tdsToken: tdsToken)
-            }
+            presenter?.createToken()
         }
     }
 
@@ -325,28 +323,6 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         didCompleteCardForm(with: .cancel)
-    }
-}
-
-// MARK: CardVerificationViewControllerDelegate
-extension CardFormViewController: CardVerificationViewControllerDelegate {
-
-    public func cardVarificationViewController(_ viewController: CardVerificationViewController,
-                                               didVerified tdsToken: ThreeDSecureToken?) {
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            // トークン生成
-            print(debug: "cardVarificationViewController didVerified => トークン生成")
-            if let tdsToken = tdsToken {
-                self.presenter?.createToken(tdsToken: tdsToken)
-            }
-        }
-    }
-
-    public func cardVarificationViewControllerDidCancel(_ viewController: CardVerificationViewController) {
-        print(debug: "cardVarificationViewControllerDidCancel")
-        dismissIndicator()
-        enableSubmitButton()
     }
 }
 
