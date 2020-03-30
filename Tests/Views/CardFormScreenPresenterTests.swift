@@ -170,12 +170,16 @@ class CardFormScreenPresenterTests: XCTestCase {
 
     func testCreateTokenWithTds_success() {
         let expectation = self.expectation(description: "view update")
+        expectation.expectedFulfillmentCount = 2
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let token = mockToken(tdsStatus: .verified)
-        let mockService = MockTokenService(token: token)
+        let tdsToken = ThreeDSecureToken(identifier: "tds_id")
+        let requiredTds = APIError.requiredThreeDSecure(tdsToken)
+        let mockService = MockTokenService(token: token, error: requiredTds)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.createToken()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -193,12 +197,16 @@ class CardFormScreenPresenterTests: XCTestCase {
                             userInfo: [NSLocalizedDescriptionKey: "mock api error"])
         let apiError = APIError.systemError(error)
         let expectation = self.expectation(description: "view update")
+        expectation.expectedFulfillmentCount = 2
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
         let token = mockToken(tdsStatus: .verified)
-        let mockService = MockTokenService(token: token, error: apiError)
+        let tdsToken = ThreeDSecureToken(identifier: "tds_id")
+        let requiredTds = APIError.requiredThreeDSecure(tdsToken)
+        let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
-        presenter.createToken(tdsToken: ThreeDSecureToken(identifier: "tds_id"))
+        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.createToken()
 
         waitForExpectations(timeout: 1, handler: nil)
 

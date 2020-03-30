@@ -88,13 +88,15 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 class MockTokenService: TokenServiceType {
     let token: Token
     let error: APIError?
+    let errorForTds: APIError?
     var calledTenantId: String?
     var calledTokenId: String?
     var calledTdsId: String?
 
-    init(token: Token, error: APIError? = nil) {
+    init(token: Token, error: APIError? = nil, errorForTds: APIError? = nil) {
         self.token = token
         self.error = error
+        self.errorForTds = errorForTds
     }
 
     // swiftlint:disable function_parameter_count
@@ -127,7 +129,7 @@ class MockTokenService: TokenServiceType {
                                     completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
         self.calledTdsId = tdsId
 
-        if let error  = error {
+        if let error  = errorForTds {
             completion(.failure(error))
         } else {
             completion(.success(token))
