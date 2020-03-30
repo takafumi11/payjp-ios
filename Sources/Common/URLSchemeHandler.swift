@@ -10,13 +10,13 @@ import Foundation
 import SafariServices
 
 public protocol URLSchemeHandlerType {
-    
+
     func finishThreeDSecureProcess(appScheme: String, completion: @escaping () -> Void) -> Bool
 }
 
 @objc(PAYJPURLSchemeHandler) @objcMembers
 public class URLSchemeHandler: NSObject, URLSchemeHandlerType {
-    
+
     @objc(sharedHandler)
     public static let shared = URLSchemeHandler()
 
@@ -27,7 +27,7 @@ public class URLSchemeHandler: NSObject, URLSchemeHandlerType {
             topViewController?.dismiss(animated: true, completion: completion)
             return true
         }
-        
+
         return false
     }
 }

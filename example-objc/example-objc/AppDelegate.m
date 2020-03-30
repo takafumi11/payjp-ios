@@ -33,14 +33,13 @@ NSString *const RedirectURLKey = @"ios-app";
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
   NSLog(@"openURL => %@", url.absoluteString);
-    
-    BOOL result = [[PAYJPURLSchemeHandler sharedHandler] finishThreeDSecureProcessWithAppScheme:App3DSURLScheme
-                                                                                     completion:^{
-        NSLog(@"finishThreeDSecureProcessWithAppScheme");
-    }];
-    
-    NSLog(@"openURL %d", result);
-    return result;
+
+  BOOL result = [[PAYJPURLSchemeHandler sharedHandler]
+      finishThreeDSecureProcessWithAppScheme:App3DSURLScheme
+                                  completion:^{
+                                    NSLog(@"finishThreeDSecureProcessWithAppScheme");
+                                  }];
+  return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
