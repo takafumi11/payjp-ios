@@ -178,7 +178,9 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token, error: requiredTds)
         let mockHandler = MockURLSchemeHandler(redirectCompleted: true)
 
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService, schemeHandler: mockHandler)
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate,
+                                                tokenService: mockService,
+                                                schemeHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
         presenter.handleTdsRedirect()
 
@@ -207,7 +209,9 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
         let mockHandler = MockURLSchemeHandler(redirectCompleted: true)
 
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService, schemeHandler: mockHandler)
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate,
+                                                tokenService: mockService,
+                                                schemeHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
         presenter.handleTdsRedirect()
 
@@ -233,7 +237,9 @@ class CardFormScreenPresenterTests: XCTestCase {
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
         let mockHandler = MockURLSchemeHandler(redirectCompleted: false)
 
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService, schemeHandler: mockHandler)
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate,
+                                                tokenService: mockService,
+                                                schemeHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
         presenter.handleTdsRedirect()
 
