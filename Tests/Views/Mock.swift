@@ -233,7 +233,7 @@ class MockURLSchemeHandler: URLSchemeHandlerType {
         startThreeDSecureProcessCalled = true
     }
 
-    func completeThreeDSecureProcess(appScheme: String, completion: @escaping () -> Void) -> Bool {
+    func completeThreeDSecureProcess(url: URL, appScheme: String, completion: @escaping () -> Void) -> Bool {
         completeThreeDSecureProcessCalled = true
         return true
     }

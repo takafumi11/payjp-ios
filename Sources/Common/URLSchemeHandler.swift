@@ -13,7 +13,7 @@ public protocol URLSchemeHandlerType {
     var redirectCompleted: Bool? { get }
 
     func startThreeDSecureProcess()
-    func completeThreeDSecureProcess(appScheme: String, completion: @escaping () -> Void) -> Bool
+    func completeThreeDSecureProcess(url: URL, appScheme: String, completion: @escaping () -> Void) -> Bool
     func resetThreeDSecureProcess()
 }
 
@@ -29,12 +29,15 @@ public class URLSchemeHandler: NSObject, URLSchemeHandlerType {
         redirectCompleted = false
     }
 
-    public func completeThreeDSecureProcess(appScheme: String, completion: @escaping () -> Void) -> Bool {
-        let topViewController = UIApplication.topViewController()
-        if topViewController is SFSafariViewController {
-            redirectCompleted = true
-            topViewController?.dismiss(animated: true, completion: completion)
-            return true
+    public func completeThreeDSecureProcess(url: URL, appScheme: String, completion: @escaping () -> Void) -> Bool {
+
+        if url.scheme?.lowercased() == appScheme.lowercased() {
+            let topViewController = UIApplication.topViewController()
+            if topViewController is SFSafariViewController {
+                redirectCompleted = true
+                topViewController?.dismiss(animated: true, completion: completion)
+                return true
+            }
         }
         return false
     }

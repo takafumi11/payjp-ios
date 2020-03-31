@@ -15,7 +15,7 @@ class CreateTokenForThreeDSecureRequestTests: XCTestCase {
 
         XCTAssertEqual(request.httpMethod, "POST")
         XCTAssertEqual(request.path, "tokens")
-        XCTAssertEqual(request.bodyParameters?["tds_id"], "tds_test")
+        XCTAssertEqual(request.bodyParameters?["three_d_secure_token"], "tds_test")
         XCTAssertNil(request.queryParameters)
     }
 }

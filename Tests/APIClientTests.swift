@@ -136,7 +136,7 @@ class APIClientTests: XCTestCase {
                     return result
                 }
 
-                XCTAssertEqual(body?["tds_id"], "tds_xxx")
+                XCTAssertEqual(body?["three_d_secure_token"], "tds_xxx")
                 return true
             }
             return false
