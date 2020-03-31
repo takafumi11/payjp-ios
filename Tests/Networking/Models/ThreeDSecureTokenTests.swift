@@ -13,7 +13,8 @@ class ThreeDSecureTests: XCTestCase {
 
     func testTdsEntryUrl() {
         PAYJPSDK.publicKey = "test_key"
-        PAYJPSDK.tdsRedirectURLKey = "ios_app"
+        PAYJPSDK.threeDSecureURLConfiguration = ThreeDSecureURLConfiguration(redirectURL: "test://tds",
+                                                                             redirectURLKey: "ios_app")
         let tdsId = "tds_1234"
         let token = ThreeDSecureToken(identifier: tdsId)
         XCTAssertEqual(

@@ -176,7 +176,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
-        let mockHandler = MockURLSchemeHandler(redirectCompleted: true)
+        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: true)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
@@ -207,7 +207,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockURLSchemeHandler(redirectCompleted: true)
+        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: true)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
@@ -235,7 +235,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockURLSchemeHandler(redirectCompleted: false)
+        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: false)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
@@ -251,7 +251,7 @@ class CardFormScreenPresenterTests: XCTestCase {
 
     func testStartTdsProcess() {
         let mockDelegate = MockCardFormScreenDelegate()
-        let mockHandler = MockURLSchemeHandler()
+        let mockHandler = MockThreeDSecureURLHandler()
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, schemeHandler: mockHandler)
         presenter.startTdsProcess()
