@@ -31,7 +31,7 @@ public class URLSchemeHandler: NSObject, URLSchemeHandlerType {
 
     public func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool {
         print(debug: "tds redirect url => \(url)")
-        
+
         if let redirectUrl = PAYJPSDK.threeDSecureURLConfiguration?.redirectURL {
             if url.absoluteString.starts(with: redirectUrl) {
                 let topViewController = UIApplication.topViewController()

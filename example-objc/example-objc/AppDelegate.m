@@ -24,21 +24,22 @@ NSString *const App3DSRedirectURLKey = @"ios-app";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
-  PAYJPSDK.threeDSecureURLConfiguration = [[PAYThreeDSecureURLConfiguration alloc] initWithAppScheme:App3DSURLScheme
-                                                                                                 url:App3DSRedirectURL
-                                                                                              urlKey:App3DSRedirectURLKey];
+  PAYJPSDK.threeDSecureURLConfiguration =
+      [[PAYThreeDSecureURLConfiguration alloc] initWithAppScheme:App3DSURLScheme
+                                                             url:App3DSRedirectURL
+                                                          urlKey:App3DSRedirectURLKey];
   return YES;
 }
 
 - (BOOL)application:(__unused UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-
-        BOOL result = [[PAYJPURLSchemeHandler sharedHandler] completeThreeDSecureProcessWithUrl:url
-                                                                                     completion:^{
-            NSLog(@"completeThreeDSecureProcessWithUrl");
-        }];
-        return result;
+  BOOL result = [[PAYJPURLSchemeHandler sharedHandler]
+      completeThreeDSecureProcessWithUrl:url
+                              completion:^{
+                                NSLog(@"completeThreeDSecureProcessWithUrl");
+                              }];
+  return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
