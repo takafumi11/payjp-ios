@@ -1,5 +1,5 @@
 //
-//  URLSchemeHandler.swift
+//  ThreeDSecureURLHandler.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2020/03/30.
@@ -9,19 +9,27 @@
 import Foundation
 import SafariServices
 
-public protocol URLSchemeHandlerType {
+/// Handler for using URL in 3DSecure process
+public protocol ThreeDSecureURLHandlerType {
+    /// Complete flag for redirect from web
     var redirectCompleted: Bool? { get }
 
+    /// Start 3DSecure prpcess
     func startThreeDSecureProcess()
+    /// Complete 3DSecure prpcess
+    /// - Parameters:
+    ///   - url: redirect URL
+    ///   - completion: completion for dismiss SFSafariViewController
     func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool
+    /// Reset 3DSecure prpcess.
     func resetThreeDSecureProcess()
 }
 
-@objc(PAYJPURLSchemeHandler) @objcMembers
-public class URLSchemeHandler: NSObject, URLSchemeHandlerType {
+@objc(PAYJPThreeDSecureURLHandler) @objcMembers
+public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
 
     @objc(sharedHandler)
-    public static let shared = URLSchemeHandler()
+    public static let shared = ThreeDSecureURLHandler()
 
     public var redirectCompleted: Bool?
 
