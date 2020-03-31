@@ -11,7 +11,8 @@
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 NSString *const App3DSURLScheme = @"exampleobjc";
-NSString *const RedirectURLKey = @"ios-app";
+NSString *const App3DSRedirectURL = @"exampleobjc://tds/complete";
+NSString *const App3DSRedirectURLKey = @"ios-app";
 
 @interface AppDelegate ()
 
@@ -23,23 +24,21 @@ NSString *const RedirectURLKey = @"ios-app";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
-  PAYJPSDK.tdsRedirectURLKey = RedirectURLKey;
-
+  PAYJPSDK.threeDSecureURLConfiguration = [[PAYThreeDSecureURLConfiguration alloc] initWithAppScheme:App3DSURLScheme
+                                                                                                 url:App3DSRedirectURL
+                                                                                              urlKey:App3DSRedirectURLKey];
   return YES;
 }
 
 - (BOOL)application:(__unused UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-  NSLog(@"openURL => %@", url.absoluteString);
 
-  BOOL result = [[PAYJPURLSchemeHandler sharedHandler]
-      completeThreeDSecureProcessWithUrl:url
-                               appScheme:App3DSURLScheme
-                              completion:^{
-                                NSLog(@"finishThreeDSecureProcessWithAppScheme");
-                              }];
-  return result;
+        BOOL result = [[PAYJPURLSchemeHandler sharedHandler] completeThreeDSecureProcessWithUrl:url
+                                                                                     completion:^{
+            NSLog(@"completeThreeDSecureProcessWithUrl");
+        }];
+        return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
