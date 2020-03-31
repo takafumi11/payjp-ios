@@ -10,7 +10,6 @@
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-NSString *const App3DSURLScheme = @"exampleobjc";
 NSString *const App3DSRedirectURL = @"exampleobjc://tds/complete";
 NSString *const App3DSRedirectURLKey = @"ios-app";
 
@@ -25,9 +24,9 @@ NSString *const App3DSRedirectURLKey = @"ios-app";
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
   PAYJPSDK.threeDSecureURLConfiguration =
-      [[PAYThreeDSecureURLConfiguration alloc] initWithAppScheme:App3DSURLScheme
-                                                             url:App3DSRedirectURL
-                                                          urlKey:App3DSRedirectURLKey];
+      [[PAYThreeDSecureURLConfiguration alloc] initWithRedirectURL:App3DSRedirectURL
+                                                    redirectURLKey:App3DSRedirectURLKey];
+
   return YES;
 }
 
