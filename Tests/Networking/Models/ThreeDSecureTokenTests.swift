@@ -18,7 +18,7 @@ class ThreeDSecureTests: XCTestCase {
         let token = ThreeDSecureToken(identifier: tdsId)
         XCTAssertEqual(
             token.tdsEntryUrl.absoluteString,
-            "\(PAYJPApiEndpoint)tds/\(tdsId)/start?publickey=test_key&redirect_url=ios_app"
+            "\(PAYJPApiEndpoint)tds/\(tdsId)/start?publickey=test_key&back=ios_app"
         )
     }
 

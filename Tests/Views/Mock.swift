@@ -26,16 +26,16 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var didProducedCalled = false
 
     let error: Error?
-    let expectation: XCTestExpectation
+    let expectation: XCTestExpectation?
 
-    init(error: Error? = nil, expectation: XCTestExpectation) {
+    init(error: Error? = nil, expectation: XCTestExpectation? = nil) {
         self.error = error
         self.expectation = expectation
     }
 
     func reloadBrands(brands: [CardBrand]) {
         fetchedBrands = brands
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func showIndicator() {
@@ -57,7 +57,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     func showErrorView(message: String, buttonHidden: Bool) {
         showErrorViewMessage = message
         showErrorViewButtonHidden = buttonHidden
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func dismissErrorView() {
@@ -66,17 +66,17 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func showErrorAlert(message: String) {
         showErrorAlertMessage = message
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
         presentVerificationScreenTdsToken = tdsToken
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
         didCompleteCardFormCalled = true
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
@@ -217,4 +217,29 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
     func showPermissionAlert() {
         showPermissionAlertCalled = true
     }
+}
+
+class MockURLSchemeHandler: URLSchemeHandlerType {
+    var redirectCompleted: Bool?
+    var startThreeDSecureProcessCalled = false
+    var completeThreeDSecureProcessCalled = false
+    var resetThreeDSecureProcessCalled = false
+
+    init(redirectCompleted: Bool? = nil) {
+        self.redirectCompleted = redirectCompleted
+    }
+
+    func startThreeDSecureProcess() {
+        startThreeDSecureProcessCalled = true
+    }
+
+    func completeThreeDSecureProcess(appScheme: String, completion: @escaping () -> Void) -> Bool {
+        completeThreeDSecureProcessCalled = true
+        return true
+    }
+
+    func resetThreeDSecureProcess() {
+        resetThreeDSecureProcessCalled = true
+    }
+
 }

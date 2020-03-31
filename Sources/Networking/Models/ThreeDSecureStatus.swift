@@ -11,6 +11,6 @@ import Foundation
 /// 3D Secure verification status.
 public enum ThreeDSecureStatus: String, Codable {
     case verified
-    case attempt
+    case attempted
     case unverified
 }

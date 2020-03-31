@@ -11,7 +11,7 @@
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-NSString *const App3DSURLScheme = @"com.exmaple.jp.pay.example-objc";
+NSString *const App3DSURLScheme = @"exampleobjc";
 NSString *const RedirectURLKey = @"ios-app";
 
 @interface AppDelegate ()
@@ -35,7 +35,7 @@ NSString *const RedirectURLKey = @"ios-app";
   NSLog(@"openURL => %@", url.absoluteString);
 
   BOOL result = [[PAYJPURLSchemeHandler sharedHandler]
-      finishThreeDSecureProcessWithAppScheme:App3DSURLScheme
+      completeThreeDSecureProcessWithAppScheme:App3DSURLScheme
                                   completion:^{
                                     NSLog(@"finishThreeDSecureProcessWithAppScheme");
                                   }];

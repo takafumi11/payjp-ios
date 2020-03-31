@@ -28,7 +28,6 @@ public class CardFormViewController: UIViewController {
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
-    private var tdsSecureProcessing = false
 
     /// CardFormViewController delegate.
     private weak var delegate: CardFormViewControllerDelegate?
@@ -116,11 +115,7 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if tdsSecureProcessing {
-            tdsSecureProcessing = false
-            presenter?.createToken()
-        }
+        presenter?.handleTdsRedirect()
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -204,6 +199,7 @@ public class CardFormViewController: UIViewController {
 
 // MARK: CardFormScreenDelegate
 extension CardFormViewController: CardFormScreenDelegate {
+
     func reloadBrands(brands: [CardBrand]) {
         accptedBrands = brands
         brandsView.reloadData()
@@ -242,9 +238,8 @@ extension CardFormViewController: CardFormScreenDelegate {
         if #available(iOS 11.0, *) {
             safariVc.dismissButtonStyle = .close
         }
-        safariVc.delegate = self
         self.present(safariVc, animated: true, completion: nil)
-        tdsSecureProcessing = true
+        presenter?.startTdsProcess()
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
@@ -258,6 +253,7 @@ extension CardFormViewController: CardFormScreenDelegate {
 
 // MARK: CardFormViewDelegate
 extension CardFormViewController: CardFormViewDelegate {
+
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
         submitButton.isEnabled = isValid
         accessorySubmitButton.isEnabled = isValid
@@ -323,15 +319,5 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         didCompleteCardForm(with: .cancel)
-    }
-}
-
-// MARK: SFSafariViewControllerDelegate
-extension CardFormViewController: SFSafariViewControllerDelegate {
-    public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        print(debug: "safariViewControllerDidFinish")
-        dismissIndicator()
-        enableSubmitButton()
-        tdsSecureProcessing = false
     }
 }

@@ -15,7 +15,7 @@ struct CreateTokenForThreeDSecureRequest: BaseRequest {
     var path: String = "tokens"
     var httpMethod: String = "POST"
     var bodyParameters: [String: String]? {
-        return ["tds_id": tdsId]
+        return ["three_d_secure_token": tdsId]
     }
 
     // MARK: - Data

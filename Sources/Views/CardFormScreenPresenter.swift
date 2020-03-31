@@ -30,8 +30,10 @@ protocol CardFormScreenPresenterType {
     var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
-    func createToken()
     func fetchBrands(tenantId: String?)
+
+    func handleTdsRedirect()
+    func startTdsProcess()
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -43,17 +45,20 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
     private let errorTranslator: ErrorTranslatorType
+    private let schemeHandler: URLSchemeHandlerType
     private let dispatchQueue: DispatchQueue
 
     init(delegate: CardFormScreenDelegate,
          accountsService: AccountsServiceType = AccountsService.shared,
          tokenService: TokenServiceType = TokenService.shared,
          errorTranslator: ErrorTranslatorType = ErrorTranslator.shared,
+         schemeHandler: URLSchemeHandlerType = URLSchemeHandler.shared,
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.delegate = delegate
         self.accountsService = accountsService
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
+        self.schemeHandler = schemeHandler
         self.dispatchQueue = dispatchQueue
     }
 
@@ -78,20 +83,6 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                             self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                                         }
                                     }
-        }
-    }
-
-    func createToken() {
-        if let tdsToken = tdsToken {
-            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let token):
-                    self.creatingTokenCompleted(token: token)
-                case .failure(let error):
-                    self.showErrorAlert(message: self.errorTranslator.translate(error: error))
-                }
-            }
         }
     }
 
@@ -122,6 +113,36 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                         }
                     }()
                     self.delegate?.showErrorView(message: message, buttonHidden: buttonHidden)
+                }
+            }
+        }
+    }
+
+    func handleTdsRedirect() {
+        if let redirectCompleted = schemeHandler.redirectCompleted {
+            if redirectCompleted {
+                schemeHandler.resetThreeDSecureProcess()
+                createTokenByTds()
+            } else {
+                delegate?.dismissIndicator()
+                delegate?.enableSubmitButton()
+            }
+        }
+    }
+
+    func startTdsProcess() {
+        schemeHandler.startThreeDSecureProcess()
+    }
+
+    private func createTokenByTds() {
+        if let tdsToken = tdsToken {
+            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let token):
+                    self.creatingTokenCompleted(token: token)
+                case .failure(let error):
+                    self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                 }
             }
         }
