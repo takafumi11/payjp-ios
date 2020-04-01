@@ -10,6 +10,8 @@ import UIKit
 import PAYJP
 
 let PAYJPPublicKey = "pk_test_0383a1b8f91e8a6e3ea0e2a9"
+let App3DSRedirectURL = "exampleswift://tds/complete"
+let App3DSRedirectURLKey = "swift-app"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         PAYJPSDK.publicKey = PAYJPPublicKey
         PAYJPSDK.locale = Locale.current
+        PAYJPSDK.threeDSecureURLConfiguration =
+            ThreeDSecureURLConfiguration(redirectURL: URL(string: App3DSRedirectURL)!,
+                                         redirectURLKey: App3DSRedirectURLKey)
 
         return true
+    }
+
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+        return ThreeDSecureURLHandler.shared.completeThreeDSecureProcess(url: url)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
