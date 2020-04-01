@@ -20,7 +20,7 @@ public protocol ThreeDSecureURLHandlerType {
     /// - Parameters:
     ///   - url: redirect URL
     ///   - completion: completion for dismiss SFSafariViewController
-    func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool
+    func completeThreeDSecureProcess(url: URL, completion: (() -> Void)?) -> Bool
     /// Reset 3DSecure prpcess
     func resetThreeDSecureProcess()
 }
@@ -37,7 +37,7 @@ public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
         redirectCompleted = false
     }
 
-    public func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool {
+    public func completeThreeDSecureProcess(url: URL, completion: (() -> Void)? = nil) -> Bool {
         print(debug: "tds redirect url => \(url)")
 
         if let redirectUrl = PAYJPSDK.threeDSecureURLConfiguration?.redirectURL {
