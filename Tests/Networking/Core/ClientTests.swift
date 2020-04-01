@@ -159,9 +159,8 @@ class ClientTests: XCTestCase {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
         }, response: { (_) -> OHHTTPStubsResponse in
-            var headers = [String: String]()
-            headers["location"] = "https://api.pay-test.com/v1/tds/tds_xxx/start?publickey=pk_live_xxx"
-            return OHHTTPStubsResponse(data: Data(), statusCode: 303, headers: headers)
+            let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
+            return OHHTTPStubsResponse(data: data, statusCode: 303, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -208,27 +207,20 @@ class ClientTests: XCTestCase {
     }
 
     func testFindThreeDSecureId() {
-        var fields = [String: String]()
-        fields["Authorization"] = "auth_token"
-        fields["Location"] = "https://api.pay-test.com/v1/tds/tds_xxx/start?publickey=pk_live_xxx"
-        let response = HTTPURLResponse(url: URL(string: "https://api.pay-test.com")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: fields)!
-
-        let tdsToken = client.createThreeDSecureToken(response: response)
+        let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
+        let tdsToken = client.createThreeDSecureToken(data: data)
         XCTAssertEqual(tdsToken?.identifier, "tds_xxx")
     }
 
-    func testFindThreeDSecureId_nil() {
-        var fields = [String: String]()
-        fields["Authorization"] = "auth_token"
-        let response = HTTPURLResponse(url: URL(string: "https://api.pay-test.com")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: fields)!
+    func testFindThreeDSecureId_otherObject() {
+        let data = "{\"object\": \"token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
+        let tdsToken = client.createThreeDSecureToken(data: data)
+        XCTAssertNil(tdsToken)
+    }
 
-        let tdsToken = client.createThreeDSecureToken(response: response)
+    func testFindThreeDSecureId_notHasId() {
+        let data = "{\"object\": \"three_d_secure_token\"}".data(using: .utf8)!
+        let tdsToken = client.createThreeDSecureToken(data: data)
         XCTAssertNil(tdsToken)
     }
 }
