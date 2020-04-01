@@ -11,7 +11,7 @@ import SafariServices
 
 /// Handler for using URL in 3DSecure process
 public protocol ThreeDSecureURLHandlerType {
-    /// Complete flag for redirect from web
+    /// Complete flag for redirected from web
     var redirectCompleted: Bool? { get }
 
     /// Start 3DSecure prpcess
@@ -21,7 +21,7 @@ public protocol ThreeDSecureURLHandlerType {
     ///   - url: redirect URL
     ///   - completion: completion for dismiss SFSafariViewController
     func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool
-    /// Reset 3DSecure prpcess.
+    /// Reset 3DSecure prpcess
     func resetThreeDSecureProcess()
 }
 
