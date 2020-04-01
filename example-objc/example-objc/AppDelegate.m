@@ -10,6 +10,8 @@
 @import PAYJP;
 
 NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
+NSString *const App3DSRedirectURL = @"exampleobjc://tds/complete";
+NSString *const App3DSRedirectURLKey = @"ios-app";
 
 @interface AppDelegate ()
 
@@ -21,8 +23,22 @@ NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
+  PAYJPSDK.threeDSecureURLConfiguration = [[PAYThreeDSecureURLConfiguration alloc]
+      initWithRedirectURL:[NSURL URLWithString:App3DSRedirectURL]
+           redirectURLKey:App3DSRedirectURLKey];
 
   return YES;
+}
+
+- (BOOL)application:(__unused UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
+  BOOL result = [[PAYJPThreeDSecureURLHandler sharedHandler]
+      completeThreeDSecureProcessWithUrl:url
+                              completion:^{
+                                NSLog(@"completeThreeDSecureProcessWithUrl");
+                              }];
+  return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

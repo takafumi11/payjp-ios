@@ -11,7 +11,7 @@ import Foundation
 protocol BaseRequest: Request {}
 
 extension BaseRequest {
-    var baseUrl: URL { return URL(string: "https://api.pay.jp/v1")! }
+    var baseUrl: URL { return URL(string: PAYJPApiEndpoint)! }
     var headerFields: [String: String] {
         var fields = [String: String]()
         fields["Authorization"] = PAYJPSDK.authToken

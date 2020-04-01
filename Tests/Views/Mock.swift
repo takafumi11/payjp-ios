@@ -15,24 +15,27 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var fetchedBrands: [CardBrand] = []
     var showIndicatorCalled = false
     var dismissIndicatorCalled = false
+    var enableSubmitButtonCalled = false
+    var disableSubmitButtonCalled = false
     var showErrorViewMessage: String?
     var showErrorViewButtonHidden = false
     var dismissErrorViewCalled = false
     var showErrorAlertMessage: String?
+    var presentVerificationScreenTdsToken: ThreeDSecureToken?
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
 
     let error: Error?
-    let expectation: XCTestExpectation
+    let expectation: XCTestExpectation?
 
-    init(error: Error? = nil, expectation: XCTestExpectation) {
+    init(error: Error? = nil, expectation: XCTestExpectation? = nil) {
         self.error = error
         self.expectation = expectation
     }
 
     func reloadBrands(brands: [CardBrand]) {
         fetchedBrands = brands
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func showIndicator() {
@@ -43,10 +46,18 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
         dismissIndicatorCalled = true
     }
 
+    func enableSubmitButton() {
+        enableSubmitButtonCalled = true
+    }
+
+    func disableSubmitButton() {
+        disableSubmitButtonCalled = true
+    }
+
     func showErrorView(message: String, buttonHidden: Bool) {
         showErrorViewMessage = message
         showErrorViewButtonHidden = buttonHidden
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func dismissErrorView() {
@@ -55,12 +66,17 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func showErrorAlert(message: String) {
         showErrorAlertMessage = message
-        expectation.fulfill()
+        expectation?.fulfill()
+    }
+
+    func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
+        presentVerificationScreenTdsToken = tdsToken
+        expectation?.fulfill()
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
         didCompleteCardFormCalled = true
-        expectation.fulfill()
+        expectation?.fulfill()
     }
 
     func didProduced(with token: Token, completionHandler: @escaping (Error?) -> Void) {
@@ -72,13 +88,15 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 class MockTokenService: TokenServiceType {
     let token: Token
     let error: APIError?
-    let expectation: XCTestExpectation
+    let errorForTds: APIError?
     var calledTenantId: String?
+    var calledTokenId: String?
+    var calledTdsId: String?
 
-    init(token: Token, error: APIError? = nil, expectation: XCTestExpectation) {
+    init(token: Token, error: APIError? = nil, errorForTds: APIError? = nil) {
         self.token = token
         self.error = error
-        self.expectation = expectation
+        self.errorForTds = errorForTds
     }
 
     // swiftlint:disable function_parameter_count
@@ -107,8 +125,30 @@ class MockTokenService: TokenServiceType {
         return nil
     }
 
+    func createTokenForThreeDSecure(tdsId: String,
+                                    completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        self.calledTdsId = tdsId
+
+        if let error  = errorForTds {
+            completion(.failure(error))
+        } else {
+            completion(.success(token))
+        }
+
+        return nil
+    }
+
     func getToken(with tokenId: String,
                   completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+
+        self.calledTokenId = tokenId
+
+        if let error  = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(token))
+        }
+
         return nil
     }
 }
@@ -116,13 +156,11 @@ class MockTokenService: TokenServiceType {
 class MockAccountService: AccountsServiceType {
     let brands: [CardBrand]
     let error: APIError?
-    let expectation: XCTestExpectation
     var calledTenantId: String?
 
-    init(brands: [CardBrand], error: APIError? = nil, expectation: XCTestExpectation) {
+    init(brands: [CardBrand], error: APIError? = nil) {
         self.brands = brands
         self.error = error
-        self.expectation = expectation
     }
 
     func getAcceptedBrands(tenantId: String?,
@@ -179,4 +217,29 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
     func showPermissionAlert() {
         showPermissionAlertCalled = true
     }
+}
+
+class MockThreeDSecureURLHandler: ThreeDSecureURLHandlerType {
+    var redirectCompleted: Bool?
+    var startThreeDSecureProcessCalled = false
+    var completeThreeDSecureProcessCalled = false
+    var resetThreeDSecureProcessCalled = false
+
+    init(redirectCompleted: Bool? = nil) {
+        self.redirectCompleted = redirectCompleted
+    }
+
+    func startThreeDSecureProcess() {
+        startThreeDSecureProcessCalled = true
+    }
+
+    func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool {
+        completeThreeDSecureProcessCalled = true
+        return true
+    }
+
+    func resetThreeDSecureProcess() {
+        resetThreeDSecureProcessCalled = true
+    }
+
 }

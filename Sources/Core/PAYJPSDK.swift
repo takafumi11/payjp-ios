@@ -14,6 +14,8 @@ public protocol PAYJPSDKType: class {
     static var publicKey: String? { get set }
     /// Locale.
     static var locale: Locale? { get set }
+    /// 3DSecure URL configuration.
+    static var threeDSecureURLConfiguration: ThreeDSecureURLConfiguration? { get set }
 }
 
 /// see PAYJPSDKType.
@@ -39,6 +41,8 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
         }
     }
     public static var locale: Locale?
+
+    public static var threeDSecureURLConfiguration: ThreeDSecureURLConfiguration?
 
     public static var clientInfo: ClientInfo = .default
 

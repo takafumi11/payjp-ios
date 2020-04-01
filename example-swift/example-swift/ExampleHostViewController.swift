@@ -15,21 +15,21 @@ class ExampleHostViewController: UITableViewController {
 
         if indexPath.row == 3 {
             // customize card form
-//            let color = UIColor(0, 122, 255)
-//            let style = FormStyle(
-//                labelTextColor: color,
-//                inputTextColor: color,
-//                tintColor: color)
-            
+            //            let color = UIColor(0, 122, 255)
+            //            let style = FormStyle(
+            //                labelTextColor: color,
+            //                inputTextColor: color,
+            //                tintColor: color)
+
             let cardFormVc = CardFormViewController.createCardFormViewController()
             cardFormVc.delegate = self
             // push
             self.navigationController?.pushViewController(cardFormVc, animated: true)
 
             // modal
-//            let naviVc = UINavigationController(rootViewController: cardFormVc)
-//            naviVc.presentationController?.delegate = cardFormVc
-//            self.present(naviVc, animated: true, completion: nil)
+            //            let naviVc = UINavigationController(rootViewController: cardFormVc)
+            //            naviVc.presentationController?.delegate = cardFormVc
+            //            self.present(naviVc, animated: true, completion: nil)
         }
     }
 }
@@ -47,7 +47,7 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
                 self?.navigationController?.popViewController(animated: true)
 
                 // dismiss
-//                                self?.dismiss(animated: true, completion: nil)
+                //                                self?.dismiss(animated: true, completion: nil)
             }
         }
     }
