@@ -26,8 +26,10 @@ extension ThreeDSecureToken {
     var tdsEntryUrl: URL {
         let url = tdsBaseUrl.appendingPathComponent("start")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-        components.queryItems = [URLQueryItem(name: "publickey", value: PAYJPSDK.publicKey),
-                                 URLQueryItem(name: "back", value: PAYJPSDK.threeDSecureURLConfiguration?.redirectURLKey)]
+        components.queryItems = [
+            URLQueryItem(name: "publickey", value: PAYJPSDK.publicKey),
+            URLQueryItem(name: "back", value: PAYJPSDK.threeDSecureURLConfiguration?.redirectURLKey)
+        ]
         return components.url!
     }
 
