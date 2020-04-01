@@ -21,8 +21,7 @@ class ExampleHostViewController: UITableViewController {
             //                inputTextColor: color,
             //                tintColor: color)
 
-            let cardFormVc = CardFormViewController.createCardFormViewController()
-            cardFormVc.delegate = self
+            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self)
             // push
             self.navigationController?.pushViewController(cardFormVc, animated: true)
 

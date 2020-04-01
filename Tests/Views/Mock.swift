@@ -233,7 +233,7 @@ class MockThreeDSecureURLHandler: ThreeDSecureURLHandlerType {
         startThreeDSecureProcessCalled = true
     }
 
-    func completeThreeDSecureProcess(url: URL, completion: @escaping () -> Void) -> Bool {
+    func completeThreeDSecureProcess(url: URL, completion: (() -> Void)?) -> Bool {
         completeThreeDSecureProcessCalled = true
         return true
     }
