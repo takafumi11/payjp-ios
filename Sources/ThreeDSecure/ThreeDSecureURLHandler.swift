@@ -41,7 +41,7 @@ public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
         print(debug: "tds redirect url => \(url)")
 
         if let redirectUrl = PAYJPSDK.threeDSecureURLConfiguration?.redirectURL {
-            if url.absoluteString.starts(with: redirectUrl) {
+            if url.absoluteString.starts(with: redirectUrl.absoluteString) {
                 let topViewController = UIApplication.topViewController()
                 if topViewController is SFSafariViewController {
                     redirectCompleted = true

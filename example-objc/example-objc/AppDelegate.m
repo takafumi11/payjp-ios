@@ -23,9 +23,9 @@ NSString *const App3DSRedirectURLKey = @"ios-app";
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PAYJPSDK.publicKey = PAYJPPublicKey;
   PAYJPSDK.locale = [NSLocale currentLocale];
-  PAYJPSDK.threeDSecureURLConfiguration =
-      [[PAYThreeDSecureURLConfiguration alloc] initWithRedirectURL:App3DSRedirectURL
-                                                    redirectURLKey:App3DSRedirectURLKey];
+  PAYJPSDK.threeDSecureURLConfiguration = [[PAYThreeDSecureURLConfiguration alloc]
+      initWithRedirectURL:[NSURL URLWithString:App3DSRedirectURL]
+           redirectURLKey:App3DSRedirectURLKey];
 
   return YES;
 }

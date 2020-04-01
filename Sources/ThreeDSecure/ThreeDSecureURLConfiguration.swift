@@ -11,11 +11,11 @@ import Foundation
 @objcMembers @objc(PAYThreeDSecureURLConfiguration)
 public class ThreeDSecureURLConfiguration: NSObject {
     /// Redirect URL for launching app from web
-    let redirectURL: String
+    let redirectURL: URL
     /// Redirect URL key
     let redirectURLKey: String
 
-    public init(redirectURL: String, redirectURLKey: String) {
+    public init(redirectURL: URL, redirectURLKey: String) {
         self.redirectURL = redirectURL
         self.redirectURLKey = redirectURLKey
     }
