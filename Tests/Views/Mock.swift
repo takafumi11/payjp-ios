@@ -219,14 +219,14 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
     }
 }
 
-class MockThreeDSecureURLHandler: ThreeDSecureURLHandlerType {
-    var redirectCompleted: Bool?
+class MockThreeDSecureProcessHandler: ThreeDSecureProcessHandlerType {
+    var status: ThreeDSecureProcessStatus
     var startThreeDSecureProcessCalled = false
     var completeThreeDSecureProcessCalled = false
     var resetThreeDSecureProcessCalled = false
 
-    init(redirectCompleted: Bool? = nil) {
-        self.redirectCompleted = redirectCompleted
+    init(status: ThreeDSecureProcessStatus = .none) {
+        self.status = status
     }
 
     func startThreeDSecureProcess() {

@@ -32,7 +32,7 @@ protocol CardFormScreenPresenterType {
     func createToken(tenantId: String?, formInput: CardFormInput)
     func fetchBrands(tenantId: String?)
 
-    func handleTdsRedirect()
+    func checkTdsProcess()
     func startTdsProcess()
 }
 
@@ -45,20 +45,20 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
     private let errorTranslator: ErrorTranslatorType
-    private let schemeHandler: ThreeDSecureURLHandlerType
+    private let processHandler: ThreeDSecureProcessHandlerType
     private let dispatchQueue: DispatchQueue
 
     init(delegate: CardFormScreenDelegate,
          accountsService: AccountsServiceType = AccountsService.shared,
          tokenService: TokenServiceType = TokenService.shared,
          errorTranslator: ErrorTranslatorType = ErrorTranslator.shared,
-         schemeHandler: ThreeDSecureURLHandlerType = ThreeDSecureURLHandler.shared,
+         processHandler: ThreeDSecureProcessHandlerType = ThreeDSecureProcessHandler.shared,
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.delegate = delegate
         self.accountsService = accountsService
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
-        self.schemeHandler = schemeHandler
+        self.processHandler = processHandler
         self.dispatchQueue = dispatchQueue
     }
 
@@ -118,20 +118,21 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func handleTdsRedirect() {
-        if let redirectCompleted = schemeHandler.redirectCompleted {
-            if redirectCompleted {
-                schemeHandler.resetThreeDSecureProcess()
-                createTokenByTds()
-            } else {
-                delegate?.dismissIndicator()
-                delegate?.enableSubmitButton()
-            }
+    func checkTdsProcess() {
+        switch processHandler.status {
+        case .completed:
+            processHandler.resetThreeDSecureProcess()
+            createTokenByTds()
+        case .processing:
+            delegate?.dismissIndicator()
+            delegate?.enableSubmitButton()
+        default:
+            break
         }
     }
 
     func startTdsProcess() {
-        schemeHandler.startThreeDSecureProcess()
+        processHandler.startThreeDSecureProcess()
     }
 
     private func createTokenByTds() {

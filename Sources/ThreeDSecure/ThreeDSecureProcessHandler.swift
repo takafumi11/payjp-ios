@@ -1,5 +1,5 @@
 //
-//  ThreeDSecureURLHandler.swift
+//  ThreeDSecureProcessHandler.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2020/03/30.
@@ -9,10 +9,20 @@
 import Foundation
 import SafariServices
 
-/// Handler for using URL in 3DSecure process
-public protocol ThreeDSecureURLHandlerType {
-    /// Complete flag for redirected from web
-    var redirectCompleted: Bool? { get }
+/// 3DSecure process status
+@objc public enum ThreeDSecureProcessStatus: Int {
+    /// when 3DSecure process is starting
+    case processing
+    /// when 3DSecure process is finished
+    case completed
+    /// when 3DSecure process is not starting
+    case none
+}
+
+/// Handler for 3DSecure process
+public protocol ThreeDSecureProcessHandlerType {
+    /// 3DSecure process status
+    var status: ThreeDSecureProcessStatus { get }
 
     /// Start 3DSecure prpcess
     func startThreeDSecureProcess()
@@ -26,15 +36,15 @@ public protocol ThreeDSecureURLHandlerType {
 }
 
 @objc(PAYJPThreeDSecureURLHandler) @objcMembers
-public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
+public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerType {
 
     @objc(sharedHandler)
-    public static let shared = ThreeDSecureURLHandler()
+    public static let shared = ThreeDSecureProcessHandler()
 
-    public var redirectCompleted: Bool?
+    public var status: ThreeDSecureProcessStatus = .none
 
     public func startThreeDSecureProcess() {
-        redirectCompleted = false
+        status = .processing
     }
 
     public func completeThreeDSecureProcess(url: URL, completion: (() -> Void)? = nil) -> Bool {
@@ -44,7 +54,7 @@ public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
             if url.absoluteString.starts(with: redirectUrl.absoluteString) {
                 let topViewController = UIApplication.topViewController()
                 if topViewController is SFSafariViewController {
-                    redirectCompleted = true
+                    status = .completed
                     topViewController?.dismiss(animated: true, completion: completion)
                     return true
                 }
@@ -54,6 +64,6 @@ public class ThreeDSecureURLHandler: NSObject, ThreeDSecureURLHandlerType {
     }
 
     public func resetThreeDSecureProcess() {
-        redirectCompleted = nil
+        status = .none
     }
 }

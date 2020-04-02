@@ -66,7 +66,7 @@
 		C6E00B0F1E1F583B00C101B0 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; };
 		C6E00B111E1F58D100C101B0 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED00F8BF24319E1B004DFE2C /* UIApplication+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00F8BE24319E1B004DFE2C /* UIApplication+PAYJP.swift */; };
-		ED00F8D1243353FD004DFE2C /* ThreeDSecureURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00F8CF243353FC004DFE2C /* ThreeDSecureURLHandler.swift */; };
+		ED00F8D1243353FD004DFE2C /* ThreeDSecureProcessHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00F8CF243353FC004DFE2C /* ThreeDSecureProcessHandler.swift */; };
 		ED00F8D2243353FD004DFE2C /* ThreeDSecureURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */; };
 		ED00F8D424346B5B004DFE2C /* PAYCommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00F8D324346B5B004DFE2C /* PAYCommonResponse.swift */; };
 		ED016AAF234ACE030049E6CE /* NSErrorConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */; };
@@ -214,7 +214,7 @@
 		C68681F91E1E2369001D7F75 /* TestFixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFixture.swift; sourceTree = "<group>"; };
 		C6E00B0D1E1F505600C101B0 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		ED00F8BE24319E1B004DFE2C /* UIApplication+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+PAYJP.swift"; sourceTree = "<group>"; };
-		ED00F8CF243353FC004DFE2C /* ThreeDSecureURLHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSecureURLHandler.swift; sourceTree = "<group>"; };
+		ED00F8CF243353FC004DFE2C /* ThreeDSecureProcessHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSecureProcessHandler.swift; sourceTree = "<group>"; };
 		ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSecureURLConfiguration.swift; sourceTree = "<group>"; };
 		ED00F8D324346B5B004DFE2C /* PAYCommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYCommonResponse.swift; sourceTree = "<group>"; };
 		ED016AAE234ACE030049E6CE /* NSErrorConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverterTests.swift; sourceTree = "<group>"; };
@@ -585,7 +585,7 @@
 		ED00F8CE243353FC004DFE2C /* ThreeDSecure */ = {
 			isa = PBXGroup;
 			children = (
-				ED00F8CF243353FC004DFE2C /* ThreeDSecureURLHandler.swift */,
+				ED00F8CF243353FC004DFE2C /* ThreeDSecureProcessHandler.swift */,
 				ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */,
 			);
 			path = ThreeDSecure;
@@ -779,7 +779,7 @@
 			files = (
 				32A8E4CC23B4616A001D1C38 /* JSONDecodable.swift in Sources */,
 				EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */,
-				ED00F8D1243353FD004DFE2C /* ThreeDSecureURLHandler.swift in Sources */,
+				ED00F8D1243353FD004DFE2C /* ThreeDSecureProcessHandler.swift in Sources */,
 				EDCF723222F948F500272C10 /* CardNumber.swift in Sources */,
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
