@@ -215,10 +215,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: nil)!
+        let response = mock303Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertEqual(tdsToken?.identifier, "tds_xxx")
@@ -228,10 +225,8 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: nil)!
+        let response = mock303Response()
+
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
     }
@@ -240,10 +235,8 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: nil)!
+        let response = mock303Response()
+
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
     }
@@ -252,10 +245,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens/any")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: nil)!
+        let response = mock303Response(urlString: "\(PAYJPApiEndpoint)tokens/any")
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
@@ -265,12 +255,16 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "GET"
-        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
-                                       statusCode: 303,
-                                       httpVersion: "",
-                                       headerFields: nil)!
+        let response = mock303Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
+    }
+
+    private func mock303Response(urlString: String = "\(PAYJPApiEndpoint)tokens") -> HTTPURLResponse {
+        return HTTPURLResponse(url: URL(string: urlString)!,
+                               statusCode: 303,
+                               httpVersion: "",
+                               headerFields: nil)!
     }
 }
