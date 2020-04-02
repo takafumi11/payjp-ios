@@ -98,6 +98,8 @@
 		ED9B33E2238FD0AF0079E7B8 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */; };
 		ED9B33E42390B7780079E7B8 /* ErrorTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33E32390B7780079E7B8 /* ErrorTranslator.swift */; };
 		ED9B33E62390F0B00079E7B8 /* ErrorTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33E52390F0B00079E7B8 /* ErrorTranslatorTests.swift */; };
+		EDA0E4122435E8AA0083A5E0 /* ThreeDSecureStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA0E4112435E8AA0083A5E0 /* ThreeDSecureStatus.swift */; };
+		EDA0E4142435EBA80083A5E0 /* ThreeDSecureStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA0E4132435EBA80083A5E0 /* ThreeDSecureStatusTests.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
 		EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */; };
@@ -247,6 +249,8 @@
 		ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ED9B33E32390B7780079E7B8 /* ErrorTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTranslator.swift; sourceTree = "<group>"; };
 		ED9B33E52390F0B00079E7B8 /* ErrorTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTranslatorTests.swift; sourceTree = "<group>"; };
+		EDA0E4112435E8AA0083A5E0 /* ThreeDSecureStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSecureStatus.swift; sourceTree = "<group>"; };
+		EDA0E4132435EBA80083A5E0 /* ThreeDSecureStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureStatusTests.swift; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
 		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 				BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
 				ED00F8D324346B5B004DFE2C /* PAYCommonResponse.swift */,
+				EDA0E4112435E8AA0083A5E0 /* ThreeDSecureStatus.swift */,
 				ED2638FF242896BF006D0715 /* ThreeDSecureToken.swift */,
 				EDCF722C22F935D400272C10 /* Token.swift */,
 			);
@@ -433,6 +438,7 @@
 			children = (
 				BE196D4922F123F100A042BE /* GetAcceptedBrandsResponseTests.swift */,
 				BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */,
+				EDA0E4132435EBA80083A5E0 /* ThreeDSecureStatusTests.swift */,
 				ED0C78F9242C89090022D544 /* ThreeDSecureTokenTests.swift */,
 				EDCF722E22F9363600272C10 /* TokenTests.swift */,
 			);
@@ -816,6 +822,7 @@
 				ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */,
+				EDA0E4122435E8AA0083A5E0 /* ThreeDSecureStatus.swift in Sources */,
 				EDCF722D22F935D400272C10 /* Token.swift in Sources */,
 				ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
@@ -860,6 +867,7 @@
 				EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */,
 				ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */,
 				EDA77569238E4CB200162340 /* PublicKeyValidatorTests.swift in Sources */,
+				EDA0E4142435EBA80083A5E0 /* ThreeDSecureStatusTests.swift in Sources */,
 				EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */,
 				BE21781622E8091A0098128D /* PAYJPSDKTests.swift in Sources */,
 				BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */,

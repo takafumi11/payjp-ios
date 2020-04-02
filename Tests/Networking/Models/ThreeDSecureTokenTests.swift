@@ -9,7 +9,7 @@
 import XCTest
 @testable import PAYJP
 
-class ThreeDSecureTests: XCTestCase {
+class ThreeDSecureTokenTests: XCTestCase {
 
     func testTdsEntryUrl() {
         PAYJPSDK.publicKey = "test_key"
