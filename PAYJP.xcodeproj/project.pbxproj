@@ -407,8 +407,8 @@
 				BEA1D28822EAFB6700F8906B /* GetAcceptedBrandsResponse.swift */,
 				BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */,
 				ED00F8D324346B5B004DFE2C /* PAYCommonResponse.swift */,
-				ED2638FF242896BF006D0715 /* ThreeDSecureToken.swift */,
 				EDE20E9623B3135300A38A96 /* ThreeDSecureStatus.swift */,
+				ED2638FF242896BF006D0715 /* ThreeDSecureToken.swift */,
 				EDCF722C22F935D400272C10 /* Token.swift */,
 			);
 			path = Models;

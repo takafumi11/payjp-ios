@@ -13,7 +13,9 @@ public enum ThreeDSecureStatus: String {
     case verified
     case attempted
     case unverified
+}
 
+extension ThreeDSecureStatus: RawRepresentable {
     public var rawValue: String {
         switch self {
         case .verified:
