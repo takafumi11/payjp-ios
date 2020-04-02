@@ -115,7 +115,7 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.handleTdsRedirect()
+        presenter?.checkTdsProcess()
     }
 
     public override func viewDidDisappear(_ animated: Bool) {

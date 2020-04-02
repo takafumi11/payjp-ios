@@ -176,13 +176,13 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
-        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: true)
+        let mockHandler = MockThreeDSecureProcessHandler(status: .completed)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
-                                                schemeHandler: mockHandler)
+                                                processHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.handleTdsRedirect()
+        presenter.checkTdsProcess()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -207,13 +207,13 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: true)
+        let mockHandler = MockThreeDSecureProcessHandler(status: .completed)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
-                                                schemeHandler: mockHandler)
+                                                processHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.handleTdsRedirect()
+        presenter.checkTdsProcess()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -235,13 +235,13 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockThreeDSecureURLHandler(redirectCompleted: false)
+        let mockHandler = MockThreeDSecureProcessHandler(status: .processing)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
                                                 tokenService: mockService,
-                                                schemeHandler: mockHandler)
+                                                processHandler: mockHandler)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.handleTdsRedirect()
+        presenter.checkTdsProcess()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -251,9 +251,9 @@ class CardFormScreenPresenterTests: XCTestCase {
 
     func testStartTdsProcess() {
         let mockDelegate = MockCardFormScreenDelegate()
-        let mockHandler = MockThreeDSecureURLHandler()
+        let mockHandler = MockThreeDSecureProcessHandler()
 
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, schemeHandler: mockHandler)
+        let presenter = CardFormScreenPresenter(delegate: mockDelegate, processHandler: mockHandler)
         presenter.startTdsProcess()
 
         XCTAssertTrue(mockHandler.startThreeDSecureProcessCalled, "startThreeDSecureProcessCalled not called")
