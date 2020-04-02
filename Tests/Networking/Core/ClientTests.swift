@@ -13,13 +13,14 @@ import OHHTTPStubs
 struct MockRequest: BaseRequest {
     typealias Response = Token
 
-    var path: String { return "mocks/\(tokenId)" }
+    var path: String
     var httpMethod: String = "GET"
 
     let tokenId: String
 
-    init(tokenId: String) {
+    init(tokenId: String, path: String? = nil) {
         self.tokenId = tokenId
+        self.path = path ?? "mocks/\(tokenId)"
     }
 }
 
@@ -157,14 +158,16 @@ class ClientTests: XCTestCase {
 
     func testRequest_requiredTds_303() {
         stub(condition: { (req) -> Bool in
-            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
+            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }, response: { (_) -> OHHTTPStubsResponse in
             let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
             return OHHTTPStubsResponse(data: data, statusCode: 303, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
-        let request = MockRequest(tokenId: "mock_id")
+        var request = MockRequest(tokenId: "mock_id")
+        request.path = "tokens"
+        request.httpMethod = "POST"
         client.request(with: request) { result in
             switch result {
             case .failure(let apiError):
@@ -181,15 +184,17 @@ class ClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func testRequest_requiredTds_303_location_nil() {
+    func testRequest_requiredTds_303_token_nil() {
         stub(condition: { (req) -> Bool in
-            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
+            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }, response: { (_) -> OHHTTPStubsResponse in
             return OHHTTPStubsResponse(data: Data(), statusCode: 303, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
-        let request = MockRequest(tokenId: "mock_id")
+        var request = MockRequest(tokenId: "mock_id")
+        request.path = "tokens"
+        request.httpMethod = "GET"
         client.request(with: request) { result in
             switch result {
             case .failure(let apiError):
@@ -206,21 +211,66 @@ class ClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func testFindThreeDSecureId() {
+    func testCreateThreeDSecureToken() {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
-        let tdsToken = client.createThreeDSecureToken(data: data)
+        var request = MockRequest(tokenId: "mock_id")
+        request.httpMethod = "POST"
+        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: nil)!
+
+        let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertEqual(tdsToken?.identifier, "tds_xxx")
     }
 
-    func testFindThreeDSecureId_otherObject() {
+    func testCreateThreeDSecureToken_otherObject() {
         let data = "{\"object\": \"token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
-        let tdsToken = client.createThreeDSecureToken(data: data)
+        var request = MockRequest(tokenId: "mock_id")
+        request.httpMethod = "POST"
+        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: nil)!
+        let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
     }
 
-    func testFindThreeDSecureId_notHasId() {
+    func testCreateThreeDSecureToken_notHasId() {
         let data = "{\"object\": \"three_d_secure_token\"}".data(using: .utf8)!
-        let tdsToken = client.createThreeDSecureToken(data: data)
+        var request = MockRequest(tokenId: "mock_id")
+        request.httpMethod = "POST"
+        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: nil)!
+        let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
+        XCTAssertNil(tdsToken)
+    }
+
+    func testCreateThreeDSecureToken_otherPath() {
+        let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
+        var request = MockRequest(tokenId: "mock_id")
+        request.httpMethod = "POST"
+        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens/any")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: nil)!
+
+        let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
+        XCTAssertNil(tdsToken)
+    }
+
+    func testCreateThreeDSecureToken_notPost() {
+        let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
+        var request = MockRequest(tokenId: "mock_id")
+        request.httpMethod = "GET"
+        let response = HTTPURLResponse(url: URL(string: "\(PAYJPApiEndpoint)tokens")!,
+                                       statusCode: 303,
+                                       httpVersion: "",
+                                       headerFields: nil)!
+
+        let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
     }
 }
