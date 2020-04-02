@@ -14,3 +14,17 @@ public enum ThreeDSecureStatus: String, Codable {
     case attempted
     case unverified
 }
+
+@objc public enum ThreeDSecureStatusObjc: Int {
+    case verified
+    case attempted
+    case unverified
+
+    func value() -> String {
+        switch self {
+        case .verified: return "verified"
+        case .attempted: return "attempted"
+        case .unverified: return "unverified"
+        }
+    }
+}

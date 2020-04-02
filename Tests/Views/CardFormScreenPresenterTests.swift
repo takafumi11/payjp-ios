@@ -19,7 +19,7 @@ class CardFormScreenPresenterTests: XCTestCase {
                              cardHolder: "waka")
     }
 
-    private func mockToken(tdsStatus: ThreeDSecureStatus? = nil) -> Token {
+    private func mockToken(tdsStatus: String = "unverified") -> Token {
         let card = Card(identifier: "card_id",
                         name: "paykun",
                         last4Number: "1234",
@@ -151,7 +151,7 @@ class CardFormScreenPresenterTests: XCTestCase {
     func testValidateThreeDSecure_execute() {
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let token = mockToken(tdsStatus: .unverified)
+        let token = mockToken()
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
@@ -172,7 +172,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         expectation.expectedFulfillmentCount = 2
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let token = mockToken(tdsStatus: .verified)
+        let token = mockToken()
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
@@ -203,7 +203,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "view update")
         expectation.expectedFulfillmentCount = 2
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let token = mockToken(tdsStatus: .verified)
+        let token = mockToken()
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
@@ -231,7 +231,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         let apiError = APIError.systemError(error)
         let expectation = self.expectation(description: "view update")
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let token = mockToken(tdsStatus: .verified)
+        let token = mockToken()
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)

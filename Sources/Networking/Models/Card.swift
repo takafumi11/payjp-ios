@@ -25,8 +25,8 @@ import Foundation
     public let fingerprint: String
     public let liveMode: Bool
     public let createdAt: Date
+    public let threeDSecureStatus: String?
     public var rawValue: [String: Any]?
-    public var threeDSecureStatus: ThreeDSecureStatus?
 
     // MARK: - Decodable
 
@@ -54,7 +54,7 @@ import Foundation
         fingerprint = try container.decode(String.self, forKey: .fingerprint)
         liveMode = try container.decode(Bool.self, forKey: .liveMode)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
-        threeDSecureStatus = try container.decodeIfPresent(ThreeDSecureStatus.self, forKey: .threeDSecureStatus)
+        threeDSecureStatus = try container.decodeIfPresent(String.self, forKey: .threeDSecureStatus)
     }
 
     public init(identifier: String,
@@ -66,7 +66,7 @@ import Foundation
                 fingerprint: String,
                 liveMode: Bool,
                 createAt: Date,
-                threeDSecureStatus: ThreeDSecureStatus?,
+                threeDSecureStatus: String?,
                 rawValue: [String: Any]? = nil ) {
         self.identifer = identifier
         self.name = name
