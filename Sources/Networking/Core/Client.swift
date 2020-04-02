@@ -75,7 +75,9 @@ class Client: NSObject, ClientType {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else if response.statusCode == 303 {
-                        if let tdsToken = self.createThreeDSecureToken(data: data, request: request, response: response) {
+                        if let tdsToken = self.createThreeDSecureToken(data: data,
+                                                                       request: request,
+                                                                       response: response) {
                             completion?(Result.failure(.requiredThreeDSecure(tdsToken)))
                         } else {
                             completion?(Result.failure(.invalidResponse(response)))
