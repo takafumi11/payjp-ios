@@ -9,22 +9,19 @@
 import Foundation
 
 /// 3D Secure verification status.
-public enum ThreeDSecureStatus: String, Codable {
-    case verified
-    case attempted
-    case unverified
-}
-
-@objc public enum ThreeDSecureStatusObjc: Int {
+public enum ThreeDSecureStatus: String {
     case verified
     case attempted
     case unverified
 
-    func value() -> String {
+    public var rawValue: String {
         switch self {
-        case .verified: return "verified"
-        case .attempted: return "attempted"
-        case .unverified: return "unverified"
+        case .verified:
+            return PAYThreeDSecureStatus.verified.rawValue
+        case .attempted:
+            return PAYThreeDSecureStatus.attempted.rawValue
+        case .unverified:
+            return PAYThreeDSecureStatus.unverified.rawValue
         }
     }
 }

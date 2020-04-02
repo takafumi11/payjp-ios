@@ -47,3 +47,9 @@ FOUNDATION_EXPORT NSString *const PAYErrorInvalidJSONErrorObject;
 /// Use this key name to get `PAYErrorRequiredThreeDSecure` tds identifier which is stored in the
 /// `userInfo`.
 FOUNDATION_EXPORT NSString *const PAYErrorRequiredThreeDSecureIdObject;
+
+/// 3DSecure status
+typedef NSString *const PAYThreeDSecureStatus NS_STRING_ENUM;
+FOUNDATION_EXPORT PAYThreeDSecureStatus PAYThreeDSecureStatusVerified;
+FOUNDATION_EXPORT PAYThreeDSecureStatus PAYThreeDSecureStatusAttempted;
+FOUNDATION_EXPORT PAYThreeDSecureStatus PAYThreeDSecureStatusUnverified;
