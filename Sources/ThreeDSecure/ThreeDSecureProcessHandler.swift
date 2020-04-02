@@ -35,7 +35,7 @@ public protocol ThreeDSecureProcessHandlerType {
     func resetThreeDSecureProcess()
 }
 
-@objc(PAYJPThreeDSecureURLHandler) @objcMembers
+@objc(PAYJPThreeDSecureProcessHandler) @objcMembers
 public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerType {
 
     @objc(sharedHandler)
