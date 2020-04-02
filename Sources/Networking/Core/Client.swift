@@ -75,7 +75,9 @@ class Client: NSObject, ClientType {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
                     } else if response.statusCode == 303 {
-                        if let tdsToken = self.createThreeDSecureToken(response: response) {
+                        if let tdsToken = self.createThreeDSecureToken(data: data,
+                                                                       request: request,
+                                                                       response: response) {
                             completion?(Result.failure(.requiredThreeDSecure(tdsToken)))
                         } else {
                             completion?(Result.failure(.invalidResponse(response)))
@@ -100,14 +102,23 @@ class Client: NSObject, ClientType {
         }
     }
 
-    /// Locationヘッダからtds_idを取得する
-    /// - Parameter response: HTTPURLResponse
+    /// Response bodyから3DSecureのidを取り出してThreeDSecureTokenを生成する
+    /// - Parameters:
+    ///   - data: Data
+    ///   - request: Request
+    ///   - response: Response
     /// - Returns: ThreeDSecureToken
-    func createThreeDSecureToken(response: HTTPURLResponse) -> ThreeDSecureToken? {
-        if let location = response.allHeaderFields["Location"] as? String,
-            let url = URL(string: location) {
-            let pattern = "^/v1/tds/([\\w\\d_]+)/.*$"
-            if let tdsId = url.path.capture(pattern: pattern, group: 1) {
+    func createThreeDSecureToken<Request: PAYJP.Request>(data: Data,
+                                                         request: Request,
+                                                         response: HTTPURLResponse) -> ThreeDSecureToken? {
+
+        guard let url = response.url?.absoluteString else { return nil }
+        guard url == "\(PAYJPApiEndpoint)tokens" else { return nil }
+        guard request.httpMethod == "POST" else { return nil }
+
+        let response = try? self.jsonDecoder.decode(PAYCommonResponse.self, from: data)
+        if response?.object == "three_d_secure_token" {
+            if let tdsId = response?.id {
                 return ThreeDSecureToken(identifier: tdsId)
             }
         }
