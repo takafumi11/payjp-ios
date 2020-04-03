@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 
-        return ThreeDSecureURLHandler.shared.completeThreeDSecureProcess(url: url)
+        return ThreeDSecureProcessHandler.shared.completeThreeDSecureProcess(url: url)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
