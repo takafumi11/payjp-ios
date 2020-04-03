@@ -30,10 +30,8 @@ protocol CardFormScreenPresenterType {
     var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
+    func createTokenByTds()
     func fetchBrands(tenantId: String?)
-
-    func checkTdsProcess()
-    func startTdsProcess()
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -118,24 +116,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func checkTdsProcess() {
-        switch processHandler.status {
-        case .completed:
-            processHandler.resetThreeDSecureProcess()
-            createTokenByTds()
-        case .processing:
-            delegate?.dismissIndicator()
-            delegate?.enableSubmitButton()
-        default:
-            break
-        }
-    }
-
-    func startTdsProcess() {
-        processHandler.startThreeDSecureProcess()
-    }
-
-    private func createTokenByTds() {
+    func createTokenByTds() {
         if let tdsToken = tdsToken {
             tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
                 guard let self = self else { return }
