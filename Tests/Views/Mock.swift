@@ -218,28 +218,3 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
         showPermissionAlertCalled = true
     }
 }
-
-class MockThreeDSecureProcessHandler: ThreeDSecureProcessHandlerType {
-    var status: ThreeDSecureProcessStatus
-    var startThreeDSecureProcessCalled = false
-    var completeThreeDSecureProcessCalled = false
-    var resetThreeDSecureProcessCalled = false
-
-    init(status: ThreeDSecureProcessStatus = .none) {
-        self.status = status
-    }
-
-    func startThreeDSecureProcess() {
-        startThreeDSecureProcessCalled = true
-    }
-
-    func completeThreeDSecureProcess(url: URL, completion: (() -> Void)?) -> Bool {
-        completeThreeDSecureProcessCalled = true
-        return true
-    }
-
-    func resetThreeDSecureProcess() {
-        resetThreeDSecureProcessCalled = true
-    }
-
-}

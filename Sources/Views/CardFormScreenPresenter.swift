@@ -43,20 +43,17 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
     private let errorTranslator: ErrorTranslatorType
-    private let processHandler: ThreeDSecureProcessHandlerType
     private let dispatchQueue: DispatchQueue
 
     init(delegate: CardFormScreenDelegate,
          accountsService: AccountsServiceType = AccountsService.shared,
          tokenService: TokenServiceType = TokenService.shared,
          errorTranslator: ErrorTranslatorType = ErrorTranslator.shared,
-         processHandler: ThreeDSecureProcessHandlerType = ThreeDSecureProcessHandler.shared,
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.delegate = delegate
         self.accountsService = accountsService
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
-        self.processHandler = processHandler
         self.dispatchQueue = dispatchQueue
     }
 

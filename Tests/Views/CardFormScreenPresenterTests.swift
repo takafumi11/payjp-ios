@@ -168,7 +168,7 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertFalse(presenter.cardFormResultSuccess)
     }
 
-    func testHandleTdsRedirect_success() {
+    func testCreateTokenByTds_success() {
         let expectation = self.expectation(description: "view update")
         expectation.expectedFulfillmentCount = 2
         let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
@@ -176,13 +176,11 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds)
-        let mockHandler = MockThreeDSecureProcessHandler(status: .completed)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
-                                                tokenService: mockService,
-                                                processHandler: mockHandler)
+                                                tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.checkTdsProcess()
+        presenter.createTokenByTds()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -191,11 +189,10 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
         XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
-        XCTAssertTrue(mockHandler.resetThreeDSecureProcessCalled, "resetThreeDSecureProcessCalled not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }
 
-    func testHandleTdsRedirect_failure() {
+    func testCreateTokenByTds_failure() {
         let error = NSError(domain: "mock_domain",
                             code: 0,
                             userInfo: [NSLocalizedDescriptionKey: "mock api error"])
@@ -207,13 +204,11 @@ class CardFormScreenPresenterTests: XCTestCase {
         let tdsToken = ThreeDSecureToken(identifier: "tds_id")
         let requiredTds = APIError.requiredThreeDSecure(tdsToken)
         let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockThreeDSecureProcessHandler(status: .completed)
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate,
-                                                tokenService: mockService,
-                                                processHandler: mockHandler)
+                                                tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.checkTdsProcess()
+        presenter.createTokenByTds()
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -222,40 +217,5 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
-    }
-
-    func testHandleTdsRedirect_cancel() {
-        let error = NSError(domain: "mock_domain",
-                            code: 0,
-                            userInfo: [NSLocalizedDescriptionKey: "mock api error"])
-        let apiError = APIError.systemError(error)
-        let expectation = self.expectation(description: "view update")
-        let mockDelegate = MockCardFormScreenDelegate(expectation: expectation)
-        let token = mockToken()
-        let tdsToken = ThreeDSecureToken(identifier: "tds_id")
-        let requiredTds = APIError.requiredThreeDSecure(tdsToken)
-        let mockService = MockTokenService(token: token, error: requiredTds, errorForTds: apiError)
-        let mockHandler = MockThreeDSecureProcessHandler(status: .processing)
-
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate,
-                                                tokenService: mockService,
-                                                processHandler: mockHandler)
-        presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
-        presenter.checkTdsProcess()
-
-        waitForExpectations(timeout: 1, handler: nil)
-
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
-    }
-
-    func testStartTdsProcess() {
-        let mockDelegate = MockCardFormScreenDelegate()
-        let mockHandler = MockThreeDSecureProcessHandler()
-
-        let presenter = CardFormScreenPresenter(delegate: mockDelegate, processHandler: mockHandler)
-        presenter.startTdsProcess()
-
-        XCTAssertTrue(mockHandler.startThreeDSecureProcessCalled, "startThreeDSecureProcessCalled not called")
     }
 }
