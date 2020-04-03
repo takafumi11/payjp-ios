@@ -31,9 +31,9 @@ public protocol ThreeDSecureProcessHandlerDelegate: class {
 /// Handler for 3DSecure process.
 public protocol ThreeDSecureProcessHandlerType {
 
-    /// Start 3DSecure prpcess.
+    /// Start 3DSecure process.
     /// - Parameters:
-    ///   - viewController: ViewController which will present SFSafariViewController.
+    ///   - viewController: the viewController which will present SFSafariViewController.
     ///   - delegate: ThreeDSecureProcessHandlerDelegate
     ///   - token: ThreeDSecureToken
     func startThreeDSecureProcess(viewController: UIViewController,
