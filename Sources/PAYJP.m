@@ -26,3 +26,7 @@ NSString *const PAYErrorServiceErrorObject = @"PAYErrorServiceErrorObject";
 NSString *const PAYErrorInvalidJSONObject = @"PAYErrorInvalidJSONObject";
 NSString *const PAYErrorInvalidJSONErrorObject = @"PAYErrorInvalidJSONErrorObject";
 NSString *const PAYErrorRequiredThreeDSecureIdObject = @"PAYErrorRequiredThreeDSecureIdObject";
+
+PAYThreeDSecureStatus PAYThreeDSecureStatusVerified = @"verified";
+PAYThreeDSecureStatus PAYThreeDSecureStatusAttempted = @"attempted";
+PAYThreeDSecureStatus PAYThreeDSecureStatusUnverified = @"unverified";
