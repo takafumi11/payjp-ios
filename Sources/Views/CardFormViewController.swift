@@ -322,7 +322,7 @@ extension CardFormViewController: ThreeDSecureProcessHandlerDelegate {
         switch status {
         case .completed:
             presenter?.createTokenByTds()
-        case .cancel:
+        case .canceled:
             dismissIndicator()
             enableSubmitButton()
         default:

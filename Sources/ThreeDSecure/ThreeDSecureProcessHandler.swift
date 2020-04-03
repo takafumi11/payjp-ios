@@ -13,8 +13,8 @@ import SafariServices
 @objc public enum ThreeDSecureProcessStatus: Int {
     /// when 3DSecure process is completed.
     case completed
-    /// when 3DSecure process is cancel.
-    case cancel
+    /// when 3DSecure process is canceled.
+    case canceled
 }
 
 /// 3DSecure handler delegate.
@@ -32,6 +32,7 @@ public protocol ThreeDSecureProcessHandlerDelegate: class {
 public protocol ThreeDSecureProcessHandlerType {
 
     /// Start 3DSecure process.
+    /// Delegate is released when didFinish of ThreeDSecureProcessHandlerDelegate is called.
     /// - Parameters:
     ///   - viewController: the viewController which will present SFSafariViewController.
     ///   - delegate: ThreeDSecureProcessHandlerDelegate
@@ -67,8 +68,8 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
             safariVc.dismissButtonStyle = .close
         }
         safariVc.delegate = self
-        viewController.present(safariVc, animated: true, completion: nil)
         self.delegate = delegate
+        viewController.present(safariVc, animated: true, completion: nil)
     }
 
     public func completeThreeDSecureProcess(url: URL, completion: (() -> Void)? = nil) -> Bool {
@@ -96,6 +97,7 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
 extension ThreeDSecureProcessHandler: SFSafariViewControllerDelegate {
 
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        delegate?.threeDSecureProcessHandlerDidFinish(self, status: .cancel)
+        delegate?.threeDSecureProcessHandlerDidFinish(self, status: .canceled)
+        delegate = nil
     }
 }
