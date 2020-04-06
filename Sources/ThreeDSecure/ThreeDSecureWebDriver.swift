@@ -11,14 +11,14 @@ import SafariServices
 
 /// Web browse driver for 3DSecure.
 public protocol ThreeDSecureWebDriver {
-    
+
     /// Open web browser with SFSafariViewController.
     /// - Parameters:
     ///   - host: host ViewController
     ///   - url: load url
     ///   - delegate: SFSafariViewControllerDelegate
     func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate)
-    
+
     /// Close web browser.
     /// - Parameters:
     ///   - host: host ViewController
@@ -28,10 +28,10 @@ public protocol ThreeDSecureWebDriver {
 
 /// see ThreeDSecureWebDriver.
 public class ThreeDSecureSFSafariViewControllerDriver: ThreeDSecureWebDriver {
-    
+
     /// Shared instance.
     public static let shared = ThreeDSecureSFSafariViewControllerDriver()
-    
+
     public func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate) {
         let safariVc = SFSafariViewController(url: url)
         if #available(iOS 11.0, *) {
@@ -40,7 +40,7 @@ public class ThreeDSecureSFSafariViewControllerDriver: ThreeDSecureWebDriver {
         safariVc.delegate = delegate
         host.present(safariVc, animated: true, completion: nil)
     }
-    
+
     public func closeWebBrowser(host: UIViewController?, completion: (() -> Void)?) -> Bool {
         if host is SFSafariViewController {
             host?.dismiss(animated: true) {

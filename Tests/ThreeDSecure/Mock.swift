@@ -11,7 +11,7 @@ import SafariServices
 class MockViewController: UIViewController {
     var tdsStatus: ThreeDSecureProcessStatus?
     var presentedVC: UIViewController?
-    
+
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
@@ -28,7 +28,7 @@ extension MockViewController: ThreeDSecureProcessHandlerDelegate {
 
 class MockSafariViewController: SFSafariViewController {
     var dismissCalled: Bool = false
-    
+
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         dismissCalled = true
         completion?()
@@ -42,15 +42,15 @@ class MockSafariDelegateImpl: NSObject, SFSafariViewControllerDelegate {
 class MockWebDriver: ThreeDSecureWebDriver {
     var openWebBrowserUrl: URL?
     var isSafariVC: Bool = false
-    
+
     init(isSafariVC: Bool = false) {
         self.isSafariVC = isSafariVC
     }
-    
+
     func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate) {
         openWebBrowserUrl = url
     }
-    
+
     func closeWebBrowser(host: UIViewController?, completion: (() -> Void)?) -> Bool {
         if isSafariVC {
             completion?()

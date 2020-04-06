@@ -56,7 +56,7 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
 
     private weak var delegate: ThreeDSecureProcessHandlerDelegate?
     private let webDriver: ThreeDSecureWebDriver
-    
+
     public init(webDriver: ThreeDSecureWebDriver = ThreeDSecureSFSafariViewControllerDriver.shared) {
         self.webDriver = webDriver
     }
