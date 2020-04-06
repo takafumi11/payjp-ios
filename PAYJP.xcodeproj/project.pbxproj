@@ -600,8 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				ED00F8CF243353FC004DFE2C /* ThreeDSecureProcessHandler.swift */,
-				ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */,
 				EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */,
+				ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */,
 				ED3DB9DD243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift */,
 			);
 			path = ThreeDSecure;
