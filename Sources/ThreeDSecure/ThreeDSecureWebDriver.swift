@@ -9,6 +9,14 @@
 import Foundation
 import SafariServices
 
+/// Delegate of web browse driver.
+public protocol ThreeDSecureWebDriverDelegate: class {
+    
+    /// Tells the delegate that web browsing is finished.
+    /// - Parameter driver: ThreeDSecureWebDriver
+    func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver)
+}
+
 /// Web browse driver for 3DSecure.
 public protocol ThreeDSecureWebDriver {
 
@@ -16,38 +24,12 @@ public protocol ThreeDSecureWebDriver {
     /// - Parameters:
     ///   - host: host ViewController
     ///   - url: load url
-    ///   - delegate: SFSafariViewControllerDelegate
-    func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate)
+    ///   - delegate: ThreeDSecureWebDriverDelegate
+    func openWebBrowser(host: UIViewController, url: URL, delegate: ThreeDSecureWebDriverDelegate)
 
     /// Close web browser.
     /// - Parameters:
     ///   - host: host ViewController
     ///   - completion: completion action after dismiss SFSafariViewController
     func closeWebBrowser(host: UIViewController?, completion: (() -> Void)?) -> Bool
-}
-
-/// see ThreeDSecureWebDriver.
-public class ThreeDSecureSFSafariViewControllerDriver: ThreeDSecureWebDriver {
-
-    /// Shared instance.
-    public static let shared = ThreeDSecureSFSafariViewControllerDriver()
-
-    public func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate) {
-        let safariVc = SFSafariViewController(url: url)
-        if #available(iOS 11.0, *) {
-            safariVc.dismissButtonStyle = .close
-        }
-        safariVc.delegate = delegate
-        host.present(safariVc, animated: true, completion: nil)
-    }
-
-    public func closeWebBrowser(host: UIViewController?, completion: (() -> Void)?) -> Bool {
-        if host is SFSafariViewController {
-            host?.dismiss(animated: true) {
-                completion?()
-            }
-            return true
-        }
-        return false
-    }
 }

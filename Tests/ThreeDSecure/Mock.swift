@@ -35,8 +35,12 @@ class MockSafariViewController: SFSafariViewController {
     }
 }
 
-class MockSafariDelegateImpl: NSObject, SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {}
+class MockThreeDSecureWebDriverDelegate: NSObject, ThreeDSecureWebDriverDelegate {
+    var webBrowseDidFinishCalled: Bool = false
+    
+    func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver) {
+        webBrowseDidFinishCalled = true
+    }
 }
 
 class MockWebDriver: ThreeDSecureWebDriver {
@@ -47,7 +51,7 @@ class MockWebDriver: ThreeDSecureWebDriver {
         self.isSafariVC = isSafariVC
     }
 
-    func openWebBrowser(host: UIViewController, url: URL, delegate: SFSafariViewControllerDelegate) {
+    func openWebBrowser(host: UIViewController, url: URL, delegate: ThreeDSecureWebDriverDelegate) {
         openWebBrowserUrl = url
     }
 

@@ -15,7 +15,7 @@ class ThreeDSecureSFSafariViewControllerDriverTests: XCTestCase {
     func testOpenWebBrowser() {
         let driver = ThreeDSecureSFSafariViewControllerDriver()
         let mockVC = MockViewController()
-        let mockDelegate = MockSafariDelegateImpl()
+        let mockDelegate = MockThreeDSecureWebDriverDelegate()
         let url = URL(string: "https://test")!
 
         driver.openWebBrowser(host: mockVC, url: url, delegate: mockDelegate)
@@ -40,5 +40,18 @@ class ThreeDSecureSFSafariViewControllerDriverTests: XCTestCase {
         let result = driver.closeWebBrowser(host: mockVC, completion: nil)
 
         XCTAssertFalse(result)
+    }
+    
+    func testWebBrowswDidFinishDelegate() {
+        let driver = ThreeDSecureSFSafariViewControllerDriver()
+        let mockVC = MockViewController()
+        let mockDelegate = MockThreeDSecureWebDriverDelegate()
+        let url = URL(string: "https://test")!
+
+        driver.openWebBrowser(host: mockVC, url: url, delegate: mockDelegate)
+        // SafariVCを閉じた場合を想定
+        driver.safariViewControllerDidFinish(MockSafariViewController(url: url))
+
+        XCTAssertTrue(mockDelegate.webBrowseDidFinishCalled)
     }
 }

@@ -84,4 +84,22 @@ class ThreeDSecureProcessHandlerTests: XCTestCase {
         XCTAssertFalse(result)
         XCTAssertNil(mockVC.tdsStatus)
     }
+    
+    func testWebBrowseDidFinish() {
+        PAYJPSDK.threeDSecureURLConfiguration = ThreeDSecureURLConfiguration(redirectURL: URL(string: "test://")!,
+                                                                             redirectURLKey: "test")
+
+        let mockDriver = MockWebDriver(isSafariVC: true)
+        let handler = ThreeDSecureProcessHandler(webDriver: mockDriver)
+        let token = ThreeDSecureToken(identifier: "tds_xxx")
+        let mockVC = MockViewController()
+
+        handler.startThreeDSecureProcess(viewController: mockVC,
+                                         delegate: mockVC,
+                                         token: token)
+        // Webブラウザを閉じた場合を想定
+        handler.webBrowseDidFinish(mockDriver)
+
+        XCTAssertEqual(mockVC.tdsStatus, ThreeDSecureProcessStatus.canceled)
+    }
 }
