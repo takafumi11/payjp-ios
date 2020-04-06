@@ -34,10 +34,7 @@ NSString *const App3DSRedirectURLKey = @"ios-app";
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
   BOOL result = [[PAYJPThreeDSecureProcessHandler sharedHandler]
-      completeThreeDSecureProcessWithUrl:url
-                              completion:^{
-                                NSLog(@"completeThreeDSecureProcessWithUrl");
-                              }];
+      completeThreeDSecureProcessWithUrl:url];
   return result;
 }
 
