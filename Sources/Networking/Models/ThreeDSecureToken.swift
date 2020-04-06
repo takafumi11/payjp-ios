@@ -8,8 +8,10 @@
 
 import Foundation
 
+/// 3DSecure token object.
+/// used for 3DSecure verification.
 public class ThreeDSecureToken: NSObject {
-
+    /// Identifier.
     public let identifier: String
 
     init(identifier: String) {
