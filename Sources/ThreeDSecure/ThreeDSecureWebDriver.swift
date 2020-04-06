@@ -20,7 +20,7 @@ public protocol ThreeDSecureWebDriverDelegate: class {
 /// Web browse driver for 3DSecure.
 public protocol ThreeDSecureWebDriver {
 
-    /// Open web browser with SFSafariViewController.
+    /// Open web browser.
     /// - Parameters:
     ///   - host: host ViewController
     ///   - url: load url
