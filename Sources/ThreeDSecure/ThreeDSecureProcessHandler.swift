@@ -43,8 +43,7 @@ public protocol ThreeDSecureProcessHandlerType {
     /// Complete 3DSecure process.
     /// - Parameters:
     ///   - url: redirect URL
-    ///   - completion: completion for dismiss SFSafariViewController
-    func completeThreeDSecureProcess(url: URL, completion: (() -> Void)?) -> Bool
+    func completeThreeDSecureProcess(url: URL) -> Bool
 }
 
 /// see ThreeDSecureProcessHandlerType.
@@ -56,36 +55,31 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
     public static let shared = ThreeDSecureProcessHandler()
 
     private weak var delegate: ThreeDSecureProcessHandlerDelegate?
+    private let webDriver: ThreeDSecureWebDriver
+    
+    public init(webDriver: ThreeDSecureWebDriver = ThreeDSecureSFSafariViewControllerDriver.shared) {
+        self.webDriver = webDriver
+    }
 
     // MARK: ThreeDSecureProcessHandlerType
 
     public func startThreeDSecureProcess(viewController: UIViewController,
                                          delegate: ThreeDSecureProcessHandlerDelegate,
                                          token: ThreeDSecureToken) {
-
-        let safariVc = SFSafariViewController(url: token.tdsEntryUrl)
-        if #available(iOS 11.0, *) {
-            safariVc.dismissButtonStyle = .close
-        }
-        safariVc.delegate = self
         self.delegate = delegate
-        viewController.present(safariVc, animated: true, completion: nil)
+        webDriver.openWebBrowser(host: viewController, url: token.tdsEntryUrl, delegate: self)
     }
 
-    public func completeThreeDSecureProcess(url: URL, completion: (() -> Void)? = nil) -> Bool {
+    public func completeThreeDSecureProcess(url: URL) -> Bool {
         print(debug: "tds redirect url => \(url)")
 
         if let redirectUrl = PAYJPSDK.threeDSecureURLConfiguration?.redirectURL {
             if url.absoluteString.starts(with: redirectUrl.absoluteString) {
                 let topViewController = UIApplication.topViewController()
-                if topViewController is SFSafariViewController {
-                    topViewController?.dismiss(animated: true) { [weak self] in
-                        guard let self = self else { return }
-                        self.delegate?.threeDSecureProcessHandlerDidFinish(self, status: .completed)
-                        self.delegate = nil
-                        completion?()
-                    }
-                    return true
+                return webDriver.closeWebBrowser(host: topViewController) { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.threeDSecureProcessHandlerDidFinish(self, status: .completed)
+                    self.delegate = nil
                 }
             }
         }
