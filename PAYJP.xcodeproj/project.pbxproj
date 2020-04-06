@@ -84,6 +84,9 @@
 		ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */; };
 		ED31B0852399FA8800DDFFE5 /* CardFormScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */; };
 		ED31B088239A31DA00DDFFE5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31B086239A31B300DDFFE5 /* Mock.swift */; };
+		ED3DB9DE243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DB9DD243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift */; };
+		ED3DB9E0243ACCBE0065FC33 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DB9DF243ACCBE0065FC33 /* Mock.swift */; };
+		ED3DB9E2243ACD2B0065FC33 /* ThreeDSecureSFSafariViewControllerDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DB9E1243ACD2B0065FC33 /* ThreeDSecureSFSafariViewControllerDriverTests.swift */; };
 		ED3FEF7522F13F6000FA73BF /* String+PAYJPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7422F13F6000FA73BF /* String+PAYJPTests.swift */; };
 		ED40969E2394B9FA007FD8A6 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40969C2394B9E1007FD8A6 /* ClientTests.swift */; };
 		ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4ACE172383F61C00349BBF /* CardFormViewControllerDelegate.swift */; };
@@ -100,6 +103,7 @@
 		ED9B33E62390F0B00079E7B8 /* ErrorTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B33E52390F0B00079E7B8 /* ErrorTranslatorTests.swift */; };
 		EDA0E4122435E8AA0083A5E0 /* ThreeDSecureStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA0E4112435E8AA0083A5E0 /* ThreeDSecureStatus.swift */; };
 		EDA0E4142435EBA80083A5E0 /* ThreeDSecureStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA0E4132435EBA80083A5E0 /* ThreeDSecureStatusTests.swift */; };
+		EDA0E419243739C00083A5E0 /* ThreeDSecureProcessHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA0E418243739C00083A5E0 /* ThreeDSecureProcessHandlerTests.swift */; };
 		EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */; };
 		EDA3EE8122DF1F0300D9A6C9 /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */; };
 		EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA3EE8722E18A6C00D9A6C9 /* CardNumberValidator.swift */; };
@@ -123,6 +127,7 @@
 		EDCF723222F948F500272C10 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7022F0376500FA73BF /* CardNumber.swift */; };
 		EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */; };
 		EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */; };
+		EDDB9371243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */; };
 		EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */; };
 		EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */; };
 		EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF4DB1234322B00036F449 /* LocalError.swift */; };
@@ -233,6 +238,9 @@
 		ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormInput.swift; sourceTree = "<group>"; };
 		ED31B0832398FC0C00DDFFE5 /* CardFormScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormScreenPresenterTests.swift; sourceTree = "<group>"; };
 		ED31B086239A31B300DDFFE5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		ED3DB9DD243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureWebDriver.swift; sourceTree = "<group>"; };
+		ED3DB9DF243ACCBE0065FC33 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		ED3DB9E1243ACD2B0065FC33 /* ThreeDSecureSFSafariViewControllerDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureSFSafariViewControllerDriverTests.swift; sourceTree = "<group>"; };
 		ED3FEF6E22EFE71900FA73BF /* FormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormError.swift; sourceTree = "<group>"; };
 		ED3FEF7022F0376500FA73BF /* CardNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		ED3FEF7222F133A700FA73BF /* String+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PAYJP.swift"; sourceTree = "<group>"; };
@@ -251,6 +259,7 @@
 		ED9B33E52390F0B00079E7B8 /* ErrorTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTranslatorTests.swift; sourceTree = "<group>"; };
 		EDA0E4112435E8AA0083A5E0 /* ThreeDSecureStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSecureStatus.swift; sourceTree = "<group>"; };
 		EDA0E4132435EBA80083A5E0 /* ThreeDSecureStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureStatusTests.swift; sourceTree = "<group>"; };
+		EDA0E418243739C00083A5E0 /* ThreeDSecureProcessHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureProcessHandlerTests.swift; sourceTree = "<group>"; };
 		EDA3EE7E22DF0AF600D9A6C9 /* CardNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatter.swift; sourceTree = "<group>"; };
 		EDA3EE8022DF1F0300D9A6C9 /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
 		EDA3EE8222E0199700D9A6C9 /* CardBrandTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTransformer.swift; sourceTree = "<group>"; };
@@ -271,6 +280,7 @@
 		EDCF722C22F935D400272C10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EDCF722E22F9363600272C10 /* TokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTests.swift; sourceTree = "<group>"; };
 		EDCF723B22FBF07C00272C10 /* CardFormViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModelTests.swift; sourceTree = "<group>"; };
+		EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureSFSafariViewControllerDriver.swift; sourceTree = "<group>"; };
 		EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormLabelStyledView.swift; sourceTree = "<group>"; };
 		EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormLabelStyledView.xib; sourceTree = "<group>"; };
 		EDFF4DB1234322B00036F449 /* LocalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalError.swift; sourceTree = "<group>"; };
@@ -345,6 +355,7 @@
 				BE21781122E806580098128D /* Core */,
 				BE734B8522DD7888008679EC /* Formatters */,
 				BE21781722E82A420098128D /* Networking */,
+				EDA0E417243739920083A5E0 /* ThreeDSecure */,
 				BE734B8422DD787E008679EC /* Validators */,
 				EDCF723A22FBF07C00272C10 /* Views */,
 				615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */,
@@ -589,7 +600,9 @@
 			isa = PBXGroup;
 			children = (
 				ED00F8CF243353FC004DFE2C /* ThreeDSecureProcessHandler.swift */,
+				EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */,
 				ED00F8D0243353FC004DFE2C /* ThreeDSecureURLConfiguration.swift */,
+				ED3DB9DD243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift */,
 			);
 			path = ThreeDSecure;
 			sourceTree = "<group>";
@@ -619,6 +632,16 @@
 				32A6F6152396093B00747477 /* Radius.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		EDA0E417243739920083A5E0 /* ThreeDSecure */ = {
+			isa = PBXGroup;
+			children = (
+				EDA0E418243739C00083A5E0 /* ThreeDSecureProcessHandlerTests.swift */,
+				ED3DB9E1243ACD2B0065FC33 /* ThreeDSecureSFSafariViewControllerDriverTests.swift */,
+				ED3DB9DF243ACCBE0065FC33 /* Mock.swift */,
+			);
+			path = ThreeDSecure;
 			sourceTree = "<group>";
 		};
 		EDCF723A22FBF07C00272C10 /* Views */ = {
@@ -784,6 +807,7 @@
 				EDCF723322F9490400272C10 /* String+PAYJP.swift in Sources */,
 				ED00F8D1243353FD004DFE2C /* ThreeDSecureProcessHandler.swift in Sources */,
 				EDCF723222F948F500272C10 /* CardNumber.swift in Sources */,
+				ED3DB9DE243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift in Sources */,
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
@@ -827,6 +851,7 @@
 				ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */,
 				EDA3EE8822E18A6C00D9A6C9 /* CardNumberValidator.swift in Sources */,
 				ED00F8BF24319E1B004DFE2C /* UIApplication+PAYJP.swift in Sources */,
+				EDDB9371243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift in Sources */,
 				BE734B8F22DEF3AE008679EC /* CardFormTableStyledView.swift in Sources */,
 				EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
@@ -850,6 +875,7 @@
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
+				ED3DB9E0243ACCBE0065FC33 /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,10 +886,12 @@
 				BE196D4A22F123F100A042BE /* GetAcceptedBrandsResponseTests.swift in Sources */,
 				ED40969E2394B9FA007FD8A6 /* ClientTests.swift in Sources */,
 				BE25B80722F15AF900799201 /* TestFixture.swift in Sources */,
+				ED3DB9E2243ACD2B0065FC33 /* ThreeDSecureSFSafariViewControllerDriverTests.swift in Sources */,
 				EDA3EE8C22E19D7800D9A6C9 /* CardNumberValidatorTests.swift in Sources */,
 				615AFF6B1C8C74A1003FB86F /* APIClientTests.swift in Sources */,
 				EDCF723C22FBF07C00272C10 /* CardFormViewModelTests.swift in Sources */,
 				BE21785F22E99F260098128D /* GetTokenRequestTests.swift in Sources */,
+				EDA0E419243739C00083A5E0 /* ThreeDSecureProcessHandlerTests.swift in Sources */,
 				EDA3EE9B22E1CD9900D9A6C9 /* CardBrandTransformerTests.swift in Sources */,
 				ED508383231CC3B600C64A7F /* StringProtocol+PAYJPTests.swift in Sources */,
 				EDA77569238E4CB200162340 /* PublicKeyValidatorTests.swift in Sources */,

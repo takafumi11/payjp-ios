@@ -113,11 +113,6 @@ public class CardFormViewController: UIViewController {
         fetchAccpetedBrands()
     }
 
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter?.checkTdsProcess()
-    }
-
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
@@ -234,12 +229,9 @@ extension CardFormViewController: CardFormScreenDelegate {
     }
 
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
-        let safariVc = SFSafariViewController(url: tdsToken.tdsEntryUrl)
-        if #available(iOS 11.0, *) {
-            safariVc.dismissButtonStyle = .close
-        }
-        self.present(safariVc, animated: true, completion: nil)
-        presenter?.startTdsProcess()
+        ThreeDSecureProcessHandler.shared.startThreeDSecureProcess(viewController: self,
+                                                                   delegate: self,
+                                                                   token: tdsToken)
     }
 
     func didCompleteCardForm(with result: CardFormResult) {
@@ -319,5 +311,22 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         didCompleteCardForm(with: .cancel)
+    }
+}
+
+// MARK: ThreeDSecureProcessHandlerDelegate
+extension CardFormViewController: ThreeDSecureProcessHandlerDelegate {
+
+    public func threeDSecureProcessHandlerDidFinish(_ handler: ThreeDSecureProcessHandler,
+                                                    status: ThreeDSecureProcessStatus) {
+        switch status {
+        case .completed:
+            presenter?.createTokenByTds()
+        case .canceled:
+            dismissIndicator()
+            enableSubmitButton()
+        default:
+            break
+        }
     }
 }

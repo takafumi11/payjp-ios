@@ -9,61 +9,89 @@
 import Foundation
 import SafariServices
 
-/// 3DSecure process status
+/// 3DSecure process status.
 @objc public enum ThreeDSecureProcessStatus: Int {
-    /// when 3DSecure process is starting
-    case processing
-    /// when 3DSecure process is finished
+    /// when 3DSecure process is completed.
     case completed
-    /// when 3DSecure process is not starting
-    case none
+    /// when 3DSecure process is canceled.
+    case canceled
 }
 
-/// Handler for 3DSecure process
-public protocol ThreeDSecureProcessHandlerType {
-    /// 3DSecure process status
-    var status: ThreeDSecureProcessStatus { get }
+/// 3DSecure handler delegate.
+public protocol ThreeDSecureProcessHandlerDelegate: class {
 
-    /// Start 3DSecure prpcess
-    func startThreeDSecureProcess()
-    /// Complete 3DSecure prpcess
+    /// Tells the delegate that 3DSecure process is finished.
+    /// - Parameters:
+    ///   - handler: ThreeDSecureProcessHandler
+    ///   - status: ThreeDSecureProcessStatus
+    func threeDSecureProcessHandlerDidFinish(_ handler: ThreeDSecureProcessHandler,
+                                             status: ThreeDSecureProcessStatus)
+}
+
+/// Handler for 3DSecure process.
+public protocol ThreeDSecureProcessHandlerType {
+
+    /// Start 3DSecure process.
+    /// Delegate will be released once the process is finished.
+    /// - Parameters:
+    ///   - viewController: the viewController which will present SFSafariViewController.
+    ///   - delegate: ThreeDSecureProcessHandlerDelegate
+    ///   - token: ThreeDSecureToken
+    func startThreeDSecureProcess(viewController: UIViewController,
+                                  delegate: ThreeDSecureProcessHandlerDelegate,
+                                  token: ThreeDSecureToken)
+    /// Complete 3DSecure process.
     /// - Parameters:
     ///   - url: redirect URL
-    ///   - completion: completion for dismiss SFSafariViewController
-    func completeThreeDSecureProcess(url: URL, completion: (() -> Void)?) -> Bool
-    /// Reset 3DSecure prpcess
-    func resetThreeDSecureProcess()
+    func completeThreeDSecureProcess(url: URL) -> Bool
 }
 
+/// see ThreeDSecureProcessHandlerType.
 @objc(PAYJPThreeDSecureProcessHandler) @objcMembers
 public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerType {
 
+    /// Shared instance.
     @objc(sharedHandler)
     public static let shared = ThreeDSecureProcessHandler()
 
-    public var status: ThreeDSecureProcessStatus = .none
+    private weak var delegate: ThreeDSecureProcessHandlerDelegate?
+    private let webDriver: ThreeDSecureWebDriver
 
-    public func startThreeDSecureProcess() {
-        status = .processing
+    public init(webDriver: ThreeDSecureWebDriver = ThreeDSecureSFSafariViewControllerDriver.shared) {
+        self.webDriver = webDriver
     }
 
-    public func completeThreeDSecureProcess(url: URL, completion: (() -> Void)? = nil) -> Bool {
+    // MARK: ThreeDSecureProcessHandlerType
+
+    public func startThreeDSecureProcess(viewController: UIViewController,
+                                         delegate: ThreeDSecureProcessHandlerDelegate,
+                                         token: ThreeDSecureToken) {
+        self.delegate = delegate
+        webDriver.openWebBrowser(host: viewController, url: token.tdsEntryUrl, delegate: self)
+    }
+
+    public func completeThreeDSecureProcess(url: URL) -> Bool {
         print(debug: "tds redirect url => \(url)")
 
         if let redirectUrl = PAYJPSDK.threeDSecureURLConfiguration?.redirectURL {
             if url.absoluteString.starts(with: redirectUrl.absoluteString) {
                 let topViewController = UIApplication.topViewController()
-                if topViewController is SFSafariViewController {
-                    status = .completed
-                    topViewController?.dismiss(animated: true, completion: completion)
-                    return true
+                return webDriver.closeWebBrowser(host: topViewController) { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.threeDSecureProcessHandlerDidFinish(self, status: .completed)
+                    self.delegate = nil
                 }
             }
         }
         return false
     }
+}
 
-    public func resetThreeDSecureProcess() {
-        status = .none
+// MARK: ThreeDSecureWebDriverDelegate
+extension ThreeDSecureProcessHandler: ThreeDSecureWebDriverDelegate {
+
+    public func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver) {
+        delegate?.threeDSecureProcessHandlerDidFinish(self, status: .canceled)
+        delegate = nil
     }
 }

@@ -30,10 +30,8 @@ protocol CardFormScreenPresenterType {
     var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
+    func createTokenByTds()
     func fetchBrands(tenantId: String?)
-
-    func checkTdsProcess()
-    func startTdsProcess()
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -45,20 +43,17 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
     private let errorTranslator: ErrorTranslatorType
-    private let processHandler: ThreeDSecureProcessHandlerType
     private let dispatchQueue: DispatchQueue
 
     init(delegate: CardFormScreenDelegate,
          accountsService: AccountsServiceType = AccountsService.shared,
          tokenService: TokenServiceType = TokenService.shared,
          errorTranslator: ErrorTranslatorType = ErrorTranslator.shared,
-         processHandler: ThreeDSecureProcessHandlerType = ThreeDSecureProcessHandler.shared,
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.delegate = delegate
         self.accountsService = accountsService
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
-        self.processHandler = processHandler
         self.dispatchQueue = dispatchQueue
     }
 
@@ -118,24 +113,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func checkTdsProcess() {
-        switch processHandler.status {
-        case .completed:
-            processHandler.resetThreeDSecureProcess()
-            createTokenByTds()
-        case .processing:
-            delegate?.dismissIndicator()
-            delegate?.enableSubmitButton()
-        default:
-            break
-        }
-    }
-
-    func startTdsProcess() {
-        processHandler.startThreeDSecureProcess()
-    }
-
-    private func createTokenByTds() {
+    func createTokenByTds() {
         if let tdsToken = tdsToken {
             tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
                 guard let self = self else { return }
