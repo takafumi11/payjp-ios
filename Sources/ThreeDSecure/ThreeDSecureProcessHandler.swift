@@ -32,7 +32,7 @@ public protocol ThreeDSecureProcessHandlerDelegate: class {
 public protocol ThreeDSecureProcessHandlerType {
 
     /// Start 3DSecure process.
-    /// Delegate is released when didFinish of ThreeDSecureProcessHandlerDelegate is called.
+    /// Delegate will be released once the process is finished.
     /// - Parameters:
     ///   - viewController: the viewController which will present SFSafariViewController.
     ///   - delegate: ThreeDSecureProcessHandlerDelegate
