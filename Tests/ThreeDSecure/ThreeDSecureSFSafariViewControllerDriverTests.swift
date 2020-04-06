@@ -41,7 +41,7 @@ class ThreeDSecureSFSafariViewControllerDriverTests: XCTestCase {
 
         XCTAssertFalse(result)
     }
-    
+
     func testWebBrowswDidFinishDelegate() {
         let driver = ThreeDSecureSFSafariViewControllerDriver()
         let mockVC = MockViewController()

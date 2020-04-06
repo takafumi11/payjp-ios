@@ -89,7 +89,7 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
 
 // MARK: ThreeDSecureWebDriverDelegate
 extension ThreeDSecureProcessHandler: ThreeDSecureWebDriverDelegate {
-    
+
     public func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver) {
         delegate?.threeDSecureProcessHandlerDidFinish(self, status: .canceled)
         delegate = nil

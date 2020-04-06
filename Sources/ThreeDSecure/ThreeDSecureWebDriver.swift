@@ -11,7 +11,7 @@ import SafariServices
 
 /// Delegate of web browse driver.
 public protocol ThreeDSecureWebDriverDelegate: class {
-    
+
     /// Tells the delegate that web browsing is finished.
     /// - Parameter driver: ThreeDSecureWebDriver
     func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver)

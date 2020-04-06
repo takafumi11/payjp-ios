@@ -14,7 +14,7 @@ public class ThreeDSecureSFSafariViewControllerDriver: NSObject, ThreeDSecureWeb
 
     /// Shared instance.
     public static let shared = ThreeDSecureSFSafariViewControllerDriver()
-    
+
     private weak var delegate: ThreeDSecureWebDriverDelegate?
 
     public func openWebBrowser(host: UIViewController, url: URL, delegate: ThreeDSecureWebDriverDelegate) {
@@ -39,7 +39,7 @@ public class ThreeDSecureSFSafariViewControllerDriver: NSObject, ThreeDSecureWeb
 }
 
 extension ThreeDSecureSFSafariViewControllerDriver: SFSafariViewControllerDelegate {
-    
+
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         delegate?.webBrowseDidFinish(self)
     }

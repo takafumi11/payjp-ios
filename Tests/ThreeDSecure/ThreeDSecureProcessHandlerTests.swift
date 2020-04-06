@@ -84,7 +84,7 @@ class ThreeDSecureProcessHandlerTests: XCTestCase {
         XCTAssertFalse(result)
         XCTAssertNil(mockVC.tdsStatus)
     }
-    
+
     func testWebBrowseDidFinish() {
         PAYJPSDK.threeDSecureURLConfiguration = ThreeDSecureURLConfiguration(redirectURL: URL(string: "test://")!,
                                                                              redirectURLKey: "test")

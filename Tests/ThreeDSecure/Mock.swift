@@ -37,7 +37,7 @@ class MockSafariViewController: SFSafariViewController {
 
 class MockThreeDSecureWebDriverDelegate: NSObject, ThreeDSecureWebDriverDelegate {
     var webBrowseDidFinishCalled: Bool = false
-    
+
     func webBrowseDidFinish(_ driver: ThreeDSecureWebDriver) {
         webBrowseDidFinishCalled = true
     }
