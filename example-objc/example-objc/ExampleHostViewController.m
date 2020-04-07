@@ -27,8 +27,8 @@
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
+                                     delegate:self
                                      viewType:CardFormViewTypeTableStyled];
-    cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 
@@ -65,8 +65,8 @@
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
+                                     delegate:self
                                      viewType:CardFormViewTypeCardDisplay];
-    cardFormVc.delegate = self;
     [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 }
