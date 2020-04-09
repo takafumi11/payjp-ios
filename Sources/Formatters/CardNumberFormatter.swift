@@ -31,12 +31,12 @@ struct CardNumberFormatter: CardNumberFormatterType {
 
             let brand = transformer.transform(from: filtered)
             var trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
-            
+
             var formatted = trimmed
             while formatted.count < brand.numberLength {
                 formatted.append("X")
             }
-            
+
             switch brand {
             case .americanExpress, .dinersClub:
                 trimmed.insert(separator: "-", positions: [4, 10])
