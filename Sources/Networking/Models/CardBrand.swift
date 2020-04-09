@@ -99,4 +99,23 @@ extension CardBrand {
             return "icon_card_cvc_3"
         }
     }
+    
+    var cardBackgroundColor: UIColor {
+        switch self {
+        case .visa:
+            return Style.Color.visa
+        case .mastercard:
+            return Style.Color.masterCard
+        case .jcb:
+            return Style.Color.jcb
+        case .americanExpress:
+            return Style.Color.americanExpress
+        case .dinersClub:
+            return Style.Color.dinersClub
+        case .discover:
+            return Style.Color.discover
+        case .unknown:
+            return Style.Color.defaultBrand
+        }
+    }
 }

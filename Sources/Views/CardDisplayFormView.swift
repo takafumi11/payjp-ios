@@ -169,6 +169,22 @@ public class CardDisplayFormView: UIView, CardFormView {
     func inputCardHolderComplete() {
         errorMessageLabel.isHidden = cardHolderTextField.text == nil
     }
+    
+    func updateBrandLogo(brand: CardBrand?) {
+        guard let brandLogoImage = brandLogoImage else { return }
+        guard let brand = brand else {
+            brandLogoImage.image = nil
+            cardDisplayView.backgroundColor = Style.Color.defaultBrand
+            return
+        }
+        if brand == .unknown {
+            brandLogoImage.image = nil
+            cardDisplayView.backgroundColor = Style.Color.defaultBrand
+            return
+        }
+        brandLogoImage.image = brand.logoResourceName.image
+        cardDisplayView.backgroundColor = brand.cardBackgroundColor
+    }
 
     // MARK: Private
 

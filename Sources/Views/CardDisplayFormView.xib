@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDisplayFormView">
             <connections>
+                <outlet property="brandLogoImage" destination="MCs-Gi-s47" id="Kcn-FZ-azb"/>
                 <outlet property="cardBackView" destination="aVk-0J-2sE" id="K0g-pH-R17"/>
                 <outlet property="cardDisplayView" destination="ZIu-Kf-DOT" id="YhV-2q-kXx"/>
                 <outlet property="cardFrontView" destination="0Gy-yU-PVk" id="oaI-Ed-9AF"/>
@@ -38,11 +39,20 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-yU-PVk">
                                             <rect key="frame" x="0.0" y="0.0" width="336" height="200"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLm-R4-mpy">
+                                                    <rect key="frame" x="16" y="0.0" width="304" height="66.5"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCs-Gi-s47">
+                                                            <rect key="frame" x="0.0" y="10" width="84" height="48"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tO0-c4-cfy">
-                                                    <rect key="frame" x="16" y="0.0" width="304" height="100"/>
+                                                    <rect key="frame" x="16" y="66.5" width="304" height="67"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx-xxxx-xxxx-xxxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmZ-Y0-LLn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="67"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -50,16 +60,16 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Xex-t8-d54">
-                                                    <rect key="frame" x="16" y="100" width="304" height="100"/>
+                                                    <rect key="frame" x="16" y="133.5" width="304" height="66.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfn-bZ-kq4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="152" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="152" height="66.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MM/YY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNq-HK-CLA">
-                                                            <rect key="frame" x="152" y="0.0" width="152" height="100"/>
+                                                            <rect key="frame" x="152" y="0.0" width="152" height="66.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -80,9 +90,9 @@
                                                     <rect key="frame" x="24" y="92" width="199" height="36"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LVe-F6-0wB">
-                                                            <rect key="frame" x="149" y="0.0" width="50" height="36"/>
+                                                            <rect key="frame" x="166" y="0.0" width="33" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -102,7 +112,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.83540875506280043" green="0.83540875506280043" blue="0.83540875506280043" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="aVk-0J-2sE" secondAttribute="bottom" id="6ig-En-5lF"/>
                                         <constraint firstItem="0Gy-yU-PVk" firstAttribute="top" secondItem="ZIu-Kf-DOT" secondAttribute="top" id="G5c-DI-VZR"/>
