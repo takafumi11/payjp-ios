@@ -15,7 +15,7 @@
                 <outlet property="cardFrontView" destination="0Gy-yU-PVk" id="oaI-Ed-9AF"/>
                 <outlet property="cardHolderDisplayLabel" destination="sfn-bZ-kq4" id="ozq-3u-fWQ"/>
                 <outlet property="cardNumberDisplayLabel" destination="KmZ-Y0-LLn" id="aQK-ia-qRV"/>
-                <outlet property="cvcDisplayLabel" destination="LVe-F6-0wB" id="aTZ-ao-xt6"/>
+                <outlet property="cvcDisplayLabel" destination="dz8-Kn-dBy" id="5XI-aU-2nJ"/>
                 <outlet property="errorMessageLabel" destination="4Cw-dZ-bz7" id="5pA-GH-0t1"/>
                 <outlet property="expirationDisplayLabel" destination="VNq-HK-CLA" id="FxU-lK-QAD"/>
                 <outlet property="formContentView" destination="PSi-a5-m6U" id="XNk-MW-f3D"/>
@@ -51,7 +51,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tO0-c4-cfy">
                                                     <rect key="frame" x="16" y="66.5" width="304" height="67"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx-xxxx-xxxx-xxxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmZ-Y0-LLn">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXX-XXXX-XXXX-XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmZ-Y0-LLn">
                                                             <rect key="frame" x="0.0" y="0.0" width="304" height="67"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                             <nil key="textColor"/>
@@ -89,13 +89,12 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdg-Zq-Hpl">
                                                     <rect key="frame" x="24" y="92" width="199" height="36"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LVe-F6-0wB">
-                                                            <rect key="frame" x="166" y="0.0" width="33" height="36"/>
+                                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXX" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dz8-Kn-dBy">
+                                                            <rect key="frame" x="155" y="0.0" width="44" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.72636282517906625" green="0.82892307354431816" blue="0.9434023470745474" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </view>

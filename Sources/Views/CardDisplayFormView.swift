@@ -37,7 +37,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardBackView: UIView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
-    @IBOutlet weak var cvcDisplayLabel: UILabel!
+    @IBOutlet weak var cvcDisplayLabel: UITextField!
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
@@ -256,10 +256,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         isCardDisplayFront = false
         cardFrontView.isHidden = true
         cardBackView.isHidden = false
-        cardNumberDisplayLabel.isHidden = true
-        expirationDisplayLabel.isHidden = true
-        cvcDisplayLabel.isHidden = false
-        cardHolderDisplayLabel.isHidden = true
         UIView.transition(with: cardDisplayView,
                           duration: 0.8,
                           options: .transitionFlipFromLeft,
@@ -271,10 +267,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         isCardDisplayFront = true
         cardFrontView.isHidden = false
         cardBackView.isHidden = true
-        cardNumberDisplayLabel.isHidden = false
-        expirationDisplayLabel.isHidden = false
-        cvcDisplayLabel.isHidden = true
-        cardHolderDisplayLabel.isHidden = false
         UIView.transition(with: cardDisplayView,
                           duration: 0.8,
                           options: .transitionFlipFromRight,
