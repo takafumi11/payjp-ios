@@ -16,7 +16,6 @@ public class CardDisplayFormView: UIView, CardFormView {
     /// Card holder input field enabled.
     @IBInspectable public var isHolderRequired: Bool = true {
         didSet {
-            //            holderContainer.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
             notifyIsValidChanged()
         }
@@ -34,6 +33,8 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     // 追加
     @IBOutlet weak var cardDisplayView: UIView!
+    @IBOutlet weak var cardFrontView: UIStackView!
+    @IBOutlet weak var cardBackView: UIView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
     @IBOutlet weak var cvcDisplayLabel: UILabel!
@@ -237,7 +238,8 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     private func backFlipCard() {
         isCardDisplayFront = false
-        cardDisplayView.backgroundColor = .systemRed
+        cardFrontView.isHidden = true
+        cardBackView.isHidden = false
         cardNumberDisplayLabel.isHidden = true
         expirationDisplayLabel.isHidden = true
         cvcDisplayLabel.isHidden = false
@@ -251,7 +253,8 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     private func frontFlipCard() {
         isCardDisplayFront = true
-        cardDisplayView.backgroundColor = .systemBlue
+        cardFrontView.isHidden = false
+        cardBackView.isHidden = true
         cardNumberDisplayLabel.isHidden = false
         expirationDisplayLabel.isHidden = false
         cvcDisplayLabel.isHidden = true
