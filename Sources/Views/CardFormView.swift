@@ -44,7 +44,7 @@ protocol CardFormView {
     func inputCardHolderSuccess(value: String)
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
     func inputCardHolderComplete()
-    
+
     func updateBrandLogo(brand: CardBrand?)
 }
 

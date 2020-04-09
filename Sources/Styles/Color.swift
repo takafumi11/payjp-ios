@@ -52,7 +52,7 @@ extension Style {
         static var red: UIColor {
             return .systemRed
         }
-        
+
         // Card background color
         static var visa: UIColor {
             return UIColor(hex: "87cefa")

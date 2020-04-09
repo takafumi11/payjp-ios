@@ -169,7 +169,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     func inputCardHolderComplete() {
         errorMessageLabel.isHidden = cardHolderTextField.text == nil
     }
-    
+
     func updateBrandLogo(brand: CardBrand?) {
         guard let brandLogoImage = brandLogoImage else { return }
         guard let brand = brand else {

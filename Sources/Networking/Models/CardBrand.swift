@@ -99,7 +99,7 @@ extension CardBrand {
             return "icon_card_cvc_3"
         }
     }
-    
+
     var cardBackgroundColor: UIColor {
         switch self {
         case .visa:
