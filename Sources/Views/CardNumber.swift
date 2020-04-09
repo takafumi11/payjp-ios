@@ -11,4 +11,5 @@ import Foundation
 struct CardNumber {
     let formatted: String
     let brand: CardBrand
+    let display: String
 }

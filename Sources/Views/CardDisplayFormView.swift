@@ -115,12 +115,16 @@ public class CardDisplayFormView: UIView, CardFormView {
     // MARK: CardFormView
 
     func inputCardNumberSuccess(value: CardNumber) {
-        cardNumberDisplayLabel.text = value.formatted
+        cardNumberDisplayLabel.text = value.display
         errorMessageLabel.text = nil
     }
 
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
-        cardNumberDisplayLabel.text = value?.formatted
+        if let value = value {
+            cardNumberDisplayLabel.text = value.display
+        } else {
+            cardNumberDisplayLabel.text = "XXXX-XXXX-XXXX-XXXX"
+        }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
