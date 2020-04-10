@@ -101,8 +101,8 @@ extension Token {
     var display: String {
         return "id=\(identifer),\n"
             + "card.id=\(card.identifer),\n"
-            + "card.last4=\(card.last4Number)\n,"
-            + "card.exp=\(card.expirationMonth)/\(card.expirationYear)\n"
+            + "card.last4=\(card.last4Number),\n"
+            + "card.exp=\(card.expirationMonth)/\(card.expirationYear),\n"
             + "card.name=\(card.name ?? "nil")"
     }
 }
