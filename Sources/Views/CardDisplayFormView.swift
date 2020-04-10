@@ -32,6 +32,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
     @IBOutlet weak var cvcDisplayLabel: UITextField!
+    @IBOutlet weak var cvc4DisplayLabel: UITextField!
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
@@ -108,11 +109,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     // MARK: CardFormView
 
     func inputCardNumberSuccess(value: CardNumber) {
+        updateCvc4LabelVisibility()
         cardNumberDisplayLabel.text = value.display
         errorMessageLabel.text = nil
     }
 
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
+        updateCvc4LabelVisibility()
         if let value = value {
             cardNumberDisplayLabel.text = value.display
         } else {
@@ -131,7 +134,11 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        expirationDisplayLabel.text = value
+        if let value = value {
+            expirationDisplayLabel.text = value
+        } else {
+            expirationDisplayLabel.text = "MM/YY"
+        }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
@@ -140,12 +147,12 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCvcSuccess(value: String) {
-        cvcDisplayLabel.text = value
+        updateCvcDisplayLabel(cvc: value)
         errorMessageLabel.text = nil
     }
 
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        cvcDisplayLabel.text = value
+        updateCvcDisplayLabel(cvc: value)
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
@@ -159,7 +166,11 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        cardHolderDisplayLabel.text = value
+        if let value = value {
+            cardHolderDisplayLabel.text = value
+        } else {
+            cardHolderDisplayLabel.text = "NAME"
+        }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
@@ -281,6 +292,24 @@ public class CardDisplayFormView: UIView, CardFormView {
                           options: .transitionFlipFromRight,
                           animations: nil,
                           completion: nil)
+    }
+
+    private func updateCvc4LabelVisibility() {
+        switch currentCardBrand {
+        case .americanExpress:
+            cvc4DisplayLabel.isHidden = false
+        default:
+            cvc4DisplayLabel.isHidden = true
+        }
+    }
+
+    private func updateCvcDisplayLabel(cvc: String?) {
+        switch currentCardBrand {
+        case .americanExpress:
+            cvc4DisplayLabel.text = cvc
+        default:
+            cvcDisplayLabel.text = cvc
+        }
     }
 }
 
@@ -423,7 +452,7 @@ extension CardDisplayFormView: UITextFieldDelegate {
     }
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == cvcTextField {
+        if textField == cvcTextField && currentCardBrand != .americanExpress {
             // backFlip
             backFlipCard()
         } else {

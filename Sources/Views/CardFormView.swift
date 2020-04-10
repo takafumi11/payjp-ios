@@ -15,6 +15,7 @@ protocol CardFormView {
     var inputTintColor: UIColor { get }
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
+    var currentCardBrand: CardBrand {get}
 
     /// view
     var brandLogoImage: UIImageView! { get }
@@ -59,6 +60,9 @@ extension CardFormView {
     var inputTextErrorColorEnabled: Bool {
         return false
     }
+    var currentCardBrand: CardBrand {
+        return viewModel.cardBrand
+    }
 
     /// カード番号の入力フィールドを更新する
     ///
@@ -97,7 +101,7 @@ extension CardFormView {
         inputCardNumberComplete()
 
         // ブランドが変わったらcvcのチェックを走らせる
-        if viewModel.isBrandChanged || input?.isEmpty == true {
+        if viewModel.isCardBrandChanged || input?.isEmpty == true {
             updateCvcInput(input: cvcTextField.text)
         }
     }

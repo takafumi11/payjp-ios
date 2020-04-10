@@ -14,8 +14,11 @@ protocol CardFormViewViewModelType {
     /// バリデーションOKかどうか
     var isValid: Bool { get }
 
-    /// ブランドが変わったかどうか
-    var isBrandChanged: Bool { get }
+    /// カードブランドが変わったかどうか
+    var isCardBrandChanged: Bool { get }
+
+    /// カードブランド
+    var cardBrand: CardBrand { get }
 
     /// CardFormViewModelDelegate
     var delegate: CardFormViewModelDelegate? { get set }
@@ -92,7 +95,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let permissionFetcher: PermissionFetcherType
 
     private var cardNumber: String?
-    private var cardBrand: CardBrand = .unknown
     private var acceptedCardBrands: [CardBrand]?
     private var monthYear: (month: String, year: String)?
     private var cvc: String?
@@ -107,7 +109,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             (!self.isCardHolderEnabled || checkCardHolderValid())
     }
 
-    var isBrandChanged = false
+    var isCardBrandChanged = false
+    var cardBrand: CardBrand = .unknown
     weak var delegate: CardFormViewModelDelegate?
 
     // MARK: - Lifecycle
@@ -143,10 +146,10 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 self.cardNumber = nil
                 self.cardBrand = .unknown
                 // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
-                self.isBrandChanged = false
+                self.isCardBrandChanged = false
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
-        self.isBrandChanged = self.cardBrand != cardNumberInput.brand
+        self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
         self.cardNumber = cardNumberInput.formatted.numberfy()
         self.cardBrand = cardNumberInput.brand
 
@@ -205,9 +208,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
         // ブランドが変わった時に入力文字数のままエラー表示にするための処理
-        if self.isBrandChanged {
+        if self.isCardBrandChanged {
             cvcInput = cvc
-            self.isBrandChanged = false
+            self.isCardBrandChanged = false
         }
         self.cvc = cvcInput
 

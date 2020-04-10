@@ -15,6 +15,7 @@
                 <outlet property="cardFrontView" destination="0Gy-yU-PVk" id="oaI-Ed-9AF"/>
                 <outlet property="cardHolderDisplayLabel" destination="sfn-bZ-kq4" id="ozq-3u-fWQ"/>
                 <outlet property="cardNumberDisplayLabel" destination="KmZ-Y0-LLn" id="aQK-ia-qRV"/>
+                <outlet property="cvc4DisplayLabel" destination="hv7-Bo-tjW" id="DPv-hv-cRf"/>
                 <outlet property="cvcDisplayLabel" destination="dz8-Kn-dBy" id="5XI-aU-2nJ"/>
                 <outlet property="errorMessageLabel" destination="4Cw-dZ-bz7" id="5pA-GH-0t1"/>
                 <outlet property="expirationDisplayLabel" destination="VNq-HK-CLA" id="FxU-lK-QAD"/>
@@ -47,9 +48,14 @@
                                                         </imageView>
                                                     </subviews>
                                                 </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tO0-c4-cfy">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tO0-c4-cfy">
                                                     <rect key="frame" x="16" y="66.5" width="304" height="67"/>
                                                     <subviews>
+                                                        <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="XXXX" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hv7-Bo-tjW">
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXX-XXXX-XXXX-XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmZ-Y0-LLn">
                                                             <rect key="frame" x="0.0" y="0.0" width="304" height="67"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
