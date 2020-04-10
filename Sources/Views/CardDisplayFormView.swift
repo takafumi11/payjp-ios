@@ -13,13 +13,7 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     // MARK: CardFormView
 
-    /// Card holder input field enabled.
-    @IBInspectable public var isHolderRequired: Bool = true {
-        didSet {
-            viewModel.update(isCardHolderEnabled: isHolderRequired)
-            notifyIsValidChanged()
-        }
-    }
+    var isHolderRequired: Bool = true
 
     @IBOutlet weak var brandLogoImage: UIImageView!
     @IBOutlet weak var cvcIconImage: UIImageView!
@@ -41,7 +35,6 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
-    @IBOutlet weak var formContentView: UIStackView!
 
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -197,7 +190,21 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     private func setupFormLayout() {
+        // 横スクロール可能なフォームの作成
+        let formContentView = UIStackView()
+        formContentView.spacing = 0.0
+        formContentView.axis = .horizontal
+        formContentView.alignment = .fill
+        formContentView.distribution = .fillEqually
+        formContentView.translatesAutoresizingMaskIntoConstraints = false
+        formScrollView.addSubview(formContentView)
+
         NSLayoutConstraint.activate([
+            formContentView.topAnchor.constraint(equalTo: formScrollView.topAnchor),
+            formContentView.leadingAnchor.constraint(equalTo: formScrollView.leadingAnchor),
+            formContentView.bottomAnchor.constraint(equalTo: formScrollView.bottomAnchor),
+            formContentView.trailingAnchor.constraint(equalTo: formScrollView.trailingAnchor),
+            formContentView.heightAnchor.constraint(equalTo: formScrollView.heightAnchor),
             // widthはscrollView.widthAnchor x ページ数
             formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
                                                    multiplier: CGFloat(4))
@@ -252,8 +259,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         formContentView.addArrangedSubview(expirationTextField)
         formContentView.addArrangedSubview(cvcTextField)
         formContentView.addArrangedSubview(cardHolderTextField)
-
-        formScrollView.contentSize = CGSize(width: pageWidth * CGFloat(4), height: textFieldHeight)
     }
 
     private func backFlipCard() {
