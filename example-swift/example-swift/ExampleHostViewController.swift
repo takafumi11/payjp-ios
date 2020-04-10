@@ -9,7 +9,7 @@ import UIKit
 import PAYJP
 
 class ExampleHostViewController: UITableViewController {
-    
+
     private var token: Token?
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,12 +44,13 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
         case .success:
             print("CardFormResult.success")
             DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 // pop
-                self?.navigationController?.popViewController(animated: true)
-                if let token = token {
+                self.navigationController?.popViewController(animated: true)
+                if let token = self.token {
                     self.showToken(token: token)
                 }
-                
+
                 // dismiss
                 //                                self?.dismiss(animated: true, completion: nil)
             }
