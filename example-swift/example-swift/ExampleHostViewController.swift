@@ -10,6 +10,8 @@ import PAYJP
 
 class ExampleHostViewController: UITableViewController {
 
+    private var token: Token?
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -42,8 +44,12 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
         case .success:
             print("CardFormResult.success")
             DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 // pop
-                self?.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
+                if let token = self.token {
+                    self.showToken(token: token)
+                }
 
                 // dismiss
                 //                                self?.dismiss(animated: true, completion: nil)
@@ -55,6 +61,7 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
                                 didProduced token: Token,
                                 completionHandler: @escaping (Error?) -> Void) {
         print("token = \(token.display)")
+        self.token = token
 
         // サーバにトークンを送信
         SampleService.shared.saveCard(withToken: token.identifer) { (error) in
@@ -62,7 +69,7 @@ extension ExampleHostViewController: CardFormViewControllerDelegate {
                 print("Failed save card. error = \(error)")
                 completionHandler(error)
             } else {
-                print("Success save card. token = \(token.display)")
+                print("Success save card.")
                 completionHandler(nil)
             }
         }
