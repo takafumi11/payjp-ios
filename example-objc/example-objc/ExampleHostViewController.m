@@ -14,6 +14,8 @@
 
 @interface ExampleHostViewController ()
 
+@property(nonatomic) PAYToken *token;
+
 @end
 
 @implementation ExampleHostViewController
@@ -65,6 +67,9 @@
       dispatch_async(dispatch_get_main_queue(), ^{
         // pop
         [wself.navigationController popViewControllerAnimated:YES];
+        if (wself.token != nil) {
+          [wself showToken:wself.token];
+        }
 
         // dismiss
         //                          [wself.navigationController dismissViewControllerAnimated:YES
@@ -78,6 +83,7 @@
                    didProduced:(PAYToken *)token
              completionHandler:(void (^)(NSError *_Nullable))completionHandler {
   NSLog(@"token = %@", [self displayToken:token]);
+  self.token = token;
 
   // サーバにトークンを送信
   SampleService *service = [SampleService sharedService];
@@ -87,7 +93,7 @@
                       NSLog(@"Failed save card. error = %@", error);
                       completionHandler(error);
                     } else {
-                      NSLog(@"Success save card. token = %@", [self displayToken:token]);
+                      NSLog(@"Success save card.");
                       completionHandler(nil);
                     }
                   }];
