@@ -7,12 +7,12 @@
 
 import Foundation
 
-/// Configuration for using URL in 3DSecure process
+/// Configuration for using URL in 3DSecure process.
 @objcMembers @objc(PAYThreeDSecureURLConfiguration)
 public class ThreeDSecureURLConfiguration: NSObject {
-    /// Redirect URL for launching app from web
+    /// Redirect URL for launching app from web.
     let redirectURL: URL
-    /// Redirect URL key
+    /// Redirect URL key.
     let redirectURLKey: String
 
     public init(redirectURL: URL, redirectURLKey: String) {
