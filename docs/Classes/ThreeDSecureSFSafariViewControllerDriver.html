@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ClientInfo Class Reference</title>
+    <title>ThreeDSecureSFSafariViewControllerDriver Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/ClientInfo" class="dashAnchor"></a>
-    <a title="ClientInfo Class Reference"></a>
+    <a name="//apple_ref/swift/Class/ThreeDSecureSFSafariViewControllerDriver" class="dashAnchor"></a>
+    <a title="ThreeDSecureSFSafariViewControllerDriver Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PAYJP Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ClientInfo Class Reference
+        ThreeDSecureSFSafariViewControllerDriver Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -140,17 +140,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ClientInfo</h1>
+            <h1>ThreeDSecureSFSafariViewControllerDriver</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">@objc(PAYClientInfo)</span>
-<span class="kd">@objcMembers</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ClientInfo</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">Encodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ThreeDSecureSFSafariViewControllerDriver</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a></span></code></pre>
 
                 </div>
               </div>
-            <p>リクエストに付与するクライアント情報を表す
-<code>ClientInfo:makeInfo:plugin:publisher</code> で作成する</p>
+            <p>Web browse driver for SFSafariViewController.</p>
 
           </section>
           <section class="section task-group-section">
@@ -159,9 +156,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsName"></a>
-                    <a name="//apple_ref/swift/Property/bindingsName" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsName">bindingsName</a>
+                    <a name="/s:5PAYJP40ThreeDSecureSFSafariViewControllerDriverC6sharedACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP40ThreeDSecureSFSafariViewControllerDriverC6sharedACvpZ">shared</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -169,14 +166,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Shared instance.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">ThreeDSecureSFSafariViewControllerDriver</span></code></pre>
 
                         </div>
                       </div>
@@ -186,9 +183,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsVersion"></a>
-                    <a name="//apple_ref/swift/Property/bindingsVersion" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsVersion">bindingsVersion</a>
+                    <a name="/s:5PAYJP21ThreeDSecureWebDriverP04openD7Browser4host3url8delegateySo16UIViewControllerC_10Foundation3URLVAA0bcdE8Delegate_ptF"></a>
+                    <a name="//apple_ref/swift/Method/openWebBrowser(host:url:delegate:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP04openD7Browser4host3url8delegateySo16UIViewControllerC_10Foundation3URLVAA0bcdE8Delegate_ptF">openWebBrowser(host:url:delegate:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -196,14 +193,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsVersion</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">openWebBrowser</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureWebDriverDelegate.html">ThreeDSecureWebDriverDelegate</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -213,9 +209,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsPlugin"></a>
-                    <a name="//apple_ref/swift/Property/bindingsPlugin" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)bindingsPlugin">bindingsPlugin</a>
+                    <a name="/s:5PAYJP21ThreeDSecureWebDriverP05closeD7Browser4host10completionSbSo16UIViewControllerCSg_yycSgtF"></a>
+                    <a name="//apple_ref/swift/Method/closeWebBrowser(host:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP05closeD7Browser4host10completionSbSo16UIViewControllerCSg_yycSgtF">closeWebBrowser(host:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -223,26 +219,36 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bindingsPlugin</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">closeWebBrowser</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">?,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/SFSafariViewControllerDelegate"></a>
+                <a name="//apple_ref/swift/Section/SFSafariViewControllerDelegate" class="dashAnchor"></a>
+                <a href="#/SFSafariViewControllerDelegate">
+                  <h3 class="section-name">SFSafariViewControllerDelegate</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)unameString"></a>
-                    <a name="//apple_ref/swift/Property/unameString" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)unameString">unameString</a>
+                    <a name="/c:@CM@PAYJP@objc(cs)ThreeDSecureSFSafariViewControllerDriver(im)safariViewControllerDidFinish:"></a>
+                    <a name="//apple_ref/swift/Method/safariViewControllerDidFinish(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)ThreeDSecureSFSafariViewControllerDriver(im)safariViewControllerDidFinish:">safariViewControllerDidFinish(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -257,118 +263,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">unameString</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)platform"></a>
-                    <a name="//apple_ref/swift/Property/platform" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)platform">platform</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">platform</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(py)publisher"></a>
-                    <a name="//apple_ref/swift/Property/publisher" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(py)publisher">publisher</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">publisher</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(cpy)default"></a>
-                    <a name="//apple_ref/swift/Variable/default" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(cpy)default">default</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">let</span> <span class="err">`</span><span class="k">default</span><span class="err">`</span><span class="p">:</span> <span class="kt">ClientInfo</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYClientInfo(cm)makeInfoWithPlugin:publisher:"></a>
-                    <a name="//apple_ref/swift/Method/makeInfo(plugin:publisher:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYClientInfo(cm)makeInfoWithPlugin:publisher:">makeInfo(plugin:publisher:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeInfo</span><span class="p">(</span>
-    <span class="nv">plugin</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">publisher</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ClientInfo</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">safariViewControllerDidFinish</span><span class="p">(</span><span class="n">_</span> <span class="nv">controller</span><span class="p">:</span> <span class="kt">SFSafariViewController</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
