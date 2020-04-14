@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FormStyle Class Reference</title>
+    <title>ThreeDSecureProcessHandler Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/FormStyle" class="dashAnchor"></a>
-    <a title="FormStyle Class Reference"></a>
+    <a name="//apple_ref/swift/Class/ThreeDSecureProcessHandler" class="dashAnchor"></a>
+    <a title="ThreeDSecureProcessHandler Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PAYJP Reference</a>
         <img id="carat" src="../img/carat.png" />
-        FormStyle Class Reference
+        ThreeDSecureProcessHandler Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -140,17 +140,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>FormStyle</h1>
+            <h1>ThreeDSecureProcessHandler</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
-<span class="kd">@objc(PAYCardFormStyle)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kt">FormStyle</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@objc(PAYJPThreeDSecureProcessHandler)</span>
+<span class="kd">@objcMembers</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ThreeDSecureProcessHandler</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/ThreeDSecureProcessHandlerType.html">ThreeDSecureProcessHandlerType</a></span></code></pre>
 
                 </div>
               </div>
-            <p>CardForm style settings.
-It&rsquo;s possible to change the color of each UIComponent.</p>
+            <p>see ThreeDSecureProcessHandlerType.</p>
 
           </section>
           <section class="section task-group-section">
@@ -159,9 +158,9 @@ It&rsquo;s possible to change the color of each UIComponent.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(cpy)defaultStyle"></a>
-                    <a name="//apple_ref/swift/Variable/defaultStyle" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(cpy)defaultStyle">defaultStyle</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYJPThreeDSecureProcessHandler(cpy)sharedHandler"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYJPThreeDSecureProcessHandler(cpy)sharedHandler">shared</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -169,14 +168,15 @@ It&rsquo;s possible to change the color of each UIComponent.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Default style.</p>
+                        <p>Shared instance.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultStyle</span><span class="p">:</span> <span class="kt">FormStyle</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@objc(sharedHandler)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">ThreeDSecureProcessHandler</span></code></pre>
 
                         </div>
                       </div>
@@ -186,171 +186,9 @@ It&rsquo;s possible to change the color of each UIComponent.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)labelTextColor"></a>
-                    <a name="//apple_ref/swift/Property/labelTextColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)labelTextColor">labelTextColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Text color of UILabel.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">labelTextColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)inputTextColor"></a>
-                    <a name="//apple_ref/swift/Property/inputTextColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)inputTextColor">inputTextColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Text color of UITextField.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">inputTextColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)errorTextColor"></a>
-                    <a name="//apple_ref/swift/Property/errorTextColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)errorTextColor">errorTextColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Text color of Error.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">errorTextColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)tintColor"></a>
-                    <a name="//apple_ref/swift/Property/tintColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)tintColor">tintColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Tint color of UITextField.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">tintColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)inputFieldBackgroundColor"></a>
-                    <a name="//apple_ref/swift/Property/inputFieldBackgroundColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)inputFieldBackgroundColor">inputFieldBackgroundColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Background color of UITextField.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">inputFieldBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)submitButtonColor"></a>
-                    <a name="//apple_ref/swift/Property/submitButtonColor" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(py)submitButtonColor">submitButtonColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Background color of UIButton.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">submitButtonColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormStyle(im)initWithLabelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:"></a>
-                    <a name="//apple_ref/swift/Method/init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormStyle(im)initWithLabelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:">init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:)</a>
+                    <a name="/s:5PAYJP26ThreeDSecureProcessHandlerC9webDriverAcA0bc3WebG0_p_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(webDriver:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP26ThreeDSecureProcessHandlerC9webDriverAcA0bc3WebG0_p_tcfc">init(webDriver:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -365,12 +203,109 @@ It&rsquo;s possible to change the color of each UIComponent.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">labelTextColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">inputTextColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">errorTextColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">tintColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">inputFieldBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">submitButtonColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">webDriver</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a></span> <span class="o">=</span> <span class="kt"><a href="../Classes/ThreeDSecureSFSafariViewControllerDriver.html">ThreeDSecureSFSafariViewControllerDriver</a></span><span class="o">.</span><span class="n"><a href="../Classes/ThreeDSecureProcessHandler.html#/c:@M@PAYJP@objc(cs)PAYJPThreeDSecureProcessHandler(cpy)sharedHandler">shared</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ThreeDSecureProcessHandlerType"></a>
+                <a name="//apple_ref/swift/Section/ThreeDSecureProcessHandlerType" class="dashAnchor"></a>
+                <a href="#/ThreeDSecureProcessHandlerType">
+                  <h3 class="section-name">ThreeDSecureProcessHandlerType</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP30ThreeDSecureProcessHandlerTypeP05startbcD014viewController8delegate5tokenySo06UIViewI0C_AA0bcdE8Delegate_pAA0bC5TokenCtF"></a>
+                    <a name="//apple_ref/swift/Method/startThreeDSecureProcess(viewController:delegate:token:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP05startbcD014viewController8delegate5tokenySo06UIViewI0C_AA0bcdE8Delegate_pAA0bC5TokenCtF">startThreeDSecureProcess(viewController:delegate:token:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startThreeDSecureProcess</span><span class="p">(</span><span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+                                     <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a></span><span class="p">,</span>
+                                     <span class="nv">token</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThreeDSecureToken.html">ThreeDSecureToken</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP30ThreeDSecureProcessHandlerTypeP08completebcD03urlSb10Foundation3URLV_tF"></a>
+                    <a name="//apple_ref/swift/Method/completeThreeDSecureProcess(url:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP08completebcD03urlSb10Foundation3URLV_tF">completeThreeDSecureProcess(url:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">completeThreeDSecureProcess</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ThreeDSecureWebDriverDelegate"></a>
+                <a name="//apple_ref/swift/Section/ThreeDSecureWebDriverDelegate" class="dashAnchor"></a>
+                <a href="#/ThreeDSecureWebDriverDelegate">
+                  <h3 class="section-name">ThreeDSecureWebDriverDelegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP29ThreeDSecureWebDriverDelegateP18webBrowseDidFinishyyAA0bcdE0_pF"></a>
+                    <a name="//apple_ref/swift/Method/webBrowseDidFinish(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP29ThreeDSecureWebDriverDelegateP18webBrowseDidFinishyyAA0bcdE0_pF">webBrowseDidFinish(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">webBrowseDidFinish</span><span class="p">(</span><span class="n">_</span> <span class="nv">driver</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
