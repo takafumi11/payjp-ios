@@ -36,6 +36,11 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
+    @IBOutlet weak var cvc4BorderView: BorderView!
+    @IBOutlet weak var cvcBorderView: BorderView!
+    @IBOutlet weak var cardNumberBorderView: BorderView!
+    @IBOutlet weak var cardHolderBorderView: BorderView!
+    @IBOutlet weak var expirationBorderView: BorderView!
 
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -297,9 +302,9 @@ public class CardDisplayFormView: UIView, CardFormView {
     private func updateCvc4LabelVisibility() {
         switch currentCardBrand {
         case .americanExpress:
-            cvc4DisplayLabel.isHidden = false
+            cvc4BorderView.isHidden = false
         default:
-            cvc4DisplayLabel.isHidden = true
+            cvc4BorderView.isHidden = true
         }
     }
 
@@ -309,6 +314,42 @@ public class CardDisplayFormView: UIView, CardFormView {
             cvc4DisplayLabel.text = cvc
         default:
             cvcDisplayLabel.text = cvc
+        }
+    }
+
+    private func updateDisplayLabelHighlight(textField: UITextField) {
+        switch textField {
+        case cardNumberTextField:
+            cardNumberBorderView.highlightOn()
+            expirationBorderView.highlightOff()
+            cvcBorderView.highlightOff()
+            cvc4BorderView.highlightOff()
+            cardHolderBorderView.highlightOff()
+        case expirationTextField:
+            cardNumberBorderView.highlightOff()
+            expirationBorderView.highlightOn()
+            cvcBorderView.highlightOff()
+            cvc4BorderView.highlightOff()
+            cardHolderBorderView.highlightOff()
+        case cvcTextField:
+            if currentCardBrand == .americanExpress {
+                cvcBorderView.highlightOff()
+                cvc4BorderView.highlightOn()
+            } else {
+                cvcBorderView.highlightOn()
+                cvc4BorderView.highlightOff()
+            }
+            cardNumberBorderView.highlightOff()
+            expirationBorderView.highlightOff()
+            cardHolderBorderView.highlightOff()
+        case cardHolderTextField:
+            cardNumberBorderView.highlightOff()
+            expirationBorderView.highlightOff()
+            cvcBorderView.highlightOff()
+            cvc4BorderView.highlightOff()
+            cardHolderBorderView.highlightOn()
+        default:
+            break
         }
     }
 }
@@ -452,6 +493,7 @@ extension CardDisplayFormView: UITextFieldDelegate {
     }
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
+        updateDisplayLabelHighlight(textField: textField)
         if textField == cvcTextField && currentCardBrand != .americanExpress {
             // backFlip
             backFlipCard()

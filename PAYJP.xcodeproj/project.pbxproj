@@ -97,6 +97,7 @@
 		ED66B2DD23D697D10095B18D /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED66B2DC23D697D10095B18D /* Resource.bundle */; };
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
 		ED78734724404EBD0074795B /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED78734624404EBC0074795B /* PAYJP.m */; };
+		ED78734924443AC30074795B /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED78734824443AC30074795B /* BorderView.swift */; };
 		ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE6233A0F02002F1639 /* Style.swift */; };
 		ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE8233A0F35002F1639 /* Color.swift */; };
 		ED9B33E0238FD0860079E7B8 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9B33DF238FD0860079E7B8 /* ErrorView.xib */; };
@@ -257,6 +258,7 @@
 		ED66B2D323D581990095B18D /* Bundle+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+PAYJP.swift"; sourceTree = "<group>"; };
 		ED66B2DC23D697D10095B18D /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
 		ED78734624404EBC0074795B /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
+		ED78734824443AC30074795B /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		ED7C3FE8233A0F35002F1639 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		ED9B33DF238FD0860079E7B8 /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				32A6F613239608DD00747477 /* ActionButton.swift */,
+				ED78734824443AC30074795B /* BorderView.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,
 				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
 				ED1A0742241B876F00AB1423 /* CardDisplayFormView.swift */,
@@ -825,6 +828,7 @@
 				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
 				ED78734724404EBD0074795B /* PAYJP.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
+				ED78734924443AC30074795B /* BorderView.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
 				ED00F8D424346B5B004DFE2C /* PAYCommonResponse.swift in Sources */,
 				ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */,
