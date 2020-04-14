@@ -29,6 +29,24 @@ class ThreeDSecureStatusTests: XCTestCase {
         XCTAssertEqual(status, PAYThreeDSecureStatus.unverified)
     }
 
+    func testFind_failed() {
+        let rawValue = PAYThreeDSecureStatus.failed.rawValue
+        let status = ThreeDSecureStatus.find(rawValue: rawValue)
+        XCTAssertEqual(status, PAYThreeDSecureStatus.failed)
+    }
+
+    func testFind_aborted() {
+        let rawValue = PAYThreeDSecureStatus.aborted.rawValue
+        let status = ThreeDSecureStatus.find(rawValue: rawValue)
+        XCTAssertEqual(status, PAYThreeDSecureStatus.aborted)
+    }
+
+    func testFind_error() {
+        let rawValue = PAYThreeDSecureStatus.error.rawValue
+        let status = ThreeDSecureStatus.find(rawValue: rawValue)
+        XCTAssertEqual(status, PAYThreeDSecureStatus.error)
+    }
+
     func testFind_unknown() {
         let rawValue = "unknown"
         let status = ThreeDSecureStatus.find(rawValue: rawValue)
