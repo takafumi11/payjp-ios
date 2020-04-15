@@ -100,22 +100,22 @@ extension CardBrand {
         }
     }
 
-    var cardBackgroundColor: UIColor {
+    var displayLogoResourceName: String? {
         switch self {
         case .visa:
-            return Style.Color.visa
+            return "visa"
         case .mastercard:
-            return Style.Color.masterCard
+            return "mastercard"
         case .jcb:
-            return Style.Color.jcb
+            return "jcb"
         case .americanExpress:
-            return Style.Color.americanExpress
+            return "amex"
         case .dinersClub:
-            return Style.Color.dinersClub
+            return "diners"
         case .discover:
-            return Style.Color.discover
+            return "discover"
         case .unknown:
-            return Style.Color.defaultBrand
+            return nil
         }
     }
 }

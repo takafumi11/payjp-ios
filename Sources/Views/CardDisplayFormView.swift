@@ -91,6 +91,13 @@ public class CardDisplayFormView: UIView, CardFormView {
         setupInputField()
         setupScrollableFormLayout()
 
+        cvcDisplayLabel.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_display_form_cvc_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        cvc4DisplayLabel.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_display_form_cvc4_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+
         //        ocrButton.setImage("icon_camera".image, for: .normal)
         //        ocrButton.imageView?.contentMode = .scaleAspectFit
         //        ocrButton.contentHorizontalAlignment = .fill
@@ -121,7 +128,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             cardNumberDisplayLabel.text = value.display
         } else {
-            cardNumberDisplayLabel.text = "XXXX-XXXX-XXXX-XXXX"
+            cardNumberDisplayLabel.text = "payjp_card_display_form_number_default".localized
         }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -139,7 +146,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             expirationDisplayLabel.text = value
         } else {
-            expirationDisplayLabel.text = "MM/YY"
+            expirationDisplayLabel.text = "payjp_card_display_form_expiration_default".localized
         }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -171,7 +178,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             cardHolderDisplayLabel.text = value
         } else {
-            cardHolderDisplayLabel.text = "NAME"
+            cardHolderDisplayLabel.text = "payjp_card_display_form_holder_name_default".localized
         }
         errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -182,18 +189,7 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     func updateBrandLogo(brand: CardBrand?) {
         guard let brandLogoImage = brandLogoImage else { return }
-        guard let brand = brand else {
-            brandLogoImage.image = nil
-            cardDisplayView.backgroundColor = Style.Color.defaultBrand
-            return
-        }
-        if brand == .unknown {
-            brandLogoImage.image = nil
-            cardDisplayView.backgroundColor = Style.Color.defaultBrand
-            return
-        }
-        brandLogoImage.image = brand.logoResourceName.image
-        cardDisplayView.backgroundColor = brand.cardBackgroundColor
+        brandLogoImage.image = brand?.displayLogoResourceName?.image
     }
 
     // MARK: Private
