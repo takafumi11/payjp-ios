@@ -40,11 +40,11 @@ struct CardNumberFormatter: CardNumberFormatterType {
             switch brand {
             case .americanExpress, .dinersClub:
                 trimmed.insert(separator: "-", positions: [4, 10])
-                formatted.insert(separator: "-", positions: [4, 10])
+                formatted.insert(separator: " ", positions: [4, 10])
                 return CardNumber(formatted: trimmed, brand: brand, display: formatted)
             default:
                 trimmed.insert(separator: "-", every: 4)
-                formatted.insert(separator: "-", every: 4)
+                formatted.insert(separator: " ", every: 4)
                 return CardNumber(formatted: trimmed, brand: brand, display: formatted)
             }
         }
