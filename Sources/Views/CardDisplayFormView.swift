@@ -282,7 +282,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardFrontView.isHidden = true
         cardBackView.isHidden = false
         UIView.transition(with: cardDisplayView,
-                          duration: 0.8,
+                          duration: 0.4,
                           options: .transitionFlipFromLeft,
                           animations: nil,
                           completion: nil)
@@ -293,7 +293,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardFrontView.isHidden = false
         cardBackView.isHidden = true
         UIView.transition(with: cardDisplayView,
-                          duration: 0.8,
+                          duration: 0.4,
                           options: .transitionFlipFromRight,
                           animations: nil,
                           completion: nil)
@@ -496,11 +496,17 @@ extension CardDisplayFormView: UITextFieldDelegate {
         updateDisplayLabelHighlight(textField: textField)
         if textField == cvcTextField && currentCardBrand != .americanExpress {
             // backFlip
-            backFlipCard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                guard let self = self else { return }
+                self.backFlipCard()
+            }
         } else {
             // frontFlip
             if !isCardDisplayFront {
-                frontFlipCard()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    guard let self = self else { return }
+                    self.frontFlipCard()
+                }
             }
         }
     }
