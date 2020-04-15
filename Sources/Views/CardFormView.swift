@@ -312,17 +312,18 @@ extension CardFormView {
                                                 message: "payjp_scanner_camera_permission_denied_message".localized,
                                                 preferredStyle: .alert)
 
-        let settingsAction = UIAlertAction(title: "payjp_common_settings".localized,
-                                           style: .default,
-                                           handler: { (_) -> Void in
-                                            guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
-                                                return
-                                            }
-                                            if #available(iOS 10.0, *) {
-                                                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-                                            } else {
-                                                UIApplication.shared.openURL(settingsURL)
-                                            }
+        let settingsAction = UIAlertAction(
+            title: "payjp_common_settings".localized,
+            style: .default,
+            handler: { (_) -> Void in
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
+                    return
+                }
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
         })
         let closeAction = UIAlertAction(title: "payjp_common_ok".localized,
                                         style: .default,

@@ -88,11 +88,8 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         backgroundColor = .clear
 
-        setupFormLayout()
-
-        // set images
-        //        brandLogoImage.image = "icon_card".image
-        //        cvcIconImage.image = "icon_card_cvc_3".image
+        setupInputField()
+        setupScrollableFormLayout()
 
         //        ocrButton.setImage("icon_camera".image, for: .normal)
         //        ocrButton.imageView?.contentMode = .scaleAspectFit
@@ -205,27 +202,9 @@ public class CardDisplayFormView: UIView, CardFormView {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 
-    private func setupFormLayout() {
-        // 横スクロール可能なフォームの作成
-        let formContentView = UIStackView()
-        formContentView.spacing = 0.0
-        formContentView.axis = .horizontal
-        formContentView.alignment = .fill
-        formContentView.distribution = .fillEqually
-        formContentView.translatesAutoresizingMaskIntoConstraints = false
-        formScrollView.addSubview(formContentView)
-
-        NSLayoutConstraint.activate([
-            formContentView.topAnchor.constraint(equalTo: formScrollView.topAnchor),
-            formContentView.leadingAnchor.constraint(equalTo: formScrollView.leadingAnchor),
-            formContentView.bottomAnchor.constraint(equalTo: formScrollView.bottomAnchor),
-            formContentView.trailingAnchor.constraint(equalTo: formScrollView.trailingAnchor),
-            formContentView.heightAnchor.constraint(equalTo: formScrollView.heightAnchor),
-            // widthはscrollView.widthAnchor x ページ数
-            formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
-                                                   multiplier: CGFloat(4))
-        ])
-
+    /// 入力フィールドのセットアップ
+    /// 現状は 1ページ に 1テキストフィールド のレイアウトで実装
+    private func setupInputField() {
         let pageWidth = formScrollView.frame.width
         let textFieldWidth = pageWidth
         let textFieldHeight = CGFloat(60.0)
@@ -270,6 +249,29 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
+    }
+
+    /// 横スクロール可能なフォームの作成
+    /// ScrollViewとStackViewの組み合わせで実装
+    private func setupScrollableFormLayout() {
+        let formContentView = UIStackView()
+        formContentView.spacing = 0.0
+        formContentView.axis = .horizontal
+        formContentView.alignment = .fill
+        formContentView.distribution = .fillEqually
+        formContentView.translatesAutoresizingMaskIntoConstraints = false
+        formScrollView.addSubview(formContentView)
+
+        NSLayoutConstraint.activate([
+            formContentView.topAnchor.constraint(equalTo: formScrollView.topAnchor),
+            formContentView.leadingAnchor.constraint(equalTo: formScrollView.leadingAnchor),
+            formContentView.bottomAnchor.constraint(equalTo: formScrollView.bottomAnchor),
+            formContentView.trailingAnchor.constraint(equalTo: formScrollView.trailingAnchor),
+            formContentView.heightAnchor.constraint(equalTo: formScrollView.heightAnchor),
+            // widthはscrollView.widthAnchor x ページ数
+            formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
+                                                   multiplier: CGFloat(4))
+        ])
 
         formContentView.addArrangedSubview(cardNumberTextField)
         formContentView.addArrangedSubview(expirationTextField)
@@ -496,6 +498,7 @@ extension CardDisplayFormView: UITextFieldDelegate {
         updateDisplayLabelHighlight(textField: textField)
         if textField == cvcTextField && currentCardBrand != .americanExpress {
             // backFlip
+            // いったん遅延実行で対応　他に良い方法があれば直す
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 guard let self = self else { return }
                 self.backFlipCard()

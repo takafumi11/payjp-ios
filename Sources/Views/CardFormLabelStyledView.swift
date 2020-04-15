@@ -102,25 +102,6 @@ public class CardFormLabelStyledView: UIView, CardFormView {
         cvcLabel.text = "payjp_card_form_cvc_label".localized
         cardHolderLabel.text = "payjp_card_form_holder_name_label".localized
 
-        // placeholder
-        cardNumberTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_label_style_number_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        expirationTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_label_style_expiration_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        cvcTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_label_style_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        cardHolderTextField.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_form_label_style_holder_name_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-
-        cardNumberTextField.delegate = self
-        expirationTextField.delegate = self
-        cvcTextField.delegate = self
-        cardHolderTextField.delegate = self
-
         // set images
         brandLogoImage.image = "icon_card".image
         cvcIconImage.image = "icon_card_cvc_3".image
@@ -204,6 +185,27 @@ public class CardFormLabelStyledView: UIView, CardFormView {
 
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
+
+    private func setupInputField() {
+        // placeholder
+        cardNumberTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_label_style_number_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        expirationTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_label_style_expiration_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        cvcTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_label_style_cvc_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+        cardHolderTextField.attributedPlaceholder = NSAttributedString(
+            string: "payjp_card_form_label_style_holder_name_placeholder".localized,
+            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
+
+        cardNumberTextField.delegate = self
+        expirationTextField.delegate = self
+        cvcTextField.delegate = self
+        cardHolderTextField.delegate = self
     }
 }
 

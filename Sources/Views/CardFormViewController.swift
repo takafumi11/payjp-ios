@@ -51,10 +51,12 @@ public class CardFormViewController: UIViewController {
     ///   - viewType: card form type
     /// - Returns: CardFormViewController
     @objc(createCardFormViewControllerWithStyle: tenantId: delegate: viewType:)
-    public static func createCardFormViewController(style: FormStyle = .defaultStyle,
-                                                    tenantId: String? = nil,
-                                                    delegate: CardFormViewControllerDelegate,
-                                                    viewType: CardFormViewType = .labelStyled) -> CardFormViewController {
+    public static func createCardFormViewController(
+        style: FormStyle = .defaultStyle,
+        tenantId: String? = nil,
+        delegate: CardFormViewControllerDelegate,
+        viewType: CardFormViewType = .labelStyled) -> CardFormViewController {
+
         let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
@@ -212,7 +214,7 @@ public class CardFormViewController: UIViewController {
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
             cardFormView.setupInputAccessoryView(view: view)
-            cardFormView.backgroundColor = .white
+            cardFormView.backgroundColor = Style.Color.groupedBackground
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
                 submitButton.normalBackgroundColor = formStyle.submitButtonColor
