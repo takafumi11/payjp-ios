@@ -31,8 +31,8 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardBackView: UIView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
-    @IBOutlet weak var cvcDisplayLabel: UITextField!
-    @IBOutlet weak var cvc4DisplayLabel: UITextField!
+    @IBOutlet weak var cvcDisplayLabel: UILabel!
+    @IBOutlet weak var cvc4DisplayLabel: UILabel!
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
     @IBOutlet weak var formScrollView: UIScrollView!
@@ -90,13 +90,6 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         setupInputField()
         setupScrollableFormLayout()
-
-        cvcDisplayLabel.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_display_form_cvc_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
-        cvc4DisplayLabel.attributedPlaceholder = NSAttributedString(
-            string: "payjp_card_display_form_cvc4_placeholder".localized,
-            attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
 
         //        ocrButton.setImage("icon_camera".image, for: .normal)
         //        ocrButton.imageView?.contentMode = .scaleAspectFit
@@ -307,11 +300,17 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     private func updateCvcDisplayLabel(cvc: String?) {
-        switch currentCardBrand {
-        case .americanExpress:
-            cvc4DisplayLabel.text = cvc
-        default:
-            cvcDisplayLabel.text = cvc
+        if let cvc = cvc {
+            let mask = String(repeating: "•", count: cvc.count)
+            switch currentCardBrand {
+            case .americanExpress:
+                cvc4DisplayLabel.text = mask
+            default:
+                cvcDisplayLabel.text = mask
+            }
+        } else {
+            cvc4DisplayLabel.text = "payjp_card_display_form_cvc4_default".localized
+            cvcDisplayLabel.text = "payjp_card_display_form_cvc_default".localized
         }
     }
 

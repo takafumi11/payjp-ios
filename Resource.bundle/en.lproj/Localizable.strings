@@ -31,8 +31,8 @@
 // card display
 "payjp_card_display_form_number_default" = "XXXX XXXX XXXX XXXX";
 "payjp_card_display_form_expiration_default" = "MM/YY";
-"payjp_card_display_form_cvc_placeholder" = "XXX";
-"payjp_card_display_form_cvc4_placeholder" = "XXXX";
+"payjp_card_display_form_cvc_default" = "XXX";
+"payjp_card_display_form_cvc4_default" = "XXXX";
 "payjp_card_display_form_holder_name_default" = "NAME";
 
 // validation
