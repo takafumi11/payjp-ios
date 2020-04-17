@@ -185,6 +185,13 @@ public class CardDisplayFormView: UIView, CardFormView {
         brandLogoImage.image = brand?.displayLogoResourceName?.image
     }
 
+    func focusNextInputField(currentField: UITextField) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let self = self else { return }
+            self.focusNext(currentField: currentField)
+        }
+    }
+
     // MARK: Private
 
     private func notifyIsValidChanged() {
@@ -349,6 +356,25 @@ public class CardDisplayFormView: UIView, CardFormView {
             break
         }
     }
+
+    private func focusNext(currentField: UITextField) {
+        switch currentField {
+        case cardNumberTextField:
+            if cardNumberTextField.isFirstResponder {
+                expirationTextField.becomeFirstResponder()
+            }
+        case expirationTextField:
+            if expirationTextField.isFirstResponder {
+                cvcTextField.becomeFirstResponder()
+            }
+        case cvcTextField:
+            if cvcTextField.isFirstResponder && isHolderRequired {
+                cardHolderTextField.becomeFirstResponder()
+            }
+        default:
+            break
+        }
+    }
 }
 
 // MARK: CardFormAction
@@ -492,19 +518,10 @@ extension CardDisplayFormView: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)
         if textField == cvcTextField && currentCardBrand != .americanExpress {
-            // backFlip
-            // いったん遅延実行で対応　他に良い方法があれば直す
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                guard let self = self else { return }
-                self.backFlipCard()
-            }
+            backFlipCard()
         } else {
-            // frontFlip
             if !isCardDisplayFront {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                    guard let self = self else { return }
-                    self.frontFlipCard()
-                }
+                frontFlipCard()
             }
         }
     }
