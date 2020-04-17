@@ -14,7 +14,7 @@
     <a title="CardFormViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (64% documented)</p>
+        <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -59,6 +59,18 @@
                 <a href="../Classes/PAYJPSDK.html">PAYJPSDK</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/ThreeDSecureProcessHandler.html">ThreeDSecureProcessHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ThreeDSecureSFSafariViewControllerDriver.html">ThreeDSecureSFSafariViewControllerDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ThreeDSecureToken.html">ThreeDSecureToken</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ThreeDSecureURLConfiguration.html">ThreeDSecureURLConfiguration</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Token.html">Token</a>
               </li>
             </ul>
@@ -77,6 +89,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/LocalError.html">LocalError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ThreeDSecureProcessStatus.html">ThreeDSecureProcessStatus</a>
               </li>
             </ul>
           </li>
@@ -97,6 +112,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/PAYJPSDKType.html">PAYJPSDKType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ThreeDSecureProcessHandlerType.html">ThreeDSecureProcessHandlerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ThreeDSecureWebDriverDelegate.html">ThreeDSecureWebDriverDelegate</a>
               </li>
             </ul>
           </li>
@@ -132,36 +159,9 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(py)delegate"></a>
-                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(py)delegate">delegate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>CardFormViewController delegate.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:"></a>
-                    <a name="//apple_ref/swift/Method/createCardFormViewController(style:tenantId:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:">createCardFormViewController(style:tenantId:)</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:"></a>
+                    <a name="//apple_ref/swift/Method/createCardFormViewController(style:tenantId:delegate:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:">createCardFormViewController(style:tenantId:delegate:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,9 +176,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(createCardFormViewControllerWithStyle:tenantId:)</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">createCardFormViewController</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Classes/FormStyle.html">FormStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">defaultStyle</span><span class="p">,</span>
-                                                <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CardFormViewController</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@objc(createCardFormViewControllerWithStyle:tenantId:delegate:)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">createCardFormViewController</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Classes/FormStyle.html">FormStyle</a></span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="n">defaultStyle</span><span class="p">,</span>
+                                                <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                                                <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a></span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="kt">CardFormViewController</span></code></pre>
 
                         </div>
                       </div>
@@ -207,6 +209,18 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                               <td>
                                 <div>
                                   <p>identifier of tenant</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>delegate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>delegate of CardFormViewControllerDelegate</p>
                                 </div>
                               </td>
                             </tr>
@@ -521,10 +535,48 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ThreeDSecureProcessHandlerDelegate"></a>
+                <a name="//apple_ref/swift/Section/ThreeDSecureProcessHandlerDelegate" class="dashAnchor"></a>
+                <a href="#/ThreeDSecureProcessHandlerDelegate">
+                  <h3 class="section-name">ThreeDSecureProcessHandlerDelegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP05threecdE9DidFinish_6statusyAA0bcdE0C_AA0bcD6StatusOtF"></a>
+                    <a name="//apple_ref/swift/Method/threeDSecureProcessHandlerDidFinish(_:status:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP05threecdE9DidFinish_6statusyAA0bcdE0C_AA0bcD6StatusOtF">threeDSecureProcessHandlerDidFinish(_:status:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">threeDSecureProcessHandlerDidFinish</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThreeDSecureProcessHandler.html">ThreeDSecureProcessHandler</a></span><span class="p">,</span>
+                                                <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/ThreeDSecureProcessStatus.html">ThreeDSecureProcessStatus</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-02-27)</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-04-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

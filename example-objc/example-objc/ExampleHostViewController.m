@@ -14,6 +14,8 @@
 
 @interface ExampleHostViewController ()
 
+@property(nonatomic) PAYToken *token;
+
 @end
 
 @implementation ExampleHostViewController
@@ -33,16 +35,16 @@
     // push
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-                                     tenantId:nil];
-    cardFormVc.delegate = self;
+                                     tenantId:nil
+                                     delegate:self];
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
     //                PAYCardFormViewController *cardFormVc =
     //                    [PAYCardFormViewController
     //                    createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
-    //                                                                            tenantId:nil];
-    //                cardFormVc.delegate = self;
+    //                                                                            tenantId:nil
+    //                                                                            delegate:self];
     //                UINavigationController *naviVc =
     //                    [UINavigationController.new initWithRootViewController:cardFormVc];
     //                naviVc.presentationController.delegate = cardFormVc;
@@ -65,10 +67,13 @@
       dispatch_async(dispatch_get_main_queue(), ^{
         // pop
         [wself.navigationController popViewControllerAnimated:YES];
+        if (wself.token != nil) {
+          [wself showToken:wself.token];
+        }
 
         // dismiss
-        //                  [wself.navigationController dismissViewControllerAnimated:YES
-        //                  completion:nil];
+        //                          [wself.navigationController dismissViewControllerAnimated:YES
+        //                          completion:nil];
       });
       break;
   }
@@ -78,6 +83,7 @@
                    didProduced:(PAYToken *)token
              completionHandler:(void (^)(NSError *_Nullable))completionHandler {
   NSLog(@"token = %@", [self displayToken:token]);
+  self.token = token;
 
   // サーバにトークンを送信
   SampleService *service = [SampleService sharedService];
@@ -87,7 +93,7 @@
                       NSLog(@"Failed save card. error = %@", error);
                       completionHandler(error);
                     } else {
-                      NSLog(@"Success save card. token = %@", [self displayToken:token]);
+                      NSLog(@"Success save card.");
                       completionHandler(nil);
                     }
                   }];

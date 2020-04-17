@@ -14,7 +14,7 @@
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">PAYJP Docs</a> (64% documented)</p>
+        <p><a href="index.html">PAYJP Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -59,6 +59,18 @@
                 <a href="Classes/PAYJPSDK.html">PAYJPSDK</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/ThreeDSecureProcessHandler.html">ThreeDSecureProcessHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ThreeDSecureSFSafariViewControllerDriver.html">ThreeDSecureSFSafariViewControllerDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ThreeDSecureToken.html">ThreeDSecureToken</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ThreeDSecureURLConfiguration.html">ThreeDSecureURLConfiguration</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/Token.html">Token</a>
               </li>
             </ul>
@@ -77,6 +89,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/LocalError.html">LocalError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ThreeDSecureProcessStatus.html">ThreeDSecureProcessStatus</a>
               </li>
             </ul>
           </li>
@@ -97,6 +112,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/PAYJPSDKType.html">PAYJPSDKType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ThreeDSecureProcessHandlerType.html">ThreeDSecureProcessHandlerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ThreeDSecureWebDriverDelegate.html">ThreeDSecureWebDriverDelegate</a>
               </li>
             </ul>
           </li>
@@ -175,6 +202,126 @@
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
 <span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PAYErrorResponseType</span> <span class="p">:</span> <span class="kt">NSObjectProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP"></a>
+                    <a name="//apple_ref/swift/Protocol/ThreeDSecureProcessHandlerDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP">ThreeDSecureProcessHandlerDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>3DSecure handler delegate.</p>
+
+                        <a href="Protocols/ThreeDSecureProcessHandlerDelegate.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ThreeDSecureProcessHandlerDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP30ThreeDSecureProcessHandlerTypeP"></a>
+                    <a name="//apple_ref/swift/Protocol/ThreeDSecureProcessHandlerType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP">ThreeDSecureProcessHandlerType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handler for 3DSecure process.</p>
+
+                        <a href="Protocols/ThreeDSecureProcessHandlerType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ThreeDSecureProcessHandlerType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP29ThreeDSecureWebDriverDelegateP"></a>
+                    <a name="//apple_ref/swift/Protocol/ThreeDSecureWebDriverDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP29ThreeDSecureWebDriverDelegateP">ThreeDSecureWebDriverDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delegate of web browse driver.</p>
+
+                        <a href="Protocols/ThreeDSecureWebDriverDelegate.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ThreeDSecureWebDriverDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5PAYJP21ThreeDSecureWebDriverP"></a>
+                    <a name="//apple_ref/swift/Protocol/ThreeDSecureWebDriver" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP">ThreeDSecureWebDriver</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Web browse driver for 3DSecure.</p>
+
+                        <a href="Protocols/ThreeDSecureWebDriver.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ThreeDSecureWebDriver</span></code></pre>
 
                         </div>
                       </div>
@@ -280,7 +427,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-02-27)</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-04-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
@@ -15,7 +16,7 @@ public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cardFormView: CardFormLabelStyledView!
-    @IBOutlet weak var saveButton: ActionButton!
+    @IBOutlet weak var submitButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
@@ -29,25 +30,29 @@ public class CardFormViewController: UIViewController {
     private let errorTranslator = ErrorTranslator.shared
 
     /// CardFormViewController delegate.
-    public weak var delegate: CardFormViewControllerDelegate?
+    private weak var delegate: CardFormViewControllerDelegate?
 
     /// CardFormViewController factory method.
     ///
     /// - Parameters:
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
+    ///   - delegate: delegate of CardFormViewControllerDelegate
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId:)
-    public static func createCardFormViewController(style: FormStyle = .defaultStyle,
-                                                    tenantId: String? = nil) -> CardFormViewController {
-        let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
-        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
-        guard
-            let cardFormVc = naviVc?.topViewController as? CardFormViewController
-            else { fatalError("Couldn't instantiate CardFormViewController") }
-        cardFormVc.formStyle = style
-        cardFormVc.tenantId = tenantId
-        return cardFormVc
+    @objc(createCardFormViewControllerWithStyle: tenantId: delegate:)
+    public static func createCardFormViewController(style: FormStyle? = .defaultStyle,
+                                                    tenantId: String? = nil,
+                                                    delegate: CardFormViewControllerDelegate)
+        -> CardFormViewController {
+            let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
+            let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
+            guard
+                let cardFormVc = naviVc?.topViewController as? CardFormViewController
+                else { fatalError("Couldn't instantiate CardFormViewController") }
+            cardFormVc.formStyle = style
+            cardFormVc.tenantId = tenantId
+            cardFormVc.delegate = delegate
+            return cardFormVc
     }
 
     @IBAction func registerCardTapped(_ sender: Any) {
@@ -91,7 +96,7 @@ public class CardFormViewController: UIViewController {
         }
 
         navigationItem.title = "payjp_card_form_screen_title".localized
-        saveButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        submitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
 
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
                             forCellWithReuseIdentifier: "BrandCell")
@@ -99,7 +104,7 @@ public class CardFormViewController: UIViewController {
         // style
         if let formStyle = formStyle {
             cardFormView.apply(style: formStyle)
-            saveButton.normalBackgroundColor = formStyle.submitButtonColor
+            submitButton.normalBackgroundColor = formStyle.submitButtonColor
             accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
         }
         brandsView.backgroundColor = Style.Color.groupedBackground
@@ -129,11 +134,11 @@ public class CardFormViewController: UIViewController {
     }
 
     @objc private func handleKeyboardShow(notification: Notification) {
-        saveButton.isHidden = true
+        submitButton.isHidden = true
     }
 
     @objc private func handleKeyboardHide(notification: Notification) {
-        saveButton.isHidden = false
+        submitButton.isHidden = false
     }
 
     @objc private func keyboardDidChangeFrame(notification: Notification) {
@@ -189,6 +194,7 @@ public class CardFormViewController: UIViewController {
 
 // MARK: CardFormScreenDelegate
 extension CardFormViewController: CardFormScreenDelegate {
+
     func reloadBrands(brands: [CardBrand]) {
         accptedBrands = brands
         brandsView.reloadData()
@@ -200,6 +206,14 @@ extension CardFormViewController: CardFormScreenDelegate {
 
     func dismissIndicator() {
         activityIndicator.stopAnimating()
+    }
+
+    func enableSubmitButton() {
+        submitButton.isEnabled = true
+    }
+
+    func disableSubmitButton() {
+        submitButton.isEnabled = false
     }
 
     func showErrorView(message: String, buttonHidden: Bool) {
@@ -214,6 +228,12 @@ extension CardFormViewController: CardFormScreenDelegate {
         showError(message: message)
     }
 
+    func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
+        ThreeDSecureProcessHandler.shared.startThreeDSecureProcess(viewController: self,
+                                                                   delegate: self,
+                                                                   token: tdsToken)
+    }
+
     func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }
@@ -225,8 +245,9 @@ extension CardFormViewController: CardFormScreenDelegate {
 
 // MARK: CardFormViewDelegate
 extension CardFormViewController: CardFormViewDelegate {
+
     public func formInputValidated(in cardFormView: UIView, isValid: Bool) {
-        saveButton.isEnabled = isValid
+        submitButton.isEnabled = isValid
         accessorySubmitButton.isEnabled = isValid
     }
 
@@ -290,5 +311,22 @@ extension CardFormViewController: UIAdaptivePresentationControllerDelegate {
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         didCompleteCardForm(with: .cancel)
+    }
+}
+
+// MARK: ThreeDSecureProcessHandlerDelegate
+extension CardFormViewController: ThreeDSecureProcessHandlerDelegate {
+
+    public func threeDSecureProcessHandlerDidFinish(_ handler: ThreeDSecureProcessHandler,
+                                                    status: ThreeDSecureProcessStatus) {
+        switch status {
+        case .completed:
+            presenter?.createTokenByTds()
+        case .canceled:
+            dismissIndicator()
+            enableSubmitButton()
+        default:
+            break
+        }
     }
 }

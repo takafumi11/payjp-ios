@@ -25,6 +25,7 @@ import Foundation
     public let fingerprint: String
     public let liveMode: Bool
     public let createdAt: Date
+    public let threeDSecureStatus: PAYThreeDSecureStatus?
     public var rawValue: [String: Any]?
 
     // MARK: - Decodable
@@ -39,6 +40,7 @@ import Foundation
         case fingerprint
         case liveMode = "livemode"
         case createdAt = "created"
+        case threeDSecureStatus = "three_d_secure_status"
     }
 
     public init(from decoder: Decoder) throws {
@@ -52,10 +54,15 @@ import Foundation
         fingerprint = try container.decode(String.self, forKey: .fingerprint)
         liveMode = try container.decode(Bool.self, forKey: .liveMode)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
+        if let tdsStatusRaw = try container.decodeIfPresent(String.self, forKey: .threeDSecureStatus) {
+            threeDSecureStatus = ThreeDSecureStatus.find(rawValue: tdsStatusRaw)
+        } else {
+            threeDSecureStatus = nil
+        }
     }
 
     public init(identifier: String,
-                name: String,
+                name: String?,
                 last4Number: String,
                 brand: String,
                 expirationMonth: UInt8,
@@ -63,6 +70,7 @@ import Foundation
                 fingerprint: String,
                 liveMode: Bool,
                 createAt: Date,
+                threeDSecureStatus: PAYThreeDSecureStatus?,
                 rawValue: [String: Any]? = nil ) {
         self.identifer = identifier
         self.name = name
@@ -73,6 +81,7 @@ import Foundation
         self.fingerprint = fingerprint
         self.liveMode = liveMode
         self.createdAt = createAt
+        self.threeDSecureStatus = threeDSecureStatus
         self.rawValue = rawValue
     }
 }

@@ -14,6 +14,8 @@ public protocol PAYJPSDKType: class {
     static var publicKey: String? { get set }
     /// Locale.
     static var locale: Locale? { get set }
+    /// 3DSecure URL configuration.
+    static var threeDSecureURLConfiguration: ThreeDSecureURLConfiguration? { get set }
 }
 
 /// see PAYJPSDKType.
@@ -40,10 +42,12 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
     }
     public static var locale: Locale?
 
+    public static var threeDSecureURLConfiguration: ThreeDSecureURLConfiguration?
+
     public static var clientInfo: ClientInfo = .default
 
     // Update by Fastlane :bump_up_version
-    public static let sdkVersion: String = "1.1.6"
+    public static let sdkVersion: String = "1.2.0"
 
     static var authToken: String = ""
 }

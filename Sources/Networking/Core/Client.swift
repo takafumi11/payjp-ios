@@ -15,23 +15,30 @@ protocol ClientType {
     ) -> URLSessionDataTask?
 }
 
-class Client: ClientType {
+class Client: NSObject, ClientType {
 
     static let shared = Client()
 
-    private let session: URLSession
+    private var session: URLSession?
     private let callbackQueue: CallbackQueue
     private let jsonDecoder: JSONDecoder
 
     private init(
-        session: URLSession = URLSession(configuration: .default),
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
         DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
     ) {
-        self.session = session
         self.callbackQueue = callbackQueue
         self.jsonDecoder = jsonDecoder
+    }
+
+    private func getSession() -> URLSession {
+        if session == nil {
+            session = URLSession(configuration: .default,
+                                 delegate: self,
+                                 delegateQueue: nil)
+        }
+        return session!
     }
 
     @discardableResult
@@ -41,7 +48,7 @@ class Client: ClientType {
     ) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
-            let dataTask = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
+            let dataTask = getSession().dataTask(with: urlRequest) { [weak self] data, response, error in
                 guard let self = self else { return }
 
                 if error != nil && data == nil && response == nil {
@@ -67,6 +74,14 @@ class Client: ClientType {
                         } catch {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
+                    } else if response.statusCode == 303 {
+                        if let tdsToken = self.createThreeDSecureToken(data: data,
+                                                                       request: request,
+                                                                       response: response) {
+                            completion?(Result.failure(.requiredThreeDSecure(tdsToken)))
+                        } else {
+                            completion?(Result.failure(.invalidResponse(response)))
+                        }
                     } else {
                         do {
                             let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
@@ -85,5 +100,42 @@ class Client: ClientType {
             completion?(Result.failure(.systemError(error)))
             return nil
         }
+    }
+
+    /// Response bodyから3DSecureのidを取り出してThreeDSecureTokenを生成する
+    /// - Parameters:
+    ///   - data: Data
+    ///   - request: Request
+    ///   - response: Response
+    /// - Returns: ThreeDSecureToken
+    func createThreeDSecureToken<Request: PAYJP.Request>(data: Data,
+                                                         request: Request,
+                                                         response: HTTPURLResponse) -> ThreeDSecureToken? {
+
+        guard let url = response.url?.absoluteString else { return nil }
+        guard url == "\(PAYJPApiEndpoint)tokens" else { return nil }
+        guard request.httpMethod == "POST" else { return nil }
+
+        let response = try? self.jsonDecoder.decode(PAYCommonResponse.self, from: data)
+        if response?.object == "three_d_secure_token" {
+            if let tdsId = response?.id {
+                return ThreeDSecureToken(identifier: tdsId)
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: URLSessionTaskDelegate
+extension Client: URLSessionTaskDelegate {
+
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    willPerformHTTPRedirection response: HTTPURLResponse,
+                    newRequest request: URLRequest,
+                    completionHandler: @escaping (URLRequest?) -> Void) {
+
+        // 303のresponseが返されるようにリダイレクトのrequestはスルーする
+        completionHandler(nil)
     }
 }
