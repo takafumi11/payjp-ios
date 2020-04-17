@@ -34,7 +34,7 @@
 
 - (NSString *)displayToken:(PAYToken *)token {
   return [NSString
-      stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu\ncard.name=%@",
+      stringWithFormat:@"id=%@,\ncard.id=%@,\ncard.last4=%@,\ncard.exp=%hhu/%hu,\ncard.name=%@",
                        token.identifer, token.card.identifer, token.card.last4Number,
                        token.card.expirationMonth, token.card.expirationYear, token.card.name];
 }

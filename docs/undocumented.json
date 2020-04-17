@@ -2,56 +2,63 @@
   "warnings": [
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 94,
+      "line": 105,
       "symbol": "APIClient.createTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 109,
+      "line": 120,
       "symbol": "APIClient.createTokenWith(_:cvc:expirationMonth:expirationYear:name:tenantId:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 134,
+      "line": 145,
+      "symbol": "APIClient.createTokenWithTds(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/APIClient.swift",
+      "line": 160,
       "symbol": "APIClient.getTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 147,
+      "line": 173,
       "symbol": "APIClient.getAcceptedBrandsWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Core/PAYJPSDK.swift",
-      "line": 43,
+      "line": 47,
       "symbol": "PAYJPSDK.clientInfo",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Core/PAYJPSDK.swift",
-      "line": 46,
+      "line": 50,
       "symbol": "PAYJPSDK.sdkVersion",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 55,
+      "line": 59,
       "symbol": "APIError.errorCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 70,
+      "line": 76,
       "symbol": "APIError.userInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -192,14 +199,21 @@
     {
       "file": "/Users/distiller/project/Sources/Networking/Models/Card.swift",
       "line": 28,
+      "symbol": "Card.threeDSecureStatus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/Models/Card.swift",
+      "line": 29,
       "symbol": "Card.rawValue",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Models/Card.swift",
-      "line": 57,
-      "symbol": "Card.init(identifier:name:last4Number:brand:expirationMonth:expirationYear:fingerprint:liveMode:createAt:rawValue:)",
+      "line": 64,
+      "symbol": "Card.init(identifier:name:last4Number:brand:expirationMonth:expirationYear:fingerprint:liveMode:createAt:threeDSecureStatus:rawValue:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -263,6 +277,27 @@
       "file": "/Users/distiller/project/Sources/Networking/Models/Token.swift",
       "line": 83,
       "symbol": "Token.isEqual(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/ThreeDSecure/ThreeDSecureProcessHandler.swift",
+      "line": 60,
+      "symbol": "ThreeDSecureProcessHandler.init(webDriver:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/ThreeDSecure/ThreeDSecureSFSafariViewControllerDriver.swift",
+      "line": 44,
+      "symbol": "ThreeDSecureSFSafariViewControllerDriver.safariViewControllerDidFinish(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/ThreeDSecure/ThreeDSecureURLConfiguration.swift",
+      "line": 18,
+      "symbol": "ThreeDSecureURLConfiguration.init(redirectURL:redirectURLKey:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -387,49 +422,49 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 66,
+      "line": 71,
       "symbol": "CardFormViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 111,
+      "line": 116,
       "symbol": "CardFormViewController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 119,
+      "line": 124,
       "symbol": "CardFormViewController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 241,
+      "line": 262,
       "symbol": "CardFormViewController.collectionView(_:numberOfItemsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 245,
+      "line": 266,
       "symbol": "CardFormViewController.collectionView(_:cellForItemAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 269,
+      "line": 290,
       "symbol": "CardFormViewController.collectionView(_:layout:insetForSectionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 291,
+      "line": 312,
       "symbol": "CardFormViewController.presentationControllerDidDismiss(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
