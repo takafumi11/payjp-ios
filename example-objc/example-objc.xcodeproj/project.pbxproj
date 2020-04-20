@@ -123,7 +123,6 @@
 				F57758D25FB0F2BAF6EE8D8E /* Pods-example-objc.debug.xcconfig */,
 				199766F3DD044D216CB3FB1A /* Pods-example-objc.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
