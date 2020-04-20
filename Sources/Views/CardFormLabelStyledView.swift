@@ -96,6 +96,8 @@ public class CardFormLabelStyledView: UIView, CardFormView {
 
         backgroundColor = .clear
 
+        setupInputField()
+
         // label
         cardNumberLabel.text = "payjp_card_form_number_label".localized
         expirationLabel.text = "payjp_card_form_expiration_label".localized

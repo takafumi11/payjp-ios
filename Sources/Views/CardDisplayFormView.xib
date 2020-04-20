@@ -29,11 +29,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="421"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="338"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="3MT-d0-UK7">
-                    <rect key="frame" x="16" y="0.0" width="368" height="421"/>
+                    <rect key="frame" x="16" y="0.0" width="368" height="338"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pNv-2o-dEk">
                             <rect key="frame" x="0.0" y="0.0" width="368" height="228"/>
@@ -292,21 +292,21 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="44" bottom="0.0" right="44"/>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cw-dZ-bz7">
-                            <rect key="frame" x="0.0" y="240" width="368" height="109"/>
+                            <rect key="frame" x="0.0" y="240" width="368" height="42"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b44-8S-faU">
-                            <rect key="frame" x="0.0" y="361" width="368" height="60"/>
+                            <rect key="frame" x="0.0" y="294" width="368" height="44"/>
                             <subviews>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-1x-IMx">
-                                    <rect key="frame" x="0.0" y="0.0" width="368" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="368" height="44"/>
                                 </scrollView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="waa-1x-IMx" secondAttribute="bottom" id="9af-Oc-jrj"/>
-                                <constraint firstAttribute="height" constant="60" id="HZv-Q6-aNl"/>
+                                <constraint firstAttribute="height" constant="44" id="HZv-Q6-aNl"/>
                                 <constraint firstItem="waa-1x-IMx" firstAttribute="top" secondItem="b44-8S-faU" secondAttribute="top" id="SCY-Dd-K5t"/>
                                 <constraint firstAttribute="trailing" secondItem="waa-1x-IMx" secondAttribute="trailing" id="dhB-07-GUG"/>
                                 <constraint firstItem="waa-1x-IMx" firstAttribute="leading" secondItem="b44-8S-faU" secondAttribute="leading" id="xKb-Vh-278"/>
@@ -322,7 +322,7 @@
                 <constraint firstAttribute="trailing" secondItem="3MT-d0-UK7" secondAttribute="trailing" constant="16" id="oZa-nI-lSO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-72.463768115942031" y="-114.84375"/>
+            <point key="canvasLocation" x="-72.463768115942031" y="-142.63392857142856"/>
         </view>
     </objects>
 </document>

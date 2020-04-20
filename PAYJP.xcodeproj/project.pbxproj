@@ -121,8 +121,6 @@
 		EDA77569238E4CB200162340 /* PublicKeyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA77568238E4CB200162340 /* PublicKeyValidatorTests.swift */; };
 		EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */; };
 		EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */; };
-		EDB04DCE241B3A1E00690CA9 /* CardFormInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDB04DC9241B3A1D00690CA9 /* CardFormInputView.xib */; };
-		EDB04DD0241B3A1E00690CA9 /* CardFormInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB04DCB241B3A1E00690CA9 /* CardFormInputView.swift */; };
 		EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CB234EDF0300CB0212 /* CardFormView.swift */; };
 		EDB319CE23501CA300CB0212 /* CardFormViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */; };
 		EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC02D61230D2A0C00305B10 /* Assets.xcassets */; };
@@ -135,6 +133,7 @@
 		EDDB9371243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */; };
 		EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */; };
 		EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */; };
+		EDFDF7CE244D67CF00A61488 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */; };
 		EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF4DB1234322B00036F449 /* LocalError.swift */; };
 /* End PBXBuildFile section */
 
@@ -282,8 +281,6 @@
 		EDA77568238E4CB200162340 /* PublicKeyValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyValidatorTests.swift; sourceTree = "<group>"; };
 		EDA7F92C2345BF0F00EB1CA8 /* NSErrorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorConverter.swift; sourceTree = "<group>"; };
 		EDADA261238BCE860057FDF3 /* UIViewController+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PAYJP.swift"; sourceTree = "<group>"; };
-		EDB04DC9241B3A1D00690CA9 /* CardFormInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormInputView.xib; sourceTree = "<group>"; };
-		EDB04DCB241B3A1E00690CA9 /* CardFormInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormInputView.swift; sourceTree = "<group>"; };
 		EDB319CB234EDF0300CB0212 /* CardFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
 		EDB319CD23501CA300CB0212 /* CardFormViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewDelegate.swift; sourceTree = "<group>"; };
 		EDC02D61230D2A0C00305B10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -293,6 +290,7 @@
 		EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureSFSafariViewControllerDriver.swift; sourceTree = "<group>"; };
 		EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormLabelStyledView.swift; sourceTree = "<group>"; };
 		EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormLabelStyledView.xib; sourceTree = "<group>"; };
+		EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		EDFF4DB1234322B00036F449 /* LocalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -561,8 +559,6 @@
 				ED1A0741241B876F00AB1423 /* CardDisplayFormView.xib */,
 				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
 				ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */,
-				EDB04DCB241B3A1E00690CA9 /* CardFormInputView.swift */,
-				EDB04DC9241B3A1D00690CA9 /* CardFormInputView.xib */,
 				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
 				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
 				ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */,
@@ -579,6 +575,7 @@
 				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
+				EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -780,7 +777,6 @@
 				ED9B33E0238FD0860079E7B8 /* ErrorView.xib in Resources */,
 				EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */,
 				ED66B2DD23D697D10095B18D /* Resource.bundle in Resources */,
-				EDB04DCE241B3A1E00690CA9 /* CardFormInputView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +839,7 @@
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
 				EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
+				EDFDF7CE244D67CF00A61488 /* PaddingTextField.swift in Sources */,
 				ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */,
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
 				ED6F13442360319B00857BCC /* FormStyle.swift in Sources */,
@@ -890,7 +887,6 @@
 				BEA1D28B22EAFCBE00F8906B /* CardBrand.swift in Sources */,
 				BE21780F22E802A00098128D /* PAYJPSDK.swift in Sources */,
 				ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */,
-				EDB04DD0241B3A1E00690CA9 /* CardFormInputView.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,

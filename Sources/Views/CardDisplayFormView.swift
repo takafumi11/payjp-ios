@@ -16,14 +16,14 @@ public class CardDisplayFormView: UIView, CardFormView {
     var isHolderRequired: Bool = true
 
     @IBOutlet weak var brandLogoImage: UIImageView!
-    @IBOutlet weak var cvcIconImage: UIImageView!
-    @IBOutlet weak var holderContainer: UIStackView!
-    @IBOutlet weak var ocrButton: UIButton!
+    var cvcIconImage: UIImageView!
+    var holderContainer: UIStackView!
 
     var cardNumberTextField: UITextField!
     var expirationTextField: UITextField!
     var cvcTextField: UITextField!
     var cardHolderTextField: UITextField!
+    var ocrButton: UIButton!
 
     // 追加
     @IBOutlet weak var cardDisplayView: UIView!
@@ -42,6 +42,12 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardHolderBorderView: BorderView!
     @IBOutlet weak var expirationBorderView: BorderView!
 
+    var cardNumberFieldBackground: UIView!
+    var expirationFieldBackground: UIView!
+    var cvcFieldBackground: UIView!
+    var cardHolderFieldBackground: UIView!
+
+    var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
@@ -90,15 +96,6 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         setupInputField()
         setupScrollableFormLayout()
-
-        //        ocrButton.setImage("icon_camera".image, for: .normal)
-        //        ocrButton.imageView?.contentMode = .scaleAspectFit
-        //        ocrButton.contentHorizontalAlignment = .fill
-        //        ocrButton.contentVerticalAlignment = .fill
-
-        cardIOProxy = CardIOProxy(delegate: self)
-        //        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
@@ -201,31 +198,20 @@ public class CardDisplayFormView: UIView, CardFormView {
     /// 入力フィールドのセットアップ
     /// 現状は 1ページ に 1テキストフィールド のレイアウトで実装
     private func setupInputField() {
-        let pageWidth = formScrollView.frame.width
-        let textFieldWidth = pageWidth
-        let textFieldHeight = CGFloat(60.0)
+        cardNumberFieldBackground = UIView()
+        expirationFieldBackground = UIView()
+        cvcFieldBackground = UIView()
+        cardHolderFieldBackground = UIView()
 
-        cardNumberTextField = UITextField(frame: CGRect(x: 0.0,
-                                                        y: 0.0,
-                                                        width: textFieldWidth,
-                                                        height: textFieldHeight))
-        expirationTextField = UITextField(frame: CGRect(x: pageWidth ,
-                                                        y: 0.0,
-                                                        width: textFieldWidth,
-                                                        height: textFieldHeight))
-        cvcTextField = UITextField(frame: CGRect(x: pageWidth*2,
-                                                 y: 0.0,
-                                                 width: textFieldWidth,
-                                                 height: textFieldHeight))
-        cardHolderTextField = UITextField(frame: CGRect(x: pageWidth*3,
-                                                        y: 0.0,
-                                                        width: textFieldWidth,
-                                                        height: textFieldHeight))
+        cardNumberTextField = PaddingTextField()
+        expirationTextField = PaddingTextField()
+        cvcTextField = PaddingTextField()
+        cardHolderTextField = PaddingTextField()
 
-        cardNumberTextField.borderStyle = .roundedRect
-        expirationTextField.borderStyle = .roundedRect
-        cvcTextField.borderStyle = .roundedRect
-        cardHolderTextField.borderStyle = .roundedRect
+        cardNumberTextField.borderStyle = .none
+        expirationTextField.borderStyle = .none
+        cvcTextField.borderStyle = .none
+        cardHolderTextField.borderStyle = .none
 
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
@@ -245,11 +231,21 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
+
+        ocrButton = UIButton()
+        ocrButton.setImage("icon_camera".image, for: .normal)
+        ocrButton.imageView?.contentMode = .scaleAspectFit
+        ocrButton.contentHorizontalAlignment = .fill
+        ocrButton.contentVerticalAlignment = .fill
+
+        cardIOProxy = CardIOProxy(delegate: self)
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
 
     /// 横スクロール可能なフォームの作成
     /// ScrollViewとStackViewの組み合わせで実装
     private func setupScrollableFormLayout() {
+        // 横ScrollViewにaddするStackView
         let formContentView = UIStackView()
         formContentView.spacing = 0.0
         formContentView.axis = .horizontal
@@ -269,10 +265,59 @@ public class CardDisplayFormView: UIView, CardFormView {
                                                    multiplier: CGFloat(4))
         ])
 
-        formContentView.addArrangedSubview(cardNumberTextField)
-        formContentView.addArrangedSubview(expirationTextField)
-        formContentView.addArrangedSubview(cvcTextField)
-        formContentView.addArrangedSubview(cardHolderTextField)
+        // 各入力フィールド
+        let cardNumberContentView = setupInputContentView(contentView: cardNumberFieldBackground,
+                                                          textField: cardNumberTextField,
+                                                          actionButton: ocrButton,
+                                                          spacing: 8.0)
+        let expirationContentView = setupInputContentView(contentView: expirationFieldBackground,
+                                                          textField: expirationTextField)
+        let cvcContentView = setupInputContentView(contentView: cvcFieldBackground,
+                                                   textField: cvcTextField)
+        let cardHolderContentView = setupInputContentView(contentView: cardHolderFieldBackground,
+                                                          textField: cardHolderTextField)
+
+        cardNumberContentView.roundingCorners(corners: .allCorners, radius: 4.0)
+        expirationContentView.roundingCorners(corners: .allCorners, radius: 4.0)
+        cvcContentView.roundingCorners(corners: .allCorners, radius: 4.0)
+        cardHolderContentView.roundingCorners(corners: .allCorners, radius: 4.0)
+
+        formContentView.addArrangedSubview(cardNumberContentView)
+        formContentView.addArrangedSubview(expirationContentView)
+        formContentView.addArrangedSubview(cvcContentView)
+        formContentView.addArrangedSubview(cardHolderContentView)
+    }
+
+    private func setupInputContentView(contentView: UIView,
+                                       textField: UITextField,
+                                       actionButton: UIButton? = nil,
+                                       spacing: CGFloat = 0.0) -> UIView {
+        let inputView = UIStackView()
+        inputView.spacing = spacing
+        inputView.axis = .horizontal
+        inputView.alignment = .fill
+        inputView.distribution = .fill
+        inputView.translatesAutoresizingMaskIntoConstraints = false
+        inputView.addArrangedSubview(textField)
+
+        contentView.backgroundColor = FormStyle.defaultStyle.inputFieldBackgroundColor
+        contentView.addSubview(inputView)
+
+        NSLayoutConstraint.activate([
+            inputView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            inputView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            inputView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            textField.heightAnchor.constraint(equalToConstant: 30.0)
+        ])
+
+        if let button = actionButton {
+            inputView.addArrangedSubview(button)
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: 24.0)
+            ])
+        }
+
+        return contentView
     }
 
     private func backFlipCard() {
@@ -431,6 +476,8 @@ extension CardDisplayFormView: CardFormAction {
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
+        let inputFieldBackgroundColor = style.inputFieldBackgroundColor
+        self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
         // input text
@@ -445,6 +492,11 @@ extension CardDisplayFormView: CardFormAction {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
+        // input field background
+        cardNumberFieldBackground.backgroundColor = inputFieldBackgroundColor
+        expirationFieldBackground.backgroundColor = inputFieldBackgroundColor
+        cvcFieldBackground.backgroundColor = inputFieldBackgroundColor
+        cardHolderFieldBackground.backgroundColor = inputFieldBackgroundColor
     }
 
     public func setupInputAccessoryView(view: UIView) {
