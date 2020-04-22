@@ -51,6 +51,10 @@ public class CardDisplayFormView: UIView, CardFormView {
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
+    private let inputFieldMargin: CGFloat = 16.0
+    private var contentPositionX: CGFloat = 0.0
+    private var isScrolling: Bool = false
+
     /// Camera scan action
     ///
     /// - Parameter sender: sender
@@ -99,6 +103,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
+        formScrollView.delegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -203,10 +208,10 @@ public class CardDisplayFormView: UIView, CardFormView {
         cvcFieldBackground = UIView()
         cardHolderFieldBackground = UIView()
 
-        cardNumberTextField = PaddingTextField()
-        expirationTextField = PaddingTextField()
-        cvcTextField = PaddingTextField()
-        cardHolderTextField = PaddingTextField()
+        cardNumberTextField = UITextField()
+        expirationTextField = UITextField()
+        cvcTextField = UITextField()
+        cardHolderTextField = UITextField()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -239,7 +244,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         ocrButton.contentVerticalAlignment = .fill
 
         cardIOProxy = CardIOProxy(delegate: self)
-        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+        //        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
 
     /// 横スクロール可能なフォームの作成
@@ -304,8 +309,10 @@ public class CardDisplayFormView: UIView, CardFormView {
         contentView.addSubview(inputView)
 
         NSLayoutConstraint.activate([
-            inputView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            inputView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            inputView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
+                                               constant: inputFieldMargin),
+            inputView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                                constant: -inputFieldMargin),
             inputView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             textField.heightAnchor.constraint(equalToConstant: 30.0)
         ])
@@ -419,6 +426,27 @@ public class CardDisplayFormView: UIView, CardFormView {
         default:
             break
         }
+    }
+}
+
+// MARK: UIScrollViewDelegate
+extension CardDisplayFormView: UIScrollViewDelegate {
+
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 各入力Viewに設定しているマージン分だけスクロール位置がずれるため調整する
+        let diff = contentPositionX - scrollView.contentOffset.x
+        if !isScrolling &&
+            (diff == inputFieldMargin || diff == -inputFieldMargin) {
+            formScrollView.setContentOffset(CGPoint(x: contentPositionX, y: 0), animated: false)
+        }
+    }
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isScrolling = true
+    }
+
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isScrolling = false
     }
 }
 
@@ -575,6 +603,20 @@ extension CardDisplayFormView: UITextFieldDelegate {
             if !isCardDisplayFront {
                 frontFlipCard()
             }
+        }
+
+        // スクロール位置調整のため、各入力Viewのpositionを保持する
+        switch textField {
+        case cardNumberTextField:
+            contentPositionX = cardNumberFieldBackground.frame.origin.x
+        case expirationTextField:
+            contentPositionX = expirationFieldBackground.frame.origin.x
+        case cvcTextField:
+            contentPositionX = cvcFieldBackground.frame.origin.x
+        case cardHolderTextField:
+            contentPositionX = cardHolderFieldBackground.frame.origin.x
+        default:
+            break
         }
     }
 }

@@ -133,7 +133,6 @@
 		EDDB9371243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */; };
 		EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */; };
 		EDEAE9582344431200E061C8 /* CardFormLabelStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */; };
-		EDFDF7CE244D67CF00A61488 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */; };
 		EDFF4DB2234322B00036F449 /* LocalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF4DB1234322B00036F449 /* LocalError.swift */; };
 /* End PBXBuildFile section */
 
@@ -290,7 +289,6 @@
 		EDDB9370243AF0E400B5806B /* ThreeDSecureSFSafariViewControllerDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureSFSafariViewControllerDriver.swift; sourceTree = "<group>"; };
 		EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormLabelStyledView.swift; sourceTree = "<group>"; };
 		EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormLabelStyledView.xib; sourceTree = "<group>"; };
-		EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		EDFF4DB1234322B00036F449 /* LocalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -575,7 +573,6 @@
 				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
-				EDFDF7CD244D67CF00A61488 /* PaddingTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -839,7 +836,6 @@
 				EDA3EE8E22E1AF9C00D9A6C9 /* CvcValidator.swift in Sources */,
 				EDADA262238BCE860057FDF3 /* UIViewController+PAYJP.swift in Sources */,
 				EDA3EE7F22DF0AF600D9A6C9 /* CardNumberFormatter.swift in Sources */,
-				EDFDF7CE244D67CF00A61488 /* PaddingTextField.swift in Sources */,
 				ED4ACE182383F61D00349BBF /* CardFormViewControllerDelegate.swift in Sources */,
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
 				ED6F13442360319B00857BCC /* FormStyle.swift in Sources */,

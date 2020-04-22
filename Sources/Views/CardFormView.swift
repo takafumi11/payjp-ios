@@ -226,7 +226,6 @@ extension CardFormView {
     ///
     /// - Parameter currentField: 現在のTextField
     func focusNextInputField(currentField: UITextField) {
-        print("CardFormView : focusNextInputField")
         switch currentField {
         case cardNumberTextField:
             if cardNumberTextField.isFirstResponder {
