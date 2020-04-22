@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT' }
   s.author           = { 'PAY.JP (https://pay.jp)' => 'support@pay.jp' }
   s.source           = { :git => 'https://github.com/payjp/payjp-ios.git', :tag => s.version.to_s, submodules: true }
-  s.swift_version    = '5.0'
+  s.swift_versions   = ['5.0', '5.1', '5.2']
 
   s.ios.deployment_target = '10.0'
 
