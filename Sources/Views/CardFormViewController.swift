@@ -187,18 +187,20 @@ public class CardFormViewController: UIViewController {
 
     private func setupCardFormView() {
         // show submit button on top of keyboard
-        let frame = CGRect.init(x: 0,
-                                y: 0,
-                                width: (UIScreen.main.bounds.size.width),
-                                height: 44)
-        let view = UIView(frame: frame)
-        accessorySubmitButton = ActionButton(frame: frame)
+        let buttonFrame = CGRect.init(x: 0,
+                                      y: 0,
+                                      width: (UIScreen.main.bounds.size.width),
+                                      height: 44)
+        let buttonView = UIView(frame: buttonFrame)
+        accessorySubmitButton = ActionButton(frame: buttonFrame)
         accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
-        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
+        accessorySubmitButton.addTarget(self,
+                                        action: #selector(submitTapped(sender:)),
+                                        for: .touchUpInside)
         accessorySubmitButton.isEnabled = false
         accessorySubmitButton.cornerRadius = Style.Radius.none
-        view.addSubview(accessorySubmitButton)
+        buttonView.addSubview(accessorySubmitButton)
 
         let x = self.formContentView.bounds.origin.x
         let y = self.formContentView.bounds.origin.y
@@ -206,18 +208,18 @@ public class CardFormViewController: UIViewController {
         let height = self.formContentView.bounds.height
         let viewFrame = CGRect(x: x, y: y, width: width, height: height)
 
-        initCardFormView(viewFrame: viewFrame)
+        initCardFormView(viewFrame: viewFrame, accessoryView: buttonView)
     }
 
-    private func initCardFormView(viewFrame: CGRect) {
-        // どのカスタムViewを使うか判定
+    /// タイプ別で判定してCardFormViewを生成する
+    private func initCardFormView(viewFrame: CGRect, accessoryView: UIView) {
         switch cardFormViewType {
         case .tableStyled:
             brandsLayout.isHidden = false
             let cardFormView = CardFormTableStyledView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
-            cardFormView.setupInputAccessoryView(view: view)
+            cardFormView.setupInputAccessoryView(view: accessoryView)
             cardFormView.backgroundColor = Style.Color.groupedBackground
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
@@ -231,7 +233,7 @@ public class CardFormViewController: UIViewController {
             let cardFormView = CardFormLabelStyledView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
-            cardFormView.setupInputAccessoryView(view: view)
+            cardFormView.setupInputAccessoryView(view: accessoryView)
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
                 submitButton.normalBackgroundColor = formStyle.submitButtonColor
@@ -244,7 +246,7 @@ public class CardFormViewController: UIViewController {
             let cardFormView = CardDisplayFormView(frame: viewFrame)
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
-            cardFormView.setupInputAccessoryView(view: view)
+            cardFormView.setupInputAccessoryView(view: accessoryView)
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
                 submitButton.normalBackgroundColor = formStyle.submitButtonColor
