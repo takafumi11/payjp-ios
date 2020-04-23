@@ -25,11 +25,14 @@ public class CardDisplayFormView: UIView, CardFormView {
     var cardHolderTextField: UITextField!
     var ocrButton: UIButton!
 
-    // 追加
+    var cardNumberErrorLabel: UILabel!
+    var expirationErrorLabel: UILabel!
+    var cvcErrorLabel: UILabel!
+    var cardHolderErrorLabel: UILabel!
+
     @IBOutlet weak var cardDisplayView: UIView!
     @IBOutlet weak var cardFrontView: UIStackView!
     @IBOutlet weak var cardBackView: UIView!
-    @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
     @IBOutlet weak var cvcDisplayLabel: UILabel!
     @IBOutlet weak var cvc4DisplayLabel: UILabel!
@@ -47,6 +50,11 @@ public class CardDisplayFormView: UIView, CardFormView {
     var cvcFieldBackground: UIView!
     var cardHolderFieldBackground: UIView!
 
+    var cardNumberFieldContentView: UIStackView!
+    var expirationFieldContentView: UIStackView!
+    var cvcFieldContentView: UIStackView!
+    var cardHolderFieldContentView: UIStackView!
+
     var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
@@ -54,11 +62,12 @@ public class CardDisplayFormView: UIView, CardFormView {
     private let inputFieldMargin: CGFloat = 16.0
     private var contentPositionX: CGFloat = 0.0
     private var isScrolling: Bool = false
+    private let formContentStackView: UIStackView = UIStackView()
 
     /// Camera scan action
     ///
     /// - Parameter sender: sender
-    @IBAction func onTapOcrButton(_ sender: Any) {
+    @objc private func onTapOcrButton(_ sender: Any) {
         viewModel.requestOcr()
     }
 
@@ -98,7 +107,13 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         backgroundColor = .clear
 
-        setupInputField()
+        cardNumberDisplayLabel.adjustsFontSizeToFitWidth = true
+        expirationDisplayLabel.adjustsFontSizeToFitWidth = true
+        cvcDisplayLabel.adjustsFontSizeToFitWidth = true
+        cvc4DisplayLabel.adjustsFontSizeToFitWidth = true
+        cardHolderDisplayLabel.adjustsFontSizeToFitWidth = true
+
+        setupViews()
         setupScrollableFormLayout()
         apply(style: .defaultStyle)
 
@@ -115,7 +130,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     func inputCardNumberSuccess(value: CardNumber) {
         updateCvc4LabelVisibility()
         cardNumberDisplayLabel.text = value.display
-        errorMessageLabel.text = nil
+        cardNumberErrorLabel.text = nil
     }
 
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
@@ -125,16 +140,16 @@ public class CardDisplayFormView: UIView, CardFormView {
         } else {
             cardNumberDisplayLabel.text = "payjp_card_display_form_number_default".localized
         }
-        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+        cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
     func inputCardNumberComplete() {
-        errorMessageLabel.isHidden = cardNumberTextField.text == nil
+        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
     }
 
     func inputExpirationSuccess(value: String) {
         expirationDisplayLabel.text = value
-        errorMessageLabel.text = nil
+        expirationErrorLabel.text = nil
     }
 
     func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
@@ -143,30 +158,30 @@ public class CardDisplayFormView: UIView, CardFormView {
         } else {
             expirationDisplayLabel.text = "payjp_card_display_form_expiration_default".localized
         }
-        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+        expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
     func inputExpirationComplete() {
-        errorMessageLabel.isHidden = expirationTextField.text == nil
+        expirationErrorLabel.isHidden = expirationTextField.text == nil
     }
 
     func inputCvcSuccess(value: String) {
         updateCvcDisplayLabel(cvc: value)
-        errorMessageLabel.text = nil
+        cvcErrorLabel.text = nil
     }
 
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         updateCvcDisplayLabel(cvc: value)
-        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+        cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
     func inputCvcComplete() {
-        errorMessageLabel.isHidden = cvcTextField.text == nil
+        cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
 
     func inputCardHolderSuccess(value: String) {
         cardHolderDisplayLabel.text = value
-        errorMessageLabel.text = nil
+        cardHolderErrorLabel.text = nil
     }
 
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
@@ -175,11 +190,11 @@ public class CardDisplayFormView: UIView, CardFormView {
         } else {
             cardHolderDisplayLabel.text = "payjp_card_display_form_holder_name_default".localized
         }
-        errorMessageLabel.text = forceShowError || instant ? error.localizedDescription : nil
+        cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
     func inputCardHolderComplete() {
-        errorMessageLabel.isHidden = cardHolderTextField.text == nil
+        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
 
     func updateBrandLogo(brand: CardBrand?) {
@@ -200,9 +215,8 @@ public class CardDisplayFormView: UIView, CardFormView {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 
-    /// 入力フィールドのセットアップ
-    /// 現状は 1ページ に 1テキストフィールド のレイアウトで実装
-    private func setupInputField() {
+    /// 各Viewのセットアップ
+    private func setupViews() {
         cardNumberFieldBackground = UIView()
         expirationFieldBackground = UIView()
         cvcFieldBackground = UIView()
@@ -212,6 +226,11 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationTextField = UITextField()
         cvcTextField = UITextField()
         cardHolderTextField = UITextField()
+
+        cardNumberErrorLabel = UILabel()
+        expirationErrorLabel = UILabel()
+        cvcErrorLabel = UILabel()
+        cardHolderErrorLabel = UILabel()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -238,6 +257,9 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardHolderTextField.delegate = self
 
         ocrButton = UIButton()
+        ocrButton.addTarget(self,
+                            action: #selector(onTapOcrButton(_:)),
+                            for: UIControl.Event.touchUpInside)
         ocrButton.setImage("icon_camera".image, for: .normal)
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
@@ -251,80 +273,95 @@ public class CardDisplayFormView: UIView, CardFormView {
     /// ScrollViewとStackViewの組み合わせで実装
     private func setupScrollableFormLayout() {
         // 横ScrollViewにaddするStackView
-        let formContentView = UIStackView()
-        formContentView.spacing = 0.0
-        formContentView.axis = .horizontal
-        formContentView.alignment = .fill
-        formContentView.distribution = .fillEqually
-        formContentView.translatesAutoresizingMaskIntoConstraints = false
-        formScrollView.addSubview(formContentView)
+        formContentStackView.spacing = 0.0
+        formContentStackView.axis = .horizontal
+        formContentStackView.alignment = .fill
+        formContentStackView.distribution = .fillEqually
+        formContentStackView.translatesAutoresizingMaskIntoConstraints = false
+        formScrollView.addSubview(formContentStackView)
 
         NSLayoutConstraint.activate([
-            formContentView.topAnchor.constraint(equalTo: formScrollView.topAnchor),
-            formContentView.leadingAnchor.constraint(equalTo: formScrollView.leadingAnchor),
-            formContentView.bottomAnchor.constraint(equalTo: formScrollView.bottomAnchor),
-            formContentView.trailingAnchor.constraint(equalTo: formScrollView.trailingAnchor),
-            formContentView.heightAnchor.constraint(equalTo: formScrollView.heightAnchor),
+            formContentStackView.topAnchor.constraint(equalTo: formScrollView.topAnchor),
+            formContentStackView.leadingAnchor.constraint(equalTo: formScrollView.leadingAnchor),
+            formContentStackView.bottomAnchor.constraint(equalTo: formScrollView.bottomAnchor),
+            formContentStackView.trailingAnchor.constraint(equalTo: formScrollView.trailingAnchor),
+            formContentStackView.heightAnchor.constraint(equalTo: formScrollView.heightAnchor),
             // widthはscrollView.widthAnchor x ページ数
-            formContentView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
-                                                   multiplier: CGFloat(4))
+            formContentStackView.widthAnchor.constraint(equalTo: formScrollView.widthAnchor,
+                                                        multiplier: CGFloat(4))
         ])
 
         // 各入力フィールド
-        let cardNumberContentView = setupInputContentView(contentView: cardNumberFieldBackground,
-                                                          textField: cardNumberTextField,
-                                                          actionButton: ocrButton,
-                                                          spacing: 8.0)
-        let expirationContentView = setupInputContentView(contentView: expirationFieldBackground,
-                                                          textField: expirationTextField)
-        let cvcContentView = setupInputContentView(contentView: cvcFieldBackground,
-                                                   textField: cvcTextField)
-        let cardHolderContentView = setupInputContentView(contentView: cardHolderFieldBackground,
-                                                          textField: cardHolderTextField)
+        cardNumberFieldContentView = setupInputContentView(backgroundView: cardNumberFieldBackground,
+                                                           textField: cardNumberTextField,
+                                                           errorLabel: cardNumberErrorLabel,
+                                                           actionButton: ocrButton,
+                                                           spacing: 8.0)
+        expirationFieldContentView = setupInputContentView(backgroundView: expirationFieldBackground,
+                                                           textField: expirationTextField,
+                                                           errorLabel: expirationErrorLabel)
+        cvcFieldContentView = setupInputContentView(backgroundView: cvcFieldBackground,
+                                                    textField: cvcTextField,
+                                                    errorLabel: cvcErrorLabel)
+        cardHolderFieldContentView = setupInputContentView(backgroundView: cardHolderFieldBackground,
+                                                           textField: cardHolderTextField,
+                                                           errorLabel: cardHolderErrorLabel)
 
-        cardNumberContentView.roundingCorners(corners: .allCorners, radius: 4.0)
-        expirationContentView.roundingCorners(corners: .allCorners, radius: 4.0)
-        cvcContentView.roundingCorners(corners: .allCorners, radius: 4.0)
-        cardHolderContentView.roundingCorners(corners: .allCorners, radius: 4.0)
-
-        formContentView.addArrangedSubview(cardNumberContentView)
-        formContentView.addArrangedSubview(expirationContentView)
-        formContentView.addArrangedSubview(cvcContentView)
-        formContentView.addArrangedSubview(cardHolderContentView)
+        formContentStackView.addArrangedSubview(cardNumberFieldContentView)
+        formContentStackView.addArrangedSubview(expirationFieldContentView)
+        formContentStackView.addArrangedSubview(cvcFieldContentView)
+        formContentStackView.addArrangedSubview(cardHolderFieldContentView)
     }
 
-    private func setupInputContentView(contentView: UIView,
+    private func setupInputContentView(backgroundView: UIView,
                                        textField: UITextField,
+                                       errorLabel: UILabel,
                                        actionButton: UIButton? = nil,
-                                       spacing: CGFloat = 0.0) -> UIView {
-        let inputView = UIStackView()
-        inputView.spacing = spacing
-        inputView.axis = .horizontal
-        inputView.alignment = .fill
-        inputView.distribution = .fill
-        inputView.translatesAutoresizingMaskIntoConstraints = false
-        inputView.addArrangedSubview(textField)
+                                       spacing: CGFloat = 0.0) -> UIStackView {
 
-        contentView.backgroundColor = FormStyle.defaultStyle.inputFieldBackgroundColor
-        contentView.addSubview(inputView)
+        let inputStackView = UIStackView()
+        inputStackView.spacing = spacing
+        inputStackView.axis = .horizontal
+        inputStackView.alignment = .fill
+        inputStackView.distribution = .fill
+        inputStackView.translatesAutoresizingMaskIntoConstraints = false
+        inputStackView.addArrangedSubview(textField)
+
+        backgroundView.roundingCorners(corners: .allCorners, radius: 4.0)
+        backgroundView.backgroundColor = FormStyle.defaultStyle.inputFieldBackgroundColor
+        backgroundView.addSubview(inputStackView)
 
         NSLayoutConstraint.activate([
-            inputView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                               constant: inputFieldMargin),
-            inputView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                constant: -inputFieldMargin),
-            inputView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            inputStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
+                                                    constant: inputFieldMargin),
+            inputStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor,
+                                                     constant: -inputFieldMargin),
+            inputStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
             textField.heightAnchor.constraint(equalToConstant: 30.0)
         ])
 
         if let button = actionButton {
-            inputView.addArrangedSubview(button)
+            inputStackView.addArrangedSubview(button)
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalToConstant: 24.0)
             ])
         }
 
-        return contentView
+        let contentStackView = UIStackView()
+        contentStackView.spacing = 4.0
+        contentStackView.axis = .vertical
+        contentStackView.alignment = .fill
+        contentStackView.distribution = .fill
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.addArrangedSubview(backgroundView)
+        contentStackView.addArrangedSubview(errorLabel)
+
+        NSLayoutConstraint.activate([
+            errorLabel.heightAnchor.constraint(equalToConstant: 24.0),
+            contentStackView.heightAnchor.constraint(equalToConstant: 72.0)
+        ])
+
+        return contentStackView
     }
 
     private func backFlipCard() {
@@ -514,7 +551,10 @@ extension CardDisplayFormView: CardFormAction {
         cvcTextField.textColor = inputTextColor
         cardHolderTextField.textColor = inputTextColor
         // error text
-        errorMessageLabel.textColor = errorTextColor
+        cardNumberErrorLabel.textColor = errorTextColor
+        expirationErrorLabel.textColor = errorTextColor
+        cvcErrorLabel.textColor = errorTextColor
+        cardHolderErrorLabel.textColor = errorTextColor
         // tint
         cardNumberTextField.tintColor = tintColor
         expirationTextField.tintColor = tintColor
@@ -608,13 +648,13 @@ extension CardDisplayFormView: UITextFieldDelegate {
         // スクロール位置調整のため、各入力Viewのpositionを保持する
         switch textField {
         case cardNumberTextField:
-            contentPositionX = cardNumberFieldBackground.frame.origin.x
+            contentPositionX = cardNumberFieldContentView.frame.origin.x
         case expirationTextField:
-            contentPositionX = expirationFieldBackground.frame.origin.x
+            contentPositionX = expirationFieldContentView.frame.origin.x
         case cvcTextField:
-            contentPositionX = cvcFieldBackground.frame.origin.x
+            contentPositionX = cvcFieldContentView.frame.origin.x
         case cardHolderTextField:
-            contentPositionX = cardHolderFieldBackground.frame.origin.x
+            contentPositionX = cardHolderFieldContentView.frame.origin.x
         default:
             break
         }
