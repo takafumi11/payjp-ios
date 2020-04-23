@@ -20,7 +20,6 @@ protocol CardFormView {
     /// view
     var brandLogoImage: UIImageView! { get }
     var cvcIconImage: UIImageView! { get }
-    var holderContainer: UIStackView! { get }
     var ocrButton: UIButton! { get }
 
     var cardNumberTextField: UITextField! { get }
@@ -28,23 +27,21 @@ protocol CardFormView {
     var cvcTextField: UITextField! { get }
     var cardHolderTextField: UITextField! { get }
 
+    var cardNumberErrorLabel: UILabel! { get }
+    var expirationErrorLabel: UILabel! { get }
+    var cvcErrorLabel: UILabel! { get }
+    var cardHolderErrorLabel: UILabel! { get }
+
     var viewModel: CardFormViewViewModelType { get }
 
     func inputCardNumberSuccess(value: CardNumber)
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool)
-    func inputCardNumberComplete()
-
     func inputExpirationSuccess(value: String)
     func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
-    func inputExpirationComplete()
-
     func inputCvcSuccess(value: String)
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
-    func inputCvcComplete()
-
     func inputCardHolderSuccess(value: String)
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
-    func inputCardHolderComplete()
 
     func updateBrandLogo(brand: CardBrand?)
     func focusNextInputField(currentField: UITextField)
@@ -99,7 +96,7 @@ extension CardFormView {
                 break
             }
         }
-        inputCardNumberComplete()
+        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
 
         // ブランドが変わったらcvcのチェックを走らせる
         if viewModel.isCardBrandChanged || input?.isEmpty == true {
@@ -148,7 +145,7 @@ extension CardFormView {
                 break
             }
         }
-        inputExpirationComplete()
+        expirationErrorLabel.isHidden = expirationTextField.text == nil
     }
 
     /// CVCの入力フィールドを更新する
@@ -180,7 +177,7 @@ extension CardFormView {
                 break
             }
         }
-        inputCvcComplete()
+        cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
 
     /// cvcアイコンの表示を更新する
@@ -219,7 +216,43 @@ extension CardFormView {
                 break
             }
         }
-        inputCardNumberComplete()
+        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
+    }
+
+    func inputCardNumberSuccess(value: CardNumber) {
+        cardNumberErrorLabel.text = nil
+    }
+
+    func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputExpirationSuccess(value: String) {
+        expirationErrorLabel.text = nil
+    }
+
+    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCvcSuccess(value: String) {
+        cvcErrorLabel.text = nil
+    }
+
+    func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardHolderSuccess(value: String) {
+        cardHolderErrorLabel.text = nil
+    }
+
+    func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardHolderComplete() {
+        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
 
     /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する

@@ -17,7 +17,6 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     @IBOutlet weak var brandLogoImage: UIImageView!
     var cvcIconImage: UIImageView!
-    var holderContainer: UIStackView!
 
     var cardNumberTextField: UITextField!
     var expirationTextField: UITextField!
@@ -30,14 +29,20 @@ public class CardDisplayFormView: UIView, CardFormView {
     var cvcErrorLabel: UILabel!
     var cardHolderErrorLabel: UILabel!
 
+    var inputTextColor: UIColor = Style.Color.label
+    var inputTintColor: UIColor = Style.Color.blue
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+
     @IBOutlet weak var cardDisplayView: UIView!
     @IBOutlet weak var cardFrontView: UIStackView!
     @IBOutlet weak var cardBackView: UIView!
+
     @IBOutlet weak var cardNumberDisplayLabel: UILabel!
     @IBOutlet weak var cvcDisplayLabel: UILabel!
     @IBOutlet weak var cvc4DisplayLabel: UILabel!
     @IBOutlet weak var cardHolderDisplayLabel: UILabel!
     @IBOutlet weak var expirationDisplayLabel: UILabel!
+
     @IBOutlet weak var formScrollView: UIScrollView!
     @IBOutlet weak var cvc4BorderView: BorderView!
     @IBOutlet weak var cvcBorderView: BorderView!
@@ -45,19 +50,15 @@ public class CardDisplayFormView: UIView, CardFormView {
     @IBOutlet weak var cardHolderBorderView: BorderView!
     @IBOutlet weak var expirationBorderView: BorderView!
 
-    var cardNumberFieldBackground: UIView!
-    var expirationFieldBackground: UIView!
-    var cvcFieldBackground: UIView!
-    var cardHolderFieldBackground: UIView!
+    private var cardNumberFieldBackground: UIView!
+    private var expirationFieldBackground: UIView!
+    private var cvcFieldBackground: UIView!
+    private var cardHolderFieldBackground: UIView!
 
-    var cardNumberFieldContentView: UIStackView!
-    var expirationFieldContentView: UIStackView!
-    var cvcFieldContentView: UIStackView!
-    var cardHolderFieldContentView: UIStackView!
-
-    var inputTextColor: UIColor = Style.Color.label
-    var inputTintColor: UIColor = Style.Color.blue
-    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    private var cardNumberFieldContentView: UIStackView!
+    private var expirationFieldContentView: UIStackView!
+    private var cvcFieldContentView: UIStackView!
+    private var cardHolderFieldContentView: UIStackView!
 
     private let inputFieldMargin: CGFloat = 16.0
     private var contentPositionX: CGFloat = 0.0
@@ -114,7 +115,8 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardHolderDisplayLabel.adjustsFontSizeToFitWidth = true
 
         setupViews()
-        setupScrollableFormLayout()
+        setupInputFields()
+        setupScrollableForm()
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
@@ -143,10 +145,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputCardNumberComplete() {
-        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
-    }
-
     func inputExpirationSuccess(value: String) {
         expirationDisplayLabel.text = value
         expirationErrorLabel.text = nil
@@ -161,10 +159,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputExpirationComplete() {
-        expirationErrorLabel.isHidden = expirationTextField.text == nil
-    }
-
     func inputCvcSuccess(value: String) {
         updateCvcDisplayLabel(cvc: value)
         cvcErrorLabel.text = nil
@@ -173,10 +167,6 @@ public class CardDisplayFormView: UIView, CardFormView {
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         updateCvcDisplayLabel(cvc: value)
         cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputCvcComplete() {
-        cvcErrorLabel.isHidden = cvcTextField.text == nil
     }
 
     func inputCardHolderSuccess(value: String) {
@@ -191,10 +181,6 @@ public class CardDisplayFormView: UIView, CardFormView {
             cardHolderDisplayLabel.text = "payjp_card_display_form_holder_name_default".localized
         }
         cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputCardHolderComplete() {
-        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
     }
 
     func updateBrandLogo(brand: CardBrand?) {
@@ -222,15 +208,29 @@ public class CardDisplayFormView: UIView, CardFormView {
         cvcFieldBackground = UIView()
         cardHolderFieldBackground = UIView()
 
-        cardNumberTextField = UITextField()
-        expirationTextField = UITextField()
-        cvcTextField = UITextField()
-        cardHolderTextField = UITextField()
-
         cardNumberErrorLabel = UILabel()
         expirationErrorLabel = UILabel()
         cvcErrorLabel = UILabel()
         cardHolderErrorLabel = UILabel()
+
+        ocrButton = UIButton()
+        ocrButton.addTarget(self,
+                            action: #selector(onTapOcrButton(_:)),
+                            for: UIControl.Event.touchUpInside)
+        ocrButton.setImage("icon_camera".image, for: .normal)
+        ocrButton.imageView?.contentMode = .scaleAspectFit
+        ocrButton.contentHorizontalAlignment = .fill
+        ocrButton.contentVerticalAlignment = .fill
+
+        cardIOProxy = CardIOProxy(delegate: self)
+        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+    }
+
+    private func setupInputFields() {
+        cardNumberTextField = UITextField()
+        expirationTextField = UITextField()
+        cvcTextField = UITextField()
+        cardHolderTextField = UITextField()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -255,23 +255,11 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationTextField.delegate = self
         cvcTextField.delegate = self
         cardHolderTextField.delegate = self
-
-        ocrButton = UIButton()
-        ocrButton.addTarget(self,
-                            action: #selector(onTapOcrButton(_:)),
-                            for: UIControl.Event.touchUpInside)
-        ocrButton.setImage("icon_camera".image, for: .normal)
-        ocrButton.imageView?.contentMode = .scaleAspectFit
-        ocrButton.contentHorizontalAlignment = .fill
-        ocrButton.contentVerticalAlignment = .fill
-
-        cardIOProxy = CardIOProxy(delegate: self)
-        //        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
     }
 
     /// 横スクロール可能なフォームの作成
     /// ScrollViewとStackViewの組み合わせで実装
-    private func setupScrollableFormLayout() {
+    private func setupScrollableForm() {
         // 横ScrollViewにaddするStackView
         formContentStackView.spacing = 0.0
         formContentStackView.axis = .horizontal

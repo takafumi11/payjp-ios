@@ -96,7 +96,7 @@ public class CardFormLabelStyledView: UIView, CardFormView {
 
         backgroundColor = .clear
 
-        setupInputField()
+        setupInputFields()
 
         // label
         cardNumberLabel.text = "payjp_card_form_number_label".localized
@@ -133,63 +133,13 @@ public class CardFormLabelStyledView: UIView, CardFormView {
         cardHolderFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
     }
 
-    // MARK: CardFormView
-
-    func inputCardNumberSuccess(value: CardNumber) {
-        cardNumberErrorLabel.text = nil
-    }
-
-    func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
-        cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputCardNumberComplete() {
-        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
-    }
-
-    func inputExpirationSuccess(value: String) {
-        expirationErrorLabel.text = nil
-    }
-
-    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputExpirationComplete() {
-        expirationErrorLabel.isHidden = expirationTextField.text == nil
-    }
-
-    func inputCvcSuccess(value: String) {
-        cvcErrorLabel.text = nil
-    }
-
-    func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputCvcComplete() {
-        cvcErrorLabel.isHidden = cvcTextField.text == nil
-    }
-
-    func inputCardHolderSuccess(value: String) {
-        cardHolderErrorLabel.text = nil
-    }
-
-    func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
-    }
-
-    func inputCardHolderComplete() {
-        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
-    }
-
     // MARK: Private
 
     private func notifyIsValidChanged() {
         self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 
-    private func setupInputField() {
+    private func setupInputFields() {
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_label_style_number_placeholder".localized,

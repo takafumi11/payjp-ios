@@ -206,6 +206,10 @@ public class CardFormViewController: UIViewController {
         let height = self.formContentView.bounds.height
         let viewFrame = CGRect(x: x, y: y, width: width, height: height)
 
+        initCardFormView(viewFrame: viewFrame)
+    }
+
+    private func initCardFormView(viewFrame: CGRect) {
         // どのカスタムViewを使うか判定
         switch cardFormViewType {
         case .tableStyled:
