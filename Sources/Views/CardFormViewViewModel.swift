@@ -150,7 +150,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
-        self.cardNumber = cardNumberInput.formatted.numberfy()
+        self.cardNumber = cardNumberInput.hyphenFormatted.numberfy()
         self.cardBrand = cardNumberInput.brand
 
         if let cardNumber = self.cardNumber {

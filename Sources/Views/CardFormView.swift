@@ -43,6 +43,7 @@ protocol CardFormView {
     func inputCardHolderSuccess(value: String)
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
 
+    func updateCardNumber(value: CardNumber?)
     func updateBrandLogo(brand: CardBrand?)
     func focusNextInputField(currentField: UITextField)
 }
@@ -72,11 +73,11 @@ extension CardFormView {
         let result = viewModel.update(cardNumber: input)
         switch result {
         case let .success(cardNumber):
-            cardNumberTextField.text = cardNumber.formatted
             if inputTextErrorColorEnabled {
                 cardNumberTextField.textColor = self.inputTextColor
             }
             inputCardNumberSuccess(value: cardNumber)
+            updateCardNumber(value: cardNumber)
             updateBrandLogo(brand: cardNumber.brand)
             updateCvcIcon(brand: cardNumber.brand)
             focusNextInputField(currentField: cardNumberTextField)
@@ -85,11 +86,11 @@ extension CardFormView {
             case let .cardNumberEmptyError(value, instant),
                  let .cardNumberInvalidError(value, instant),
                  let .cardNumberInvalidBrandError(value, instant):
-                cardNumberTextField.text = value?.formatted
                 if inputTextErrorColorEnabled {
                     cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 }
                 inputCardNumberFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
+                updateCardNumber(value: value)
                 updateBrandLogo(brand: value?.brand)
                 updateCvcIcon(brand: value?.brand)
             default:
@@ -275,6 +276,10 @@ extension CardFormView {
         default:
             break
         }
+    }
+
+    func updateCardNumber(value: CardNumber?) {
+        cardNumberTextField.text = value?.hyphenFormatted
     }
 
     /// 入力フィールドのカーソル位置を調整する

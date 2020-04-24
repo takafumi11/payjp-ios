@@ -86,7 +86,7 @@ class CardFormViewModelTests: XCTestCase {
 
         switch result {
         case .success(let value):
-            XCTAssertEqual(value.formatted, "4242-4242-4242-4242")
+            XCTAssertEqual(value.hyphenFormatted, "4242-4242-4242-4242")
             XCTAssertEqual(value.brand, .visa)
         default:
             XCTFail()

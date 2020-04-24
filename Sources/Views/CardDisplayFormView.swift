@@ -109,10 +109,6 @@ public class CardDisplayFormView: UIView, CardFormView {
         backgroundColor = .clear
 
         cardNumberDisplayLabel.adjustsFontSizeToFitWidth = true
-        expirationDisplayLabel.adjustsFontSizeToFitWidth = true
-        cvcDisplayLabel.adjustsFontSizeToFitWidth = true
-        cvc4DisplayLabel.adjustsFontSizeToFitWidth = true
-        cardHolderDisplayLabel.adjustsFontSizeToFitWidth = true
 
         setupViews()
         setupInputFields()
@@ -193,6 +189,10 @@ public class CardDisplayFormView: UIView, CardFormView {
             guard let self = self else { return }
             self.focusNext(currentField: currentField)
         }
+    }
+
+    func updateCardNumber(value: CardNumber?) {
+        cardNumberTextField.text = value?.spaceFormatted
     }
 
     // MARK: Private

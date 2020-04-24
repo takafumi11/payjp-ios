@@ -30,22 +30,32 @@ struct CardNumberFormatter: CardNumberFormatterType {
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            var trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
+            let trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
 
-            var formatted = trimmed
-            while formatted.count < brand.numberLength {
-                formatted.append("X")
+            var hyphenFormatted = trimmed
+            var spaceFormatted = trimmed
+            var masked = trimmed
+            while masked.count < brand.numberLength {
+                masked.append("X")
             }
 
             switch brand {
             case .americanExpress, .dinersClub:
-                trimmed.insert(separator: "-", positions: [4, 10])
-                formatted.insert(separator: " ", positions: [4, 10])
-                return CardNumber(formatted: trimmed, brand: brand, display: formatted)
+                hyphenFormatted.insert(separator: "-", positions: [4, 10])
+                spaceFormatted.insert(separator: " ", positions: [4, 10])
+                masked.insert(separator: " ", positions: [4, 10])
+                return CardNumber(hyphenFormatted: hyphenFormatted,
+                                  spaceFormatted: spaceFormatted,
+                                  brand: brand,
+                                  display: masked)
             default:
-                trimmed.insert(separator: "-", every: 4)
-                formatted.insert(separator: " ", every: 4)
-                return CardNumber(formatted: trimmed, brand: brand, display: formatted)
+                hyphenFormatted.insert(separator: "-", every: 4)
+                spaceFormatted.insert(separator: " ", every: 4)
+                masked.insert(separator: " ", every: 4)
+                return CardNumber(hyphenFormatted: hyphenFormatted,
+                                  spaceFormatted: spaceFormatted,
+                                  brand: brand,
+                                  display: masked)
             }
         }
         return nil
