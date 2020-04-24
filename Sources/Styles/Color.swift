@@ -52,28 +52,5 @@ extension Style {
         static var red: UIColor {
             return .systemRed
         }
-
-        // Card background color
-        static var visa: UIColor {
-            return UIColor(hex: "87cefa")
-        }
-        static var masterCard: UIColor {
-            return UIColor(hex: "a9a9a9")
-        }
-        static var jcb: UIColor {
-            return UIColor(hex: "fffaf0")
-        }
-        static var americanExpress: UIColor {
-            return UIColor(hex: "6495ed")
-        }
-        static var dinersClub: UIColor {
-            return UIColor(hex: "6495ed")
-        }
-        static var discover: UIColor {
-            return UIColor(hex: "a9a9a9")
-        }
-        static var defaultBrand: UIColor {
-            return UIColor(hex: "d3d3d3")
-        }
     }
 }
