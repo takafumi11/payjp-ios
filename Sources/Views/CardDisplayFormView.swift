@@ -31,6 +31,7 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
+    let inputTextErrorColorEnabled: Bool = true
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
 
     @IBOutlet weak var cardDisplayView: UIView!
@@ -127,14 +128,14 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     func inputCardNumberSuccess(value: CardNumber) {
         updateCvc4LabelVisibility()
-        cardNumberDisplayLabel.text = value.display
+        updateCardNumber(value: value)
         cardNumberErrorLabel.text = nil
     }
 
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
         updateCvc4LabelVisibility()
         if let value = value {
-            cardNumberDisplayLabel.text = value.display
+            updateCardNumber(value: value)
         } else {
             cardNumberDisplayLabel.text = "payjp_card_display_form_number_default".localized
         }
@@ -142,13 +143,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputExpirationSuccess(value: Expiration) {
-        expirationDisplayLabel.text = value.display
+        updateExpiration(value: value)
         expirationErrorLabel.text = nil
     }
 
     func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            expirationDisplayLabel.text = value.display
+            updateExpiration(value: value)
         } else {
             expirationDisplayLabel.text = "payjp_card_display_form_expiration_default".localized
         }
@@ -166,13 +167,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCardHolderSuccess(value: String) {
-        cardHolderDisplayLabel.text = value
+        updateCardHolder(value: value)
         cardHolderErrorLabel.text = nil
     }
 
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            cardHolderDisplayLabel.text = value
+            updateCardHolder(value: value)
         } else {
             cardHolderDisplayLabel.text = "payjp_card_display_form_holder_name_default".localized
         }
@@ -224,6 +225,12 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+
+        cardNumberDisplayLabel.textColor = Style.Color.placeholderText
+        expirationDisplayLabel.textColor = Style.Color.placeholderText
+        cvcDisplayLabel.textColor = Style.Color.placeholderText
+        cvc4DisplayLabel.textColor = Style.Color.placeholderText
+        cardHolderDisplayLabel.textColor = Style.Color.placeholderText
     }
 
     private func setupInputFields() {
@@ -383,19 +390,54 @@ public class CardDisplayFormView: UIView, CardFormView {
         }
     }
 
+    private func updateCardNumber(value: CardNumber) {
+        let range = (value.display as NSString).range(of: value.spaceFormatted)
+        let attributed = NSMutableAttributedString.init(string: value.display)
+        attributed.addAttribute(.foregroundColor,
+                                value: UIColor.white,
+                                range: range)
+        cardNumberDisplayLabel.attributedText = attributed
+    }
+
+    private func updateExpiration(value: Expiration) {
+        let range = (value.display as NSString).range(of: value.formatted)
+        let attributed = NSMutableAttributedString.init(string: value.display)
+        attributed.addAttribute(.foregroundColor,
+                                value: UIColor.white,
+                                range: range)
+        expirationDisplayLabel.attributedText = attributed
+    }
+
     private func updateCvcDisplayLabel(cvc: String?) {
         if let cvc = cvc {
             let mask = String(repeating: "•", count: cvc.count)
+            let range = (mask as NSString).range(of: mask)
+            let attributed = NSMutableAttributedString.init(string: mask)
             switch currentCardBrand {
             case .americanExpress:
-                cvc4DisplayLabel.text = mask
+                attributed.addAttribute(.foregroundColor,
+                                        value: UIColor.white,
+                                        range: range)
+                cvc4DisplayLabel.attributedText = attributed
             default:
-                cvcDisplayLabel.text = mask
+                attributed.addAttribute(.foregroundColor,
+                                        value: Style.Color.label,
+                                        range: range)
+                cvcDisplayLabel.attributedText = attributed
             }
         } else {
             cvc4DisplayLabel.text = "payjp_card_display_form_cvc4_default".localized
             cvcDisplayLabel.text = "payjp_card_display_form_cvc_default".localized
         }
+    }
+
+    private func updateCardHolder(value: String) {
+        let range = (value as NSString).range(of: value)
+        let attributed = NSMutableAttributedString.init(string: value)
+        attributed.addAttribute(.foregroundColor,
+                                value: UIColor.white,
+                                range: range)
+        cardHolderDisplayLabel.attributedText = attributed
     }
 
     private func updateDisplayLabelHighlight(textField: UITextField) {
