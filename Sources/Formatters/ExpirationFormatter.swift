@@ -32,20 +32,14 @@ struct ExpirationFormatter: ExpirationFormatterType {
             }
 
             filtered = String(filtered.unicodeScalars.prefix(4))
-
-            var masked = filtered
-            while masked.count < 4 {
-                if masked.count < 2 {
-                    masked.append("M")
-                } else {
-                    masked.append("Y")
-                }
-            }
-            masked.insert(separator: "/", every: 2)
-
             if filtered.count >= 3 {
                 filtered.insert(separator: "/", every: 2)
             }
+
+            let mmyy = "MM/YY"
+            let start = mmyy.startIndex
+            let end = mmyy.index(mmyy.startIndex, offsetBy: filtered.count, limitedBy: mmyy.endIndex) ?? mmyy.endIndex
+            let masked = mmyy.replacingCharacters(in: start..<end, with: filtered)
 
             return Expiration(formatted: filtered, display: masked)
         }
