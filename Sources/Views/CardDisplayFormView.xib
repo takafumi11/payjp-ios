@@ -228,7 +228,7 @@
                                                 <constraint firstItem="Mpf-2e-oSj" firstAttribute="leading" secondItem="ov6-6p-fHx" secondAttribute="leading" constant="8" id="DlO-yA-txO"/>
                                                 <constraint firstItem="Mpf-2e-oSj" firstAttribute="top" secondItem="ov6-6p-fHx" secondAttribute="top" constant="4" id="EZg-Ps-6lf"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mpf-2e-oSj" secondAttribute="trailing" constant="8" id="HgD-JG-xGb"/>
-                                                <constraint firstAttribute="width" constant="35" id="sGK-ld-ZNu"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="sGK-ld-ZNu"/>
                                                 <constraint firstAttribute="bottom" secondItem="Mpf-2e-oSj" secondAttribute="bottom" constant="4" id="zDE-z0-qpg"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
