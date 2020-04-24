@@ -137,7 +137,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             updateCardNumber(value: value)
         } else {
-            cardNumberDisplayLabel.text = "payjp_card_display_form_number_default".localized
+            cardNumberDisplayLabel.text = "XXXX XXXX XXXX XXXX"
         }
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -151,7 +151,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             updateExpiration(value: value)
         } else {
-            expirationDisplayLabel.text = "payjp_card_display_form_expiration_default".localized
+            expirationDisplayLabel.text = "MM/YY"
         }
         expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -175,7 +175,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         if let value = value {
             updateCardHolder(value: value)
         } else {
-            cardHolderDisplayLabel.text = "payjp_card_display_form_holder_name_default".localized
+            cardHolderDisplayLabel.text = "NAME"
         }
         cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
@@ -193,7 +193,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func updateCardNumber(value: CardNumber?) {
-        cardNumberTextField.text = value?.spaceFormatted
+        cardNumberTextField.text = value?.formatted
     }
 
     // MARK: Private
@@ -391,7 +391,7 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     private func updateCardNumber(value: CardNumber) {
-        let range = (value.display as NSString).range(of: value.spaceFormatted)
+        let range = (value.display as NSString).range(of: value.formatted)
         let attributed = NSMutableAttributedString.init(string: value.display)
         attributed.addAttribute(.foregroundColor,
                                 value: UIColor.white,
@@ -426,8 +426,8 @@ public class CardDisplayFormView: UIView, CardFormView {
                 cvcDisplayLabel.attributedText = attributed
             }
         } else {
-            cvc4DisplayLabel.text = "payjp_card_display_form_cvc4_default".localized
-            cvcDisplayLabel.text = "payjp_card_display_form_cvc_default".localized
+            cvc4DisplayLabel.text = "••••"
+            cvcDisplayLabel.text = "•••"
         }
     }
 
@@ -620,7 +620,7 @@ extension CardDisplayFormView: UITextFieldDelegate {
 
             switch textField {
             case cardNumberTextField:
-                updateCardNumberInput(input: newText)
+                updateCardNumberInput(input: newText, separator: " ")
             case expirationTextField:
                 updateExpirationInput(input: newText)
             case cvcTextField:

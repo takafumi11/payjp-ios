@@ -9,8 +9,7 @@
 import Foundation
 
 struct CardNumber {
-    let hyphenFormatted: String
-    let spaceFormatted: String
+    let formatted: String
     let brand: CardBrand
     let display: String
 }

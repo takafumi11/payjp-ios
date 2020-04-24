@@ -25,9 +25,11 @@ protocol CardFormViewViewModelType {
 
     /// カード番号の入力値を更新する
     ///
-    /// - Parameter cardNumber: カード番号
+    /// - Parameters:
+    ///   - cardNumber: cardNumber: カード番号
+    ///   - separator: separator: 区切り文字
     /// - Returns: 入力結果
-    func update(cardNumber: String?) -> Result<CardNumber, FormError>
+    func update(cardNumber: String?, separator: String) -> Result<CardNumber, FormError>
 
     /// 有効期限の入力値を更新する
     ///
@@ -139,8 +141,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     // MARK: - CardFormViewViewModelType
 
-    func update(cardNumber: String?) -> Result<CardNumber, FormError> {
-        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber),
+    func update(cardNumber: String?, separator: String) -> Result<CardNumber, FormError> {
+        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber,
+                                                                    separator: separator),
             let cardNumber = cardNumber,
             !cardNumber.isEmpty else {
                 self.cardNumber = nil
@@ -150,7 +153,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
-        self.cardNumber = cardNumberInput.hyphenFormatted.numberfy()
+        self.cardNumber = cardNumberInput.formatted.numberfy()
         self.cardBrand = cardNumberInput.brand
 
         if let cardNumber = self.cardNumber {

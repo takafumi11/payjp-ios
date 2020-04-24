@@ -68,9 +68,9 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
-    func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
+    func updateCardNumberInput(input: String?, forceShowError: Bool = false, separator: String = "-") {
         cardNumberTextField.tintColor = .clear
-        let result = viewModel.update(cardNumber: input)
+        let result = viewModel.update(cardNumber: input, separator: separator)
         switch result {
         case let .success(cardNumber):
             if inputTextErrorColorEnabled {
@@ -279,7 +279,7 @@ extension CardFormView {
     }
 
     func updateCardNumber(value: CardNumber?) {
-        cardNumberTextField.text = value?.hyphenFormatted
+        cardNumberTextField.text = value?.formatted
     }
 
     /// 入力フィールドのカーソル位置を調整する
