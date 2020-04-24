@@ -131,7 +131,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "15", isInstant: true):
+            case .expirationInvalidError(value: _, isInstant: true):
                 break
             default:
                 XCTFail()
@@ -147,7 +147,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "08/10", isInstant: true):
+            case .expirationInvalidError(value: _, isInstant: true):
                 break
             default:
                 XCTFail()
@@ -163,7 +163,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "1", isInstant: false):
+            case .expirationInvalidError(value: _, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -179,7 +179,7 @@ class CardFormViewModelTests: XCTestCase {
         switch result {
         case .failure(let error):
             switch error {
-            case .expirationInvalidError(value: "02/0", isInstant: false):
+            case .expirationInvalidError(value: _, isInstant: false):
                 break
             default:
                 XCTFail()
@@ -194,7 +194,8 @@ class CardFormViewModelTests: XCTestCase {
 
         switch result {
         case .success(let value):
-            XCTAssertEqual(value, "12/99")
+            XCTAssertEqual(value.formatted, "12/99")
+            XCTAssertEqual(value.display, "12/99")
         default:
             XCTFail()
         }

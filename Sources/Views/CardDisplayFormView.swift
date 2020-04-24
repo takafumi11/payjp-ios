@@ -141,14 +141,14 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputExpirationSuccess(value: String) {
-        expirationDisplayLabel.text = value
+    func inputExpirationSuccess(value: Expiration) {
+        expirationDisplayLabel.text = value.display
         expirationErrorLabel.text = nil
     }
 
-    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+    func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            expirationDisplayLabel.text = value
+            expirationDisplayLabel.text = value.display
         } else {
             expirationDisplayLabel.text = "payjp_card_display_form_expiration_default".localized
         }

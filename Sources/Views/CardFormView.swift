@@ -36,8 +36,8 @@ protocol CardFormView {
 
     func inputCardNumberSuccess(value: CardNumber)
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool)
-    func inputExpirationSuccess(value: String)
-    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
+    func inputExpirationSuccess(value: Expiration)
+    func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool)
     func inputCvcSuccess(value: String)
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool)
     func inputCardHolderSuccess(value: String)
@@ -127,7 +127,7 @@ extension CardFormView {
         let result = viewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
-            expirationTextField.text = expiration
+            expirationTextField.text = expiration.formatted
             if inputTextErrorColorEnabled {
                 expirationTextField.textColor = self.inputTextColor
             }
@@ -137,7 +137,7 @@ extension CardFormView {
             switch error {
             case let .expirationEmptyError(value, instant),
                  let .expirationInvalidError(value, instant):
-                expirationTextField.text = value
+                expirationTextField.text = value?.formatted
                 if inputTextErrorColorEnabled {
                     expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
                 }
@@ -228,11 +228,11 @@ extension CardFormView {
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputExpirationSuccess(value: String) {
+    func inputExpirationSuccess(value: Expiration) {
         expirationErrorLabel.text = nil
     }
 
-    func inputExpirationFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+    func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
         expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 

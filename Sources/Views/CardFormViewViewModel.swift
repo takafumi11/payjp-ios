@@ -33,7 +33,7 @@ protocol CardFormViewViewModelType {
     ///
     /// - Parameter expiration: 有効期限
     /// - Returns: 入力結果
-    func update(expiration: String?) -> Result<String, FormError>
+    func update(expiration: String?) -> Result<Expiration, FormError>
 
     /// CVCの入力値を更新する
     ///
@@ -178,7 +178,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         return .success(cardNumberInput)
     }
 
-    func update(expiration: String?) -> Result<String, FormError> {
+    func update(expiration: String?) -> Result<Expiration, FormError> {
         guard let expirationInput = self.expirationFormatter.string(from: expiration),
             let expiration = expiration, !expiration.isEmpty else {
                 self.monthYear = nil
@@ -186,7 +186,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
 
         do {
-            self.monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
+            self.monthYear = try self.expirationExtractor.extract(expiration: expirationInput.formatted)
         } catch {
             return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
         }
