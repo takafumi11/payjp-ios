@@ -182,7 +182,7 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     func updateBrandLogo(brand: CardBrand?) {
         guard let brandLogoImage = brandLogoImage else { return }
-        brandLogoImage.image = brand?.displayLogoResourceName?.image
+        brandLogoImage.image = brand?.displayLogoImage
     }
 
     func focusNextInputField(currentField: UITextField) {

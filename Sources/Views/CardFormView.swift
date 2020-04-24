@@ -114,7 +114,7 @@ extension CardFormView {
             brandLogoImage.image = "icon_card".image
             return
         }
-        brandLogoImage.image = brand.logoResourceName.image
+        brandLogoImage.image = brand.logoImage
     }
 
     /// 有効期限の入力フィールドを更新する
@@ -190,7 +190,7 @@ extension CardFormView {
             cvcIconImage.image = "icon_card_cvc_3".image
             return
         }
-        cvcIconImage.image = brand.cvcIconResourceName.image
+        cvcIconImage.image = brand.cvcIconImage
     }
 
     /// カード名義の入力フィールドを更新する
