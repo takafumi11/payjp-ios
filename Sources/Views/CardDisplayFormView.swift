@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable type_body_length file_length
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
 public class CardDisplayFormView: UIView, CardFormView {
@@ -722,3 +723,4 @@ extension CardDisplayFormView: CardFormViewModelDelegate {
         showCameraPermissionAlert()
     }
 }
+// swiftlint:enable type_body_length file_length
