@@ -162,7 +162,14 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
-        updateCvcDisplayLabel(cvc: value)
+        if let value = value {
+            updateCvcDisplayLabel(cvc: value)
+        } else {
+            cvc4DisplayLabel.attributedText = nil
+            cvcDisplayLabel.attributedText = nil
+            cvc4DisplayLabel.text = "••••"
+            cvcDisplayLabel.text = "•••"
+        }
         cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
@@ -408,26 +415,22 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationDisplayLabel.attributedText = attributed
     }
 
-    private func updateCvcDisplayLabel(cvc: String?) {
-        if let cvc = cvc {
-            let mask = String(repeating: "•", count: cvc.count)
-            let range = (mask as NSString).range(of: mask)
-            let attributed = NSMutableAttributedString.init(string: mask)
-            switch currentCardBrand {
-            case .americanExpress:
-                attributed.addAttribute(.foregroundColor,
-                                        value: UIColor.white,
-                                        range: range)
-                cvc4DisplayLabel.attributedText = attributed
-            default:
-                attributed.addAttribute(.foregroundColor,
-                                        value: Style.Color.label,
-                                        range: range)
-                cvcDisplayLabel.attributedText = attributed
-            }
-        } else {
-            cvc4DisplayLabel.text = "••••"
-            cvcDisplayLabel.text = "•••"
+    private func updateCvcDisplayLabel(cvc: String) {
+        let mask = String(repeating: "•", count: cvc.count)
+        let range = (mask as NSString).range(of: mask)
+        switch currentCardBrand {
+        case .americanExpress:
+            let attributed = NSMutableAttributedString.init(string: "••••")
+            attributed.addAttribute(.foregroundColor,
+                                    value: UIColor.white,
+                                    range: range)
+            cvc4DisplayLabel.attributedText = attributed
+        default:
+            let attributed = NSMutableAttributedString.init(string: "•••")
+            attributed.addAttribute(.foregroundColor,
+                                    value: Style.Color.label,
+                                    range: range)
+            cvcDisplayLabel.attributedText = attributed
         }
     }
 
