@@ -12,4 +12,5 @@ struct CardNumber {
     let formatted: String
     let brand: CardBrand
     let display: String
+    let mask: String
 }

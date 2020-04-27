@@ -16,6 +16,7 @@ protocol CardFormView {
     var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
     var currentCardBrand: CardBrand {get}
+    var currentCardNumber: CardNumber? {get}
 
     /// view
     var brandLogoImage: UIImageView! { get }
@@ -61,6 +62,9 @@ extension CardFormView {
     }
     var currentCardBrand: CardBrand {
         return viewModel.cardBrand
+    }
+    var currentCardNumber: CardNumber? {
+        return viewModel.cardNumber
     }
 
     /// カード番号の入力フィールドを更新する

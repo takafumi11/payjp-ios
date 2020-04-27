@@ -129,14 +129,14 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     func inputCardNumberSuccess(value: CardNumber) {
         updateCvc4LabelVisibility()
-        updateCardNumber(value: value)
+        updateDisplayLabel(cardNumber: value)
         cardNumberErrorLabel.text = nil
     }
 
     func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
         updateCvc4LabelVisibility()
         if let value = value {
-            updateCardNumber(value: value)
+            updateDisplayLabel(cardNumber: value)
         } else {
             cardNumberDisplayLabel.text = "XXXX XXXX XXXX XXXX"
         }
@@ -144,13 +144,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputExpirationSuccess(value: Expiration) {
-        updateExpiration(value: value)
+        updateDisplayLabel(expiration: value)
         expirationErrorLabel.text = nil
     }
 
     func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            updateExpiration(value: value)
+            updateDisplayLabel(expiration: value)
         } else {
             expirationDisplayLabel.text = "MM/YY"
         }
@@ -158,13 +158,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCvcSuccess(value: String) {
-        updateCvcDisplayLabel(cvc: value)
+        updateDisplayLabel(cvc: value)
         cvcErrorLabel.text = nil
     }
 
     func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            updateCvcDisplayLabel(cvc: value)
+            updateDisplayLabel(cvc: value)
         } else {
             cvc4DisplayLabel.attributedText = nil
             cvcDisplayLabel.attributedText = nil
@@ -175,13 +175,13 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     func inputCardHolderSuccess(value: String) {
-        updateCardHolder(value: value)
+        updateDisplayLabel(cardHolder: value)
         cardHolderErrorLabel.text = nil
     }
 
     func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
-            updateCardHolder(value: value)
+            updateDisplayLabel(cardHolder: value)
         } else {
             cardHolderDisplayLabel.text = "NAME"
         }
@@ -398,50 +398,36 @@ public class CardDisplayFormView: UIView, CardFormView {
         }
     }
 
-    private func updateCardNumber(value: CardNumber) {
-        let range = (value.display as NSString).range(of: value.formatted)
-        let attributed = NSMutableAttributedString.init(string: value.display)
-        attributed.addAttribute(.foregroundColor,
-                                value: UIColor.white,
-                                range: range)
-        cardNumberDisplayLabel.attributedText = attributed
+    private func updateDisplayLabel(cardNumber: CardNumber) {
+        let range = (cardNumber.display as NSString).range(of: cardNumber.formatted)
+        cardNumberDisplayLabel.attributedText = createAttributeText(string: cardNumber.display,
+                                                                    range: range)
     }
 
-    private func updateExpiration(value: Expiration) {
-        let range = (value.display as NSString).range(of: value.formatted)
-        let attributed = NSMutableAttributedString.init(string: value.display)
-        attributed.addAttribute(.foregroundColor,
-                                value: UIColor.white,
-                                range: range)
-        expirationDisplayLabel.attributedText = attributed
+    private func updateDisplayLabel(expiration: Expiration) {
+        let range = (expiration.display as NSString).range(of: expiration.formatted)
+        expirationDisplayLabel.attributedText = createAttributeText(string: expiration.display,
+                                                                    range: range)
     }
 
-    private func updateCvcDisplayLabel(cvc: String) {
+    private func updateDisplayLabel(cvc: String) {
         let mask = String(repeating: "•", count: cvc.count)
         let range = (mask as NSString).range(of: mask)
         switch currentCardBrand {
         case .americanExpress:
-            let attributed = NSMutableAttributedString.init(string: "••••")
-            attributed.addAttribute(.foregroundColor,
-                                    value: UIColor.white,
-                                    range: range)
-            cvc4DisplayLabel.attributedText = attributed
+            cvc4DisplayLabel.attributedText = createAttributeText(string: "••••",
+                                                                  range: range)
         default:
-            let attributed = NSMutableAttributedString.init(string: "•••")
-            attributed.addAttribute(.foregroundColor,
-                                    value: Style.Color.label,
-                                    range: range)
-            cvcDisplayLabel.attributedText = attributed
+            cvcDisplayLabel.attributedText = createAttributeText(string: "•••",
+                                                                 range: range,
+                                                                 textColor: Style.Color.label)
         }
     }
 
-    private func updateCardHolder(value: String) {
-        let range = (value as NSString).range(of: value)
-        let attributed = NSMutableAttributedString.init(string: value)
-        attributed.addAttribute(.foregroundColor,
-                                value: UIColor.white,
-                                range: range)
-        cardHolderDisplayLabel.attributedText = attributed
+    private func updateDisplayLabel(cardHolder: String) {
+        let range = (cardHolder as NSString).range(of: cardHolder)
+        cardHolderDisplayLabel.attributedText = createAttributeText(string: cardHolder,
+                                                                    range: range)
     }
 
     private func updateDisplayLabelHighlight(textField: UITextField) {
@@ -478,6 +464,32 @@ public class CardDisplayFormView: UIView, CardFormView {
         default:
             break
         }
+    }
+
+    private func updateCardNumberMask(textField: UITextField) {
+        switch textField {
+        case cardNumberTextField:
+            // maskなし
+            if let cardNumber = currentCardNumber {
+                updateDisplayLabel(cardNumber: cardNumber)
+            }
+        default:
+            // maskして下4桁のみ
+            if let cardNumber = currentCardNumber {
+                let range = (cardNumber.mask as NSString).range(of: cardNumber.mask)
+                cardNumberDisplayLabel.attributedText = createAttributeText(string: cardNumber.mask,
+                                                                            range: range)
+            }
+        }
+    }
+
+    private func createAttributeText(string: String, range: NSRange, textColor: UIColor = .white)
+        -> NSMutableAttributedString {
+            let attributed = NSMutableAttributedString.init(string: string)
+            attributed.addAttribute(.foregroundColor,
+                                    value: textColor,
+                                    range: range)
+            return attributed
     }
 
     private func focusNext(currentField: UITextField) {
@@ -671,6 +683,8 @@ extension CardDisplayFormView: UITextFieldDelegate {
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)
+        updateCardNumberMask(textField: textField)
+
         if textField == cvcTextField && currentCardBrand != .americanExpress {
             backFlipCard()
         } else {

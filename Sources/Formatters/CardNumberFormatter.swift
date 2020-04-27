@@ -35,24 +35,37 @@ struct CardNumberFormatter: CardNumberFormatterType {
             let trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
 
             var formatted = trimmed
-            var masked = trimmed
-            while masked.count < brand.numberLength {
-                masked.append("X")
+            var display = trimmed
+            while display.count < brand.numberLength {
+                display.append("X")
+            }
+
+            var mask = String()
+            if trimmed.count == brand.numberLength {
+                let last4 = String(trimmed.suffix(4))
+                while mask.count < brand.numberLength - 4 {
+                    mask.append("•")
+                }
+                mask.append(last4)
             }
 
             switch brand {
             case .americanExpress, .dinersClub:
                 formatted.insert(separator: separator, positions: [4, 10])
-                masked.insert(separator: separator, positions: [4, 10])
+                display.insert(separator: separator, positions: [4, 10])
+                mask.insert(separator: separator, positions: [4, 10])
                 return CardNumber(formatted: formatted,
                                   brand: brand,
-                                  display: masked)
+                                  display: display,
+                                  mask: mask)
             default:
                 formatted.insert(separator: separator, every: 4)
-                masked.insert(separator: separator, every: 4)
+                display.insert(separator: separator, every: 4)
+                mask.insert(separator: separator, every: 4)
                 return CardNumber(formatted: formatted,
                                   brand: brand,
-                                  display: masked)
+                                  display: display,
+                                  mask: mask)
             }
         }
         return nil
