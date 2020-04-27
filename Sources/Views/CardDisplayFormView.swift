@@ -475,7 +475,7 @@ public class CardDisplayFormView: UIView, CardFormView {
             }
         default:
             // maskして下4桁のみ
-            if let cardNumber = currentCardNumber {
+            if let cardNumber = currentCardNumber, !cardNumber.mask.isEmpty {
                 let range = (cardNumber.mask as NSString).range(of: cardNumber.mask)
                 cardNumberDisplayLabel.attributedText = createAttributeText(string: cardNumber.mask,
                                                                             range: range)
