@@ -373,7 +373,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardBackView.isHidden = false
         UIView.transition(with: cardDisplayView,
                           duration: 0.4,
-                          options: .transitionFlipFromLeft,
+                          options: .transitionFlipFromRight,
                           animations: nil,
                           completion: nil)
     }
@@ -384,7 +384,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardBackView.isHidden = true
         UIView.transition(with: cardDisplayView,
                           duration: 0.4,
-                          options: .transitionFlipFromRight,
+                          options: .transitionFlipFromLeft,
                           animations: nil,
                           completion: nil)
     }
