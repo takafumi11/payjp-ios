@@ -1,0 +1,6 @@
+if [[ -z "$REPOSITORY_ROOT" ]]; then
+    export REPOSITORY_ROOT="$(git rev-parse --show-toplevel)"
+fi
+
+export ENTERPRISE_P12_FILE=$REPOSITORY_ROOT/BASE_Enterprise.p12
+export PROFILE_EXAMPLE_OBJC_APP_FILE=$REPOSITORY_ROOT/payjpiosexampleobjc.mobileprovision
