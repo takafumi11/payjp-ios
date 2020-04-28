@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormTableStyledView" customModule="PAYJP" customModuleProvider="target">
             <connections>
-                <outlet property="brandLogoImage" destination="6O6-nL-6Y3" id="XVc-Pz-Lds"/>
-                <outlet property="cardHolderErrorLabel" destination="NaF-fa-61z" id="TBj-9a-JB1"/>
-                <outlet property="cardHolderTextField" destination="GUy-pg-STB" id="CiK-nS-Q0V"/>
-                <outlet property="cardNumberErrorLabel" destination="GFQ-GY-Vr8" id="gmg-kU-Ikl"/>
-                <outlet property="cardNumberTextField" destination="T4u-qt-kxC" id="F58-Lk-k2D"/>
-                <outlet property="cvcErrorLabel" destination="f2T-bl-zOV" id="MIZ-E3-axO"/>
-                <outlet property="cvcIconImage" destination="dkb-dD-D2u" id="Tm8-NH-pNM"/>
+                <outlet property="_brandLogoImage" destination="6O6-nL-6Y3" id="MsN-c2-c4y"/>
+                <outlet property="_cardHolderErrorLabel" destination="NaF-fa-61z" id="L1f-7l-zoz"/>
+                <outlet property="_cardHolderTextField" destination="GUy-pg-STB" id="W08-fh-Yv6"/>
+                <outlet property="_cardNumberErrorLabel" destination="GFQ-GY-Vr8" id="0zY-2x-etR"/>
+                <outlet property="_cardNumberTextField" destination="T4u-qt-kxC" id="0lh-sa-bKN"/>
+                <outlet property="_cvcErrorLabel" destination="f2T-bl-zOV" id="y4R-fq-JBR"/>
+                <outlet property="_cvcIconImage" destination="dkb-dD-D2u" id="oyo-dh-RYD"/>
+                <outlet property="_cvcTextField" destination="cFx-df-SwM" id="PUq-oI-KWb"/>
+                <outlet property="_expirationErrorLabel" destination="MyD-K5-tRI" id="HH6-ZH-2lf"/>
+                <outlet property="_expirationTextField" destination="G9O-hO-3ha" id="Mkj-J2-1Jj"/>
+                <outlet property="_ocrButton" destination="Edh-Qk-Qqn" id="tHU-LT-iZG"/>
                 <outlet property="cvcSeparator" destination="sx1-iF-Ehn" id="zKc-YP-XwB"/>
                 <outlet property="cvcSeparatorConstraint" destination="MPT-Dz-owM" id="sgi-K8-Wdc"/>
-                <outlet property="cvcTextField" destination="cFx-df-SwM" id="Gxd-bt-0cY"/>
-                <outlet property="expirationErrorLabel" destination="MyD-K5-tRI" id="Rhq-Xv-gae"/>
                 <outlet property="expirationSeparator" destination="dYQ-X5-gpG" id="6gF-Gu-A0R"/>
                 <outlet property="expirationSeparatorConstraint" destination="mnt-dg-7Jt" id="Wlj-nh-rPp"/>
-                <outlet property="expirationTextField" destination="G9O-hO-3ha" id="O7B-i9-Pkc"/>
                 <outlet property="holderContainer" destination="5jR-px-r6W" id="Xpn-vD-pDM"/>
                 <outlet property="holderSeparator" destination="UV3-z2-UU5" id="3jK-kE-JPT"/>
                 <outlet property="holderSeparatorConstraint" destination="XwA-5B-AuG" id="gof-bR-EY4"/>
-                <outlet property="ocrButton" destination="Edh-Qk-Qqn" id="2Im-K9-h0D"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

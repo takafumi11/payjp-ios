@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardFormLabelStyledView">
             <connections>
-                <outlet property="brandLogoImage" destination="w6k-hZ-nkl" id="gDA-sR-G0N"/>
+                <outlet property="_brandLogoImage" destination="w6k-hZ-nkl" id="kRq-iR-5ED"/>
+                <outlet property="_cardHolderErrorLabel" destination="0eX-6y-NFG" id="yQO-Wt-vyA"/>
+                <outlet property="_cardHolderTextField" destination="K5S-bf-dwx" id="q9h-h6-lmM"/>
+                <outlet property="_cardNumberErrorLabel" destination="3sB-1R-fme" id="S2H-I9-iMk"/>
+                <outlet property="_cardNumberTextField" destination="rRc-xY-Mxs" id="UIz-xS-Wp4"/>
+                <outlet property="_cvcErrorLabel" destination="YVS-Sx-5xU" id="zwo-fQ-cen"/>
+                <outlet property="_cvcIconImage" destination="mCd-Fn-CwL" id="OFO-pU-YPs"/>
+                <outlet property="_cvcTextField" destination="1cT-9j-hzJ" id="dwE-KM-l94"/>
+                <outlet property="_expirationErrorLabel" destination="Lrv-TP-VGx" id="TVS-3v-U3C"/>
+                <outlet property="_expirationTextField" destination="Kfm-ax-Mxe" id="djD-eS-XaO"/>
+                <outlet property="_ocrButton" destination="Wm2-WI-Uu8" id="XAz-lx-StK"/>
                 <outlet property="cardHolderErrorLabel" destination="0eX-6y-NFG" id="3Vl-ho-fnq"/>
                 <outlet property="cardHolderFieldBackground" destination="Ek4-XT-5rJ" id="3hD-JD-N1v"/>
                 <outlet property="cardHolderLabel" destination="1ay-nw-vn1" id="YIA-wY-Qb3"/>
-                <outlet property="cardHolderTextField" destination="K5S-bf-dwx" id="5lx-1y-eYg"/>
-                <outlet property="cardNumberErrorLabel" destination="3sB-1R-fme" id="7Bm-Gd-kGy"/>
                 <outlet property="cardNumberFieldBackground" destination="xSv-iy-RO8" id="xOk-2s-DHb"/>
                 <outlet property="cardNumberLabel" destination="S7B-o6-abT" id="nB8-hd-TNF"/>
-                <outlet property="cardNumberTextField" destination="rRc-xY-Mxs" id="Lje-OV-S4p"/>
-                <outlet property="cvcErrorLabel" destination="YVS-Sx-5xU" id="q0W-nu-AJJ"/>
                 <outlet property="cvcFieldBackground" destination="Jon-7l-YgQ" id="5rg-cV-oCJ"/>
-                <outlet property="cvcIconImage" destination="mCd-Fn-CwL" id="PQa-vb-kpW"/>
                 <outlet property="cvcLabel" destination="xak-wc-KAo" id="xsc-kx-yQE"/>
-                <outlet property="cvcTextField" destination="1cT-9j-hzJ" id="Hns-1e-mOq"/>
-                <outlet property="expirationErrorLabel" destination="Lrv-TP-VGx" id="fC4-h3-AXE"/>
                 <outlet property="expirationFieldBackground" destination="2v1-AK-upi" id="WXn-Os-lHi"/>
                 <outlet property="expirationLabel" destination="lUv-JX-rJC" id="YOm-Ls-aqY"/>
-                <outlet property="expirationTextField" destination="Kfm-ax-Mxe" id="rSq-tJ-jCy"/>
                 <outlet property="holderContainer" destination="tgn-Ty-UYl" id="ep3-5P-GOG"/>
-                <outlet property="ocrButton" destination="Wm2-WI-Uu8" id="Lkh-4g-ex0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

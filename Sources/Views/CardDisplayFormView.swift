@@ -10,47 +10,83 @@ import Foundation
 // swiftlint:disable type_body_length file_length
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
-public class CardDisplayFormView: UIView, CardFormView {
+public class CardDisplayFormView: CardFormView {
 
     // MARK: CardFormView
 
-    var isHolderRequired: Bool = true
+    override var isHolderRequired: Bool {
+        get { return true } set { }
+    }
 
-    @IBOutlet weak var brandLogoImage: UIImageView!
-    var cvcIconImage: UIImageView!
+    @IBOutlet private weak var _brandLogoImage: UIImageView!
+    override weak var brandLogoImage: UIImageView! {
+        get { return _brandLogoImage } set { }
+    }
 
-    var cardNumberTextField: UITextField!
-    var expirationTextField: UITextField!
-    var cvcTextField: UITextField!
-    var cardHolderTextField: UITextField!
-    var ocrButton: UIButton!
+    private var _cardNumberTextField: UITextField!
+    override var cardNumberTextField: UITextField! {
+        get { return _cardNumberTextField } set { }
+    }
+    private var _expirationTextField: UITextField!
+    override var expirationTextField: UITextField! {
+        get { return _expirationTextField } set { }
+    }
+    private var _cvcTextField: UITextField!
+    override var cvcTextField: UITextField! {
+        get { return _cvcTextField } set { }
+    }
+    private var _cardHolderTextField: UITextField!
+    override var cardHolderTextField: UITextField! {
+        get { return _cardHolderTextField } set { }
+    }
+    private var _ocrButton: UIButton!
+    override var ocrButton: UIButton! {
+        get { return _ocrButton } set { }
+    }
 
-    var cardNumberErrorLabel: UILabel!
-    var expirationErrorLabel: UILabel!
-    var cvcErrorLabel: UILabel!
-    var cardHolderErrorLabel: UILabel!
+    private var _cardNumberErrorLabel: UILabel!
+    override var cardNumberErrorLabel: UILabel! {
+        get { return _cardNumberErrorLabel } set { }
+    }
+    private var _expirationErrorLabel: UILabel!
+    override var expirationErrorLabel: UILabel! {
+        get { return _expirationErrorLabel } set { }
+    }
+    private var _cvcErrorLabel: UILabel!
+    override var cvcErrorLabel: UILabel! {
+        get { return _cvcErrorLabel } set { }
+    }
+    private var _cardHolderErrorLabel: UILabel!
+    override var cardHolderErrorLabel: UILabel! {
+        get { return _cardHolderErrorLabel } set { }
+    }
 
-    var inputTextColor: UIColor = Style.Color.label
-    var inputTintColor: UIColor = Style.Color.blue
-    let inputTextErrorColorEnabled: Bool = true
-    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    override var inputTextColor: UIColor {
+        get { return Style.Color.label } set { }
+    }
+    override var inputTintColor: UIColor {
+        get { return Style.Color.blue } set { }
+    }
+    override var inputTextErrorColorEnabled: Bool {
+        get { return true } set { }
+    }
 
-    @IBOutlet weak var cardDisplayView: UIView!
-    @IBOutlet weak var cardFrontView: UIStackView!
-    @IBOutlet weak var cardBackView: UIView!
+    @IBOutlet private weak var cardDisplayView: UIView!
+    @IBOutlet private weak var cardFrontView: UIStackView!
+    @IBOutlet private weak var cardBackView: UIView!
 
-    @IBOutlet weak var cardNumberDisplayLabel: UILabel!
-    @IBOutlet weak var cvcDisplayLabel: UILabel!
-    @IBOutlet weak var cvc4DisplayLabel: UILabel!
-    @IBOutlet weak var cardHolderDisplayLabel: UILabel!
-    @IBOutlet weak var expirationDisplayLabel: UILabel!
+    @IBOutlet private weak var cardNumberDisplayLabel: UILabel!
+    @IBOutlet private weak var cvcDisplayLabel: UILabel!
+    @IBOutlet private weak var cvc4DisplayLabel: UILabel!
+    @IBOutlet private weak var cardHolderDisplayLabel: UILabel!
+    @IBOutlet private weak var expirationDisplayLabel: UILabel!
 
-    @IBOutlet weak var formScrollView: UIScrollView!
-    @IBOutlet weak var cvc4BorderView: BorderView!
-    @IBOutlet weak var cvcBorderView: BorderView!
-    @IBOutlet weak var cardNumberBorderView: BorderView!
-    @IBOutlet weak var cardHolderBorderView: BorderView!
-    @IBOutlet weak var expirationBorderView: BorderView!
+    @IBOutlet private weak var formScrollView: UIScrollView!
+    @IBOutlet private weak var cvc4BorderView: BorderView!
+    @IBOutlet private weak var cvcBorderView: BorderView!
+    @IBOutlet private weak var cardNumberBorderView: BorderView!
+    @IBOutlet private weak var cardHolderBorderView: BorderView!
+    @IBOutlet private weak var expirationBorderView: BorderView!
 
     private var cardNumberFieldBackground: UIView!
     private var expirationFieldBackground: UIView!
@@ -74,15 +110,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         viewModel.requestOcr()
     }
 
-    // MARK: CardFormViewDelegate
-
-    /// CardFormView delegate.
-    public weak var delegate: CardFormViewDelegate?
-
-    private var cardIOProxy: CardIOProxy!
     private var contentView: UIView!
-    private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
-    private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
     private var isCardDisplayFront = true
 
     // MARK: Lifecycle
@@ -119,6 +147,7 @@ public class CardDisplayFormView: UIView, CardFormView {
 
         viewModel.delegate = self
         formScrollView.delegate = self
+        textDelegate = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -127,13 +156,13 @@ public class CardDisplayFormView: UIView, CardFormView {
 
     // MARK: CardFormView
 
-    func inputCardNumberSuccess(value: CardNumber) {
+    override func inputCardNumberSuccess(value: CardNumber) {
         updateCvc4LabelVisibility()
         updateDisplayLabel(cardNumber: value)
         cardNumberErrorLabel.text = nil
     }
 
-    func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
+    override func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
         updateCvc4LabelVisibility()
         if let value = value {
             updateDisplayLabel(cardNumber: value)
@@ -143,12 +172,12 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputExpirationSuccess(value: Expiration) {
+    override func inputExpirationSuccess(value: Expiration) {
         updateDisplayLabel(expiration: value)
         expirationErrorLabel.text = nil
     }
 
-    func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
+    override func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
             updateDisplayLabel(expiration: value)
         } else {
@@ -157,12 +186,12 @@ public class CardDisplayFormView: UIView, CardFormView {
         expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputCvcSuccess(value: String) {
+    override func inputCvcSuccess(value: String) {
         updateDisplayLabel(cvc: value)
         cvcErrorLabel.text = nil
     }
 
-    func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+    override func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
             updateDisplayLabel(cvc: value)
         } else {
@@ -174,12 +203,12 @@ public class CardDisplayFormView: UIView, CardFormView {
         cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func inputCardHolderSuccess(value: String) {
+    override func inputCardHolderSuccess(value: String) {
         updateDisplayLabel(cardHolder: value)
         cardHolderErrorLabel.text = nil
     }
 
-    func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+    override func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
         if let value = value {
             updateDisplayLabel(cardHolder: value)
         } else {
@@ -188,27 +217,19 @@ public class CardDisplayFormView: UIView, CardFormView {
         cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
     }
 
-    func updateBrandLogo(brand: CardBrand?) {
-        guard let brandLogoImage = brandLogoImage else { return }
+    override func updateBrandLogo(brand: CardBrand?) {
+        guard let brandLogoImage = _brandLogoImage else { return }
         brandLogoImage.image = brand?.displayLogoImage
     }
 
-    func focusNextInputField(currentField: UITextField) {
+    override func focusNextInputField(currentField: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             guard let self = self else { return }
             self.focusNext(currentField: currentField)
         }
     }
 
-    func updateCardNumber(value: CardNumber?) {
-        cardNumberTextField.text = value?.formatted
-    }
-
     // MARK: Private
-
-    private func notifyIsValidChanged() {
-        self.delegate?.formInputValidated(in: self, isValid: isValid)
-    }
 
     /// 各Viewのセットアップ
     private func setupViews() {
@@ -217,12 +238,12 @@ public class CardDisplayFormView: UIView, CardFormView {
         cvcFieldBackground = UIView()
         cardHolderFieldBackground = UIView()
 
-        cardNumberErrorLabel = UILabel()
-        expirationErrorLabel = UILabel()
-        cvcErrorLabel = UILabel()
-        cardHolderErrorLabel = UILabel()
+        _cardNumberErrorLabel = UILabel()
+        _expirationErrorLabel = UILabel()
+        _cvcErrorLabel = UILabel()
+        _cardHolderErrorLabel = UILabel()
 
-        ocrButton = UIButton()
+        _ocrButton = UIButton()
         ocrButton.addTarget(self,
                             action: #selector(onTapOcrButton(_:)),
                             for: UIControl.Event.touchUpInside)
@@ -231,21 +252,20 @@ public class CardDisplayFormView: UIView, CardFormView {
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
 
-        cardIOProxy = CardIOProxy(delegate: self)
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
-        cardNumberDisplayLabel.textColor = Style.Color.placeholderText
-        expirationDisplayLabel.textColor = Style.Color.placeholderText
-        cvcDisplayLabel.textColor = Style.Color.placeholderText
-        cvc4DisplayLabel.textColor = Style.Color.placeholderText
-        cardHolderDisplayLabel.textColor = Style.Color.placeholderText
+        cardNumberDisplayLabel.textColor = Style.Color.displayLabel
+        expirationDisplayLabel.textColor = Style.Color.displayLabel
+        cvcDisplayLabel.textColor = Style.Color.displayLabel
+        cvc4DisplayLabel.textColor = Style.Color.displayLabel
+        cardHolderDisplayLabel.textColor = Style.Color.displayLabel
     }
 
     private func setupInputFields() {
-        cardNumberTextField = UITextField()
-        expirationTextField = UITextField()
-        cvcTextField = UITextField()
-        cardHolderTextField = UITextField()
+        _cardNumberTextField = UITextField()
+        _expirationTextField = UITextField()
+        _cvcTextField = UITextField()
+        _cardHolderTextField = UITextField()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -420,7 +440,7 @@ public class CardDisplayFormView: UIView, CardFormView {
         default:
             cvcDisplayLabel.attributedText = createAttributeText(string: "•••",
                                                                  range: range,
-                                                                 textColor: Style.Color.label)
+                                                                 textColor: Style.Color.displayCvcLabel)
         }
     }
 
@@ -431,35 +451,23 @@ public class CardDisplayFormView: UIView, CardFormView {
     }
 
     private func updateDisplayLabelHighlight(textField: UITextField) {
+        cardNumberBorderView.highlightOff()
+        expirationBorderView.highlightOff()
+        cvcBorderView.highlightOff()
+        cvc4BorderView.highlightOff()
+        cardHolderBorderView.highlightOff()
         switch textField {
         case cardNumberTextField:
             cardNumberBorderView.highlightOn()
-            expirationBorderView.highlightOff()
-            cvcBorderView.highlightOff()
-            cvc4BorderView.highlightOff()
-            cardHolderBorderView.highlightOff()
         case expirationTextField:
-            cardNumberBorderView.highlightOff()
             expirationBorderView.highlightOn()
-            cvcBorderView.highlightOff()
-            cvc4BorderView.highlightOff()
-            cardHolderBorderView.highlightOff()
         case cvcTextField:
             if currentCardBrand == .americanExpress {
-                cvcBorderView.highlightOff()
                 cvc4BorderView.highlightOn()
             } else {
                 cvcBorderView.highlightOn()
-                cvc4BorderView.highlightOff()
             }
-            cardNumberBorderView.highlightOff()
-            expirationBorderView.highlightOff()
-            cardHolderBorderView.highlightOff()
         case cardHolderTextField:
-            cardNumberBorderView.highlightOff()
-            expirationBorderView.highlightOff()
-            cvcBorderView.highlightOff()
-            cvc4BorderView.highlightOff()
             cardHolderBorderView.highlightOn()
         default:
             break
@@ -533,62 +541,13 @@ extension CardDisplayFormView: UIScrollViewDelegate {
     }
 }
 
-// MARK: CardFormAction
-extension CardDisplayFormView: CardFormAction {
-
-    public var isValid: Bool {
-        return viewModel.isValid
-    }
-
-    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
-        viewModel.createToken(with: tenantId, completion: completion)
-    }
-
-    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
-        viewModel.createToken(with: tenantId) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let result):
-                completion(result, nil)
-            case .failure(let error):
-                completion(nil, self.nsErrorConverter.convert(from: error))
-            }
-        }
-    }
-
-    @nonobjc public func fetchBrands(tenantId: String?, completion: CardBrandsResult?) {
-        viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
-    }
-
-    public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
-        viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let result):
-                let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
-                completion?(converted, nil)
-            case .failure(let error):
-                completion?(nil, self.nsErrorConverter.convert(from: error))
-            }
-        }
-    }
-
-    public func validateCardForm() -> Bool {
-        updateCardNumberInput(input: cardNumberTextField.text, forceShowError: true)
-        updateExpirationInput(input: expirationTextField.text, forceShowError: true)
-        updateCvcInput(input: cvcTextField.text, forceShowError: true)
-        updateCardHolderInput(input: cardHolderTextField.text, forceShowError: true)
-        resetTintColor()
-        notifyIsValidChanged()
-        return isValid
-    }
+// MARK: CardFormViewProtocol
+extension CardDisplayFormView: CardFormViewProtocol {
 
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
-        let inputFieldBackgroundColor = style.inputFieldBackgroundColor
-        self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
         // input text
@@ -606,82 +565,12 @@ extension CardDisplayFormView: CardFormAction {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
-        // input field background
-        cardNumberFieldBackground.backgroundColor = inputFieldBackgroundColor
-        expirationFieldBackground.backgroundColor = inputFieldBackgroundColor
-        cvcFieldBackground.backgroundColor = inputFieldBackgroundColor
-        cardHolderFieldBackground.backgroundColor = inputFieldBackgroundColor
-    }
-
-    public func setupInputAccessoryView(view: UIView) {
-        cardNumberTextField.inputAccessoryView = view
-        expirationTextField.inputAccessoryView = view
-        cvcTextField.inputAccessoryView = view
-        cardHolderTextField.inputAccessoryView = view
     }
 }
 
-// MARK: UITextFieldDelegate
-extension CardDisplayFormView: UITextFieldDelegate {
+extension CardDisplayFormView: CardFormViewTextFieldDelegate {
 
-    public func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String
-    ) -> Bool {
-
-        if let currentText = textField.text {
-            let range = Range(range, in: currentText)!
-            let newText = currentText.replacingCharacters(in: range, with: string)
-
-            switch textField {
-            case cardNumberTextField:
-                updateCardNumberInput(input: newText, separator: " ")
-            case expirationTextField:
-                updateExpirationInput(input: newText)
-            case cvcTextField:
-                updateCvcInput(input: newText)
-            case cardHolderTextField:
-                updateCardHolderInput(input: newText)
-            default:
-                break
-            }
-        }
-        notifyIsValidChanged()
-
-        return adjustInputFieldCursor(textField: textField, range: range, replacement: string)
-    }
-
-    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
-
-        switch textField {
-        case cardNumberTextField:
-            updateCardNumberInput(input: nil)
-            updateCvcInput(input: cvcTextField.text)
-        case expirationTextField:
-            updateExpirationInput(input: nil)
-        case cvcTextField:
-            updateCvcInput(input: nil)
-        case cardHolderTextField:
-            updateCardHolderInput(input: nil)
-        default:
-            break
-        }
-        resetTintColor()
-        notifyIsValidChanged()
-
-        return true
-    }
-
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        cardHolderTextField.resignFirstResponder()
-        if isValid {
-            delegate?.formInputDoneTapped(in: self)
-        }
-        return true
-    }
-
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
+    public override func textFieldDidBeginEditing(_ textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)
         updateCardNumberMask(textField: textField)
 
@@ -708,33 +597,3 @@ extension CardDisplayFormView: UITextFieldDelegate {
         }
     }
 }
-
-// MARK: CardIOProxyDelegate
-extension CardDisplayFormView: CardIOProxyDelegate {
-    public func didCancel(in proxy: CardIOProxy) {
-        ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
-    }
-
-    public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
-        updateCardNumberInput(input: cardParams.number)
-        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue,
-                                                                year: cardParams.expiryYear?.intValue))
-        updateCvcInput(input: cardParams.cvc)
-
-        notifyIsValidChanged()
-    }
-}
-
-extension CardDisplayFormView: CardFormViewModelDelegate {
-
-    func startScanner() {
-        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
-            cardIOProxy.presentCardIO(from: viewController)
-        }
-    }
-
-    func showPermissionAlert() {
-        showCameraPermissionAlert()
-    }
-}
-// swiftlint:enable type_body_length file_length

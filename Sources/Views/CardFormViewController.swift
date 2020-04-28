@@ -14,6 +14,17 @@ import SafariServices
     case tableStyled = 0
     case labelStyled = 1
     case cardDisplay = 2
+
+    func createView(frame: CGRect) -> CardFormView & CardFormViewProtocol {
+        switch self {
+        case .tableStyled:
+            return CardFormTableStyledView(frame: frame)
+        case .labelStyled:
+            return CardFormLabelStyledView(frame: frame)
+        case .cardDisplay:
+            return CardDisplayFormView(frame: frame)
+        }
+    }
 }
 
 /// CardFormViewController.
@@ -32,6 +43,7 @@ public class CardFormViewController: UIViewController {
     private var formStyle: FormStyle?
     private var tenantId: String?
     private var cardFormViewType: CardFormViewType?
+    private var isCardHolderRequired: Bool = true
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
     private var cardFormView: CardFormView!
@@ -213,14 +225,12 @@ public class CardFormViewController: UIViewController {
 
     /// タイプ別で判定してCardFormViewを生成する
     private func initCardFormView(viewFrame: CGRect, accessoryView: UIView) {
-        switch cardFormViewType {
-        case .tableStyled:
-            brandsLayout.isHidden = false
-            let cardFormView = CardFormTableStyledView(frame: viewFrame)
+
+        if let cardFormView = cardFormViewType?.createView(frame: viewFrame) {
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
             cardFormView.setupInputAccessoryView(view: accessoryView)
-            cardFormView.backgroundColor = Style.Color.groupedBackground
+            cardFormView.isHolderRequired = true
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
                 submitButton.normalBackgroundColor = formStyle.submitButtonColor
@@ -228,34 +238,6 @@ public class CardFormViewController: UIViewController {
             }
             self.formContentView.addSubview(cardFormView)
             self.cardFormView = cardFormView
-        case .labelStyled:
-            brandsLayout.isHidden = false
-            let cardFormView = CardFormLabelStyledView(frame: viewFrame)
-            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            cardFormView.delegate = self
-            cardFormView.setupInputAccessoryView(view: accessoryView)
-            if let formStyle = formStyle {
-                cardFormView.apply(style: formStyle)
-                submitButton.normalBackgroundColor = formStyle.submitButtonColor
-                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
-            }
-            self.formContentView.addSubview(cardFormView)
-            self.cardFormView = cardFormView
-        case .cardDisplay:
-            brandsLayout.isHidden = false
-            let cardFormView = CardDisplayFormView(frame: viewFrame)
-            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            cardFormView.delegate = self
-            cardFormView.setupInputAccessoryView(view: accessoryView)
-            if let formStyle = formStyle {
-                cardFormView.apply(style: formStyle)
-                submitButton.normalBackgroundColor = formStyle.submitButtonColor
-                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
-            }
-            self.formContentView.addSubview(cardFormView)
-            self.cardFormView = cardFormView
-        default:
-            print("Unknown custom view style.")
         }
     }
 }
