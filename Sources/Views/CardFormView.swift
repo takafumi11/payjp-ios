@@ -351,6 +351,7 @@ public class CardFormView: UIView {
         properties.cardNumberTextField.tintColor = properties.inputTintColor
         properties.expirationTextField.tintColor = properties.inputTintColor
         properties.cvcTextField.tintColor = properties.inputTintColor
+        properties.cardHolderTextField.tintColor = properties.inputTintColor
     }
 
     /// textField入力値を取得する
