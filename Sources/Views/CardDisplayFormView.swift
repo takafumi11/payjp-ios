@@ -225,6 +225,12 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         cvcDisplayLabel.textColor = Style.Color.displayLabel
         cvc4DisplayLabel.textColor = Style.Color.displayLabel
         cardHolderDisplayLabel.textColor = Style.Color.displayLabel
+        
+        // カードUIのシャドウ
+        cardDisplayView.layer.shadowColor = UIColor.black.cgColor
+        cardDisplayView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        cardDisplayView.layer.shadowOpacity = 0.4
+        cardDisplayView.layer.shadowRadius = 4
     }
 
     private func setupInputFields() {
