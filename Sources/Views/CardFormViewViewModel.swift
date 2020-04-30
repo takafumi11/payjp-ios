@@ -152,6 +152,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             !cardNumber.isEmpty else {
                 self.cardNumberString = nil
                 self.cardBrand = .unknown
+                self.cardNumber = nil
                 // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
                 self.isCardBrandChanged = false
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))

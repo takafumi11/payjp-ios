@@ -25,10 +25,10 @@ protocol CardFormProperties {
     var cvcIconImage: UIImageView! { get }
     var ocrButton: UIButton! { get }
 
-    var cardNumberTextField: UITextField! { get }
-    var expirationTextField: UITextField! { get }
-    var cvcTextField: UITextField! { get }
-    var cardHolderTextField: UITextField! { get }
+    var cardNumberTextField: FormTextField! { get }
+    var expirationTextField: FormTextField! { get }
+    var cvcTextField: FormTextField! { get }
+    var cardHolderTextField: FormTextField! { get }
 
     var cardNumberErrorLabel: UILabel! { get }
     var expirationErrorLabel: UILabel! { get }
@@ -43,7 +43,8 @@ protocol CardFormProperties {
 }
 
 protocol CardFormViewTextFieldDelegate: class {
-    func textFieldDidBeginEditing(textField: UITextField)
+    func didBeginEditing(textField: UITextField)
+    func didDeleteBackward(textField: FormTextField)
 }
 
 // swiftlint:disable type_body_length file_length
@@ -222,6 +223,7 @@ public class CardFormView: UIView {
         let result = viewModel.update(cardHolder: input)
         switch result {
         case let .success(cardHolder):
+            properties.cardHolderTextField.text = cardHolder
             if properties.inputTextErrorColorEnabled {
                 properties.cardHolderTextField.textColor = properties.inputTextColor
             }
@@ -229,6 +231,7 @@ public class CardFormView: UIView {
         case let .failure(error):
             switch error {
             case let .cardHolderEmptyError(value, instant):
+                properties.cardHolderTextField.text = value
                 if properties.inputTextErrorColorEnabled {
                     properties.cardHolderTextField.textColor = forceShowError ||
                         instant ? Style.Color.red : properties.inputTextColor
@@ -310,12 +313,6 @@ public class CardFormView: UIView {
         textField: UITextField,
         range: NSRange,
         replacement: String) -> Bool {
-
-        // カード名義の場合は入力値をそのまま使用
-        if textField == properties.cardHolderTextField {
-            return true
-        }
-
         // 文字挿入時にカーソルの位置を調整する
         let beginning = textField.beginningOfDocument
         let start = textField.position(from: beginning, offset: range.location)
@@ -519,7 +516,7 @@ extension CardFormView: UITextFieldDelegate {
     }
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        textFieldDelegate?.textFieldDidBeginEditing(textField: textField)
+        textFieldDelegate?.didBeginEditing(textField: textField)
     }
 }
 
@@ -551,4 +548,12 @@ extension CardFormView: CardFormViewModelDelegate {
         showCameraPermissionAlert()
     }
 }
+
+extension CardFormView: FormTextFieldDelegate {
+
+    func didDeleteBackward(_ textField: FormTextField) {
+        textFieldDelegate?.didDeleteBackward(textField: textField)
+    }
+}
+
 // swiftlint:enable type_body_length file_length

@@ -20,10 +20,10 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
     var cvcIconImage: UIImageView!
     var ocrButton: UIButton!
 
-    var cardNumberTextField: UITextField!
-    var expirationTextField: UITextField!
-    var cvcTextField: UITextField!
-    var cardHolderTextField: UITextField!
+    var cardNumberTextField: FormTextField!
+    var expirationTextField: FormTextField!
+    var cvcTextField: FormTextField!
+    var cardHolderTextField: FormTextField!
 
     var cardNumberErrorLabel: UILabel!
     var expirationErrorLabel: UILabel!
@@ -134,6 +134,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         if let value = value {
             updateDisplayLabel(cardNumber: value)
         } else {
+            cardNumberDisplayLabel.attributedText = nil
             cardNumberDisplayLabel.text = "XXXX XXXX XXXX XXXX"
         }
         cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
@@ -148,6 +149,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         if let value = value {
             updateDisplayLabel(expiration: value)
         } else {
+            expirationDisplayLabel.attributedText = nil
             expirationDisplayLabel.text = "MM/YY"
         }
         expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
@@ -179,6 +181,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         if let value = value {
             updateDisplayLabel(cardHolder: value)
         } else {
+            cardHolderDisplayLabel.attributedText = nil
             cardHolderDisplayLabel.text = "NAME"
         }
         cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
@@ -226,7 +229,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         cvc4DisplayLabel.textColor = Style.Color.displayLabel
         cardHolderDisplayLabel.textColor = Style.Color.displayLabel
 
-        // カードUIのシャドウ
+        // カードのシャドウ
         cardDisplayView.layer.shadowColor = UIColor.black.cgColor
         cardDisplayView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         cardDisplayView.layer.shadowOpacity = 0.4
@@ -234,10 +237,10 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
     }
 
     private func setupInputFields() {
-        cardNumberTextField = UITextField()
-        expirationTextField = UITextField()
-        cvcTextField = UITextField()
-        cardHolderTextField = UITextField()
+        cardNumberTextField = FormTextField()
+        expirationTextField = FormTextField()
+        cvcTextField = FormTextField()
+        cardHolderTextField = FormTextField()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -259,9 +262,13 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
             attributes: [NSAttributedString.Key.foregroundColor: Style.Color.placeholderText])
 
         cardNumberTextField.delegate = self
+        cardNumberTextField.deletionDelegate = self
         expirationTextField.delegate = self
+        expirationTextField.deletionDelegate = self
         cvcTextField.delegate = self
+        cvcTextField.deletionDelegate = self
         cardHolderTextField.delegate = self
+        cardHolderTextField.deletionDelegate = self
     }
 
     /// 横スクロール可能なフォームの作成
@@ -409,6 +416,10 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         case .americanExpress:
             cvc4DisplayLabel.attributedText = createAttributeText(string: "••••",
                                                                   range: range)
+        case .unknown:
+            cvcDisplayLabel.attributedText = createAttributeText(string: "••••",
+                                                                 range: range,
+                                                                 textColor: Style.Color.displayCvcLabel)
         default:
             cvcDisplayLabel.attributedText = createAttributeText(string: "•••",
                                                                  range: range,
@@ -547,7 +558,7 @@ extension CardDisplayFormView: CardFormViewProtocol {
 
 extension CardDisplayFormView: CardFormViewTextFieldDelegate {
 
-    public func textFieldDidBeginEditing(textField: UITextField) {
+    func didBeginEditing(textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)
         updateCardNumberMask(textField: textField)
 
@@ -569,6 +580,29 @@ extension CardDisplayFormView: CardFormViewTextFieldDelegate {
             contentPositionX = cvcFieldContentView.frame.origin.x
         case cardHolderTextField:
             contentPositionX = cardHolderFieldContentView.frame.origin.x
+        default:
+            break
+        }
+    }
+
+    func didDeleteBackward(textField: FormTextField) {
+        focusPrevious(currentField: textField)
+    }
+
+    private func focusPrevious(currentField: UITextField) {
+        switch currentField {
+        case properties.expirationTextField:
+            if properties.expirationTextField.isFirstResponder {
+                properties.cardNumberTextField.becomeFirstResponder()
+            }
+        case properties.cvcTextField:
+            if properties.cvcTextField.isFirstResponder {
+                properties.expirationTextField.becomeFirstResponder()
+            }
+        case properties.cardHolderTextField:
+            if properties.cardHolderTextField.isFirstResponder && properties.isHolderRequired {
+                properties.cvcTextField.becomeFirstResponder()
+            }
         default:
             break
         }

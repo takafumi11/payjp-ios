@@ -96,6 +96,7 @@
 		ED66B2D423D581990095B18D /* Bundle+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED66B2D323D581990095B18D /* Bundle+PAYJP.swift */; };
 		ED66B2DD23D697D10095B18D /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED66B2DC23D697D10095B18D /* Resource.bundle */; };
 		ED6DF6F124528B41009E2EF3 /* Expiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F024528B41009E2EF3 /* Expiration.swift */; };
+		ED6DF6F5245ADC9C009E2EF3 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */; };
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
 		ED78734724404EBD0074795B /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED78734624404EBC0074795B /* PAYJP.m */; };
 		ED78734924443AC30074795B /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED78734824443AC30074795B /* BorderView.swift */; };
@@ -257,6 +258,7 @@
 		ED66B2D323D581990095B18D /* Bundle+PAYJP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+PAYJP.swift"; sourceTree = "<group>"; };
 		ED66B2DC23D697D10095B18D /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
 		ED6DF6F024528B41009E2EF3 /* Expiration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expiration.swift; sourceTree = "<group>"; };
+		ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		ED78734624404EBC0074795B /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
 		ED78734824443AC30074795B /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				ED6DF6F024528B41009E2EF3 /* Expiration.swift */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
+				ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				ED78734924443AC30074795B /* BorderView.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
+				ED6DF6F5245ADC9C009E2EF3 /* FormTextField.swift in Sources */,
 				ED00F8D424346B5B004DFE2C /* PAYCommonResponse.swift in Sources */,
 				ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */,
 				BEA1D28722EADE5000F8906B /* AccountsService.swift in Sources */,

@@ -29,10 +29,10 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
     @IBOutlet weak var holderContainer: UIStackView!
     @IBOutlet weak var ocrButton: UIButton!
 
-    @IBOutlet weak var cardNumberTextField: UITextField!
-    @IBOutlet weak var expirationTextField: UITextField!
-    @IBOutlet weak var cvcTextField: UITextField!
-    @IBOutlet weak var cardHolderTextField: UITextField!
+    @IBOutlet weak var cardNumberTextField: FormTextField!
+    @IBOutlet weak var expirationTextField: FormTextField!
+    @IBOutlet weak var cvcTextField: FormTextField!
+    @IBOutlet weak var cardHolderTextField: FormTextField!
 
     @IBOutlet weak var cardNumberErrorLabel: UILabel!
     @IBOutlet weak var expirationErrorLabel: UILabel!
