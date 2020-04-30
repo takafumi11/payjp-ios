@@ -16,7 +16,7 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
     // MARK: CardFormProperties
 
     /// Card holder input field enabled.
-    @IBInspectable public var isHolderRequired: Bool = false {
+    @IBInspectable var isHolderRequired: Bool = false {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
@@ -29,11 +29,6 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
     @IBOutlet weak var holderContainer: UIStackView!
     @IBOutlet weak var ocrButton: UIButton!
 
-    @IBOutlet weak var cardNumberLabel: UILabel!
-    @IBOutlet weak var expirationLabel: UILabel!
-    @IBOutlet weak var cvcLabel: UILabel!
-    @IBOutlet weak var cardHolderLabel: UILabel!
-
     @IBOutlet weak var cardNumberTextField: UITextField!
     @IBOutlet weak var expirationTextField: UITextField!
     @IBOutlet weak var cvcTextField: UITextField!
@@ -44,15 +39,22 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
     @IBOutlet weak var cvcErrorLabel: UILabel!
     @IBOutlet weak var cardHolderErrorLabel: UILabel!
 
-    @IBOutlet private weak var cardNumberFieldBackground: UIView!
-    @IBOutlet private weak var expirationFieldBackground: UIView!
-    @IBOutlet private weak var cvcFieldBackground: UIView!
-    @IBOutlet private weak var cardHolderFieldBackground: UIView!
-
     var inputTextColor: UIColor = Style.Color.label
     var inputTintColor: UIColor = Style.Color.blue
     var inputTextErrorColorEnabled: Bool = true
     var cardNumberSeparator: String = "-"
+
+    // MARK: Private
+
+    @IBOutlet private weak var cardNumberLabel: UILabel!
+    @IBOutlet private weak var expirationLabel: UILabel!
+    @IBOutlet private weak var cvcLabel: UILabel!
+    @IBOutlet private weak var cardHolderLabel: UILabel!
+
+    @IBOutlet private weak var cardNumberFieldBackground: UIView!
+    @IBOutlet private weak var expirationFieldBackground: UIView!
+    @IBOutlet private weak var cvcFieldBackground: UIView!
+    @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
     /// Camera scan action
     ///

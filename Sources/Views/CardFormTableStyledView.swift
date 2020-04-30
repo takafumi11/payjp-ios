@@ -16,7 +16,7 @@ public class CardFormTableStyledView: CardFormView, CardFormProperties {
     // MARK: CardFormView
 
     /// Card holder input field enabled.
-    @IBInspectable public var isHolderRequired: Bool = false {
+    @IBInspectable var isHolderRequired: Bool = false {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             holderSeparator.isHidden = !isHolderRequired
@@ -40,6 +40,13 @@ public class CardFormTableStyledView: CardFormView, CardFormProperties {
     @IBOutlet weak var cvcErrorLabel: UILabel!
     @IBOutlet weak var cardHolderErrorLabel: UILabel!
 
+    var inputTextColor: UIColor = Style.Color.blue
+    var inputTintColor: UIColor = Style.Color.blue
+    var inputTextErrorColorEnabled: Bool = false
+    var cardNumberSeparator: String = "-"
+
+    // MARK: Private
+
     @IBOutlet private weak var expirationSeparator: UIView!
     @IBOutlet private weak var cvcSeparator: UIView!
     @IBOutlet private weak var holderSeparator: UIView!
@@ -47,11 +54,6 @@ public class CardFormTableStyledView: CardFormView, CardFormProperties {
     @IBOutlet private weak var expirationSeparatorConstraint: NSLayoutConstraint!
     @IBOutlet private weak var cvcSeparatorConstraint: NSLayoutConstraint!
     @IBOutlet private weak var holderSeparatorConstraint: NSLayoutConstraint!
-
-    var inputTextColor: UIColor = Style.Color.blue
-    var inputTintColor: UIColor = Style.Color.blue
-    var inputTextErrorColorEnabled: Bool = false
-    var cardNumberSeparator: String = "-"
 
     /// Camera scan action
     ///
