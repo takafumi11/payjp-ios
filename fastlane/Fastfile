@@ -136,4 +136,71 @@ platform :ios do
       )
     end
   end
+
+  desc "Distribute sample app with Firebase App Distribution"
+  lane :distribute_sample_app do
+    sample_xcproj = "example-objc/example-objc.xcodeproj"
+    keychain_pw = ENV["KEYCHAIN_PASSWORD"]
+    create_keychain(
+      name: ENV["KEYCHAIN_NAME"],
+      password: keychain_pw,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600
+    )
+    # import Certificate and Profile
+    sh("#{ENV["REPOSITORY_ROOT"]}/scripts/restore_signing_credential.sh")
+    import_certificate(
+      keychain_name: ENV["KEYCHAIN_NAME"],
+      certificate_path: ENV["ENTERPRISE_P12_FILE"],
+      certificate_password: ENV["INHOUSE_KEY_PASSWORD"],
+      keychain_password: keychain_pw
+    )
+    install_provisioning_profile(path: ENV["PROFILE_EXAMPLE_OBJC_APP_FILE"])
+    team_id = ENV["PAYJP_ENT_TEAM_ID"]
+    app_id = "jp.pay.example-objc"
+    provisioning_profile = "payjp-ios-example-objc"
+    # Update project settings
+    disable_automatic_code_signing(path: sample_xcproj)
+    update_project_team(teamid: team_id, path: sample_xcproj)
+    update_project_provisioning(profile: ENV["PROFILE_EXAMPLE_OBJC_APP_FILE"], xcodeproj: sample_xcproj)
+    update_project_code_signing(uuid: ENV["PROFILE_EXAMPLE_OBJC_APP_UUID"], path: sample_xcproj)
+    # sync version number
+    version_number = get_version_number(
+      xcodeproj: "PAYJP.xcodeproj",
+      target: "PAYJP"
+    )
+    increment_version_number(
+      version_number: version_number,
+      xcodeproj: sample_xcproj
+    )
+    # build number from commit number
+    increment_build_number(
+      build_number: number_of_commits.to_s,
+      xcodeproj: sample_xcproj
+    )
+
+    # build app
+    build_app(
+      workspace: "example-objc/example-objc.xcworkspace",
+      configuration: "Release",
+      scheme: "example-objc",
+      clean: true,
+      silent: true,
+      export_method: 'enterprise',
+      export_team_id: team_id
+    )
+
+    # distribute
+    firebase_app_distribution(
+      app: ENV["EXAMPLE_FIREBASE_APP_ID"],
+      groups: "internal-tester",
+      release_notes: "git sha: #{last_git_commit[:abbreviated_commit_hash]}"
+    )
+
+    slack(
+      message: ":bullettrain_side: New SDK app has been updated!",
+      success: true
+    )
+  end
 end
