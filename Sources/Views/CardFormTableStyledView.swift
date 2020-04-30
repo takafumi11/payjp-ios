@@ -11,12 +11,12 @@ import UIKit
 /// CardFormView without label.
 /// It's suitable for UITableView design.
 @IBDesignable @objcMembers @objc(PAYCardFormTableStyledView)
-public class CardFormTableStyledView: CardFormView {
+public class CardFormTableStyledView: CardFormView, CardFormProperties {
 
     // MARK: CardFormView
 
     /// Card holder input field enabled.
-    @IBInspectable override public var isHolderRequired: Bool {
+    @IBInspectable public var isHolderRequired: Bool = false {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             holderSeparator.isHidden = !isHolderRequired
@@ -25,53 +25,20 @@ public class CardFormTableStyledView: CardFormView {
         }
     }
 
-    @IBOutlet private weak var _brandLogoImage: UIImageView!
-    override weak var brandLogoImage: UIImageView! {
-        get { return _brandLogoImage } set { }
-    }
-    @IBOutlet private weak var _cvcIconImage: UIImageView!
-    override weak var cvcIconImage: UIImageView! {
-        get { return _cvcIconImage } set { }
-    }
-    @IBOutlet private weak var holderContainer: UIStackView!
-    @IBOutlet private weak var _ocrButton: UIButton!
-    override weak var ocrButton: UIButton! {
-        get { return _ocrButton } set { }
-    }
+    @IBOutlet weak var brandLogoImage: UIImageView!
+    @IBOutlet weak var cvcIconImage: UIImageView!
+    @IBOutlet weak var holderContainer: UIStackView!
+    @IBOutlet weak var ocrButton: UIButton!
 
-    @IBOutlet private weak var _cardNumberTextField: UITextField!
-    override weak var cardNumberTextField: UITextField! {
-        get { return _cardNumberTextField } set { }
-    }
-    @IBOutlet private weak var _expirationTextField: UITextField!
-    override weak var expirationTextField: UITextField! {
-        get { return _expirationTextField } set { }
-    }
-    @IBOutlet private weak var _cvcTextField: UITextField!
-    override weak var cvcTextField: UITextField! {
-        get { return _cvcTextField } set { }
-    }
-    @IBOutlet private weak var _cardHolderTextField: UITextField!
-    override weak var cardHolderTextField: UITextField! {
-        get { return _cardHolderTextField } set { }
-    }
+    @IBOutlet weak var cardNumberTextField: UITextField!
+    @IBOutlet weak var expirationTextField: UITextField!
+    @IBOutlet weak var cvcTextField: UITextField!
+    @IBOutlet weak var cardHolderTextField: UITextField!
 
-    @IBOutlet private weak var _cardNumberErrorLabel: UILabel!
-    override weak var cardNumberErrorLabel: UILabel! {
-        get { return _cardNumberErrorLabel } set { }
-    }
-    @IBOutlet private weak var _expirationErrorLabel: UILabel!
-    override weak var expirationErrorLabel: UILabel! {
-        get { return _expirationErrorLabel } set { }
-    }
-    @IBOutlet private weak var _cvcErrorLabel: UILabel!
-    override weak var cvcErrorLabel: UILabel! {
-        get { return _cvcErrorLabel } set { }
-    }
-    @IBOutlet private weak var _cardHolderErrorLabel: UILabel!
-    override weak var cardHolderErrorLabel: UILabel! {
-        get { return _cardHolderErrorLabel } set { }
-    }
+    @IBOutlet weak var cardNumberErrorLabel: UILabel!
+    @IBOutlet weak var expirationErrorLabel: UILabel!
+    @IBOutlet weak var cvcErrorLabel: UILabel!
+    @IBOutlet weak var cardHolderErrorLabel: UILabel!
 
     @IBOutlet private weak var expirationSeparator: UIView!
     @IBOutlet private weak var cvcSeparator: UIView!
@@ -81,9 +48,10 @@ public class CardFormTableStyledView: CardFormView {
     @IBOutlet private weak var cvcSeparatorConstraint: NSLayoutConstraint!
     @IBOutlet private weak var holderSeparatorConstraint: NSLayoutConstraint!
 
-    override var inputTintColor: UIColor {
-        get { return Style.Color.blue } set { }
-    }
+    var inputTextColor: UIColor = Style.Color.blue
+    var inputTintColor: UIColor = Style.Color.blue
+    var inputTextErrorColorEnabled: Bool = false
+    var cardNumberSeparator: String = "-"
 
     /// Camera scan action
     ///
@@ -119,8 +87,6 @@ public class CardFormTableStyledView: CardFormView {
 
         backgroundColor = Style.Color.groupedBackground
 
-        setupInputFields()
-
         // set images
         brandLogoImage.image = "icon_card".image
         cvcIconImage.image = "icon_card_cvc_3".image
@@ -129,7 +95,6 @@ public class CardFormTableStyledView: CardFormView {
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
-
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         // separatorのheightを 0.5 で指定すると太さが統一ではなくなってしまうためscaleを使って対応
@@ -143,9 +108,11 @@ public class CardFormTableStyledView: CardFormView {
         cvcSeparator.backgroundColor = Style.Color.separator
         holderSeparator.backgroundColor = Style.Color.separator
 
+        setupInputFields()
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
+        properties = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -199,5 +166,9 @@ extension CardFormTableStyledView: CardFormViewProtocol {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
+    }
+
+    public func setCardHolderRequired(required: Bool) {
+        isHolderRequired = required
     }
 }

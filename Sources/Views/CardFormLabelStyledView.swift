@@ -11,12 +11,12 @@ import UIKit
 /// CardFormView with label.
 /// It's recommended to implement with UIScrollView.
 @IBDesignable @objcMembers @objc(PAYCardFormLabelStyledView)
-public class CardFormLabelStyledView: CardFormView {
+public class CardFormLabelStyledView: CardFormView, CardFormProperties {
 
-    // MARK: CardFormView
+    // MARK: CardFormProperties
 
     /// Card holder input field enabled.
-    @IBInspectable override public var isHolderRequired: Bool {
+    @IBInspectable public var isHolderRequired: Bool = false {
         didSet {
             holderContainer.isHidden = !isHolderRequired
             viewModel.update(isCardHolderEnabled: isHolderRequired)
@@ -24,73 +24,35 @@ public class CardFormLabelStyledView: CardFormView {
         }
     }
 
-    @IBOutlet private weak var _brandLogoImage: UIImageView!
-    override weak var brandLogoImage: UIImageView! {
-        get { return _brandLogoImage } set { }
-    }
-    @IBOutlet private weak var _cvcIconImage: UIImageView!
-    override weak var cvcIconImage: UIImageView! {
-        get { return _cvcIconImage } set { }
-    }
-    @IBOutlet private weak var holderContainer: UIStackView!
-    @IBOutlet private weak var _ocrButton: UIButton!
-    override weak var ocrButton: UIButton! {
-        get { return _ocrButton } set { }
-    }
+    @IBOutlet weak var brandLogoImage: UIImageView!
+    @IBOutlet weak var cvcIconImage: UIImageView!
+    @IBOutlet weak var holderContainer: UIStackView!
+    @IBOutlet weak var ocrButton: UIButton!
 
-    @IBOutlet private weak var cardNumberLabel: UILabel!
-    @IBOutlet private weak var expirationLabel: UILabel!
-    @IBOutlet private weak var cvcLabel: UILabel!
-    @IBOutlet private weak var cardHolderLabel: UILabel!
+    @IBOutlet weak var cardNumberLabel: UILabel!
+    @IBOutlet weak var expirationLabel: UILabel!
+    @IBOutlet weak var cvcLabel: UILabel!
+    @IBOutlet weak var cardHolderLabel: UILabel!
 
-    @IBOutlet private weak var _cardNumberTextField: UITextField!
-    override weak var cardNumberTextField: UITextField! {
-        get { return _cardNumberTextField } set { }
-    }
-    @IBOutlet private weak var _expirationTextField: UITextField!
-    override weak var expirationTextField: UITextField! {
-        get { return _expirationTextField } set { }
-    }
-    @IBOutlet private weak var _cvcTextField: UITextField!
-    override weak var cvcTextField: UITextField! {
-        get { return _cvcTextField } set { }
-    }
-    @IBOutlet private weak var _cardHolderTextField: UITextField!
-    override weak var cardHolderTextField: UITextField! {
-        get { return _cardHolderTextField } set { }
-    }
+    @IBOutlet weak var cardNumberTextField: UITextField!
+    @IBOutlet weak var expirationTextField: UITextField!
+    @IBOutlet weak var cvcTextField: UITextField!
+    @IBOutlet weak var cardHolderTextField: UITextField!
 
-    @IBOutlet private weak var _cardNumberErrorLabel: UILabel!
-    override weak var cardNumberErrorLabel: UILabel! {
-        get { return _cardNumberErrorLabel } set { }
-    }
-    @IBOutlet private weak var _expirationErrorLabel: UILabel!
-    override weak var expirationErrorLabel: UILabel! {
-        get { return _expirationErrorLabel } set { }
-    }
-    @IBOutlet private weak var _cvcErrorLabel: UILabel!
-    override weak var cvcErrorLabel: UILabel! {
-        get { return _cvcErrorLabel } set { }
-    }
-    @IBOutlet private weak var _cardHolderErrorLabel: UILabel!
-    override weak var cardHolderErrorLabel: UILabel! {
-        get { return _cardHolderErrorLabel } set { }
-    }
+    @IBOutlet weak var cardNumberErrorLabel: UILabel!
+    @IBOutlet weak var expirationErrorLabel: UILabel!
+    @IBOutlet weak var cvcErrorLabel: UILabel!
+    @IBOutlet weak var cardHolderErrorLabel: UILabel!
 
     @IBOutlet private weak var cardNumberFieldBackground: UIView!
     @IBOutlet private weak var expirationFieldBackground: UIView!
     @IBOutlet private weak var cvcFieldBackground: UIView!
     @IBOutlet private weak var cardHolderFieldBackground: UIView!
 
-    override var inputTextColor: UIColor {
-        get { return Style.Color.label } set { }
-    }
-    override var inputTintColor: UIColor {
-        get { return Style.Color.blue } set { }
-    }
-    override var inputTextErrorColorEnabled: Bool {
-        get { return true } set { }
-    }
+    var inputTextColor: UIColor = Style.Color.label
+    var inputTintColor: UIColor = Style.Color.blue
+    var inputTextErrorColorEnabled: Bool = true
+    var cardNumberSeparator: String = "-"
 
     /// Camera scan action
     ///
@@ -126,8 +88,6 @@ public class CardFormLabelStyledView: CardFormView {
 
         backgroundColor = .clear
 
-        setupInputFields()
-
         // label
         cardNumberLabel.text = "payjp_card_form_number_label".localized
         expirationLabel.text = "payjp_card_form_expiration_label".localized
@@ -142,12 +102,13 @@ public class CardFormLabelStyledView: CardFormView {
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
-
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
+        setupInputFields()
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
+        properties = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -223,5 +184,9 @@ extension CardFormLabelStyledView: CardFormViewProtocol {
         expirationFieldBackground.backgroundColor = inputFieldBackgroundColor
         cvcFieldBackground.backgroundColor = inputFieldBackgroundColor
         cardHolderFieldBackground.backgroundColor = inputFieldBackgroundColor
+    }
+
+    public func setCardHolderRequired(required: Bool) {
+        isHolderRequired = required
     }
 }

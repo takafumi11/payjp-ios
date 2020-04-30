@@ -10,66 +10,32 @@ import Foundation
 // swiftlint:disable type_body_length file_length
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
-public class CardDisplayFormView: CardFormView {
+public class CardDisplayFormView: CardFormView, CardFormProperties {
 
-    // MARK: CardFormView
+    // MARK: CardFormProperties
 
-    override var isHolderRequired: Bool {
-        get { return true } set { }
-    }
+    var isHolderRequired: Bool = true
 
-    @IBOutlet private weak var _brandLogoImage: UIImageView!
-    override weak var brandLogoImage: UIImageView! {
-        get { return _brandLogoImage } set { }
-    }
+    @IBOutlet weak var brandLogoImage: UIImageView!
+    var cvcIconImage: UIImageView!
+    var ocrButton: UIButton!
 
-    private var _cardNumberTextField: UITextField!
-    override var cardNumberTextField: UITextField! {
-        get { return _cardNumberTextField } set { }
-    }
-    private var _expirationTextField: UITextField!
-    override var expirationTextField: UITextField! {
-        get { return _expirationTextField } set { }
-    }
-    private var _cvcTextField: UITextField!
-    override var cvcTextField: UITextField! {
-        get { return _cvcTextField } set { }
-    }
-    private var _cardHolderTextField: UITextField!
-    override var cardHolderTextField: UITextField! {
-        get { return _cardHolderTextField } set { }
-    }
-    private var _ocrButton: UIButton!
-    override var ocrButton: UIButton! {
-        get { return _ocrButton } set { }
-    }
+    var cardNumberTextField: UITextField!
+    var expirationTextField: UITextField!
+    var cvcTextField: UITextField!
+    var cardHolderTextField: UITextField!
 
-    private var _cardNumberErrorLabel: UILabel!
-    override var cardNumberErrorLabel: UILabel! {
-        get { return _cardNumberErrorLabel } set { }
-    }
-    private var _expirationErrorLabel: UILabel!
-    override var expirationErrorLabel: UILabel! {
-        get { return _expirationErrorLabel } set { }
-    }
-    private var _cvcErrorLabel: UILabel!
-    override var cvcErrorLabel: UILabel! {
-        get { return _cvcErrorLabel } set { }
-    }
-    private var _cardHolderErrorLabel: UILabel!
-    override var cardHolderErrorLabel: UILabel! {
-        get { return _cardHolderErrorLabel } set { }
-    }
+    var cardNumberErrorLabel: UILabel!
+    var expirationErrorLabel: UILabel!
+    var cvcErrorLabel: UILabel!
+    var cardHolderErrorLabel: UILabel!
 
-    override var inputTextColor: UIColor {
-        get { return Style.Color.label } set { }
-    }
-    override var inputTintColor: UIColor {
-        get { return Style.Color.blue } set { }
-    }
-    override var inputTextErrorColorEnabled: Bool {
-        get { return true } set { }
-    }
+    var inputTextColor: UIColor = Style.Color.label
+    var inputTintColor: UIColor = Style.Color.blue
+    var inputTextErrorColorEnabled: Bool = true
+    var cardNumberSeparator: String = " "
+
+    // MARK: Private
 
     @IBOutlet private weak var cardDisplayView: UIView!
     @IBOutlet private weak var cardFrontView: UIStackView!
@@ -147,7 +113,8 @@ public class CardDisplayFormView: CardFormView {
 
         viewModel.delegate = self
         formScrollView.delegate = self
-        textDelegate = self
+        textFieldDelegate = self
+        properties = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -218,7 +185,7 @@ public class CardDisplayFormView: CardFormView {
     }
 
     override func updateBrandLogo(brand: CardBrand?) {
-        guard let brandLogoImage = _brandLogoImage else { return }
+        guard let brandLogoImage = brandLogoImage else { return }
         brandLogoImage.image = brand?.displayLogoImage
     }
 
@@ -238,12 +205,12 @@ public class CardDisplayFormView: CardFormView {
         cvcFieldBackground = UIView()
         cardHolderFieldBackground = UIView()
 
-        _cardNumberErrorLabel = UILabel()
-        _expirationErrorLabel = UILabel()
-        _cvcErrorLabel = UILabel()
-        _cardHolderErrorLabel = UILabel()
+        cardNumberErrorLabel = UILabel()
+        expirationErrorLabel = UILabel()
+        cvcErrorLabel = UILabel()
+        cardHolderErrorLabel = UILabel()
 
-        _ocrButton = UIButton()
+        ocrButton = UIButton()
         ocrButton.addTarget(self,
                             action: #selector(onTapOcrButton(_:)),
                             for: UIControl.Event.touchUpInside)
@@ -251,7 +218,6 @@ public class CardDisplayFormView: CardFormView {
         ocrButton.imageView?.contentMode = .scaleAspectFit
         ocrButton.contentHorizontalAlignment = .fill
         ocrButton.contentVerticalAlignment = .fill
-
         ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
 
         cardNumberDisplayLabel.textColor = Style.Color.displayLabel
@@ -262,10 +228,10 @@ public class CardDisplayFormView: CardFormView {
     }
 
     private func setupInputFields() {
-        _cardNumberTextField = UITextField()
-        _expirationTextField = UITextField()
-        _cvcTextField = UITextField()
-        _cardHolderTextField = UITextField()
+        cardNumberTextField = UITextField()
+        expirationTextField = UITextField()
+        cvcTextField = UITextField()
+        cardHolderTextField = UITextField()
 
         cardNumberTextField.borderStyle = .none
         expirationTextField.borderStyle = .none
@@ -548,6 +514,7 @@ extension CardDisplayFormView: CardFormViewProtocol {
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
+        self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
         // input text
@@ -566,11 +533,15 @@ extension CardDisplayFormView: CardFormViewProtocol {
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
     }
+
+    public func setCardHolderRequired(required: Bool) {
+        isHolderRequired = required
+    }
 }
 
 extension CardDisplayFormView: CardFormViewTextFieldDelegate {
 
-    public override func textFieldDidBeginEditing(_ textField: UITextField) {
+    public func textFieldDidBeginEditing(textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)
         updateCardNumberMask(textField: textField)
 
@@ -597,3 +568,4 @@ extension CardDisplayFormView: CardFormViewTextFieldDelegate {
         }
     }
 }
+// swiftlint:enable type_body_length file_length

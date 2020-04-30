@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDisplayFormView">
             <connections>
-                <outlet property="_brandLogoImage" destination="MCs-Gi-s47" id="CkB-0Q-RM7"/>
+                <outlet property="brandLogoImage" destination="MCs-Gi-s47" id="Px9-ic-RMr"/>
                 <outlet property="cardBackView" destination="aVk-0J-2sE" id="K0g-pH-R17"/>
                 <outlet property="cardDisplayView" destination="ZIu-Kf-DOT" id="YhV-2q-kXx"/>
                 <outlet property="cardFrontView" destination="0Gy-yU-PVk" id="oaI-Ed-9AF"/>
