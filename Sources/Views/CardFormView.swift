@@ -15,31 +15,31 @@ public protocol CardFormViewProtocol {
     func apply(style: FormStyle)
 
     /// Set whether to enable card holder form.
-    /// 
+    ///
     /// - Parameter required: card holder required
     func setCardHolderRequired(required: Bool)
 }
 
 protocol CardFormProperties {
-    var brandLogoImage: UIImageView! {get}
-    var cvcIconImage: UIImageView! {get}
-    var ocrButton: UIButton! {get}
+    var brandLogoImage: UIImageView! { get }
+    var cvcIconImage: UIImageView! { get }
+    var ocrButton: UIButton! { get }
 
-    var cardNumberTextField: UITextField! {get}
-    var expirationTextField: UITextField! {get}
-    var cvcTextField: UITextField! {get}
-    var cardHolderTextField: UITextField! {get}
+    var cardNumberTextField: UITextField! { get }
+    var expirationTextField: UITextField! { get }
+    var cvcTextField: UITextField! { get }
+    var cardHolderTextField: UITextField! { get }
 
-    var cardNumberErrorLabel: UILabel! {get}
-    var expirationErrorLabel: UILabel! {get}
-    var cvcErrorLabel: UILabel! {get}
-    var cardHolderErrorLabel: UILabel! {get}
+    var cardNumberErrorLabel: UILabel! { get }
+    var expirationErrorLabel: UILabel! { get }
+    var cvcErrorLabel: UILabel! { get }
+    var cardHolderErrorLabel: UILabel! { get }
 
-    var inputTextColor: UIColor {get}
-    var inputTintColor: UIColor {get}
-    var inputTextErrorColorEnabled: Bool {get}
+    var inputTextColor: UIColor { get }
+    var inputTintColor: UIColor { get }
+    var inputTextErrorColorEnabled: Bool { get }
     var isHolderRequired: Bool { get }
-    var cardNumberSeparator: String {get}
+    var cardNumberSeparator: String { get }
 }
 
 protocol CardFormViewTextFieldDelegate: class {
@@ -105,7 +105,8 @@ public class CardFormView: UIView {
                  let .cardNumberInvalidBrandError(value, instant):
                 properties.cardNumberTextField.text = value?.formatted
                 if properties.inputTextErrorColorEnabled {
-                    properties.cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : properties.inputTextColor
+                    properties.cardNumberTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : properties.inputTextColor
                 }
                 inputCardNumberFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
                 updateBrandLogo(brand: value?.brand)
@@ -156,7 +157,8 @@ public class CardFormView: UIView {
                  let .expirationInvalidError(value, instant):
                 properties.expirationTextField.text = value?.formatted
                 if properties.inputTextErrorColorEnabled {
-                    properties.expirationTextField.textColor = forceShowError || instant ? Style.Color.red : properties.inputTextColor
+                    properties.expirationTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : properties.inputTextColor
                 }
                 inputExpirationFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
@@ -188,7 +190,8 @@ public class CardFormView: UIView {
                  let .cvcInvalidError(value, instant):
                 properties.cvcTextField.text = value
                 if properties.inputTextErrorColorEnabled {
-                    properties.cvcTextField.textColor = forceShowError || instant ? Style.Color.red : properties.inputTextColor
+                    properties.cvcTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : properties.inputTextColor
                 }
                 inputCvcFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
@@ -227,7 +230,8 @@ public class CardFormView: UIView {
             switch error {
             case let .cardHolderEmptyError(value, instant):
                 if properties.inputTextErrorColorEnabled {
-                    properties.cardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : properties.inputTextColor
+                    properties.cardHolderTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : properties.inputTextColor
                 }
                 inputCardHolderFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
