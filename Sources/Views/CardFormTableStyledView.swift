@@ -113,7 +113,6 @@ public class CardFormTableStyledView: CardFormView, CardFormProperties {
         setupInputFields()
         apply(style: .defaultStyle)
 
-        viewModel.delegate = self
         cardFormProperties = self
     }
 
@@ -124,6 +123,7 @@ public class CardFormTableStyledView: CardFormView, CardFormProperties {
     // MARK: Private
 
     private func setupInputFields() {
+        cardHolderTextField.keyboardType = .alphabet
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
             string: "payjp_card_form_number_placeholder".localized,

@@ -64,10 +64,12 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     private var cvcFieldContentView: UIStackView!
     private var cardHolderFieldContentView: UIStackView!
 
+    private var contentView: UIView!
+    private let formContentStackView: UIStackView = UIStackView()
+    private var isCardDisplayFront: Bool = true
+    private var isScrolling: Bool = false
     private let inputFieldMargin: CGFloat = 16.0
     private var contentPositionX: CGFloat = 0.0
-    private var isScrolling: Bool = false
-    private let formContentStackView: UIStackView = UIStackView()
 
     /// Camera scan action
     ///
@@ -75,9 +77,6 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     @objc private func onTapOcrButton(_ sender: Any) {
         viewModel.requestOcr()
     }
-
-    private var contentView: UIView!
-    private var isCardDisplayFront = true
 
     // MARK: Lifecycle
 
@@ -111,7 +110,6 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         setupScrollableForm()
         apply(style: .defaultStyle)
 
-        viewModel.delegate = self
         formScrollView.delegate = self
         textFieldDelegate = self
         cardFormProperties = self
@@ -246,6 +244,14 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         expirationTextField.borderStyle = .none
         cvcTextField.borderStyle = .none
         cardHolderTextField.borderStyle = .none
+
+        cardNumberTextField.textContentType = .creditCardNumber
+        cardNumberTextField.keyboardType = .numberPad
+        expirationTextField.keyboardType = .numberPad
+        cvcTextField.keyboardType = .numberPad
+        cvcTextField.isSecureTextEntry = true
+        cardHolderTextField.keyboardType = .alphabet
+        cardHolderTextField.autocapitalizationType = .none
 
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(

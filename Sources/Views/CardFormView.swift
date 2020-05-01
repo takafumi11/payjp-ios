@@ -79,6 +79,7 @@ public class CardFormView: UIView {
 
     private func initialize() {
         cardIOProxy = CardIOProxy(delegate: self)
+        viewModel.delegate = self
     }
 
     /// カード番号の入力フィールドを更新する

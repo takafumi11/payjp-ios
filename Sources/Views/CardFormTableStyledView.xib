@@ -186,7 +186,7 @@
                                             </constraints>
                                             <color key="textColor" red="0.01176470588" green="0.01176470588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" textContentType="name"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         </textField>
                                     </subviews>
                                     <edgeInsets key="layoutMargins" top="4" left="0.0" bottom="4" right="8"/>
