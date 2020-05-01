@@ -14,7 +14,11 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
 
     // MARK: CardFormProperties
 
-    var isHolderRequired: Bool = true
+    var isHolderRequired: Bool = true {
+        didSet {
+            viewModel.update(isCardHolderEnabled: isHolderRequired)
+        }
+    }
 
     @IBOutlet weak var brandLogoImage: UIImageView!
     var cvcIconImage: UIImageView!
@@ -417,18 +421,14 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     }
 
     private func updateDisplayLabel(cvc: String) {
-        let mask = String(repeating: "•", count: cvc.count)
-        let range = (mask as NSString).range(of: mask)
+        let mask = String(repeating: "•", count: currentCardBrand.cvcLength)
+        let range = NSRange(location: 0, length: cvc.count)
         switch currentCardBrand {
         case .americanExpress:
-            cvc4DisplayLabel.attributedText = createAttributeText(string: "••••",
+            cvc4DisplayLabel.attributedText = createAttributeText(string: mask,
                                                                   range: range)
-        case .unknown:
-            cvcDisplayLabel.attributedText = createAttributeText(string: "••••",
-                                                                 range: range,
-                                                                 textColor: Style.Color.displayCvcLabel)
         default:
-            cvcDisplayLabel.attributedText = createAttributeText(string: "•••",
+            cvcDisplayLabel.attributedText = createAttributeText(string: mask,
                                                                  range: range,
                                                                  textColor: Style.Color.displayCvcLabel)
         }
@@ -441,27 +441,14 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     }
 
     private func updateDisplayLabelHighlight(textField: UITextField) {
-        cardNumberBorderView.highlightOff()
-        expirationBorderView.highlightOff()
-        cvcBorderView.highlightOff()
-        cvc4BorderView.highlightOff()
-        cardHolderBorderView.highlightOff()
-        switch textField {
-        case cardNumberTextField:
-            cardNumberBorderView.highlightOn()
-        case expirationTextField:
-            expirationBorderView.highlightOn()
-        case cvcTextField:
-            if currentCardBrand == .americanExpress {
-                cvc4BorderView.highlightOn()
-            } else {
-                cvcBorderView.highlightOn()
-            }
-        case cardHolderTextField:
-            cardHolderBorderView.highlightOn()
-        default:
-            break
+        cardNumberBorderView.isHighlighted = textField == cardNumberTextField
+        expirationBorderView.isHighlighted = textField == expirationTextField
+        if currentCardBrand == .americanExpress {
+            cvc4BorderView.isHighlighted = textField == cvcTextField
+        } else {
+            cvcBorderView.isHighlighted = textField == cvcTextField
         }
+        cardHolderBorderView.isHighlighted = textField == cardHolderTextField
     }
 
     private func updateCardNumberMask(textField: UITextField) {

@@ -29,7 +29,7 @@ class BorderView: UIView {
     }
     @IBInspectable var isHighlighted: Bool = false {
         didSet {
-            if oldValue != isHighlighted {
+            if isHighlighted {
                 highlightOn()
             } else {
                 highlightOff()
