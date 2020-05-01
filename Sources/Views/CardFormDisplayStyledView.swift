@@ -252,6 +252,7 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         cvcTextField.isSecureTextEntry = true
         cardHolderTextField.keyboardType = .alphabet
         cardHolderTextField.autocapitalizationType = .none
+        cardHolderTextField.autocorrectionType = .no
 
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
