@@ -66,7 +66,7 @@
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
                                      delegate:self
-                                     viewType:CardFormViewTypeCardDisplay];
+                                     viewType:CardFormViewTypeDisplayStyled];
     [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 }

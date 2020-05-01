@@ -13,7 +13,7 @@ import SafariServices
 @objc public enum CardFormViewType: Int {
     case tableStyled = 0
     case labelStyled = 1
-    case cardDisplay = 2
+    case displayStyled = 2
 
     func createView(frame: CGRect) -> CardFormView & CardFormStylable {
         switch self {
@@ -21,8 +21,8 @@ import SafariServices
             return CardFormTableStyledView(frame: frame)
         case .labelStyled:
             return CardFormLabelStyledView(frame: frame)
-        case .cardDisplay:
-            return CardDisplayFormView(frame: frame)
+        case .displayStyled:
+            return CardFormDisplayStyledView(frame: frame)
         }
     }
 }

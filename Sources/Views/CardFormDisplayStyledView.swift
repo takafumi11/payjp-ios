@@ -1,5 +1,5 @@
 //
-//  CardDisplayFormView.swift
+//  CardFormDisplayStyledView.swift
 //  PAYJP
 //
 //  Created by Tadashi Wakayanagi on 2020/03/13.
@@ -10,7 +10,7 @@ import Foundation
 // swiftlint:disable type_body_length file_length
 /// CardFormView with card animation.
 @IBDesignable @objcMembers @objc(PAYCardFormDisplayStyledView)
-public class CardDisplayFormView: CardFormView, CardFormProperties {
+public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
 
     // MARK: CardFormProperties
 
@@ -92,7 +92,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
     }
 
     private func initialize() {
-        let nib = UINib(nibName: "CardDisplayFormView", bundle: .payjpBundle)
+        let nib = UINib(nibName: "CardFormDisplayStyledView", bundle: .payjpBundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
 
         if let view = view {
@@ -504,7 +504,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
 }
 
 // MARK: UIScrollViewDelegate
-extension CardDisplayFormView: UIScrollViewDelegate {
+extension CardFormDisplayStyledView: UIScrollViewDelegate {
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 各入力Viewに設定しているマージン分だけスクロール位置がずれるため調整する
@@ -525,7 +525,7 @@ extension CardDisplayFormView: UIScrollViewDelegate {
 }
 
 // MARK: CardFormViewProtocol
-extension CardDisplayFormView: CardFormStylable {
+extension CardFormDisplayStyledView: CardFormStylable {
 
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
@@ -556,7 +556,7 @@ extension CardDisplayFormView: CardFormStylable {
     }
 }
 
-extension CardDisplayFormView: CardFormViewTextFieldDelegate {
+extension CardFormDisplayStyledView: CardFormViewTextFieldDelegate {
 
     func didBeginEditing(textField: UITextField) {
         updateDisplayLabelHighlight(textField: textField)

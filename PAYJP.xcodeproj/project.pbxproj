@@ -75,8 +75,7 @@
 		ED0C78F52429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */; };
 		ED0C78F82429F3FE0022D544 /* CreateTokenForThreeDSecureRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */; };
 		ED0C78FA242C89090022D544 /* ThreeDSecureTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C78F9242C89090022D544 /* ThreeDSecureTokenTests.swift */; };
-		ED1A0743241B876F00AB1423 /* CardDisplayFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1A0741241B876F00AB1423 /* CardDisplayFormView.xib */; };
-		ED1A0744241B876F00AB1423 /* CardDisplayFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A0742241B876F00AB1423 /* CardDisplayFormView.swift */; };
+		ED1A0743241B876F00AB1423 /* CardFormDisplayStyledView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1A0741241B876F00AB1423 /* CardFormDisplayStyledView.xib */; };
 		ED263900242896BF006D0715 /* ThreeDSecureToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2638FF242896BF006D0715 /* ThreeDSecureToken.swift */; };
 		ED2CDBB323E952570017F102 /* PermissionFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2CDBB223E952570017F102 /* PermissionFetcher.swift */; };
 		ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */; };
@@ -97,6 +96,7 @@
 		ED66B2DD23D697D10095B18D /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED66B2DC23D697D10095B18D /* Resource.bundle */; };
 		ED6DF6F124528B41009E2EF3 /* Expiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F024528B41009E2EF3 /* Expiration.swift */; };
 		ED6DF6F5245ADC9C009E2EF3 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */; };
+		ED6DF6F7245BB9B1009E2EF3 /* CardFormDisplayStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */; };
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
 		ED78734724404EBD0074795B /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED78734624404EBC0074795B /* PAYJP.m */; };
 		ED78734924443AC30074795B /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED78734824443AC30074795B /* BorderView.swift */; };
@@ -234,8 +234,7 @@
 		ED0C78F42429B9980022D544 /* CreateTokenForThreeDSecureRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequest.swift; sourceTree = "<group>"; };
 		ED0C78F62429F3940022D544 /* CreateTokenForThreeDSecureRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenForThreeDSecureRequestTests.swift; sourceTree = "<group>"; };
 		ED0C78F9242C89090022D544 /* ThreeDSecureTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureTokenTests.swift; sourceTree = "<group>"; };
-		ED1A0741241B876F00AB1423 /* CardDisplayFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardDisplayFormView.xib; sourceTree = "<group>"; };
-		ED1A0742241B876F00AB1423 /* CardDisplayFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDisplayFormView.swift; sourceTree = "<group>"; };
+		ED1A0741241B876F00AB1423 /* CardFormDisplayStyledView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardFormDisplayStyledView.xib; sourceTree = "<group>"; };
 		ED2638FF242896BF006D0715 /* ThreeDSecureToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureToken.swift; sourceTree = "<group>"; };
 		ED2CDBB223E952570017F102 /* PermissionFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionFetcher.swift; sourceTree = "<group>"; };
 		ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +258,7 @@
 		ED66B2DC23D697D10095B18D /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
 		ED6DF6F024528B41009E2EF3 /* Expiration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expiration.swift; sourceTree = "<group>"; };
 		ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormDisplayStyledView.swift; sourceTree = "<group>"; };
 		ED78734624404EBC0074795B /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
 		ED78734824443AC30074795B /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -557,10 +557,10 @@
 				ED78734824443AC30074795B /* BorderView.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,
 				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
-				ED1A0742241B876F00AB1423 /* CardDisplayFormView.swift */,
-				ED1A0741241B876F00AB1423 /* CardDisplayFormView.xib */,
 				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
 				ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */,
+				ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */,
+				ED1A0741241B876F00AB1423 /* CardFormDisplayStyledView.xib */,
 				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
 				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
 				ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */,
@@ -773,7 +773,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED50836A230FC3AC00C64A7F /* CardFormTableStyledView.xib in Resources */,
-				ED1A0743241B876F00AB1423 /* CardDisplayFormView.xib in Resources */,
+				ED1A0743241B876F00AB1423 /* CardFormDisplayStyledView.xib in Resources */,
 				EDC02D62230D2A0C00305B10 /* Assets.xcassets in Resources */,
 				ED06736B2387844B00F86D18 /* BrandImageCell.xib in Resources */,
 				ED2ECF86237E9E4F0066D6C2 /* CardForm.storyboard in Resources */,
@@ -893,9 +893,9 @@
 				ED31B07E2397C6E800DDFFE5 /* CardFormScreenPresenter.swift in Sources */,
 				EDA3EE9622E1C26100D9A6C9 /* CvcFormatter.swift in Sources */,
 				ED2ECF84237E9E240066D6C2 /* CardFormViewController.swift in Sources */,
+				ED6DF6F7245BB9B1009E2EF3 /* CardFormDisplayStyledView.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
 				ED3DB9E0243ACCBE0065FC33 /* Mock.swift in Sources */,
-				ED1A0744241B876F00AB1423 /* CardDisplayFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
