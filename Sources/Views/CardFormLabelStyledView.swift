@@ -110,7 +110,7 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
         apply(style: .defaultStyle)
 
         viewModel.delegate = self
-        properties = self
+        cardFormProperties = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -150,7 +150,7 @@ public class CardFormLabelStyledView: CardFormView, CardFormProperties {
 }
 
 // MARK: CardFormViewProtocol
-extension CardFormLabelStyledView: CardFormViewProtocol {
+extension CardFormLabelStyledView: CardFormStylable {
 
     public func apply(style: FormStyle) {
         let labelTextColor = style.labelTextColor
@@ -188,7 +188,7 @@ extension CardFormLabelStyledView: CardFormViewProtocol {
         cardHolderFieldBackground.backgroundColor = inputFieldBackgroundColor
     }
 
-    public func setCardHolderRequired(required: Bool) {
+    public func setCardHolderRequired(_ required: Bool) {
         isHolderRequired = required
     }
 }

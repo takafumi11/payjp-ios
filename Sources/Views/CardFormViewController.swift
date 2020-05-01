@@ -15,7 +15,7 @@ import SafariServices
     case labelStyled = 1
     case cardDisplay = 2
 
-    func createView(frame: CGRect) -> CardFormView & CardFormViewProtocol {
+    func createView(frame: CGRect) -> CardFormView & CardFormStylable {
         switch self {
         case .tableStyled:
             return CardFormTableStyledView(frame: frame)
@@ -43,7 +43,6 @@ public class CardFormViewController: UIViewController {
     private var formStyle: FormStyle?
     private var tenantId: String?
     private var cardFormViewType: CardFormViewType?
-    private var isCardHolderRequired: Bool = true
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
     private var cardFormView: CardFormView!
@@ -230,7 +229,7 @@ public class CardFormViewController: UIViewController {
             cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             cardFormView.delegate = self
             cardFormView.setupInputAccessoryView(view: accessoryView)
-            cardFormView.setCardHolderRequired(required: true)
+            cardFormView.setCardHolderRequired(true)
             if let formStyle = formStyle {
                 cardFormView.apply(style: formStyle)
                 submitButton.normalBackgroundColor = formStyle.submitButtonColor

@@ -114,7 +114,7 @@ public class CardDisplayFormView: CardFormView, CardFormProperties {
         viewModel.delegate = self
         formScrollView.delegate = self
         textFieldDelegate = self
-        properties = self
+        cardFormProperties = self
     }
 
     override public var intrinsicContentSize: CGSize {
@@ -525,7 +525,7 @@ extension CardDisplayFormView: UIScrollViewDelegate {
 }
 
 // MARK: CardFormViewProtocol
-extension CardDisplayFormView: CardFormViewProtocol {
+extension CardDisplayFormView: CardFormStylable {
 
     public func apply(style: FormStyle) {
         let inputTextColor = style.inputTextColor
@@ -551,7 +551,7 @@ extension CardDisplayFormView: CardFormViewProtocol {
         cardHolderTextField.tintColor = tintColor
     }
 
-    public func setCardHolderRequired(required: Bool) {
+    public func setCardHolderRequired(_ required: Bool) {
         isHolderRequired = required
     }
 }
@@ -591,17 +591,17 @@ extension CardDisplayFormView: CardFormViewTextFieldDelegate {
 
     private func focusPrevious(currentField: UITextField) {
         switch currentField {
-        case properties.expirationTextField:
-            if properties.expirationTextField.isFirstResponder {
-                properties.cardNumberTextField.becomeFirstResponder()
+        case cardFormProperties.expirationTextField:
+            if cardFormProperties.expirationTextField.isFirstResponder {
+                cardFormProperties.cardNumberTextField.becomeFirstResponder()
             }
-        case properties.cvcTextField:
-            if properties.cvcTextField.isFirstResponder {
-                properties.expirationTextField.becomeFirstResponder()
+        case cardFormProperties.cvcTextField:
+            if cardFormProperties.cvcTextField.isFirstResponder {
+                cardFormProperties.expirationTextField.becomeFirstResponder()
             }
-        case properties.cardHolderTextField:
-            if properties.cardHolderTextField.isFirstResponder && properties.isHolderRequired {
-                properties.cvcTextField.becomeFirstResponder()
+        case cardFormProperties.cardHolderTextField:
+            if cardFormProperties.cardHolderTextField.isFirstResponder && cardFormProperties.isHolderRequired {
+                cardFormProperties.cvcTextField.becomeFirstResponder()
             }
         default:
             break

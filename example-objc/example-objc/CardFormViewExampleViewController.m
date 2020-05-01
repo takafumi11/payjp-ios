@@ -252,7 +252,7 @@
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
-  [self.cardFormView setCardHolderRequiredWithRequired:sender.isOn];
+  [self.cardFormView setCardHolderRequired:sender.isOn];
 }
 
 @end
