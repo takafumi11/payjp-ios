@@ -244,7 +244,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
-        if let cardNumberString = cardNumber?.value, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+        if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
+            let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumberString,
                                      cvc: cvc,
                                      expirationMonth: month,
@@ -275,7 +276,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
-        if let cardNumberString = cardNumber?.value, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+        if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
+            let year = monthYear?.year, let cvc = cvc {
             let input = CardFormInput(cardNumber: cardNumberString,
                                       expirationMonth: month,
                                       expirationYear: year,
