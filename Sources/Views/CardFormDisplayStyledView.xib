@@ -66,7 +66,7 @@
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL6-Q2-Xtb" customClass="BorderView" customModule="PAYJP" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="16" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="16" text="XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIx-Sj-moo">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="16" text="••••" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIx-Sj-moo">
                                                             <rect key="frame" x="8" y="4" width="0.0" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="12" id="rhT-jo-qu5"/>
@@ -221,7 +221,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ov6-6p-fHx" customClass="BorderView" customModule="PAYJP" customModuleProvider="target">
                                             <rect key="frame" x="83.5" y="2" width="34.5" height="20"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpf-2e-oSj">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•••" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpf-2e-oSj">
                                                     <rect key="frame" x="8" y="4" width="18.5" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="glA-Qe-tIA"/>
