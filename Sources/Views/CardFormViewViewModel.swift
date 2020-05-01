@@ -99,7 +99,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let tokenService: TokenServiceType
     private let permissionFetcher: PermissionFetcherType
 
-    private var cardNumberString: String?
     private var acceptedCardBrands: [CardBrand]?
     private var monthYear: (month: String, year: String)?
     private var cvc: String?
@@ -150,7 +149,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                                                                     separator: separator),
             let cardNumber = cardNumber,
             !cardNumber.isEmpty else {
-                self.cardNumberString = nil
                 self.cardBrand = .unknown
                 self.cardNumber = nil
                 // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
@@ -158,11 +156,10 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
-        self.cardNumberString = cardNumberInput.formatted.numberfy()
         self.cardBrand = cardNumberInput.brand
         self.cardNumber = cardNumberInput
 
-        if let cardNumber = self.cardNumberString {
+        if let cardNumber = self.cardNumber?.value {
             // 利用可能ブランドのチェック
             if let acceptedCardBrands = self.acceptedCardBrands {
                 if cardNumberInput.brand != .unknown && !acceptedCardBrands.contains(cardNumberInput.brand) {
@@ -247,7 +244,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
-        if let cardNumber = cardNumberString, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+        if let cardNumber = cardNumber?.value, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumber,
                                      cvc: cvc,
                                      expirationMonth: month,
@@ -278,7 +275,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
-        if let cardNumber = cardNumberString, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
+        if let cardNumber = cardNumber?.value, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
             let input = CardFormInput(cardNumber: cardNumber,
                                       expirationMonth: month,
                                       expirationYear: year,
@@ -313,7 +310,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
-        if let cardNumber = self.cardNumberString {
+        if let cardNumber = cardNumber?.value {
             return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: self.cardBrand)
         }
         return false

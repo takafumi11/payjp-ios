@@ -54,7 +54,8 @@ struct CardNumberFormatter: CardNumberFormatterType {
                 formatted.insert(separator: separator, positions: [4, 10])
                 display.insert(separator: separator, positions: [4, 10])
                 mask.insert(separator: separator, positions: [4, 10])
-                return CardNumber(formatted: formatted,
+                return CardNumber(value: trimmed,
+                                  formatted: formatted,
                                   brand: brand,
                                   display: display,
                                   mask: mask)
@@ -62,7 +63,8 @@ struct CardNumberFormatter: CardNumberFormatterType {
                 formatted.insert(separator: separator, every: 4)
                 display.insert(separator: separator, every: 4)
                 mask.insert(separator: separator, every: 4)
-                return CardNumber(formatted: formatted,
+                return CardNumber(value: trimmed,
+                                  formatted: formatted,
                                   brand: brand,
                                   display: display,
                                   mask: mask)
