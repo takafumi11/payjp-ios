@@ -27,12 +27,14 @@ class BorderView: UIView {
             layer.borderColor = borderColor?.cgColor
         }
     }
-    @IBInspectable var isHighlighted: Bool = false {
+    @IBInspectable var isHighlighted: Bool = true {
         didSet {
-            if isHighlighted {
-                highlightOn()
-            } else {
-                highlightOff()
+            if oldValue != isHighlighted {
+                if isHighlighted {
+                    highlightOn()
+                } else {
+                    highlightOff()
+                }
             }
         }
     }
