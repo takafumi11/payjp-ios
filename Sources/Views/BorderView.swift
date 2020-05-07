@@ -34,31 +34,28 @@ class BorderView: UIView {
             }
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         updateHighlight()
     }
-    
-    private func updateHighlight(){
+
+    private func updateHighlight() {
         if isHighlighted {
             highlightOn()
         } else {
             highlightOff()
         }
     }
-}
 
-extension BorderView {
-
-    func highlightOn() {
+    private func highlightOn() {
         layer.cornerRadius = cornerRadius
         layer.masksToBounds = cornerRadius > 0
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor?.cgColor
     }
 
-    func highlightOff() {
+    private func highlightOff() {
         layer.cornerRadius = 0
         layer.masksToBounds = false
         layer.borderWidth = 0
