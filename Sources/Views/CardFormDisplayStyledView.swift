@@ -249,6 +249,11 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         cvcTextField.borderStyle = .none
         cardHolderTextField.borderStyle = .none
 
+        cardNumberTextField.clearButtonMode = .whileEditing
+        expirationTextField.clearButtonMode = .whileEditing
+        cvcTextField.clearButtonMode = .whileEditing
+        cardHolderTextField.clearButtonMode = .whileEditing
+
         cardNumberTextField.textContentType = .creditCardNumber
         cardNumberTextField.keyboardType = .numberPad
         expirationTextField.keyboardType = .numberPad
