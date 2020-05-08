@@ -9,22 +9,43 @@
 import Foundation
 import SafariServices
 
+/// View type of CardFormView.
+@objc public enum CardFormViewType: Int {
+    case tableStyled = 0
+    case labelStyled = 1
+    case displayStyled = 2
+
+    func createView(frame: CGRect) -> CardFormView & CardFormStylable {
+        switch self {
+        case .tableStyled:
+            return CardFormTableStyledView(frame: frame)
+        case .labelStyled:
+            return CardFormLabelStyledView(frame: frame)
+        case .displayStyled:
+            return CardFormDisplayStyledView(frame: frame)
+        }
+    }
+}
+
 /// CardFormViewController.
 /// It's configured with CardFormLabelStyledView.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var cardFormView: CardFormLabelStyledView!
     @IBOutlet weak var submitButton: ActionButton!
     @IBOutlet weak var brandsView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: ErrorView!
+    @IBOutlet weak var brandsLayout: UIView!
+    @IBOutlet weak var formContentView: UIView!
 
     private var formStyle: FormStyle?
     private var tenantId: String?
+    private var cardFormViewType: CardFormViewType?
     private var accptedBrands: [CardBrand]?
     private var accessorySubmitButton: ActionButton!
+    private var cardFormView: CardFormView!
 
     private var presenter: CardFormScreenPresenterType?
     private let errorTranslator = ErrorTranslator.shared
@@ -38,21 +59,25 @@ public class CardFormViewController: UIViewController {
     ///   - style: formStyle
     ///   - tenantId: identifier of tenant
     ///   - delegate: delegate of CardFormViewControllerDelegate
+    ///   - viewType: card form type
     /// - Returns: CardFormViewController
-    @objc(createCardFormViewControllerWithStyle: tenantId: delegate:)
-    public static func createCardFormViewController(style: FormStyle? = .defaultStyle,
-                                                    tenantId: String? = nil,
-                                                    delegate: CardFormViewControllerDelegate)
-        -> CardFormViewController {
-            let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
-            let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
-            guard
-                let cardFormVc = naviVc?.topViewController as? CardFormViewController
-                else { fatalError("Couldn't instantiate CardFormViewController") }
-            cardFormVc.formStyle = style
-            cardFormVc.tenantId = tenantId
-            cardFormVc.delegate = delegate
-            return cardFormVc
+    @objc(createCardFormViewControllerWithStyle: tenantId: delegate: viewType:)
+    public static func createCardFormViewController(
+        style: FormStyle = .defaultStyle,
+        tenantId: String? = nil,
+        delegate: CardFormViewControllerDelegate,
+        viewType: CardFormViewType = .labelStyled) -> CardFormViewController {
+
+        let stotyboard = UIStoryboard(name: "CardForm", bundle: .payjpBundle)
+        let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
+        guard
+            let cardFormVc = naviVc?.topViewController as? CardFormViewController
+            else { fatalError("Couldn't instantiate CardFormViewController") }
+        cardFormVc.formStyle = style
+        cardFormVc.tenantId = tenantId
+        cardFormVc.delegate = delegate
+        cardFormVc.cardFormViewType = viewType
+        return cardFormVc
     }
 
     @IBAction func registerCardTapped(_ sender: Any) {
@@ -70,22 +95,9 @@ public class CardFormViewController: UIViewController {
 
     public override func viewDidLoad() {
         presenter = CardFormScreenPresenter(delegate: self)
-        // show submit button on top of keyboard
-        let frame = CGRect.init(x: 0,
-                                y: 0,
-                                width: (UIScreen.main.bounds.size.width),
-                                height: 44)
-        let view = UIView(frame: frame)
-        accessorySubmitButton = ActionButton(frame: frame)
-        accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
-        accessorySubmitButton.addTarget(self, action: #selector(submitTapped(sender:)), for: .touchUpInside)
-        accessorySubmitButton.isEnabled = false
-        accessorySubmitButton.cornerRadius = Style.Radius.none
-        view.addSubview(accessorySubmitButton)
-        cardFormView.setupInputAccessoryView(view: view)
 
-        cardFormView.delegate = self
+        setupCardFormView()
+
         brandsView.delegate = self
         brandsView.dataSource = self
         errorView.delegate = self
@@ -100,13 +112,6 @@ public class CardFormViewController: UIViewController {
 
         brandsView.register(UINib(nibName: "BrandImageCell", bundle: .payjpBundle),
                             forCellWithReuseIdentifier: "BrandCell")
-
-        // style
-        if let formStyle = formStyle {
-            cardFormView.apply(style: formStyle)
-            submitButton.normalBackgroundColor = formStyle.submitButtonColor
-            accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
-        }
         brandsView.backgroundColor = Style.Color.groupedBackground
 
         setupKeyboardNotification()
@@ -189,6 +194,50 @@ public class CardFormViewController: UIViewController {
 
     private func fetchAccpetedBrands() {
         presenter?.fetchBrands(tenantId: tenantId)
+    }
+
+    private func setupCardFormView() {
+        // show submit button on top of keyboard
+        let buttonFrame = CGRect.init(x: 0,
+                                      y: 0,
+                                      width: (UIScreen.main.bounds.size.width),
+                                      height: 44)
+        let buttonView = UIView(frame: buttonFrame)
+        accessorySubmitButton = ActionButton(frame: buttonFrame)
+        accessorySubmitButton.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        accessorySubmitButton.setTitle("payjp_card_form_screen_submit_button".localized, for: .normal)
+        accessorySubmitButton.addTarget(self,
+                                        action: #selector(submitTapped(sender:)),
+                                        for: .touchUpInside)
+        accessorySubmitButton.isEnabled = false
+        accessorySubmitButton.cornerRadius = Style.Radius.none
+        buttonView.addSubview(accessorySubmitButton)
+
+        let x = self.formContentView.bounds.origin.x
+        let y = self.formContentView.bounds.origin.y
+        let width  = self.formContentView.bounds.width
+        let height = self.formContentView.bounds.height
+        let viewFrame = CGRect(x: x, y: y, width: width, height: height)
+
+        initCardFormView(viewFrame: viewFrame, accessoryView: buttonView)
+    }
+
+    /// タイプ別で判定してCardFormViewを生成する
+    private func initCardFormView(viewFrame: CGRect, accessoryView: UIView) {
+
+        if let cardFormView = cardFormViewType?.createView(frame: viewFrame) {
+            cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            cardFormView.delegate = self
+            cardFormView.setupInputAccessoryView(view: accessoryView)
+            cardFormView.setCardHolderRequired(true)
+            if let formStyle = formStyle {
+                cardFormView.apply(style: formStyle)
+                submitButton.normalBackgroundColor = formStyle.submitButtonColor
+                accessorySubmitButton.normalBackgroundColor = formStyle.submitButtonColor
+            }
+            self.formContentView.addSubview(cardFormView)
+            self.cardFormView = cardFormView
+        }
     }
 }
 

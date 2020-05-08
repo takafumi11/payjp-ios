@@ -24,6 +24,15 @@
   [tableView deselectRowAtIndexPath:indexPath animated:true];
 
   if (indexPath.row == 3) {
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                     tenantId:nil
+                                     delegate:self
+                                     viewType:CardFormViewTypeTableStyled];
+    [self.navigationController pushViewController:cardFormVc animated:YES];
+  }
+
+  if (indexPath.row == 4) {
     // customize card form
     //        UIColor *color = RGB(0, 122, 255);
     //        PAYCardFormStyle *style = [[PAYCardFormStyle alloc] initWithLabelTextColor:color
@@ -36,7 +45,8 @@
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
                                      tenantId:nil
-                                     delegate:self];
+                                     delegate:self
+                                     viewType:CardFormViewTypeLabelStyled];
     [self.navigationController pushViewController:cardFormVc animated:YES];
 
     // modal
@@ -49,6 +59,15 @@
     //                    [UINavigationController.new initWithRootViewController:cardFormVc];
     //                naviVc.presentationController.delegate = cardFormVc;
     //                [self presentViewController:naviVc animated:true completion:nil];
+  }
+
+  if (indexPath.row == 5) {
+    PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
+                                     tenantId:nil
+                                     delegate:self
+                                     viewType:CardFormViewTypeDisplayStyled];
+    [self.navigationController pushViewController:cardFormVc animated:YES];
   }
 }
 

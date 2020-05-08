@@ -8,43 +8,78 @@
 
 import Foundation
 
-protocol CardFormView {
+public protocol CardFormStylable {
+    /// Apply card form style.
+    ///
+    /// - Parameter style: card form style
+    func apply(style: FormStyle)
 
-    /// property
-    var inputTextColor: UIColor { get }
-    var inputTintColor: UIColor { get }
-    var inputTextErrorColorEnabled: Bool { get }
-    var isHolderRequired: Bool { get }
+    /// Set whether to enable card holder form.
+    ///
+    /// - Parameter required: card holder required
+    func setCardHolderRequired(_ required: Bool)
+}
 
-    /// view
+protocol CardFormProperties {
     var brandLogoImage: UIImageView! { get }
     var cvcIconImage: UIImageView! { get }
-    var holderContainer: UIStackView! { get }
     var ocrButton: UIButton! { get }
 
-    var cardNumberTextField: UITextField! { get }
-    var expirationTextField: UITextField! { get }
-    var cvcTextField: UITextField! { get }
-    var cardHolderTextField: UITextField! { get }
+    var cardNumberTextField: FormTextField! { get }
+    var expirationTextField: FormTextField! { get }
+    var cvcTextField: FormTextField! { get }
+    var cardHolderTextField: FormTextField! { get }
 
     var cardNumberErrorLabel: UILabel! { get }
     var expirationErrorLabel: UILabel! { get }
     var cvcErrorLabel: UILabel! { get }
     var cardHolderErrorLabel: UILabel! { get }
 
-    var viewModel: CardFormViewViewModelType { get }
+    var inputTextColor: UIColor { get }
+    var inputTintColor: UIColor { get }
+    var inputTextErrorColorEnabled: Bool { get }
+    var isHolderRequired: Bool { get }
+    var cardNumberSeparator: String { get }
 }
 
-extension CardFormView {
+protocol CardFormViewTextFieldDelegate: class {
+    func didBeginEditing(textField: UITextField)
+    func didDeleteBackward(textField: FormTextField)
+}
 
-    var inputTextColor: UIColor {
-        return Style.Color.label
+// swiftlint:disable type_body_length file_length
+@objcMembers
+public class CardFormView: UIView {
+
+    private let expirationFormatter: ExpirationFormatterType = ExpirationFormatter()
+    private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
+    private var cardIOProxy: CardIOProxy!
+
+    public weak var delegate: CardFormViewDelegate?
+    weak var textFieldDelegate: CardFormViewTextFieldDelegate?
+    var viewModel: CardFormViewViewModelType = CardFormViewViewModel()
+    var cardFormProperties: CardFormProperties!
+
+    var currentCardBrand: CardBrand {
+        return viewModel.cardBrand
     }
-    var inputTintColor: UIColor {
-        return Style.Color.blue
+    var currentCardNumber: CardNumber? {
+        return viewModel.cardNumber
     }
-    var inputTextErrorColorEnabled: Bool {
-        return false
+
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+
+    private func initialize() {
+        cardIOProxy = CardIOProxy(delegate: self)
+        viewModel.delegate = self
     }
 
     /// カード番号の入力フィールドを更新する
@@ -52,40 +87,41 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: カード番号
     ///   - forceShowError: エラー表示を強制するか
-    func updateCardNumberInput(input: String?, forceShowError: Bool = false) {
-        cardNumberTextField.tintColor = .clear
-        let result = viewModel.update(cardNumber: input)
+    private func updateCardNumberInput(input: String?, forceShowError: Bool = false, separator: String) {
+        cardFormProperties.cardNumberTextField.tintColor = .clear
+        let result = viewModel.update(cardNumber: input, separator: separator)
         switch result {
         case let .success(cardNumber):
-            cardNumberTextField.text = cardNumber.formatted
-            if inputTextErrorColorEnabled {
-                cardNumberTextField.textColor = self.inputTextColor
+            cardFormProperties.cardNumberTextField.text = cardNumber.formatted
+            if cardFormProperties.inputTextErrorColorEnabled {
+                cardFormProperties.cardNumberTextField.textColor = cardFormProperties.inputTextColor
             }
-            cardNumberErrorLabel.text = nil
+            inputCardNumberSuccess(value: cardNumber)
             updateBrandLogo(brand: cardNumber.brand)
             updateCvcIcon(brand: cardNumber.brand)
-            focusNextInputField(currentField: cardNumberTextField)
+            focusNextInputField(currentField: cardFormProperties.cardNumberTextField)
         case let .failure(error):
             switch error {
             case let .cardNumberEmptyError(value, instant),
                  let .cardNumberInvalidError(value, instant),
                  let .cardNumberInvalidBrandError(value, instant):
-                cardNumberTextField.text = value?.formatted
-                if inputTextErrorColorEnabled {
-                    cardNumberTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
+                cardFormProperties.cardNumberTextField.text = value?.formatted
+                if cardFormProperties.inputTextErrorColorEnabled {
+                    cardFormProperties.cardNumberTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : cardFormProperties.inputTextColor
                 }
-                cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                inputCardNumberFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
                 updateBrandLogo(brand: value?.brand)
                 updateCvcIcon(brand: value?.brand)
             default:
                 break
             }
         }
-        cardNumberErrorLabel.isHidden = cardNumberTextField.text == nil
+        cardFormProperties.cardNumberErrorLabel.isHidden = cardFormProperties.cardNumberTextField.text == nil
 
         // ブランドが変わったらcvcのチェックを走らせる
-        if viewModel.isBrandChanged || input?.isEmpty == true {
-            updateCvcInput(input: cvcTextField.text)
+        if viewModel.isCardBrandChanged || input?.isEmpty == true {
+            updateCvcInput(input: cardFormProperties.cvcTextField.text)
         }
     }
 
@@ -93,11 +129,12 @@ extension CardFormView {
     ///
     /// - Parameter brand: カードブランド
     func updateBrandLogo(brand: CardBrand?) {
+        guard let brandLogoImage = cardFormProperties.brandLogoImage else { return }
         guard let brand = brand else {
             brandLogoImage.image = "icon_card".image
             return
         }
-        brandLogoImage.image = brand.logoResourceName.image
+        brandLogoImage.image = brand.logoImage
     }
 
     /// 有効期限の入力フィールドを更新する
@@ -105,31 +142,32 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: 有効期限
     ///   - forceShowError: エラー表示を強制するか
-    func updateExpirationInput(input: String?, forceShowError: Bool = false) {
-        expirationTextField.tintColor = .clear
+    private func updateExpirationInput(input: String?, forceShowError: Bool = false) {
+        cardFormProperties.expirationTextField.tintColor = .clear
         let result = viewModel.update(expiration: input)
         switch result {
         case let .success(expiration):
-            expirationTextField.text = expiration
-            if inputTextErrorColorEnabled {
-                expirationTextField.textColor = self.inputTextColor
+            cardFormProperties.expirationTextField.text = expiration.formatted
+            if cardFormProperties.inputTextErrorColorEnabled {
+                cardFormProperties.expirationTextField.textColor = cardFormProperties.inputTextColor
             }
-            expirationErrorLabel.text = nil
-            focusNextInputField(currentField: expirationTextField)
+            inputExpirationSuccess(value: expiration)
+            focusNextInputField(currentField: cardFormProperties.expirationTextField)
         case let .failure(error):
             switch error {
             case let .expirationEmptyError(value, instant),
                  let .expirationInvalidError(value, instant):
-                expirationTextField.text = value
-                if inputTextErrorColorEnabled {
-                    expirationTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
+                cardFormProperties.expirationTextField.text = value?.formatted
+                if cardFormProperties.inputTextErrorColorEnabled {
+                    cardFormProperties.expirationTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : cardFormProperties.inputTextColor
                 }
-                expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                inputExpirationFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
                 break
             }
         }
-        expirationErrorLabel.isHidden = expirationTextField.text == nil
+        cardFormProperties.expirationErrorLabel.isHidden = cardFormProperties.expirationTextField.text == nil
     }
 
     /// CVCの入力フィールドを更新する
@@ -137,42 +175,44 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: CVC
     ///   - forceShowError: エラー表示を強制するか
-    func updateCvcInput(input: String?, forceShowError: Bool = false) {
-        cvcTextField.tintColor = .clear
+    private func updateCvcInput(input: String?, forceShowError: Bool = false) {
+        cardFormProperties.cvcTextField.tintColor = .clear
         let result = viewModel.update(cvc: input)
         switch result {
         case let .success(cvc):
-            cvcTextField.text = cvc
-            if inputTextErrorColorEnabled {
-                cvcTextField.textColor = self.inputTextColor
+            cardFormProperties.cvcTextField.text = cvc
+            if cardFormProperties.inputTextErrorColorEnabled {
+                cardFormProperties.cvcTextField.textColor = cardFormProperties.inputTextColor
             }
-            cvcErrorLabel.text = nil
-            focusNextInputField(currentField: cvcTextField)
+            inputCvcSuccess(value: cvc)
+            focusNextInputField(currentField: cardFormProperties.cvcTextField)
         case let .failure(error):
             switch error {
             case let .cvcEmptyError(value, instant),
                  let .cvcInvalidError(value, instant):
-                cvcTextField.text = value
-                if inputTextErrorColorEnabled {
-                    cvcTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
+                cardFormProperties.cvcTextField.text = value
+                if cardFormProperties.inputTextErrorColorEnabled {
+                    cardFormProperties.cvcTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : cardFormProperties.inputTextColor
                 }
-                cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                inputCvcFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
                 break
             }
         }
-        cvcErrorLabel.isHidden = cvcTextField.text == nil
+        cardFormProperties.cvcErrorLabel.isHidden = cardFormProperties.cvcTextField.text == nil
     }
 
     /// cvcアイコンの表示を更新する
     ///
     /// - Parameter brand: カードブランド
-    func updateCvcIcon(brand: CardBrand?) {
+    private func updateCvcIcon(brand: CardBrand?) {
+        guard let cvcIconImage = cardFormProperties.cvcIconImage else { return }
         guard let brand = brand else {
             cvcIconImage.image = "icon_card_cvc_3".image
             return
         }
-        cvcIconImage.image = brand.cvcIconResourceName.image
+        cvcIconImage.image = brand.cvcIconImage
     }
 
     /// カード名義の入力フィールドを更新する
@@ -180,45 +220,83 @@ extension CardFormView {
     /// - Parameters:
     ///   - input: カード名義
     ///   - forceShowError: エラー表示を強制するか
-    func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
+    private func updateCardHolderInput(input: String?, forceShowError: Bool = false) {
         let result = viewModel.update(cardHolder: input)
         switch result {
-        case .success:
-            if inputTextErrorColorEnabled {
-                cardHolderTextField.textColor = self.inputTextColor
+        case let .success(cardHolder):
+            cardFormProperties.cardHolderTextField.text = cardHolder
+            if cardFormProperties.inputTextErrorColorEnabled {
+                cardFormProperties.cardHolderTextField.textColor = cardFormProperties.inputTextColor
             }
-            cardHolderErrorLabel.text = nil
+            inputCardHolderSuccess(value: cardHolder)
         case let .failure(error):
             switch error {
-            case let .cardHolderEmptyError(_, instant):
-                if inputTextErrorColorEnabled {
-                    cardHolderTextField.textColor = forceShowError || instant ? Style.Color.red : self.inputTextColor
+            case let .cardHolderEmptyError(value, instant):
+                cardFormProperties.cardHolderTextField.text = value
+                if cardFormProperties.inputTextErrorColorEnabled {
+                    cardFormProperties.cardHolderTextField.textColor = forceShowError ||
+                        instant ? Style.Color.red : cardFormProperties.inputTextColor
                 }
-                cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+                inputCardHolderFailure(value: value, error: error, forceShowError: forceShowError, instant: instant)
             default:
                 break
             }
         }
-        cardHolderErrorLabel.isHidden = cardHolderTextField.text == nil
+        cardFormProperties.cardHolderErrorLabel.isHidden = cardFormProperties.cardHolderTextField.text == nil
+    }
+
+    func inputCardNumberSuccess(value: CardNumber) {
+        cardFormProperties.cardNumberErrorLabel.text = nil
+    }
+
+    func inputCardNumberFailure(value: CardNumber?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardFormProperties.cardNumberErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputExpirationSuccess(value: Expiration) {
+        cardFormProperties.expirationErrorLabel.text = nil
+    }
+
+    func inputExpirationFailure(value: Expiration?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardFormProperties.expirationErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCvcSuccess(value: String) {
+        cardFormProperties.cvcErrorLabel.text = nil
+    }
+
+    func inputCvcFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardFormProperties.cvcErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardHolderSuccess(value: String) {
+        cardFormProperties.cardHolderErrorLabel.text = nil
+    }
+
+    func inputCardHolderFailure(value: String?, error: Error, forceShowError: Bool, instant: Bool) {
+        cardFormProperties.cardHolderErrorLabel.text = forceShowError || instant ? error.localizedDescription : nil
+    }
+
+    func inputCardHolderComplete() {
+        cardFormProperties.cardHolderErrorLabel.isHidden = cardFormProperties.cardHolderTextField.text == nil
     }
 
     /// バリデーションOKの場合、次のTextFieldへフォーカスを移動する
     ///
     /// - Parameter currentField: 現在のTextField
     func focusNextInputField(currentField: UITextField) {
-
         switch currentField {
-        case cardNumberTextField:
-            if cardNumberTextField.isFirstResponder {
-                expirationTextField.becomeFirstResponder()
+        case cardFormProperties.cardNumberTextField:
+            if cardFormProperties.cardNumberTextField.isFirstResponder {
+                cardFormProperties.expirationTextField.becomeFirstResponder()
             }
-        case expirationTextField:
-            if expirationTextField.isFirstResponder {
-                cvcTextField.becomeFirstResponder()
+        case cardFormProperties.expirationTextField:
+            if cardFormProperties.expirationTextField.isFirstResponder {
+                cardFormProperties.cvcTextField.becomeFirstResponder()
             }
-        case cvcTextField:
-            if cvcTextField.isFirstResponder && isHolderRequired {
-                cardHolderTextField.becomeFirstResponder()
+        case cardFormProperties.cvcTextField:
+            if cardFormProperties.cvcTextField.isFirstResponder && cardFormProperties.isHolderRequired {
+                cardFormProperties.cardHolderTextField.becomeFirstResponder()
             }
         default:
             break
@@ -232,16 +310,10 @@ extension CardFormView {
     ///   - range: 置換される文字列範囲
     ///   - replacement: 置換文字列
     /// - Returns: 古いテキストを保持する場合はfalse
-    func adjustInputFieldCursor(
+    private func adjustInputFieldCursor(
         textField: UITextField,
         range: NSRange,
         replacement: String) -> Bool {
-
-        // カード名義の場合は入力値をそのまま使用
-        if textField == cardHolderTextField {
-            return true
-        }
-
         // 文字挿入時にカーソルの位置を調整する
         let beginning = textField.beginningOfDocument
         let start = textField.position(from: beginning, offset: range.location)
@@ -259,7 +331,7 @@ extension CardFormView {
                     let textBeforeCursor = textField.text(in: range) {
                     if replacement != "" &&
                         !textBeforeCursor.isDigitsOnly ||
-                        (textBeforeCursor == "0" && textField == expirationTextField) {
+                        (textBeforeCursor == "0" && textField == cardFormProperties.expirationTextField) {
                         if let adjustPosition = textField.position(from: newSelectedRange.start, offset: 1),
                             let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
                             textField.selectedTextRange = adjustSelectedRange
@@ -276,10 +348,11 @@ extension CardFormView {
     }
 
     /// textFieldのtintColorをリセットする
-    func resetTintColor() {
-        cardNumberTextField.tintColor = self.inputTintColor
-        expirationTextField.tintColor = self.inputTintColor
-        cvcTextField.tintColor = self.inputTintColor
+    private func resetTintColor() {
+        cardFormProperties.cardNumberTextField.tintColor = cardFormProperties.inputTintColor
+        cardFormProperties.expirationTextField.tintColor = cardFormProperties.inputTintColor
+        cardFormProperties.cvcTextField.tintColor = cardFormProperties.inputTintColor
+        cardFormProperties.cardHolderTextField.tintColor = cardFormProperties.inputTintColor
     }
 
     /// textField入力値を取得する
@@ -288,22 +361,23 @@ extension CardFormView {
     }
 
     /// カメラ使用を許可していない場合にアラートを表示する
-    func showCameraPermissionAlert() {
+    private func showCameraPermissionAlert() {
         let alertController = UIAlertController(title: "payjp_scanner_camera_permission_denied_title".localized,
                                                 message: "payjp_scanner_camera_permission_denied_message".localized,
                                                 preferredStyle: .alert)
 
-        let settingsAction = UIAlertAction(title: "payjp_common_settings".localized,
-                                           style: .default,
-                                           handler: { (_) -> Void in
-                                            guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
-                                                return
-                                            }
-                                            if #available(iOS 10.0, *) {
-                                                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-                                            } else {
-                                                UIApplication.shared.openURL(settingsURL)
-                                            }
+        let settingsAction = UIAlertAction(
+            title: "payjp_common_settings".localized,
+            style: .default,
+            handler: { (_) -> Void in
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
+                    return
+                }
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
         })
         let closeAction = UIAlertAction(title: "payjp_common_ok".localized,
                                         style: .default,
@@ -318,3 +392,170 @@ extension CardFormView {
         viewController.present(alertController, animated: true, completion: nil)
     }
 }
+
+// MARK: CardFormAction
+extension CardFormView: CardFormAction {
+
+    public var isValid: Bool {
+        return viewModel.isValid
+    }
+
+    @nonobjc public func createToken(tenantId: String? = nil, completion: @escaping (Result<Token, Error>) -> Void) {
+        viewModel.createToken(with: tenantId, completion: completion)
+    }
+
+    public func createTokenWith(_ tenantId: String?, completion: @escaping (Token?, NSError?) -> Void) {
+        viewModel.createToken(with: tenantId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                completion(result, nil)
+            case .failure(let error):
+                completion(nil, self.nsErrorConverter.convert(from: error))
+            }
+        }
+    }
+
+    @nonobjc public func fetchBrands(tenantId: String?, completion: CardBrandsResult?) {
+        viewModel.fetchAcceptedBrands(with: tenantId, completion: completion)
+    }
+
+    public func fetchBrandsWith(_ tenantId: String?, completion: (([NSString]?, NSError?) -> Void)?) {
+        viewModel.fetchAcceptedBrands(with: tenantId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                let converted = result.map { (brand: CardBrand) -> NSString in return brand.rawValue as NSString }
+                completion?(converted, nil)
+            case .failure(let error):
+                completion?(nil, self.nsErrorConverter.convert(from: error))
+            }
+        }
+    }
+
+    public func validateCardForm() -> Bool {
+        updateCardNumberInput(input: cardFormProperties.cardNumberTextField.text,
+                              forceShowError: true,
+                              separator: cardFormProperties.cardNumberSeparator)
+        updateExpirationInput(input: cardFormProperties.expirationTextField.text, forceShowError: true)
+        updateCvcInput(input: cardFormProperties.cvcTextField.text, forceShowError: true)
+        updateCardHolderInput(input: cardFormProperties.cardHolderTextField.text, forceShowError: true)
+        resetTintColor()
+        notifyIsValidChanged()
+        return isValid
+    }
+
+    public func setupInputAccessoryView(view: UIView) {
+        cardFormProperties.cardNumberTextField.inputAccessoryView = view
+        cardFormProperties.expirationTextField.inputAccessoryView = view
+        cardFormProperties.cvcTextField.inputAccessoryView = view
+        cardFormProperties.cardHolderTextField.inputAccessoryView = view
+    }
+
+    func notifyIsValidChanged() {
+        self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
+}
+
+// MARK: UITextFieldDelegate
+extension CardFormView: UITextFieldDelegate {
+
+    public func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+
+        if let currentText = textField.text {
+            let range = Range(range, in: currentText)!
+            let newText = currentText.replacingCharacters(in: range, with: string)
+
+            switch textField {
+            case cardFormProperties.cardNumberTextField:
+                updateCardNumberInput(input: newText, separator: cardFormProperties.cardNumberSeparator)
+            case cardFormProperties.expirationTextField:
+                updateExpirationInput(input: newText)
+            case cardFormProperties.cvcTextField:
+                updateCvcInput(input: newText)
+            case cardFormProperties.cardHolderTextField:
+                updateCardHolderInput(input: newText)
+            default:
+                break
+            }
+        }
+        notifyIsValidChanged()
+
+        return adjustInputFieldCursor(textField: textField, range: range, replacement: string)
+    }
+
+    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+
+        switch textField {
+        case cardFormProperties.cardNumberTextField:
+            updateCardNumberInput(input: nil, separator: cardFormProperties.cardNumberSeparator)
+            updateCvcInput(input: cardFormProperties.cvcTextField.text)
+        case cardFormProperties.expirationTextField:
+            updateExpirationInput(input: nil)
+        case cardFormProperties.cvcTextField:
+            updateCvcInput(input: nil)
+        case cardFormProperties.cardHolderTextField:
+            updateCardHolderInput(input: nil)
+        default:
+            break
+        }
+        resetTintColor()
+        notifyIsValidChanged()
+
+        return true
+    }
+
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        cardFormProperties.cardHolderTextField.resignFirstResponder()
+        if isValid {
+            delegate?.formInputDoneTapped(in: self)
+        }
+        return true
+    }
+
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldDelegate?.didBeginEditing(textField: textField)
+    }
+}
+
+// MARK: CardIOProxyDelegate
+extension CardFormView: CardIOProxyDelegate {
+    public func didCancel(in proxy: CardIOProxy) {
+        cardFormProperties.ocrButton.isHidden = !CardIOProxy.isCardIOAvailable()
+    }
+
+    public func cardIOProxy(_ proxy: CardIOProxy, didFinishWith cardParams: CardIOCardParams) {
+        updateCardNumberInput(input: cardParams.number, separator: cardFormProperties.cardNumberSeparator)
+        updateExpirationInput(input: expirationFormatter.string(month: cardParams.expiryMonth?.intValue,
+                                                                year: cardParams.expiryYear?.intValue))
+        updateCvcInput(input: cardParams.cvc)
+
+        notifyIsValidChanged()
+    }
+}
+
+extension CardFormView: CardFormViewModelDelegate {
+
+    func startScanner() {
+        if let viewController = parentViewController, CardIOProxy.canReadCardWithCamera() {
+            cardIOProxy.presentCardIO(from: viewController)
+        }
+    }
+
+    func showPermissionAlert() {
+        showCameraPermissionAlert()
+    }
+}
+
+extension CardFormView: FormTextFieldDelegate {
+
+    func didDeleteBackward(_ textField: FormTextField) {
+        textFieldDelegate?.didDeleteBackward(textField: textField)
+    }
+}
+
+// swiftlint:enable type_body_length file_length
