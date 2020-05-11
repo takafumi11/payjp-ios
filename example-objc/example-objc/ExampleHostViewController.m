@@ -40,7 +40,8 @@
     //                                                                    errorTextColor:nil
     //                                                                         tintColor:color
     //                                                         inputFieldBackgroundColor:nil
-    //                                                                 submitButtonColor:color];
+    //                                                                 submitButtonColor:color
+    //                                                                    highlightColor:nil];
     // push
     PAYCardFormViewController *cardFormVc = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:PAYCardFormStyle.defaultStyle
