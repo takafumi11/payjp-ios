@@ -14,7 +14,7 @@
     <a title="CardFormView Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (53% documented)</p>
+        <p><a href="../index.html">PAYJP 1.2.0 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -105,68 +105,6 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Extensions/BaseRequest.html">BaseRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Bundle.html">Bundle</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/CharacterSet.html">CharacterSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Client.html">Client</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/FormError.html">FormError</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/JSONDecoder.html">JSONDecoder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/MockViewController.html">MockViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSErrorSerializable.html">NSErrorSerializable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Request.html">Request</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/String.html">String</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/StringProtocol.html">StringProtocol</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Style.html">Style</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Style.html#/s:5PAYJP5StyleC5ColorC">– Color</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/Style.html#/s:5PAYJP5StyleC6RadiusC">– Radius</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIApplication.html">UIApplication</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIColor.html">UIColor</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIView.html">UIView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIView.html#/s:So6UIViewC5PAYJPE10RectCornerV">– RectCorner</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIViewController.html">UIViewController</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -219,10 +157,13 @@
                 <div class="language">
                   <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CardFormView</span> <span class="p">:</span> <span class="kt">UIView</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormView</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormAction.html">CardFormAction</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormView</span><span class="p">:</span> <span class="kt">UITextFieldDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormView</span><span class="p">:</span> <span class="kt">CardIOProxyDelegate</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Base class of CardFormView.</p>
 
           </section>
           <section class="section task-group-section">
@@ -241,7 +182,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>CardFormView delegate.</p>
 
                       </div>
                       <div class="declaration">
@@ -260,7 +201,7 @@
                     <code>
                     <a name="/c:@M@PAYJP@objc(cs)CardFormView(im)initWithFrame:"></a>
                     <a name="//apple_ref/swift/Method/init(frame:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)CardFormView(im)initWithFrame:">init(frame:)</a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)CardFormView(im)initWithFrame:">init(frame:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -287,7 +228,7 @@
                     <code>
                     <a name="/c:@M@PAYJP@objc(cs)CardFormView(im)initWithCoder:"></a>
                     <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)CardFormView(im)initWithCoder:">init(coder:)</a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)CardFormView(im)initWithCoder:">init(coder:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -315,9 +256,11 @@
               <div class="task-name-container">
                 <a name="/CardFormAction"></a>
                 <a name="//apple_ref/swift/Section/CardFormAction" class="dashAnchor"></a>
-                <a href="#/CardFormAction">
-                  <h3 class="section-name">CardFormAction</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CardFormAction"></a>
+                  <h3 class="section-name"><p>CardFormAction</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -351,7 +294,7 @@
                     <code>
                     <a name="/s:5PAYJP14CardFormActionP11createToken8tenantId10completionySSSg_ys6ResultOyAA0F0Cs5Error_pGctF"></a>
                     <a name="//apple_ref/swift/Method/createToken(tenantId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP14CardFormActionP11createToken8tenantId10completionySSSg_ys6ResultOyAA0F0Cs5Error_pGctF">createToken(tenantId:completion:)</a>
+                    <a class="token" href="#/s:5PAYJP14CardFormActionP11createToken8tenantId10completionySSSg_ys6ResultOyAA0F0Cs5Error_pGctF">createToken(tenantId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -378,7 +321,7 @@
                     <code>
                     <a name="/s:5PAYJP14CardFormActionP15createTokenWith_10completionySSSg_yAA0F0CSg_So7NSErrorCSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createTokenWith(_:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP14CardFormActionP15createTokenWith_10completionySSSg_yAA0F0CSg_So7NSErrorCSgtctF">createTokenWith(_:completion:)</a>
+                    <a class="token" href="#/s:5PAYJP14CardFormActionP15createTokenWith_10completionySSSg_yAA0F0CSg_So7NSErrorCSgtctF">createTokenWith(_:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -404,7 +347,7 @@
                     <code>
                     <a name="/s:5PAYJP14CardFormActionP11fetchBrands8tenantId10completionySSSg_ys6ResultOySayAA0B5BrandOGAA8APIErrorOGcSgtF"></a>
                     <a name="//apple_ref/swift/Method/fetchBrands(tenantId:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP14CardFormActionP11fetchBrands8tenantId10completionySSSg_ys6ResultOySayAA0B5BrandOGAA8APIErrorOGcSgtF">fetchBrands(tenantId:completion:)</a>
+                    <a class="token" href="#/s:5PAYJP14CardFormActionP11fetchBrands8tenantId10completionySSSg_ys6ResultOySayAA0B5BrandOGAA8APIErrorOGcSgtF">fetchBrands(tenantId:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -431,7 +374,7 @@
                     <code>
                     <a name="/s:5PAYJP14CardFormActionP15fetchBrandsWith_10completionySSSg_ySaySo8NSStringCGSg_So7NSErrorCSgtcSgtF"></a>
                     <a name="//apple_ref/swift/Method/fetchBrandsWith(_:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP14CardFormActionP15fetchBrandsWith_10completionySSSg_ySaySo8NSStringCGSg_So7NSErrorCSgtcSgtF">fetchBrandsWith(_:completion:)</a>
+                    <a class="token" href="#/s:5PAYJP14CardFormActionP15fetchBrandsWith_10completionySSSg_ySaySo8NSStringCGSg_So7NSErrorCSgtcSgtF">fetchBrandsWith(_:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,7 +426,7 @@
                     <code>
                     <a name="/s:5PAYJP14CardFormActionP23setupInputAccessoryView4viewySo6UIViewC_tF"></a>
                     <a name="//apple_ref/swift/Method/setupInputAccessoryView(view:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP14CardFormActionP23setupInputAccessoryView4viewySo6UIViewC_tF">setupInputAccessoryView(view:)</a>
+                    <a class="token" href="#/s:5PAYJP14CardFormActionP23setupInputAccessoryView4viewySo6UIViewC_tF">setupInputAccessoryView(view:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -504,42 +447,17 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)notifyIsValidChanged"></a>
-                    <a name="//apple_ref/swift/Method/notifyIsValidChanged()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)notifyIsValidChanged">notifyIsValidChanged()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">notifyIsValidChanged</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/UITextFieldDelegate"></a>
                 <a name="//apple_ref/swift/Section/UITextFieldDelegate" class="dashAnchor"></a>
-                <a href="#/UITextFieldDelegate">
-                  <h3 class="section-name">UITextFieldDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UITextFieldDelegate"></a>
+                  <h3 class="section-name"><p>UITextFieldDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -547,7 +465,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)textField:shouldChangeCharactersInRange:replacementString:"></a>
                     <a name="//apple_ref/swift/Method/textField(_:shouldChangeCharactersIn:replacementString:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textField:shouldChangeCharactersInRange:replacementString:">textField(_:shouldChangeCharactersIn:replacementString:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textField:shouldChangeCharactersInRange:replacementString:">textField(_:<wbr>shouldChangeCharactersIn:<wbr>replacementString:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -578,7 +496,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldClear:"></a>
                     <a name="//apple_ref/swift/Method/textFieldShouldClear(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldClear:">textFieldShouldClear(_:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldClear:">textFieldShouldClear(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -605,7 +523,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldReturn:"></a>
                     <a name="//apple_ref/swift/Method/textFieldShouldReturn(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldReturn:">textFieldShouldReturn(_:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldShouldReturn:">textFieldShouldReturn(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -632,7 +550,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldDidBeginEditing:"></a>
                     <a name="//apple_ref/swift/Method/textFieldDidBeginEditing(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldDidBeginEditing:">textFieldDidBeginEditing(_:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)textFieldDidBeginEditing:">textFieldDidBeginEditing(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -660,9 +578,11 @@
               <div class="task-name-container">
                 <a name="/CardIOProxyDelegate"></a>
                 <a name="//apple_ref/swift/Section/CardIOProxyDelegate" class="dashAnchor"></a>
-                <a href="#/CardIOProxyDelegate">
-                  <h3 class="section-name">CardIOProxyDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CardIOProxyDelegate"></a>
+                  <h3 class="section-name"><p>CardIOProxyDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -670,7 +590,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)didCancelCardIOProxy:"></a>
                     <a name="//apple_ref/swift/Method/didCancel(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)didCancelCardIOProxy:">didCancel(in:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)didCancelCardIOProxy:">didCancel(in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -697,7 +617,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)cardIOProxy:didFinishWithCardParams:"></a>
                     <a name="//apple_ref/swift/Method/cardIOProxy(_:didFinishWith:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)cardIOProxy:didFinishWithCardParams:">cardIOProxy(_:didFinishWith:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)cardIOProxy:didFinishWithCardParams:">cardIOProxy(_:<wbr>didFinishWith:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -721,112 +641,11 @@
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/CardIOProxyDelegate2"></a>
-                <a name="//apple_ref/swift/Section/CardIOProxyDelegate" class="dashAnchor"></a>
-                <a href="#/CardIOProxyDelegate2">
-                  <h3 class="section-name">CardIOProxyDelegate</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5PAYJP25CardFormViewModelDelegateP12startScanneryyF"></a>
-                    <a name="//apple_ref/swift/Method/startScanner()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP25CardFormViewModelDelegateP12startScanneryyF">startScanner()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">startScanner</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5PAYJP25CardFormViewModelDelegateP19showPermissionAlertyyF"></a>
-                    <a name="//apple_ref/swift/Method/showPermissionAlert()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP25CardFormViewModelDelegateP19showPermissionAlertyyF">showPermissionAlert()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">showPermissionAlert</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/CardIOProxyDelegate3"></a>
-                <a name="//apple_ref/swift/Section/CardIOProxyDelegate" class="dashAnchor"></a>
-                <a href="#/CardIOProxyDelegate3">
-                  <h3 class="section-name">CardIOProxyDelegate</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@CM@PAYJP@objc(cs)CardFormView(im)didDeleteBackward:"></a>
-                    <a name="//apple_ref/swift/Method/didDeleteBackward(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)CardFormView(im)didDeleteBackward:">didDeleteBackward(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">didDeleteBackward</span><span class="p">(</span><span class="n">_</span> <span class="nv">textField</span><span class="p">:</span> <span class="kt">FormTextField</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-05-08)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-05-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

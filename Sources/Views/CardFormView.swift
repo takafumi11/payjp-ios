@@ -394,6 +394,10 @@ public class CardFormView: UIView {
         }
         viewController.present(alertController, animated: true, completion: nil)
     }
+
+    func notifyIsValidChanged() {
+        self.delegate?.formInputValidated(in: self, isValid: isValid)
+    }
 }
 
 // MARK: CardFormAction
@@ -453,10 +457,6 @@ extension CardFormView: CardFormAction {
         cardFormProperties.expirationTextField.inputAccessoryView = view
         cardFormProperties.cvcTextField.inputAccessoryView = view
         cardFormProperties.cardHolderTextField.inputAccessoryView = view
-    }
-
-    func notifyIsValidChanged() {
-        self.delegate?.formInputValidated(in: self, isValid: isValid)
     }
 }
 
