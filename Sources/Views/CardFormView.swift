@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// CardForm style protocol.
 public protocol CardFormStylable {
     /// Apply card form style.
     ///
@@ -48,6 +49,7 @@ protocol CardFormViewTextFieldDelegate: class {
 }
 
 // swiftlint:disable type_body_length file_length
+/// Base class of CardFormView.
 @objcMembers
 public class CardFormView: UIView {
 
@@ -55,6 +57,7 @@ public class CardFormView: UIView {
     private let nsErrorConverter: NSErrorConverterType = NSErrorConverter()
     private var cardIOProxy: CardIOProxy!
 
+    /// CardFormView delegate.
     public weak var delegate: CardFormViewDelegate?
     weak var textFieldDelegate: CardFormViewTextFieldDelegate?
     var viewModel: CardFormViewViewModelType = CardFormViewViewModel()

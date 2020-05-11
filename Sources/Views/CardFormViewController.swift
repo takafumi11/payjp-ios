@@ -11,8 +11,11 @@ import SafariServices
 
 /// View type of CardFormView.
 @objc public enum CardFormViewType: Int {
+    /// CardFormTableStyledView.
     case tableStyled = 0
+    /// CardFormLabelStyledView.
     case labelStyled = 1
+    /// CardFormDisplayStyledView.
     case displayStyled = 2
 
     func createView(frame: CGRect) -> CardFormView & CardFormStylable {
@@ -27,8 +30,7 @@ import SafariServices
     }
 }
 
-/// CardFormViewController.
-/// It's configured with CardFormLabelStyledView.
+/// CardFormViewController show card form.
 @objcMembers @objc(PAYCardFormViewController)
 public class CardFormViewController: UIViewController {
 
