@@ -65,6 +65,7 @@ public protocol CardFormAction {
     func validateCardForm() -> Bool
 
     /// Setup input accessory view of text field
+    /// 
     /// - Parameter view: input accessory view
     func setupInputAccessoryView(view: UIView)
 }
