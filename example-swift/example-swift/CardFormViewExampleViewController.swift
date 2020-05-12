@@ -32,7 +32,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         let frame: CGRect = CGRect(x: x, y: y, width: width, height: height)
         cardFormView = CardFormTableStyledView(frame: frame)
         cardFormView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        cardFormView.isHolderRequired = true
+        cardFormView.setCardHolderRequired(true)
         cardFormView.delegate = self
 
         self.formContentView.addSubview(cardFormView)
@@ -175,7 +175,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     }
 
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
-        self.cardFormView.isHolderRequired = sender.isOn
+        self.cardFormView.setCardHolderRequired(sender.isOn)
         self.tableView.reloadData()
     }
 
