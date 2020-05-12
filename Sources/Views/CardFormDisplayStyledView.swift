@@ -530,6 +530,7 @@ extension CardFormDisplayStyledView: CardFormStylable {
         let inputTextColor = style.inputTextColor
         let errorTextColor = style.errorTextColor
         let tintColor = style.tintColor
+        let highlightColor = style.highlightColor
         self.inputTextColor = inputTextColor
         self.inputTintColor = tintColor
 
@@ -548,6 +549,12 @@ extension CardFormDisplayStyledView: CardFormStylable {
         expirationTextField.tintColor = tintColor
         cvcTextField.tintColor = tintColor
         cardHolderTextField.tintColor = tintColor
+        // highlight
+        cardNumberBorderView.borderColor = highlightColor
+        expirationBorderView.borderColor = highlightColor
+        cvcBorderView.borderColor = highlightColor
+        cvc4BorderView.borderColor = highlightColor
+        cardHolderBorderView.borderColor = highlightColor
     }
 
     public func setCardHolderRequired(_ required: Bool) {

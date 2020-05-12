@@ -79,7 +79,8 @@
                                                                   errorTextColor:nil
                                                                        tintColor:red
                                                        inputFieldBackgroundColor:nil
-                                                               submitButtonColor:nil];
+                                                               submitButtonColor:nil
+                                                                  highlightColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -91,7 +92,8 @@
                                                                   errorTextColor:nil
                                                                        tintColor:blue
                                                        inputFieldBackgroundColor:nil
-                                                               submitButtonColor:nil];
+                                                               submitButtonColor:nil
+                                                                  highlightColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
@@ -104,7 +106,8 @@
                                                                   errorTextColor:nil
                                                                        tintColor:white
                                                        inputFieldBackgroundColor:nil
-                                                               submitButtonColor:nil];
+                                                               submitButtonColor:nil
+                                                                  highlightColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = darkGray;
       break;
@@ -117,7 +120,8 @@
                                                                   errorTextColor:nil
                                                                        tintColor:defaultBlue
                                                        inputFieldBackgroundColor:nil
-                                                               submitButtonColor:nil];
+                                                               submitButtonColor:nil
+                                                                  highlightColor:nil];
       [self.cardFormView applyWithStyle:style];
       self.cardFormView.backgroundColor = UIColor.clearColor;
       break;
