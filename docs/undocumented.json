@@ -492,8 +492,8 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/FormStyle.swift",
-      "line": 40,
-      "symbol": "FormStyle.init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:)",
+      "line": 43,
+      "symbol": "FormStyle.init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:highlightColor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
