@@ -124,6 +124,7 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     }
 
     public override func layoutSubviews() {
+        super.layoutSubviews()
         cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
         cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
