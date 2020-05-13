@@ -123,6 +123,13 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         return contentView.intrinsicContentSize
     }
 
+    public override func layoutSubviews() {
+        cardNumberFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        expirationFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        cvcFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+        cardHolderFieldBackground.roundingCorners(corners: .allCorners, radius: 4.0)
+    }
+
     // MARK: CardFormView
 
     override func inputCardNumberSuccess(value: CardNumber) {
@@ -205,10 +212,14 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
 
     /// 各Viewのセットアップ
     private func setupViews() {
-        cardNumberFieldBackground = UIView()
-        expirationFieldBackground = UIView()
-        cvcFieldBackground = UIView()
-        cardHolderFieldBackground = UIView()
+        let backgroudFrame = CGRect(x: 0,
+                                    y: 0,
+                                    width: formScrollView.frame.width,
+                                    height: 44.0)
+        cardNumberFieldBackground = UIView(frame: backgroudFrame)
+        expirationFieldBackground = UIView(frame: backgroudFrame)
+        cvcFieldBackground = UIView(frame: backgroudFrame)
+        cardHolderFieldBackground = UIView(frame: backgroudFrame)
 
         cardNumberErrorLabel = UILabel()
         expirationErrorLabel = UILabel()
@@ -345,7 +356,6 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
         inputStackView.addArrangedSubview(textField)
 
-        backgroundView.roundingCorners(corners: .allCorners, radius: 4.0)
         backgroundView.backgroundColor = FormStyle.defaultStyle.inputFieldBackgroundColor
         backgroundView.addSubview(inputStackView)
 
