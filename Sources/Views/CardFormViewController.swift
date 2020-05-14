@@ -164,6 +164,18 @@ public class CardFormViewController: UIViewController {
         scrollIndicatorInsets.bottom = keyboardY
         scrollView.scrollIndicatorInsets = scrollIndicatorInsets
         scrollView.showsVerticalScrollIndicator = true
+
+        let keyboardHeight = keyboardRect.height
+        let scrollViewHeight = scrollView.bounds.height
+        let cardFormViewHeight = cardFormView.bounds.height
+        // CardFormView高さ > ScrollView高さ - キーボード高さ - AccessaryView高さ だったらスクロールさせる
+        if keyboardY > 0  && cardFormViewHeight > scrollViewHeight - keyboardHeight - 44 {
+            let bottomOffset = CGPoint(x: 0,
+                                       y: self.scrollView.contentSize.height -
+                                        self.scrollView.bounds.size.height +
+                                        self.scrollView.contentInset.bottom)
+            scrollView.setContentOffset(bottomOffset, animated: true)
+        }
     }
 
     // MARK: Private
