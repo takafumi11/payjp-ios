@@ -274,6 +274,7 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         cardHolderTextField.keyboardType = .alphabet
         cardHolderTextField.autocapitalizationType = .none
         cardHolderTextField.autocorrectionType = .no
+        cardHolderTextField.returnKeyType = .done
 
         // placeholder
         cardNumberTextField.attributedPlaceholder = NSAttributedString(
