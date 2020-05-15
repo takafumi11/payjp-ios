@@ -317,21 +317,28 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 508,
+      "line": 126,
+      "symbol": "CardFormDisplayStyledView.layoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 519,
       "symbol": "CardFormDisplayStyledView.scrollViewDidScroll(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 517,
+      "line": 528,
       "symbol": "CardFormDisplayStyledView.scrollViewWillBeginDragging(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 521,
+      "line": 532,
       "symbol": "CardFormDisplayStyledView.scrollViewDidEndDecelerating(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -464,28 +471,28 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 313,
+      "line": 324,
       "symbol": "CardFormViewController.collectionView(_:numberOfItemsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 317,
+      "line": 328,
       "symbol": "CardFormViewController.collectionView(_:cellForItemAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 341,
+      "line": 352,
       "symbol": "CardFormViewController.collectionView(_:layout:insetForSectionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 363,
+      "line": 374,
       "symbol": "CardFormViewController.presentationControllerDidDismiss(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
