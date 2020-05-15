@@ -324,21 +324,21 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 519,
+      "line": 520,
       "symbol": "CardFormDisplayStyledView.scrollViewDidScroll(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 528,
+      "line": 529,
       "symbol": "CardFormDisplayStyledView.scrollViewWillBeginDragging(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
-      "line": 532,
+      "line": 533,
       "symbol": "CardFormDisplayStyledView.scrollViewDidEndDecelerating(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
