@@ -17,6 +17,6 @@ class BrandImageCell: UICollectionViewCell {
     }
 
     func setup(brand: CardBrand) {
-        brandImage.image = brand.logoResourceName.image
+        brandImage.image = brand.logoImage
     }
 }

@@ -14,23 +14,31 @@ protocol CardFormViewViewModelType {
     /// バリデーションOKかどうか
     var isValid: Bool { get }
 
-    /// ブランドが変わったかどうか
-    var isBrandChanged: Bool { get }
+    /// カードブランドが変わったかどうか
+    var isCardBrandChanged: Bool { get }
+
+    /// カードブランド
+    var cardBrand: CardBrand { get }
+
+    /// カード番号
+    var cardNumber: CardNumber? { get }
 
     /// CardFormViewModelDelegate
     var delegate: CardFormViewModelDelegate? { get set }
 
     /// カード番号の入力値を更新する
     ///
-    /// - Parameter cardNumber: カード番号
+    /// - Parameters:
+    ///   - cardNumber: cardNumber: カード番号
+    ///   - separator: separator: 区切り文字
     /// - Returns: 入力結果
-    func update(cardNumber: String?) -> Result<CardNumber, FormError>
+    func update(cardNumber: String?, separator: String) -> Result<CardNumber, FormError>
 
     /// 有効期限の入力値を更新する
     ///
     /// - Parameter expiration: 有効期限
     /// - Returns: 入力結果
-    func update(expiration: String?) -> Result<String, FormError>
+    func update(expiration: String?) -> Result<Expiration, FormError>
 
     /// CVCの入力値を更新する
     ///
@@ -91,8 +99,6 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     private let tokenService: TokenServiceType
     private let permissionFetcher: PermissionFetcherType
 
-    private var cardNumber: String?
-    private var cardBrand: CardBrand = .unknown
     private var acceptedCardBrands: [CardBrand]?
     private var monthYear: (month: String, year: String)?
     private var cvc: String?
@@ -107,7 +113,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
             (!self.isCardHolderEnabled || checkCardHolderValid())
     }
 
-    var isBrandChanged = false
+    var isCardBrandChanged = false
+    var cardBrand: CardBrand = .unknown
+    var cardNumber: CardNumber?
     weak var delegate: CardFormViewModelDelegate?
 
     // MARK: - Lifecycle
@@ -136,21 +144,22 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     // MARK: - CardFormViewViewModelType
 
-    func update(cardNumber: String?) -> Result<CardNumber, FormError> {
-        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber),
+    func update(cardNumber: String?, separator: String) -> Result<CardNumber, FormError> {
+        guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber,
+                                                                    separator: separator),
             let cardNumber = cardNumber,
             !cardNumber.isEmpty else {
-                self.cardNumber = nil
                 self.cardBrand = .unknown
+                self.cardNumber = nil
                 // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
-                self.isBrandChanged = false
+                self.isCardBrandChanged = false
                 return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
-        self.isBrandChanged = self.cardBrand != cardNumberInput.brand
-        self.cardNumber = cardNumberInput.formatted.numberfy()
+        self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
         self.cardBrand = cardNumberInput.brand
+        self.cardNumber = cardNumberInput
 
-        if let cardNumber = self.cardNumber {
+        if let cardNumberString = self.cardNumber?.value {
             // 利用可能ブランドのチェック
             if let acceptedCardBrands = self.acceptedCardBrands {
                 if cardNumberInput.brand != .unknown && !acceptedCardBrands.contains(cardNumberInput.brand) {
@@ -158,11 +167,11 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 }
             }
             // 桁数チェック
-            if cardNumber.count == cardNumberInput.brand.numberLength {
-                if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumber) {
+            if cardNumberString.count == cardNumberInput.brand.numberLength {
+                if !self.cardNumberValidator.isLuhnValid(cardNumber: cardNumberString) {
                     return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
                 }
-            } else if cardNumber.count > cardNumberInput.brand.numberLength {
+            } else if cardNumberString.count > cardNumberInput.brand.numberLength {
                 return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: true))
             } else {
                 return .failure(.cardNumberInvalidError(value: cardNumberInput, isInstant: false))
@@ -175,7 +184,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         return .success(cardNumberInput)
     }
 
-    func update(expiration: String?) -> Result<String, FormError> {
+    func update(expiration: String?) -> Result<Expiration, FormError> {
         guard let expirationInput = self.expirationFormatter.string(from: expiration),
             let expiration = expiration, !expiration.isEmpty else {
                 self.monthYear = nil
@@ -183,7 +192,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
         }
 
         do {
-            self.monthYear = try self.expirationExtractor.extract(expiration: expirationInput)
+            self.monthYear = try self.expirationExtractor.extract(expiration: expirationInput.formatted)
         } catch {
             return .failure(.expirationInvalidError(value: expirationInput, isInstant: true))
         }
@@ -205,9 +214,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
                 return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
         // ブランドが変わった時に入力文字数のままエラー表示にするための処理
-        if self.isBrandChanged {
+        if self.isCardBrandChanged {
             cvcInput = cvc
-            self.isBrandChanged = false
+            self.isCardBrandChanged = false
         }
         self.cvc = cvcInput
 
@@ -235,8 +244,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
-        if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
-            tokenService.createToken(cardNumber: cardNumber,
+        if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
+            let year = monthYear?.year, let cvc = cvc {
+            tokenService.createToken(cardNumber: cardNumberString,
                                      cvc: cvc,
                                      expirationMonth: month,
                                      expirationYear: year,
@@ -266,8 +276,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     }
 
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
-        if let cardNumber = cardNumber, let month = monthYear?.month, let year = monthYear?.year, let cvc = cvc {
-            let input = CardFormInput(cardNumber: cardNumber,
+        if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
+            let year = monthYear?.year, let cvc = cvc {
+            let input = CardFormInput(cardNumber: cardNumberString,
                                       expirationMonth: month,
                                       expirationYear: year,
                                       cvc: cvc,
@@ -301,8 +312,8 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     // MARK: - Helpers
 
     private func checkCardNumberValid() -> Bool {
-        if let cardNumber = self.cardNumber {
-            return self.cardNumberValidator.isValid(cardNumber: cardNumber, brand: self.cardBrand)
+        if let cardNumberString = cardNumber?.value {
+            return self.cardNumberValidator.isValid(cardNumber: cardNumberString, brand: self.cardBrand)
         }
         return false
     }

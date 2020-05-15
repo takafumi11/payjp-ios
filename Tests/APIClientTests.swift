@@ -15,21 +15,21 @@ class APIClientTests: XCTestCase {
         // token
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
+        }, response: { (_) -> HTTPStubsResponse in
             let data = TestFixture.JSON(by: "token.json")
-            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }).name = "default"
         // card brands
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/accounts/brands") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
+        }, response: { (_) -> HTTPStubsResponse in
             let data = TestFixture.JSON(by: "cardBrands.json")
-            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }).name = "default"
     }
 
     override func tearDown() {
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
         super.tearDown()
     }
 
@@ -63,7 +63,7 @@ class APIClientTests: XCTestCase {
     }
 
     func testCreateToken_withCardInput() {
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
         stub(condition: { (req) -> Bool in
             // check request
             if let body = req.ohhttpStubs_httpBody {
@@ -85,8 +85,8 @@ class APIClientTests: XCTestCase {
                 return true
             }
             return false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            OHHTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+        }, response: { (_) -> HTTPStubsResponse in
+            HTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
         })
 
         PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"
@@ -122,7 +122,7 @@ class APIClientTests: XCTestCase {
     }
 
     func testCreateToken_withThreeDSecureToken() {
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
         stub(condition: { (req) -> Bool in
             // check request
             if let body = req.ohhttpStubs_httpBody {
@@ -140,8 +140,8 @@ class APIClientTests: XCTestCase {
                 return true
             }
             return false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            OHHTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
+        }, response: { (_) -> HTTPStubsResponse in
+            HTTPStubsResponse(data: TestFixture.JSON(by: "token.json"), statusCode: 200, headers: nil)
         })
 
         PAYJPSDK.publicKey = "pk_test_d5b6d618c26b898d5ed4253c"

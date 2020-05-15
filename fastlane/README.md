@@ -51,6 +51,11 @@ Check Objective-C format with clang-format
 fastlane ios create_pr_to_update_docs
 ```
 Create PR to update docs
+### ios distribute_sample_app
+```
+fastlane ios distribute_sample_app
+```
+Distribute sample app with Firebase App Distribution
 
 ----
 

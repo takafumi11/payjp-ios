@@ -14,7 +14,7 @@
     <a title="ThreeDSecureSFSafariViewControllerDriver Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
+        <p><a href="../index.html">PAYJP 1.2.1 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -38,10 +38,16 @@
                 <a href="../Classes/Card.html">Card</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/CardFormDisplayStyledView.html">CardFormDisplayStyledView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CardFormLabelStyledView.html">CardFormLabelStyledView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormTableStyledView.html">CardFormTableStyledView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CardFormView.html">CardFormView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormViewController.html">CardFormViewController</a>
@@ -88,6 +94,9 @@
                 <a href="../Enums/CardFormResult.html">CardFormResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/CardFormViewType.html">CardFormViewType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/LocalError.html">LocalError</a>
               </li>
               <li class="nav-group-task">
@@ -100,6 +109,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormAction.html">CardFormAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CardFormStylable.html">CardFormStylable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a>
@@ -144,6 +156,7 @@
               <div class="declaration">
                 <div class="language">
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ThreeDSecureSFSafariViewControllerDriver</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/ThreeDSecureWebDriver.html">ThreeDSecureWebDriver</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ThreeDSecureSFSafariViewControllerDriver</span><span class="p">:</span> <span class="kt">SFSafariViewControllerDelegate</span></code></pre>
 
                 </div>
               </div>
@@ -185,7 +198,7 @@
                     <code>
                     <a name="/s:5PAYJP21ThreeDSecureWebDriverP04openD7Browser4host3url8delegateySo16UIViewControllerC_10Foundation3URLVAA0bcdE8Delegate_ptF"></a>
                     <a name="//apple_ref/swift/Method/openWebBrowser(host:url:delegate:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP04openD7Browser4host3url8delegateySo16UIViewControllerC_10Foundation3URLVAA0bcdE8Delegate_ptF">openWebBrowser(host:url:delegate:)</a>
+                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP04openD7Browser4host3url8delegateySo16UIViewControllerC_10Foundation3URLVAA0bcdE8Delegate_ptF">openWebBrowser(host:<wbr>url:<wbr>delegate:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -211,7 +224,7 @@
                     <code>
                     <a name="/s:5PAYJP21ThreeDSecureWebDriverP05closeD7Browser4host10completionSbSo16UIViewControllerCSg_yycSgtF"></a>
                     <a name="//apple_ref/swift/Method/closeWebBrowser(host:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP05closeD7Browser4host10completionSbSo16UIViewControllerCSg_yycSgtF">closeWebBrowser(host:completion:)</a>
+                    <a class="token" href="#/s:5PAYJP21ThreeDSecureWebDriverP05closeD7Browser4host10completionSbSo16UIViewControllerCSg_yycSgtF">closeWebBrowser(host:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -238,9 +251,11 @@
               <div class="task-name-container">
                 <a name="/SFSafariViewControllerDelegate"></a>
                 <a name="//apple_ref/swift/Section/SFSafariViewControllerDelegate" class="dashAnchor"></a>
-                <a href="#/SFSafariViewControllerDelegate">
-                  <h3 class="section-name">SFSafariViewControllerDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/SFSafariViewControllerDelegate"></a>
+                  <h3 class="section-name"><p>SFSafariViewControllerDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -248,7 +263,7 @@
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)ThreeDSecureSFSafariViewControllerDriver(im)safariViewControllerDidFinish:"></a>
                     <a name="//apple_ref/swift/Method/safariViewControllerDidFinish(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)ThreeDSecureSFSafariViewControllerDriver(im)safariViewControllerDidFinish:">safariViewControllerDidFinish(_:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)ThreeDSecureSFSafariViewControllerDriver(im)safariViewControllerDidFinish:">safariViewControllerDidFinish(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,8 +290,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-04-17)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-05-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

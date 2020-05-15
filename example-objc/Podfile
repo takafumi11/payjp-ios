@@ -2,8 +2,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'example-objc' do
-  pod 'PAYJP'
-  # pod 'PAYJP', :path => '../'
-
-  # pod 'CardIO'
+#  pod 'PAYJP'
+  pod 'PAYJP', :path => '../'
+  pod 'CardIO'
 end

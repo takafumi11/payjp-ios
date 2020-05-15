@@ -64,13 +64,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Networking/Core/BaseRequest.swift",
-      "line": 13,
-      "symbol": "BaseRequest",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/distiller/project/Sources/Networking/Core/ClientInfo.swift",
       "line": 16,
       "symbol": "ClientInfo.bindingsName",
@@ -302,177 +295,212 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 87,
+      "symbol": "CardFormDisplayStyledView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 92,
+      "symbol": "CardFormDisplayStyledView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 122,
+      "symbol": "CardFormDisplayStyledView.intrinsicContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 126,
+      "symbol": "CardFormDisplayStyledView.layoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 520,
+      "symbol": "CardFormDisplayStyledView.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 529,
+      "symbol": "CardFormDisplayStyledView.scrollViewWillBeginDragging(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormDisplayStyledView.swift",
+      "line": 533,
+      "symbol": "CardFormDisplayStyledView.scrollViewDidEndDecelerating(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 76,
+      "line": 70,
       "symbol": "CardFormLabelStyledView.init(frame:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 81,
+      "line": 75,
       "symbol": "CardFormLabelStyledView.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 141,
+      "line": 115,
       "symbol": "CardFormLabelStyledView.intrinsicContentSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 145,
+      "line": 119,
       "symbol": "CardFormLabelStyledView.layoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 253,
-      "symbol": "CardFormLabelStyledView.textField(_:shouldChangeCharactersIn:replacementString:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 280,
-      "symbol": "CardFormLabelStyledView.textFieldShouldClear(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 301,
-      "symbol": "CardFormLabelStyledView.textFieldShouldReturn(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 312,
-      "symbol": "CardFormLabelStyledView.didCancel(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/distiller/project/Sources/Views/CardFormLabelStyledView.swift",
-      "line": 316,
-      "symbol": "CardFormLabelStyledView.cardIOProxy(_:didFinishWith:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 73,
+      "line": 69,
       "symbol": "CardFormTableStyledView.init(frame:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 78,
+      "line": 74,
       "symbol": "CardFormTableStyledView.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 143,
+      "line": 119,
       "symbol": "CardFormTableStyledView.intrinsicContentSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 227,
-      "symbol": "CardFormTableStyledView.textField(_:shouldChangeCharactersIn:replacementString:)",
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 73,
+      "symbol": "CardFormView.init(frame:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 255,
-      "symbol": "CardFormTableStyledView.textFieldShouldClear(_:)",
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 78,
+      "symbol": "CardFormView.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 276,
-      "symbol": "CardFormTableStyledView.textFieldShouldReturn(_:)",
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 466,
+      "symbol": "CardFormView.textField(_:shouldChangeCharactersIn:replacementString:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 294,
-      "symbol": "CardFormTableStyledView.didCancel(in:)",
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 494,
+      "symbol": "CardFormView.textFieldShouldClear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/distiller/project/Sources/Views/CardFormTableStyledView.swift",
-      "line": 298,
-      "symbol": "CardFormTableStyledView.cardIOProxy(_:didFinishWith:)",
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 515,
+      "symbol": "CardFormView.textFieldShouldReturn(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 523,
+      "symbol": "CardFormView.textFieldDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 530,
+      "symbol": "CardFormView.didCancel(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormView.swift",
+      "line": 534,
+      "symbol": "CardFormView.cardIOProxy(_:didFinishWith:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 71,
+      "line": 98,
       "symbol": "CardFormViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 116,
+      "line": 123,
       "symbol": "CardFormViewController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 124,
+      "line": 131,
       "symbol": "CardFormViewController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 262,
+      "line": 324,
       "symbol": "CardFormViewController.collectionView(_:numberOfItemsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 266,
+      "line": 328,
       "symbol": "CardFormViewController.collectionView(_:cellForItemAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 290,
+      "line": 352,
       "symbol": "CardFormViewController.collectionView(_:layout:insetForSectionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 312,
+      "line": 374,
       "symbol": "CardFormViewController.presentationControllerDidDismiss(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/FormStyle.swift",
-      "line": 40,
-      "symbol": "FormStyle.init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:)",
+      "line": 43,
+      "symbol": "FormStyle.init(labelTextColor:inputTextColor:errorTextColor:tintColor:inputFieldBackgroundColor:submitButtonColor:highlightColor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }

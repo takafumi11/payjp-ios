@@ -12,13 +12,13 @@ protocol ExpirationFormatterType {
     /// Returns a formatted value from given string.
     /// - parameter expiration: 変換したい文字列。
     /// - returns: MM/yy のフォーマットで返します、例： `01/20` 。変換できない場合は nil で返します。
-    func string(from expiration: String?) -> String?
+    func string(from expiration: String?) -> Expiration?
 
     func string(month: Int?, year: Int?) -> String?
 }
 
 struct ExpirationFormatter: ExpirationFormatterType {
-    func string(from expiration: String?) -> String? {
+    func string(from expiration: String?) -> Expiration? {
         if let expiration = expiration, !expiration.isEmpty {
             var filtered = expiration.numberfy()
 
@@ -32,12 +32,16 @@ struct ExpirationFormatter: ExpirationFormatterType {
             }
 
             filtered = String(filtered.unicodeScalars.prefix(4))
-
             if filtered.count >= 3 {
                 filtered.insert(separator: "/", every: 2)
             }
 
-            return filtered
+            let mmyy = "MM/YY"
+            let start = mmyy.startIndex
+            let end = mmyy.index(mmyy.startIndex, offsetBy: filtered.count, limitedBy: mmyy.endIndex) ?? mmyy.endIndex
+            let masked = mmyy.replacingCharacters(in: start..<end, with: filtered)
+
+            return Expiration(formatted: filtered, display: masked)
         }
         return nil
     }

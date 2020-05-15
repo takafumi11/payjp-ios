@@ -52,5 +52,13 @@ extension Style {
         static var red: UIColor {
             return .systemRed
         }
+
+        // CardDisplay
+        static var displayLabel: UIColor {
+            return .systemGray
+        }
+        static var displayCvcLabel: UIColor {
+            return .init(hex: "030300")
+        }
     }
 }
