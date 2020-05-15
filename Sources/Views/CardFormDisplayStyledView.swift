@@ -216,7 +216,7 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
         let backgroudFrame = CGRect(x: 0,
                                     y: 0,
                                     width: formScrollView.frame.width,
-                                    height: 44.0)
+                                    height: 44)
         cardNumberFieldBackground = UIView(frame: backgroudFrame)
         expirationFieldBackground = UIView(frame: backgroudFrame)
         cvcFieldBackground = UIView(frame: backgroudFrame)

@@ -164,7 +164,7 @@ public class CardFormViewController: UIViewController {
         scrollIndicatorInsets.bottom = keyboardY
         scrollView.scrollIndicatorInsets = scrollIndicatorInsets
         scrollView.showsVerticalScrollIndicator = true
-        
+
         // displayStyledのレイアウトで横ScrollViewを使用している影響で
         // 縦スクロールが効かないため、手動でスクロールさせるようにしている
         // 縦スクロールが発生する画面サイズ かつ displayStyled のときのみスクロールさせる
