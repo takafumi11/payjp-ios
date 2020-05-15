@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1aI-eK-01f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1aI-eK-01f">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,8 +22,8 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="blx-Ud-4tL">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="317.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="afn-Xo-Kwx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-pl-3uh" userLabel="Brands Layout">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
@@ -51,8 +51,8 @@
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z" customClass="PAYCardFormLabelStyledView">
-                                                        <rect key="frame" x="0.0" y="86" width="414" height="231.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iu-cW-k9Z">
+                                                        <rect key="frame" x="0.0" y="82" width="414" height="231.5"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isHolderRequired" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
@@ -101,20 +101,20 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="0Hx-7U-5WH"/>
+                            <constraint firstItem="uGj-64-kZm" firstAttribute="top" secondItem="I2t-0Q-mnp" secondAttribute="top" id="0Hx-7U-5WH"/>
                             <constraint firstItem="61c-5M-xI7" firstAttribute="top" secondItem="bes-nP-2cY" secondAttribute="top" id="1jd-II-XB0"/>
-                            <constraint firstItem="61c-5M-xI7" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="3RT-h0-evd"/>
-                            <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="uGj-64-kZm" secondAttribute="trailing" id="4YO-B8-RNn"/>
-                            <constraint firstItem="IuV-8P-tEi" firstAttribute="bottom" secondItem="uGj-64-kZm" secondAttribute="bottom" id="Bdk-k5-t0H"/>
-                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="top" secondItem="IuV-8P-tEi" secondAttribute="top" id="Eye-02-PG6"/>
-                            <constraint firstItem="IuV-8P-tEi" firstAttribute="trailing" secondItem="5fp-Ih-ELw" secondAttribute="trailing" id="GWQ-L3-Na2"/>
-                            <constraint firstItem="61c-5M-xI7" firstAttribute="trailing" secondItem="IuV-8P-tEi" secondAttribute="trailing" id="Kqa-yG-JDf"/>
-                            <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="mRa-tP-wmA"/>
-                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="moS-yQ-F4t"/>
-                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="bottom" secondItem="IuV-8P-tEi" secondAttribute="bottom" id="rYu-K4-LrX"/>
-                            <constraint firstItem="61c-5M-xI7" firstAttribute="leading" secondItem="IuV-8P-tEi" secondAttribute="leading" id="w0h-kb-oSe"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="bottom" secondItem="I2t-0Q-mnp" secondAttribute="bottom" id="3RT-h0-evd"/>
+                            <constraint firstItem="I2t-0Q-mnp" firstAttribute="trailing" secondItem="uGj-64-kZm" secondAttribute="trailing" id="4YO-B8-RNn"/>
+                            <constraint firstItem="I2t-0Q-mnp" firstAttribute="bottom" secondItem="uGj-64-kZm" secondAttribute="bottom" id="Bdk-k5-t0H"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="top" secondItem="I2t-0Q-mnp" secondAttribute="top" id="Eye-02-PG6"/>
+                            <constraint firstItem="I2t-0Q-mnp" firstAttribute="trailing" secondItem="5fp-Ih-ELw" secondAttribute="trailing" id="GWQ-L3-Na2"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="trailing" secondItem="I2t-0Q-mnp" secondAttribute="trailing" id="Kqa-yG-JDf"/>
+                            <constraint firstItem="uGj-64-kZm" firstAttribute="leading" secondItem="I2t-0Q-mnp" secondAttribute="leading" id="mRa-tP-wmA"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="leading" secondItem="I2t-0Q-mnp" secondAttribute="leading" id="moS-yQ-F4t"/>
+                            <constraint firstItem="5fp-Ih-ELw" firstAttribute="bottom" secondItem="I2t-0Q-mnp" secondAttribute="bottom" id="rYu-K4-LrX"/>
+                            <constraint firstItem="61c-5M-xI7" firstAttribute="leading" secondItem="I2t-0Q-mnp" secondAttribute="leading" id="w0h-kb-oSe"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="IuV-8P-tEi"/>
+                        <viewLayoutGuide key="safeArea" id="I2t-0Q-mnp"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add New Card" leftItemsSupplementBackButton="YES" id="Mkd-CE-3mO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qLk-y6-8dY">
@@ -125,9 +125,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="uGj-64-kZm" id="y9m-6o-q0h"/>
+                        <outlet property="brandsLayout" destination="cmB-pl-3uh" id="ZF1-B1-rQG"/>
                         <outlet property="brandsView" destination="Ua3-wA-bvi" id="RCp-Ch-Nsr"/>
-                        <outlet property="cardFormView" destination="5iu-cW-k9Z" id="KQd-w0-7cg"/>
                         <outlet property="errorView" destination="5fp-Ih-ELw" id="e9i-z0-gq8"/>
+                        <outlet property="formContentView" destination="5iu-cW-k9Z" id="ZgC-Qj-YXN"/>
                         <outlet property="scrollView" destination="blx-Ud-4tL" id="398-1X-NRm"/>
                         <outlet property="submitButton" destination="yza-qd-fV7" id="j5x-cy-dYY"/>
                     </connections>

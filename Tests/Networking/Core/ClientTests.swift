@@ -29,7 +29,7 @@ class ClientTests: XCTestCase {
     let client = Client.shared
 
     override func tearDown() {
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
         super.tearDown()
     }
 
@@ -37,8 +37,8 @@ class ClientTests: XCTestCase {
         let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(error: notConnectedError)
+        }, response: { (_) -> HTTPStubsResponse in
+            return HTTPStubsResponse(error: notConnectedError)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -62,8 +62,8 @@ class ClientTests: XCTestCase {
     func testRequest_invalidJSON_200() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
+        }, response: { (_) -> HTTPStubsResponse in
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -87,8 +87,8 @@ class ClientTests: XCTestCase {
     func testRequest_invalidJSON_500() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
+        }, response: { (_) -> HTTPStubsResponse in
+            return HTTPStubsResponse(data: Data(), statusCode: 500, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -112,9 +112,9 @@ class ClientTests: XCTestCase {
     func testRequest_serviceError() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
+        }, response: { (_) -> HTTPStubsResponse in
             let data = TestFixture.JSON(by: "error.json")
-            return OHHTTPStubsResponse(data: data, statusCode: 400, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 400, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -138,9 +138,9 @@ class ClientTests: XCTestCase {
     func testRequest_success() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
+        }, response: { (_) -> HTTPStubsResponse in
             let data = TestFixture.JSON(by: "token.json")
-            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -159,9 +159,9 @@ class ClientTests: XCTestCase {
     func testRequest_requiredTds_303() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
+        }, response: { (_) -> HTTPStubsResponse in
             let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
-            return OHHTTPStubsResponse(data: data, statusCode: 303, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 303, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -187,8 +187,8 @@ class ClientTests: XCTestCase {
     func testRequest_requiredTds_303_token_nil() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
-        }, response: { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data: Data(), statusCode: 303, headers: nil)
+        }, response: { (_) -> HTTPStubsResponse in
+            return HTTPStubsResponse(data: Data(), statusCode: 303, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)

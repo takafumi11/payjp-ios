@@ -72,7 +72,7 @@ extension CardBrand {
         }
     }
 
-    var logoResourceName: String {
+    private var logoResourceName: String {
         switch self {
         case .visa:
             return "logo_visa"
@@ -91,12 +91,46 @@ extension CardBrand {
         }
     }
 
-    var cvcIconResourceName: String {
+    var logoImage: UIImage? {
+        return UIImage(named: self.logoResourceName, in: .payjpBundle, compatibleWith: nil)
+    }
+
+    private var cvcIconResourceName: String {
         switch self {
         case .americanExpress:
             return "icon_card_cvc_4"
         default:
             return "icon_card_cvc_3"
         }
+    }
+
+    var cvcIconImage: UIImage? {
+        return UIImage(named: self.cvcIconResourceName, in: .payjpBundle, compatibleWith: nil)
+    }
+
+    private var displayLogoResourceName: String? {
+        switch self {
+        case .visa:
+            return "visa"
+        case .mastercard:
+            return "mastercard"
+        case .jcb:
+            return "jcb"
+        case .americanExpress:
+            return "amex"
+        case .dinersClub:
+            return "diners"
+        case .discover:
+            return "discover"
+        case .unknown:
+            return nil
+        }
+    }
+
+    var displayLogoImage: UIImage? {
+        if let resource = self.displayLogoResourceName {
+            return UIImage(named: resource, in: .payjpBundle, compatibleWith: nil)
+        }
+        return nil
     }
 }

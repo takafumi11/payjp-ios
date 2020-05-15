@@ -23,7 +23,8 @@ class ExampleHostViewController: UITableViewController {
             //                inputTextColor: color,
             //                tintColor: color)
 
-            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self)
+            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
+                                                                                 viewType: .tableStyled)
             // push
             self.navigationController?.pushViewController(cardFormVc, animated: true)
 
@@ -31,6 +32,16 @@ class ExampleHostViewController: UITableViewController {
             //            let naviVc = UINavigationController(rootViewController: cardFormVc)
             //            naviVc.presentationController?.delegate = cardFormVc
             //            self.present(naviVc, animated: true, completion: nil)
+        }
+        if indexPath.row == 4 {
+            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
+                                                                                 viewType: .labelStyled)
+            self.navigationController?.pushViewController(cardFormVc, animated: true)
+        }
+        if indexPath.row == 5 {
+            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
+                                                                                 viewType: .displayStyled)
+            self.navigationController?.pushViewController(cardFormVc, animated: true)
         }
     }
 }

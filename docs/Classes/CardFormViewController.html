@@ -14,7 +14,7 @@
     <a title="CardFormViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
+        <p><a href="../index.html">PAYJP 1.2.1 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -38,10 +38,16 @@
                 <a href="../Classes/Card.html">Card</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/CardFormDisplayStyledView.html">CardFormDisplayStyledView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CardFormLabelStyledView.html">CardFormLabelStyledView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormTableStyledView.html">CardFormTableStyledView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CardFormView.html">CardFormView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormViewController.html">CardFormViewController</a>
@@ -88,6 +94,9 @@
                 <a href="../Enums/CardFormResult.html">CardFormResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/CardFormViewType.html">CardFormViewType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/LocalError.html">LocalError</a>
               </li>
               <li class="nav-group-task">
@@ -100,6 +109,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormAction.html">CardFormAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CardFormStylable.html">CardFormStylable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a>
@@ -146,11 +158,15 @@
                   <pre class="highlight swift"><code><span class="kd">@objcMembers</span>
 <span class="kd">@objc(PAYCardFormViewController)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CardFormViewController</span> <span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormViewController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormViewDelegate.html">CardFormViewDelegate</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormViewController</span><span class="p">:</span> <span class="kt">UICollectionViewDataSource</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormViewController</span><span class="p">:</span> <span class="kt">UICollectionViewDelegateFlowLayout</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormViewController</span><span class="p">:</span> <span class="kt">UIAdaptivePresentationControllerDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CardFormViewController</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a></span></code></pre>
 
                 </div>
               </div>
-            <p>CardFormViewController.
-It&rsquo;s configured with CardFormLabelStyledView.</p>
+            <p>CardFormViewController show card form.</p>
 
           </section>
           <section class="section task-group-section">
@@ -159,9 +175,9 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:"></a>
-                    <a name="//apple_ref/swift/Method/createCardFormViewController(style:tenantId:delegate:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:">createCardFormViewController(style:tenantId:delegate:)</a>
+                    <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:viewType:"></a>
+                    <a name="//apple_ref/swift/Method/createCardFormViewController(style:tenantId:delegate:viewType:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(cm)createCardFormViewControllerWithStyle:tenantId:delegate:viewType:">createCardFormViewController(style:<wbr>tenantId:<wbr>delegate:<wbr>viewType:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,11 +192,12 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(createCardFormViewControllerWithStyle:tenantId:delegate:)</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">createCardFormViewController</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Classes/FormStyle.html">FormStyle</a></span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="n">defaultStyle</span><span class="p">,</span>
-                                                <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-                                                <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a></span><span class="p">)</span>
-    <span class="o">-&gt;</span> <span class="kt">CardFormViewController</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@objc(createCardFormViewControllerWithStyle:tenantId:delegate:viewType:)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">createCardFormViewController</span><span class="p">(</span>
+    <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Classes/FormStyle.html">FormStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">defaultStyle</span><span class="p">,</span>
+    <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a></span><span class="p">,</span>
+    <span class="nv">viewType</span><span class="p">:</span> <span class="kt"><a href="../Enums/CardFormViewType.html">CardFormViewType</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">labelStyled</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CardFormViewController</span></code></pre>
 
                         </div>
                       </div>
@@ -224,6 +241,18 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>card form type</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -240,9 +269,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/Lifecycle"></a>
                 <a name="//apple_ref/swift/Section/Lifecycle" class="dashAnchor"></a>
-                <a href="#/Lifecycle">
-                  <h3 class="section-name">Lifecycle</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Lifecycle"></a>
+                  <h3 class="section-name"><p>Lifecycle</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -277,7 +308,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@M@PAYJP@objc(cs)PAYCardFormViewController(im)viewDidDisappear:"></a>
                     <a name="//apple_ref/swift/Method/viewDidDisappear(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(im)viewDidDisappear:">viewDidDisappear(_:)</a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(cs)PAYCardFormViewController(im)viewDidDisappear:">viewDidDisappear(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -332,9 +363,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/CardFormViewDelegate"></a>
                 <a name="//apple_ref/swift/Section/CardFormViewDelegate" class="dashAnchor"></a>
-                <a href="#/CardFormViewDelegate">
-                  <h3 class="section-name">CardFormViewDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CardFormViewDelegate"></a>
+                  <h3 class="section-name"><p>CardFormViewDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -342,7 +375,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputValidatedIn:isValid:"></a>
                     <a name="//apple_ref/swift/Method/formInputValidated(in:isValid:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputValidatedIn:isValid:">formInputValidated(in:isValid:)</a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputValidatedIn:isValid:">formInputValidated(in:<wbr>isValid:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,7 +401,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputDoneTappedIn:"></a>
                     <a name="//apple_ref/swift/Method/formInputDoneTapped(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputDoneTappedIn:">formInputDoneTapped(in:)</a>
+                    <a class="token" href="#/c:@M@PAYJP@objc(pl)PAYCardFormViewDelegate(im)formInputDoneTappedIn:">formInputDoneTapped(in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -395,9 +428,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/UICollectionViewDataSource"></a>
                 <a name="//apple_ref/swift/Section/UICollectionViewDataSource" class="dashAnchor"></a>
-                <a href="#/UICollectionViewDataSource">
-                  <h3 class="section-name">UICollectionViewDataSource</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UICollectionViewDataSource"></a>
+                  <h3 class="section-name"><p>UICollectionViewDataSource</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -405,7 +440,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:numberOfItemsInSection:"></a>
                     <a name="//apple_ref/swift/Method/collectionView(_:numberOfItemsInSection:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:numberOfItemsInSection:">collectionView(_:numberOfItemsInSection:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:numberOfItemsInSection:">collectionView(_:<wbr>numberOfItemsInSection:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -432,7 +467,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:cellForItemAtIndexPath:"></a>
                     <a name="//apple_ref/swift/Method/collectionView(_:cellForItemAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:cellForItemAtIndexPath:">collectionView(_:cellForItemAt:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:cellForItemAtIndexPath:">collectionView(_:<wbr>cellForItemAt:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -461,9 +496,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/UICollectionViewDelegateFlowLayout"></a>
                 <a name="//apple_ref/swift/Section/UICollectionViewDelegateFlowLayout" class="dashAnchor"></a>
-                <a href="#/UICollectionViewDelegateFlowLayout">
-                  <h3 class="section-name">UICollectionViewDelegateFlowLayout</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UICollectionViewDelegateFlowLayout"></a>
+                  <h3 class="section-name"><p>UICollectionViewDelegateFlowLayout</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -471,7 +508,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:layout:insetForSectionAtIndex:"></a>
                     <a name="//apple_ref/swift/Method/collectionView(_:layout:insetForSectionAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:layout:insetForSectionAtIndex:">collectionView(_:layout:insetForSectionAt:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)collectionView:layout:insetForSectionAtIndex:">collectionView(_:<wbr>layout:<wbr>insetForSectionAt:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -501,9 +538,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/UIAdaptivePresentationControllerDelegate"></a>
                 <a name="//apple_ref/swift/Section/UIAdaptivePresentationControllerDelegate" class="dashAnchor"></a>
-                <a href="#/UIAdaptivePresentationControllerDelegate">
-                  <h3 class="section-name">UIAdaptivePresentationControllerDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UIAdaptivePresentationControllerDelegate"></a>
+                  <h3 class="section-name"><p>UIAdaptivePresentationControllerDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -511,7 +550,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)presentationControllerDidDismiss:"></a>
                     <a name="//apple_ref/swift/Method/presentationControllerDidDismiss(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)presentationControllerDidDismiss:">presentationControllerDidDismiss(_:)</a>
+                    <a class="token" href="#/c:@CM@PAYJP@objc(cs)PAYCardFormViewController(im)presentationControllerDidDismiss:">presentationControllerDidDismiss(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -539,9 +578,11 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
               <div class="task-name-container">
                 <a name="/ThreeDSecureProcessHandlerDelegate"></a>
                 <a name="//apple_ref/swift/Section/ThreeDSecureProcessHandlerDelegate" class="dashAnchor"></a>
-                <a href="#/ThreeDSecureProcessHandlerDelegate">
-                  <h3 class="section-name">ThreeDSecureProcessHandlerDelegate</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/ThreeDSecureProcessHandlerDelegate"></a>
+                  <h3 class="section-name"><p>ThreeDSecureProcessHandlerDelegate</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -549,7 +590,7 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
                     <code>
                     <a name="/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP05threecdE9DidFinish_6statusyAA0bcdE0C_AA0bcD6StatusOtF"></a>
                     <a name="//apple_ref/swift/Method/threeDSecureProcessHandlerDidFinish(_:status:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP05threecdE9DidFinish_6statusyAA0bcdE0C_AA0bcD6StatusOtF">threeDSecureProcessHandlerDidFinish(_:status:)</a>
+                    <a class="token" href="#/s:5PAYJP34ThreeDSecureProcessHandlerDelegateP05threecdE9DidFinish_6statusyAA0bcdE0C_AA0bcD6StatusOtF">threeDSecureProcessHandlerDidFinish(_:<wbr>status:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -576,8 +617,8 @@ It&rsquo;s configured with CardFormLabelStyledView.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-04-17)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-05-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

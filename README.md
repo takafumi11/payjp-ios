@@ -13,8 +13,9 @@
 - クレジットカードによる決済
   - https://pay.jp/docs/started
 
-<img src="https://user-images.githubusercontent.com/38201241/71139310-295ede80-2251-11ea-9b31-5395b18efbde.png" width="240px">
-
+| `.tableStyled` | `.labelStyled` | `.displayStyled` |
+| - | - | - |
+| <img alt="tableStyled" width=240 src="https://user-images.githubusercontent.com/38201241/82025679-a2614580-96cc-11ea-86c5-9eecc0122bc8.png" /> | <img alt="labelStyled" width=240 src="https://user-images.githubusercontent.com/38201241/82025696-a5f4cc80-96cc-11ea-9313-a42896ecd783.png" /> | <img alt="displayStyled" width=240 src="https://user-images.githubusercontent.com/38201241/82026803-3849a000-96ce-11ea-9a8a-eff7ab017060.png" /> |
 
 ## サンプルコード
 

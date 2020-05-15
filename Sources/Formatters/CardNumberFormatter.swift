@@ -10,9 +10,11 @@ import Foundation
 
 protocol CardNumberFormatterType {
     /// カード番号をカード種類別でフォーマットします
-    /// - parameter cardNumber: カード番号
-    /// - returns: フォーマットしたカード番号、カード種類
-    func string(from cardNumber: String?) -> CardNumber?
+    /// - Parameters:
+    ///   - cardNumber: cardNumber: カード番号
+    ///   - separator: separator: 区切り文字
+    /// - Returns: フォーマットしたカード番号、カード種類
+    func string(from cardNumber: String?, separator: String) -> CardNumber?
 }
 
 struct CardNumberFormatter: CardNumberFormatterType {
@@ -23,21 +25,49 @@ struct CardNumberFormatter: CardNumberFormatterType {
         self.transformer = transformer
     }
 
-    func string(from cardNumber: String?) -> CardNumber? {
+    func string(from cardNumber: String?, separator: String) -> CardNumber? {
         if let cardNumber = cardNumber, !cardNumber.isEmpty {
             let filtered = cardNumber.numberfy()
 
             if filtered.isEmpty { return nil }
 
             let brand = transformer.transform(from: filtered)
-            var trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
+            let trimmed = String(filtered.unicodeScalars.prefix(brand.numberLength))
+
+            var formatted = trimmed
+            var display = trimmed
+            while display.count < brand.numberLength {
+                display.append("X")
+            }
+
+            var mask = String()
+            if trimmed.count == brand.numberLength {
+                let last4 = String(trimmed.suffix(4))
+                while mask.count < brand.numberLength - 4 {
+                    mask.append("•")
+                }
+                mask.append(last4)
+            }
+
             switch brand {
             case .americanExpress, .dinersClub:
-                trimmed.insert(separator: "-", positions: [4, 10])
-                return CardNumber(formatted: trimmed, brand: brand)
+                formatted.insert(separator: separator, positions: [4, 10])
+                display.insert(separator: separator, positions: [4, 10])
+                mask.insert(separator: separator, positions: [4, 10])
+                return CardNumber(value: trimmed,
+                                  formatted: formatted,
+                                  brand: brand,
+                                  display: display,
+                                  mask: mask)
             default:
-                trimmed.insert(separator: "-", every: 4)
-                return CardNumber(formatted: trimmed, brand: brand)
+                formatted.insert(separator: separator, every: 4)
+                display.insert(separator: separator, every: 4)
+                mask.insert(separator: separator, every: 4)
+                return CardNumber(value: trimmed,
+                                  formatted: formatted,
+                                  brand: brand,
+                                  display: display,
+                                  mask: mask)
             }
         }
         return nil

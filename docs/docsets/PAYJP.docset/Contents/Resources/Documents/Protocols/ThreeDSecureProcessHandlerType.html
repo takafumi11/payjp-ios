@@ -14,7 +14,7 @@
     <a title="ThreeDSecureProcessHandlerType Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PAYJP Docs</a> (68% documented)</p>
+        <p><a href="../index.html">PAYJP 1.2.1 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/payjp/payjp-ios"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -38,10 +38,16 @@
                 <a href="../Classes/Card.html">Card</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/CardFormDisplayStyledView.html">CardFormDisplayStyledView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/CardFormLabelStyledView.html">CardFormLabelStyledView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormTableStyledView.html">CardFormTableStyledView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CardFormView.html">CardFormView</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CardFormViewController.html">CardFormViewController</a>
@@ -88,6 +94,9 @@
                 <a href="../Enums/CardFormResult.html">CardFormResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/CardFormViewType.html">CardFormViewType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/LocalError.html">LocalError</a>
               </li>
               <li class="nav-group-task">
@@ -100,6 +109,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormAction.html">CardFormAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CardFormStylable.html">CardFormStylable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/CardFormViewControllerDelegate.html">CardFormViewControllerDelegate</a>
@@ -158,7 +170,7 @@
                     <code>
                     <a name="/s:5PAYJP30ThreeDSecureProcessHandlerTypeP05startbcD014viewController8delegate5tokenySo06UIViewI0C_AA0bcdE8Delegate_pAA0bC5TokenCtF"></a>
                     <a name="//apple_ref/swift/Method/startThreeDSecureProcess(viewController:delegate:token:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP05startbcD014viewController8delegate5tokenySo06UIViewI0C_AA0bcdE8Delegate_pAA0bC5TokenCtF">startThreeDSecureProcess(viewController:delegate:token:)</a>
+                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP05startbcD014viewController8delegate5tokenySo06UIViewI0C_AA0bcdE8Delegate_pAA0bC5TokenCtF">startThreeDSecureProcess(viewController:<wbr>delegate:<wbr>token:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -174,7 +186,9 @@ Delegate will be released once the process is finished.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">startThreeDSecureProcess</span><span class="p">(</span><span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a></span><span class="p">,</span> <span class="nv">token</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThreeDSecureToken.html">ThreeDSecureToken</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">startThreeDSecureProcess</span><span class="p">(</span><span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+                              <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThreeDSecureProcessHandlerDelegate.html">ThreeDSecureProcessHandlerDelegate</a></span><span class="p">,</span>
+                              <span class="nv">token</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThreeDSecureToken.html">ThreeDSecureToken</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -229,7 +243,7 @@ Delegate will be released once the process is finished.</p>
                     <code>
                     <a name="/s:5PAYJP30ThreeDSecureProcessHandlerTypeP08completebcD03urlSb10Foundation3URLV_tF"></a>
                     <a name="//apple_ref/swift/Method/completeThreeDSecureProcess(url:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP08completebcD03urlSb10Foundation3URLV_tF">completeThreeDSecureProcess(url:)</a>
+                    <a class="token" href="#/s:5PAYJP30ThreeDSecureProcessHandlerTypeP08completebcD03urlSb10Foundation3URLV_tF">completeThreeDSecureProcess(url:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,8 +289,8 @@ Delegate will be released once the process is finished.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-04-17)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://pay.jp" target="_blank" rel="external">PAYJP</a>. All rights reserved. (Last updated: 2020-05-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

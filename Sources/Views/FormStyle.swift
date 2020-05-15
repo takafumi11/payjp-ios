@@ -20,7 +20,8 @@ public class FormStyle: NSObject {
                               errorTextColor: Style.Color.red,
                               tintColor: Style.Color.blue,
                               inputFieldBackgroundColor: Style.Color.groupedBackground,
-                              submitButtonColor: Style.Color.blue)
+                              submitButtonColor: Style.Color.blue,
+                              highlightColor: Style.Color.blue)
         return style
     }()
 
@@ -36,18 +37,22 @@ public class FormStyle: NSObject {
     public let inputFieldBackgroundColor: UIColor
     /// Background color of UIButton.
     public let submitButtonColor: UIColor
+    /// Highlight color of Card display label.
+    public let highlightColor: UIColor
 
     public init(labelTextColor: UIColor? = nil,
                 inputTextColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
                 tintColor: UIColor? = nil,
                 inputFieldBackgroundColor: UIColor? = nil,
-                submitButtonColor: UIColor? = nil) {
+                submitButtonColor: UIColor? = nil,
+                highlightColor: UIColor? = nil) {
         self.labelTextColor = labelTextColor ?? Style.Color.label
         self.inputTextColor = inputTextColor ?? Style.Color.label
         self.errorTextColor = errorTextColor ?? Style.Color.red
         self.tintColor = tintColor ?? Style.Color.blue
         self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? Style.Color.groupedBackground
         self.submitButtonColor = submitButtonColor ?? Style.Color.blue
+        self.highlightColor = highlightColor ?? Style.Color.blue
     }
 }
