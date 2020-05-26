@@ -581,7 +581,9 @@ extension CardFormDisplayStyledView: CardFormViewTextFieldDelegate {
         updateCardNumberMask(textField: textField)
 
         if textField == cvcTextField && currentCardBrand != .americanExpress {
-            backFlipCard()
+            if isCardDisplayFront {
+                backFlipCard()
+            }
         } else {
             if !isCardDisplayFront {
                 frontFlipCard()
