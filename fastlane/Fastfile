@@ -193,7 +193,7 @@ platform :ios do
 
     # distribute
     firebase_app_distribution(
-      app: ENV["EXAMPLE_FIREBASE_APP_ID"],
+      app: ENV["EXAMPLE_FIREBASE_APP_ID_IOS"],
       groups: "internal-tester",
       release_notes: "git sha: #{last_git_commit[:abbreviated_commit_hash]}"
     )
