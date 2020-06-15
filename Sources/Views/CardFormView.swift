@@ -389,7 +389,7 @@ public class CardFormView: UIView {
         alertController.addAction(settingsAction)
         alertController.preferredAction = settingsAction
 
-        guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
+        guard let viewController = UIApplication.topViewController() else {
             return
         }
         viewController.present(alertController, animated: true, completion: nil)
