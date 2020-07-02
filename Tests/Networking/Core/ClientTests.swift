@@ -156,12 +156,12 @@ class ClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func testRequest_requiredTds_303() {
+    func testRequest_requiredTds() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }, response: { (_) -> HTTPStubsResponse in
             let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
-            return HTTPStubsResponse(data: data, statusCode: 303, headers: nil)
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -184,11 +184,11 @@ class ClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func testRequest_requiredTds_303_token_nil() {
+    func testRequest_requiredTds_token_nil() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/tokens") ?? false
         }, response: { (_) -> HTTPStubsResponse in
-            return HTTPStubsResponse(data: Data(), statusCode: 303, headers: nil)
+            return HTTPStubsResponse(data: Data(), statusCode: 200, headers: nil)
         }).name = "default"
 
         let expectation = self.expectation(description: self.description)
@@ -199,7 +199,7 @@ class ClientTests: XCTestCase {
             switch result {
             case .failure(let apiError):
                 switch apiError {
-                case .invalidResponse:
+                case .invalidJSON:
                     expectation.fulfill()
                 default:
                     XCTFail()
@@ -215,7 +215,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = mock303Response()
+        let response = mock200Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertEqual(tdsToken?.identifier, "tds_xxx")
@@ -225,7 +225,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = mock303Response()
+        let response = mock200Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
@@ -235,7 +235,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = mock303Response()
+        let response = mock200Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
@@ -245,7 +245,7 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "POST"
-        let response = mock303Response(urlString: "\(PAYJPApiEndpoint)tokens/any")
+        let response = mock200Response(urlString: "\(PAYJPApiEndpoint)tokens/any")
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
@@ -255,15 +255,15 @@ class ClientTests: XCTestCase {
         let data = "{\"object\": \"three_d_secure_token\", \"id\": \"tds_xxx\"}".data(using: .utf8)!
         var request = MockRequest(tokenId: "mock_id")
         request.httpMethod = "GET"
-        let response = mock303Response()
+        let response = mock200Response()
 
         let tdsToken = client.createThreeDSecureToken(data: data, request: request, response: response)
         XCTAssertNil(tdsToken)
     }
 
-    private func mock303Response(urlString: String = "\(PAYJPApiEndpoint)tokens") -> HTTPURLResponse {
+    private func mock200Response(urlString: String = "\(PAYJPApiEndpoint)tokens") -> HTTPURLResponse {
         return HTTPURLResponse(url: URL(string: urlString)!,
-                               statusCode: 303,
+                               statusCode: 200,
                                httpVersion: "",
                                headerFields: nil)!
     }
