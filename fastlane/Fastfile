@@ -12,6 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+require '../podspec'
 
 default_platform(:ios)
 
@@ -30,7 +31,8 @@ platform :ios do
   desc "Lint podspec"
   lane :lint_podspec do
     sh('pod lib lint ../PAYJP.podspec')
-    pod_version = version_get_podspec(path: 'PAYJP.podspec')
+    sh('pod lib lint ../PAYJPFlutterCore.podspec')
+    pod_version = PAYJPSDK::VERSION
     info_version = get_version_number
     unless pod_version == info_version then
       UI.user_error! "Version mismatch between podspec (#{pod_version}) and info.plist (#{info_version})."
