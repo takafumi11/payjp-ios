@@ -9,9 +9,9 @@
 import Foundation
 
 protocol ClientType {
-    func request<Request: PAYJP.Request>(
-        with request: Request,
-        completion: ((Result<Request.Response, APIError>) -> Void)?
+    func request<Req: Request>(
+        with request: Req,
+        completion: ((Result<Req.Response, APIError>) -> Void)?
     ) -> URLSessionDataTask?
 }
 
@@ -35,9 +35,9 @@ class Client: NSObject, ClientType {
     }
 
     @discardableResult
-    func request<Request: PAYJP.Request>(
-        with request: Request,
-        completion: ((Result<Request.Response, APIError>) -> Void)?
+    func request<Req: Request>(
+        with request: Req,
+        completion: ((Result<Req.Response, APIError>) -> Void)?
     ) -> URLSessionDataTask? {
         do {
             let urlRequest = try request.buildUrlRequest()
@@ -100,9 +100,9 @@ class Client: NSObject, ClientType {
     ///   - request: Request
     ///   - response: Response
     /// - Returns: ThreeDSecureToken
-    func createThreeDSecureToken<Request: PAYJP.Request>(data: Data,
-                                                         request: Request,
-                                                         response: HTTPURLResponse) -> ThreeDSecureToken? {
+    func createThreeDSecureToken<Req: Request>(data: Data,
+                                               request: Req,
+                                               response: HTTPURLResponse) -> ThreeDSecureToken? {
 
         guard let url = response.url?.absoluteString else { return nil }
         guard url == "\(PAYJPApiEndpoint)tokens" else { return nil }
