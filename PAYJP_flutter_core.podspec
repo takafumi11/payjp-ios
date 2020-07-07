@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.license          = PAYJPSDK::LICENSE
   s.author           = PAYJPSDK::AUTHOR
   s.source           = PAYJPSDK::SOURCE
+  s.module_name      = PAYJPSDK::MODULE_NAME
   s.swift_versions   = PAYJPSDK::SWIFT_VERSIONS
 
   s.ios.deployment_target = PAYJPSDK::IOS_DEPLOYMENT_TARGET
