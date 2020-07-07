@@ -8,9 +8,9 @@
 require './podspec'
 
 Pod::Spec.new do |s|
-  s.name             = 'PAYJP'
+  s.name             = 'PAYJPFlutterCore'
   s.version          = PAYJPSDK::VERSION
-  s.summary          = 'PAY.JP iOS SDK'
+  s.summary          = 'PAY.JP iOS SDK for Flutter distribution'
   s.description      = 'PAY.JP iOS SDK https://pay.jp/docs/started'
 
   s.homepage         = PAYJPSDK::HOMEPAGE_URL
@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
 
   s.source_files = PAYJPSDK::SOURCE_FILES
   s.resource_bundles = PAYJPSDK::RESOURCE_BUNDLES
+  s.resources = PAYJPSDK::RESOURCES
   s.public_header_files = PAYJPSDK::PUBLIC_HEADER_FILES
   s.frameworks = PAYJPSDK::FRAMEWORKS
   
