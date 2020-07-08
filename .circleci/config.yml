@@ -3,7 +3,7 @@ version: 2
 machine:
   - &defaults
     macos:
-      xcode: "11.4.1"
+      xcode: "11.5.0"
     shell: /bin/bash --login -eo pipefail
     working_directory: /Users/distiller/project
 
