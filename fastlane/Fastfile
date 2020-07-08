@@ -44,15 +44,17 @@ platform :ios do
     current = get_version_number
     new_version = options[:version] || prompt(text: "enter next version(current is #{current}):")
     increment_version_number(version_number: new_version)
-    version_bump_podspec(
-      path: "PAYJP.podspec",
-      version_number: new_version
-    )
-    # Update constant
-    file = '../Sources/Core/PAYJPSDK.swift'
-    new_version_line = "public static let sdkVersion: String = \"#{new_version}\""
-    regex = 'public static let sdkVersion: String = .*'
-    sh("sed -i '' -e 's/#{regex}/#{new_version_line}/g' #{file}")
+    # Update constant in swift
+    file_swift = '../Sources/Core/PAYJPSDK.swift'
+    new_version_line_swift = "public static let sdkVersion: String = \"#{new_version}\""
+    regex_swift = 'public static let sdkVersion: String = .*'
+    sh("sed -i '' -e 's/#{regex_swift}/#{new_version_line_swift}/g' #{file_swift}")
+    # Update constant in podspec
+    file_podspec = '../podspec.rb'
+    new_version_line_podspec = "VERSION = '#{new_version}'"
+    regex_podspec = 'VERSION = .*'
+    sh("sed -i '' -e \"s/#{regex_podspec}/#{new_version_line_podspec}/g\" #{file_podspec}")
+    
   end
   
   desc "Create GitHub PR to `payjp/payjp-ios` from internal repo. (internal only)"
