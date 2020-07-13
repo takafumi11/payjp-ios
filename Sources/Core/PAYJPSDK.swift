@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if SWIFT_PACKAGE
+@_exported import PAYJP_ObjC
+#endif
 
 /// PAY.JP SDK initial settings.
 public protocol PAYJPSDKType: class {

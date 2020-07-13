@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import PassKit
 @testable import PAYJP
 
 class TokenTests: XCTestCase {

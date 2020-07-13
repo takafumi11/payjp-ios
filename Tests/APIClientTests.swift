@@ -4,7 +4,6 @@
 //
 
 import XCTest
-import PassKit
 import OHHTTPStubs
 @testable import PAYJP
 

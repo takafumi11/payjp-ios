@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PassKit
 
 struct CreateTokenForApplePayRequest: BaseRequest {
 

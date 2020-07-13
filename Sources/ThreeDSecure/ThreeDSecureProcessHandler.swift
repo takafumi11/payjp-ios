@@ -6,7 +6,7 @@
 //  Copyright © 2020 PAY, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SafariServices
 
 /// 3DSecure process status.
