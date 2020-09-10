@@ -36,6 +36,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
     case invalidJSON(Data, Error?)
     /// Required 3DSecure.
     case requiredThreeDSecure(ThreeDSecureToken)
+    /// Too many requests in a short period of time.
+    case rateLimitExceeded
 
     // MARK: - LocalizedError
 
@@ -53,6 +55,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             return "Unable parse JSON object into expected classes."
         case .requiredThreeDSecure:
             return "Required 3DSecure process."
+        case .rateLimitExceeded:
+            return "Request throttled due to excessive requests."
         }
     }
 
@@ -70,6 +74,8 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             return PAYErrorInvalidJSON
         case .requiredThreeDSecure:
             return PAYErrorRequiredThreeDSecure
+        case .rateLimitExceeded:
+            return PAYErrorRateLimitExceeded
         }
     }
 
@@ -91,6 +97,7 @@ public enum APIError: LocalizedError, NSErrorSerializable {
             }
         case .requiredThreeDSecure(let identifier):
             userInfo[PAYErrorRequiredThreeDSecureIdObject] = identifier
+        case .rateLimitExceeded: break
         }
         return userInfo
     }

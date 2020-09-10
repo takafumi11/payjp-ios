@@ -65,6 +65,13 @@ class ErrorTranslatorTests: XCTestCase {
         XCTAssertEqual(result, "payjp_card_form_screen_error_server".localized)
     }
 
+    func testTranslate_rateLimitExceeded() {
+        let apiError = APIError.rateLimitExceeded
+
+        let result = translator.translate(error: apiError)
+        XCTAssertEqual(result, "payjp_card_form_screen_error_rate_limit_exceeded".localized)
+    }
+
     func testTranslate_systemError() {
         var userInfo = [String: Any]()
         userInfo[NSLocalizedDescriptionKey] = "Network is offline."

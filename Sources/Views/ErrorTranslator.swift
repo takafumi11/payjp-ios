@@ -28,6 +28,8 @@ struct ErrorTranslator: ErrorTranslatorType {
                 default:
                     return "payjp_card_form_screen_error_application".localized
                 }
+            case .rateLimitExceeded:
+                return "payjp_card_form_screen_error_rate_limit_exceeded".localized
             case .systemError(let error):
                 return error.localizedDescription
             default:
