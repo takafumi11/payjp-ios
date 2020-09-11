@@ -106,7 +106,7 @@ extension APIClient {
         _ token: PKPaymentToken,
         completionHandler: @escaping (Token?, NSError?) -> Void
     ) {
-        tokensService.createTokenForApplePay(paymentToken: token) { [weak self] result in
+        createToken(with: token) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):
@@ -126,19 +126,18 @@ extension APIClient {
         tenantId: String?,
         completionHandler: @escaping (Token?, NSError?) -> Void
     ) {
-        tokensService.createToken(cardNumber: cardNumber,
-                                  cvc: cvc,
-                                  expirationMonth: expirationMonth,
-                                  expirationYear: expirationYear,
-                                  name: name,
-                                  tenantId: tenantId) { [weak self] result in
-                                    guard let self = self else { return }
-                                    switch result {
-                                    case .success(let result):
-                                        completionHandler(result, nil)
-                                    case .failure(let error):
-                                        completionHandler(nil, self.nsErrorConverter.convert(from: error))
-                                    }
+        createToken(with: cardNumber,
+                    cvc: cvc,
+                    expirationMonth: expirationMonth,
+                    expirationYear: expirationYear
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                completionHandler(result, nil)
+            case .failure(let error):
+                completionHandler(nil, self.nsErrorConverter.convert(from: error))
+            }
         }
     }
 
@@ -146,7 +145,7 @@ extension APIClient {
         _ token: ThreeDSecureToken,
         completionHandler: @escaping (Token?, NSError?) -> Void
     ) {
-        tokensService.createTokenForThreeDSecure(tdsId: token.identifier) { [weak self] result in
+        createToken(with: token) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):
@@ -159,7 +158,7 @@ extension APIClient {
 
     @objc public func getTokenWith(_ tokenId: String,
                                    completionHandler: @escaping (Token?, NSError?) -> Void) {
-        tokensService.getToken(with: tokenId) { [weak self] result in
+        getToken(with: tokenId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):
@@ -174,7 +173,7 @@ extension APIClient {
         _ tenantId: String?,
         completionHandler: @escaping ([NSString]?, NSError?) -> Void
     ) {
-        accountsService.getAcceptedBrands(tenantId: tenantId) { [weak self] result in
+        getAcceptedBrands(with: tenantId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):
