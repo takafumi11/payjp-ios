@@ -32,6 +32,7 @@ protocol CardFormScreenPresenterType {
     func createToken(tenantId: String?, formInput: CardFormInput)
     func createTokenByTds()
     func fetchBrands(tenantId: String?)
+    func tokenOperationStatusDidUpdate(status: TokenOperationStatus)
 }
 
 class CardFormScreenPresenter: CardFormScreenPresenterType {
@@ -39,6 +40,8 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     var tdsToken: ThreeDSecureToken?
 
     private weak var delegate: CardFormScreenDelegate?
+    private var tokenOperationStatus: TokenOperationStatus
+    private var tokenizeProgressing: Bool = false
 
     private let accountsService: AccountsServiceType
     private let tokenService: TokenServiceType
@@ -55,10 +58,12 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         self.tokenService = tokenService
         self.errorTranslator = errorTranslator
         self.dispatchQueue = dispatchQueue
+        self.tokenOperationStatus = tokenService.tokenOperationObserver.status
     }
 
     func createToken(tenantId: String?, formInput: CardFormInput) {
-        showLoading()
+        tokenizeProgressing = true
+        updateIndicatingUI()
         tokenService.createToken(cardNumber: formInput.cardNumber,
                                  cvc: formInput.cvc,
                                  expirationMonth: formInput.expirationMonth,
@@ -127,6 +132,11 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
+    func tokenOperationStatusDidUpdate(status: TokenOperationStatus) {
+        self.tokenOperationStatus = status
+        updateIndicatingUI()
+    }
+
     private func validateThreeDSecure(tdsToken: ThreeDSecureToken, alreadyVerify: Bool = false) {
         self.dispatchQueue.async { [weak self] in
             guard let self = self else { return }
@@ -143,27 +153,29 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                 self.dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
                     self.cardFormResultSuccess = true
-                    self.dismissLoading()
+                    self.tokenizeProgressing = false
+                    self.updateIndicatingUI()
                     self.delegate?.didCompleteCardForm(with: .success)
                 }
             }
         }
     }
 
-    private func showLoading() {
-        delegate?.showIndicator()
-        delegate?.disableSubmitButton()
-    }
-
-    private func dismissLoading() {
-        delegate?.dismissIndicator()
-        delegate?.enableSubmitButton()
+    private func updateIndicatingUI() {
+        if self.cardFormResultSuccess || self.tokenizeProgressing || self.tokenOperationStatus != .acceptable {
+            delegate?.showIndicator()
+            delegate?.disableSubmitButton()
+        } else {
+            delegate?.dismissIndicator()
+            delegate?.enableSubmitButton()
+        }
     }
 
     private func showErrorAlert(message: String) {
         dispatchQueue.async { [weak self] in
             guard let self = self else { return }
-            self.dismissLoading()
+            self.tokenizeProgressing = false
+            self.updateIndicatingUI()
             self.delegate?.showErrorAlert(message: message)
         }
     }

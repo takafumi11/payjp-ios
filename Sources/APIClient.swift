@@ -19,6 +19,10 @@ import PassKit
     /// Shared instance.
     @objc(sharedClient) public static let shared = APIClient()
 
+    public var tokenOperationObserver: TokenOperationObserverType {
+        return self.tokensService.tokenOperationObserver
+    }
+
     private init(
         accountsService: AccountsServiceType = AccountsService.shared,
         tokensService: TokenServiceType = TokenService.shared,
