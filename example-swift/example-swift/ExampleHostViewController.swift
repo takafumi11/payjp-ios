@@ -14,35 +14,36 @@ class ExampleHostViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        if indexPath.row == 3 {
-            // customize card form
-            //            let color = UIColor(0, 122, 255)
-            //            let style = FormStyle(
-            //                labelTextColor: color,
-            //                inputTextColor: color,
-            //                tintColor: color)
-
-            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
-                                                                                 viewType: .tableStyled)
-            // push
-            self.navigationController?.pushViewController(cardFormVc, animated: true)
-
-            // modal
-            //            let naviVc = UINavigationController(rootViewController: cardFormVc)
-            //            naviVc.presentationController?.delegate = cardFormVc
-            //            self.present(naviVc, animated: true, completion: nil)
+        switch indexPath.row {
+        case 0:
+            self.pushCardForm(viewType: .tableStyled)
+        case 1:
+            self.presentCardForm(viewType: .labelStyled)
+        case 2:
+            self.pushCardForm(viewType: .displayStyled)
+        default:
+            break
         }
-        if indexPath.row == 4 {
-            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
-                                                                                 viewType: .labelStyled)
-            self.navigationController?.pushViewController(cardFormVc, animated: true)
-        }
-        if indexPath.row == 5 {
-            let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
-                                                                                 viewType: .displayStyled)
-            self.navigationController?.pushViewController(cardFormVc, animated: true)
-        }
+    }
+
+    private func pushCardForm(viewType: CardFormViewType) {
+        // customize card form
+        //            let color = UIColor(0, 122, 255)
+        //            let style = FormStyle(
+        //                labelTextColor: color,
+        //                inputTextColor: color,
+        //                tintColor: color)
+        let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
+        viewType: viewType)
+        self.navigationController?.pushViewController(cardFormVc, animated: true)
+    }
+
+    private func presentCardForm(viewType: CardFormViewType) {
+        let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
+        viewType: viewType)
+                    let naviVc = UINavigationController(rootViewController: cardFormVc)
+                    naviVc.presentationController?.delegate = cardFormVc
+                    self.present(naviVc, animated: true, completion: nil)
     }
 }
 

@@ -12,11 +12,13 @@ class CardFormVieExampleViewController: UITableViewController, CardFormViewDeleg
 UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
-    @IBOutlet private weak var createTokenButton: UITableViewCell!
+    @IBOutlet private weak var createTokenCell: UITableViewCell!
+    @IBOutlet private weak var validateAndCreateTokenCell: UITableViewCell!
     @IBOutlet private weak var tokenIdLabel: UILabel!
     @IBOutlet private weak var selectColorField: UITextField!
 
     private var cardFormView: CardFormTableStyledView!
+    private var tokenOperationStatus: TokenOperationStatus = .acceptable
 
     private let list: [ColorTheme] = [.Normal, .Red, .Blue, .Dark]
     private var pickerView: UIPickerView!
@@ -36,10 +38,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         cardFormView.delegate = self
 
         self.formContentView.addSubview(cardFormView)
-
-        self.createTokenButton.selectionStyle = .none
-        self.createTokenButton.isUserInteractionEnabled = false
-        self.createTokenButton.contentView.alpha = 0.5
+        self.toggleCellStyle(cell: self.createTokenCell, isEnabled: false)
 
         self.pickerView = UIPickerView()
         self.pickerView.delegate = self
@@ -66,6 +65,11 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
         // processing to adjust the cell height of CardFormView when OS version is lower than 10
         self.tableView.layoutIfNeeded()
+
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(handleTokenOperationStatusChange(notification:)),
+        name: .payjpTokenOperationStatusChanged,
+        object: nil)
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -154,20 +158,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     }
 
     func formInputValidated(in cardFormView: UIView, isValid: Bool) {
-        if isValid {
-            self.createTokenButton.selectionStyle = .default
-            self.createTokenButton.isUserInteractionEnabled = true
-            self.createTokenButton.contentView.alpha = 1.0
-        } else {
-            self.createTokenButton.selectionStyle = .none
-            self.createTokenButton.isUserInteractionEnabled = false
-            self.createTokenButton.contentView.alpha = 0.5
-        }
-
-        UIView.performWithoutAnimation {
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-        }
+        updateButtonEnabled()
     }
 
     func formInputDoneTapped(in cardFormView: UIView) {
@@ -177,6 +168,30 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {
         self.cardFormView.setCardHolderRequired(sender.isOn)
         self.tableView.reloadData()
+    }
+
+    @objc private func handleTokenOperationStatusChange(notification: Notification) {
+        if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
+            let newStatus = TokenOperationStatus.init(rawValue: value) {
+            self.tokenOperationStatus = newStatus
+            self.updateButtonEnabled()
+        }
+    }
+
+    private func updateButtonEnabled() {
+        let isAcceptable = self.tokenOperationStatus == .acceptable
+        self.toggleCellStyle(cell: self.createTokenCell, isEnabled: isAcceptable && self.cardFormView.isValid)
+        self.toggleCellStyle(cell: self.validateAndCreateTokenCell, isEnabled: isAcceptable)
+        let indexPathCreateToken = IndexPath(row: 1, section: 1)
+        let indexPathValidateAndCreateToken = IndexPath(row: 2, section: 1)
+        self.tableView.reloadRows(at: [indexPathCreateToken, indexPathValidateAndCreateToken],
+                                  with: .none)
+    }
+
+    private func toggleCellStyle(cell: UITableViewCell, isEnabled: Bool) {
+        cell.isUserInteractionEnabled = isEnabled
+        cell.selectionStyle = isEnabled ? .default : .none
+        cell.contentView.alpha = isEnabled ? 1.0 : 0.5
     }
 
     func createToken() {
