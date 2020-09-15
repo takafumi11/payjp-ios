@@ -76,6 +76,7 @@ class TokenService: TokenServiceType {
             expirationYear: expirationYear,
             name: name,
             tenantId: tenantId)
+        self.checkTokenOperationStatus()
         self.tokenOperationObserverInternal.startRequest()
         return self.client.request(with: request) { [weak self] result in
             self?.tokenOperationObserverInternal.completeRequest()
@@ -94,6 +95,7 @@ class TokenService: TokenServiceType {
         }
 
         let request = CreateTokenForApplePayRequest(paymentToken: decodedToken)
+        self.checkTokenOperationStatus()
         self.tokenOperationObserverInternal.startRequest()
         return self.client.request(with: request) { [weak self] result in
             self?.tokenOperationObserverInternal.completeRequest()
@@ -106,6 +108,7 @@ class TokenService: TokenServiceType {
         completion: @escaping (Result<Token, APIError>) -> Void
     ) -> URLSessionDataTask? {
         let request = CreateTokenForThreeDSecureRequest(tdsId: tdsId)
+        self.checkTokenOperationStatus()
         self.tokenOperationObserverInternal.startRequest()
         return client.request(with: request) { [weak self] result in
             self?.tokenOperationObserverInternal.completeRequest()
@@ -119,6 +122,14 @@ class TokenService: TokenServiceType {
     ) -> URLSessionDataTask? {
         let request = GetTokenRequest(tokenId: tokenId)
         return client.request(with: request, completion: completion)
+    }
+
+    private func checkTokenOperationStatus() {
+        let status = self.tokenOperationObserverInternal.status
+        if status != .acceptable {
+            print(debug: "⚠️The PAYTokenOperationStatus is now \(status), " +
+                "We recommend waiting for the request until the status is `.acceptable`.")
+        }
     }
 }
 // swiftlint:enable function_parameter_count
