@@ -15,6 +15,7 @@
 
 @property(weak, nonatomic) IBOutlet PAYCardFormLabelStyledView *cardFormView;
 @property(weak, nonatomic) IBOutlet UIButton *createTokenButton;
+@property(weak, nonatomic) IBOutlet UIButton *validateAndCreateTokenButton;
 @property(weak, nonatomic) IBOutlet UITextField *selectColorField;
 @property(weak, nonatomic) IBOutlet UILabel *tokenIdLabel;
 
@@ -24,6 +25,7 @@
 
 @property(strong, nonatomic) NSArray *list;
 @property(strong, nonatomic) UIPickerView *pickerView;
+@property(assign, nonatomic) PAYTokenOperationStatus tokenOperationStatus;
 
 @end
 
@@ -56,6 +58,11 @@
 
   self.selectColorField.inputView = self.pickerView;
   self.selectColorField.inputAccessoryView = toolbar;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleTokenOperationStatusChange:)
+                                               name:NSNotification.payjpTokenOperationStatusChanged
+                                             object:nil];
 }
 
 - (void)colorSelected:(id)sender {
@@ -144,11 +151,23 @@
 }
 
 - (void)formInputValidatedIn:(UIView *)cardFormView isValid:(BOOL)isValid {
-  self.createTokenButton.enabled = isValid;
+  [self updateButtonEnabled];
 }
 
 - (void)formInputDoneTappedIn:(UIView *)cardFormView {
   [self createToken];
+}
+
+- (void)handleTokenOperationStatusChange:(NSNotification *)notification {
+  self.tokenOperationStatus =
+      [notification.userInfo[PAYNotificationKey.newTokenOperationStatus] integerValue];
+  [self updateButtonEnabled];
+}
+
+- (void)updateButtonEnabled {
+  BOOL isAcceptable = self.tokenOperationStatus == PAYTokenOperationStatusAcceptable;
+  self.createTokenButton.enabled = self.cardFormView.isValid && isAcceptable;
+  self.validateAndCreateTokenButton.enabled = isAcceptable;
 }
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {

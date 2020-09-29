@@ -12,10 +12,12 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UIButton!
+    @IBOutlet private weak var validateAndCreateTokenButton: UIButton!
     @IBOutlet private weak var tokenIdLabel: UILabel!
     @IBOutlet private weak var selectColorField: UITextField!
 
     private var cardFormView: CardFormLabelStyledView!
+    private var tokenOperationStatus: TokenOperationStatus = .acceptable
 
     private let list: [ColorTheme] = [.Normal, .Red, .Blue, .Dark]
     private var pickerView: UIPickerView!
@@ -59,6 +61,11 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         self.selectColorField.inputAccessoryView = toolbar
 
         self.fetchBrands()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleTokenOperationStatusChange(notification:)),
+                                               name: .payjpTokenOperationStatusChanged,
+                                               object: nil)
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -125,11 +132,25 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     }
 
     func formInputValidated(in cardFormView: UIView, isValid: Bool) {
-        self.createTokenButton.isEnabled = isValid
+        self.updateButtonEnabled()
     }
 
     func formInputDoneTapped(in cardFormView: UIView) {
         self.createToken()
+    }
+
+    @objc private func handleTokenOperationStatusChange(notification: Notification) {
+        if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
+            let newStatus = TokenOperationStatus.init(rawValue: value) {
+            self.tokenOperationStatus = newStatus
+            self.updateButtonEnabled()
+        }
+    }
+
+    private func updateButtonEnabled() {
+        let isAcceptable = self.tokenOperationStatus == .acceptable
+        self.createTokenButton.isEnabled = isAcceptable && self.cardFormView.isValid
+        self.validateAndCreateTokenButton.isEnabled = isAcceptable
     }
 
     @IBAction func cardHolderSwitchChanged(_ sender: UISwitch) {

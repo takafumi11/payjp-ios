@@ -135,6 +135,32 @@ class ClientTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
+    func testRequest_rateLimitError() {
+        stub(condition: { (req) -> Bool in
+            req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false
+        }, response: { (_) -> HTTPStubsResponse in
+            let data = TestFixture.JSON(by: "error.json")
+            return HTTPStubsResponse(data: data, statusCode: 429, headers: nil)
+        }).name = "default"
+
+        let expectation = self.expectation(description: self.description)
+        let request = MockRequest(tokenId: "mock_id")
+        client.request(with: request) { result in
+            switch result {
+            case .failure(let apiError):
+                switch apiError {
+                case .rateLimitExceeded:
+                    expectation.fulfill()
+                default:
+                    XCTFail()
+                }
+            default:
+                XCTFail()
+            }
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
     func testRequest_success() {
         stub(condition: { (req) -> Bool in
             req.url?.host == "api.pay.jp" && req.url?.path.starts(with: "/v1/mocks") ?? false

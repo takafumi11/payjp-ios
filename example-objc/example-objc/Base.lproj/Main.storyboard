@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nTF-Oc-WpN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nTF-Oc-WpN">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -19,14 +19,14 @@
                         <sections>
                             <tableViewSection id="f2J-H4-97A">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="pvm-Vu-6Mi" style="IBUITableViewCellStyleDefault" id="d4k-J2-4EB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="laI-N2-Rh7" style="IBUITableViewCellStyleDefault" id="5ZB-rO-ECd">
                                         <rect key="frame" x="0.0" y="18" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4k-J2-4EB" id="0l4-PO-8JH">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ZB-rO-ECd" id="C5C-PP-ZB1">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Request Directly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pvm-Vu-6Mi">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form ViewController (Table)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="laI-N2-Rh7">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -35,12 +35,43 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="VKh-Lw-K9Y" kind="show" id="9Ie-5p-hfV"/>
-                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="7Hv-N4-U8Z" style="IBUITableViewCellStyleDefault" id="a3m-Eo-2bC">
+                                        <rect key="frame" x="0.0" y="62" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a3m-Eo-2bC" id="RYo-34-z5C">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form ViewController (Label)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Hv-N4-U8Z">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="NUX-Ew-28s" style="IBUITableViewCellStyleDefault" id="uaS-ub-2xy">
+                                        <rect key="frame" x="0.0" y="106" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uaS-ub-2xy" id="dJp-TF-16f">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form ViewController (Display)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NUX-Ew-28s">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="PMl-4S-vLX" style="IBUITableViewCellStyleDefault" id="rP2-oW-81h">
-                                        <rect key="frame" x="0.0" y="62" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="150" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rP2-oW-81h" id="XTN-9S-di7">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
@@ -60,7 +91,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Wjs-DO-9wD" style="IBUITableViewCellStyleDefault" id="PPe-vf-fBh">
-                                        <rect key="frame" x="0.0" y="106" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="194" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PPe-vf-fBh" id="5uk-kw-vMh">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
@@ -79,48 +110,14 @@
                                             <segue destination="yyD-Mo-wif" kind="show" id="xZY-Ax-DCw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="laI-N2-Rh7" style="IBUITableViewCellStyleDefault" id="5ZB-rO-ECd">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ZB-rO-ECd" id="C5C-PP-ZB1">
-                                            <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form ViewController（Table）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="laI-N2-Rh7">
-                                                    <rect key="frame" x="16" y="0.0" width="324" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="7Hv-N4-U8Z" style="IBUITableViewCellStyleDefault" id="a3m-Eo-2bC">
-                                        <rect key="frame" x="0.0" y="194" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a3m-Eo-2bC" id="RYo-34-z5C">
-                                            <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Form ViewController（Label）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Hv-N4-U8Z">
-                                                    <rect key="frame" x="16" y="0.0" width="324" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="NUX-Ew-28s" style="IBUITableViewCellStyleDefault" id="uaS-ub-2xy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="pvm-Vu-6Mi" style="IBUITableViewCellStyleDefault" id="d4k-J2-4EB">
                                         <rect key="frame" x="0.0" y="238" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uaS-ub-2xy" id="dJp-TF-16f">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4k-J2-4EB" id="0l4-PO-8JH">
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Card Display ViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NUX-Ew-28s">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Request Directly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pvm-Vu-6Mi">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -129,6 +126,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="VKh-Lw-K9Y" kind="show" id="9Ie-5p-hfV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -391,6 +391,7 @@
                             <outlet property="delegate" destination="VKh-Lw-K9Y" id="pk0-Lj-Uzb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="tR9-A6-xHY"/>
                     <connections>
                         <outlet property="fieldCardCvc" destination="Lz7-lQ-qoo" id="XaM-MQ-SjW"/>
                         <outlet property="fieldCardMonth" destination="ySB-th-XuK" id="YVo-54-QwL"/>
@@ -402,7 +403,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="auZ-wy-SU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="-169"/>
+            <point key="canvasLocation" x="1839" y="958"/>
         </scene>
         <!--Card Form View-->
         <scene sceneID="9Y5-TT-EXE">
@@ -552,16 +553,18 @@
                             <outlet property="delegate" destination="OBK-L6-feX" id="idW-wZ-EhO"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Bdf-uu-ub4"/>
                     <connections>
                         <outlet property="cardFormView" destination="72d-mz-CTM" id="HQC-2G-c0b"/>
-                        <outlet property="createTokenButton" destination="c6c-l5-GFl" id="SLp-4e-fKZ"/>
+                        <outlet property="createTokenCell" destination="c6c-l5-GFl" id="Cte-tk-wLz"/>
                         <outlet property="selectColorField" destination="Cy7-tt-tBj" id="LmJ-AN-mQH"/>
                         <outlet property="tokenIdLabel" destination="DNC-Pu-dxa" id="ka4-yu-WpG"/>
+                        <outlet property="validateAndCreateTokenCell" destination="fhy-GU-cv1" id="Cfb-Dh-m5Q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP6-o4-hRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="247.82608695652175" y="508.92857142857139"/>
+            <point key="canvasLocation" x="1031" y="958"/>
         </scene>
         <!--Card Form View-->
         <scene sceneID="gKo-Li-Yif">
@@ -668,16 +671,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PyC-fF-fD8"/>
                     </view>
+                    <navigationItem key="navigationItem" id="qgu-6k-w9T"/>
                     <connections>
                         <outlet property="cardFormView" destination="uRA-zd-x0N" id="2R8-DD-cXO"/>
                         <outlet property="createTokenButton" destination="lY7-bv-Jwq" id="4yW-N9-AXe"/>
                         <outlet property="selectColorField" destination="iWe-7X-jUk" id="sg3-dW-DXb"/>
                         <outlet property="tokenIdLabel" destination="8JZ-EV-iGf" id="Yaf-c7-pPs"/>
+                        <outlet property="validateAndCreateTokenButton" destination="xxu-Gk-Qdj" id="byX-uC-duO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFh-Dg-tFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="248.80000000000001" y="1235.5322338830586"/>
+            <point key="canvasLocation" x="249" y="958"/>
         </scene>
     </scenes>
 </document>

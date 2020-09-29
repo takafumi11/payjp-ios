@@ -60,7 +60,8 @@ class Client: NSObject, ClientType {
                 }
 
                 guard error != nil else {
-                    if response.statusCode == 200 {
+                    switch response.statusCode {
+                    case 200:
                         // 3Dセキュア認証かどうかのチェック
                         if let tdsToken = self.createThreeDSecureToken(data: data,
                                                                        request: request,
@@ -74,7 +75,9 @@ class Client: NSObject, ClientType {
                         } catch {
                             completion?(Result.failure(.invalidJSON(data, error)))
                         }
-                    } else {
+                    case 429:
+                        completion?(Result.failure(.rateLimitExceeded))
+                    default:
                         do {
                             let error = try self.jsonDecoder.decode(PAYErrorResult.self, from: data).error
                             completion?(Result.failure(.serviceError(error)))
