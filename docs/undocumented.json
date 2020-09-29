@@ -2,37 +2,58 @@
   "warnings": [
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 105,
+      "line": 22,
+      "symbol": "APIClient.tokenOperationObserver",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/APIClient.swift",
+      "line": 109,
       "symbol": "APIClient.createTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 120,
+      "line": 124,
       "symbol": "APIClient.createTokenWith(_:cvc:expirationMonth:expirationYear:name:tenantId:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 145,
+      "line": 148,
       "symbol": "APIClient.createTokenWithTds(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 160,
+      "line": 163,
       "symbol": "APIClient.getTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 173,
+      "line": 176,
       "symbol": "APIClient.getAcceptedBrandsWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Common/PAYNotificationKey.swift",
+      "line": 11,
+      "symbol": "PAYNotificationKey",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Common/PAYNotificationKey.swift",
+      "line": 19,
+      "symbol": "PAYNotificationKey",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -51,14 +72,14 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 59,
+      "line": 63,
       "symbol": "APIError.errorCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 76,
+      "line": 82,
       "symbol": "APIError.userInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -274,6 +295,69 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationObserver.swift",
+      "line": 12,
+      "symbol": "Notification.Name.payjpTokenOperationStatusChanged",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationObserver.swift",
+      "line": 16,
+      "symbol": "NSNotification.payjpTokenOperationStatusChanged",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationObserver.swift",
+      "line": 20,
+      "symbol": "PAYNotificationKey.newTokenOperationStatus",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationObserver.swift",
+      "line": 23,
+      "symbol": "TokenOperationObserverType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationObserver.swift",
+      "line": 24,
+      "symbol": "TokenOperationObserverType.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationStatus.swift",
+      "line": 11,
+      "symbol": "TokenOperationStatus",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationStatus.swift",
+      "line": 12,
+      "symbol": "TokenOperationStatus.acceptable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationStatus.swift",
+      "line": 13,
+      "symbol": "TokenOperationStatus.running",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/TokenOperationStatus.swift",
+      "line": 14,
+      "symbol": "TokenOperationStatus.throttled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/distiller/project/Sources/ThreeDSecure/ThreeDSecureProcessHandler.swift",
       "line": 60,
       "symbol": "ThreeDSecureProcessHandler.init(webDriver:)",
@@ -457,42 +541,42 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 123,
+      "line": 128,
       "symbol": "CardFormViewController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 131,
+      "line": 136,
       "symbol": "CardFormViewController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 324,
+      "line": 336,
       "symbol": "CardFormViewController.collectionView(_:numberOfItemsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 328,
+      "line": 340,
       "symbol": "CardFormViewController.collectionView(_:cellForItemAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 352,
+      "line": 364,
       "symbol": "CardFormViewController.collectionView(_:layout:insetForSectionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 374,
+      "line": 386,
       "symbol": "CardFormViewController.presentationControllerDidDismiss(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

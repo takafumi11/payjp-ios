@@ -15,7 +15,8 @@
 
 @property(weak, nonatomic) IBOutlet PAYCardFormTableStyledView *cardFormView;
 @property(weak, nonatomic) IBOutlet UILabel *tokenIdLabel;
-@property(weak, nonatomic) IBOutlet UITableViewCell *createTokenButton;
+@property(weak, nonatomic) IBOutlet UITableViewCell *createTokenCell;
+@property(weak, nonatomic) IBOutlet UITableViewCell *validateAndCreateTokenCell;
 @property(weak, nonatomic) IBOutlet UITextField *selectColorField;
 
 - (IBAction)cardHolderSwitchChanged:(id)sender;
@@ -24,6 +25,7 @@
 
 @property(strong, nonatomic) NSArray *list;
 @property(strong, nonatomic) UIPickerView *pickerView;
+@property(assign, nonatomic) PAYTokenOperationStatus tokenOperationStatus;
 
 @end
 
@@ -57,12 +59,15 @@
   self.selectColorField.inputView = self.pickerView;
   self.selectColorField.inputAccessoryView = toolbar;
 
-  self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
-  [self.createTokenButton setUserInteractionEnabled:NO];
-  self.createTokenButton.contentView.alpha = 0.5;
+  [self toggleCellStyle:self.createTokenCell isEnabled:NO];
 
   // processing to adjust the cell height of CardFormView when OS version is lower than 10
   [self.tableView layoutIfNeeded];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleTokenOperationStatusChange:)
+                                               name:NSNotification.payjpTokenOperationStatusChanged
+                                             object:nil];
 }
 
 - (void)colorSelected:(id)sender {
@@ -235,20 +240,7 @@
 }
 
 - (void)formInputValidatedIn:(UIView *)cardFormView isValid:(BOOL)isValid {
-  if (isValid) {
-    self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleDefault;
-    [self.createTokenButton setUserInteractionEnabled:YES];
-    self.createTokenButton.contentView.alpha = 1.0;
-  } else {
-    self.createTokenButton.selectionStyle = UITableViewCellSelectionStyleNone;
-    [self.createTokenButton setUserInteractionEnabled:NO];
-    self.createTokenButton.contentView.alpha = 0.5;
-  }
-  // update the cell height of CardFormView
-  [UIView performWithoutAnimation:^{
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-  }];
+  [self updateButtonEnabled];
 }
 
 - (void)formInputDoneTappedIn:(UIView *)cardFormView {
@@ -257,6 +249,29 @@
 
 - (IBAction)cardHolderSwitchChanged:(UISwitch *)sender {
   [self.cardFormView setCardHolderRequired:sender.isOn];
+}
+
+- (void)handleTokenOperationStatusChange:(NSNotification *)notification {
+  self.tokenOperationStatus =
+      [notification.userInfo[PAYNotificationKey.newTokenOperationStatus] integerValue];
+  [self updateButtonEnabled];
+}
+
+- (void)updateButtonEnabled {
+  BOOL isAcceptable = self.tokenOperationStatus == PAYTokenOperationStatusAcceptable;
+  [self toggleCellStyle:self.createTokenCell isEnabled:isAcceptable && self.cardFormView.isValid];
+  [self toggleCellStyle:self.validateAndCreateTokenCell isEnabled:isAcceptable];
+  NSIndexPath *createButtonRow = [NSIndexPath indexPathForRow:1 inSection:1];
+  NSIndexPath *validateAndCreateButtonRow = [NSIndexPath indexPathForRow:2 inSection:1];
+  [self.tableView reloadRowsAtIndexPaths:@[ createButtonRow, validateAndCreateButtonRow ]
+                        withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)toggleCellStyle:(UITableViewCell *)cell isEnabled:(BOOL)isEnabled {
+  [cell setUserInteractionEnabled:isEnabled];
+  cell.selectionStyle =
+      isEnabled ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
+  cell.contentView.alpha = isEnabled ? 1.0 : 0.5;
 }
 
 @end

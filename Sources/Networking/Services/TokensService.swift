@@ -39,16 +39,25 @@ protocol TokenServiceType {
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
     ) -> URLSessionDataTask?
+
+    var tokenOperationObserver: TokenOperationObserverType { get }
 }
 
-struct TokenService: TokenServiceType {
+class TokenService: TokenServiceType {
 
     let client: ClientType
+    let tokenOperationObserverInternal: TokenOperationObserverInternalType
 
     static let shared = TokenService()
 
-    init(client: ClientType = Client.shared) {
+    init(client: ClientType = Client.shared,
+         tokenOperationObserverInternal: TokenOperationObserverInternalType = TokenOperationObserver.shared) {
         self.client = client
+        self.tokenOperationObserverInternal = tokenOperationObserverInternal
+    }
+
+    var tokenOperationObserver: TokenOperationObserverType {
+        return self.tokenOperationObserverInternal
     }
 
     func createToken(
@@ -67,7 +76,12 @@ struct TokenService: TokenServiceType {
             expirationYear: expirationYear,
             name: name,
             tenantId: tenantId)
-        return client.request(with: request, completion: completion)
+        self.checkTokenOperationStatus()
+        self.tokenOperationObserverInternal.startRequest()
+        return self.client.request(with: request) { [weak self] result in
+            self?.tokenOperationObserverInternal.completeRequest()
+            completion(result)
+        }
     }
 
     func createTokenForApplePay(
@@ -81,7 +95,12 @@ struct TokenService: TokenServiceType {
         }
 
         let request = CreateTokenForApplePayRequest(paymentToken: decodedToken)
-        return client.request(with: request, completion: completion)
+        self.checkTokenOperationStatus()
+        self.tokenOperationObserverInternal.startRequest()
+        return self.client.request(with: request) { [weak self] result in
+            self?.tokenOperationObserverInternal.completeRequest()
+            completion(result)
+        }
     }
 
     func createTokenForThreeDSecure(
@@ -89,7 +108,12 @@ struct TokenService: TokenServiceType {
         completion: @escaping (Result<Token, APIError>) -> Void
     ) -> URLSessionDataTask? {
         let request = CreateTokenForThreeDSecureRequest(tdsId: tdsId)
-        return client.request(with: request, completion: completion)
+        self.checkTokenOperationStatus()
+        self.tokenOperationObserverInternal.startRequest()
+        return client.request(with: request) { [weak self] result in
+            self?.tokenOperationObserverInternal.completeRequest()
+            completion(result)
+        }
     }
 
     func getToken(
@@ -98,6 +122,14 @@ struct TokenService: TokenServiceType {
     ) -> URLSessionDataTask? {
         let request = GetTokenRequest(tokenId: tokenId)
         return client.request(with: request, completion: completion)
+    }
+
+    private func checkTokenOperationStatus() {
+        let status = self.tokenOperationObserverInternal.status
+        if status != .acceptable {
+            print(debug: "⚠️The PAYTokenOperationStatus is now \(status), " +
+                "We recommend waiting for the request until the status is `.acceptable`.")
+        }
     }
 }
 // swiftlint:enable function_parameter_count
