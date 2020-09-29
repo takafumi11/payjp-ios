@@ -30,6 +30,8 @@ FOUNDATION_EXPORT NSInteger const PAYErrorInvalidJSON;
 FOUNDATION_EXPORT NSInteger const PAYErrorFormInvalid;
 /// Required 3DSecure.
 FOUNDATION_EXPORT NSInteger const PAYErrorRequiredThreeDSecure;
+/// Too many requests
+FOUNDATION_EXPORT NSInteger const PAYErrorRateLimitExceeded;
 
 /// Use this key name to get `PAYErrorInvalidApplePayToken` error's data which is stored in the
 /// `userInfo`.

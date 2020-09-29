@@ -50,6 +50,9 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.tokenOperationStatusDidUpdate(status: .running)
+        presenter.tokenOperationStatusDidUpdate(status: .throttled)
+        presenter.tokenOperationStatusDidUpdate(status: .acceptable)
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -57,10 +60,13 @@ class CardFormScreenPresenterTests: XCTestCase {
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
+        XCTAssertFalse(mockDelegate.dismissIndicatorCalled, "dismissIndicator is called")
+        XCTAssertFalse(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
+
+        XCTAssertFalse(mockDelegate.dismissIndicatorCalled, "dismissIndicator is called")
+        XCTAssertFalse(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is called")
     }
 
     func testCreateToken_failure() {
@@ -72,16 +78,23 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.tokenOperationStatusDidUpdate(status: .running)
+        presenter.tokenOperationStatusDidUpdate(status: .throttled)
 
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
+        XCTAssertFalse(mockDelegate.dismissIndicatorCalled, "dismissIndicator is called")
+        XCTAssertFalse(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock api error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
+
+        presenter.tokenOperationStatusDidUpdate(status: .acceptable)
+
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator is not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is not called")
     }
 
     func testCreateToken_delegate_failure() {
@@ -94,16 +107,23 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.tokenOperationStatusDidUpdate(status: .running)
+        presenter.tokenOperationStatusDidUpdate(status: .throttled)
 
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTenantId, "tenant_id")
         XCTAssertTrue(mockDelegate.showIndicatorCalled, "showIndicator not called")
         XCTAssertTrue(mockDelegate.disableSubmitButtonCalled, "disableSubmitButton not called")
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
+        XCTAssertFalse(mockDelegate.dismissIndicatorCalled, "dismissIndicator is called")
+        XCTAssertFalse(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is called")
         XCTAssertEqual(mockDelegate.showErrorAlertMessage, "mock delegate error")
         XCTAssertFalse(presenter.cardFormResultSuccess)
+
+        presenter.tokenOperationStatusDidUpdate(status: .acceptable)
+
+        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator is not called")
+        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is not called")
     }
 
     func testFetchBrands_success() {
@@ -158,6 +178,9 @@ class CardFormScreenPresenterTests: XCTestCase {
 
         let presenter = CardFormScreenPresenter(delegate: mockDelegate, tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
+        presenter.tokenOperationStatusDidUpdate(status: .running)
+        presenter.tokenOperationStatusDidUpdate(status: .throttled)
+        presenter.tokenOperationStatusDidUpdate(status: .acceptable)
 
         waitForExpectations(timeout: 1, handler: nil)
 
@@ -181,13 +204,16 @@ class CardFormScreenPresenterTests: XCTestCase {
                                                 tokenService: mockService)
         presenter.createToken(tenantId: "tenant_id", formInput: cardFormInput())
         presenter.createTokenByTds()
+        presenter.tokenOperationStatusDidUpdate(status: .running)
+        presenter.tokenOperationStatusDidUpdate(status: .throttled)
+        presenter.tokenOperationStatusDidUpdate(status: .acceptable)
 
         waitForExpectations(timeout: 1, handler: nil)
 
         XCTAssertEqual(mockService.calledTdsId, "tds_id")
         XCTAssertTrue(mockDelegate.didProducedCalled, "didProduced not called")
-        XCTAssertTrue(mockDelegate.dismissIndicatorCalled, "dismissIndicator not called")
-        XCTAssertTrue(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton not called")
+        XCTAssertFalse(mockDelegate.dismissIndicatorCalled, "dismissIndicator is called")
+        XCTAssertFalse(mockDelegate.enableSubmitButtonCalled, "enableSubmitButton is called")
         XCTAssertTrue(mockDelegate.didCompleteCardFormCalled, "didCompleteCardForm not called")
         XCTAssertTrue(presenter.cardFormResultSuccess)
     }

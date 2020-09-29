@@ -92,6 +92,7 @@ class MockTokenService: TokenServiceType {
     var calledTenantId: String?
     var calledTokenId: String?
     var calledTdsId: String?
+    let tokenOperationObserver: TokenOperationObserverType = MockTokenOperationObserverType()
 
     init(token: Token, error: APIError? = nil, errorForTds: APIError? = nil) {
         self.token = token
@@ -217,4 +218,8 @@ class MockCardFormViewModelDelegate: CardFormViewModelDelegate {
     func showPermissionAlert() {
         showPermissionAlertCalled = true
     }
+}
+
+class MockTokenOperationObserverType: TokenOperationObserverType {
+    var status: TokenOperationStatus = .acceptable
 }

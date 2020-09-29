@@ -118,6 +118,11 @@ public class CardFormViewController: UIViewController {
 
         setupKeyboardNotification()
         fetchAccpetedBrands()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleTokenOperationStatusChange),
+                                               name: .payjpTokenOperationStatusChanged,
+                                               object: nil)
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -174,6 +179,13 @@ public class CardFormViewController: UIViewController {
         if keyboardY > 0 && diff > 0 && cardFormViewType == .displayStyled {
             let offset = CGPoint(x: 0, y: diff)
             scrollView.setContentOffset(offset, animated: true)
+        }
+    }
+
+    @objc private func handleTokenOperationStatusChange(notification: Notification) {
+        if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
+            let newStatus = TokenOperationStatus.init(rawValue: value) {
+            self.presenter?.tokenOperationStatusDidUpdate(status: newStatus)
         }
     }
 
