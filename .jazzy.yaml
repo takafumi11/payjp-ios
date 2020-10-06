@@ -1,18 +1,9 @@
-# minimum access control level。[private | fileprivate | internal | public | open]
-# ここで指定したレベル以上がドキュメント化される
-min_acl: public
- 
-#実行前に出力先フォルダをクリーン
-clean: true
- 
-# 著者
-author: PAYJP
- 
-# 著者のURL
-author_url: https://pay.jp
 
-# githubのURL
+min_acl: public
+clean: true
+author: PAYJP
+author_url: https://pay.jp
 github_url: https://github.com/payjp/payjp-ios
- 
-# ドキュメント化するモジュールの名前
 module: PAYJP
+hide_documentation_coverage: true
+copyright: "&copy; 2020 [PAY.JP](https://pay.jp) All rights reserved."
