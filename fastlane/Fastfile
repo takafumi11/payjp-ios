@@ -103,12 +103,12 @@ platform :ios do
 
   desc "Create PR to update docs"
   lane :create_pr_to_update_docs do
-    base_branch = 'develop'
+    jazzy
     diff_files = sh("git diff HEAD^ --name-only").split
-    unless diff_files.any? { |file| file.start_with? "Sources/" }
-      UI.message "No updates in sources."
+    unless diff_files.any? { |file| file.start_with? "docs/" }
+      UI.message "No updates in docs."
     else
-      jazzy
+      base_branch = 'develop'
       last_commit_hash = last_git_commit[:abbreviated_commit_hash]
       new_branch = "feature/update_docs_#{last_commit_hash}"
       sh("git checkout -b #{new_branch}")
