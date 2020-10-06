@@ -104,7 +104,7 @@ platform :ios do
   desc "Create PR to update docs"
   lane :create_pr_to_update_docs do
     jazzy
-    diff_files = sh("git diff HEAD^ --name-only").split
+    diff_files = sh("git diff --name-only").split
     unless diff_files.any? { |file| file.start_with? "docs/" }
       UI.message "No updates in docs."
     else
