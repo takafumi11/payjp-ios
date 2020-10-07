@@ -89,9 +89,9 @@ class TokenService: TokenServiceType {
         completion: @escaping (Result<Token, APIError>) -> Void
     ) -> URLSessionDataTask? {
         guard let decodedToken = String(data: paymentToken.paymentData, encoding: .utf8)?
-            .addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
-                completion(.failure(APIError.invalidApplePayToken(paymentToken)))
-                return nil
+                .addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
+            completion(.failure(APIError.invalidApplePayToken(paymentToken)))
+            return nil
         }
 
         let request = CreateTokenForApplePayRequest(paymentToken: decodedToken)
@@ -128,7 +128,7 @@ class TokenService: TokenServiceType {
         let status = self.tokenOperationObserverInternal.status
         if status != .acceptable {
             print(debug: "⚠️The PAYTokenOperationStatus is now \(status), " +
-                "We recommend waiting for the request until the status is `.acceptable`.")
+                    "We recommend waiting for the request until the status is `.acceptable`.")
         }
     }
 }
