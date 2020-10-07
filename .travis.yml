@@ -8,7 +8,9 @@ before_install:
   - brew outdated swiftlint || brew upgrade swiftlint
   - brew list clang-format || brew install clang-format
   - brew outdated clang-format || brew upgrade clang-format 
-  - bundle install --path=vendor/bundle --clean --jobs 4 --retry 3
+  - bundle config set deployment 'true'
+  - bundle config set clean 'true'
+  - bundle install --jobs 4 --retry 3
   - ./scripts/carthage-build.sh bootstrap --no-use-binaries --platform ios
 
 script:

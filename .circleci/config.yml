@@ -9,10 +9,10 @@ machine:
 
 cache_step:
   - gem_cache:
-      primary: &primary_cache_key_gem gem-v1-{{ checksum "Gemfile.lock" }}
+      primary: &primary_cache_key_gem gem-v2-{{ checksum "Gemfile.lock" }}
       keys: &all_cache_keys_gem
         - *primary_cache_key_gem
-        - gem-v1-
+        - gem-v2-
   - carthage_cache:
       primary: &primary_cache_key_carthage carthage-v1-{{ checksum "Cartfile.resolved" }}
       keys: &all_cache_keys_carthage
@@ -40,7 +40,10 @@ shared_build_step:
 
   - run: &bundle_install
       name: bundle install
-      command: bundle install --path=vendor/bundle --clean --jobs 4 --retry 3
+      command: |
+        bundle config set deployment 'true'
+        bundle config set clean 'true'
+        bundle install --jobs 4 --retry 3
 
   - run: &carthage_bootstrap
       name: carthage bootstrap
