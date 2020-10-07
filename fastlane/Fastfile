@@ -22,7 +22,7 @@ platform :ios do
   lane :test do
     scan(
       scheme: 'PAYJP',
-      device: 'iPhone Xs Max',
+      device: 'iPhone 11 Pro',
       configuration: 'Debug',
       skip_slack: true
     )
