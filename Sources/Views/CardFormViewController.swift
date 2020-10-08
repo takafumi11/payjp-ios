@@ -28,6 +28,14 @@ import SafariServices
             return CardFormDisplayStyledView(frame: frame)
         }
     }
+
+    var name: String {
+        switch self {
+        case .tableStyled: return "tableStyled"
+        case .labelStyled: return "labelStyled"
+        case .displayStyled: return "cardDisplay"
+        }
+    }
 }
 
 /// CardFormViewController show card form.
@@ -123,6 +131,16 @@ public class CardFormViewController: UIViewController {
                                                selector: #selector(handleTokenOperationStatusChange),
                                                name: .payjpTokenOperationStatusChanged,
                                                object: nil)
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        PAYJPSDK.clientInfo.cardFormType = self.cardFormViewType?.name
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        PAYJPSDK.clientInfo.cardFormType = nil
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
