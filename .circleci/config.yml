@@ -45,10 +45,6 @@ shared_build_step:
         bundle config set clean 'true'
         bundle install --jobs 4 --retry 3
 
-  - run: &carthage_bootstrap
-      name: carthage bootstrap
-      command: ./scripts/carthage-build.sh bootstrap --no-use-binaries --platform ios
-
   - run: &swiftlint_install
       name: install swiftlint
       command: brew install swiftlint
@@ -73,7 +69,7 @@ jobs:
       - run: bundle exec fastlane ios check_objc_format
       - run: bundle exec fastlane ios lint_podspec
       - restore_cache: *restore_cache_carthage
-      - run: *carthage_bootstrap
+      - run: bundle exec fastlane ios carthage_bootstrap
       - save_cache: *save_cache_carthage
       - run: bundle exec fastlane ios test
 

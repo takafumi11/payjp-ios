@@ -18,6 +18,11 @@ default_platform(:ios)
 
 platform :ios do
 
+  desc "Run carthage bootstrap"
+  lane :carthage_bootstrap do
+    sh('cd ../ && ./scripts/carthage-build.sh bootstrap --platform iOS --cache-builds')
+  end
+
   desc "Run test"
   lane :test do
     scan(
