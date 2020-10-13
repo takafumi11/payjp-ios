@@ -68,10 +68,10 @@ extension Token: JSONDecodable {
         let jsonOptions = JSONSerialization.ReadingOptions.allowFragments
         guard let rawValue = try JSONSerialization.jsonObject(with: data,
                                                               options: jsonOptions) as? RawValue,
-            let cardRawValue = rawValue["card"] as? RawValue else {
-                let context = DecodingError.Context(codingPath: [],
-                                                    debugDescription: "Cannot deserialize rawValue")
-                throw DecodingError.dataCorrupted(context)
+              let cardRawValue = rawValue["card"] as? RawValue else {
+            let context = DecodingError.Context(codingPath: [],
+                                                debugDescription: "Cannot deserialize rawValue")
+            throw DecodingError.dataCorrupted(context)
         }
         token.rawValue = rawValue
         token.card.rawValue = cardRawValue

@@ -486,12 +486,12 @@ public class CardFormDisplayStyledView: CardFormView, CardFormProperties {
     }
 
     private func createAttributeText(string: String, range: NSRange, textColor: UIColor = .white)
-        -> NSMutableAttributedString {
-            let attributed = NSMutableAttributedString.init(string: string)
-            attributed.addAttribute(.foregroundColor,
-                                    value: textColor,
-                                    range: range)
-            return attributed
+    -> NSMutableAttributedString {
+        let attributed = NSMutableAttributedString.init(string: string)
+        attributed.addAttribute(.foregroundColor,
+                                value: textColor,
+                                range: range)
+        return attributed
     }
 
     private func focusNext(currentField: UITextField) {
