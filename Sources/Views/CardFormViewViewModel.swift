@@ -147,13 +147,13 @@ class CardFormViewViewModel: CardFormViewViewModelType {
     func update(cardNumber: String?, separator: String) -> Result<CardNumber, FormError> {
         guard let cardNumberInput = self.cardNumberFormatter.string(from: cardNumber,
                                                                     separator: separator),
-            let cardNumber = cardNumber,
-            !cardNumber.isEmpty else {
-                self.cardBrand = .unknown
-                self.cardNumber = nil
-                // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
-                self.isCardBrandChanged = false
-                return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
+              let cardNumber = cardNumber,
+              !cardNumber.isEmpty else {
+            self.cardBrand = .unknown
+            self.cardNumber = nil
+            // cvc入力でtrimされてない入力値が表示されるのを回避するためfalseにしている
+            self.isCardBrandChanged = false
+            return .failure(.cardNumberEmptyError(value: nil, isInstant: false))
         }
         self.isCardBrandChanged = self.cardBrand != cardNumberInput.brand
         self.cardBrand = cardNumberInput.brand
@@ -186,9 +186,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func update(expiration: String?) -> Result<Expiration, FormError> {
         guard let expirationInput = self.expirationFormatter.string(from: expiration),
-            let expiration = expiration, !expiration.isEmpty else {
-                self.monthYear = nil
-                return .failure(.expirationEmptyError(value: nil, isInstant: false))
+              let expiration = expiration, !expiration.isEmpty else {
+            self.monthYear = nil
+            return .failure(.expirationEmptyError(value: nil, isInstant: false))
         }
 
         do {
@@ -209,9 +209,9 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func update(cvc: String?) -> Result<String, FormError> {
         guard var cvcInput = self.cvcFormatter.string(from: cvc, brand: self.cardBrand),
-            let cvc = cvc, !cvc.isEmpty else {
-                self.cvc = nil
-                return .failure(.cvcEmptyError(value: nil, isInstant: false))
+              let cvc = cvc, !cvc.isEmpty else {
+            self.cvc = nil
+            return .failure(.cvcEmptyError(value: nil, isInstant: false))
         }
         // ブランドが変わった時に入力文字数のままエラー表示にするための処理
         if self.isCardBrandChanged {
@@ -245,17 +245,17 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func createToken(with tenantId: String?, completion: @escaping (Result<Token, Error>) -> Void) {
         if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
-            let year = monthYear?.year, let cvc = cvc {
+           let year = monthYear?.year, let cvc = cvc {
             tokenService.createToken(cardNumber: cardNumberString,
                                      cvc: cvc,
                                      expirationMonth: month,
                                      expirationYear: year,
                                      name: cardHolder,
                                      tenantId: tenantId) { result in
-                                        switch result {
-                                        case .success(let token): completion(.success(token))
-                                        case .failure(let error): completion(.failure(error))
-                                        }
+                switch result {
+                case .success(let token): completion(.success(token))
+                case .failure(let error): completion(.failure(error))
+                }
             }
         } else {
             completion(.failure(LocalError.invalidFormInput))
@@ -277,7 +277,7 @@ class CardFormViewViewModel: CardFormViewViewModelType {
 
     func cardFormInput(completion: (Result<CardFormInput, Error>) -> Void) {
         if let cardNumberString = cardNumber?.value, let month = monthYear?.month,
-            let year = monthYear?.year, let cvc = cvc {
+           let year = monthYear?.year, let cvc = cvc {
             let input = CardFormInput(cardNumber: cardNumberString,
                                       expirationMonth: month,
                                       expirationYear: year,

@@ -18,11 +18,16 @@ default_platform(:ios)
 
 platform :ios do
 
+  desc "Run carthage bootstrap"
+  lane :carthage_bootstrap do
+    sh('cd ../ && ./scripts/carthage-build.sh bootstrap --platform iOS --cache-builds')
+  end
+
   desc "Run test"
   lane :test do
     scan(
       scheme: 'PAYJP',
-      device: 'iPhone Xs Max',
+      device: 'iPhone 11 Pro',
       configuration: 'Debug',
       skip_slack: true
     )
@@ -104,7 +109,7 @@ platform :ios do
   desc "Create PR to update docs"
   lane :create_pr_to_update_docs do
     jazzy
-    diff_files = sh("git diff HEAD^ --name-only").split
+    diff_files = sh("git diff --name-only").split
     unless diff_files.any? { |file| file.start_with? "docs/" }
       UI.message "No updates in docs."
     else

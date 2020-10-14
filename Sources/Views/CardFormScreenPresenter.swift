@@ -70,19 +70,19 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
                                  expirationYear: formInput.expirationYear,
                                  name: formInput.cardHolder,
                                  tenantId: tenantId) { [weak self] result in
-                                    guard let self = self else { return }
-                                    switch result {
-                                    case .success(let token):
-                                        self.creatingTokenCompleted(token: token)
-                                    case .failure(let error):
-                                        switch error {
-                                        case .requiredThreeDSecure(let tdsToken):
-                                            self.tdsToken = tdsToken
-                                            self.validateThreeDSecure(tdsToken: tdsToken)
-                                        default:
-                                            self.showErrorAlert(message: self.errorTranslator.translate(error: error))
-                                        }
-                                    }
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                self.creatingTokenCompleted(token: token)
+            case .failure(let error):
+                switch error {
+                case .requiredThreeDSecure(let tdsToken):
+                    self.tdsToken = tdsToken
+                    self.validateThreeDSecure(tdsToken: tdsToken)
+                default:
+                    self.showErrorAlert(message: self.errorTranslator.translate(error: error))
+                }
+            }
         }
     }
 

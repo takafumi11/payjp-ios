@@ -74,7 +74,7 @@ public class CardFormViewController: UIViewController {
         let naviVc = stotyboard.instantiateInitialViewController() as? UINavigationController
         guard
             let cardFormVc = naviVc?.topViewController as? CardFormViewController
-            else { fatalError("Couldn't instantiate CardFormViewController") }
+        else { fatalError("Couldn't instantiate CardFormViewController") }
         cardFormVc.formStyle = style
         cardFormVc.tenantId = tenantId
         cardFormVc.delegate = delegate
@@ -184,7 +184,7 @@ public class CardFormViewController: UIViewController {
 
     @objc private func handleTokenOperationStatusChange(notification: Notification) {
         if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
-            let newStatus = TokenOperationStatus.init(rawValue: value) {
+           let newStatus = TokenOperationStatus.init(rawValue: value) {
             self.presenter?.tokenOperationStatusDidUpdate(status: newStatus)
         }
     }

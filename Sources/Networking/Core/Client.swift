@@ -26,7 +26,7 @@ class Client: NSObject, ClientType {
     private init(
         session: URLSession = URLSession(configuration: .default),
         callbackQueue: CallbackQueue = CallbackQueue.dispatch(
-        DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
+            DispatchQueue(label: "jp.pay.ios", attributes: .concurrent)),
         jsonDecoder: JSONDecoder = JSONDecoder.shared
     ) {
         self.session = session

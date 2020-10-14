@@ -18,7 +18,7 @@ extension StringProtocol where Self: RangeReplaceableCollection {
     mutating func insert(separator: Self, every count: Int) {
         for index in indices.reversed() where index != startIndex &&
             distance(from: startIndex, to: index) % count == 0 {
-                insert(contentsOf: separator, at: index)
+            insert(contentsOf: separator, at: index)
         }
     }
 
@@ -30,7 +30,7 @@ extension StringProtocol where Self: RangeReplaceableCollection {
     mutating func insert(separator: Self, positions: [Int]) {
         for index in indices.reversed() where index != startIndex &&
             positions.contains(distance(from: startIndex, to: index)) {
-                insert(contentsOf: separator, at: index)
+            insert(contentsOf: separator, at: index)
         }
     }
 }

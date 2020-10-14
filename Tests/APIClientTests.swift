@@ -99,23 +99,23 @@ class APIClientTests: XCTestCase {
                               expirationMonth: "02",
                               expirationYear: "2020",
                               name: "TARO YAMADA") { result in
-                                switch result {
-                                case .success(let payToken):
-                                    let json = TestFixture.JSON(by: "token.json")
-                                    let decoder = JSONDecoder.shared
-                                    let token = try! Token.decodeJson(with: json, using: decoder)
+            switch result {
+            case .success(let payToken):
+                let json = TestFixture.JSON(by: "token.json")
+                let decoder = JSONDecoder.shared
+                let token = try! Token.decodeJson(with: json, using: decoder)
 
-                                    XCTAssertEqual(payToken.identifer, token.identifer)
-                                    XCTAssertEqual(payToken.used, token.used)
-                                    XCTAssertEqual(payToken.livemode, token.livemode)
-                                    XCTAssertEqual(payToken.createdAt, token.createdAt)
-                                    XCTAssertEqual(payToken.rawValue?.count, token.rawValue?.count)
-                                    XCTAssertEqual(payToken.card.identifer, token.card.identifer)
-                                    XCTAssertEqual(payToken.card.rawValue?.count, token.card.rawValue?.count)
-                                    expectation.fulfill()
-                                default:
-                                    XCTFail()
-                                }
+                XCTAssertEqual(payToken.identifer, token.identifer)
+                XCTAssertEqual(payToken.used, token.used)
+                XCTAssertEqual(payToken.livemode, token.livemode)
+                XCTAssertEqual(payToken.createdAt, token.createdAt)
+                XCTAssertEqual(payToken.rawValue?.count, token.rawValue?.count)
+                XCTAssertEqual(payToken.card.identifer, token.card.identifer)
+                XCTAssertEqual(payToken.card.rawValue?.count, token.card.rawValue?.count)
+                expectation.fulfill()
+            default:
+                XCTFail()
+            }
         }
 
         waitForExpectations(timeout: 1, handler: nil)
