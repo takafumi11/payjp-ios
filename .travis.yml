@@ -1,15 +1,17 @@
 language: objective-c
 matrix:
   include:
-    - osx_image: xcode11.6
+    - osx_image: xcode12
 
 before_install:
   - brew list swiftlint || brew install swiftlint
   - brew outdated swiftlint || brew upgrade swiftlint
   - brew list clang-format || brew install clang-format
   - brew outdated clang-format || brew upgrade clang-format 
-  - bundle install --path=vendor/bundle --clean --jobs 4 --retry 3
-  - carthage bootstrap --no-use-binaries --platform ios
+  - bundle config set deployment 'true'
+  - bundle config set clean 'true'
+  - bundle install --jobs 4 --retry 3
+  - bundle exec fastlane ios carthage_bootstrap
 
 script:
     - bundle exec fastlane ios check_swift_format

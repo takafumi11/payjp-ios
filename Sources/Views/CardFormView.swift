@@ -326,17 +326,17 @@ public class CardFormView: UIView {
             let newCursorPosition = textField.position(from: textField.beginningOfDocument, offset: cursorOffset)
 
             if let newCursorPosition = newCursorPosition,
-                let newSelectedRange = textField.textRange(from: newCursorPosition, to: newCursorPosition) {
+               let newSelectedRange = textField.textRange(from: newCursorPosition, to: newCursorPosition) {
                 // カーソル直前の文字列が数字以外（-, /）の場合 あるいは 0（有効期限の0埋め）の場合
                 // カーソルを 1文字 後ろに移動させる
                 if let newPosition = textField.position(from: newSelectedRange.start, offset: -1),
-                    let range = textField.textRange(from: newPosition, to: newSelectedRange.start),
-                    let textBeforeCursor = textField.text(in: range) {
+                   let range = textField.textRange(from: newPosition, to: newSelectedRange.start),
+                   let textBeforeCursor = textField.text(in: range) {
                     if replacement != "" &&
                         !textBeforeCursor.isDigitsOnly ||
                         (textBeforeCursor == "0" && textField == cardFormProperties.expirationTextField) {
                         if let adjustPosition = textField.position(from: newSelectedRange.start, offset: 1),
-                            let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
+                           let adjustSelectedRange = textField.textRange(from: adjustPosition, to: adjustPosition) {
                             textField.selectedTextRange = adjustSelectedRange
                             resetTintColor()
                             return false
@@ -381,7 +381,7 @@ public class CardFormView: UIView {
                 } else {
                     UIApplication.shared.openURL(settingsURL)
                 }
-        })
+            })
         let closeAction = UIAlertAction(title: "payjp_common_ok".localized,
                                         style: .default,
                                         handler: nil)
