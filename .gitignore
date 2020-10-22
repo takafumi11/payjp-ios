@@ -76,3 +76,5 @@ vendor/bundle
 firebase-debug.log
 
 docs/docsets/*.tgz
+
+Brewfile.lock.json
