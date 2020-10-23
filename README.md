@@ -1,7 +1,7 @@
 # PAY.JP iOS SDK
 [![CocoaPods](https://img.shields.io/cocoapods/v/PAYJP.svg)](https://github.com/payjp/payjp-ios)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![build-test](https://github.com/payjp/payjp-ios/workflows/build-test/badge.svg?branch=master)
+![Build and Test](https://github.com/payjp/payjp-ios/workflows/Build%20and%20Test/badge.svg?branch=master)
 
 オンライン決済サービス「[PAY.JP](https://pay.jp/)」のiOSアプリ組込み用のSDKです。
 
