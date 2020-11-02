@@ -128,14 +128,21 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/ClientInfo.swift",
-      "line": 27,
+      "line": 22,
+      "symbol": "ClientInfo.cardFormType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Networking/Core/ClientInfo.swift",
+      "line": 30,
       "symbol": "ClientInfo.default",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/ClientInfo.swift",
-      "line": 29,
+      "line": 32,
       "symbol": "ClientInfo.makeInfo(plugin:publisher:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -534,49 +541,63 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 98,
+      "line": 106,
       "symbol": "CardFormViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 128,
+      "line": 136,
+      "symbol": "CardFormViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
+      "line": 141,
+      "symbol": "CardFormViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
+      "line": 146,
       "symbol": "CardFormViewController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 136,
+      "line": 154,
       "symbol": "CardFormViewController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 336,
+      "line": 354,
       "symbol": "CardFormViewController.collectionView(_:numberOfItemsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 340,
+      "line": 358,
       "symbol": "CardFormViewController.collectionView(_:cellForItemAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 364,
+      "line": 382,
       "symbol": "CardFormViewController.collectionView(_:layout:insetForSectionAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Views/CardFormViewController.swift",
-      "line": 386,
+      "line": 404,
       "symbol": "CardFormViewController.presentationControllerDidDismiss(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

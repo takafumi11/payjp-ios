@@ -19,10 +19,13 @@ public final class ClientInfo: NSObject, Encodable {
     public let unameString: String
     public let platform: String
     public let publisher: String
+    public var cardFormType: String?
 
     lazy var bindingInfo: String = buildBindingInfo()
     lazy var userAgent: String = buildUserAgent()
-    lazy var json: String? = buildJson()
+    var json: String? {
+        return buildJson()
+    }
 
     public static let `default` = ClientInfo.makeInfo()
 
@@ -62,6 +65,7 @@ public final class ClientInfo: NSObject, Encodable {
         case unameString = "uname"
         case platform
         case publisher
+        case cardFormType = "card_form_type"
     }
 
     func buildBindingInfo() -> String {
