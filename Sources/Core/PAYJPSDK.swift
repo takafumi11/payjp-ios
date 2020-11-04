@@ -47,7 +47,7 @@ public final class PAYJPSDK: NSObject, PAYJPSDKType {
     public static var clientInfo: ClientInfo = .default
 
     // Update by Fastlane :bump_up_version
-    public static let sdkVersion: String = "1.3.0"
+    public static let sdkVersion: String = "1.3.1"
 
     static var authToken: String = ""
 }
