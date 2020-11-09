@@ -23,21 +23,21 @@
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 148,
+      "line": 150,
       "symbol": "APIClient.createTokenWithTds(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 163,
+      "line": 165,
       "symbol": "APIClient.getTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 176,
+      "line": 178,
       "symbol": "APIClient.getAcceptedBrandsWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
