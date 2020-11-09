@@ -133,7 +133,9 @@ extension APIClient {
         createToken(with: cardNumber,
                     cvc: cvc,
                     expirationMonth: expirationMonth,
-                    expirationYear: expirationYear
+                    expirationYear: expirationYear,
+                    name: name,
+                    tenantId: tenantId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
