@@ -100,6 +100,17 @@ jobs:
       - run: bundle exec pod install --repo-update --project-directory=example-objc
       - run: bundle exec fastlane ios distribute_sample_app
 
+  build_example:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *set_env
+      - restore_cache: *restore_cache_gem
+      - run: *bundle_install
+      - run: *brew_install
+      - run: bundle exec fastlane ios build_carthage_swift_example
+      - run: bundle exec fastlane ios build_cocoapods_objc_example
+
 workflows:
   version: 2
   default_flow:
@@ -118,6 +129,12 @@ workflows:
               branches:
                 only: develop
       - distribute_sample_app:
+          requires:
+            - build
+          filters:
+              branches:
+                only: develop
+      - build_example:
           requires:
             - build
           filters:

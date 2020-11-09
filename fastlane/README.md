@@ -66,6 +66,16 @@ Distribute sample app with Firebase App Distribution
 fastlane ios build_swiftpm
 ```
 Build with Package.swift
+### ios build_carthage_swift_example
+```
+fastlane ios build_carthage_swift_example
+```
+Build carthage-swift example app
+### ios build_cocoapods_objc_example
+```
+fastlane ios build_cocoapods_objc_example
+```
+Build cocoapods-objc example app
 
 ----
 

@@ -1,1 +1,2 @@
-github "payjp/payjp-ios"
+# github "payjp/payjp-ios"
+git "../" "HEAD"
