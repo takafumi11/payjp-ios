@@ -61,6 +61,11 @@ Create PR to update docs
 fastlane ios distribute_sample_app
 ```
 Distribute sample app with Firebase App Distribution
+### ios build_swiftpm
+```
+fastlane ios build_swiftpm
+```
+Build with Package.swift
 
 ----
 

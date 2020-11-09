@@ -218,4 +218,9 @@ platform :ios do
       success: true
     )
   end
+
+  desc "Build with Package.swift"
+  lane :build_swiftpm do
+    sh('swift build -v -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.0-simulator"')
+  end
 end

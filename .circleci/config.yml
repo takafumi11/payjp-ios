@@ -69,6 +69,7 @@ jobs:
       - run: bundle exec fastlane ios carthage_bootstrap
       - save_cache: *save_cache_carthage
       - run: bundle exec fastlane ios test
+      - run: bundle exec fastlane ios build_swiftpm
 
   create_pr_to_public:
     <<: *defaults
