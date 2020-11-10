@@ -5,7 +5,7 @@
 //  Created by Tadashi Wakayanagi on 2020/03/13.
 //
 
-import Foundation
+import UIKit
 
 // swiftlint:disable type_body_length file_length
 /// CardFormView with card animation.

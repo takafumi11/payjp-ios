@@ -218,4 +218,33 @@ platform :ios do
       success: true
     )
   end
+
+  desc "Build with Package.swift"
+  lane :build_swiftpm do
+    sh('swift build -v -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.0-simulator"')
+  end
+
+  desc "Build carthage-swift example app"
+  lane :build_carthage_swift_example do
+    sh('cd ../example-swift && ../scripts/carthage-build.sh bootstrap --platform iOS --cache-builds')
+    project_file = 'example-swift/example-swift.xcodeproj'
+    build_app(
+      project: project_file,
+      configuration: 'Debug',
+      skip_archive: true,
+      skip_codesigning: true
+    )
+  end
+
+  desc "Build cocoapods-objc example app"
+  lane :build_cocoapods_objc_example do
+    cocoapods(podfile: 'example-objc/Podfile')
+    workspace_file = 'example-objc/example-objc.xcworkspace'
+    build_app(
+      workspace: workspace_file,
+      configuration: 'Debug',
+      skip_archive: true,
+      skip_codesigning: true
+    )
+  end
 end

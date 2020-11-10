@@ -10,7 +10,9 @@
 //
 
 #import "CardIOProxy.h"
+#import <TargetConditionals.h>
 #import "CardIOCardParams.h"
+#if TARGET_OS_IOS
 
 @protocol ClassProxy
 
@@ -149,3 +151,5 @@
 }
 
 @end
+
+#endif

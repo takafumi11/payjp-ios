@@ -7,6 +7,7 @@
 //
 
 import Foundation
+#if canImport(PassKit)
 import PassKit
 
 protocol NSErrorSerializable: Error {
@@ -114,3 +115,4 @@ public enum APIError: LocalizedError, NSErrorSerializable {
         }
     }
 }
+#endif

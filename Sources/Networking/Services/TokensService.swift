@@ -7,6 +7,7 @@
 //
 
 import Foundation
+#if canImport(PassKit)
 import PassKit
 
 // swiftlint:disable function_parameter_count
@@ -133,3 +134,4 @@ class TokenService: TokenServiceType {
     }
 }
 // swiftlint:enable function_parameter_count
+#endif
