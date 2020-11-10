@@ -1,11 +1,9 @@
-name: Build and Test
+name: Update Docs
 
 on:
   push:
     branches:
       - master
-  pull_request:
-  workflow_dispatch:
 
 jobs:
   build:
@@ -31,20 +29,9 @@ jobs:
           bundle config set deployment 'true'
           bundle config set clean 'true'
           bundle install --jobs 4 --retry 3
-      - uses: actions/cache@v2
-        with:
-          path: Carthage
-          key: ${{ runner.os }}-carthage-${{ hashFiles('Cartfile.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-carthage-
-      - run: bundle exec fastlane ios carthage_bootstrap
-      - run: bundle exec fastlane ios check_swift_format
-      - run: bundle exec fastlane ios check_objc_format
-      - run: bundle exec fastlane ios test
-      - run: bundle exec fastlane ios lint_podspec
-      - run: bundle exec fastlane ios build_swiftpm
-      - run: bundle exec fastlane ios build_carthage_swift_example
-      - run: bundle exec fastlane ios build_cocoapods_objc_example
+      - run: bundle exec fastlane ios create_pr_to_update_docs
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
