@@ -119,7 +119,6 @@ platform :ios do
     unless diff_files.any? { |file| file.start_with? "docs/" }
       UI.message "No updates in docs."
     else
-      base_branch = 'master'
       last_commit_hash = last_git_commit[:abbreviated_commit_hash]
       new_branch = "docs/update_docs_#{last_commit_hash}"
       sh("git checkout -b #{new_branch}")
@@ -140,7 +139,7 @@ platform :ios do
 
       pr_url = create_pull_request(
         repo: 'payjp/payjp-ios',
-        base: base_branch,
+        base: 'master',
         title: "update docs:#{last_commit_hash}",
         api_token: ENV['GITHUB_API_TOKEN']
       )
