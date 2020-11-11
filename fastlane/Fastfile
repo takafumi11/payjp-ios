@@ -119,9 +119,9 @@ platform :ios do
     unless diff_files.any? { |file| file.start_with? "docs/" }
       UI.message "No updates in docs."
     else
-      base_branch = 'develop'
+      base_branch = 'master'
       last_commit_hash = last_git_commit[:abbreviated_commit_hash]
-      new_branch = "feature/update_docs_#{last_commit_hash}"
+      new_branch = "docs/update_docs_#{last_commit_hash}"
       sh("git checkout -b #{new_branch}")
 
       sh('git config --global user.email "misc@pay.jp"')
