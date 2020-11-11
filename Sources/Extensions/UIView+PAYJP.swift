@@ -6,7 +6,7 @@
 //  Copyright © 2019 PAY, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIView {
     struct RectCorner: OptionSet {

@@ -14,10 +14,15 @@
 		32A6F614239608DD00747477 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F613239608DD00747477 /* ActionButton.swift */; };
 		32A6F6162396093B00747477 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F6152396093B00747477 /* Radius.swift */; };
 		32A8E4CC23B4616A001D1C38 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */; };
+		443AD9AF255A3D3800C13CB0 /* CardIOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AC255A3D3800C13CB0 /* CardIOProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		443AD9B0255A3D3800C13CB0 /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AD255A3D3800C13CB0 /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		443AD9B1255A3D3800C13CB0 /* CardIOCardParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AE255A3D3800C13CB0 /* CardIOCardParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		443B98D5250EFF2E00E93D9E /* PAYNotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B98D4250EFF2E00E93D9E /* PAYNotificationKey.swift */; };
+		444052DF2554ED2500CBEEAE /* CardIOCardParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 444052D82554ED2500CBEEAE /* CardIOCardParams.m */; };
+		444052E32554ED2500CBEEAE /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = 444052DD2554ED2500CBEEAE /* PAYJP.m */; };
+		444052E42554ED2500CBEEAE /* CardIOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 444052DE2554ED2500CBEEAE /* CardIOProxy.m */; };
 		44A5733D250B881100EBE2CB /* TokenOperationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A5733C250B881100EBE2CB /* TokenOperationObserver.swift */; };
 		44C47143250B11F100B5B39C /* TokenOperationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47142250B11F100B5B39C /* TokenOperationStatus.swift */; };
-		615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 615AFF5E1C8C74A1003FB86F /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		615AFF661C8C74A1003FB86F /* PAYJP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615AFF5B1C8C74A1003FB86F /* PAYJP.framework */; };
 		615AFF6B1C8C74A1003FB86F /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */; };
 		615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AFF751C8C76E2003FB86F /* APIClient.swift */; };
@@ -46,10 +51,6 @@
 		BE21786322E9B9A90098128D /* GetAcceptedBrandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */; };
 		BE25B80722F15AF900799201 /* TestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68681F91E1E2369001D7F75 /* TestFixture.swift */; };
 		BE25B80822F15AFF00799201 /* StubPaymentToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25B80322F15AAC00799201 /* StubPaymentToken.swift */; };
-		BE3F43B0232775860020742A /* CardIOCardParams.h in Headers */ = {isa = PBXBuildFile; fileRef = BE3F43AE232775860020742A /* CardIOCardParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F43AF232775860020742A /* CardIOCardParams.m */; };
-		BE4B4FD922FC036200642192 /* CardIOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4B4FD722FC036200642192 /* CardIOProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4B4FD822FC036200642192 /* CardIOProxy.m */; };
 		BE4B4FDF22FD3E3A00642192 /* UIView+PAYJP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */; };
 		BE6C230620B2DCEB00C4FE1E /* PAYErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */; };
 		BE6C230920B2DE2F00C4FE1E /* PAYErrorResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */; };
@@ -101,7 +102,6 @@
 		ED6DF6F5245ADC9C009E2EF3 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */; };
 		ED6DF6F7245BB9B1009E2EF3 /* CardFormDisplayStyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */; };
 		ED6F13442360319B00857BCC /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325E36AE233482AC0037E6BE /* FormStyle.swift */; };
-		ED78734724404EBD0074795B /* PAYJP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED78734624404EBC0074795B /* PAYJP.m */; };
 		ED78734924443AC30074795B /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED78734824443AC30074795B /* BorderView.swift */; };
 		ED7C3FE7233A0F02002F1639 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE6233A0F02002F1639 /* Style.swift */; };
 		ED7C3FE9233A0F35002F1639 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C3FE8233A0F35002F1639 /* Color.swift */; };
@@ -173,11 +173,16 @@
 		32A6F613239608DD00747477 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		32A6F6152396093B00747477 /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
+		443AD9AC255A3D3800C13CB0 /* CardIOProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOProxy.h; sourceTree = "<group>"; };
+		443AD9AD255A3D3800C13CB0 /* PAYJP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
+		443AD9AE255A3D3800C13CB0 /* CardIOCardParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCardParams.h; sourceTree = "<group>"; };
 		443B98D4250EFF2E00E93D9E /* PAYNotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAYNotificationKey.swift; sourceTree = "<group>"; };
+		444052D82554ED2500CBEEAE /* CardIOCardParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardIOCardParams.m; sourceTree = "<group>"; };
+		444052DD2554ED2500CBEEAE /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
+		444052DE2554ED2500CBEEAE /* CardIOProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardIOProxy.m; sourceTree = "<group>"; };
 		44A5733C250B881100EBE2CB /* TokenOperationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenOperationObserver.swift; sourceTree = "<group>"; };
 		44C47142250B11F100B5B39C /* TokenOperationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenOperationStatus.swift; sourceTree = "<group>"; };
 		615AFF5B1C8C74A1003FB86F /* PAYJP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PAYJP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		615AFF5E1C8C74A1003FB86F /* PAYJP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
 		615AFF601C8C74A1003FB86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615AFF651C8C74A1003FB86F /* PAYJPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PAYJPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AFF6A1C8C74A1003FB86F /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
@@ -208,10 +213,6 @@
 		BE21786022E9A4F70098128D /* GetAcceptedBrands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrands.swift; sourceTree = "<group>"; };
 		BE21786222E9B9A90098128D /* GetAcceptedBrandsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcceptedBrandsTests.swift; sourceTree = "<group>"; };
 		BE25B80322F15AAC00799201 /* StubPaymentToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPaymentToken.swift; sourceTree = "<group>"; };
-		BE3F43AE232775860020742A /* CardIOCardParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardIOCardParams.h; sourceTree = "<group>"; };
-		BE3F43AF232775860020742A /* CardIOCardParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardIOCardParams.m; sourceTree = "<group>"; };
-		BE4B4FD722FC036200642192 /* CardIOProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardIOProxy.h; sourceTree = "<group>"; };
-		BE4B4FD822FC036200642192 /* CardIOProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardIOProxy.m; sourceTree = "<group>"; };
 		BE4B4FDE22FD3E3A00642192 /* UIView+PAYJP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PAYJP.swift"; sourceTree = "<group>"; };
 		BE6C230520B2DCEA00C4FE1E /* PAYErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponse.swift; sourceTree = "<group>"; };
 		BE6C230720B2DE0300C4FE1E /* PAYErrorResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAYErrorResponseTests.swift; sourceTree = "<group>"; };
@@ -265,7 +266,6 @@
 		ED6DF6F024528B41009E2EF3 /* Expiration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expiration.swift; sourceTree = "<group>"; };
 		ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormDisplayStyledView.swift; sourceTree = "<group>"; };
-		ED78734624404EBC0074795B /* PAYJP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAYJP.m; sourceTree = "<group>"; };
 		ED78734824443AC30074795B /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		ED7C3FE6233A0F02002F1639 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		ED7C3FE8233A0F35002F1639 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -322,6 +322,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		443AD9AB255A3D3800C13CB0 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				443AD9AC255A3D3800C13CB0 /* CardIOProxy.h */,
+				443AD9AD255A3D3800C13CB0 /* PAYJP.h */,
+				443AD9AE255A3D3800C13CB0 /* CardIOCardParams.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		443ADA20255B8BED00C13CB0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EDC02D61230D2A0C00305B10 /* Assets.xcassets */,
+				ED66B2DC23D697D10095B18D /* Resource.bundle */,
+				443ADA21255B8C0C00C13CB0 /* Views */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		443ADA21255B8C0C00C13CB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
+				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
+				ED1A0741241B876F00AB1423 /* CardFormDisplayStyledView.xib */,
+				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
+				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
+				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		444052D72554ED2500CBEEAE /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				443AD9AB255A3D3800C13CB0 /* Public */,
+				444052DD2554ED2500CBEEAE /* PAYJP.m */,
+				444052DE2554ED2500CBEEAE /* CardIOProxy.m */,
+				444052D82554ED2500CBEEAE /* CardIOCardParams.m */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
 		615AFF511C8C74A1003FB86F = {
 			isa = PBXGroup;
 			children = (
@@ -329,8 +373,6 @@
 				615AFF5C1C8C74A1003FB86F /* Products */,
 				615AFF5D1C8C74A1003FB86F /* Sources */,
 				615AFF691C8C74A1003FB86F /* Tests */,
-				ED66B2DC23D697D10095B18D /* Resource.bundle */,
-				EDC02D61230D2A0C00305B10 /* Assets.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -346,7 +388,8 @@
 		615AFF5D1C8C74A1003FB86F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BE7FB8EE22FC00820090B9B8 /* CardIO */,
+				443ADA20255B8BED00C13CB0 /* Resources */,
+				444052D72554ED2500CBEEAE /* ObjC */,
 				ED2CDBB123E952570017F102 /* Common */,
 				BE21781022E8061D0098128D /* Core */,
 				BE4B4FDD22FD3E1D00642192 /* Extensions */,
@@ -359,8 +402,6 @@
 				615AFF751C8C76E2003FB86F /* APIClient.swift */,
 				615AFF601C8C74A1003FB86F /* Info.plist */,
 				ED05B172238CF18200DCA1C9 /* Log.swift */,
-				615AFF5E1C8C74A1003FB86F /* PAYJP.h */,
-				ED78734624404EBC0074795B /* PAYJP.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -564,16 +605,11 @@
 				32A6F613239608DD00747477 /* ActionButton.swift */,
 				ED78734824443AC30074795B /* BorderView.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,
-				ED0673692387844B00F86D18 /* BrandImageCell.xib */,
-				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
 				ED31B0812398E9F000DDFFE5 /* CardFormInput.swift */,
 				ED6DF6F6245BB9B0009E2EF3 /* CardFormDisplayStyledView.swift */,
-				ED1A0741241B876F00AB1423 /* CardFormDisplayStyledView.xib */,
 				EDEAE9552344431100E061C8 /* CardFormLabelStyledView.swift */,
-				EDEAE9562344431200E061C8 /* CardFormLabelStyledView.xib */,
 				ED31B07D2397C6E800DDFFE5 /* CardFormScreenPresenter.swift */,
 				BE734B8E22DEF3AE008679EC /* CardFormTableStyledView.swift */,
-				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
 				EDB319CB234EDF0300CB0212 /* CardFormView.swift */,
 				ED2ECF83237E9E240066D6C2 /* CardFormViewController.swift */,
 				ED4ACE172383F61C00349BBF /* CardFormViewControllerDelegate.swift */,
@@ -582,24 +618,12 @@
 				ED3FEF7022F0376500FA73BF /* CardNumber.swift */,
 				ED9B33E32390B7780079E7B8 /* ErrorTranslator.swift */,
 				ED9B33E1238FD0AF0079E7B8 /* ErrorView.swift */,
-				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 				ED6DF6F024528B41009E2EF3 /* Expiration.swift */,
 				ED3FEF6E22EFE71900FA73BF /* FormError.swift */,
 				325E36AE233482AC0037E6BE /* FormStyle.swift */,
 				ED6DF6F4245ADC9C009E2EF3 /* FormTextField.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		BE7FB8EE22FC00820090B9B8 /* CardIO */ = {
-			isa = PBXGroup;
-			children = (
-				BE3F43AE232775860020742A /* CardIOCardParams.h */,
-				BE3F43AF232775860020742A /* CardIOCardParams.m */,
-				BE4B4FD722FC036200642192 /* CardIOProxy.h */,
-				BE4B4FD822FC036200642192 /* CardIOProxy.m */,
-			);
-			path = CardIO;
 			sourceTree = "<group>";
 		};
 		BEA1D28322EADCA400F8906B /* Services */ = {
@@ -686,9 +710,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				615AFF5F1C8C74A1003FB86F /* PAYJP.h in Headers */,
-				BE3F43B0232775860020742A /* CardIOCardParams.h in Headers */,
-				BE4B4FD922FC036200642192 /* CardIOProxy.h in Headers */,
+				443AD9B0255A3D3800C13CB0 /* PAYJP.h in Headers */,
+				443AD9AF255A3D3800C13CB0 /* CardIOProxy.h in Headers */,
+				443AD9B1255A3D3800C13CB0 /* CardIOCardParams.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,8 +857,6 @@
 				ED00F8D1243353FD004DFE2C /* ThreeDSecureProcessHandler.swift in Sources */,
 				EDCF723222F948F500272C10 /* CardNumber.swift in Sources */,
 				ED3DB9DE243ABCEE0065FC33 /* ThreeDSecureWebDriver.swift in Sources */,
-				BE3F43B1232775860020742A /* CardIOCardParams.m in Sources */,
-				ED78734724404EBD0074795B /* PAYJP.m in Sources */,
 				EDCF723122F948ED00272C10 /* FormError.swift in Sources */,
 				ED78734924443AC30074795B /* BorderView.swift in Sources */,
 				BE21781A22E82AA50098128D /* CallbackQueue.swift in Sources */,
@@ -858,9 +880,9 @@
 				ED06736A2387844B00F86D18 /* BrandImageCell.swift in Sources */,
 				ED6F13442360319B00857BCC /* FormStyle.swift in Sources */,
 				ED00F8D2243353FD004DFE2C /* ThreeDSecureURLConfiguration.swift in Sources */,
+				444052E42554ED2500CBEEAE /* CardIOProxy.m in Sources */,
 				3289C9D123EACB6D008FFBC1 /* ClientInfo.swift in Sources */,
 				ED66B2D423D581990095B18D /* Bundle+PAYJP.swift in Sources */,
-				BE4B4FDA22FC036200642192 /* CardIOProxy.m in Sources */,
 				BEA1D28522EADCC200F8906B /* TokensService.swift in Sources */,
 				BE21785422E982E30098128D /* BaseRequest.swift in Sources */,
 				BE734B8722DD7C2D008679EC /* ExpirationFormatter.swift in Sources */,
@@ -872,6 +894,7 @@
 				32A6F614239608DD00747477 /* ActionButton.swift in Sources */,
 				EDA7F92D2345BF0F00EB1CA8 /* NSErrorConverter.swift in Sources */,
 				BE21786122E9A4F70098128D /* GetAcceptedBrands.swift in Sources */,
+				444052DF2554ED2500CBEEAE /* CardIOCardParams.m in Sources */,
 				ED31B0822398E9F000DDFFE5 /* CardFormInput.swift in Sources */,
 				615AFF761C8C76E2003FB86F /* APIClient.swift in Sources */,
 				BE0203E9231F8DCB00FE5635 /* StringProtocol+PAYJP.swift in Sources */,
@@ -908,6 +931,7 @@
 				ED6DF6F7245BB9B1009E2EF3 /* CardFormDisplayStyledView.swift in Sources */,
 				BE21782022E82B820098128D /* ParametersSerialization.swift in Sources */,
 				ED3DB9E0243ACCBE0065FC33 /* Mock.swift in Sources */,
+				444052E32554ED2500CBEEAE /* PAYJP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

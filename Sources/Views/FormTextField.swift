@@ -6,7 +6,7 @@
 //  Copyright © 2020 PAY, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol FormTextFieldDelegate: class {
     func didDeleteBackward(_ textField: FormTextField)

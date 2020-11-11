@@ -6,7 +6,7 @@
 //  Copyright © 2019 PAY, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// CardForm style settings.
 /// It's possible to change the color of each UIComponent.

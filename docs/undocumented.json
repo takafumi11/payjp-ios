@@ -2,42 +2,42 @@
   "warnings": [
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 22,
+      "line": 23,
       "symbol": "APIClient.tokenOperationObserver",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 109,
+      "line": 110,
       "symbol": "APIClient.createTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 124,
+      "line": 125,
       "symbol": "APIClient.createTokenWith(_:cvc:expirationMonth:expirationYear:name:tenantId:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 150,
+      "line": 151,
       "symbol": "APIClient.createTokenWithTds(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 165,
+      "line": 166,
       "symbol": "APIClient.getTokenWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/APIClient.swift",
-      "line": 178,
+      "line": 179,
       "symbol": "APIClient.getAcceptedBrandsWith(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -58,28 +58,28 @@
     },
     {
       "file": "/Users/distiller/project/Sources/Core/PAYJPSDK.swift",
-      "line": 47,
+      "line": 50,
       "symbol": "PAYJPSDK.clientInfo",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Core/PAYJPSDK.swift",
-      "line": 50,
+      "line": 53,
       "symbol": "PAYJPSDK.sdkVersion",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 63,
+      "line": 64,
       "symbol": "APIError.errorCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/distiller/project/Sources/Networking/Core/APIError.swift",
-      "line": 82,
+      "line": 83,
       "symbol": "APIError.userInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

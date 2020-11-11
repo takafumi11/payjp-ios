@@ -69,6 +69,7 @@ jobs:
       - run: bundle exec fastlane ios carthage_bootstrap
       - save_cache: *save_cache_carthage
       - run: bundle exec fastlane ios test
+      - run: bundle exec fastlane ios build_swiftpm
 
   create_pr_to_public:
     <<: *defaults
@@ -78,15 +79,6 @@ jobs:
       - restore_cache: *restore_cache_gem
       - run: *bundle_install
       - run: bundle exec fastlane ios create_pr_to_public
-
-  create_pr_to_update_docs:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: *set_env
-      - restore_cache: *restore_cache_gem
-      - run: *bundle_install
-      - run: bundle exec fastlane ios create_pr_to_update_docs
 
   distribute_sample_app:
     <<: *defaults
@@ -99,6 +91,17 @@ jobs:
       - run: bundle exec pod install --repo-update --project-directory=example-objc
       - run: bundle exec fastlane ios distribute_sample_app
 
+  build_example:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *set_env
+      - restore_cache: *restore_cache_gem
+      - run: *bundle_install
+      - run: *brew_install
+      - run: bundle exec fastlane ios build_carthage_swift_example
+      - run: bundle exec fastlane ios build_cocoapods_objc_example
+
 workflows:
   version: 2
   default_flow:
@@ -110,13 +113,13 @@ workflows:
           filters:
               branches:
                 only: master
-      - create_pr_to_update_docs:
+      - distribute_sample_app:
           requires:
             - build
           filters:
               branches:
                 only: develop
-      - distribute_sample_app:
+      - build_example:
           requires:
             - build
           filters:

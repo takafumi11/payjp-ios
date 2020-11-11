@@ -296,6 +296,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cocoapods
   danger
   danger-swiftlint
   fastlane
