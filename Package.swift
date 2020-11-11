@@ -23,13 +23,12 @@ let package = Package(
             path: "Sources",
             exclude: [
                 "ObjC",
-                "Info.plist",
-                "Views/Resources"
+                "Info.plist"
             ],
             resources: [
-                .copy("Assets.xcassets"),
-                .copy("Resource.bundle"),
-                .process("Sources/Views/Resources")
+                .process("Resources/Views"),
+                .process("Resources/Resource.bundle"),
+                .copy("Resources/Assets.xcassets")
             ]
         )
     ]
