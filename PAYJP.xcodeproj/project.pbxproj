@@ -332,7 +332,17 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
-		443AD9B6255A3E6F00C13CB0 /* Resources */ = {
+		443ADA20255B8BED00C13CB0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EDC02D61230D2A0C00305B10 /* Assets.xcassets */,
+				ED66B2DC23D697D10095B18D /* Resource.bundle */,
+				443ADA21255B8C0C00C13CB0 /* Views */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		443ADA21255B8C0C00C13CB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				ED2ECF85237E9E4F0066D6C2 /* CardForm.storyboard */,
@@ -342,7 +352,7 @@
 				ED508369230FC3AB00C64A7F /* CardFormTableStyledView.xib */,
 				ED9B33DF238FD0860079E7B8 /* ErrorView.xib */,
 			);
-			path = Resources;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		444052D72554ED2500CBEEAE /* ObjC */ = {
@@ -363,8 +373,6 @@
 				615AFF5C1C8C74A1003FB86F /* Products */,
 				615AFF5D1C8C74A1003FB86F /* Sources */,
 				615AFF691C8C74A1003FB86F /* Tests */,
-				ED66B2DC23D697D10095B18D /* Resource.bundle */,
-				EDC02D61230D2A0C00305B10 /* Assets.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -380,6 +388,7 @@
 		615AFF5D1C8C74A1003FB86F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				443ADA20255B8BED00C13CB0 /* Resources */,
 				444052D72554ED2500CBEEAE /* ObjC */,
 				ED2CDBB123E952570017F102 /* Common */,
 				BE21781022E8061D0098128D /* Core */,
@@ -593,7 +602,6 @@
 		BE734B8B22DEE2DA008679EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				443AD9B6255A3E6F00C13CB0 /* Resources */,
 				32A6F613239608DD00747477 /* ActionButton.swift */,
 				ED78734824443AC30074795B /* BorderView.swift */,
 				ED0673682387844B00F86D18 /* BrandImageCell.swift */,

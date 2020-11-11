@@ -24,6 +24,8 @@ extension Bundle {
         }
         return bundle
     }()
+    #elseif SWIFT_PACKAGE
+    static let payjpBundle: Bundle = .module
     #else
     static let payjpBundle: Bundle = .frameworkBundle
     #endif
