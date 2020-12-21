@@ -22,6 +22,7 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
     var dismissErrorViewCalled = false
     var showErrorAlertMessage: String?
     var presentVerificationScreenTdsToken: ThreeDSecureToken?
+    var presentVerificationScreenToken: Token?
     var didCompleteCardFormCalled = false
     var didProducedCalled = false
 
@@ -71,6 +72,11 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken) {
         presentVerificationScreenTdsToken = tdsToken
+        expectation?.fulfill()
+    }
+
+    func presentVerificationScreen(token: Token) {
+        presentVerificationScreenToken = token
         expectation?.fulfill()
     }
 

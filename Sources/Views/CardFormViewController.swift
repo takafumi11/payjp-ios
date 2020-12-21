@@ -326,6 +326,12 @@ extension CardFormViewController: CardFormScreenDelegate {
                                                                    token: tdsToken)
     }
 
+    func presentVerificationScreen(token: Token) {
+        ThreeDSecureProcessHandler.shared.startThreeDSecureProcess(viewController: self,
+                                                                   delegate: self,
+                                                                   token: token)
+    }
+
     func didCompleteCardForm(with result: CardFormResult) {
         delegate?.cardFormViewController(self, didCompleteWith: result)
     }

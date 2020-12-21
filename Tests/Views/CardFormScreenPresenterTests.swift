@@ -19,7 +19,7 @@ class CardFormScreenPresenterTests: XCTestCase {
                              cardHolder: "waka")
     }
 
-    private func mockToken(tdsStatus: PAYThreeDSecureStatus = .unverified) -> Token {
+    private func mockToken(tdsStatus: PAYThreeDSecureStatus? = nil) -> Token {
         let card = Card(identifier: "card_id",
                         name: "paykun",
                         last4Number: "1234",

@@ -19,6 +19,7 @@ protocol CardFormScreenDelegate: class {
     func dismissErrorView()
     func showErrorAlert(message: String)
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken)
+    func presentVerificationScreen(token: Token)
     // callback
     func didCompleteCardForm(with result: CardFormResult)
     func didProduced(with token: Token,
@@ -73,12 +74,22 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.creatingTokenCompleted(token: token)
+                if let status = token.card.threeDSecureStatus, status == .unverified {
+                    self.dispatchQueue.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.presentVerificationScreen(token: token)
+                    }
+                } else {
+                    self.creatingTokenCompleted(token: token)
+                }
             case .failure(let error):
                 switch error {
                 case .requiredThreeDSecure(let tdsToken):
                     self.tdsToken = tdsToken
-                    self.validateThreeDSecure(tdsToken: tdsToken)
+                    self.dispatchQueue.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.presentVerificationScreen(with: tdsToken)
+                    }
                 default:
                     self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                 }
@@ -135,13 +146,6 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
     func tokenOperationStatusDidUpdate(status: TokenOperationStatus) {
         self.tokenOperationStatus = status
         updateIndicatingUI()
-    }
-
-    private func validateThreeDSecure(tdsToken: ThreeDSecureToken, alreadyVerify: Bool = false) {
-        self.dispatchQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.presentVerificationScreen(with: tdsToken)
-        }
     }
 
     private func creatingTokenCompleted(token: Token) {
