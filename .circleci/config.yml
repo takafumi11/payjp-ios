@@ -48,6 +48,7 @@ shared_build_step:
   - run: &brew_install
       name: install via HomeBrew
       command: |
+        brew update
         brew bundle
         cat Brewfile.lock.json
 
