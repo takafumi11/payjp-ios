@@ -92,19 +92,15 @@ class MockCardFormScreenDelegate: CardFormScreenDelegate {
 }
 
 class MockTokenService: TokenServiceType {
-    let token: Token
-    let error: APIError?
-    let errorForTds: APIError?
-    var calledTenantId: String?
-    var calledTokenId: String?
-    var calledTdsId: String?
+    var createTokenResult: Result<Token, APIError>?
+    var createTokenTenantId: String?
+    var createTokenForThreeDSecureResult: Result<Token, APIError>?
+    var createTokenForThreeDSecureTdsId: String?
+    var finishTokenThreeDSecureResult: Result<Token, APIError>?
+    var finishTokenThreeDSecureTokenId: String?
+    var getTokenResult: Result<Token, APIError>?
+    var getTokenTokenId: String?
     let tokenOperationObserver: TokenOperationObserverType = MockTokenOperationObserverType()
-
-    init(token: Token, error: APIError? = nil, errorForTds: APIError? = nil) {
-        self.token = token
-        self.error = error
-        self.errorForTds = errorForTds
-    }
 
     // swiftlint:disable function_parameter_count
     func createToken(cardNumber: String,
@@ -115,14 +111,11 @@ class MockTokenService: TokenServiceType {
                      tenantId: String?,
                      completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
 
-        self.calledTenantId = tenantId
-
-        if let error  = error {
-            completion(.failure(error))
-        } else {
-            completion(.success(token))
+        self.createTokenTenantId = tenantId
+        guard let result = createTokenResult else {
+            fatalError("Set createTokenResult before invoked.")
         }
-
+        completion(result)
         return nil
     }
     // swiftlint:enable function_parameter_count
@@ -134,28 +127,32 @@ class MockTokenService: TokenServiceType {
 
     func createTokenForThreeDSecure(tdsId: String,
                                     completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
-        self.calledTdsId = tdsId
-
-        if let error  = errorForTds {
-            completion(.failure(error))
-        } else {
-            completion(.success(token))
+        self.createTokenForThreeDSecureTdsId = tdsId
+        guard let result = createTokenForThreeDSecureResult else {
+            fatalError("Set createTokenForThreeDSecureResult before invoked.")
         }
+        completion(result)
+        return nil
+    }
 
+    func finishTokenThreeDSecure(tokenId: String,
+                                 completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
+        self.finishTokenThreeDSecureTokenId = tokenId
+        guard let result = finishTokenThreeDSecureResult else {
+            fatalError("Set finishTokenThreeDSecureResult before invoked.")
+        }
+        completion(result)
         return nil
     }
 
     func getToken(with tokenId: String,
                   completion: @escaping (Result<Token, APIError>) -> Void) -> URLSessionDataTask? {
 
-        self.calledTokenId = tokenId
-
-        if let error  = error {
-            completion(.failure(error))
-        } else {
-            completion(.success(token))
+        self.getTokenTokenId = tokenId
+        guard let result = getTokenResult else {
+            fatalError("Set getTokenResult before invoked.")
         }
-
+        completion(result)
         return nil
     }
 }

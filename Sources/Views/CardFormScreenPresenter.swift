@@ -28,10 +28,9 @@ protocol CardFormScreenDelegate: class {
 
 protocol CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool { get }
-    var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
-    func createTokenByTds()
+    func completeTokenTds()
     func fetchBrands(tenantId: String?)
     func tokenOperationStatusDidUpdate(status: TokenOperationStatus)
 }
@@ -39,6 +38,7 @@ protocol CardFormScreenPresenterType {
 class CardFormScreenPresenter: CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool = false
     var tdsToken: ThreeDSecureToken?
+    var incompletedToken: Token?
 
     private weak var delegate: CardFormScreenDelegate?
     private var tokenOperationStatus: TokenOperationStatus
@@ -75,6 +75,7 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             switch result {
             case .success(let token):
                 if let status = token.card.threeDSecureStatus, status == .unverified {
+                    self.incompletedToken = token
                     self.dispatchQueue.async { [weak self] in
                         guard let self = self else { return }
                         self.delegate?.presentVerificationScreen(token: token)
@@ -129,17 +130,22 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func createTokenByTds() {
-        if let tdsToken = tdsToken {
-            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let token):
-                    self.creatingTokenCompleted(token: token)
-                case .failure(let error):
-                    self.showErrorAlert(message: self.errorTranslator.translate(error: error))
-                }
+    func completeTokenTds() {
+        let tokenCompletion: (Result<Token, APIError>) -> Void = { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                self.creatingTokenCompleted(token: token)
+            case .failure(let error):
+                self.showErrorAlert(message: self.errorTranslator.translate(error: error))
             }
+        }
+        if let incompletedToken = incompletedToken {
+            tokenService.finishTokenThreeDSecure(tokenId: incompletedToken.identifer,
+                                                 completion: tokenCompletion)
+        } else if let tdsToken = tdsToken {
+            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier,
+                                                    completion: tokenCompletion)
         }
     }
 
