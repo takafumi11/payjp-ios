@@ -3,7 +3,7 @@ version: 2
 machine:
   - &defaults
     macos:
-      xcode: "12.2.0"
+      xcode: "12.3.0"
     shell: /bin/bash --login -eo pipefail
     working_directory: /Users/distiller/project
 
@@ -48,6 +48,7 @@ shared_build_step:
   - run: &brew_install
       name: install via HomeBrew
       command: |
+        brew update
         brew bundle
         cat Brewfile.lock.json
 

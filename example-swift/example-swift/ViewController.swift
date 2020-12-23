@@ -56,23 +56,23 @@ class ViewController: UITableViewController {
             expirationMonth: month,
             expirationYear: year,
             name: name) { [weak self] result in
-                switch result {
-                case .success(let token):
-                    DispatchQueue.main.async {
-                        self?.labelTokenId.text = token.identifer
-                        self?.tableView.reloadData()
-                        self?.showToken(token: token)
-                    }
-                case .failure(let error):
-                    if let payError = error.payError {
-                        print("[errorResponse] \(payError.description)")
-                    }
-
-                    DispatchQueue.main.async {
-                        self?.labelTokenId.text = ""
-                        self?.showError(error: error)
-                    }
+            switch result {
+            case .success(let token):
+                DispatchQueue.main.async {
+                    self?.labelTokenId.text = token.identifer
+                    self?.tableView.reloadData()
+                    self?.showToken(token: token)
                 }
+            case .failure(let error):
+                if let payError = error.payError {
+                    print("[errorResponse] \(payError.description)")
+                }
+
+                DispatchQueue.main.async {
+                    self?.labelTokenId.text = ""
+                    self?.showError(error: error)
+                }
+            }
         }
     }
 

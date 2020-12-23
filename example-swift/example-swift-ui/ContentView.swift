@@ -9,7 +9,7 @@ import SwiftUI
 import PAYJP
 
 struct ContentView: View {
-    @ObservedObject private var cardFormDelegate = CardFormDelegate()
+    @ObservedObject private weak var cardFormDelegate = CardFormDelegate()
     var body: some View {
         Button("Add Credit Card") {
             self.cardFormDelegate.isPresented.toggle()
@@ -49,11 +49,11 @@ class CardFormDelegate: ObservableObject, CardFormViewControllerDelegate {
 // MARK: - CardFormViewControllerWrapper
 
 struct CardFormViewControllerWrapper: UIViewControllerRepresentable {
-    let delegate: CardFormViewControllerDelegate
+    weak var delegate: CardFormViewControllerDelegate
 
     func makeUIViewController(context: Context) -> UINavigationController {
         let cardFormVc =  CardFormViewController.createCardFormViewController(delegate: delegate,
-        viewType: .displayStyled)
+                                                                              viewType: .displayStyled)
         let naviVc = UINavigationController(rootViewController: cardFormVc)
         naviVc.presentationController?.delegate = cardFormVc
         return naviVc
