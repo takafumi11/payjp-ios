@@ -8,7 +8,7 @@
 import PAYJP
 
 class CardFormViewScrollViewController: UIViewController, CardFormViewDelegate,
-UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+                                        UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenButton: UIButton!
@@ -141,7 +141,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @objc private func handleTokenOperationStatusChange(notification: Notification) {
         if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
-            let newStatus = TokenOperationStatus.init(rawValue: value) {
+           let newStatus = TokenOperationStatus.init(rawValue: value) {
             self.tokenOperationStatus = newStatus
             self.updateButtonEnabled()
         }

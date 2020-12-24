@@ -14,6 +14,7 @@
 		32A6F614239608DD00747477 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F613239608DD00747477 /* ActionButton.swift */; };
 		32A6F6162396093B00747477 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6F6152396093B00747477 /* Radius.swift */; };
 		32A8E4CC23B4616A001D1C38 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */; };
+		4421F6662591CCAC0001DA30 /* FinishTokenThreeDSecureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4421F6652591CCAC0001DA30 /* FinishTokenThreeDSecureRequest.swift */; };
 		443AD9AF255A3D3800C13CB0 /* CardIOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AC255A3D3800C13CB0 /* CardIOProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		443AD9B0255A3D3800C13CB0 /* PAYJP.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AD255A3D3800C13CB0 /* PAYJP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		443AD9B1255A3D3800C13CB0 /* CardIOCardParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 443AD9AE255A3D3800C13CB0 /* CardIOCardParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -173,6 +174,7 @@
 		32A6F613239608DD00747477 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		32A6F6152396093B00747477 /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		32A8E4CB23B4616A001D1C38 /* JSONDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
+		4421F6652591CCAC0001DA30 /* FinishTokenThreeDSecureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishTokenThreeDSecureRequest.swift; sourceTree = "<group>"; };
 		443AD9AC255A3D3800C13CB0 /* CardIOProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOProxy.h; sourceTree = "<group>"; };
 		443AD9AD255A3D3800C13CB0 /* PAYJP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAYJP.h; sourceTree = "<group>"; };
 		443AD9AE255A3D3800C13CB0 /* CardIOCardParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCardParams.h; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				BE21785122E982A60098128D /* CreateTokenRequest.swift */,
 				BE21786022E9A4F70098128D /* GetAcceptedBrands.swift */,
 				BE21785C22E99CF10098128D /* GetTokenRequest.swift */,
+				4421F6652591CCAC0001DA30 /* FinishTokenThreeDSecureRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -764,7 +767,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "PAY, Inc.";
 				TargetAttributes = {
 					615AFF5A1C8C74A1003FB86F = {
@@ -908,6 +911,7 @@
 				EDB319CC234EDF0300CB0212 /* CardFormView.swift in Sources */,
 				BE0417D322E1CE4300B944CB /* CardFormViewViewModel.swift in Sources */,
 				BE1DAA7A22E043AE00D15A84 /* ExpirationExtractor.swift in Sources */,
+				4421F6662591CCAC0001DA30 /* FinishTokenThreeDSecureRequest.swift in Sources */,
 				32A6F6162396093B00747477 /* Radius.swift in Sources */,
 				EDA3EE9A22E1CD8F00D9A6C9 /* CardBrandTransformer.swift in Sources */,
 				EDEAE9572344431200E061C8 /* CardFormLabelStyledView.swift in Sources */,
@@ -1167,6 +1171,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/PAYJPTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -1185,6 +1190,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/PAYJPTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
