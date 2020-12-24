@@ -19,6 +19,7 @@ protocol CardFormScreenDelegate: class {
     func dismissErrorView()
     func showErrorAlert(message: String)
     func presentVerificationScreen(with tdsToken: ThreeDSecureToken)
+    func presentVerificationScreen(token: Token)
     // callback
     func didCompleteCardForm(with result: CardFormResult)
     func didProduced(with token: Token,
@@ -27,10 +28,9 @@ protocol CardFormScreenDelegate: class {
 
 protocol CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool { get }
-    var tdsToken: ThreeDSecureToken? { get }
 
     func createToken(tenantId: String?, formInput: CardFormInput)
-    func createTokenByTds()
+    func completeTokenTds()
     func fetchBrands(tenantId: String?)
     func tokenOperationStatusDidUpdate(status: TokenOperationStatus)
 }
@@ -38,6 +38,7 @@ protocol CardFormScreenPresenterType {
 class CardFormScreenPresenter: CardFormScreenPresenterType {
     var cardFormResultSuccess: Bool = false
     var tdsToken: ThreeDSecureToken?
+    var incompletedToken: Token?
 
     private weak var delegate: CardFormScreenDelegate?
     private var tokenOperationStatus: TokenOperationStatus
@@ -73,12 +74,23 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.creatingTokenCompleted(token: token)
+                if let status = token.card.threeDSecureStatus, status == .unverified {
+                    self.incompletedToken = token
+                    self.dispatchQueue.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.presentVerificationScreen(token: token)
+                    }
+                } else {
+                    self.creatingTokenCompleted(token: token)
+                }
             case .failure(let error):
                 switch error {
                 case .requiredThreeDSecure(let tdsToken):
                     self.tdsToken = tdsToken
-                    self.validateThreeDSecure(tdsToken: tdsToken)
+                    self.dispatchQueue.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.presentVerificationScreen(with: tdsToken)
+                    }
                 default:
                     self.showErrorAlert(message: self.errorTranslator.translate(error: error))
                 }
@@ -118,30 +130,28 @@ class CardFormScreenPresenter: CardFormScreenPresenterType {
         }
     }
 
-    func createTokenByTds() {
-        if let tdsToken = tdsToken {
-            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let token):
-                    self.creatingTokenCompleted(token: token)
-                case .failure(let error):
-                    self.showErrorAlert(message: self.errorTranslator.translate(error: error))
-                }
+    func completeTokenTds() {
+        let tokenCompletion: (Result<Token, APIError>) -> Void = { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                self.creatingTokenCompleted(token: token)
+            case .failure(let error):
+                self.showErrorAlert(message: self.errorTranslator.translate(error: error))
             }
+        }
+        if let incompletedToken = incompletedToken {
+            tokenService.finishTokenThreeDSecure(tokenId: incompletedToken.identifer,
+                                                 completion: tokenCompletion)
+        } else if let tdsToken = tdsToken {
+            tokenService.createTokenForThreeDSecure(tdsId: tdsToken.identifier,
+                                                    completion: tokenCompletion)
         }
     }
 
     func tokenOperationStatusDidUpdate(status: TokenOperationStatus) {
         self.tokenOperationStatus = status
         updateIndicatingUI()
-    }
-
-    private func validateThreeDSecure(tdsToken: ThreeDSecureToken, alreadyVerify: Bool = false) {
-        self.dispatchQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.presentVerificationScreen(with: tdsToken)
-        }
     }
 
     private func creatingTokenCompleted(token: Token) {

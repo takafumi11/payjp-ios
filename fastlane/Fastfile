@@ -96,7 +96,9 @@ platform :ios do
 
   desc "Check Swift format with swiftLint"
   lane :check_swift_format do
-    sh('../scripts/run-swift-format.sh')
+    Dir.chdir('..') do
+      sh('scripts/run-swift-format.sh')
+    end
     modified_files = sh('git status --porcelain').split
     unless modified_files.empty?
       UI.user_error! "Some diffs have generated after Swift format."

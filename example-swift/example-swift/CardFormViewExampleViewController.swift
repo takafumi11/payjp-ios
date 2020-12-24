@@ -9,7 +9,7 @@ import UIKit
 import PAYJP
 
 class CardFormVieExampleViewController: UITableViewController, CardFormViewDelegate,
-UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+                                        UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var formContentView: UIView!
     @IBOutlet private weak var createTokenCell: UITableViewCell!
@@ -67,9 +67,9 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
         self.tableView.layoutIfNeeded()
 
         NotificationCenter.default.addObserver(self,
-        selector: #selector(handleTokenOperationStatusChange(notification:)),
-        name: .payjpTokenOperationStatusChanged,
-        object: nil)
+                                               selector: #selector(handleTokenOperationStatusChange(notification:)),
+                                               name: .payjpTokenOperationStatusChanged,
+                                               object: nil)
     }
 
     @objc private func colorSelected(_ sender: UIButton) {
@@ -172,7 +172,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @objc private func handleTokenOperationStatusChange(notification: Notification) {
         if let value = notification.userInfo?[PAYNotificationKey.newTokenOperationStatus] as? Int,
-            let newStatus = TokenOperationStatus.init(rawValue: value) {
+           let newStatus = TokenOperationStatus.init(rawValue: value) {
             self.tokenOperationStatus = newStatus
             self.updateButtonEnabled()
         }

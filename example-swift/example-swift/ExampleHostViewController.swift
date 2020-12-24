@@ -34,16 +34,16 @@ class ExampleHostViewController: UITableViewController {
         //                inputTextColor: color,
         //                tintColor: color)
         let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
-        viewType: viewType)
+                                                                             viewType: viewType)
         self.navigationController?.pushViewController(cardFormVc, animated: true)
     }
 
     private func presentCardForm(viewType: CardFormViewType) {
         let cardFormVc = CardFormViewController.createCardFormViewController(delegate: self,
-        viewType: viewType)
-                    let naviVc = UINavigationController(rootViewController: cardFormVc)
-                    naviVc.presentationController?.delegate = cardFormVc
-                    self.present(naviVc, animated: true, completion: nil)
+                                                                             viewType: viewType)
+        let naviVc = UINavigationController(rootViewController: cardFormVc)
+        naviVc.presentationController?.delegate = cardFormVc
+        self.present(naviVc, animated: true, completion: nil)
     }
 }
 

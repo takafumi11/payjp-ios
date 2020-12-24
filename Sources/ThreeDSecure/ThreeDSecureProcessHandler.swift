@@ -31,6 +31,16 @@ public protocol ThreeDSecureProcessHandlerDelegate: class {
 /// Handler for 3DSecure process.
 public protocol ThreeDSecureProcessHandlerType {
 
+    /// Stsart 3DSecure process
+    /// Delegate will be released once the process is finished.
+    /// - Parameters:
+    ///   - viewController: the viewController which will present SFSafariViewController.
+    ///   - delegate: ThreeDSecureProcessHandlerDelegate
+    ///   - token: Token
+    func startThreeDSecureProcess(viewController: UIViewController,
+                                  delegate: ThreeDSecureProcessHandlerDelegate,
+                                  token: Token)
+
     /// Start 3DSecure process.
     /// Delegate will be released once the process is finished.
     /// - Parameters:
@@ -62,6 +72,13 @@ public class ThreeDSecureProcessHandler: NSObject, ThreeDSecureProcessHandlerTyp
     }
 
     // MARK: ThreeDSecureProcessHandlerType
+
+    public func startThreeDSecureProcess(viewController: UIViewController,
+                                         delegate: ThreeDSecureProcessHandlerDelegate,
+                                         token: Token) {
+        self.delegate = delegate
+        webDriver.openWebBrowser(host: viewController, url: token.tdsEntryUrl, delegate: self)
+    }
 
     public func startThreeDSecureProcess(viewController: UIViewController,
                                          delegate: ThreeDSecureProcessHandlerDelegate,
