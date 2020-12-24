@@ -36,6 +36,12 @@ protocol TokenServiceType {
     ) -> URLSessionDataTask?
 
     @discardableResult
+    func finishTokenThreeDSecure(
+        tokenId: String,
+        completion: @escaping (Result<Token, APIError>) -> Void
+    ) -> URLSessionDataTask?
+
+    @discardableResult
     func getToken(
         with tokenId: String,
         completion: @escaping (Result<Token, APIError>) -> Void
@@ -109,6 +115,19 @@ class TokenService: TokenServiceType {
         completion: @escaping (Result<Token, APIError>) -> Void
     ) -> URLSessionDataTask? {
         let request = CreateTokenForThreeDSecureRequest(tdsId: tdsId)
+        self.checkTokenOperationStatus()
+        self.tokenOperationObserverInternal.startRequest()
+        return client.request(with: request) { [weak self] result in
+            self?.tokenOperationObserverInternal.completeRequest()
+            completion(result)
+        }
+    }
+
+    func finishTokenThreeDSecure(
+        tokenId: String,
+        completion: @escaping (Result<Token, APIError>) -> Void
+    ) -> URLSessionDataTask? {
+        let request = FinishTokenThreeDSecureRequest(tokenId: tokenId)
         self.checkTokenOperationStatus()
         self.tokenOperationObserverInternal.startRequest()
         return client.request(with: request) { [weak self] result in
